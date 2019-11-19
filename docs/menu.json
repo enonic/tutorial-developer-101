@@ -1,0 +1,12 @@
+{
+  "menuItems": [
+    {
+      "title": "Intro",
+      "document": "index"
+    },    
+    {
+      "title": "1 - Install CLI",
+      "document": "storage"
+    }
+  ]
+}
