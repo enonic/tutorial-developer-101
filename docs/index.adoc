@@ -10,8 +10,7 @@ NOTE: *For the impatient!* Head over to our https://developer.enonic.com/quickst
 == Tutorial overview
 
 . <<sdk#, Setting up the development environment>>
-. <<dev#, Development basics>>.
-environment>>
+. <<dev#, Development basics>>
 . <<webapp#, Building a webapp>>
 . <<storage#, Storing data>>
 . <<cms#, Content Management basics>>

@@ -1,10 +1,6 @@
 {
   "menuItems": [
     {
-      "title": "Getting started",
-      "document": "index"
-    },    
-    {
       "title": "1 - Setup SDK",
       "document": "sdk"
     },    
@@ -25,7 +21,7 @@
       "document": "cms"
     },    
     {
-      "title": "6 - Sites and landing pages",
+      "title": "6 - Sites and pages",
       "document": "sites"
     },
     {
