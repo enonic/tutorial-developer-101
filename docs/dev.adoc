@@ -1,0 +1,13 @@
+= Development basics
+:toc: right
+:imagesdir: media
+
+This section gives you an introduction to the Enonic Command Line Interface (CLI) and XP sandboxes.
+
+== Enonic CLI
+
+== Sandboxes
+
+== Project templates
+
+== Building and deploying

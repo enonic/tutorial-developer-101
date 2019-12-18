@@ -1,0 +1,19 @@
+= Building a webapp
+:toc: right
+:imagesdir: media
+
+In this step, you will build a webapp from scratch, using the "Vanilla" project template
+
+== Assets
+
+== Controllers
+
+== Libraries
+
+== Routing
+
+== Error handling
+
+
+
+

@@ -1,0 +1,23 @@
+= Setting up the development environment
+:toc: right
+:imagesdir: media
+
+This step helps you set up the Enonic development environment from scratch.
+
+== Command line
+
+== Package manager
+
+== Git
+
+== Installing Enonic CLI
+
+=== MacOS
+
+=== Windows
+
+=== Linux
+
+== Setting up a code editor
+
+== Core technologies
