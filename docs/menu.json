@@ -2,11 +2,11 @@
   "menuItems": [
     {
       "title": "1 - Setting up SDK",
-      "document": "sdk"
+      "document": "setup"
     },    
     {
       "title": "2 - Development basics",
-      "document": "dev"
+      "document": "basics"
     },    
     {
       "title": "3 - Building a webapp",

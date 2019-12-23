@@ -1,0 +1,171 @@
+= Setting up the development environment
+:toc: right
+:imagesdir: media
+
+Before you start building your first XP apps and sites, you must installed all required software tools.
+
+== Introducing the command line
+
+The command line aka "the terminal" is a powerful text-based interface for running commands on your computer. Additionally, you may use the terminal to navigate you file system, similar to the Finder on a Mac or Explorer on Windows.
+
+Take a moment to locate and open up the command line interface (CLI) for your operating system. Instructions for https://www.macworld.co.uk/how-to/mac-software/how-use-terminal-on-mac-3608274/[Mac], https://www.lifewire.com/how-to-open-command-prompt-2618089[Windows] and https://www.howtogeek.com/140679/beginner-geek-how-to-start-using-the-linux-terminal/[Linux].
+
+NOTE: Running a command in your terminal is as easy as typing in the command, and pressing enter i.e. `cd myfolder` (change directory to myfolder)
+
+== Package managers
+To simplify installation and keeping your tools updated, Enonic uses package managers. Package managers are terminal based "app stores" that focus on developer and command line tools.
+
+Follow the instructions for your operating system to install the respective package managers:
+
+=== MacOS
+
+We use the popular MacOS package manager https://brew.sh/[Homebrew]. Homebrew lets you both install, and later update your command line tools when new versions arrive.
+
+To install Homebrew, follow the instructions from the link above. Once installed, run the following command in your terminal to verify that everything is working:
+
+    brew help
+
+=== Windows
+
+We use the https://scoop.sh/[Scoop] package manager for Windows. To install Scoop, visit their website, or simply run these two commands from your powershell terminal:
+
+NOTE: To launch powershell from your regular terminal, simply execute `powershell`. The prompt should then start with "PS" 
+
+    set-executionpolicy remotesigned -scope currentuser
+    iwr -useb get.scoop.sh | iex
+
+To verify that Scoop was installed successfully, run the following command:
+
+    scoop help
+
+=== Linux
+
+We use Snapcraft as the package manager for Linux. Snapcraft comes pre-installed with the popular Ubuntu distribution of Linux and some others.
+
+To verify that snapcraft is installed on your computer, run the following command in your terminal:
+
+    snap version
+
+If it is missing, follow Snapcraft's detailed https://snapcraft.io/docs/installing-snapd[installation instructions]for your Linux distro. 
+
+== Installing Enonic CLI
+
+With the package managers installed, we will now install the Enonic Command Line Interface. The Enonic CLI enables you to run enonic specific commands directly from your terminal.
+
+Follow the instructions for your specific operating system to install Enonic CLI:
+
+=== MacOS
+
+From your terminal, run the following commands:
+
+    brew tap enonic/cli
+    brew install enonic
+
+Verify that enonic cli is installed by running the following command:
+
+    enonic version
+
+NOTE: To later upgrade to newer versions of enonic CLI, simply run the command `brew upgrade enonic`
+
+=== Windows
+
+From your powershell terminal, run the following commands:
+
+    scoop bucket add enonic https://github.com/enonic/cli-scoop
+    scoop install enonic
+
+Verify that enonic cli is installed by running the following command:
+
+    enonic version
+
+NOTE: To later upgrade to newer versions of enonic CLI, simply run the command `scoop update enonic`
+
+=== Linux
+
+From your terminal, run the following command:
+
+   sudo snap install enonic
+
+Verify that enonic cli is installed by running the following command:
+
+    enonic version
+
+NOTE: Snap automatically keeps your snaps updated, to manually force an update, run the command `sudo snap refresh enonic`
+
+
+== Git
+
+Git is a free and open source distributed version control system. Later in this tutorial, you will be creating new Enonic development projects using “starters". Enonic CLI uses Git behind the scenes to download the starter and prepare the files for your project locally. As such, you will need to have Git installed as well.
+
+Follow the steps for your operating system below to install Git:
+
+
+=== MacOS
+
+NOTE: Apple is maintaining it's own fork of Git. With XCode installed, you will already have Git on your Mac.
+
+To install with Homebrew: From your terminal, run the following commands:
+
+    brew install git
+
+Verify that git has been installed by running the following command:
+
+    git version
+
+=== Windows
+
+To install with Scoop, run the following command from the powershell terminal:
+
+    scoop install git
+
+Verify that git has been installed by running the following command:
+
+    git version
+
+=== Linux
+
+To install with Snapcraft, run the following command in your terminal:
+
+   sudo snap install git
+
+Verify that Git is installed by running the following command:
+
+    git version
+
+== Set up a code editor
+
+Code editors are designed specifically for writing computer code. There are a range of available editors out there. If you do not already have a good editor, follow the steps below to get one:
+
+=== Download VS code
+
+Throughout this documentation we will be using screenshots taken from the popular lightweight cross-platform code editor https://code.visualstudio.com/[VS Code].
+
+Visit the https://code.visualstudio.com/Download[VS Code download page] to download and install the version matching your operating system.
+
+=== Install Prettier plugin
+
+Addint the "Prettier - Code formatter" plugin to VS code helps format your code and avoid common typing mistakes.
+
+Follow these steps to install the VS Code plugin:
+
+. Open the VS Code extensions panel (View => Extensions).
+. Search for: “Prettier - Code formatter”.
+. Click “Install”. 
+
+NOTE: When the installation is finished, you must restart VS Code to activate the Prettier.
+
+
+== Summary
+
+You have now installed a package manager for your OS, Enonic CLI, Git and a Code editor. You will be using these tools throughout the various steps of this tutorial.
+
+=== Useful links
+
+* Visit the Enonic CLI documentation for a full overview
+* Learn more about Git from this useful https://guides.github.com/introduction/git-handbook/[handbook by Github].
+
+
+=== Next
+
+In the next step, you 
+
