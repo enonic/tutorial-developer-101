@@ -2,7 +2,7 @@
 :toc: right
 :imagesdir: media
 
-Before you start building your first XP apps and sites, you must installed all required software tools.
+Before you start building on XP, you must install the required development tools.
 
 == Introducing the command line
 

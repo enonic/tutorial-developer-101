@@ -2,9 +2,9 @@
 :toc: right
 :imagesdir: media
 
-This tutorial takes you through the basic concepts and development steps for the Enonic platform. 
+This tutorial takes you through the basic concepts and development tasks of the Enonic platform step by step. 
 
-NOTE: *For the impatient!* Head over to our https://developer.enonic.com/quickstart[Quickstart page] to install our SDK and build your first XP app in a few minutes.
+NOTE: *tl;dr* Head over to our https://developer.enonic.com/quickstart[Quickstart page] to install our SDK and build your first XP app in a few minutes.
 
 
 == Tutorial overview
