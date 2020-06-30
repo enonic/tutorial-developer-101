@@ -9,27 +9,31 @@
       "document": "basics"
     },    
     {
-      "title": "3 - Building a webapp",
-      "document": "webapp"
-    },    
-    {
-      "title": "4 - Storing data",
-      "document": "storage"
-    },    
-    {
-      "title": "5 - CMS basics",
+      "title": "3 - CMS basics",
       "document": "cms"
     },    
     {
-      "title": "6 - Sites and pages",
+      "title": "4 - Sites and pages",
       "document": "sites"
     },
     {
-      "title": "7 - Depoyment",
+      "title": "5 - Webapps and back-ends",
+      "document": "webapp"
+    },    
+    {
+      "title": "6 - Storing data",
+      "document": "storage"
+    },    
+    {
+      "title": "7 - Admin extensions",
+      "document": "admin"
+    },
+    {
+      "title": "8 - Depoyment",
       "document": "deploy"
     },
     {
-      "title": "8 - Next steps",
+      "title": "9 - Next steps",
       "document": "next"
     }
   ]

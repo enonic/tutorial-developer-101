@@ -2,11 +2,13 @@
 :toc: right
 :imagesdir: media
 
-In this step, you will learn the fundamental concepts of XP's CMS, create your first content and access it via a Headless GraphQL API.
+In this step, you will learn the fundamentals of XP's CMS, create your first content and access it via a Headless GraphQL API.
 
-== Content Types
+== Content studio
 
-== Content Studio
+== Content projects
+
+== Content types
 
 == Sites and content
 
