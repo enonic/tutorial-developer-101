@@ -2,7 +2,7 @@
 :toc: right
 :imagesdir: media
 
-This tutorial takes you through the basic concepts and development tasks of the Enonic platform step by step. 
+This tutorial takes you through the basic concepts and development tasks of the Enonic platform step by step.
 
 NOTE: *tl;dr* Head over to our https://developer.enonic.com/quickstart[Quickstart page] to install our SDK and build your first XP app in a few minutes.
 
@@ -12,9 +12,4 @@ NOTE: *tl;dr* Head over to our https://developer.enonic.com/quickstart[Quickstar
 . <<setup#, Setting up the development environment>>
 . <<dev#, Development basics>>
 . <<api#, Creating our first headless API>>
-. <<webapp#, Building a webapp>>
-. <<storage#, Storing data>>
-. <<cms#, Content Management basics>>
-. <<sites#, Sites and pages>>
-. <<deploy#, Deploying to a server>>
 . <<next#, Next steps>>
