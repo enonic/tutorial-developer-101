@@ -11,6 +11,7 @@ NOTE: *tl;dr* Head over to our https://developer.enonic.com/quickstart[Quickstar
 
 . <<setup#, Setting up the development environment>>
 . <<dev#, Development basics>>
+. <<api#, Creating our first headless API>>
 . <<webapp#, Building a webapp>>
 . <<storage#, Storing data>>
 . <<cms#, Content Management basics>>
