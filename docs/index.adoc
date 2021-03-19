@@ -9,7 +9,7 @@ NOTE: *tl;dr* Head over to our https://developer.enonic.com/quickstart[Quickstar
 
 == Tutorial overview
 
-. <<sdk#, Setting up the development environment>>
+. <<setup#, Setting up the development environment>>
 . <<dev#, Development basics>>
 . <<webapp#, Building a webapp>>
 . <<storage#, Storing data>>
