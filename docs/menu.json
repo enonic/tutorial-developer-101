@@ -9,8 +9,48 @@
       "document": "basics"
     },
     {
-      "title": "3 - Building an API",
-      "document": "api"
+      "title": "3 - Creating content",
+      "document": "content"
+    },
+    {
+      "title": "4 - More content!",
+      "document": "morecontent"
+    },
+    {
+      "title": "5 - Sites and pages",
+      "document": "sites"
+    },
+    {
+      "title": "6 - Filters and routing",
+      "document": "filters"
+    },
+    {
+      "title": "7 - Controllers",
+      "document": "controllers"
+    },
+    {
+      "title": "8 - The Enonic Market",
+      "document": "market"
+    },
+    {
+      "title": "9 - Authentication & Authorization",
+      "document": "auth"
+    },
+    {
+      "title": "10 - Storing data",
+      "document": "storage"
+    },
+    {
+      "title": "11 - Admin extensions",
+      "document": "admin"
+    },
+    {
+      "title": "12 - Deployment",
+      "document": "deployment"
+    },
+    {
+      "title": "13 - Next steps",
+      "document": "next"
     }
   ]
 }

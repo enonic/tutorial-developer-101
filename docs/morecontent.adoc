@@ -1,0 +1,26 @@
+= More content!
+:toc: right
+:imagesdir: media
+
+In which we take the content concepts from the previous chapter and
+expand on them. Show the reader how they can create more complex
+content types.
+
+== Key input types
+
+This section focuses on the key input types available to the
+user. They'll use these all the time.
+
+== Additional input types
+
+Briefly cover less common input types. Also link to the input type
+reference docs.
+
+== Input type configuration
+
+Talk about configuring inputs in content types, including adjusting
+occurrences and other configuration  options and attributes.
+
+== Mixins
+
+We can use mixins to reuse input field sets across different content types!

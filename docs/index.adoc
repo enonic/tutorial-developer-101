@@ -11,5 +11,14 @@ NOTE: *tl;dr* Head over to our https://developer.enonic.com/quickstart[Quickstar
 
 . <<setup#, Setting up the development environment>>
 . <<dev#, Development basics>>
-. <<api#, Creating our first headless API>>
+. <<content#, Creating Content>>
+. <<morecontent#, More content!>>
+. <<sites#, Sites and pages>>
+. <<filters#, Filters and routing>>
+. <<controllers#, Controllers>>
+. <<market#, The Enonic Market>>
+. <<auth#, Authentication & Authorization>>
+. <<storage#, Storing data>>
+. <<admin#, Admin extensions>>
+. <<deployment#, Deployment>>
 . <<next#, Next steps>>
