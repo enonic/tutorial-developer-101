@@ -1,4 +1,4 @@
-= Sites and pages
+= Pages
 :toc: right
 :imagesdir: media
 

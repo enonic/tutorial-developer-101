@@ -13,43 +13,59 @@
       "document": "content"
     },
     {
-      "title": "4 - More content!",
-      "document": "morecontent"
+      "title": "4 - Input types",
+      "document": "input-types"
     },
     {
-      "title": "5 - Sites and pages",
-      "document": "sites"
+      "title": "5 - Advanced content types",
+      "document": "advanced-content"
     },
     {
-      "title": "6 - Filters and routing",
-      "document": "filters"
+      "title": "6 - Headless API",
+      "document": "headless-api"
     },
     {
       "title": "7 - Controllers",
       "document": "controllers"
     },
     {
-      "title": "8 - The Enonic Market",
+      "title": "8 - Assets",
+      "document": "assets"
+    },
+    {
+      "title": "9 - The Content API",
+      "document": "content-api"
+    },
+    {
+      "title": "10 - Filters and routing",
+      "document": "content-api"
+    },
+    {
+      "title": "11 - Pages",
+      "document": "pages"
+    },
+    {
+      "title": "12 - The Enonic Market",
       "document": "market"
     },
     {
-      "title": "9 - Authentication & Authorization",
+      "title": "13 - Authentication & Authorization",
       "document": "auth"
     },
     {
-      "title": "10 - Storing data",
+      "title": "14 - Storing data",
       "document": "storage"
     },
     {
-      "title": "11 - Admin extensions",
+      "title": "15 - Admin extensions",
       "document": "admin"
     },
     {
-      "title": "12 - Deployment",
+      "title": "16 - Deployment",
       "document": "deployment"
     },
     {
-      "title": "13 - Next steps",
+      "title": "17 - Next steps",
       "document": "next"
     }
   ]

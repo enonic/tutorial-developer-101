@@ -1,4 +1,4 @@
-= More content!
+= Input types
 :toc: right
 :imagesdir: media
 
