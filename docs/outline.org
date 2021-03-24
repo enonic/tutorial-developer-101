@@ -20,7 +20,8 @@
    content types.
    1) The most important input types
       This section focuses on the key input types available to the
-      user. They'll use these all the time.
+      user. They'll use these all the time. Add some extra focus to
+      the text area input type.
    2) Additional input types
       A section briefly covering the less commonly used input types.
       Should link to reference docs for input types.
@@ -47,7 +48,7 @@
    1. Application controllers
    2. HTTP controllers
    3. Error handling
-   4. Mappings ->  here's how lib-guill works.
+   4. Mappings: use ~lib-guillotine~ as an example to explain this.
 
 8. Assets
    Link to lib-static
