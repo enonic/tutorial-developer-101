@@ -9,7 +9,8 @@ content types.
 == Key input types
 
 This section focuses on the key input types available to the
-user. They'll use these all the time.
+user. They'll use these all the time. Should also include extra focus
+on the text area input type.
 
 == Additional input types
 

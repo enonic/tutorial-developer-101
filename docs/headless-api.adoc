@@ -1,0 +1,9 @@
+= Headless API
+:toc: right
+:imagesdir: media
+
+This chapter serves as a deeper introduction to consuming headless
+APIs and as an introduction to GraphQL. As such it'll explore some
+slightly advanced queries and explore what you can do with relations.
+
+Should probably reference the HMDB guide.
