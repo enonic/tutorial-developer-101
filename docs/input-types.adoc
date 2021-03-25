@@ -6,22 +6,39 @@ In which we take the content concepts from the previous chapter and
 expand on them. Show the reader how they can create more complex
 content types.
 
+This chapter should build off the previous chapter and provide some data models we can work with.
+
 == Key input types
 
-This section focuses on the key input types available to the
-user. They'll use these all the time. Should also include extra focus
-on the text area input type.
+This section focuses on a few key input types available to the
+user. They'll use these all the time.
+
+. TextLine
+. HtmlArea
+. CheckBox
+. ImageSelector
+
+=== Task: add these new input types to your content type
+
+Let's explore these input types in practice. We'll add them to an existing content type and explore how they work.
 
 == Additional input types
 
-Briefly cover less common input types. Also link to the input type
-reference docs.
+This section should briefly mention some less common input types, and refer the reader to https://developer.enonic.com/docs/xp/stable/cms/input-types[the reference docs].
+
+Optionally, suggest that the reader go and add some of these too to see how they work.
 
 == Input type configuration
 
-Talk about configuring inputs in content types, including adjusting
-occurrences and other configuration  options and attributes.
+When using the input types previously, we would have used labels. This section mentions other configuration options the `input` element accepts,  listed under https://developer.enonic.com/docs/xp/stable/cms/schemas#input_types[the input types section] of the doc on schemas.
+
+Also mention that each input type accepts specialized, extra configuration under the `config` option, and that this configuration can be found in the same reference docs as before.
+
 
 == Mixins
 
 We can use mixins to reuse input field sets across different content types!
+
+=== Task
+
+Create another content type that reuses a lot of the fields from our preexisting one. Solve it by using a Mixin.
