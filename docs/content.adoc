@@ -1,4 +1,4 @@
-= Losing our heads: Let's build an API
+= Content and content types
 :toc: right
 :imagesdir: media
 

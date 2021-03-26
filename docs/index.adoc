@@ -11,7 +11,7 @@ NOTE: *tl;dr* Head over to our https://developer.enonic.com/quickstart[Quickstar
 
 . <<setup#, Setting your development environment>>
 . <<basics#, Development basics>>
-. <<content#, Creating content>>
+. <<content#, Content and content types>>
 . <<input-types#, Input types>>
 . <<advanced-content#, Advanced content types>>
 . <<headless-api#, Headless API>>
