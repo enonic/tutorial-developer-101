@@ -1,0 +1,34 @@
+= Advanced content
+:toc: right
+:imagesdir: media
+
+We've seen basic content types, now let's explore some of the more advanced aspects. We'll look at item sets and option sets and how they can help us both structure our data and make our input forms clearer and easier to use.
+
+[TIP]
+====
+For @the: Item sets are basic hierarchical data structures (think JSON, Rust's `struct`, etc.).
+
+Option sets are sort of like union types / enums: if they are single-select option sets, then they're like union types. However, this is just a specialized version of the multi-select option sets. If they are multi-select option types, then it's just a set where you can pick which options to include and exclude (giving us the standard 2^n^ number of possibilities 🤓).
+====
+
+== Item sets
+
+Item sets provide a convenient way to abstract away certain details.
+
+Item sets allow you to group a number of inputs together as a logical unit ...
+
+You can also nest item sets, ...
+
+When using item sets, ...
+
+== Option sets
+
+Enonic XP also sports something called option sets. They are visually similar to item sets when viewed in Content Studio, but are a different way of grouping items together.
+
+Explain how multi-sets work.
+
+NOTE: Can you use item sets within option sets? I need to try out option sets to properly understand what they're about.
+
+== Task
+
+Let's add use both item sets and option sets!

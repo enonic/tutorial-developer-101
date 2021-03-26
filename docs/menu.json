@@ -1,39 +1,71 @@
 {
   "menuItems": [
     {
-      "title": "1 - Setting up SDK",
+      "title": "1 - Setting your development environment",
       "document": "setup"
-    },    
+    },
     {
       "title": "2 - Development basics",
       "document": "basics"
-    },    
-    {
-      "title": "3 - CMS basics",
-      "document": "cms"
-    },    
-    {
-      "title": "4 - Sites and pages",
-      "document": "sites"
     },
     {
-      "title": "5 - Webapps and back-ends",
-      "document": "webapp"
-    },    
+      "title": "3 - Creating content",
+      "document": "content"
+    },
     {
-      "title": "6 - Storing data",
+      "title": "4 - Input types",
+      "document": "input-types"
+    },
+    {
+      "title": "5 - Advanced content types",
+      "document": "advanced-content"
+    },
+    {
+      "title": "6 - Headless API",
+      "document": "headless-api"
+    },
+    {
+      "title": "7 - Controllers",
+      "document": "controllers"
+    },
+    {
+      "title": "8 - Assets",
+      "document": "assets"
+    },
+    {
+      "title": "9 - The Content API",
+      "document": "content-api"
+    },
+    {
+      "title": "10 - Filters and routing",
+      "document": "content-api"
+    },
+    {
+      "title": "11 - Pages",
+      "document": "pages"
+    },
+    {
+      "title": "12 - The Enonic Market",
+      "document": "market"
+    },
+    {
+      "title": "13 - Authentication & Authorization",
+      "document": "auth"
+    },
+    {
+      "title": "14 - Storing data",
       "document": "storage"
-    },    
+    },
     {
-      "title": "7 - Admin extensions",
+      "title": "15 - Admin extensions",
       "document": "admin"
     },
     {
-      "title": "8 - Depoyment",
-      "document": "deploy"
+      "title": "16 - Deployment",
+      "document": "deployment"
     },
     {
-      "title": "9 - Next steps",
+      "title": "17 - Next steps",
       "document": "next"
     }
   ]

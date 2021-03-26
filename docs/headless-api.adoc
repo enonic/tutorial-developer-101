@@ -1,0 +1,37 @@
+= Headless API
+:toc: right
+:imagesdir: media
+
+This chapter serves as a deeper introduction to consuming headless
+APIs and as an introduction to GraphQL. As such it'll explore some
+slightly advanced queries and explore what you can do with relations.
+
+If you're already familiar with GraphQL, this section is largely optional.
+
+NOTE: This section should reference the https://developer.enonic.com/guides/headless-cms-intro[headless CMS intro guide]  somehow, but I'm not sure how best to do that yet.
+
+== What is GraphQL?
+
+(basic explanation of what GraphQL is and why we use it?)
+
+GraphQL is a _graph query language_, and it ...
+
+It's also become very popular lately ...
+
+== How does it work in XP?
+
+In XP, `lib-guillotine` creates the API for us ...
+
+To check it out, you can head to http://localhost:8080/site/hmdb/draft/hmdb/api[this link which I will totally fix up later.]
+
+== Let's build a query
+
+We'll walk the user through the basics of creating a query, including syntax, filtering, sorting, and picking which properties to expose.
+
+== Query by using content relations
+
+We'll dig a little deeper and work with some more advanced queries, including querying by using content relations.
+
+== Still want to learn more?
+
+Check out the GraphQL docs ...
