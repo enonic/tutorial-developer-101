@@ -45,4 +45,6 @@ Create another content type that reuses a lot of the fields from our preexisting
 
 === Next / after mixins
 
+// We might want to move this to the next section? Making it about input reuse and grouping / advanced content.
+
 Mixins provide a handy way of reusing the same inputs across different content types. However, if you want to group a set of fields as a logical unit, you may be better off looking at item sets. Luckily, that's coming right up.
