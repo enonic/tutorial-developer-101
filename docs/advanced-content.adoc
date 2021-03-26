@@ -4,7 +4,12 @@
 
 We've seen basic content types, now let's explore some of the more advanced aspects. We'll look at item sets and option sets and how they can help us both structure our data and make our input forms clearer and easier to use.
 
-NOTE: For @the: Item sets are basic hierarchical data structures (think JSON, Rust's `struct`, etc.). Option sets are union types / enums? Ask @tsi about this.
+[TIP]
+====
+For @the: Item sets are basic hierarchical data structures (think JSON, Rust's `struct`, etc.).
+
+Option sets are sort of like union types / enums: if they are single-select option sets, then they're like union types. However, this is just a specialized version of the multi-select option sets. If they are multi-select option types, then it's just a set where you can pick which options to include and exclude (giving us the standard 2^n^ number of possibilities 🤓).
+====
 
 == Item sets
 
