@@ -22,6 +22,8 @@ NOTE: Projects are a new feature in Content Studio, introduced in 7.3.0. They ar
 
 After creating the site, we'll see that there are no content types! The only things we can create are folders, shortcuts, sites, and template folders. We'll change that in the next section.
 
+// Mention that content types belong to apps
+
 == My first content type
 
 This section gives a brief explanation of XP content types: what they are and how to create them. By doing this, it also introduces the directory structure of an XP app.
