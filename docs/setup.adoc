@@ -4,13 +4,15 @@
 :experimental:
 :document: chapter
 
-Before we can start building apps and APIs, let's make sure we have the right tools available to work efficiently with XP. This {document} walks you through installing the fundamental tools we will be using throughout this guide, including a text editor, a package manager for your system, git, and the Enonic CLI. If you've already got these installed, feel free to skip to the next chapter (or to the relevant sections if you're missing some of them ).
+Before we can start building apps and APIs, let's make sure we have the right tools available to work efficiently with XP. This {document} walks you through installing the fundamental tools we will be using throughout this guide, including a text editor, a package manager for your system, Git, and the Enonic CLI. If you've already got these installed, feel free to skip to the next chapter (or to the relevant sections if you're missing some of them).
 
 == Introducing the command line
 
 The command line -- aka _the terminal_-- is a powerful, text-based interface for running commands on your computer. You can also use use the terminal to navigate your file system, similar to macOS`' Finder or Windows`' Explorer. The program running in the terminal (that interprets your commands) is known as a _shell_.
 
 The rest of this {document} will focus primarily on working with the command line, so go ahead and open your favorite terminal. If you don't know how to open a terminal on your system, don't worry! Instead, check out the guide for https://www.macworld.co.uk/how-to/mac-software/how-use-terminal-on-mac-3608274/[macOS], https://www.lifewire.com/how-to-open-command-prompt-2618089[Windows], or https://www.howtogeek.com/140679/beginner-geek-how-to-start-using-the-linux-terminal/[Linux] (depending on your operating system).
+
+When we ask you to "run a command" later on in this document, you can assume that we're asking you to run it in a terminal unless otherwise specified.
 
 NOTE: To run a command in your terminal, type in the command and press kbd:[enter]. For instance, the command `cd myfolder` would change the shell's working directory to the `myfolder` directory, assuming that it exists.
 
@@ -55,42 +57,36 @@ To verify that it's installed and available, run the following command in your t
 
     snap version
 
-== Installing Enonic CLI
+== Installing the Enonic CLI
 
-With the package managers installed, we will now install the Enonic Command Line Interface. The Enonic CLI enables you to run enonic specific commands directly from your terminal.
+Now, we'll install the Enonic CLI via the package manager we just set up. The CLI provides a number of enonic-specific commands designed to make working with XP fast, easy, and efficient.
 
 [NOTE]
 ====
 While we heavily recommend using a package manager, you can also download and install the executables manually if you prefer. To do that, find your desired version and operating system https://repo.enonic.com/public/com/enonic/cli/enonic/[here], download the files you need, and install them as you would any other binary files on your system.
 ====
 
-Follow the instructions for your specific operating system to install Enonic CLI:
+Follow the instructions for your specific operating system below. When you have installed the CLI, verify that it's working by running
 
-=== MacOS
+  enonic version
+
+=== macOS
 
 From your terminal, run the following commands:
 
     brew tap enonic/cli
     brew install enonic
 
-Verify that enonic cli is installed by running the following command:
-
-    enonic version
-
-NOTE: To later upgrade to newer versions of enonic CLI, simply run the command `brew upgrade enonic`
+To upgrade to newer versions of enonic CLI when they become available, run the command `brew upgrade enonic`
 
 === Windows
 
-From your powershell terminal, run the following commands:
+From a Powershell terminal, run the following commands:
 
     scoop bucket add enonic https://github.com/enonic/cli-scoop
     scoop install enonic
 
-Verify that enonic cli is installed by running the following command:
-
-    enonic version
-
-NOTE: To later upgrade to newer versions of enonic CLI, simply run the command `scoop update enonic`
+To upgrade to newer versions of enonic CLI when they become available, run the command `scoop update enonic`
 
 === Linux
 
@@ -98,65 +94,53 @@ From your terminal, run the following command:
 
    sudo snap install enonic
 
-Verify that enonic cli is installed by running the following command:
-
-    enonic version
-
-NOTE: Snap automatically keeps your snaps updated, to manually force an update, run the command `sudo snap refresh enonic`
+Snap automatically keeps your snaps updated. To manually force an update, run the command `sudo snap refresh enonic`
 
 
 == Git
 
-Git is a free and open source distributed version control system. Later in this tutorial, you will be creating new Enonic development projects using “starters". Enonic CLI uses Git behind the scenes to download the starter and prepare the files for your project locally. As such, you will need to have Git installed as well.
+Git is a free and open source _distributed version control system_. Later on in this tutorial, we will create new Enonic development projects using _starters_. The Enonic CLI uses Git to download these starters and to prepare the files for your project locally.
 
-Follow the steps for your operating system below to install Git:
+To install Git, follow the notes for your operating system below.
+
+Once you have installed Git, you can verify that it's working correctly by running the following command:
+
+    git version
 
 
-=== MacOS
+=== macOS
 
-NOTE: Apple is maintaining it's own fork of Git. With XCode installed, you will already have Git on your Mac.
+NOTE: Apple maintains its own fork of Git. If you have XCode installed, you already have Git installed too.
 
-To install with Homebrew: From your terminal, run the following commands:
+To install Git via Homebrew, run this command:
 
     brew install git
 
-Verify that git has been installed by running the following command:
-
-    git version
-
 === Windows
 
-To install with Scoop, run the following command from the powershell terminal:
+To install Git using Scoop, run the following command from Powershell:
 
     scoop install git
 
-Verify that git has been installed by running the following command:
-
-    git version
-
 === Linux
 
-To install with Snapcraft, run the following command in your terminal:
+To install Git with Snapcraft, run the following command:
 
    sudo snap install git
 
-Verify that Git is installed by running the following command:
 
-    git version
+== Set up a text editor
 
-== Set up a code editor
-
-Code editors are designed specifically for writing computer code. There are a range of available editors out there. If you do not already have a good editor, follow the steps below to get one:
+Text editors (or _editors_ for short) are applications
+designed specifically for writing computer code. There are a range of available editors out there. If you do not already have a good editor, follow the steps below to get one:
 
 === Download VS code
-
-Throughout this documentation we will be using screenshots taken from the popular lightweight cross-platform code editor https://code.visualstudio.com/[VS Code].
 
 Visit the https://code.visualstudio.com/Download[VS Code download page] to download and install the version matching your operating system.
 
 === Install Prettier plugin
 
-Addint the "Prettier - Code formatter" plugin to VS code helps format your code and avoid common typing mistakes.
+Addint the _Prettier - Code formatter" plugin to VS code helps format your code and avoid common typing mistakes.
 
 Follow these steps to install the VS Code plugin:
 
