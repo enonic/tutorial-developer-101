@@ -17,22 +17,26 @@ NOTE: To run a command in your terminal, type in the command and press kbd:[ente
 == Package managers
 Enonic provides a command line interface (CLI) for working with XP. To make it easy to install and keep it updated, we distribute it via a number of _package managers_. Package managers are terminal-based "app stores" that focus on developer and command line tools.
 
-Find the section below for your operating system and
-Follow the instructions for your operating system to install the respective package managers:
+Find the section below for your operating system to see what package managers we support and how to install them.
 
-=== macOS
+=== macOS: Homebrew
 
-We use the popular macOS package manager https://brew.sh/[Homebrew]. Homebrew lets you install, uninstall, and manage your command line tools, including updating them when new versions are made available.
+For macOS, we distribute the Enonic CLI through the popular package manager https://brew.sh/[Homebrew]. Homebrew lets you install, uninstall, and manage your command line tools, including updating them when new versions are made available.
 
-To install Homebrew, follow the instructions in the link above. Once installed, run the following command in your terminal to verify that everything is working:
+To install Homebrew, follow the instructions in the link above or run the following command:
+
+  /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+
+Once installed, run the following command in your terminal to verify that everything is working:
 
     brew help
 
-=== Windows
+=== Windows: Scoop
 
-We use the https://scoop.sh/[Scoop] package manager for Windows. To install Scoop, visit their website, or simply run these two commands from your powershell terminal:
+We use the https://scoop.sh/[Scoop] package manager for Windows. To install Scoop, visit their website, or simply run these two commands from Powershell:
 
-NOTE: To launch powershell from your regular terminal, simply execute `powershell`. The prompt should then start with "PS"
+NOTE: To launch Powershell from your regular terminal, the _Command Prompt_, simply execute the command `powershell`. The prompt should then start with `PS`.
+
 
     set-executionpolicy remotesigned -scope currentuser
     iwr -useb get.scoop.sh | iex
@@ -41,19 +45,24 @@ To verify that Scoop was installed successfully, run the following command:
 
     scoop help
 
-=== Linux
+=== Linux: Snapcraft
 
-We use Snapcraft as the package manager for Linux. Snapcraft comes pre-installed with the popular Ubuntu distribution of Linux and some others.
+We use Snapcraft to distribute packages for Linux. Snapcraft comes preinstalled on a number of popular Linux distributions, including Ubuntu and Manjaro, and is also available for most other major Linux distributions, such as Debian, elementary OS, and Pop!_OS.
 
-To verify that snapcraft is installed on your computer, run the following command in your terminal:
+Specific instructions will vary according to your distribution, so be sure to consult the https://snapcraft.io/docs/installing-snapd[snapd installation instructions] for your particular distro.
+
+To verify that it's installed and available, run the following command in your terminal. It should print out your version of Snap.
 
     snap version
-
-If it is missing, follow Snapcraft's detailed https://snapcraft.io/docs/installing-snapd[installation instructions]for your Linux distro.
 
 == Installing Enonic CLI
 
 With the package managers installed, we will now install the Enonic Command Line Interface. The Enonic CLI enables you to run enonic specific commands directly from your terminal.
+
+[NOTE]
+====
+While we heavily recommend using a package manager, you can also download and install the executables manually if you prefer. To do that, find your desired version and operating system https://repo.enonic.com/public/com/enonic/cli/enonic/[here], download the files you need, and install them as you would any other binary files on your system.
+====
 
 Follow the instructions for your specific operating system to install Enonic CLI:
 
