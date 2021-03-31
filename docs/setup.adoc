@@ -131,16 +131,23 @@ To install Git with Snapcraft, run the following command:
 
 == Set up a text editor
 
-Text editors (or _editors_ for short) are applications
-designed specifically for writing computer code. There are a range of available editors out there. If you do not already have a good editor, follow the steps below to get one:
+Text editors (or just _editors_ for short) are applications that are designed primarily for editing plain text and often specifically for working with code. They are therefore commonly used for programming. Note that text editors are different from _word processors_ such as Microsoft Word, which are not suited to programming.
 
-=== Download VS code
+If you do not yet have an editor you like, follow the steps below to get started with one.
 
-Visit the https://code.visualstudio.com/Download[VS Code download page] to download and install the version matching your operating system.
 
-=== Install Prettier plugin
+designed specifically for writing computer code. There are a range of available editors out there. If you do not already have a good editor, follow the steps below to get one.
 
-Addint the _Prettier - Code formatter" plugin to VS code helps format your code and avoid common typing mistakes.
+=== Download Visual Studio Code
+
+https://code.visualstudio.com/[Visual Studio Code] (often shortened to _VS Code_ or simply _Code_) is one of the most popular text editors around at the moment. It's free, open source, and available on all major platforms.
+
+You can navigate to the https://code.visualstudio.com/Download[download page] and download and install the version matching your operating system. Alternatively, if you're getting into this whole package manager business, it's also available in all package managers listed above. The install instructions will vary, though, so you'll have to figure that out on your own.
+
+==== Install Prettier plugin
+
+While not mandatory, we also recommend you install the https://marketplace.visualstudio.com/items?itemName=esbenp.prettier-vscode["Prettier - Code formatter" plugin ]
+to help keep your code nicely formatted. It helps to keep your code easier to read.
 
 Follow these steps to install the VS Code plugin:
 
@@ -148,19 +155,20 @@ Follow these steps to install the VS Code plugin:
 . Search for: “Prettier - Code formatter”.
 . Click “Install”.
 
-NOTE: When the installation is finished, you must restart VS Code to activate the Prettier.
+When the installation is finished, you must restart VS Code to activate the Prettier.
 
 
 == Summary
 
-You have now installed a package manager for your OS, Enonic CLI, Git and a Code editor. You will be using these tools throughout the various steps of this tutorial.
+Congrats! You've installed a package manager, Git, the Enonic CLI and a text editor. You're now set up to start working with Enonic XP 🚀
+
+Keep your new tools at hand; we'll be using them heavily throughout this guide, so you'll have lots of time to get to know them better.
 
 === Useful links
 
-* Visit the Enonic CLI documentation for a full overview
-* Learn more about Git from this useful https://guides.github.com/introduction/git-handbook/[handbook by Github].
-
+* We'll start using the Enonic CLI in the next chapter, and we'll explain everything as we go along. However, if you want to, you can check out the https://developer.enonic.com/docs/enonic-cli/[reference documentation] for a full overview over how it works.
+* Want to learn more about Git? Check out https://guides.github.com/introduction/git-handbook/[this useful Git handbook by Github].
 
 === Next
 
-In the next step, you
+In the next step, we'll cover the basics of working with XP and the CLI, and we'll even deploy our first application.
