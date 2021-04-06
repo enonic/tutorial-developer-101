@@ -82,28 +82,39 @@ GLOBAL OPTIONS:
 
 == Sandboxes
 
-An essential part of Enonic app development is to have an instance of Enonic XP running locally. These instances are also known as "Sandboxes".
+When talking about _sandboxes_, we're actually talking about local instances of Enonic XP. Having a local (and running) instance of XP is essential for an effective development workflow.
 
-To create a new sandbox, we will use the CLI. Execute the following command:
+Let's create a new sandbox by using the CLI. When you create a new sandbox, the CLI will present you with a few questions for configuring the sandbox, such as the sandbox name. To respond to a question, type in the desired response and press kbd:[enter].
+
+[NOTE]
+====
+If you press kbd:[enter] without entering a response, the CLI will use the default response. The default response to a question is listed in parentheses after the question. For instance, the prompt for a sandbox name might look like this:
+
+    ? Sandbox name (Sandbox1)
+
+Here, `Sandbox1` is the default response.
+====
+
+Run the following command to get started:
 
     enonic sandbox create
 
-When prompted, give your sandbox the name: `tutorial`. Next choose to use the latest version of XP (from the top of the list.)
+When prompted, give your sandbox the name: `tutorial`. Next, when asked which XP distribution you want, use the latest one (at the top of the list).
 
-The CLI will now download the Enonic XP SDK distribution for your operating system, and link it to the sandbox.
+The CLI will download the Enonic XP SDK distribution for your operating system and link it to the sandbox.
 
-.Creating sandbox
+.Creating a sandbox
 ----
 ? Sandbox name: tutorial
 ? Enonic XP distribution: mac-sdk-7.2.0
 Downloading distro [===================>--------------------------------]  37.64%
 ----
 
-Once completed, we may start the sandbox using the CLI:
+Once completed, we can use the CLI to start the sandbox:
 
     enonic sandbox start
 
-Choose the `tutorial` sandbox, and you will see it booting up in your terminal
+Choose the `tutorial` sandbox and watch it boot up in your terminal. The boot output should look something like this, but with values adjusted for your system.
 
 .Output when booting sandbox
 ----
@@ -114,19 +125,19 @@ _  _ \_  __ \  __ \_  __ \_  /_  ___/   __  |/_/__  __ \
 \___//_/ /_/\____//_/ /_//_/  \___/     /_/|_| _  .___/
                                                /_/
 
-# Enonic XP 7.2.0
-# Built on 2019-12-19T15:18:13Z (hash = 39d4b215fd2009d7ba65e07efc54ebad50638741, branch = master)
-# OpenJDK 64-Bit Server VM 11.0.5 (AdoptOpenJDK)
-# Mac OS X 10.15.1 (x86_64)
-# Install directory is /Users/tsi/.enonic/distributions/enonic-xp-mac-sdk-7.2.0
-# Home directory is /Users/tsi/.enonic/sandboxes/tutorial/home
+# Enonic XP 7.6.1
+# Built on 2021-02-25T14:26:46Z (hash = 6359021fdb52fda156e39465d824153c915d903c, branch = 7.6)
+# OpenJDK 64-Bit Server VM 11.0.10 (AdoptOpenJDK)
+# Linux 5.4.108 (amd64)
+# Install directory is $HOME/.enonic/distributions/enonic-xp-linux-sdk-7.6.1
+# Home directory is $HOME/.enonic/sandboxes/tutorial/home
 [...]
 ----
 
 
-The initial output is telling you a lot of information about this sandbox, including the "Home" directory of your sandbox. This may come in handy at a later point in time.
+The initial output gives you a lot of information about this sandbox, including its home and install directories. We won't be needing them in this {document}, but knowing where you can find these details might be useful at a later time.
 
-After sandbox has started, you should see the following output in your terminal:
+After the sandbox has started, you should see something like the following output in your terminal:
 
 ----
 [...] - Started xp@523d2774{HTTP/1.1,[http/1.1]}{0.0.0.0:8080}
@@ -140,17 +151,43 @@ After sandbox has started, you should see the following output in your terminal:
 [...] - Started Enonic XP in 11207 ms
 ----
 
-This indicates that your local XP instance is now serving on the following ports:
- 
-* *8080* Web
-* *4848* Management API (Used by CLI when running commands against an XP instance)
-* *2609* Monitoring API (Use for metrics and instance info)
+This means that your local XP instance is up and running and ready to serve requests. The instance exposes the following ports:
 
-INFO: To stop your sandbox, simply press btn:ctrl-c in the running terminal, or `enonic sandbox stop` in a new terminal.
+* *8080*: Web
+* *4848*: Management API (Used by the CLI when running commands against this XP instance)
+* *2609*: Monitoring API (Used for metrics and instance info)
 
+NOTE: To stop your sandbox, press kbd:[ctrl-c] in the terminal hosting the process. You can also run `enonic sandbox stop` in a different terminal instance.
 
-NOTE: If you have problems booting the sandbox, it may be that one or more of the ports used by XP are already in use. Check the log to see if something went wrong.
+=== Troubleshooting
 
+If you have problems booting the sandbox, it may be that one or more of the ports used by XP are already in use. The command should warn you if something doesn't work right. It'll do this in one of two ways:
+
+. If the CLI checks for the availability of some ports when starting up. If one of these ports isn't available, the CLI will abort with a message like this:
+
+----
+Port 8080 is not available, stop the app using it first!
+----
+
+. For ports where the CLI doesn't check for availability before starting, you might get an exception in the boot log. This is usually identifiable by a printed stack trace in your logs. Here's an example from what happens if port 4848 isn't available. The `[...]` replaces most of the stack trace for legibility reasons.
+
+----
+2021-04-06 11:24:01,168 ERROR c.e.xp.web.jetty.impl.JettyActivator - bundle com.enonic.xp.web.jetty:7.6.1 (80)[com.enonic.xp.web.jetty.impl.JettyActivator(171)] : The activate method has thrown an exception
+org.apache.felix.log.LogException: java.io.IOException: Failed to bind to 0.0.0.0/0.0.0.0:4848
+	at org.eclipse.jetty.server.ServerConnector.openAcceptChannel(ServerConnector.java:349)
+	at org.eclipse.jetty.server.ServerConnector.open(ServerConnector.java:310)
+[...]
+Caused by: java.net.BindException: Address already in use
+	at java.base/sun.nio.ch.Net.bind0(Native Method)
+	at java.base/sun.nio.ch.Net.bind(Net.java:455)
+	at java.base/sun.nio.ch.Net.bind(Net.java:447)
+	at java.base/sun.nio.ch.ServerSocketChannelImpl.bind(ServerSocketChannelImpl.java:227)
+	at java.base/sun.nio.ch.ServerSocketAdaptor.bind(ServerSocketAdaptor.java:80)
+	at org.eclipse.jetty.server.ServerConnector.openAcceptChannel(ServerConnector.java:345)
+	... 78 common frames omitted
+----
+
+If some ports are unavailable, you'll have to find out what programs are using those ports and then shut those programs down. How you find open ports varies from operating system to operating system, but if you're unsure about how to do it on your OS, check out the appropriate guide for https://www.cyberciti.biz/faq/unix-linux-check-if-port-is-in-use-command/[Linux], https://www.micahsmith.com/blog/2019/09/find-ports-in-use-on-macos/[macOS], or https://www.howtogeek.com/howto/28609/how-can-i-tell-what-is-listening-on-a-tcpip-port-in-windows/[Windows].
 
 == Admin console
 
@@ -172,7 +209,7 @@ NOTE: If the welcome tour does not start automatically, simply click the "Welcom
 
 == Projects and starters
 
-You are now set to create your first XP project. 
+You are now set to create your first XP project.
 
 Luckily you will not have to start from scratch. We have provide a range of different project templates (AKA starters)  that you will be using throughout this tutorial.
 
@@ -212,7 +249,7 @@ src/
 ----
 
 <1> Contains the standard project settings, as defined by the CLI
-<2> Main build file for defining dependencies and more 
+<2> Main build file for defining dependencies and more
 <3> Main project folder - JavaScript code and assets are placed here
 <4> Optional folder for Java (XP apps may also contain Java)
 
@@ -241,7 +278,7 @@ BUILD SUCCESSFUL in 5s
 
 After building, a new file (and some folders) was created in your project structure: `build/libs/myproject.jar`. This is the actual application executable file.
 
-To deploy the app to the sandbox, use the CLI once again: 
+To deploy the app to the sandbox, use the CLI once again:
 
 . From the project folder:
 
