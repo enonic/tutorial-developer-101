@@ -1,22 +1,28 @@
 = Get to know the basics of Enonic development
 :toc: right
 :imagesdir: media
+:experimental:
+:document: chapter
 
-This section gives you an introduction to the Enonic Command Line Interface (CLI), XP sandboxes, starters, building and deploying apps.
+In this {document} we'll introduce the fundamental concepts of Enonic XP development. You'll get a brief introduction to the Enonic command line interface (CLI), XP _sandboxes_, starter kits, and building and deploying apps on XP. By the end of the {document} you'll have spun up an instance of XP and deployed an app to it.
 
-== CLI
+There's lots to cover, so let's get to it, shall we?
 
-Enonic CLI gives you a powerful set of tools, available from your terminal.
+== The Enonic CLI
 
-To see all available options, type the following command in your terminal:
+NOTE: If you haven't installed the Enonic CLI yet, be sure to check out the xref:setup#_installing_the_enonic_cli[installation instructions in the previous {document}].
+
+The Enonic command line interface is a powerful tool, built specifically for the Enonic platform. The CLI allows you to interact with XP instances and deploy and develop apps.
+
+To see all available options, run the following command in your terminal:
 
     enonic
 
-You should now see something like this:
+It should output something that looks a bit like this:
 
 .Main help page
 ----
-Enonic CLI v.1.0.12
+Enonic CLI v.1.5.1
 Manage XP instances, home folders and projects
 
 USAGE:
@@ -25,14 +31,16 @@ USAGE:
 COMMANDS:
      snapshot  Create and restore snapshots
      dump      Dump and load complete repositories
-     export    Export and load repository structures
+     export    Export data from a given repository, branch and content path.
+     import    Import data from a named export.
      app       Install, stop and start applications
      repo      Tune and manage repositories
      cms       CMS commands
      system    System commands
      latest    Check for latest version
+     vacuum    Removes old version history and segments from content storage
      help, h   Shows a list of commands or help for one command
-   
+
 PROJECT COMMANDS:
      sandbox  Manage XP development instances
      project  Manage XP development projects
@@ -42,11 +50,11 @@ GLOBAL OPTIONS:
    --version, -v  print the version
 ----
 
-For more help on a specific command, i.e. "sandbox" simply run the help command:
+If you want to know more about how to use one of the subcommands, you can use the `help` subcommand. For instance, if you want to know more about the `sandbox` subcommand, you can run
 
     enonic sandbox help
 
-This will then display the available options for the specific command like this:
+This should result in something like the following being printed to your screen:
 
 .Sandbox help page
 ----
@@ -57,7 +65,7 @@ USAGE:
    Enonic CLI sandbox [global options] command [command options] [arguments...]
 
 VERSION:
-   1.0.12
+   1.5.1
 
 COMMANDS:
      list, ls         List all sandboxes
