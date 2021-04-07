@@ -253,7 +253,9 @@ src/
 
 == Building and deploying
 
-With a brand new project setup, we are ready to build (compile) it for the first time, using the terminal once more:
+Now that we've set up a project, let's see how we build (or _compile_) the project and then how we deploy it to our XP instance. Again, the CLI is key to making this process as smooth as possible.
+
+Here are the steps we need to take:
 
 . Change to the project directory:
 
@@ -262,6 +264,8 @@ With a brand new project setup, we are ready to build (compile) it for the first
 . Start the build with Enonic CLI:
 
     enonic project build
+
+While building your project, the CLI will print what it's doing to your terminal. It will look something like this:
 
 .Sample output from build process
 ----
@@ -272,18 +276,18 @@ BUILD SUCCESSFUL in 5s
 3 actionable tasks: 3 executed
 ----
 
+After the build has finished, you'll have a new file in your project directory, located under the `build/libs` subdirectory. Assuming you have used the default name, it'll be located at `build/libs/myproject.jar` when at the project root. This file is the executable file that contains your application.
 
-After building, a new file (and some folders) was created in your project structure: `build/libs/myproject.jar`. This is the actual application executable file.
 
-To deploy the app to the sandbox, use the CLI once again:
-
-. From the project folder:
+To deploy the app to the sandbox, use the CLI again. From the project root folder, run:
 
     enonic project deploy
 
-The application file will now be copied your sandbox' home/deploy/ folder. XP then detects and starts the app.
+This copies the application file to your sandbox's `home/deploy/` folder. XP picks up on this automatically and starts the app for you.
 
-Confirm that your application was started by looking at the log file from the sandbox' terminal window:
+NOTE: The `enonic project deploy` command will build your project if you have made changes since the last build or haven't built yet. It will also ask whether you want to start the appropriate sandbox if it isn't already running.
+
+To confirm that your application was started correctly, you can look at the logs in the sandbox's terminal window. They should say something like this:
 
 .Application output
 ----
@@ -291,17 +295,19 @@ Confirm that your application was started by looking at the log file from the sa
 [...] - Application [com.example.myproject] started successfully
 ----
 
-NOTE: Running `enonic project deploy` will also build your project if needed. It will even start the sandbox if it is not running already.
+You can also verify that the application was installed correctly by using the admin console (http://localhost:8080): Open the "Applications" app from the main launcher panel and look for your application in the list.
 
-You can also verify that the application was installed by using the admin console. Open the "Applications" app from the main launcher panel to find the application in the list.
 
 TODO Screenshot:
 
-Congratulations on building your first Enonic application :-)
-
+And that's it! You've now successfully built and deployed your first Enonic XP application. Well done!
 
 == Summary
 
+In this {document} we've had our first interaction with the Enonic CLI, we've had a little tour of the XP Admin console, and we have built and deployed our first XP app.
+
 === Useful links
 
-=== Next
+== Next
+
+The app we built in this stage didn't really have any content and was just used to show you how you create and upload apps to an XP instance. In the next {document} we'll create an app that has actual content and see how we can easily serve that content via a GraphQL API.
