@@ -213,44 +213,43 @@ With the sandbox up and running, we're ready to create our first XP project. Cre
 
 NOTE: The complete list of starters can be found on https://market.enonic.com/starters[the Enonic Market].
 
-Here's how to use the CLI to create your first app.
+For our first project, we'll use a minimal starter kit that provides only the essential files for an XP app. We'll use that to familiarize ourselves with how an XP app is structured and how to upload an app to XP. We'll look at producing content in later {document}s.
+
+Here's how to use the CLI to create your first app. We'll use the "Vanilla starter" to create a project scaffold.
 
 . Launch a new terminal
 . When creating a project via the CLI, it creates a folder in your current working directory, so navigate to wherever you want your project to reside. Then, run this command:
 
     enonic project create
 
-. Choose `Vanilla starter` from the list of available starters
+. Choose `Vanilla starter` from the list of available starters.
+. Press kbd:[enter] to use the default name: `com.example.myproject`.
 +
-NOTE: The vanilla starter is a minimalistic project template, containing only the essential files required for an XP app
+NOTE: Project names matter. XP does not support running two apps with the same name within a single instance.
 +
-. Go with the default name: `com.example.myproject`
-+
-NOTE: The project names are important, since XP does not support two apps with the same name running within an instance.
-+
-. Go with default values for destination folder and version.
-. Next, link the project to the  `tutorial` sandbox we created earlier.
-. Finally, skip opening the starter documentation
+. Use the default values for destination folder and version. If the destination folder already exists, you'll have to either choose another name for the folder or remove or rename the folder that already exists.
+. When prompted to select a sandbox, choose the  `tutorial` sandbox we created earlier.
+. Finally, press kbd:[enter] to skip opening the starter documentation. If you answer yes, the documentation for this starter will open in your browser. This is useful if you're using a starter you're not familiar with (and aren't following a guide).
 
-A new folder `myproject/` was created during the process.
-The contents of this folder now contain the essentials for an XP application:
+If you used the default values as specified in the steps, a directory named `myproject/` should have been created during the process. If you used a different project name or project directory name, your directory will have a different name.
+
+The project directory contains a bare bones XP application. The most relevant parts of the directory are:
 
 .Essential XP project structure
 [source,files]
 ----
-gradle.properties <--1-->
-build.gradle <--2-->
+build.gradle <--1-->
+gradle.properties <--2-->
 src/
   main/
-    resources/ <!--3-->
-    java/ <!--4-->
+    java/ <!--3-->
+    resources/ <!--4-->
 ----
 
-<1> Contains the standard project settings, as defined by the CLI
-<2> Main build file for defining dependencies and more
-<3> Main project folder - JavaScript code and assets are placed here
-<4> Optional folder for Java (XP apps may also contain Java)
-
+<1> The main build file for defining dependencies and more build-related details.
+<2> Contains the standard project settings, as defined by the CLI.
+<3> An optional folder for Java (XP apps may also contain Java).
+<4> The main project folder. JavaScript code and assets are placed here.
 
 == Building and deploying
 
