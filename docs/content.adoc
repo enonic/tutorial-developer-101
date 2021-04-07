@@ -1,14 +1,36 @@
 = Content and content types
 :toc: right
 :imagesdir: media
+:experimental:
+:document: chapter
+:xp-url: http://localhost:8080
 
-In this chapter, we'll use the headless starter to create our first GraphQL API.
+In this {document}, we'll start exploring how to create and expose content from your XP instance. To achieve this, we'll create a new application and generate a GraphQL API, and we'll learn about _content types_. But before we can get going with the application, we'll install and have a look at Content Studio, XP's content authoring suite.
 
-Because the 'headless starter' is completely bare(?), we'll have to do things from the ground up.
+== Preparing your sandbox
 
-== Preparing our sandbox
+As we've seen previously, having a locally running sandbox is essential for XP development, so either spin up your sandbox from earlier or create a new one.
 
-If you don't already have your sandbox up and running, here's what you gotta do.
+If you already have a sandbox that you want to use, you can use the command
+
+  enonic sandbox start
+
+The CLI will prompt you for which sandbox you want to start. If you're following along from the previous {document}, feel free to use the `tutorial` sandbox we created there.
+
+If you don't have a sandbox set up, follow the xref:basics#_sandboxes[setup steps in the previous {document}] to set up a sandbox and then come back here.
+
+Once your sandbox is up and running, navigate to the admin interface at {xp-url}. If you followed the steps in the xref:basics#_admin-console[admin console section of the previous {document}], you should already have installed Content Studio, and it should show up in the XP menu on the right.
+
+NOTE: If there is no XP menu on the right-hand side of the window, you can open it by clicking the XP button in the top right corner.
+
+If you did not install Content Studio previously, you can either:
+
+- take the "XP tour" by clicking the XP tour button on the admin home screen. At the final step of this short tour, you will be prompted to be installed a few applications, including content studio.
+- navigate to the "Applications" menu entry in the XP menu. Once on the Applications page, click the "Install" button and search for Content Studio in the popup menu. Be aware that you want "Content Studio" and _not_ "Content Studio+".
+
+When you've got Content Studio up and ready to go, find Content Studio in the XP menu and follow the link.
+
+When working with content, Content Studio is your go-to tool in XP. To install
 
 === Install content studio
 
