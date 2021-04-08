@@ -196,14 +196,22 @@ Point your browser to http://localhost:8080.
 
 You should see the default XP login screen:
 
-TODO: "login screen"
+.The XP login screen
+image::xp-login.png[The XP login screen.]
 
 
 From the login screen, click "log in without a user". When working on a local development environment, we don't need to concern ourselves with users and administrators, so we'll get back to that in xref:chapter#_section[chapter X]. (TODO: do we? we should cover this at some point.)
 
 After signing in, you will be greeted by the XP welcome tour. Complete the tour and install the applications listed in the final step. You'll need some of them later in this tutorial.
 
-TODO: Screenshots of welcome tour
+.The first step of the welcome tour
+image::xp-tour-1.png[A popup describing the tools and navigation system of Enonic XP.]
+
+.The second step of the welcome tour
+image::xp-tour-2.png[A description of XP applications and the Enonic Market.]
+
+.The final step of the welcome tour
+image::xp-tour-3.png[A prompt to install a set of applications from the Enonic Market including Content Studio, Live Trace, and Data Toolbox.]
 
 NOTE: If the welcome tour does not start automatically or if you want to take it again, you can always click the "XP Tour" icon on the home screen to start it manually.
 
