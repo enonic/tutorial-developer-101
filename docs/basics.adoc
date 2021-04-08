@@ -306,7 +306,8 @@ To confirm that your application was started correctly, you can look at the logs
 You can also verify that the application was installed correctly by using the admin console (http://localhost:8080): Open the "Applications" app from the main launcher panel and look for your application in the list.
 
 
-TODO Screenshot:
+.The applications list with the vanilla starter installed
+image::applications-vanilla.png[The applications list with a single application installed. Also application details, such as content install time, version, and required XP system version.]
 
 And that's it! You've now successfully built and deployed your first Enonic XP application. Well done!
 
