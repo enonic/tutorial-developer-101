@@ -114,7 +114,7 @@ Once completed, we can use the CLI to start the sandbox:
 
     enonic sandbox start
 
-Choose the `tutorial` sandbox and watch it boot up in your terminal. The boot output should look something like this, but with values adjusted for your system.
+If you're in an XP project directory, this will start the sandbox belonging to this project automatically. Otherwise, you'll have to select which sandbox to start. If that's the case, choose the `tutorial` sandbox and watch it boot up in your terminal. The boot output should look something like this, but with values adjusted for your system.
 
 .Output when booting sandbox
 ----
