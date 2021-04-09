@@ -6,7 +6,9 @@
 :xp-url: http://localhost:8080
 :cs-url: {xp-url}/admin/tool/com.enonic.app.contentstudio/main
 
-In this {document}, we'll start exploring how to create and expose content from your XP instance. To achieve this, we'll create a new application and generate a GraphQL API, and we'll learn about _content types_. But before we can get going with the application, we'll install and have a look at Content Studio, XP's content authoring suite.
+In this {document}, we'll start exploring how to create and expose content from your XP instance. To achieve this, we'll create a new application and generate a GraphQL API, and we'll learn about _content types_.
+
+However, before we can get going with the application, we'll prepare our sandbox by installing Content Studio -- XP's content authoring suite. We'll be seeing a lot of Content Studio going forwards, so make sure you get it installed and ready to go.
 
 == Preparing your sandbox
 
@@ -24,7 +26,7 @@ Once your sandbox is up and running, navigate to the admin dashboard at {xp-url}
 
 NOTE: If there is no XP menu on the right-hand side of the window, you can open it by clicking the XP button in the top right corner.
 
-If you did not install Content Studio previously, you can either:
+If you did not install Content Studio previously, choose one of the below options to install it now:
 
 - take the "XP tour" by clicking the XP tour button on the admin home screen. At the final step of this short tour, you will be prompted to be installed a few applications, including content studio.
 - navigate to the "Applications" menu entry in the XP menu. Once on the Applications page, click the "Install" button and search for Content Studio in the popup menu. Be aware that you want "Content Studio" and _not_ "Content Studio+".
@@ -41,7 +43,7 @@ When opening Content Studio, you might find that it's telling you that "you are 
 .An empty Content Studio
 image::content-studio-empty.png[What Content Studio looks like when it's completely empty.]
 
-We can't select anything if we don't have any content. However, before we can start to create any content, we need to create an application. In XP, content is linked to applications, and applications dictate what types of content they can work with. So let's create a project!
+We can't select anything if we don't have any content. However, before we can create any content, we need to create an application. In XP, content is linked to applications, and applications dictate what types of content they can work with. So let's create a project!
 
 == Create a headless API project
 
