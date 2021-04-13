@@ -1,65 +1,116 @@
 = Content and content types
-:toc: right
-:imagesdir: media
-:experimental:
-:document: chapter
-:xp-url: http://localhost:8080
-:cs-url: {xp-url}/admin/tool/com.enonic.app.contentstudio/main
-:project-name: com.gettingstarted.content
+include::variables.adoc[]
+:project-name: content
+:project-name-full: {project-name-prefix}{project-name}
 
-In this {document}, we'll start exploring how to create and expose content from your XP instance. To achieve this, we'll create a new application and generate a GraphQL API, and we'll learn about _content types_.
+In this {document}, we'll create our first XP application project and generate a GraphQL API for it. In doing this, we'll learn about _content types_ and how to do basic work with  Content Studio.
 
-However, before we can get going with the application, we'll prepare our sandbox by installing Content Studio -- XP's content authoring suite. We'll be seeing a lot of Content Studio going forwards, so make sure you get it installed and ready to go.
+This {document} builds on the steps we took in the xref:basics[previous {document}], so if you haven't already done it, make sure you go through it and get your sandbox set up and Content Studio installed.
 
-== Preparing your sandbox
+When you're sure you're up to speed with the previous {document}, let's jump right in and create our first XP project.
 
-As we've seen previously, having a locally running sandbox is essential for XP development, so either spin up your sandbox from earlier or create a new one.
+== Projects and starters
 
-If you already have a sandbox that you want to use, you can use the command
+Creating a project from scratch can be a daunting task for any system you're not familiar with. To make things easier for you, Enonic provides a range of different project templates (known as _starters_). We'll make use of these throughout this tutorial.
 
+NOTE: The complete list of starters can be found on https://market.enonic.com/starters[the Enonic Market].
+
+For our first project, we'll use the "Headless CMS" starter. This starter is tailored to start creating your own headless content API, but is fairly minimal. We'll use this to familiarize ourselves with how an XP app is structured and how to upload an app to XP.
+
+Here's how to use the CLI to create your first app.
+
+. Launch a new terminal
+. When creating a project via the CLI, it creates a folder in your current working directory, so navigate to wherever you want your project to reside. Then, run this command:
+
+    enonic project create
+
+. Choose `Headless CMS starter` from the list of available starters.
+. When prompted enter the name `{project-name-full}` and  press kbd:[enter] to accept.
++
+NOTE: Project names matter. XP does not support running two apps with the same name within a single instance.
++
+. Use the default values for destination folder and version. If the destination folder already exists, you'll have to either choose another name for the folder or remove or rename the folder that already exists.
+. When prompted to select a sandbox, choose the  `tutorial` sandbox we created previously.
+. Finally, press kbd:[enter] to skip opening the starter documentation. If you answer yes, the documentation for this starter will open in your browser. This is useful if you're using a starter you're not familiar with (and aren't following a guide).
+
+If you used the default values as specified in the steps, a directory named `{project-name}/` should have been created during the process. If you used a different project name or project directory name, your directory will have a different name.
+
+The project directory contains a fairly minimal XP application. The most relevant parts of the directory are:
+
+.Essential XP project structure
+[source,files]
+----
+build.gradle <--1-->
+gradle.properties <--2-->
+src/
+  main/
+    resources/ <!--3-->
+----
+
+<1> The main build file for defining dependencies and more build-related details.
+<2> Contains the standard project settings, as defined by the CLI.
+<3> The main project folder. JavaScript code and assets are placed here.
+
+== Building and deploying
+
+Now that we've set up a project, let's see how we build (or _compile_) the project and then how we deploy it to our XP instance. Again, the CLI is key to making this process as smooth as possible.
+
+Here are the steps we need to take:
+
+. Change to the project directory:
++
+[subs="attributes"]
+----
+cd {project-name}
+----
++
+. If your sandbox isn't already running, start it by using this command:
++
   enonic sandbox start
++
+This will start the sandbox belonging to the current project directory.
 
-The CLI will prompt you for which sandbox you want to start. If you're following along from the previous {document}, feel free to use the `tutorial` sandbox we created there.
+. Start the build with Enonic CLI:
 
-If you don't have a sandbox set up, follow the xref:basics#_sandboxes[setup steps in the previous {document}] to set up a sandbox and then come back here.
+    enonic project build
 
-Once your sandbox is up and running, navigate to the admin dashboard at {xp-url}. If you followed the steps in the xref:basics#_admin-console[admin console section of the previous {document}], you should already have installed Content Studio, and it should show up in the XP menu on the right.
+While building your project, the CLI will print what it's doing to your terminal. It will look something like this:
 
-NOTE: If there is no XP menu on the right-hand side of the window, you can open it by clicking the XP button in the top right corner.
+.Sample output from build process
+----
+Building in sandbox 'tutorial'...
+Starting a Gradle Daemon (subsequent builds will be faster)
 
-If you did not install Content Studio previously, choose one of the below options to install it now:
+BUILD SUCCESSFUL in 5s
+3 actionable tasks: 3 executed
+----
 
-- take the "XP tour" by clicking the XP tour button on the admin home screen. At the final step of this short tour, you will be prompted to be installed a few applications, including content studio.
-- navigate to the "Applications" menu entry in the XP menu. Once on the Applications page, click the "Install" button and search for Content Studio in the popup menu. Be aware that you want "Content Studio" and _not_ "Content Studio+".
+After the build has finished, you'll have a new file in your project directory, located under the `build/libs` subdirectory. Assuming you have used the default name, it'll be located at `build/libs/{project-name}.jar` when at the project root. This file is the executable file that contains your application.
 
-When you've got Content Studio up and ready to go, find Content Studio in the XP menu and follow the link. Alternatively, you can also find it at {cs-url}[at its own URL] if everything's been installed and is running correctly.
+To deploy the app to the sandbox, use the CLI again. From the project root folder, run:
 
-.The XP menu with Content Studio installed
-image::xp-menu-content-studio.png[The XP menu, open, with Content Studio listed as an application.]
+    enonic project deploy
 
-=== The empty studio (204 No content)
+This copies the application file to your sandbox's `home/deploy/` folder. XP picks up on this automatically and starts the app for you.
 
-When opening Content Studio, you might find that it's telling you that "you are wasting this space".
+NOTE: The `enonic project deploy` command will build your project if you have made changes since the last build or haven't built yet. It will also ask whether you want to start the appropriate sandbox if it isn't already running.
 
-.An empty Content Studio
-image::content-studio-empty.png[What Content Studio looks like when it's completely empty.]
+To confirm that your application was started correctly, you can look at the logs in the sandbox's terminal window. They should say something like this:
 
-We can't select anything if we don't have any content. But we also can't create content if we don't have any applications that provide https://developer.enonic.com/docs/xp/stable/cms/content-types[_content types_]. That's because applications dictate what types of content they can work with, and we don't have any applications that provide content types yet. To fix this, let's create a project!
+.Application output
+[subs="attributes"]
+----
+[...] - Local application [{project-name-full}] installed successfully
+[...] - Application [{project-name-full}] started successfully
+----
 
-WARNING:  What determines whether an application can be selected when creating a site in CS? For instance, data toolbox and live trace don't show up as options in the Applications dropdown. The vanilla example also does not show up. Is that because it doesn't have any content types?
+You can also verify that the application was installed correctly by using the admin console ({xp-url}): Open the "Applications" app from the main launcher panel and look for your application in the list.
 
-== Create a headless API project
 
-To demonstrate how to work with content in XP, we'll create a new project. Using the headless CMS starter, we also get a fully functional GraphQL API without any additional work.
+.The applications list with the headless starter installed
+image::applications-headless.png[The applications list with a few applications installed. Also shows application details, such as content install time, version, and required XP system version for the selected application.]
 
-We've already covered how to create new projects xref:basics#_projects_and_starters[in the previous {document}], so go check that out if the following steps are hard to follow.
-
-. Create a new project using `enonic project create` and select the `Headless CMS Starter` option.
-. Use the project name `{project-name}`.
-. Select your destination folder (the default is fine) and accept the default project version.
-. Use the sandbox we created earlier, `tutorial`.
-
-To make sure that your new application is picked up correctly, run `enonic project deploy` and check that it shows up under http://localhost:8080/admin/tool/com.enonic.xp.app.applications/main[applications].
+You've now successfully built and deployed your first Enonic XP application. Well done! Now let's look at creating content.
 
 === What if the application doesn't show up?
 
@@ -69,17 +120,10 @@ If the build works, but nothing shows up in the Applications tab, make sure you'
 
 If you've checked that you're running the right sandbox and that the build succeeds, but you're still not seeing the application, you can do a manual deploy. The project build result is available in the `build/libs` directory of the project. You can copy this `.jar` file to the sandbox's `home/deploy` directory. This will make XP pick it up. If you've used the suggested names in the steps above (and the default directories for XP configuration), this command will move the file for you on Unix systems when run from the project root:
 
-  mv build/libs/content-1.0.0-SNAPSHOT.jar ~/.enonic/sandboxes/tutorial/home/deploy/
+[subs="attributes"]
+  mv build/libs/{project-name}-1.0.0-SNAPSHOT.jar ~/.enonic/sandboxes/tutorial/home/deploy/
 
 NOTE: If you have to deploy manually when going through this tutorial, please get in touch on https://discuss.enonic.com[discuss.enonic.com] so we can improve the documentation and the process.
-
-// This section walks the user through creating a new project using the headless starter. We've already created a project previously, so it needn't be _as_ detailed as previously, but should still provide all the necessary instructions.
-
-// NOTE: Projects are a new feature in Content Studio, introduced in 7.3.0. They are not essential and for a small demo like this would probably cause more issues than they solve. However, it's probably worth sticking a note in here, telling the users that there is a more advanced concept called projects which is useful for working with multiple sites/contexts. We might explore this later.
-
-// After creating the site, we'll see that there are no content types! The only things we can create are folders, shortcuts, sites, and template folders. We'll change that in the next section.
-
-// Mention that content types belong to apps
 
 == My first content type
 

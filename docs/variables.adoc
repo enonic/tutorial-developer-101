@@ -1,2 +1,7 @@
-:release: 7.1
-:version: 7.1.1
+:toc: right
+:imagesdir: media
+:experimental:
+:document: chapter
+:xp-url: http://localhost:8080
+:cs-url: {xp-url}/admin/tool/com.enonic.app.contentstudio/main
+:project-name-prefix: com.gettingstarted.

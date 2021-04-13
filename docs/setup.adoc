@@ -171,4 +171,4 @@ Keep your new tools at hand; we'll be using them heavily throughout this guide, 
 
 === Next
 
-In the next step, we'll cover the basics of working with XP and the CLI, and we'll even deploy our first application.
+In the next step, we'll cover the basics of working with XP and the CLI.

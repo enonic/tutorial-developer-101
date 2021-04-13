@@ -1,8 +1,5 @@
 = Get to know the basics of Enonic development
-:toc: right
-:imagesdir: media
-:experimental:
-:document: chapter
+include::variables.adoc[]
 
 In this {document} we'll introduce the fundamental concepts of Enonic XP development. You'll get a brief introduction to the Enonic command line interface (CLI), XP _sandboxes_, starter kits, and building and deploying apps on XP. By the end of the {document} you'll have spun up an instance of XP and deployed an app to it.
 
@@ -215,108 +212,12 @@ image::xp-tour-3.png[A prompt to install a set of applications from the Enonic M
 
 NOTE: If the welcome tour does not start automatically or if you want to take it again, you can always click the "XP Tour" icon on the home screen to start it manually.
 
-== Projects and starters
-
-With the sandbox up and running, we're ready to create our first XP project. Creating a project from scratch can be a daunting task for any system you're not familiar with, so to make things easier for you, Enonic provides a range of different project templates (known as _starters_). We'll make use of these throughout this tutorial.
-
-NOTE: The complete list of starters can be found on https://market.enonic.com/starters[the Enonic Market].
-
-For our first project, we'll use a minimal starter kit that provides only the essential files for an XP app. We'll use that to familiarize ourselves with how an XP app is structured and how to upload an app to XP. We'll look at producing content in later {document}s.
-
-Here's how to use the CLI to create your first app. We'll use the "Vanilla starter" to create a project scaffold.
-
-. Launch a new terminal
-. When creating a project via the CLI, it creates a folder in your current working directory, so navigate to wherever you want your project to reside. Then, run this command:
-
-    enonic project create
-
-. Choose `Vanilla starter` from the list of available starters.
-. Press kbd:[enter] to use the default name: `com.example.myproject`.
-+
-NOTE: Project names matter. XP does not support running two apps with the same name within a single instance.
-+
-. Use the default values for destination folder and version. If the destination folder already exists, you'll have to either choose another name for the folder or remove or rename the folder that already exists.
-. When prompted to select a sandbox, choose the  `tutorial` sandbox we created earlier.
-. Finally, press kbd:[enter] to skip opening the starter documentation. If you answer yes, the documentation for this starter will open in your browser. This is useful if you're using a starter you're not familiar with (and aren't following a guide).
-
-If you used the default values as specified in the steps, a directory named `myproject/` should have been created during the process. If you used a different project name or project directory name, your directory will have a different name.
-
-The project directory contains a bare bones XP application. The most relevant parts of the directory are:
-
-.Essential XP project structure
-[source,files]
-----
-build.gradle <--1-->
-gradle.properties <--2-->
-src/
-  main/
-    java/ <!--3-->
-    resources/ <!--4-->
-----
-
-<1> The main build file for defining dependencies and more build-related details.
-<2> Contains the standard project settings, as defined by the CLI.
-<3> An optional folder for Java (XP apps may also contain Java).
-<4> The main project folder. JavaScript code and assets are placed here.
-
-== Building and deploying
-
-Now that we've set up a project, let's see how we build (or _compile_) the project and then how we deploy it to our XP instance. Again, the CLI is key to making this process as smooth as possible.
-
-Here are the steps we need to take:
-
-. Change to the project directory:
-
-    cd myproject
-
-. Start the build with Enonic CLI:
-
-    enonic project build
-
-While building your project, the CLI will print what it's doing to your terminal. It will look something like this:
-
-.Sample output from build process
-----
-Building in sandbox 'tutorial'...
-Starting a Gradle Daemon (subsequent builds will be faster)
-
-BUILD SUCCESSFUL in 5s
-3 actionable tasks: 3 executed
-----
-
-After the build has finished, you'll have a new file in your project directory, located under the `build/libs` subdirectory. Assuming you have used the default name, it'll be located at `build/libs/myproject.jar` when at the project root. This file is the executable file that contains your application.
-
-
-To deploy the app to the sandbox, use the CLI again. From the project root folder, run:
-
-    enonic project deploy
-
-This copies the application file to your sandbox's `home/deploy/` folder. XP picks up on this automatically and starts the app for you.
-
-NOTE: The `enonic project deploy` command will build your project if you have made changes since the last build or haven't built yet. It will also ask whether you want to start the appropriate sandbox if it isn't already running.
-
-To confirm that your application was started correctly, you can look at the logs in the sandbox's terminal window. They should say something like this:
-
-.Application output
-----
-[...] - Local application [com.example.myproject] installed successfully
-[...] - Application [com.example.myproject] started successfully
-----
-
-You can also verify that the application was installed correctly by using the admin console (http://localhost:8080): Open the "Applications" app from the main launcher panel and look for your application in the list.
-
-
-.The applications list with the vanilla starter installed
-image::applications-vanilla.png[The applications list with a single application installed. Also application details, such as content install time, version, and required XP system version.]
-
-And that's it! You've now successfully built and deployed your first Enonic XP application. Well done!
-
 == Summary
 
-In this {document} we've had our first interaction with the Enonic CLI, we've had a little tour of the XP Admin console, and we have built and deployed our first XP app.
+In this {document} we've had our first glimpse at using the Enonic CLI,  we've had a little tour of the XP Admin console, and we've installed some XP apps to prepare for later.
 
 === Useful links
 
 == Next
 
-The app we built in this stage didn't really have any content and was just used to show you how you create and upload apps to an XP instance. In the next {document} we'll create an app that has actual content and see how we can easily serve that content via a GraphQL API.
+In the next {document} we'll use the sandbox that we've just created and create our first XP application and see how we can get an automatically generated GraphQL API for content that we create.
