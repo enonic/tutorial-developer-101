@@ -5,6 +5,7 @@
 :document: chapter
 :xp-url: http://localhost:8080
 :cs-url: {xp-url}/admin/tool/com.enonic.app.contentstudio/main
+:project-name: com.gettingstarted.content
 
 In this {document}, we'll start exploring how to create and expose content from your XP instance. To achieve this, we'll create a new application and generate a GraphQL API, and we'll learn about _content types_.
 
@@ -47,11 +48,34 @@ We can't select anything if we don't have any content. However, before we can cr
 
 == Create a headless API project
 
-This section walks the user through creating a new project using the headless starter. We've already created a project previously, so it needn't be _as_ detailed as previously, but should still provide all the necessary instructions.
+To demonstrate how to work with content in XP, we'll create a new project. Using the headless CMS starter, we also get a fully functional GraphQL API without any additional work.
 
-NOTE: Projects are a new feature in Content Studio, introduced in 7.3.0. They are not essential and for a small demo like this would probably cause more issues than they solve. However, it's probably worth sticking a note in here, telling the users that there is a more advanced concept called projects which is useful for working with multiple sites/contexts. We might explore this later.
+We've already covered how to create new projects xref:basics#_projects_and_starters[in the previous {document}], so go check that out if the following steps are hard to follow.
 
-After creating the site, we'll see that there are no content types! The only things we can create are folders, shortcuts, sites, and template folders. We'll change that in the next section.
+. Create a new project using `enonic project create` and select the `Headless CMS Starter` option.
+. Use the project name `{project-name}`.
+. Select your destination folder (the default is fine) and accept the default project version.
+. Use the sandbox we created earlier, `tutorial`.
+
+To make sure that your new application is picked up correctly, run `enonic project deploy` and check that it shows up under http://localhost:8080/admin/tool/com.enonic.xp.app.applications/main[applications].
+
+=== What if the application doesn't show up?
+
+If the application doesn't show up under the Applications tab in XP after you've run `enonic project deploy`, check the logs (for the build first, and then for XP) for errors. The build might have failed or something may have gone wrong when deploying.
+
+If the build works, but nothing shows up in the Applications tab, make sure you're running the right sandbox. The CLI deploys to the sandbox specified in the project's `.enonic` file (in the project directory root). This has to match the name of the sandbox that's running.
+
+If you've checked that you're running the right sandbox and that the build succeeds, but you're still not seeing the application, you can do a manual deploy. The project build result is available in the `build/libs` directory of the project. You can copy this `.jar` file to the sandbox's `home/deploy` directory. This will make XP pick it up. If you've used the suggested names in the steps above (and the default directories for XP configuration), this command will move the file for you on Unix systems when run from the project root:
+
+  mv build/libs/content-1.0.0-SNAPSHOT.jar ~/.enonic/sandboxes/tutorial/home/deploy/
+
+NOTE: If you have to deploy manually when going through this tutorial, please get in touch on https://discuss.enonic.com[discuss.enonic.com] so we can improve the documentation and the process.
+
+// This section walks the user through creating a new project using the headless starter. We've already created a project previously, so it needn't be _as_ detailed as previously, but should still provide all the necessary instructions.
+
+// NOTE: Projects are a new feature in Content Studio, introduced in 7.3.0. They are not essential and for a small demo like this would probably cause more issues than they solve. However, it's probably worth sticking a note in here, telling the users that there is a more advanced concept called projects which is useful for working with multiple sites/contexts. We might explore this later.
+
+// After creating the site, we'll see that there are no content types! The only things we can create are folders, shortcuts, sites, and template folders. We'll change that in the next section.
 
 // Mention that content types belong to apps
 
