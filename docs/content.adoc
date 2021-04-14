@@ -129,10 +129,15 @@ NOTE: If you have to deploy manually when going through this tutorial, please ge
 
 We've created our first app, but an app isn't terribly exciting if it doesn't have any content to deliver. While content _creation_ takes place inside Content Studio, Content Studio first needs to know something about what kinds of content the end user can create. Enter: _content types_.
 
-Content types are schemas that tell XP what properties a piece of content of a particular type can have. That explanation might be a bit hard to follow, so let's look at an example instead.
+=== What are content types?
+
+Content types are schemas that tell XP what properties a piece of content of a particular type can have. That might sound confusing, but imagine for a second that we're working with forms. Content types describe what fields go in a specific form. Then a piece of content is a form that has been filled out. We'll look at an example to make this even clearer.
+
+NOTE: If you're used to working with databases, you can think of content types as table schemas and contents as the rows of a table. The properties are the columns specified by the schema. Similarly, a content type is much like a _(data) type_ or a _class_ in many programming languages: something that describes the shape of your data. A piece of content is a manifestation/instance of that data type. The properties of the content type specify what that data type contains.
+
 
 Imagine we want our app to list colors. We want each color to have a name and a hexadecimal application, e.g. `red, #ff0000` or `blue, #0000ff`.
-Here's what the content type for color could like. The most relevant part of the file are numbered and further explained below.
+Here's what the content type for color could look like. The most relevant parts of the file are numbered and further explained below.
 
 .A simple content type describing the 'color' content type
 [source,xml]
@@ -144,7 +149,11 @@ include::content_content_type.xml[]
 <2> This is where we specify what properties this content type contains. The contents of this tag control what we see and are able to edit in Content Studio.
 <3> This is the first property of the color. The `type` attribute specifies what kind of input field the user will see in Content Studio, and the `label` specifies how the input will be labeled.
 
-When we use a content type to create content, that content will often be exposed as JSON data, and it can look like this:
+NOTE: Content types also have a large number of other, optional fields that we won't get into here. If you'd like to learn more about this, consult https://developer.enonic.com/docs/xp/stable/cms/content-types[the reference documentation].
+
+To create an instance of this content type, we could use Content Studio (we'll see exactly how to do this shortly!). Upon exposing it via an API, we would most likely see the piece of content exposed as JSON, so that's what we'll use to illustrate a piece of content.
+
+If we created the color `red, #ff0000` mentioned above, that specific instance of the content type (that piece of content) would be represented in JSON as this:
 
 .A piece of content of type 'color'
 [source,json]
@@ -155,16 +164,15 @@ When we use a content type to create content, that content will often be exposed
 }
 ----
 
-Content type:: Content types give you a way to group together logical properties that can then be used to instantiate separate pieces of data.
-Content:: XP uses the term _content_ for logical pieces of data that it can serve to an end user. For instance, if you create an application about food, then each recipe could be a separate piece of content. Each piece of content is an instance of one (and only one) _content type_.
+So, to recap: _content types_ describe the shape of some data that's been grouped together. A piece of _content_ is the manifestation of that content type, populated with actual data. If it's still a bit fuzzy, don't worry! It'll become clearer once we start working with it.
 
-If you're used to working with databases, you can think of content types as a schema for a table, and contents as the rows of a table. The properties are the columns specified by the schema. Similarly, a content type is similar to a _type_ or _class_ in different kinds of programming: something that describes the shape of your data. A piece of content is a manifestation/instance of that data. The properties of the content type are the properties of
+=== Creating a content type
 
-This section gives a brief explanation of XP content types: what they are and how to create them. By doing this, it also introduces the directory structure of an XP app.
 
-We'll keep it light for now and only introduce what we need.
 
 After creating the content type, we'll open Content Studio and check it out + create an instance of the content type.
+
+== Content Creation 101
 
 == Querying the API
 
