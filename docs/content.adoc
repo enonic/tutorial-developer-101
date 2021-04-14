@@ -190,6 +190,37 @@ If everything goes well, you should see your sandbox logs update now. And that's
 
 == Content Creation 101
 
+After the preceding few steps, everything is ready for us to create some actual content! So with your sandbox up and running, and navigate to {cs-url}[Content Studio]. You should be met with an empty studio that tells you you are "wasting this space":
+
+.An empty content studio
+image::content-studio-empty.png[What Content Studio looks like when it's completely empty.]
+
+=== Creating a site
+
+Before we can create our content, we need a "site" to hold it. Sites in Content Studio are ... [explain sites here!]
+
+To get going, press the "New..." button in the command bar or use the keyboard shortcut kbd:[Alt+n]. This will bring up a "Create Content" dialog looking something like this:
+
+.The Content Studio create content dialog
+image::content-studio-create-content.png[The Content Studio create content dialog.]
+
+Select "Site" either by clicking on it, or by navigating to it with your keyboard. You can start typing as soon as the dialog opens to filter the options too!
+
+When you select it, your browser will take you to a new tab (or window depending on your browser settings). This page is an edit page for the content you just created. Just like with our "color" content type.
+
+.Creating a new site in Content Studio.
+image::content-studio-new-site.png[Creating a new site in content studio. There is a form with site options on the left.]
+
+Add the required data ...
+
+Select "{project-name}" from the applications list ...
+
+=== Add a dash of color
+
+Create the color ...
+
+Try and create some more? ...
+
 == Querying the API
 
 Now that we've created some content, how about we try and query the API to see if we can fetch it?
