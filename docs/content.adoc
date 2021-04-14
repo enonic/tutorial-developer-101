@@ -168,9 +168,25 @@ So, to recap: _content types_ describe the shape of some data that's been groupe
 
 === Creating a content type
 
+Now that we know what a content type is, let's look at how we create them and make XP recognize them. We'll use the "Color" content type from before to keep things simple.
 
+XP is quite particular about project folder structure, so we need to put content types right where it expects to find them. The location is under `src/main/resources/site/content-types`.
 
-After creating the content type, we'll open Content Studio and check it out + create an instance of the content type.
+Within the `content-types` directory, we need to place another directory with the name of the content type (in our case: "color"), and within that directory, we place our content type, `color.xml`. As such, the full path to our content type from the project root is `src/main/resources/site/content-types/color/color.xml`.
+
+Now, unless you've created it manually, then that directory doesn't exist in our "{project-name}" project yet, so go ahead and create the required directories and files.
+
+In the `color.xml` file, place the following contents:
+[source,xml]
+----
+include::content_content_type.xml[]
+----
+
+Now run:
+
+  enonic project deploy
+
+If everything goes well, you should see your sandbox logs update now. And that's the basics of creating new content types. Next, let's turn our eyes to Content Studio and create some actual content!
 
 == Content Creation 101
 
