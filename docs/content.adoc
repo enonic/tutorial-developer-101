@@ -250,7 +250,7 @@ image::content-studio-new-red.png[The form for "red" fully filled out.]
 
 Again, save and close the tab (kbd:[ctrl+enter]). Now repeat this process for "green" (hexadecimal code: "#00ff00") and "blue" (hexadecimal code: "#0000ff"). Be aware that Content Studio lets you nest content, so if you try and create new content when "red" is selected in the hierarchy, it'll nest the new content under "red". In our case, though, we want the colors to be nested directly under the site, so make sure "colors" is selected when you create new content.
 
-NOTE: Notice how we end use the color name both as the display name of the content and in the content's "name" field? XP actually has a way to automate that for us! We can use something called https://developer.enonic.com/docs/xp/stable/cms/content-types#display_name_expressions[_display name expressions_]. It's not necessary for our simple use case here, but if you want to look into it, feel free to play around a bit.
+NOTE: Notice how we use the color name both as the display name of the content and in the content's "name" field? XP actually has a way to automate that for us! We can use something called https://developer.enonic.com/docs/xp/stable/cms/content-types#display_name_expressions[_display name expressions_]. It's not necessary for our simple use case here, but if you want to look into it, feel free to play around a bit.
 
 With these colors created, your content hierarchy should now list the site and the three colors and the templates folder directly underneath it.
 
