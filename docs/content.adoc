@@ -2,6 +2,7 @@
 include::variables.adoc[]
 :project-name: content
 :project-name-full: {project-name-prefix}{project-name}
+:api-url: {xp-url}/site/default/draft/colors/api
 
 In this {document}, we'll create our first XP application project and generate a GraphQL API for it. In doing this, we'll learn about _content types_ and how to do basic work with  Content Studio.
 
@@ -226,7 +227,7 @@ Your site form should now look a little something like this.
 .A filled out site creation form
 image::content-studio-site-colors.png[What the site form looks like after filling out the necessary fields.]
 
-To confirm and return to the Content Studio hierarchy, you can either press "Save" in the menu bar or use the keyboard shortcut kbd:[ctrl+enter]. The keyboard shortcut will also close the tab for you after saving. If you clicked the "Save" button in the menu, feel free to close the tab manually (you won't be needing it again).
+To confirm and return to the Content Studio hierarchy, you can either press "Save" in the menu bar or use the keyboard shortcut: kbd:[ctrl+enter] on Linux and Windows and kbd:[⌘+enter] on macOS. The keyboard shortcut will also close the tab for you after saving. If you clicked the "Save" button in the menu, feel free to close the tab manually (you won't be needing it again).
 
 When you return to the Content Studio hierarchy view, you should now see your site listed. If you expand it, you'll find that there is also a node called "Templates" underneath it. We can ignore this for now, but we'll learn more about it later.
 
@@ -248,7 +249,7 @@ It should look a little something like this:
 .The color form filled out for the color "red"
 image::content-studio-new-red.png[The form for "red" fully filled out.]
 
-Again, save and close the tab (kbd:[ctrl+enter]). Now repeat this process for "green" (hexadecimal code: "#00ff00") and "blue" (hexadecimal code: "#0000ff"). Be aware that Content Studio lets you nest content, so if you try and create new content when "red" is selected in the hierarchy, it'll nest the new content under "red". In our case, though, we want the colors to be nested directly under the site, so make sure "colors" is selected when you create new content.
+Again, save and close the tab (kbd:[ctrl+enter]/kbd:[⌘+enter]). Now repeat this process for "green" (hexadecimal code: "#00ff00") and "blue" (hexadecimal code: "#0000ff"). Be aware that Content Studio lets you nest content, so if you try and create new content when "red" is selected in the hierarchy, it'll nest the new content under "red". In our case, though, we want the colors to be nested directly under the site, so make sure "colors" is selected when you create new content.
 
 NOTE: Notice how we use the color name both as the display name of the content and in the content's "name" field? XP actually has a way to automate that for us! We can use something called https://developer.enonic.com/docs/xp/stable/cms/content-types#display_name_expressions[_display name expressions_]. It's not necessary for our simple use case here, but if you want to look into it, feel free to play around a bit.
 
@@ -261,14 +262,64 @@ image::content-studio-with-colors.png[The content hierarchy showing the colors s
 
 So we've created a custom content type and used it to create content, but what good is content if we can't access it from anywhere? Luckily, the headless starter kit has our backs! When using the headless starter kit, we get a GraphQL API automatically generated without any additional work.
 
-To find the url of the API, you can navigate to http://localhost:8080/site/default/draft/colors/api.  The url is weird, but okay `<host>:<port>/site/<project>/<branch>/<site>/api`.
+NOTE: GraphQL is a graph "query language". It allows you to create highly specific queries for exactly the content that you need.
 
-If you haven't used GraphQL before, you'll be just fine.
+The headless starter uses an XP library called https://market.enonic.com/vendors/enonic/guillotine-headless-lib[Guillotine] to dynamically expose all our editorial content. We'll learn more about how this works later, but for now (with the default configuration) we can find the API at {api-url}.
 
-There's no way to find out, but http://localhost:8080/site/default/draft/colors/api
+NOTE: If you have used a different name than "colors" for your site, you'll have to modify the URL a little: Switch `colors` for the path of your site.
 
-// where do you find the url to get to the API?
+After navigating to {api-url}, you'll find the _GraphQL playground_ waiting for you. The GraphQL playground is an interactive API explorer for GraphQL APIs. You enter your query in the text area to your left and when you execute it, you'll get the results of the query on the other side of the screen.
 
+.The GraphQL playground
+image::graphql-playground-empty.png[An empty GraphQL playground]
+
+In this {document}, we'll only barely dip our toes into the waters of GraphQL. We'll explore this further in a xref:headless-api[later chapter], but if you're interested, you can always check out the https://graphql.org/learn/[GraphQL docs].
+
+To see what GraphQL can do for us, let's see if we can just fetch all the colors that we created. Copy the below query into your playground and run it by pressing kbd:[ctrl+enter]/kbd:[⌘+enter] or by clicking the play button.
+
+.A GraphQL query fetching all content below the "colors" site
+[source,GraphQL]
+----
+{
+  guillotine {
+    getChildren(key: "/colors/")
+    {
+      displayName
+    }
+  }
+}
+----
+
+The result of this query should list all the colors you created previously as well as the Templates directory that came with the site:
+
+.The result of the above query; all content nodes below "colors"
+[source,JSON]
+----
+{
+  "data": {
+    "guillotine": {
+      "getChildren": [
+        {
+          "displayName": "green"
+        },
+        {
+          "displayName": "blue"
+        },
+        {
+          "displayName": "red"
+        },
+        {
+          "displayName": "Templates"
+        }
+      ]
+    }
+  }
+}
+----
+
+Neat! Next, let's try a slightly more complicated query. In this one, we'll also display the hexadecimal representations of all color items.
+
+.A GraphQL query that fetches all colors and their hex codes
 [source, GraphQL]
 ----
 {
@@ -286,10 +337,51 @@ There's no way to find out, but http://localhost:8080/site/default/draft/colors/
 }
 ----
 
-Now that we've created some content, how about we try and query the API to see if we can fetch it?
+Execute this and your response should look a little something like this:
 
-Introduces the GraphQL API (and mentions that it's automatically generated by Guillotine) and how to use it.
+.Colors and their hex codes as returned by GraphQL
+[source,JSON]
+----
+{
+  "data": {
+    "guillotine": {
+      "getChildren": [
+        {
+          "displayName": "green",
+          "data": {
+            "hex": "#00ff00"
+          }
+        },
+        {
+          "displayName": "blue",
+          "data": {
+            "hex": "#0000ff"
+          }
+        },
+        {
+          "displayName": "red",
+          "data": {
+            "hex": "#ff0000"
+          }
+        },
+        {
+          "displayName": "Templates"
+        }
+      ]
+    }
+  }
+}
+----
+
+Notice that we're still displaying the "Templates" node. We'll learn more about how to work with GraphQL, including filtering, in a later chapter, but for now, we'll leave it at that.
+
 
 == Summary
 
+Whew; we've been through a lot in this {document}! We've created our first XP app, looked at creating content types, had a look at Content Studio and even got to play around with GraphQL a little.
+
+For now, this has given us a first glimpse into how easy it can be to get started with building a headless API on XP.
+
 == Next
+
+Next we'll focus a little more on input types. The content types we created in this {document} were exceedingly simple. What if you want to create something more complex? Chances are XP has got just what you need, and if it doesn't, it provides you the tools to make what you need yourself!
