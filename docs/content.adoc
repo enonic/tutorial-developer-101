@@ -137,10 +137,8 @@ Content types are schemas that tell XP what properties a piece of content of a p
 NOTE: If you're used to working with databases, you can think of content types as table schemas and contents as the rows of a table. The properties are the columns specified by the schema. Similarly, a content type is much like a _(data) type_ or a _class_ in many programming languages: something that describes the shape of your data. A piece of content is a manifestation/instance of that data type. The properties of the content type specify what that data type contains.
 
 
-Imagine we want our app to list colors. We want each color to have a name and a hexadecimal application, e.g. `red, #ff0000` or `blue, #0000ff`.
+Imagine we want our app to list colors. We want each color to be represented using hexadecimal notation, e.g. `#ff0000` or `#0000ff`.
 Here's what the content type for color could look like. The most relevant parts of the file are numbered and further explained below.
-
-// TODO: consider removing the "name" property. It gets doubled up when using display name and there's no good reason to do this at this stage.
 
 .A simple content type describing the 'color' content type
 [source,xml]
@@ -151,19 +149,18 @@ include::content_content_type.xml[]
 <1> This is the name of the content type and is what will be displayed in Content Studio when you create a piece of content of this type.
 <2> This is a short description of what the content type is. It's not strictly required, but it's highly recommended to add a description to all your content types.
 <3> This is where we specify what properties this content type contains. The contents of this tag control what we see and are able to edit in Content Studio.
-<4> This is the first property of the color. The `type` attribute specifies what kind of input field the user will see in Content Studio, and the `label` specifies how the input will be labeled.
+<4> This is the only property of the color. The `type` attribute specifies what kind of input field the user will see in Content Studio, and the `label` specifies how the input will be labeled.
 
 NOTE: Content types also have a large number of other, optional fields that we won't get into here. If you'd like to learn more about this, consult https://developer.enonic.com/docs/xp/stable/cms/content-types[the reference documentation].
 
 To create an instance of this content type, we could use Content Studio (we'll see exactly how to do this shortly!). Upon exposing it via an API, we would most likely see the piece of content exposed as JSON, so that's what we'll use to illustrate a piece of content.
 
-If we created the color `red, #ff0000` mentioned above, that specific instance of the content type (that piece of content) would be represented in JSON as this:
+If we created the color `#ff0000` mentioned above, that specific instance of the content type (that piece of content) could be represented in JSON as this:
 
 .A piece of content of type 'color'
 [source,json]
 ----
 {
-  "name": "red",
   "hex": "#ff0000"
 }
 ----
@@ -242,7 +239,7 @@ Let's create a few colors to get used to the workflow. We'll start with "red".
 
 . Create a new color.
 . Give it the display name "red".
-. Use "red" for the name field and "#ff0000" in the "hexadecimal representation" field.
+. Input "#ff0000" in the "hexadecimal representation" field.
 
 It should look a little something like this:
 
@@ -250,8 +247,6 @@ It should look a little something like this:
 image::content-studio-new-red.png[The form for "red" fully filled out.]
 
 Again, save and close the tab (kbd:[ctrl+enter]/kbd:[⌘+enter]). Now repeat this process for "green" (hexadecimal code: "#00ff00") and "blue" (hexadecimal code: "#0000ff"). Be aware that Content Studio lets you nest content, so if you try and create new content when "red" is selected in the hierarchy, it'll nest the new content under "red". In our case, though, we want the colors to be nested directly under the site, so make sure "colors" is selected when you create new content.
-
-NOTE: Notice how we use the color name both as the display name of the content and in the content's "name" field? XP actually has a way to automate that for us! We can use something called https://developer.enonic.com/docs/xp/stable/cms/content-types#display_name_expressions[_display name expressions_]. It's not necessary for our simple use case here, but if you want to look into it, feel free to play around a bit.
 
 With these colors created, your content hierarchy should now list the site and the three colors and the templates folder directly underneath it.
 
