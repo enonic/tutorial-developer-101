@@ -139,6 +139,8 @@ NOTE: If you're used to working with databases, you can think of content types a
 Imagine we want our app to list colors. We want each color to have a name and a hexadecimal application, e.g. `red, #ff0000` or `blue, #0000ff`.
 Here's what the content type for color could look like. The most relevant parts of the file are numbered and further explained below.
 
+// TODO: consider removing the "name" property. It gets doubled up when using display name and there's no good reason to do this at this stage.
+
 .A simple content type describing the 'color' content type
 [source,xml]
 ----
