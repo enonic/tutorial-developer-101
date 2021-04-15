@@ -178,6 +178,7 @@ Within the `content-types` directory, we need to place another directory with th
 Now, unless you've created it manually, then that directory doesn't exist in our "{project-name}" project yet, so go ahead and create the required directories and files.
 
 In the `color.xml` file, place the following contents:
+
 [source,xml]
 ----
 include::content_content_type.xml[]
@@ -198,32 +199,74 @@ image::content-studio-empty.png[What Content Studio looks like when it's complet
 
 === Creating a site
 
-Before we can create our content, we need a "site" to hold it. Sites in Content Studio are ... [explain sites here!]
+Before we can create our content, we need a _site_ to hold it. Sites are a special content type that ships with Content Studio. It's one of a very small number of content types that we can place at the very root of the content hierarchy. A site is like a root node that we can nest other content under. When we create a new site, we can also specify which applications it uses, and that's where our application comes into play.
 
-To get going, press the "New..." button in the command bar or use the keyboard shortcut kbd:[Alt+n]. This will bring up a "Create Content" dialog looking something like this:
+To get going, press the "New..." button in the command bar or use the keyboard shortcut kbd:[Alt+n]. This will bring up a "Create Content" dialog that looks something like this:
 
 .The Content Studio create content dialog
 image::content-studio-create-content.png[The Content Studio create content dialog.]
 
 Select "Site" either by clicking on it, or by navigating to it with your keyboard. You can start typing as soon as the dialog opens to filter the options too!
 
-When you select it, your browser will take you to a new tab (or window depending on your browser settings). This page is an edit page for the content you just created. Just like with our "color" content type.
+When you select it, your browser will take you to a new tab (or window, depending on your browser settings). This page is an edit page for the site you just created.
 
 .Creating a new site in Content Studio.
 image::content-studio-new-site.png[Creating a new site in content studio. There is a form with site options on the left.]
 
-Add the required data ...
+Add the site name in the first field (with the `<Display Name>` placeholder). Because we're working with colors, let's use that and input "colors". Notice that when you do this, the path below the input field gets automatically updated to match what you input. You can manually override the path if you wish, but we'll leave that as is for now.
 
-Select "{project-name}" from the applications list ...
+The description field is used to describe what the site is about. It's an optional field, so you can either leave it blank or add a description of your liking.
+
+The next field, "Applications", is important. This is where we tell Content Studio what sort of applications the site uses and thus what content types we can create within it. Select the "Headless Starter" app.
+
+Your site form should now look a little something like this.
+
+.A filled out site creation form
+image::content-studio-site-colors.png[What the site form looks like after filling out the necessary fields.]
+
+To confirm and return to the Content Studio hierarchy, you can either press "Save" in the menu bar or use the keyboard shortcut kbd:[ctrl+enter]. The keyboard shortcut will also close the tab for you after saving. If you clicked the "Save" button in the menu, feel free to close the tab manually (you won't be needing it again).
+
+When you return to the Content Studio hierarchy view, you should now see your site listed. If you expand it, you'll find that there is also a node called "Templates" underneath it. We can ignore this for now, but we'll learn more about it later.
 
 === Add a dash of color
 
-Create the color ...
+We can finally try out our very own content type! With the "colors" site highlighted, press "New ..." (or kbd:[Alt+n]!) to open the "Create Content" menu again. This time around, you should have some more choices than what you did previously, including our very own "Color"!
 
-Try and create some more? ...
+.The "Create Content" dialog with more content types
+image::content-studio-new-color.png[The "Create Content" dialog when creating content under the "colors" site. It contains more elements than previously, including the "color" content type that we created earlier.]
+
+Let's create a few colors to get used to the workflow. We'll start with "red".
+
+. Create a new color.
+. Give it the display name "red".
+. Use "red" for the name field and "#ff0000" in the "hexadecimal representation" field.
+
+It should look a little something like this:
+
+.The color form filled out for the color "red"
+image::content-studio-new-red.png[The form for "red" fully filled out.]
+
+Again, save and close the tab (kbd:[ctrl+enter]). Now repeat this process for "green" (hexadecimal code: "#00ff00") and "blue" (hexadecimal code: "#0000ff"). Be aware that Content Studio lets you nest content, so if you try and create new content when "red" is selected in the hierarchy, it'll nest the new content under "red". In our case, though, we want the colors to be nested directly under the site, so make sure "colors" is selected when you create new content.
+
+NOTE: Notice how we end use the color name both as the display name of the content and in the content's "name" field? XP actually has a way to automate that for us! We can use something called https://developer.enonic.com/docs/xp/stable/cms/content-types#display_name_expressions[_display name expressions_]. It's not necessary for our simple use case here, but if you want to look into it, feel free to play around a bit.
+
+With these colors created, your content hierarchy should now list the site and the three colors and the templates folder directly underneath it.
+
+.The hierarchy as it should look after creating colors
+image::content-studio-with-colors.png[The content hierarchy showing the colors site with "green", "blue", "red", and "Templates" listed directly underneath it.]
 
 == Querying the API
+
+So we've created a custom content type and used it to create content, but what good is content if we can't access it from anywhere? Luckily, this headless starter kit has our backs! When using the headless starter kit, we get a GraphQL API automatically generated without any additional work.
+
+There's no way to find out, but http://localhost:8080/site/default/draft/colors/api
+
+// where do you find the url to get to the API?
 
 Now that we've created some content, how about we try and query the API to see if we can fetch it?
 
 Introduces the GraphQL API (and mentions that it's automatically generated by Guillotine) and how to use it.
+
+== Summary
+
+== Next
