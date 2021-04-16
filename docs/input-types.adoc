@@ -1,22 +1,52 @@
 = Input types
-:toc: right
-:imagesdir: media
+include::variables.adoc[]
 
-In which we take the content concepts from the previous chapter and
-expand on them. Show the reader how they can create more complex
-content types.
+In the previous {document}, we created a very simple content type and used it to create some content. However, in real world settings, you're likely to going to want to use more complex content types with different kinds of data (such as images). In this {document}  we'll be looking at some of the basic input types that come with XP and what we use them for.
 
-This chapter should build off the previous chapter and provide some data models we can work with.
+This {document} builds on what we did in the previous {document}, so if you haven't gone through that and want to follow along with the examples, you should go back ... // <- write more here
+
+// maybe we create a new project here? to reduce the dependencies on previous {document}s
 
 == Key input types
 
-This section focuses on a few key input types available to the
-user. They'll use these all the time.
+Depending on your use case, you'll probably end up using a variety of input types. However, here are some of the ones you'll probably encounter most often:
 
-. TextLine
-. HtmlArea
-. CheckBox
-. ImageSelector
+=== TextLine
+
+When creating our "color" content type previously, we used an input of the _TextLine_ type. TextLine inputs are useful for short fields that contain text.
+
+We used it for a hexadecimal values previously, but the format of the input was never enforced. However, we can also validate values in TextLine against a regular expression and a max length. For instance, if we wanted to validate that it was a valid hex we could have set a max length of 9 and used a regex like `([a-z\d]{3,4}|[a-z\d]{6}|[a-z\d]{8})` and only accepted lowercase letters.
+
+[source,xml]
+----
+<?xml version="1.0" encoding="utf-8"?>
+<content-type>
+  <display-name>Color</display-name>
+  <description>A simple color representation</description>
+  <super-type>base:structured</super-type>
+  <form>
+    <input name="hex" type="TextLine">
+      <label>Hexadecimal representation</label>
+      <config>
+	<max-length>9</max-length>
+	<regexp>^#([a-f\d]{3,4}|[a-f\d]{6}|[a-f\d]{8})$</regexp>
+      </config>
+    </input>
+  </form>
+</content-type>
+----
+
+=== HtmlArea
+
+If you want an input field for longer text or text with formatting, HtmlArea is probably what you're looking for.
+
+=== CheckBox
+
+Just what it says. A simple checkbox.
+
+=== ImageSelector
+
+Wanna upload some images? This is the one for you!
 
 === Task: add these new input types to your content type
 
