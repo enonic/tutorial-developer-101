@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <content-type>
-  <display-name>Color</display-name> <!-- 1 -->
-  <description>A simple color representation</description> <!-- 2 -->
+  <display-name>Color</display-name> <!--1-->
+  <description>A simple color representation</description> <!--2-->
   <super-type>base:structured</super-type>
-  <form> <!-- 3 -->
-    <input name="hex" type="TextLine"> <!-- 4 -->
+  <form> <!--3-->
+    <input name="hex" type="TextLine"> <!--4-->
       <label>Hexadecimal representation</label>
     </input>
   </form>
