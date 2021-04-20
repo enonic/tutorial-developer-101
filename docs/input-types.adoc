@@ -13,12 +13,19 @@ Depending on your use case, you'll probably end up using a variety of input type
 
 === TextLine
 
-Doc link: https://developer.enonic.com/docs/xp/stable/cms/input-types#textline
-
 When creating our "color" content type previously, we used an input of the _TextLine_ type. TextLine inputs are useful for short fields that contain text.
 
-We used it for a hexadecimal values previously, but the format of the input was never enforced. However, we can also validate values in TextLine against a regular expression and a max length. For instance, if we wanted to validate that it was a valid hex we could have set a max length of 9 and used a regex like `([a-z\d]{3,4}|[a-z\d]{6}|[a-z\d]{8})` and only accepted lowercase letters.
+We used it for a hexadecimal values, but the format of the input was never enforced. However, we can improve on that. TextLine supports validation directly in the content type specification. We can provide both a max length for the input and a regular expression that it must match.
 
+Let's say we only accept color values that consist of 6 characters (if you're familiar with hex color schemes, that means no shorthands and no alpha channel). If we include the leading `\#` in the input, that means it'll be a total of seven characters long. So for the validation, we can both set the max length to seven and use the regular expression `^#[a-fA-F\d]{6}$` for validation.
+
+However, if you're familiar with regular expressions, you might have noticed that setting the max length when using the above regex doesn't really do anything because the regex is restrictive enough to specify both a minimum and a maximum length on its own, both seven. So we'll leave the max length out for now.
+
+NOTE: XP uses JavaScript's regex engine to validate the input. For more information on what kind of of patterns it recognizes, see https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Regular_Expressions#writing_a_regular_expression_pattern[MDN's documentation].
+
+Adding validation, the content type would look something like this:
+
+.The Color content type with input validation
 [source,xml]
 ----
 <content-type>
@@ -28,13 +35,15 @@ We used it for a hexadecimal values previously, but the format of the input was 
     <input name="hex" type="TextLine">
       <label>Hexadecimal representation</label>
       <config>
-	<max-length>9</max-length>
-	<regexp>^#([a-f\d]{3,4}|[a-f\d]{6}|[a-f\d]{8})$</regexp>
+	<regexp>^#[a-fA-F\d]{6}$</regexp>
       </config>
     </input>
   </form>
 </content-type>
 ----
+
+Further, if you want to provide a default value for a TextLine input, you can do that by using the `default` configuration option. For an example of how to do this and for more information on the TextLine input, visit the https://developer.enonic.com/docs/xp/stable/cms/input-types#textline[reference docs].
+
 
 === HtmlArea
 
