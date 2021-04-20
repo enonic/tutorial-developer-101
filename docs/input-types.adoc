@@ -3,6 +3,8 @@ include::variables.adoc[]
 
 In the previous {document}, we created a very simple content type and used it to create some content. However, in real world settings, you're likely to going to want to use more complex content types with different kinds of data (such as images). In this {document}  we'll be looking at some of the basic input types that come with XP and what we use them for.
 
+At the end of the {document}, we'll put everything we've learned so far together.
+
 == Key input types
 
 Depending on your use case, you'll probably end up using a variety of input types. However, here are some of the ones you'll probably encounter most often:
