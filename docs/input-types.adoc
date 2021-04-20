@@ -77,7 +77,19 @@ To learn more about HtmlArea input type and how to configure all its options, ch
 
 image::input-type-image-selector.png[ImageSelector: An interactive image selection tool.]
 
+Images are a key part of many web experiences: they add color, break up the content, and gives the reader something to rest their eyes on. XP's image selector allows you to select an image for a piece of content and also to upload new images.
 
+In XP, image selectors are great for when you want to associate one or more images with piece of content. For instance, if you're creating an API of animals, you might want to have an image of what each animal looks like both as a young and as an adult.
+
+.An minimal ImageSelector configuration
+[source,xml]
+----
+<input name="myimage" type="ImageSelector">
+  <label>My Image</label>
+</input>
+----
+
+The image selector is a more specialized form of XP's https://developer.enonic.com/docs/xp/stable/cms/input-types#contentselector[ContentSelector] input type. To read more about it, head over to https://developer.enonic.com/docs/xp/stable/cms/input-types#imageselector[the reference docs].
 
 === Task: add these new input types to your content type
 
