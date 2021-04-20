@@ -13,6 +13,8 @@ Depending on your use case, you'll probably end up using a variety of input type
 
 === TextLine
 
+image::input-type-text-line.png[TextLine: A single-line input field.]
+
 When creating our "color" content type previously, we used an input of the _TextLine_ type. TextLine inputs are useful for short fields that contain text.
 
 We used it for a hexadecimal values, but the format of the input was never enforced. However, we can improve on that. TextLine supports validation directly in the content type specification. We can provide both a max length for the input and a regular expression that it must match.
