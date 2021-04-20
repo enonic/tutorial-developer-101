@@ -91,10 +91,6 @@ In XP, image selectors are great for when you want to associate one or more imag
 
 The image selector is a more specialized form of XP's https://developer.enonic.com/docs/xp/stable/cms/input-types#contentselector[ContentSelector] input type. To read more about it, head over to https://developer.enonic.com/docs/xp/stable/cms/input-types#imageselector[the reference docs].
 
-=== Task: add these new input types to your content type
-
-Let's explore these input types in practice. We'll add them to an existing content type and explore how they work.
-
 == Additional input types
 
 This section should briefly mention some less common input types, and refer the reader to https://developer.enonic.com/docs/xp/stable/cms/input-types[the reference docs].
@@ -108,5 +104,7 @@ When using the input types previously, we would have used labels. This section m
 Also mention that each input type accepts specialized, extra configuration under the `config` option, and that this configuration can be found in the same reference docs as before.
 
 == Task: Create an animals API
+
+Recap! Let's put together all of the elements we've gone through so far!
 
 Create a new site, animals, and use the input types we saw previously to create an animal content type. For instance: use a TextLine input for name, display-name-expression to reflect this to the display name, use a HtmlArea input for a description of the animal (get it from Wikipedia), and use the ImageSelector to upload an appropriate image.
