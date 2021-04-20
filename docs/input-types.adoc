@@ -98,17 +98,3 @@ Also mention that each input type accepts specialized, extra configuration under
 == Task: Create an animals API
 
 Create a new site, animals, and use the input types we saw previously to create an animal content type. For instance: use a TextLine input for name, display-name-expression to reflect this to the display name, use a HtmlArea input for a description of the animal (get it from Wikipedia), and use the ImageSelector to upload an appropriate image.
-
-== Mixins
-
-We can use mixins to reuse input field sets across different content types!
-
-=== Task
-
-Create another content type that reuses a lot of the fields from our preexisting one. Solve it by using a Mixin.
-
-=== Next / after mixins
-
-// We might want to move this to the next section? Making it about input reuse and grouping / advanced content.
-
-Mixins provide a handy way of reusing the same inputs across different content types. However, if you want to group a set of fields as a logical unit, you may be better off looking at item sets. Luckily, that's coming right up.
