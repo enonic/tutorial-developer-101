@@ -117,10 +117,9 @@ All of these configuration options are described in more detail in the https://d
 
 === Input-specific configuration
 
+Each input type also takes an optional `config` element for extra configuration. Because the input types are so different to each other, they all support different options. This is what allows us to use regex validation for TextLine inputs, configure formatting options for HtmlAreas, and what numeric values a Long or a Double input accepts.
 
-When using the input types previously, we would have used labels. This section mentions other configuration options the `input` element accepts,  listed under https://developer.enonic.com/docs/xp/stable/cms/schemas#input_types[the input types section] of the doc on schemas.
-
-Also mention that each input type accepts specialized, extra configuration under the `config` option, and that this configuration can be found in the same reference docs as before.
+To find out exactly what configuration options an input type accepts and how to configure it, visit https://developer.enonic.com/docs/xp/stable/cms/input-types[the input types documentation].
 
 == Task: Create an animals API
 
