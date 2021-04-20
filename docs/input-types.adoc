@@ -3,10 +3,6 @@ include::variables.adoc[]
 
 In the previous {document}, we created a very simple content type and used it to create some content. However, in real world settings, you're likely to going to want to use more complex content types with different kinds of data (such as images). In this {document}  we'll be looking at some of the basic input types that come with XP and what we use them for.
 
-This {document} builds on what we did in the previous {document}, so if you haven't gone through that and want to follow along with the examples, you should go back ... // <- write more here
-
-// maybe we create a new project here? to reduce the dependencies on previous {document}s
-
 == Key input types
 
 Depending on your use case, you'll probably end up using a variety of input types. However, here are some of the ones you'll probably encounter most often:
@@ -93,9 +89,11 @@ The image selector is a more specialized form of XP's https://developer.enonic.c
 
 == Additional input types
 
-This section should briefly mention some less common input types, and refer the reader to https://developer.enonic.com/docs/xp/stable/cms/input-types[the reference docs].
+We've seen some of the most important input types above, but XP has many more input types to offer. A https://developer.enonic.com/docs/xp/stable/cms/input-types#checkbox[CheckBox] allows you to indicate whether something is in one of two states (true or false), while the https://developer.enonic.com/docs/xp/stable/cms/input-types#combobox[ComboBox] lets you provide any number of predefined options for the user to select from.
 
-Optionally, suggest that the reader go and add some of these too to see how they work.
+If you need to indicate when and where something happened (or will happen), you should look into the https://developer.enonic.com/docs/xp/stable/cms/input-types#geopoint[GeoPoint] and https://developer.enonic.com/docs/xp/stable/cms/input-types#date[Date] and https://developer.enonic.com/docs/xp/stable/cms/input-types#datetime[DateTime] inputs. Try this for creating either a world history API or a live events API.
+
+There's also inputs for selecting arbitrary content and for uploading attachments, for entering numbers, for adding tags, and more. For a full overview, check out the https://developer.enonic.com/docs/xp/stable/cms/input-types[input types reference docs].
 
 == Input type configuration
 
