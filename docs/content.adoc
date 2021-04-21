@@ -1,6 +1,9 @@
 = Content and content types
 include::variables.adoc[]
-:api-url: {xp-url}/site/default/draft/colors/api
+:api-url: {xp-url}/site/default/draft{p1-site-path}/api
+:content-type: person
+:content-type-capitalized: Person
+:subs: "attributes+"
 
 In this {document}, we'll start building on the app we deployed previously and generate a GraphQL API for the content we create. In doing this, we'll learn about _content types_ and how to do basic work with  Content Studio.
 
@@ -16,31 +19,48 @@ We've created our first app, but an app isn't terribly exciting if it doesn't ha
 
 Content types are schemas that tell XP what properties a piece of content of a particular type can have. That might sound confusing, but imagine for a second that we're working with forms. Content types describe what fields go in a specific form. Then a piece of content is a form that has been filled out. We'll look at an example to make this even clearer.
 
-Imagine we want our app to list colors. We want each color to be represented using hexadecimal notation, e.g. `#ff0000` or `#0000ff`.
-Here's what the content type for color could look like. The most relevant parts of the file are numbered and further explained below.
+Imagine we want our app to list people. We'll create a simple representation of a {content-type}: we're only interested in their name and an optional alias, nickname, or pseudonym. Here's what a {content-type} content type could look like. The most relevant parts are numbered and further explained below.
 
-.A simple content type describing the 'color' content type
-[source,xml]
+
+.A simple content type describing the '{content-type}' content type
+[source,xml,subs={subs}]
 ----
-include::content_content_type.xml[]
+<?xml version="1.0" encoding="utf-8"?>
+<content-type>
+  <display-name>{content-type-capitalized}</display-name> <!--1-->
+  <description>A description of a {content-type}</description> <!--2-->
+  <super-type>base:structured</super-type>
+  <form> <!--3-->
+
+    <input name="name" type="TextLine"> <!--4-->
+      <label>Name</label>
+    </input>
+
+    <input name="alias" type="TextLine">
+      <label>Alias</label>
+    </input>
+
+  </form>
+</content-type>
 ----
 
 <1> This is the name of the content type and is what will be displayed in Content Studio when you create a piece of content of this type.
 <2> This is a short description of what the content type is. It's not strictly required, but it's highly recommended to add a description to all your content types.
 <3> This is where we specify what properties this content type contains. The contents of this tag control what we see and are able to edit in Content Studio.
-<4> This is the only property of the color. The `type` attribute specifies what kind of input field the user will see in Content Studio, and the `label` specifies how the input will be labeled.
+<4> This is a property of the content type. The `type` attribute specifies what kind of input field the user will see in Content Studio, and the `label` specifies how the input will be labeled.
 
 NOTE: Content types also have a large number of other, optional fields that we won't get into here. If you'd like to learn more about this, consult https://developer.enonic.com/docs/xp/stable/cms/content-types[the reference documentation].
 
 To create an instance of this content type, we could use Content Studio (we'll see exactly how to do this shortly!). Upon exposing it via an API, we would most likely see the piece of content exposed as JSON, so that's what we'll use to illustrate a piece of content.
 
-If we created the color `#ff0000` mentioned above, that specific instance of the content type (that piece of content) could be represented in JSON as this:
+For instance, if we created an entry for Belcalis Marlenis Almánzar, better known as Cardi B, then that instance of the {content-type} content type (that piece of content) would be represented in JSON as this:
 
-.A piece of content of type 'color'
+.A piece of content of type '{content-type-capitalized}'
 [source,json]
 ----
 {
-  "hex": "#ff0000"
+  "name": "Belcalis Marlenis Almánzar",
+  "alias": "Cardi B"
 }
 ----
 
@@ -55,19 +75,36 @@ Similarly, a content type is much like a _(data) type_ or a _class_ in many prog
 
 === Creating a content type
 
-Now that we know what a content type is, let's look at how we create them and make XP recognize them. We'll use the "Color" content type from before to keep things simple.
+Now that we know what a content type is, let's look at how we create them and make XP recognize them. We'll use the "{content-type-capitalized}" content type from before to keep things simple.
 
 XP is quite particular about project folder structure, so we need to put content types right where it expects to find them. The location is under `src/main/resources/site/content-types`.
 
-Within the `content-types` directory, we need to place another directory with the name of the content type (in our case: "color"), and within that directory, we place our content type, `color.xml`. As such, the full path to our content type from the project root is `src/main/resources/site/content-types/color/color.xml`.
+Within the `content-types` directory, we need to place another directory with the name of the content type (in our case: "{content-type-capitalized}"), and within that directory, we place our content type, `{content-type-capitalized}.xml`. As such, the full path to our content type from the project root is `src/main/resources/site/content-types/{content-type}/{content-type}.xml`.
 
 Now, unless you've created it manually, then that directory doesn't exist in our "{project-name}" project yet, so go ahead and create the required directories and files.
 
-In the `color.xml` file, place the following contents:
+In the `{content-type}.xml` file, place the following contents:
 
+.The {content-type-capitalized} content type
 [source,xml]
 ----
-include::content_content_type.xml[]
+<?xml version="1.0" encoding="utf-8"?>
+<content-type>
+  <display-name>{content-type-capitalized}</display-name>
+  <description>A description of a {content-type}</description>
+  <super-type>base:structured</super-type>
+  <form>
+
+    <input name="name" type="TextLine">
+      <label>Name</label>
+    </input>
+
+    <input name="alias" type="TextLine">
+      <label>Alias</label>
+    </input>
+
+  </form>
+</content-type>
 ----
 
 Now run:
@@ -99,7 +136,7 @@ When you select it, your browser will take you to a new tab (or window, dependin
 .Creating a new site in Content Studio.
 image::content-studio-new-site.png[Creating a new site in content studio. There is a form with site options on the left.]
 
-Add the site name in the first field (with the `<Display Name>` placeholder). Because we're working with colors, let's use that and input "colors". Notice that when you do this, the path below the input field gets automatically updated to match what you input. You can manually override the path if you wish, but we'll leave that as is for now.
+Add the site name in the first field (with the `<Display Name>` placeholder). It's our first site, so let's go with "{p1-site-name}". Notice that when you do this, the path below the input field gets automatically updated to match what you input. You can manually override the path if you wish, but we'll leave it as is for now.
 
 The description field is used to describe what the site is about. It's an optional field, so you can either leave it blank or add a description of your liking.
 
@@ -108,36 +145,39 @@ The next field, "Applications", is important. This is where we tell Content Stud
 Your site form should now look a little something like this.
 
 .A filled out site creation form
-image::content-studio-site-colors.png[What the site form looks like after filling out the necessary fields.]
+image::content-studio-site-filled-out.png[What the site form looks like after filling out the necessary fields.]
 
 To confirm and return to the Content Studio hierarchy, you can either press "Save" in the menu bar or use the keyboard shortcut: kbd:[ctrl+enter] on Linux and Windows and kbd:[⌘+enter] on macOS. The keyboard shortcut will also close the tab for you after saving. If you clicked the "Save" button in the menu, feel free to close the tab manually (you won't be needing it again).
 
 When you return to the Content Studio hierarchy view, you should now see your site listed. If you expand it, you'll find that there is also a node called "Templates" underneath it. We can ignore this for now, but we'll learn more about it later.
 
-=== Add a dash of color
+=== Add some friends
 
-We can finally try out our very own content type! With the "colors" site highlighted, press "New ..." (or kbd:[Alt+n]!) to open the "Create Content" menu again. This time around, you should have some more choices than what you did previously, including our very own "Color"!
+With the "{p1-site-name}" site highlighted, press "New ..." (or kbd:[Alt+n]!) to open the "Create Content" menu again. This time around, you should have some more choices than what you did previously, including our very own content type "{content-type-capitalized}"!
 
 .The "Create Content" dialog with more content types
-image::content-studio-new-color.png["The \"Create Content\" dialog when creating content under the \"colors\" site. It contains more elements than previously, including the \"color\" content type that we created earlier."]
+image::content-studio-new-content.png["The \"Create Content\" dialog when creating content under the \"{p1-site-name}\" site. It contains more elements than previously, including the \"{content-type-capitalized}\" content type that we created earlier."]
 
-Let's create a few colors to get used to the workflow. We'll start with "red".
+However, before we start creating people, let's create a folder. Because we'll be using this site in the coming {document}s with more content types, having some hierarchy will make things easier. Choose a new folder and call it "people".
 
-. Create a new color.
-. Give it the display name "red".
-. Input "#ff0000" in the "hexadecimal representation" field.
+Next, let's create a few people to get used to the workflow. We'll start with Cardi B.
+
+. Select the people folder (make sure it's highlighted).
+. Create a new {content-type}.
+. Give it the display name "Cardi B".
+. Enter "Belcalis Marlenis Almánzar" in the "name" field and "Cardi B" in the "alias" field.
 
 It should look a little something like this:
 
-.The color form filled out for the color "red"
-image::content-studio-new-red.png[The form for "red" fully filled out., width=800]
+.The content form filled out for the {content-type} "Cardi B"
+image::content-studio-new-{content-type}.png[The form for "{content-type}" fully filled out.]
 
-Again, save and close the tab (kbd:[ctrl+enter]/kbd:[⌘+enter]). Now repeat this process for "green" (hexadecimal code: "#00ff00") and "blue" (hexadecimal code: "#0000ff"). Be aware that Content Studio lets you nest content, so if you try and create new content when "red" is selected in the hierarchy, it'll nest the new content under "red". In our case, though, we want the colors to be nested directly under the site, so make sure "colors" is selected when you create new content.
+Again, save and close the tab (kbd:[ctrl+enter]/kbd:[⌘+enter]). Now repeat this process for Melissa Arnette Elliott (better known as Missy Elliott) and Alecia Beth Moore (known professionally as P!nk). Be aware that Content Studio lets you nest content, so if you try and create new content when "Cardi B" is selected in the hierarchy, it'll nest the new content under "Cardi B". In our case, though, we want the people to be nested directly under the current folder, so make sure "people" folder is selected when you create new content.
 
-With these colors created, your content hierarchy should now list the site and the three colors and the templates folder directly underneath it.
+With these people created, your content hierarchy should now list the site, the people folder, and the three people.
 
-.The hierarchy as it should look after creating colors
-image::content-studio-with-colors.png["The content hierarchy showing the colors site with \"green\", \"blue\", \"red\", and \"Templates\" listed directly underneath it.", width=700]
+.The hierarchy as it should look after creating some content
+image::content-studio-with-people.png["The content hierarchy showing the {p1-site-name} site with \"Cardi B\", \"Missy Elliot\", \"P!nk\", and \"Templates\" listed directly underneath it.", width=350]
 
 == Querying the API
 
@@ -147,7 +187,7 @@ NOTE: GraphQL is a graph "query language". It allows you to create highly specif
 
 The headless starter uses an XP library called https://market.enonic.com/vendors/enonic/guillotine-headless-lib[Guillotine] to dynamically expose all our editorial content. We'll learn more about how this works later, but for now (with the default configuration) we can find the API at {api-url}.
 
-NOTE: If you have used a different name than "colors" for your site, you'll have to modify the URL a little: Switch `colors` for the path of your site.
+NOTE: If you have used a different name than "{p1-site-name}" for your site, you'll have to modify the URL a little: Switch `{p1-site-path}` for the path of your site.
 
 After navigating to {api-url}, you'll find the _GraphQL playground_ waiting for you. The GraphQL playground is an interactive API explorer for GraphQL APIs. You enter your query in the text area to your left and when you execute it, you'll get the results of the query on the other side of the screen.
 
@@ -156,14 +196,14 @@ image::graphql-playground-empty.png[An empty GraphQL playground]
 
 In this {document}, we'll only barely dip our toes into the waters of GraphQL. We'll explore this further in a xref:headless-api[later chapter], but if you're interested, you can always check out the https://graphql.org/learn/[GraphQL docs].
 
-To see what GraphQL can do for us, let's see if we can just fetch all the colors that we created. Copy the below query into your playground and run it by pressing kbd:[ctrl+enter]/kbd:[⌘+enter] or by clicking the play button.
+To see what GraphQL can do for us, let's see if we can just fetch all the people that we created. Copy the below query into your playground and run it by pressing kbd:[ctrl+enter]/kbd:[⌘+enter] or by clicking the play button.
 
-.A GraphQL query fetching all content below the "colors" site
-[source,GraphQL]
+.A GraphQL query fetching all content below the "{p1-site-name}" site
+[source,GraphQL,subs={subs}"]
 ----
 {
   guillotine {
-    getChildren(key: "/colors/")
+    getChildren(key: "{p1-site-path}/people")
     {
       displayName
     }
@@ -171,9 +211,9 @@ To see what GraphQL can do for us, let's see if we can just fetch all the colors
 }
 ----
 
-The result of this query should list all the colors you created previously as well as the Templates directory that came with the site:
+The result of this query should list all the people you created previously as well as the Templates directory that came with the site:
 
-.The result of the above query; all content nodes below "colors"
+.The result of the above query; all content nodes below "people"
 [source,JSON]
 ----
 {
@@ -181,16 +221,13 @@ The result of this query should list all the colors you created previously as we
     "guillotine": {
       "getChildren": [
         {
-          "displayName": "green"
+          "displayName": "P!nk"
         },
         {
-          "displayName": "blue"
+          "displayName": "Missy Elliott"
         },
         {
-          "displayName": "red"
-        },
-        {
-          "displayName": "Templates"
+          "displayName": "Cardi B"
         }
       ]
     }
@@ -198,19 +235,20 @@ The result of this query should list all the colors you created previously as we
 }
 ----
 
-Neat! Next, let's try a slightly more complicated query. In this one, we'll also display the hexadecimal representations of all color items.
+Neat! Next, let's try a slightly more complicated query. In this one,  we'll also get the data inside the content nodes and extract their names and alias fields.
 
-.A GraphQL query that fetches all colors and their hex codes
-[source, GraphQL]
+.A GraphQL query that fetches all people and their data
+[source, GraphQL,subs={subs}]
 ----
 {
   guillotine {
-    getChildren(key: "/colors/")
+    getChildren(key: "{p1-site-path}/people/")
     {
       displayName
-      ... on com_gettingstarted_content_Color {
+      ... on com_gettingstarted_content_{content-type-Capitalized} {
         data {
-          hex
+          name
+          alias
         }
       }
     }
@@ -220,7 +258,7 @@ Neat! Next, let's try a slightly more complicated query. In this one, we'll also
 
 Execute this and your response should look a little something like this:
 
-.Colors and their hex codes as returned by GraphQL
+.People and their aliases as returned by GraphQL
 [source,JSON]
 ----
 {
@@ -228,33 +266,31 @@ Execute this and your response should look a little something like this:
     "guillotine": {
       "getChildren": [
         {
-          "displayName": "green",
+          "displayName": "P!nk",
           "data": {
-            "hex": "#00ff00"
+            "name": "Alecia Beth Moore",
+            "alias": "P!nk"
           }
         },
         {
-          "displayName": "blue",
+          "displayName": "Missy Elliott",
           "data": {
-            "hex": "#0000ff"
+            "name": "Melissa Arnette Elliott",
+            "alias": "Missy Elliott"
           }
         },
         {
-          "displayName": "red",
+          "displayName": "Cardi B",
           "data": {
-            "hex": "#ff0000"
+            "name": "Belcalis Marlenis Almánzar",
+            "alias": "Cardi B"
           }
-        },
-        {
-          "displayName": "Templates"
         }
       ]
     }
   }
 }
 ----
-
-Notice that we're still displaying the "Templates" node. We'll learn more about how to work with GraphQL, including filtering, in a later chapter, but for now, we'll leave it at that.
 
 
 == Summary
