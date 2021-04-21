@@ -5,3 +5,5 @@
 :xp-url: http://localhost:8080
 :cs-url: {xp-url}/admin/tool/com.enonic.app.contentstudio/main
 :project-name-prefix: com.gettingstarted.
+:project-name: content
+:project-name-full: {project-name-prefix}{project-name}

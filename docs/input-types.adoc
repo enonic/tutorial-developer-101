@@ -14,7 +14,7 @@ Depending on your use case, you'll probably end up using a variety of input type
 
 === TextLine
 
-image::input-type-text-line.png[TextLine: A single-line input field.]
+image::input-type-text-line.png[TextLine: A single-line input field., width=800]
 
 When creating our "color" content type previously, we used an input of the _TextLine_ type. TextLine inputs are useful for short fields that contain text.
 
@@ -50,7 +50,7 @@ Further, if you want to provide a default value for a TextLine input, you can do
 
 === HtmlArea
 
-image::input-type-html-area.png[HtmlArea: A rich text input field with visible formatting options.]
+image::input-type-html-area.png[HtmlArea: A rich text input field with visible formatting options., width=800]
 
 While the TextLine input type is great for short inputs, it doesn't handle paragraphs of text very well, and it also doesn't provide any options for text formatting. For that, we have the HtmlArea.
 
@@ -76,7 +76,7 @@ To learn more about HtmlArea input type and how to configure all its options, ch
 
 === ImageSelector
 
-image::input-type-image-selector.png[ImageSelector: An interactive image selection tool.]
+image::input-type-image-selector.png[ImageSelector: An interactive image selection tool., width=800]
 
 Images are a key part of many web experiences: they add color, break up the content, and gives the reader something to rest their eyes on. XP's image selector allows you to select an image for a piece of content and also to upload new images.
 
