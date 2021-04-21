@@ -91,27 +91,37 @@ https://developer.enonic.com/docs/xp/stable/cms/input-types#date[Date] and https
 
 == Input type configuration
 
-In the work we did in the previous {document}, we did some very minor configuration of the input types. In the sections above, we have seen a little more of what you can do, such as adding validation and specifying what formatting features the user should get. This section gives a more thorough introduction to input type configuration.
+In the work we did in the previous {document}, we did some very minor configuration of the input types. In the sections above, we have seen a little more of what you can do, such as adding validation and specifying what formatting features the user should get.
 
-=== Shared configuration options
+All input types share the same configuration options. In the XML schema, these configuration options go directly under the `input` tag. Additionally, the `config` tag can hold input-specific configuration.
 
-All input types share a small number of configuration options. In the XML schema, these configuration options go directly under the `input` tag (that is: they're _not_ nested below the `config` tag). Additionally, each input element _must_ be given a `type` attribute and a `name` attribute. The `name` must be unique on the current level of the content type.
-
-These are:
+These full list of available configuration options is:
 
 `label` (required):: What the input should be labeled as in the content form.
 `occurrences` (optional):: Specifies whether this input is required to be filled out, and whether it's a list or not.
 `default` (optional):: Gives a default value to the input.
 `help-text` (optional):: Lets you specify a description of the input field to show to the user.
-`config` (optional):: Input type-specific configuration. See the next section for more details.
-
-All of these configuration options are described in more detail in the https://developer.enonic.com/docs/xp/stable/cms/schemas#input_types[input types schema documentation], so head over there for more information and explanation of how the various inputs work.
-
-=== Input-specific configuration
-
+`config` (optional):: Input type-specific configuration.
++
 Each input type also takes an optional `config` element for extra configuration. Because the input types are so different to each other, they all support different options. This is what allows us to use regex validation for TextLine inputs, configure formatting options for HtmlAreas, and what numeric values a Long or a Double input accepts.
-
++
 To find out exactly what configuration options an input type accepts and how to configure it, visit https://developer.enonic.com/docs/xp/stable/cms/input-types[the input types documentation].
+
+All of these configuration options are described in more detail in the https://developer.enonic.com/docs/xp/stable/cms/schemas#input_types[input types schema documentation], so head over there for more information and explanation of how the various inputs work. As a bonus,
+
+=== Validation
+
+Enonic also provides XML Schema Definitions (XSDs) for text editor integration and validation of your XML schemas. To use it, add the attribute `xmlns="urn:enonic:xp:model:1.0"` to your content-type as show below:
+
+.Using XSDs for schema validation of a content type definition.
+[source,xml]
+----
+<?xml version="1.0" encoding="utf-8"?>
+<content-type xmlns="urn:enonic:xp:model:1.0">
+  <display-name>person</display-name>
+  <!-- rest of content elided for brevity -->
+</content-type>
+----
 
 == Task: Create an {project-name} API
 
