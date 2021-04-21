@@ -123,7 +123,7 @@ Enonic also provides XML Schema Definitions (XSDs) for text editor integration a
 </content-type>
 ----
 
-== Task: Create an {project-name} API
+== Task: Create an {project-name} data set
 
 Time for a little recap! We'll use everything we've learned so far to create a new API. You can either try this out on your own or follow the solution below. The task is as follows:
 
