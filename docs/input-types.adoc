@@ -7,9 +7,9 @@ In the previous {document}, we created a very simple content type and used it to
 
 At the end of the {document}, we'll put everything we've learned so far together.
 
-== Key input types
+== Input types overview
 
-Depending on your use case, you'll probably end up using a variety of input types. However, here are some of the ones you'll probably encounter most often:
+XP provides a number of input types for you to work with. This section highlights a few types you'll be using a lot and shows off some of their special features and then mentions some of the types you're also likely to be seeing a lot of. Go to the reference docs for https://developer.enonic.com/docs/xp/stable/cms/input-types[a full list of all input types and their features].
 
 === TextLine
 
@@ -80,13 +80,14 @@ In XP, image selectors are great for when you want to associate one or more imag
 
 The image selector is a more specialized form of XP's https://developer.enonic.com/docs/xp/stable/cms/input-types#contentselector[ContentSelector] input type. To read more about it, head over to https://developer.enonic.com/docs/xp/stable/cms/input-types#imageselector[the reference docs].
 
-== Additional input types
+=== Other useful input types
 
-We've seen some of the most important input types above, but XP has many more input types to offer. A https://developer.enonic.com/docs/xp/stable/cms/input-types#checkbox[CheckBox] allows you to indicate whether something is in one of two states (true or false), while the https://developer.enonic.com/docs/xp/stable/cms/input-types#combobox[ComboBox] lets you provide any number of predefined options for the user to select from.
+Some other very useful input types that it's worth taking a look into are:
 
-If you need to indicate when and where something happened (or will happen), you should look into the https://developer.enonic.com/docs/xp/stable/cms/input-types#geopoint[GeoPoint] and https://developer.enonic.com/docs/xp/stable/cms/input-types#date[Date] and https://developer.enonic.com/docs/xp/stable/cms/input-types#datetime[DateTime] inputs. Try this for creating either a world history API or a live events API.
-
-There's also inputs for selecting arbitrary content and for uploading attachments, for entering numbers, for adding tags, and more. For a full overview, check out the https://developer.enonic.com/docs/xp/stable/cms/input-types[input types reference docs].
+https://developer.enonic.com/docs/xp/stable/cms/input-types#checkbox[CheckBox]:: A trusty input checkbox. Indicates whether something is in one of two states.
+https://developer.enonic.com/docs/xp/stable/cms/input-types#combobox[ComboBox]:: A dropdown menu containing predefined options for the user to select from. Allows selection of one or more options.
+https://developer.enonic.com/docs/xp/stable/cms/input-types#geopoint[GeoPoint]:: Stores GPS coordinates.
+https://developer.enonic.com/docs/xp/stable/cms/input-types#date[Date] and https://developer.enonic.com/docs/xp/stable/cms/input-types#datetime[DateTime]:: Provides an interactive date picker (with a time component in DateTime's case) to save date and times.
 
 == Input type configuration
 
