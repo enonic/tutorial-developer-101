@@ -35,40 +35,13 @@ For example, an input that only allows between characters from `a` to `z` and re
 
 Further, if you want to provide a default value for a TextLine input, you can do that by using the `default` configuration option. For an example of how to do this and for more information on the TextLine input, visit the https://developer.enonic.com/docs/xp/stable/cms/input-types#textline[reference docs].
 
-
-=== HtmlArea
-
-image::input-type-html-area.png[HtmlArea: A rich text input field with visible formatting options., width=800]
-
-While the TextLine input type is great for short inputs, it doesn't handle paragraphs of text very well, and it also doesn't provide any options for text formatting. For that, we have the HtmlArea.
-
-The HtmlArea input type gives you a multi-line input field with rich formatting options, much like what you're used to from your favorite word processor. It supports text formatting and justification, lists, links, and even lets you insert images.
-
-You can configure the HtmlArea to be exactly what you want by dictating what formatting tools to include or exclude (the `include` and `exclude` attributes, respectively), by what heading levels are allowed (`allowedHeadings`), and by giving it a default value (`default`).
-
-To learn more about HtmlArea input type and how to configure all its options, check the https://developer.enonic.com/docs/xp/stable/cms/input-types#htmlarea[reference documentation for it]. A fully HtmlArea could look like this:
-
-.An example HtmlArea input type
-[source,xml]
-----
-<input name="myhtmlarea" type="HtmlArea">
-  <label>My HtmlArea</label>
-  <default><h3>Enter description here</h3></default>
-  <config>
-    <exclude>*</exclude>
-    <include>JustifyLeft JustifyRight | Bold Italic</include>
-    <allowHeadings>h2 h4 h6</allowHeadings>
-  </config>
-</input>
-----
-
 === ImageSelector
 
 image::input-type-image-selector.png[ImageSelector: An interactive image selection tool., width=800]
 
 Images are a key part of many web experiences: they add color, break up the content, and gives the reader something to rest their eyes on. XP's image selector allows you to select an image for a piece of content and also to upload new images.
 
-In XP, image selectors are great for when you want to associate one or more images with piece of content. For instance, if you're creating an API of animals, you might want to have an image of what each animal looks like both as a young and as an adult.
+In XP, image selectors are great for when you want to associate one or more images with piece of content. For instance, if you're creating an animal data set, you might want to have an image of what each animal looks like both as a young and as an adult.
 
 .An minimal ImageSelector configuration
 [source,xml]
@@ -78,11 +51,32 @@ In XP, image selectors are great for when you want to associate one or more imag
 </input>
 ----
 
-The image selector is a more specialized form of XP's https://developer.enonic.com/docs/xp/stable/cms/input-types#contentselector[ContentSelector] input type. To read more about it, head over to https://developer.enonic.com/docs/xp/stable/cms/input-types#imageselector[the reference docs].
+Read more about the https://developer.enonic.com/docs/xp/stable/cms/input-types#imageselector[configuration of image selectors] in the reference docs.
 
-=== Other useful input types
+=== Content Selector
 
-Some other very useful input types that it's worth taking a look into are:
+image::input-type-content-selector.png[ContentSelector: An interactive content selection tool., width=800]
+
+The image selector we just saw is actually a specialized form of the more complex ContentSelector input type. The ContentSelector input type allows you to reference other content. Let's say you have two content types: one of type person and one of type food. If you want to be able to specify which dishes the person likes, you could use a content type to create a reference from the person to their favored dish.
+
+Because referencing other content types comes with a lot of variability, the ContentSelector type has configuration options to support this. You can choose to allow only certain content types or only content that's available at a certain path. You can also change how the selector is presented to the user, including how it should present available content to the user and whether it should list content status.
+
+https://developer.enonic.com/docs/xp/stable/cms/input-types#contentselector[The full list of ContentSelector configuration options] is available in the reference docs, including a number of examples to explain content inclusion and exclusion. However, a simple configuration could look like this:
+
+.A basic ContentSelector configuration that only allows one content type
+[source, xml]
+----
+<input name="mycontentselector" type="ContentSelector">
+  <label>My ContentSelector</label>
+  <config>
+    <allowContentType>citation</allowContentType>
+  </config>
+</input>
+----
+
+=== More useful input types
+
+Some other very useful input types that it's worth looking into are:
 
 https://developer.enonic.com/docs/xp/stable/cms/input-types#checkbox[CheckBox]:: A trusty input checkbox. Indicates whether something is in one of two states.
 https://developer.enonic.com/docs/xp/stable/cms/input-types#combobox[ComboBox]:: A dropdown menu containing predefined options for the user to select from. Allows selection of one or more options.

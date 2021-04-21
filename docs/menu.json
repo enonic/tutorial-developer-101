@@ -17,55 +17,59 @@
       "document": "input-types"
     },
     {
-      "title": "5 - Advanced content types",
+      "title": "5 - Rich text",
+      "document": "rich-text"
+    },
+    {
+      "title": "6 - Advanced content types",
       "document": "advanced-content"
     },
     {
-      "title": "6 - Headless API",
+      "title": "7 - Headless API",
       "document": "headless-api"
     },
     {
-      "title": "7 - Controllers",
+      "title": "8 - Controllers",
       "document": "controllers"
     },
     {
-      "title": "8 - Assets",
+      "title": "9 - Assets",
       "document": "assets"
     },
     {
-      "title": "9 - The Content API",
+      "title": "10 - The Content API",
       "document": "content-api"
     },
     {
-      "title": "10 - Filters and routing",
+      "title": "11 - Filters and routing",
       "document": "content-api"
     },
     {
-      "title": "11 - Pages",
+      "title": "12 - Pages",
       "document": "pages"
     },
     {
-      "title": "12 - The Enonic Market",
+      "title": "13 - The Enonic Market",
       "document": "market"
     },
     {
-      "title": "13 - Authentication & Authorization",
+      "title": "14 - Authentication & Authorization",
       "document": "auth"
     },
     {
-      "title": "14 - Storing data",
+      "title": "15 - Storing data",
       "document": "storage"
     },
     {
-      "title": "15 - Admin extensions",
+      "title": "16 - Admin extensions",
       "document": "admin"
     },
     {
-      "title": "16 - Deployment",
+      "title": "17 - Deployment",
       "document": "deployment"
     },
     {
-      "title": "17 - Next steps",
+      "title": "18 - Next steps",
       "document": "next"
     }
   ]

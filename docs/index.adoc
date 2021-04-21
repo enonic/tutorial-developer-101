@@ -13,6 +13,7 @@ NOTE: *tl;dr* Head over to our https://developer.enonic.com/quickstart[Quickstar
 . <<basics#, Development basics>>
 . <<content#, Content and content types>>
 . <<input-types#, Input types>>
+. <<rich-text#, Rich text>>
 . <<advanced-content#, Advanced content types>>
 . <<headless-api#, Headless API>>
 . <<controllers#, Controllers>>

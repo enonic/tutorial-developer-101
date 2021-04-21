@@ -1,0 +1,28 @@
+= Rich text
+include::variables.adoc[]
+
+=== HtmlArea
+
+image::input-type-html-area.png[HtmlArea: A rich text input field with visible formatting options., width=800]
+
+While the TextLine input type is great for short inputs, it doesn't handle paragraphs of text very well, and it also doesn't provide any options for text formatting. For that, we have the HtmlArea.
+
+The HtmlArea input type gives you a multi-line input field with rich formatting options, much like what you're used to from your favorite word processor. It supports text formatting and justification, lists, links, and even lets you insert images.
+
+You can configure the HtmlArea to be exactly what you want by dictating what formatting tools to include or exclude (the `include` and `exclude` attributes, respectively), by what heading levels are allowed (`allowedHeadings`), and by giving it a default value (`default`).
+
+To learn more about HtmlArea input type and how to configure all its options, check the https://developer.enonic.com/docs/xp/stable/cms/input-types#htmlarea[reference documentation for it]. A fully HtmlArea could look like this:
+
+.An example HtmlArea input type
+[source,xml]
+----
+<input name="myhtmlarea" type="HtmlArea">
+  <label>My HtmlArea</label>
+  <default><h3>Enter description here</h3></default>
+  <config>
+    <exclude>*</exclude>
+    <include>JustifyLeft JustifyRight | Bold Italic</include>
+    <allowHeadings>h2 h4 h6</allowHeadings>
+  </config>
+</input>
+----
