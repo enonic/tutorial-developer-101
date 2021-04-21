@@ -9,3 +9,4 @@
 :project-name-full: {project-name-prefix}{project-name}
 :p1-site-name: My First Site
 :p1-site-path: /my-first-site
+:p1-api-url: {xp-url}/site/default/draft{p1-site-path}/api
