@@ -126,18 +126,28 @@ Note that in-editor schema validation depends on whether your text editor suppor
 
 == Task: Create an {project-name} data set
 
-Time for a little recap! We'll use everything we've learned so far to create a new API. You can either try this out on your own or follow the solution below. The task is as follows:
+Time for a little recap! We'll put together everything we've learned about content types and input types thus far to create a new data set. A solution is listed below, but try and see if you can solve it yourself first. If you're wondering how to achieve some of the goals, try consulting the documentation that's been linked to in this {document}.
 
-Create a new XP application called "{project-name}".  Create an "animal" content type. It should have the following inputs:
+Your task is to create a new content type: "Animal" and to update the "Person" content type with new constraints and fields.
 
-. Its name, e.g. "elephant".
-. A rich text input for adding a description of the animal. It should not allow the use of the `Image` formatting option.
+An animal should have the following inputs:
+
+. Its name, e.g. "elephant". Each animal must have at least one name, but multiple are also okay. For instance, the reindeer is also known as caribou.
+. A multi-line text input for adding a description of the animal. It should allow at most 500 characters.
 . An image selector that accepts between 0 and 3 images.
-. Add help text where you think it would be helpful.
+. Help text where you think it would be helpful.
 
-Additionally, the content type should use the `display-name-expression` element to update the display name based on the name input field. We haven't looked at this element previously, but as the https://developer.enonic.com/docs/xp/stable/cms/content-types#display_name_expressions[documentation] explains, it's a way to auto-generate the content display name based on values from the content type form fields.
+When you've created the content type, create a new folder in Content Studio at next to the people folder. Call it "animals".
 
-When you've created the content type, create a new site in Content Studio at the root level of the hierarchy. Call it "{project-name}" and use the "{project-name}" application. Enter some information to make sure it works and to test out the new input types.
+For the person content type, here's what's going to change:
+
+. Allow each person to have any number of aliases. (Hint: use the occurrences element; check the documentation for how it works.)
+. Add a ContentSelector input that allows only content of the "Animal" type and that must be nested under the site's "animals" folder. Call it `favoriteAnimal`.
+. Make the "name" field required.
+. Use `display-name-expression` so that a person's display name is "{Real name} ({alias})", e.g. "Alecia Beth Moore (P!nk)". We haven't looked at this element previously, but as the https://developer.enonic.com/docs/xp/stable/cms/content-types#display_name_expressions[`display-name-expression` documentation] explains, it's a way to auto-generate the content display name based on values from the content type form fields.
+(What happens if you add multiple aliases to a single person? What about none?)
+
+To verify that everything works, create some animals, and try creating a content link between
 
 === Solution
 
