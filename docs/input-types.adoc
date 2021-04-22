@@ -80,8 +80,10 @@ Some other very useful input types that it's worth looking into are:
 
 https://developer.enonic.com/docs/xp/stable/cms/input-types#checkbox[CheckBox]:: A trusty input checkbox. Indicates whether something is in one of two states.
 https://developer.enonic.com/docs/xp/stable/cms/input-types#combobox[ComboBox]:: A dropdown menu containing predefined options for the user to select from. Allows selection of one or more options.
-https://developer.enonic.com/docs/xp/stable/cms/input-types#geopoint[GeoPoint]:: Stores GPS coordinates.
 https://developer.enonic.com/docs/xp/stable/cms/input-types#date[Date] and https://developer.enonic.com/docs/xp/stable/cms/input-types#datetime[DateTime]:: Provides an interactive date picker (with a time component in DateTime's case) to save date and times.
+https://developer.enonic.com/docs/xp/stable/cms/input-types#geopoint[GeoPoint]:: Stores GPS coordinates.
+https://developer.enonic.com/docs/xp/stable/cms/input-types#htmlarea[HtmlArea]:: Provides a rich text, multi-line input. We'll discuss this in detail in xref:rich-text[the next {document}].
+https://developer.enonic.com/docs/xp/stable/cms/input-types#textarea[TextArea]:: Provides a multi-line text input with optional max length.
 
 == Input type configuration
 
