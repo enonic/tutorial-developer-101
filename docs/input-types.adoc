@@ -107,17 +107,22 @@ All of these configuration options are described in more detail in the https://d
 
 === Validation
 
-Enonic also provides XML Schema Definitions (XSDs) for text editor integration and validation of your XML schemas. To use it, add the attribute `xmlns="urn:enonic:xp:model:1.0"` to your content-type as show below:
+Enonic also provides XML Schema Definitions (XSDs) for text editor integration and validation of your XML schemas. To use it, add the attribute `xmlns`, `xmlns:xsi`, and `xsi:schemaLocation` to your content-type as shown below:
 
 .Using XSDs for schema validation of a content type definition.
 [source,xml]
 ----
 <?xml version="1.0" encoding="utf-8"?>
-<content-type xmlns="urn:enonic:xp:model:1.0">
+<content-type
+    xmlns="urn:enonic:xp:model:1.0"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="urn:enonic:xp:model:1.0 https://raw.githubusercontent.com/enonic/xp/master/modules/core/core-api/src/main/resources/META-INF/xsd/model.xsd">
   <display-name>person</display-name>
   <!-- rest of content elided for brevity -->
 </content-type>
 ----
+
+Note that in-editor schema validation depends on whether your text editor supports validating against XSD schemas or not.
 
 == Task: Create an {project-name} data set
 
