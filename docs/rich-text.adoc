@@ -1,7 +1,7 @@
 = Rich text
 include::variables.adoc[]
 
-=== HtmlArea
+== The mighty HtmlArea
 
 image::input-type-html-area.png[HtmlArea: A rich text input field with visible formatting options., width=800]
 
@@ -26,3 +26,15 @@ To learn more about HtmlArea input type and how to configure all its options, ch
   </config>
 </input>
 ----
+
+== Config
+
+Show how the HtmlArea can be configured to have nothing, everything, or something in between.
+
+== Macros
+
+What are macros? What are they used for? _How_ do you use them? Can you make your own?
+
+== In a headless context
+
+HtmlArea spits out HTML. What does this mean for headless contexts? Do you want that? Could it be updated to support spitting out other formats in the future?
