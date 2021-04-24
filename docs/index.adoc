@@ -9,7 +9,7 @@ NOTE: *tl;dr* Head over to our https://developer.enonic.com/quickstart[Quickstar
 
 == Tutorial overview
 
-. <<setup#, Setting your development environment>>
+. <<setup#, Setting up your development environment>>
 . <<basics#, Development basics>>
 . <<content#, Content and content types>>
 . <<input-types#, Input types>>
