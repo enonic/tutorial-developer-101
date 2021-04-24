@@ -1,6 +1,6 @@
 = Rich text: HtmlArea
 include::variables.adoc[]
-:macro-name: mySuccess
+:macro-name: screamingSnakeCase
 
 When you want to ... rich text is the way to go, and if you want to work with rich text in Content Studio, HtmlArea is your friend.
 
@@ -108,7 +108,9 @@ To use it, you'd pick your desired panel type (as listed in https://github.com/e
 
 === Creating our own macro
 
-If you want to create your own macro, that's possible too, and it doesn't have to take too much work. Let's look at how we can recreate the `success` macro from above. Of course, you'd probably just install the Panel Macros app if you needed it in an app, but this is a great chance to learn a little bit about macros. We'll call the macro `{macro-name}`.
+If you want to create your own macro, that's possible too, and it doesn't have to take too much work. The success macro above comes with a fair amount of styling too, so will do something simpler. We'll create a macro to transform the macro body 'SCREAMING_SNAKE_CASE': we'll put the text in all caps, and change every space into an underscore . For the macro header, we'll put it in all caps and surround it with asterisks. We'll call the macro `{macro-name}`.
+
+NOTE: This section includes a little bit of JavaScript programming. If you're not familiar with it, don't worry: we'll provide you everything you need.
 
 First off, let's create a _macro descriptor_. A macro descriptor is an XML file that lets you give a macro a friendly display name and a description, as well as a way for you to document the macro parameters. It's not strictly required, but very recommended. A macro descriptor goes in `src/main/resources/site/macros/<macro-name>/<macro-name>.xml`. In our case, that's `src/main/resources/site/macros/{macro-name}/{macro-name}.xml`. Here's the descriptor we'll be using:
 
@@ -116,8 +118,8 @@ First off, let's create a _macro descriptor_. A macro descriptor is an XML file 
 [src,xml]
 ----
 <macro>
-  <display-name>My success</display-name>
-  <description>Display a success message in an appropriate color</description>
+  <display-name>Screaming snake case</display-name>
+  <description>Transform the text body into SCREAMING_SNAKE_CASE</description>
 
   <form>
     <input name="header" type="TextLine"> <!--1-->
@@ -126,7 +128,7 @@ First off, let's create a _macro descriptor_. A macro descriptor is an XML file 
     </input>
     <input name="body" type="TextArea"> <!--2-->
       <label>Text</label>
-      <occurrences minimum="0" maximum="1"/>
+      <occurrences minimum="1" maximum="1"/>
     </input>
   </form>
 </macro>
@@ -135,9 +137,55 @@ First off, let's create a _macro descriptor_. A macro descriptor is an XML file 
 <1> This is the `header` parameter. This has to be specified as a macro attribute.
 <2> This is the `body` parameter. It's automatically mapped to whatever is inside the macro tag and is not assigned explicitly.
 
-Notice how both inputs are optional and define what sort of input they accept (single and multi-line text respectively).
+Notice how both inputs define what sort of input they accept (single and multi-line text respectively).
 
-Now for
+Now for a little bit of scripting. Next to the XML file, create a file called `{macro-name}.js`. We'll write a simple script that fetches the header and the body of the macro and transforms it.
+
+.The {macro-name} script
+[source,js]
+----
+exports.macro = (context) => {
+  // Extract the header and body parameters <!--1-->
+  const header = context.params['header'] && context.params['header'].trim()
+  const body = context.body
+
+  // define the transformation
+  const changeCase = text => text.toUpperCase().replace(/ /g, "_")
+
+  // create the optional header element
+  const headerElement = header && header.length > 0 ?
+        ('<strong>*' + header.toUpperCase() + '*: </strong>') : '';
+
+  // return the body that replaces the macro <!--2-->
+  return {
+    body: '<span>'+ headerElement + changeCase(body) + '</span>'
+  }
+}
+----
+
+<1> The header parameter is available in the `context.params` object, while the body is available as a property on the `context` object directly.
+<2> What you return from the macro is what it will be replaced with. In this case, that's the modified text.
+
+Now make sure this is deployed to your XP instance (check xref:basics#_sandboxes[the section on sandboxes in for how to start it]) either by having it run in development mode or by xref:basics#_building_and_deploying[redeploying your app].
+
+Now we can either add this manually or by using the macro tool in the HtmlArea toolbar. If we use the macro tool we also get to preview the macro.
+
+To do it manually, we'd enter this into the HtmlArea:
+
+.The {macro-name} macro in use
+[source,subs="attributes+"]
+  [{macro-name} header="Screaming snakes"]Oh no what have you done?[/{macro-name}]
+
+Using the macro tool, we'd get a popup form instead that prompts us for all the parameters:
+
+.The insert macro prompt
+image::macros-insert-macro.png[The input form for adding a macro, width=800 ]
+
+To preview the macro, click the "preview" button:
+
+.The macro preview function
+image::macros-preview-macro.png[The macro preview, width=800]
+
 
 == Rich text in a headless context
 
