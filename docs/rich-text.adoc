@@ -1,17 +1,107 @@
-= Rich text
+= Rich text: HtmlArea
 include::variables.adoc[]
 
-== The mighty HtmlArea
+When you want to ... rich text is the way to go, and if you want to work with rich text in Content Studio, HtmlArea is your friend.
 
-image::input-type-html-area.png[HtmlArea: A rich text input field with visible formatting options., width=800]
+We briefly mentioned the HtmlArea input type in the previous {document}, but didn't say much about it -- not because there's nothing to be said about it. The situation is actually quite the opposite. This rich text input type offers some very powerful editing capabilities and a lot of configuration options. As such, this whole {document} is dedicated to that one input type, how it works, and how to use it in a headless fashion.
 
-While the TextLine input type is great for short inputs, it doesn't handle paragraphs of text very well, and it also doesn't provide any options for text formatting. For that, we have the HtmlArea.
+== The HtmlArea: an overview
+
+.The default HtmlArea input type
+image::input-type-html-area.png[HtmlArea: A rich text input field with visible formatting options., width=600]
 
 The HtmlArea input type gives you a multi-line input field with rich formatting options, much like what you're used to from your favorite word processor. It supports text formatting and justification, lists, links, and even lets you insert images.
 
 You can configure the HtmlArea to be exactly what you want by dictating what formatting tools to include or exclude (the `include` and `exclude` attributes, respectively), by what heading levels are allowed (`allowedHeadings`), and by giving it a default value (`default`).
 
-To learn more about HtmlArea input type and how to configure all its options, check the https://developer.enonic.com/docs/xp/stable/cms/input-types#htmlarea[reference documentation for it]. A fully HtmlArea could look like this:
+Additionally, the HtmlArea supports the use of _macros_. Macros let you automatically insert arbitrary markup into your rendered content and is perfect for cases when you want to add banners, add footers, contact info, or the like. // <- TODO: might need to rethink this 🤔
+
+== Configuration of text tools
+
+We
+
+.The HtmlArea configured to include everything
+[source,xml]
+----
+<input type="HtmlArea" name="everything">
+  <label>HtmlArea with 'include *'</label>
+  <config>
+    <include>*</include>
+  </config>
+</input>
+----
+
+.An HtmlArea input with `<include>*</include>`
+image::input-type-html-area-all-controls.png[HtmlArea: A rich text input field with visible formatting options., width=600]
+
+
+.The HtmlArea configured to include nothing
+[source,xml]
+----
+<input type="HtmlArea" name="nothing">
+  <label>HtmlArea with exclude: *</label>
+  <config>
+    <exclude>*</exclude>
+  </config>
+</input>
+----
+
+
+.An HtmlArea exput with `<exclude>*</exclude>`
+image::input-type-html-area-no-controls.png[HtmlArea: A rich text input field with visible formatting options., width=600]
+
+
+.The HtmlArea configured to include a selection of controls
+[source,xml]
+----
+<input type="HtmlArea" name="something">
+  <label>HtmlArea with some controls</label>
+  <config>
+    <exclude>*</exclude>
+    <include>Format | Bold Italic Underline | JustifyBlock
+    JustifyLeft JustifyCenter JustifyRight |HorizontalRule Blockquote</include>
+  </config>
+</input>
+----
+
+
+
+.An HtmlArea with a selection of tools and `<exclude>*</exclude>`
+image::input-type-html-area-some-controls.png[HtmlArea: A rich text input field with visible formatting options., width=600]
+
+
+
+Show three different configurations: empty (`exclude *`), full (`include *`), and somewhere in between (`exclude *, include [ a b c ]`)
+
+== Images
+
+Adding image controls. Also shows a cursory look at image manipulation?
+
+== Macros
+
+What are they?
+
+=== Using macros
+
+=== Creating our own macro
+
+== Rich text in a headless context
+
+HtmlArea spits out HTML. What does this mean for headless contexts? Do you want that? Could it be updated to support spitting out other formats in the future?
+
+=== GraphQL queries
+
+Create multiple queries, demonstrating what happens to the macros and to images (including srcset). You should also have a query that provides params to the images to get them at a certain width.
+
+
+== HtmlArea
+
+
+The HtmlArea input type gives you a multi-line input field with rich formatting options, much like what you're used to from your favorite word processor. It supports text formatting and justification, lists, links, and even lets you insert images.
+
+You can configure the HtmlArea to be exactly what you want by dictating what formatting tools to include or exclude (the `include` and `exclude` attributes, respectively), by what heading levels are allowed (`allowedHeadings`), and by giving it a default value (`default`).
+
+To learn more about HtmlArea input type and how to configure all its options, check the https://developer.enonic.com/docs/xp/stable/cms/input-types#htmlarea[reference documentation for it].
 
 .An example HtmlArea input type
 [source,xml]
@@ -27,14 +117,12 @@ To learn more about HtmlArea input type and how to configure all its options, ch
 </input>
 ----
 
-== Config
+== Configuration
+
+The HtmlArea comes with lots of options to configure. Most importantly, you can configure what tools are available for editors to work with, so you can tailor the experience to exactly what you want it to be.
 
 Show how the HtmlArea can be configured to have nothing, everything, or something in between.
 
 == Macros
 
 What are macros? What are they used for? _How_ do you use them? Can you make your own?
-
-== In a headless context
-
-HtmlArea spits out HTML. What does this mean for headless contexts? Do you want that? Could it be updated to support spitting out other formats in the future?
