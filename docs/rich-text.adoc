@@ -18,7 +18,9 @@ Additionally, the HtmlArea supports the use of _macros_. Macros let you automati
 
 == Configuration of text tools
 
-We
+We can use the HtmlArea's `config` section to specify which rich text controls should be available when editing. Using a combination of the `include` and `exclude` tags, we can customize the input's appearance.
+
+If you want to include all controls, use `<include>*</include>` as shown below:
 
 .The HtmlArea configured to include everything
 [source,xml]
@@ -32,7 +34,10 @@ We
 ----
 
 .An HtmlArea input with `<include>*</include>`
-image::input-type-html-area-all-controls.png[HtmlArea: A rich text input field with visible formatting options., width=600]
+image::input-type-html-area-all-controls.png["An HtmlArea configured to include all editing tools.", width=600]
+
+
+If you want to exclude all controls, use `<exclude>*</exclude>`:
 
 
 .The HtmlArea configured to include nothing
@@ -46,10 +51,10 @@ image::input-type-html-area-all-controls.png[HtmlArea: A rich text input field w
 </input>
 ----
 
-
 .An HtmlArea exput with `<exclude>*</exclude>`
-image::input-type-html-area-no-controls.png[HtmlArea: A rich text input field with visible formatting options., width=600]
+image::input-type-html-area-no-controls.png[An HtmlArea configured to exclude all editing tools., width=600]
 
+Finally, if you want to exclude most tools, but not all, you can exclude all and then add back in the ones you want:
 
 .The HtmlArea configured to include a selection of controls
 [source,xml]
@@ -64,14 +69,8 @@ image::input-type-html-area-no-controls.png[HtmlArea: A rich text input field wi
 </input>
 ----
 
-
-
 .An HtmlArea with a selection of tools and `<exclude>*</exclude>`
-image::input-type-html-area-some-controls.png[HtmlArea: A rich text input field with visible formatting options., width=600]
-
-
-
-Show three different configurations: empty (`exclude *`), full (`include *`), and somewhere in between (`exclude *, include [ a b c ]`)
+image::input-type-html-area-some-controls.png[An HtmlArea configured to include a selection of editing tools., width=600]
 
 == Images
 
