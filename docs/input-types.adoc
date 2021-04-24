@@ -147,7 +147,9 @@ For the person content type, here's what's going to change:
 . Use `display-name-expression` so that a person's display name is "{Real name} ({alias})", e.g. "Alecia Beth Moore (P!nk)". We haven't looked at this element previously, but as the https://developer.enonic.com/docs/xp/stable/cms/content-types#display_name_expressions[`display-name-expression` documentation] explains, it's a way to auto-generate the content display name based on values from the content type form fields.
 (What happens if you add multiple aliases to a single person? What about none?)
 
-To verify that everything works, create some animals, and try creating a content link between
+To verify that everything works, create some animals, and try creating a content link between a person and an animal.
+
+When you're ready, create a GraphQL query that'll fetch all people and list what their favorite animals are, as well their animals' descriptions .
 
 === Solution
 
