@@ -8,7 +8,7 @@ Before we can start building apps and APIs, let's make sure we have the right to
 
 == Introducing the command line
 
-The command line -- aka _the terminal_-- is a powerful, text-based interface for running commands on your computer. You can also use use the terminal to navigate your file system, similar to macOS`' Finder or Windows`' Explorer. The program running in the terminal (that interprets your commands) is known as a _shell_.
+The command line -- aka _the terminal_ -- is a powerful, text-based interface for running commands on your computer. You can also use use the terminal to navigate your file system, similar to macOS`' Finder or Windows`' Explorer. The program running in the terminal (that interprets your commands) is known as a _shell_.
 
 The rest of this {document} will focus primarily on working with the command line, so go ahead and open your favorite terminal. If you don't know how to open a terminal on your system, don't worry! Instead, check out the guide for https://www.macworld.co.uk/how-to/mac-software/how-use-terminal-on-mac-3608274/[macOS], https://www.lifewire.com/how-to-open-command-prompt-2618089[Windows], or https://www.howtogeek.com/140679/beginner-geek-how-to-start-using-the-linux-terminal/[Linux] (depending on your operating system).
 
