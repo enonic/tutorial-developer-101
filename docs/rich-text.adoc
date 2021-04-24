@@ -1,5 +1,6 @@
 = Rich text: HtmlArea
 include::variables.adoc[]
+:macro-name: mySuccess
 
 When you want to ... rich text is the way to go, and if you want to work with rich text in Content Studio, HtmlArea is your friend.
 
@@ -64,7 +65,7 @@ Finally, if you want to exclude most tools, but not all, you can exclude all and
   <config>
     <exclude>*</exclude>
     <include>Format | Bold Italic Underline | JustifyBlock
-    JustifyLeft JustifyCenter JustifyRight |HorizontalRule Blockquote</include>
+    JustifyLeft JustifyCenter JustifyRight | HorizontalRule Blockquote</include>
   </config>
 </input>
 ----
@@ -80,11 +81,63 @@ To read more about Content Studio's image handling capabilities, check out this 
 
 == Macros
 
-What are they?
+Macros allow you to easily add content and formatting to your rich text area. When the page is rendered, the macro call is resolved and replaced. When the macro is resolved, it will either add text to your page or styles or scripts. See the https://developer.enonic.com/docs/xp/stable/cms/macros[macro reference docs] for a more in-depth explanation of how this works. In this guide, we'll see some examples of macros and then look at how we can create our own.
 
 === Using macros
 
+Adding macros to HtmlAreas looks quite a lot like the XML configuration we've been doing up until now, except that we use square brackets instead of angle brackets (`[]` instead of `<>`). You specify the name and any required attributes. Some macros are self-closing and accept no contents, while others accept content and must be closed later. To close a self-closing macro, add a `/` before the first closing bracket (`]`).
+
+.An example of a self closing macro
+[src]
+  [selfClosingMacro param="value" /]
+
+.An example of a macro with content
+[src]
+  [contentMacro param="value"]This content goes inside the macro![/contentMacro]
+
+A good example of what macros can be useful for is the https://market.enonic.com/vendors/enonic/com.enonic.app.panelmacros[`Panel Macros` XP app] which gives you colored panels that you can add important text to.
+
+.The Panel Macros package image
+image::macros-panel-macros.jpg["The Panel Macros package in action, showing differently colored panels." , width=600]
+
+To use it, you'd pick your desired panel type (as listed in https://github.com/enonic/app-panel-macros#readme[the library documentation]), such as `success`. If you also want a header, you can specify that using the `header` attribute. If we wanted a `success` panel with a header, we'd add something like this to our HtmlArea:
+
+.Using a panel macro
+[src]
+  [success header="Congrats!"]You did it! Give yourself a well-deserved pat on the back 🥳[/success]
+
 === Creating our own macro
+
+If you want to create your own macro, that's possible too, and it doesn't have to take too much work. Let's look at how we can recreate the `success` macro from above. Of course, you'd probably just install the Panel Macros app if you needed it in an app, but this is a great chance to learn a little bit about macros. We'll call the macro `{macro-name}`.
+
+First off, let's create a _macro descriptor_. A macro descriptor is an XML file that lets you give a macro a friendly display name and a description, as well as a way for you to document the macro parameters. It's not strictly required, but very recommended. A macro descriptor goes in `src/main/resources/site/macros/<macro-name>/<macro-name>.xml`. In our case, that's `src/main/resources/site/macros/{macro-name}/{macro-name}.xml`. Here's the descriptor we'll be using:
+
+.The XML descriptor for the {macro-name} macro
+[src,xml]
+----
+<macro>
+  <display-name>My success</display-name>
+  <description>Display a success message in an appropriate color</description>
+
+  <form>
+    <input name="header" type="TextLine"> <!--1-->
+      <label>Header</label>
+      <occurrences minimum="0" maximum="1"/>
+    </input>
+    <input name="body" type="TextArea"> <!--2-->
+      <label>Text</label>
+      <occurrences minimum="0" maximum="1"/>
+    </input>
+  </form>
+</macro>
+----
+
+<1> This is the `header` parameter. This has to be specified as a macro attribute.
+<2> This is the `body` parameter. It's automatically mapped to whatever is inside the macro tag and is not assigned explicitly.
+
+Notice how both inputs are optional and define what sort of input they accept (single and multi-line text respectively).
+
+Now for
 
 == Rich text in a headless context
 
@@ -93,37 +146,3 @@ HtmlArea spits out HTML. What does this mean for headless contexts? Do you want 
 === GraphQL queries
 
 Create multiple queries, demonstrating what happens to the macros and to images (including srcset). You should also have a query that provides params to the images to get them at a certain width.
-
-
-== HtmlArea
-
-
-The HtmlArea input type gives you a multi-line input field with rich formatting options, much like what you're used to from your favorite word processor. It supports text formatting and justification, lists, links, and even lets you insert images.
-
-You can configure the HtmlArea to be exactly what you want by dictating what formatting tools to include or exclude (the `include` and `exclude` attributes, respectively), by what heading levels are allowed (`allowedHeadings`), and by giving it a default value (`default`).
-
-To learn more about HtmlArea input type and how to configure all its options, check the https://developer.enonic.com/docs/xp/stable/cms/input-types#htmlarea[reference documentation for it].
-
-.An example HtmlArea input type
-[source,xml]
-----
-<input name="myhtmlarea" type="HtmlArea">
-  <label>My HtmlArea</label>
-  <default><h3>Enter description here</h3></default>
-  <config>
-    <exclude>*</exclude>
-    <include>JustifyLeft JustifyRight | Bold Italic</include>
-    <allowHeadings>h2 h4 h6</allowHeadings>
-  </config>
-</input>
-----
-
-== Configuration
-
-The HtmlArea comes with lots of options to configure. Most importantly, you can configure what tools are available for editors to work with, so you can tailor the experience to exactly what you want it to be.
-
-Show how the HtmlArea can be configured to have nothing, everything, or something in between.
-
-== Macros
-
-What are macros? What are they used for? _How_ do you use them? Can you make your own?
