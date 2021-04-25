@@ -1,24 +1,108 @@
 = Advanced content
-:toc: right
-:imagesdir: media
+include::variables.adoc[]
+:mixin: creatureDescriptor
 
-We've seen basic content types, now let's explore some of the more advanced aspects. We'll look at item sets and option sets and how they can help us both structure our data and make our input forms clearer and easier to use.
-
+Over the previous two {document}s, we've looked at content types and input types. We've explored how to use and configure input types, but we've only seen input types as standalone components. What if we want to group or reuse a set of inputs across several content types? That's what we're looking at in this {document}.
 
 == Mixins
 
-We can use mixins to reuse input field sets across different content types!
+The first and simplest option for reuse is _mixins_ (https://developer.enonic.com/docs/xp/stable/cms/mixins[mixins reference documentation]). Mixins allow you to reuse fields across several content types. They won't look or behave any different from if you manually typed the same fields into multiple content types, but it lets you keep them in sync. To demonstrate this, we'll create a `{content-type-3-capitalized}` content type that shares most of its configuration with the `{content-type-2-capitalized}` content type, but which also adds some extra fields.
 
-=== Task
+We'll want to reuse the `name` and `description` fields from animal, but a `{content-type-3-capitalized}` should also have a list of sources it appears in, such as mythology or stories. We'll start by extracting the `name` and `description` fields into a mixin.
 
-Create another content type that reuses a lot of the fields from our preexisting one. Solve it by using a Mixin.
+Mixins go in in the `/src/main/resources/site/mixins` directory, following the same naming pattern as the other schemas we've seen. Let's create a `{mixin}` mixin.
 
-=== Next / after mixins
+Save this file in `/src/main/resources/site/mixins/{mixin}/{mixin}.xml`:
 
-// We might want to move this to the next section? Making it about input reuse and grouping / advanced content.
+[src, xml, subs={subs}]
+----
+<mixin>
+  <display-name>Creature descriptor</display-name>
+  <form>
+    <input name="name" type="TextLine">
+      <label>Name</label>
+      <help-text>Put the names of the creature here. You can be as
+      specific or as vague as you like.
+      </help-text>
+      <occurrences minimum="1" maximum="0"></occurrences>
+    </input>
+
+    <input name="description" type="HtmlArea" >
+      <label>Description</label>
+      <help-text>Describe the creature. Where its habitats are, what it
+      eats, etc.</help-text>
+      <config>
+        <exclude>*</exclude>
+        <include>Format Macro Image</include>
+      </config>
+    </input>
+  </form>
+</mixin>
+----
+
+We can then update the `{content-type-2-capitalized}` to use this mixin instead. Now it'll look a little something like this:o
+
+.The `{content-type-2-capitalized}` content type using a mixin
+[src,xml,subs={subs}]
+----
+<content-type>
+  <display-name>Animal</display-name>
+  <description>An animal that lives on planet Earth</description>
+  <super-type>base:structured</super-type>
+  <form>
+
+    <mixin name="creatureDescriptor"/>
+
+  </form>
+</content-type>
+----
+
+.The `{content-type-3-capitalized}` content type
+[source,xml,subs={subs}]
+----
+<content-type>
+  <display-name>Legendary Creature</display-name>
+  <description>A mythological creature</description>
+  <display-name-expression>${name}</display-name-expression>
+  <super-type>base:structured</super-type>
+  <form>
+
+    <mixin name="creatureDescriptor"/>
+
+    <input type="TextLine" name="appearsIn">
+      <label>Appears in:</label>
+      <occurrences minimum="0" maximum="0" />
+    </input>
+  </form>
+</content-type>
+----
 
 Mixins provide a handy way of reusing the same inputs across different content types. However, if you want to group a set of fields as a logical unit, you may be better off looking at item sets. Luckily, that's coming right up.
 
+
+== Item sets
+
+Item sets also allow you to reuse fields across different content types, but more importantly, they allow you to group input types together in a logical fashion. This affects more than just the data models: item sets also get grouped together in content forms, providing a visual cue that certain fields pertain to the same topic. Item sets can also be arbitrarily nested.
+
+The https://developer.enonic.com/docs/xp/stable/cms/sets#item_set[item set documentation] does a standout job of explaining exactly how they work (and what they look like), so check that out for an overview. https://developer.enonic.com/docs/xp/stable/cms/schemas#item_set[The item set schema documentation] contains all the information you'd need on how to create an item set schema.
+
+=== Comparison to other data structures
+
+If you're used to working with JSON data or similar data structures, you can think of item sets as JSON objects. They allow you to group a number of input types together into one unit (object). You can also nest them arbitrarily to create more complex structures.
+
+=== Task: adding an item set
+
+How about we do a little refactor. Animal should now be
+
+== Option sets
+
+Where item sets
+
+The https://developer.enonic.com/docs/xp/stable/cms/sets#option_set[option set reference documentation] provides a good overview (with accompanying pictures) of how option sets work. Additionally, https://developer.enonic.com/docs/xp/stable/cms/schemas#option_set[the option set schema overview] is very thorough and full of examples on how to use the various configuration options.
+
+=== Comparison to other data structures
+
+As their name would imply, option sets are basically sets of option. For each entry, you can choose whether to include it or not. Depending on the number of options you can choose (single-select vs multi-select), option sets work a little differently. Single-select option sets, work the same as union types or enums in a number of programming languages: you can pick one, and each option can have it's separate piece of associated data. For multi-select sets it gets more complicated. Depending on the number of options available and the number of options that can be selected, you can get up to n^m^ variations, where n is the number of options to choose from and m is the number of items you can have.
 
 [TIP]
 ====
@@ -26,20 +110,6 @@ For @the: Item sets are basic hierarchical data structures (think JSON, Rust's `
 
 Option sets are sort of like union types / enums: if they are single-select option sets, then they're like union types. However, this is just a specialized version of the multi-select option sets. If they are multi-select option types, then it's just a set where you can pick which options to include and exclude (giving us the standard 2^n^ number of possibilities 🤓).
 ====
-
-== Item sets
-
-Item sets provide a convenient way to abstract away certain details.
-
-Item sets allow you to group a number of inputs together as a logical unit ...
-
-You can also nest item sets, ...
-
-When using item sets, ...
-
-== Option sets
-
-Enonic XP also sports something called option sets. They are visually similar to item sets when viewed in Content Studio, but are a different way of grouping items together.
 
 Explain how multi-sets work.
 
