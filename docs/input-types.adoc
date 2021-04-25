@@ -1,7 +1,5 @@
 = Input types
 include::variables.adoc[]
-:project-name: animals
-:project-name-full: {project-name-prefix}{project-name}
 
 In the previous {document}, we created a very simple content type and used it to create some content. However, in real world settings, you're likely to going to want to use more complex content types with different kinds of data (such as images). In this {document}  we'll be looking at some of the basic input types that come with XP and what we use them for.
 
@@ -124,7 +122,7 @@ Enonic also provides XML Schema Definitions (XSDs) for text editor integration a
 
 Note that in-editor schema validation depends on whether your text editor supports validating against XSD schemas or not.
 
-== Task: Create an {project-name} data set
+== Task: Create an {content-type-2} data set
 
 Time for a little recap! We'll put together everything we've learned about content types and input types thus far to create a new data set. A solution is listed below, but try and see if you can solve it yourself first. If you're wondering how to achieve some of the goals, try consulting the documentation that's been linked to in this {document}.
 

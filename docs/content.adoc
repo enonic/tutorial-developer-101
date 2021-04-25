@@ -1,8 +1,5 @@
 = Content and content types
 include::variables.adoc[]
-:content-type: person
-:content-type-capitalized: Person
-:subs: "attributes+"
 
 In this {document}, we'll start building on the app we deployed previously and generate a GraphQL API for the content we create. In doing this, we'll learn about _content types_ and how to do basic work with  Content Studio.
 
@@ -18,16 +15,16 @@ We've created our first app, but an app isn't terribly exciting if it doesn't ha
 
 Content types are schemas that tell XP what properties a piece of content of a particular type can have. That might sound confusing, but imagine for a second that we're working with forms. Content types describe what fields go in a specific form. Then a piece of content is a form that has been filled out. We'll look at an example to make this even clearer.
 
-Imagine we want our app to list people. We'll create a simple representation of a {content-type}: we're only interested in their name and an optional alias, nickname, or pseudonym. Here's what a {content-type} content type could look like. The most relevant parts are numbered and further explained below.
+Imagine we want our app to list people. We'll create a simple representation of a {content-type-1}: we're only interested in their name and an optional alias, nickname, or pseudonym. Here's what a {content-type-1} content type could look like. The most relevant parts are numbered and further explained below.
 
 
-.A simple content type describing the '{content-type}' content type
+.A simple content type describing the '{content-type-1}' content type
 [source,xml,subs={subs}]
 ----
 <?xml version="1.0" encoding="utf-8"?>
 <content-type>
-  <display-name>{content-type-capitalized}</display-name> <!--1-->
-  <description>A description of a {content-type}</description> <!--2-->
+  <display-name>{content-type-1-capitalized}</display-name> <!--1-->
+  <description>A description of a {content-type-1}</description> <!--2-->
   <super-type>base:structured</super-type>
   <form> <!--3-->
 
@@ -52,9 +49,9 @@ NOTE: Content types also have a large number of other, optional fields that we w
 
 To create an instance of this content type, we could use Content Studio (we'll see exactly how to do this shortly!). Upon exposing it via an API, we would most likely see the piece of content exposed as JSON, so that's what we'll use to illustrate a piece of content.
 
-For instance, if we created an entry for Belcalis Marlenis Almánzar, better known as Cardi B, then that instance of the {content-type} content type (that piece of content) would be represented in JSON as this:
+For instance, if we created an entry for Belcalis Marlenis Almánzar, better known as Cardi B, then that instance of the {content-type-1} content type (that piece of content) would be represented in JSON as this:
 
-.A piece of content of type '{content-type-capitalized}'
+.A piece of content of type '{content-type-1-capitalized}'
 [source,json]
 ----
 {
@@ -74,23 +71,23 @@ Similarly, a content type is much like a _(data) type_ or a _class_ in many prog
 
 === Creating a content type
 
-Now that we know what a content type is, let's look at how we create them and make XP recognize them. We'll use the "{content-type-capitalized}" content type from before to keep things simple.
+Now that we know what a content type is, let's look at how we create them and make XP recognize them. We'll use the "{content-type-1-capitalized}" content type from before to keep things simple.
 
 XP is quite particular about project folder structure, so we need to put content types right where it expects to find them. The location is under `src/main/resources/site/content-types`.
 
-Within the `content-types` directory, we need to place another directory with the name of the content type (in our case: "{content-type-capitalized}"), and within that directory, we place our content type, `{content-type-capitalized}.xml`. As such, the full path to our content type from the project root is `src/main/resources/site/content-types/{content-type}/{content-type}.xml`.
+Within the `content-types` directory, we need to place another directory with the name of the content type (in our case: "{content-type-1-capitalized}"), and within that directory, we place our content type, `{content-type-1-capitalized}.xml`. As such, the full path to our content type from the project root is `src/main/resources/site/content-types/{content-type-1}/{content-type-1}.xml`.
 
 Now, unless you've created it manually, then that directory doesn't exist in our "{project-name}" project yet, so go ahead and create the required directories and files.
 
-In the `{content-type}.xml` file, place the following contents:
+In the `{content-type-1}.xml` file, place the following contents:
 
-.The {content-type-capitalized} content type
+.The {content-type-1-capitalized} content type
 [source,xml]
 ----
 <?xml version="1.0" encoding="utf-8"?>
 <content-type>
-  <display-name>{content-type-capitalized}</display-name>
-  <description>A description of a {content-type}</description>
+  <display-name>{content-type-1-capitalized}</display-name>
+  <description>A description of a {content-type-1}</description>
   <super-type>base:structured</super-type>
   <form>
 
@@ -152,24 +149,24 @@ When you return to the Content Studio hierarchy view, you should now see your si
 
 === Add some friends
 
-With the "{p1-site-name}" site highlighted, press "New ..." (or kbd:[Alt+n]!) to open the "Create Content" menu again. This time around, you should have some more choices than what you did previously, including our very own content type "{content-type-capitalized}"!
+With the "{p1-site-name}" site highlighted, press "New ..." (or kbd:[Alt+n]!) to open the "Create Content" menu again. This time around, you should have some more choices than what you did previously, including our very own content type "{content-type-1-capitalized}"!
 
 .The "Create Content" dialog with more content types
-image::content-studio-new-content.png["The \"Create Content\" dialog when creating content under the \"{p1-site-name}\" site. It contains more elements than previously, including the \"{content-type-capitalized}\" content type that we created earlier."]
+image::content-studio-new-content.png["The \"Create Content\" dialog when creating content under the \"{p1-site-name}\" site. It contains more elements than previously, including the \"{content-type-1-capitalized}\" content type that we created earlier."]
 
 However, before we start creating people, let's create a folder. Because we'll be using this site in the coming {document}s with more content types, having some hierarchy will make things easier. Choose a new folder and call it "people".
 
 Next, let's create a few people to get used to the workflow. We'll start with Cardi B.
 
 . Select the people folder (make sure it's highlighted).
-. Create a new {content-type}.
+. Create a new {content-type-1}.
 . Give it the display name "Cardi B".
 . Enter "Belcalis Marlenis Almánzar" in the "name" field and "Cardi B" in the "alias" field.
 
 It should look a little something like this:
 
-.The content form filled out for the {content-type} "Cardi B"
-image::content-studio-new-{content-type}.png[The form for "{content-type}" fully filled out.]
+.The content form filled out for the {content-type-1} "Cardi B"
+image::content-studio-new-{content-type-1}.png[The form for "{content-type-1}" fully filled out.]
 
 Again, save and close the tab (kbd:[ctrl+enter]/kbd:[⌘+enter]). Now repeat this process for Melissa Arnette Elliott (better known as Missy Elliott) and Alecia Beth Moore (known professionally as P!nk). Be aware that Content Studio lets you nest content, so if you try and create new content when "Cardi B" is selected in the hierarchy, it'll nest the new content under "Cardi B". In our case, though, we want the people to be nested directly under the current folder, so make sure "people" folder is selected when you create new content.
 
@@ -255,7 +252,7 @@ Neat! Next, let's try a slightly more complicated query. In this one,  we'll als
 }
 ----
 
-Execute this and your response should look a little something like this:
+Exeprimary-cute this and your response should look a little something like this:
 
 .People and their aliases as returned by GraphQL
 [source,JSON]

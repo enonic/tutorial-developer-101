@@ -73,11 +73,60 @@ Finally, if you want to exclude most tools, but not all, you can exclude all and
 .An HtmlArea with a selection of tools and `<exclude>*</exclude>`
 image::input-type-html-area-some-controls.png[An HtmlArea configured to include a selection of editing tools., width=600]
 
+== Task: Add a rich text area to your {content-type-2-capitalized} content type
+
+Your {content-type-2-capitalized} already has a TextArea input type for 'description'. Let's upgrade that to an HtmlArea input type.
+
+The input should be optional have at most a single occurrence. You can include any editor tools you want, but it must at least have the `image` and `macro` tools, as we'll be using these later. Otherwise, configure it as you want.
+
+Once you've done that, add some text to one of your {content-type-2}s and try out the HtmlArea.
+
+It'll look a little something like this:
+
+.{content-type-2-capitalized} with an HtmlArea input type
+[source,xml,subs={subs}]
+----
+<?xml version="1.0" encoding="utf-8"?>
+<content-type>
+  <display-name>{content-type-2-capitalized}</display-name>
+  <description>An {content-type-2} that lives on planet Earth</description>
+  <super-type>base:structured</super-type>
+  <form>
+
+    <input name="name" type="TextLine">
+      <label>Name</label>
+      <help-text>
+        Put the name of the animal here. You can be as
+        specific or as vague as you like. "Dog" is just as good as
+        "Canis lupus familiaris".
+      </help-text>
+      <occurrences minimum="1" maximum="0"></occurrences>
+    </input>
+
+    <input name="description" type="HtmlArea">
+      <label>Description</label>
+      <help-text>
+        Describe the animal. Where its habitats are, what it eats, etc.
+      </help-text>
+      <config>
+        <exclude>*</exclude>
+        <include>Format Macro Image</include>
+      </config>
+    </input>
+
+  </form>
+</content-type>
+----
+
 == Images
 
 If you have configured your HtmlArea to include the image tool, you can click the image button to insert an image. Once you select an image, you'll get a prompt that allows you to customize the image. You can add a caption, alt text, change the image's justification in the block, and apply predefined styles. There's also a pencil icon in the upper right corner that allows you to edit the image. This icon takes you to Content Studio's image editing facilities where you can edit the image by cropping, rotating, or flipping it. You can also add an image focal point, so that if the image gets cropped for some reason, you're in control of what part of the image remains visible.
 
 To read more about Content Studio's image handling capabilities, check out this https://enonic.com/blog/enonic-simplifies-image-problems[blog post on how Enonic simplifies your everyday image problems].
+
+== Task: Add an image to an {content-type-2}
+
+Try out the image controls that Content Studio gives you by uploading a picture and seeing what you can do with it. Remember to click the pencil icon to try the advanced editing tools such as cropping and focal points.
 
 == Macros
 
@@ -106,7 +155,7 @@ To use it, you'd pick your desired panel type (as listed in https://github.com/e
 [src]
   [success header="Congrats!"]You did it! Give yourself a well-deserved pat on the back 🥳[/success]
 
-=== Creating our own macro
+=== Task: Creating our own macro
 
 If you want to create your own macro, that's possible too, and it doesn't have to take too much work. The success macro above comes with a fair amount of styling too, so will do something simpler. We'll create a macro to transform the macro body 'SCREAMING_SNAKE_CASE': we'll put the text in all caps, and change every space into an underscore . For the macro header, we'll put it in all caps and surround it with asterisks. We'll call the macro `{macro-name}`.
 
@@ -189,8 +238,125 @@ image::macros-preview-macro.png[The macro preview, width=800]
 
 == Rich text in a headless context
 
-HtmlArea spits out HTML. What does this mean for headless contexts? Do you want that? Could it be updated to support spitting out other formats in the future?
+We've seen that rich text gives you a lot of power at your fingertips, but how does it work in a headless context? While it might be more immediately obvious how rich text works in a traditional CMS situation, that doesn't mean that it's not useful in headless contexts. The HtmlArea is called the HtmlArea for a very good reason: it turns the rich text that you see into HTML. That means that if you fetch content that has an input of type HtmlArea, you'll get HTML included in your response.
+
+But the HtmlArea has even more tricks up its sleeves! The HtmlArea also supports specifying different dimensions for images, using the `srcset` attribute of the `img` element. We'll see how this works when performing the queries.
 
 === GraphQL queries
 
-Create multiple queries, demonstrating what happens to the macros and to images (including srcset). You should also have a query that provides params to the images to get them at a certain width.
+NOTE: Remember that GraphQL playground can be found at {p1-api-url}.
+
+Now let's look at some actual queries. If we add an image and a macro to one of our {content-type-2}s, it might look a little something like this.
+
+image::rich-text-content-macro-image["An {content-type-2} with an image and a macro inserted into its HtmlArea.",width=600]
+
+
+We can fetch this in it's entirety with the following query:
+
+.A query for {content-type-2}s
+[source,graphql,subs={subs}]
+----
+{
+  guillotine {
+    getChildren(key: "/my-first-site/animals/")
+    {
+      displayName
+      ... on com_gettingstarted_content_Animal {
+        data {
+          name
+          description {
+            processedHtml
+          }
+        }
+      }
+    }
+  }
+}
+----
+
+The only thing about this query that we haven't seen before, is that `description` has a nested `processedHtml`. This is a feature introduced in Guillotine version 5, which gives you smoother handling of images and macros. You can also try fetching `raw` as a child of `description` and it will give you the unprocessed version of the same HTML, including macros before expansion.
+
+The above query will yield something like this (depending on how many {content-type-2}s you have).
+
+.A response to the {content-type-2} query
+[source,json,subs={subs}]
+----
+{
+  "data": {
+    "guillotine": {
+      "getChildren": [
+        {
+          "displayName": "Reindeer",
+          "data": {
+            "name": [
+              "Reindeer",
+              "Caribou"
+            ],
+            "description": {
+              "processedHtml": "<p>The reindeer ...</p>\n\n<p>&nbsp;</p>\n\n<figure class=\"editor-align-justify\"><img alt=\"xp-login.png\" src=\"/site/default/draft/my-first-site/_/image/9a48f1fd-b000-4bfc-a053-911a703b4a65:689b4261abca3ddfc4dc891cf8bd39d4bf0bf879/width-768/snowy-hill.png\" data-image-ref=\"1648717e-5891-4ebd-af45-b278df224193\" style=\"width:100%\" />\n<figcaption></figcaption>\n</figure>\n\n<p><editor-macro data-macro-name=\"screamingSnakeCase\" data-macro-ref=\"23f481c5-e632-4416-ad42-16ce4485c606\">Reindeer are also known as caribou</editor-macro></p>\n"
+            }
+          }
+        }
+      ]
+    }
+  }
+}
+----
+
+Additionally, we can also pass a `processHtml` argument to the description field and specify what sort of image widths we want. This is great for responsiveness and not serving your users larger images than what they need on their devices. For instance, if we want to get images sized at 50 and 200 pixels wide, we could write a query as below. This time we'll also include the `raw` rich text so you can compare the differences:
+
+.A query that specifies image widths
+[source,GraphQL,subs={subs}]
+----
+{
+  guillotine {
+    getChildren(key: "/my-first-site/{content-type-2}s/")
+    {
+      displayName
+      ... on com_gettingstarted_content_{content-type-2-capitalized} {
+        data {
+          name
+          description(processHtml: {imageWidths: [50,200]}) {
+            processedHtml
+            raw
+          }
+        }
+      }
+    }
+  }
+}
+----
+
+That'll get us back something that looks like the following:
+
+.A response including raw and processed HTML
+[source,json,subs={subs}]
+----
+{
+  "data": {
+    "guillotine": {
+      "getChildren": [
+        {
+          "displayName": "Reindeer",
+          "data": {
+            "name": [
+              "Reindeer",
+              "Caribou"
+            ],
+            "description": {
+              "processedHtml": "<p>The reindeer ...</p>\n\n<p>&nbsp;</p>\n\n<figure class=\"editor-align-justify\"><img alt=\"xp-login.png\" src=\"/site/default/draft/my-first-site/_/image/9a48f1fd-b000-4bfc-a053-911a703b4a65:689b4261abca3ddfc4dc891cf8bd39d4bf0bf879/width-768/snowy-hill.png\" data-image-ref=\"043cf982-7996-4978-9d0a-cd1162d159aa\" srcset=\"/site/default/draft/my-first-site/_/image/9a48f1fd-b000-4bfc-a053-911a703b4a65:689b4261abca3ddfc4dc891cf8bd39d4bf0bf879/width-50/snowy-hill.png 50w,/site/default/draft/my-first-site/_/image/9a48f1fd-b000-4bfc-a053-911a703b4a65:689b4261abca3ddfc4dc891cf8bd39d4bf0bf879/width-200/snowy-hill.png 200w\" style=\"width:100%\" />\n<figcaption></figcaption>\n</figure>\n\n<p><editor-macro data-macro-name=\"screamingSnakeCase\" data-macro-ref=\"3caf649b-07a4-4560-ac92-c174b214f5d2\">Reindeer are also known as caribou</editor-macro></p>\n",
+              "raw": "<p>The reindeer ...</p>\n\n<p>&nbsp;</p>\n\n<figure class=\"editor-align-justify\"><img alt=\"xp-login.png\" src=\"image://9a48f1fd-b000-4bfc-a053-911a703b4a65\" style=\"width:100%\" />\n<figcaption></figcaption>\n</figure>\n\n<p>[screamingSnakeCase header=\"Caribou!\"]Reindeer are also known as caribou[/screamingSnakeCase]</p>\n"
+            }
+          }
+        }
+      ]
+    }
+  }
+}
+----
+
+Admittedly, this isn't the most comfortable way to read HTML, but if you look closely, you'll notice that the processed HTML uses `srcset` to include multiple resolutions of the same image. You'll also see that the macro is not expanded in the `raw` output, but that it uses an `editor-macro` element in the processed output.
+
+== Next
+
+We've looked at using simple input types to create content, but what if we want to do something more advanced? Next up: advanced content types, where we'll learn about grouping inputs together.
