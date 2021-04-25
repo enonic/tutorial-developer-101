@@ -90,31 +90,134 @@ The https://developer.enonic.com/docs/xp/stable/cms/sets#item_set[item set docum
 
 If you're used to working with JSON data or similar data structures, you can think of item sets as JSON objects. They allow you to group a number of input types together into one unit (object). You can also nest them arbitrarily to create more complex structures.
 
-=== Task: adding an item set
+=== Task: adding an item set to `{content-type-1-capitalized}`
 
-How about we do a little refactor. Animal should now be
+Let's add an item set to the `{content-type-1-capitalized}`. All the people we entered back in xref:content#_add_some_friends[the content chapter] are successful musical artists, so we can create an item set for albums they have released.
+
+To add an item set, use it as you would any other input type: place it within the `form` element of a content type. If we add it to the `{content-type-1-capitalized}` content type, it'd look something like this:
+
+.{content-type-1-capitalized} with an added Item Set
+[source,xml,subs={subs}]
+----
+<content-type>
+  <display-name>person</display-name>
+  <description>A description of a person</description>
+  <super-type>base:structured</super-type>
+  <form>
+
+    <!-- Other fields elided for brevity -->
+
+    <item-set name="albums">
+      <label>Album</label>
+      <occurrences minimum="0" maximum="0" />
+      <items>
+        <input name="Title" type="TextLine">
+          <label>Title</label>
+          <occurrences minimum="1" maximum="1" />
+          </input>
+          <input type="TextLine" name="releaseYear">
+            <label>Release year</label>
+          </input>
+      </items>
+    </item-set>
+
+  </form>
+</content-type>
+----
+
+Note that the remaining fields of the form have been left out in the above example.
+
+With this new item set, we can add as many albums as we want:
+
+image::item-set-album.png["An example of using the Album item set with two albums included.", width=800]
+
 
 == Option sets
 
-Where item sets
+Option sets enable editors (working in Content Studio) to choose from a set of predefined options. While this might sound similar to the ComboBox element, option sets also come with the option of attaching other input types (arbitrarily nested data) to each choice. Option sets can be either single-select or multi-select variants.
 
 The https://developer.enonic.com/docs/xp/stable/cms/sets#option_set[option set reference documentation] provides a good overview (with accompanying pictures) of how option sets work. Additionally, https://developer.enonic.com/docs/xp/stable/cms/schemas#option_set[the option set schema overview] is very thorough and full of examples on how to use the various configuration options.
 
+
 === Comparison to other data structures
 
-As their name would imply, option sets are basically sets of option. For each entry, you can choose whether to include it or not. Depending on the number of options you can choose (single-select vs multi-select), option sets work a little differently. Single-select option sets, work the same as union types or enums in a number of programming languages: you can pick one, and each option can have it's separate piece of associated data. For multi-select sets it gets more complicated. Depending on the number of options available and the number of options that can be selected, you can get up to n^m^ variations, where n is the number of options to choose from and m is the number of items you can have.
+As their name would imply, option sets are basically sets of option. For each entry, you can choose whether to include it or not. Depending on the number of options you can choose (single-select vs multi-select), option sets work a little differently. Single-select option sets, work the same as union types or enums in a number of programming languages: you can pick one, and each option can have it's separate piece of associated data. Multi-selects essentially allow you to choose any combination of the options. (For those of you into combinatorics, that means we can get up to 2^n^ (where n is the number of options) variations if you can choose as many options as you want 🤓)
 
-[TIP]
-====
-For @the: Item sets are basic hierarchical data structures (think JSON, Rust's `struct`, etc.).
 
-Option sets are sort of like union types / enums: if they are single-select option sets, then they're like union types. However, this is just a specialized version of the multi-select option sets. If they are multi-select option types, then it's just a set where you can pick which options to include and exclude (giving us the standard 2^n^ number of possibilities 🤓).
-====
+=== Task: add habitat and dietary data to {content-type-2}s
 
-Explain how multi-sets work.
+In this section, we'll use option sets to add some extra data to our `{content-type-2-capitalized}` data type. Our goal is:
 
-NOTE: Can you use item sets within option sets? I need to try out option sets to properly understand what they're about.
+- Add an option set for feeding behavior. It should have two options
+.. Herbivore, which has no associated data
+.. Carnivore, which allows the user to add any number of prey
+- Add an option for habitat. The user should be able to select as many as they want from the 7 continents to indicate where the animal lives.
 
-== Task
+As before, we use option sets as we would any other input type:
 
-Let's add use both item sets and option sets!
+.The `{content-type-2-capitalized}` content type with new option sets
+[source,xml]
+----
+<?xml version="1.0" encoding="utf-8"?>
+<content-type>
+  <display-name>Animal</display-name>
+  <description>An animal that lives on planet Earth</description>
+  <super-type>base:structured</super-type>
+  <form>
+    <!-- other fields elided for brevity -->
+
+    <option-set name="feedingBehavior">
+      <label>Feeding behavior</label>
+      <options minimum="1" maximum="1"> <!--1-->
+            <option name="herbivore"> <!--2-->
+              <label>Herbivore</label>
+            </option>
+
+            <option name="carnivore"> <!--3-->
+              <label>Carnivore</label>
+              <items>
+                  <input name="prey" type="TextLine">
+                    <label>prey</label>
+                    <occurrences minimum="0" maximum="0" />
+                  </input>
+                </items>
+            </option>
+        </options>
+    </option-set>
+
+    <option-set name="continents">
+      <label>Habitat (continent)</label>
+      <help-text>Continents where the animal can be found in the wild</help-text>
+      <options minimum="0" maximum="0"> <!--4-->
+        <option name="africa"> <label>Africa</label> </option>
+        <option name="antarctica"> <label>Antarctica</label> </option>
+        <option name="asia"> <label>Asia</label> </option>
+        <option name="australia"> <label>Australia</label> </option>
+        <option name="europe"> <label>Europe</label> </option>
+        <option name="northAmerica"> <label>North America</label> </option>
+        <option name="southAmerica"> <label>South America</label> </option>
+      </options>
+    </option-set>
+
+  </form>
+</content-type>
+----
+
+<1> This specifies that if you add feeding behavior, you must select one of the options, and you can not select more than one.
+<2> The herbivore option has no associated data, so it consists solely of a label.
+<3> The carnivore option allows you to optionally specify prey for the animal.
+<4> This specifies that you can add as many habitats as you want.
+
+Filling this out, it could look like this (with data appropriate for reindeer):
+
+.Habitat and feeding behavior for reindeer
+image::option-sets.png["Diet and habitat data filled out for reindeer", width=800]
+
+Or like this (with data appropriate for lions):
+
+.Habitat and feeding behavior for lions
+image::option-sets-lion.png["Diet and habitat data filled out for lion", width=800]
+
+== Next
+
+In the next {document}, we'll take a break from looking at content types and input types, and have a brief look at using GraphQL for queries.
