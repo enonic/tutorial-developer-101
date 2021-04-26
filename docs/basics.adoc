@@ -111,6 +111,10 @@ Once completed, we can use the CLI to start the sandbox:
 
     enonic sandbox start
 
+Optionally, you can run the sandbox with the `--dev` flag. This makes the sandbox automatically pick up certain changes to deployed applications, including most of the work we'll be doing in the coming {document}s. Read https://developer.enonic.com/docs/xp/stable/apps/build-system#development_mode[more about dev mode] in the reference docs. With the flag, the command would be
+
+  enonic sandbox start --dev
+
 If you're in an XP project directory, this will start the sandbox belonging to this project automatically. Otherwise, you'll have to select which sandbox to start. If that's the case, choose the `tutorial` sandbox and watch it boot up in your terminal. The boot output should look something like this, but with values adjusted for your system.
 
 .Output when booting sandbox
