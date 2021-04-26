@@ -122,52 +122,224 @@ Enonic also provides XML Schema Definitions (XSDs) for text editor integration a
 
 Note that in-editor schema validation depends on whether your text editor supports validating against XSD schemas or not.
 
-== Task: Create an {content-type-2} data set
+== Task: people and pets
 
 Time for a little recap! We'll put together everything we've learned about content types and input types thus far to create a new data set. A solution is listed below, but try and see if you can solve it yourself first. If you're wondering how to achieve some of the goals, try consulting the documentation that's been linked to in this {document}.
 
-Your task is to create a new content type: "Animal" and to update the "Person" content type with new constraints and fields.
+Your task is to create a new content type: `{content-type-2-capitalized}` and to update the `{content-type-1-capitalized}` content type with new constraints and fields.
 
-An animal should have the following inputs:
+An {content-type-2} should have the following inputs:
 
-. Its name, e.g. "elephant". Each animal must have at least one name, but multiple are also okay. For instance, the reindeer is also known as caribou.
+. Its name, e.g. "elephant". Each {content-type-2} must have at least one name, but multiple are also okay. For instance, the reindeer is also known as caribou.
 . A multi-line text input for adding a description of the animal. It should allow at most 500 characters.
 . An image selector that accepts between 0 and 3 images.
 . Help text where you think it would be helpful.
 
-When you've created the content type, create a new folder in Content Studio at next to the people folder. Call it "animals".
+When you've created the content type, create a new folder in Content Studio at next to the people folder. Call it "{content-type-2}s".
 
-For the person content type, here's what's going to change:
+For the {content-type-1} content type, here's what's going to change:
 
-. Allow each person to have any number of aliases. (Hint: use the occurrences element; check the documentation for how it works.)
-. Add a ContentSelector input that allows only content of the "Animal" type and that must be nested under the site's "animals" folder. Call it `favoriteAnimal`.
+. Allow each {content-type-1} to have any number of aliases. (Hint: use the occurrences element; check the documentation for how it works.)
+. Add a ContentSelector input that allows only content of the "{content-type-2-capitalized}" type and that must be nested under the site's "{content-type-2}s" folder. Call it `favorite{content-type-2-capitalized}`.
 . Make the "name" field required.
-. Use `display-name-expression` so that a person's display name is "{Real name} ({alias})", e.g. "Alecia Beth Moore (P!nk)". We haven't looked at this element previously, but as the https://developer.enonic.com/docs/xp/stable/cms/content-types#display_name_expressions[`display-name-expression` documentation] explains, it's a way to auto-generate the content display name based on values from the content type form fields.
-(What happens if you add multiple aliases to a single person? What about none?)
 
-To verify that everything works, create some animals, and try creating a content link between a person and an animal.
+To verify that everything works, create some animals, and try creating a content link between a {content-type-1} and an {content-type-2}.
 
-When you're ready, create a GraphQL query that'll fetch all people and list what their favorite animals are, as well their animals' descriptions .
+When you've got that, create a GraphQL query that'll fetch all people and list what their favorite animals are, as well their animals' descriptions .
 
 === Solution
 
-We'll start by creating the application. We'll use the CLI for this and follow the same steps as we did in the previous {document}: follow the steps in the xref:content#_projects_and_starters[projects and starters section], but use {project-name-full} for the project name.
+First, we'll create the animal content type. In `src/main/resources/site/content-types/{content-type-2}/{content-type-2}.xml`, place the following content:
 
-Next, we'll create the animal content type. In `src/main/resources/site/content-types/animal/animal.xml`, place the following content:
-
-.The animal content type
+.The {content-type-2} content type
 [source,xml]
 ----
-include::input_types_task.xml[]
+<content-type>
+  <display-name>Animal</display-name>
+  <description>An animal that lives on the planet Earth</description>
+  <super-type>base:structured</super-type>
+  <form>
+    <input name="name" type="TextLine">
+      <label>Name</label>
+
+      <help-text>Put the name of the animal here. You can be as
+      specific or as vague as you like. "Dog" is just as good as
+      "Canis lupus familiaris".</help-text> <!--1-->
+    </input>
+
+    <input name="description" type="TextArea" >
+      <label>Description</label>
+      <help-text>Describe the animal. Where its habitats are, what it
+      eats, etc.</help-text>
+      <config>
+        <max-length>500</max-length>
+      </config>
+    </input>
+
+    <input name="images" type="ImageSelector">
+      <label>Images</label>
+      <help-text>Images of the animal</help-text>
+      <occurrences minimum="0" maximum="3"/> <!--2-->
+    </input>
+
+  </form>
+</content-type>
 ----
 
-<1>  This display name expression specifies that we want the content we create to have the same display name as whatever we put in the "name" input field.
-<2> This help text explains what we want in the "name" field, in case the user wants more information.
-<3> As mentioned in the task text, we don't want the user to be able add images to the "description" field.
-<4> Using the `occurrences` element, we specify that the user can supply between zero and three images.
+<1> This help text explains what we want in the "name" field, in case the user wants more information.
+<2> Using the `occurrences` element, we specify that the user can supply between zero and three images.
 
-Because we'll have two applications using the same starter in our sandbox now, make sure you go and update the display name of the {project-name} project as described in xref:content#_changing_the_name_of_the_application[the section on changing your application's display name] from the previous {document}.
+Next, we'll update the `{content-type-1-capitalized}` content type.
 
-Now build and deploy your project to your sandbox as described in xref:content#_building_and_deploying[the building and deploying section], and create a new site at the root of the Content Studio hierarchy (see xref:content#_creating_a_site[the section on creating content in content studio for a refresher]).
+.An updated {content-type-1}
+[source,xml]
+----
+<content-type>
+  <display-name>person</display-name>
+  <description>A description of a person</description>
+  <display-name-expression>${name} (${alias})</display-name-expression>
+  <super-type>base:structured</super-type>
+  <form>
 
-Now create a piece of content that lives under the site and verify that the display name updates when you change the name field and that you can upload up to three images via the image selector.
+    <input name="name" type="TextLine">
+      <label>Name</label>
+      <occurrences minimum="1" maximum="1" /> <!--1-->
+    </input>
+
+    <input name="alias" type="TextLine">
+      <label>Alias</label>
+      <occurrences minimum="0" maximum="0" /> <!--2-->
+    </input>
+
+    <input name="favoriteAnimal" type="ContentSelector"> <!--3-->
+      <label >Favorite animal</label>
+      <config>
+        <allowContentType>animal</allowContentType>
+        <allowPath>${site}/animals/</allowPath>
+      </config>
+    </input>
+
+  </form>
+</content-type>
+----
+
+<1> To make a field required, set both `minimum` and `maximum` attributes of the `occurrences` tag to 0.
+<2> Setting `maximum="0"` on an `occurrences` is how you indicate that there is no upper limit to how many occurrences a field can have.
+<3> This ContentSelector uses the `config` section to narrow the possible types of content to only be `{content-type-2-capitalized}`
+
+Nice! Now, go and create some {content-type-2}s. Either pick your favorites, or, if you're not feeling creative, add these (content from Wikipedia), :
+
+.Lion (https://en.wikipedia.org/wiki/Lion[Wiki article for lion])
+Name:: Lion
+Description:: The lion (Panthera leo) is a species in the family Felidae and a member of the genus Panthera. It has a muscular, deep-chested body, short, rounded head, round ears, and a hairy tuft at the end of its tail.
+
+.Reindeer (https://en.wikipedia.org/wiki/Reindeer[Wiki article for reindeer])
+Name:: Reindeer, Caribou
+Description:: The reindeer (Rangifer tarandus), also known as caribou in North America, is a species of deer with circumpolar distribution, native to Arctic, sub-Arctic, tundra, boreal, and mountainous regions of northern Europe, Siberia, and North America.
+
+Now create some links using ContentSelector from people to {content-type-2}s. The important part here is that you link some content so that we can fetch it using GraphQL. When you have created some links, let's move on to the query.
+
+The way to link to linked content in GraphQL is to add it as a field as part of the data. This query will fetch all people and their linked {content-type-2}s:
+
+.Query to fetch people with their associated favorite animals
+[source,GraphQL]
+----
+{
+  guillotine {
+    getChildren(key: "/my-first-site/people/")
+    {
+      displayName
+      ... on com_gettingstarted_content_Person {
+        data {
+          name
+          alias
+          favoriteAnimal {
+            displayName
+            ... on com_gettingstarted_content_Animal{
+              data {
+                name
+                description
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
+----
+
+Depending on the links (and {content-type-2}s) you created, your result might look a little something like this:
+
+.The list of people with their favorite animals
+[source,json]
+----
+{
+  "data": {
+    "guillotine": {
+      "getChildren": [
+        {
+          "displayName": "Cardi B",
+          "data": {
+            "name": "Belcalis Marlenis Almánzar",
+            "alias": [
+              "Cardi B"
+            ],
+            "favoriteAnimal": {
+              "displayName": "Lion",
+              "data": {
+                "name": [
+                  "Lion"
+                ],
+                "description": "The lion (Panthera leo) is a species in the family Felidae and a member of the genus Panthera. It has a muscular, deep-chested body, short, rounded head, round ears, and a hairy tuft at the end of its tail."
+              }
+            }
+          }
+        },
+        {
+          "displayName": "Missy Elliott",
+          "data": {
+            "name": "Melissa Arnette Elliott",
+            "alias": [
+              "Missy Elliott"
+            ],
+            "favoriteAnimal": {
+              "displayName": "Reindeer",
+              "data": {
+                "name": [
+                  "Reindeer",
+                  "Caribou"
+                ],
+                "description": "The reindeer (Rangifer tarandus), also known as caribou in North America, is a species of deer with circumpolar distribution, native to Arctic, sub-Arctic, tundra, boreal, and mountainous regions of northern Europe, Siberia, and North America."
+              }
+            }
+          }
+        },
+        {
+          "displayName": "P!nk",
+          "data": {
+            "name": "Alecia Beth Moore",
+            "alias": [
+              "P!nk"
+            ],
+            "favoriteAnimal": {
+              "displayName": "Reindeer",
+              "data": {
+                "name": [
+                  "Reindeer",
+                  "Caribou"
+                ],
+                "description": "The reindeer (Rangifer tarandus), also known as caribou in North America, is a species of deer with circumpolar distribution, native to Arctic, sub-Arctic, tundra, boreal, and mountainous regions of northern Europe, Siberia, and North America."
+              }
+            }
+          }
+        }
+      ]
+    }
+  }
+}
+----
+
+== Next
+
+The next {document} is dedicated to rich text editing using the HtmlArea input type. The HtmlArea has a lot of knobs to twist and turn, so it's worth getting to know it properly.
