@@ -1,14 +1,15 @@
 = Headless API
-:toc: right
-:imagesdir: media
+include::variables.adoc[]
 
-This chapter serves as a deeper introduction to consuming headless
-APIs and as an introduction to GraphQL. As such it'll explore some
-slightly advanced queries and explore what you can do with relations.
-
-If you're already familiar with GraphQL, this section is largely optional.
+By now we've constructed a fair few GraphQL queries, but we haven't really taken much time to explain the queries. In this {document} we'll be looking a bit closer at how headless APIs work in XP. At the same time, we'll have a little look at what GraphQL is.
 
 NOTE: This section should reference the https://developer.enonic.com/guides/headless-cms-intro[headless CMS intro guide]  somehow, but I'm not sure how best to do that yet.
+
+== The Guillotine library
+
+If you've been wondering how the GraphQL API we've been querying up until now was created: the Guillotine library is the answer. The Guillotine library analyzes all the content in your applications and generates an API from that. It' s an optional library that comes preconfigured with the headless starter that we used back xref:basics#_projects_and_starters[way back when we first created our app in a previous {document}]. Guillotine provides direct, typed, and documented access to content within your site.
+
+If you're familiar with GraphQL, however, you might have noticed that we have not performed any mutations yet. The reason for that is simple: Guillotine only exposes the read-only part of the Enonic Content API, so mutations are not available.
 
 == What is GraphQL?
 
@@ -22,7 +23,7 @@ It's also become very popular lately ...
 
 In XP, `lib-guillotine` creates the API for us ...
 
-To check it out, you can head to http://localhost:8080/site/hmdb/draft/hmdb/api[this link which I will totally fix up later.]
+To check it out, you can head to {p1-api-url}.
 
 == Let's build a query
 
@@ -34,4 +35,6 @@ We'll dig a little deeper and work with some more advanced queries, including qu
 
 == Still want to learn more?
 
-Check out the GraphQL docs ...
+The https://graphql.org/learn/[_Introduction to GraphQL_ documentation] is a good place to start! It walks you through
+
+https://developer.enonic.com/docs/guillotine/stable[the Guillotine reference docs] are also a great place to go for some more info.
