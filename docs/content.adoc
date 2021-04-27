@@ -17,26 +17,35 @@ If you're used to working with databases, you can think of content types as tabl
 
 Similarly, a content type is much like a _(data) type_ or a _class_ in many programming languages: something that describes the shape of your data. A piece of content is a manifestation/instance of that data type. The properties of the content type specify what that data type contains.
 
-== My first content type
+== Task: My first content type
 
 We've created our first app, but an app isn't terribly exciting if it doesn't have any content to deliver. While content _creation_ takes place inside Content Studio, Content Studio first needs to know something about what kinds of content the end user can create. Enter: _content types_.
+
+By the end of this section we'll have created a content type that gives us a simple form that looks like this in Content Studio:
+
+.The target for our first content type
+image::content-type-target.png["A content creation form with name and biography fields", width=800]
+
+The file that backs the above form looks like this:
 
 .A simple content type describing the '{content-type-1}' content type
 [source,xml,subs={subs}]
 ----
-<?xml version="1.0" encoding="utf-8"?>
 <content-type>
   <display-name>{content-type-1-capitalized}</display-name> <!--1-->
-  <description>A description of a {content-type-1}</description> <!--2-->
+  <description>Information about an {content-type-1}</description> <!--2-->
   <super-type>base:structured</super-type>
-  <form> <!--3-->
+  <form> <--3-->
 
-    <input name="name" type="TextLine"> <!--4-->
+    <input name="name" type="TextLine"> <--4-->
       <label>Name</label>
+      <help-text>
+        The artist's name (if different from their professional moniker).
+      </help-text>
     </input>
 
-    <input name="alias" type="TextLine">
-      <label>Alias</label>
+    <input type="TextArea" name="about">
+      <label>About the {content-type-1}</label>
     </input>
 
   </form>
