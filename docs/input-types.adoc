@@ -15,7 +15,7 @@ XP provides a number of input types for you to work with. This section highlight
 
 image::input-type-text-line.png[TextLine: A single-line input field., width=800]
 
-TextLine inputs are useful for short fields that contain text. They're also the only input type that has built-in validation. TextLine inputs support two forms of validation: max length and regular expressions. They can be used separately or together. The max length validation specifies that a user's input can not be longer than the specified value. The regular expression validation allows you to provide a custom regex that is used to validate the input field as you wish.
+TextLine inputs are useful for short fields that contain text. They're also supports two forms of validation out of the box: max length and regular expressions. They can be used separately or together. The max length validation specifies that a user's input can not be longer than the specified value. The regular expression validation allows you to provide a custom regex that is used to validate the input field as you wish.
 
 NOTE: XP uses JavaScript's regex engine to validate the input. For more information on what kind of of patterns it recognizes, see https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Regular_Expressions#writing_a_regular_expression_pattern[MDN's documentation].
 
