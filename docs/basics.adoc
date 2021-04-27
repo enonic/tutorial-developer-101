@@ -333,7 +333,7 @@ If the build works, but nothing shows up in the Applications tab, make sure you'
 If you've checked that you're running the right sandbox and that the build succeeds, but you're still not seeing the application, you can do a manual deploy. The project build result is available in the `build/libs` directory of the project. You can copy this `.jar` file to the sandbox's `home/deploy` directory. This will make XP pick it up. If you've used the suggested names in the steps above (and the default directories for XP configuration), this command will move the file for you on Unix systems when run from the project root:
 
 [subs="attributes"]
-  mv build/libs/{project-name}-1.0.0-SNAPSHOT.jar ~/.enonic/sandboxes/tutorial/home/deploy/
+  mv build/libs/{project-name}.jar ~/.enonic/sandboxes/tutorial/home/deploy/
 
 NOTE: If you have to deploy manually when going through this tutorial, please get in touch on https://discuss.enonic.com[discuss.enonic.com] so we can improve the documentation and the process.
 
