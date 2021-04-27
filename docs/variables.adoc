@@ -7,11 +7,12 @@
 :project-name-prefix: com.example.
 :project-name: myproject
 :project-name-full: {project-name-prefix}{project-name}
+:project-name-query: com_example_{project-name}
 :p1-site-name: My First Site
 :p1-site-path: /my-first-site
 :p1-api-url: {xp-url}/site/default/draft{p1-site-path}/api
-:content-type-1: person
-:content-type-1-capitalized: Person
+:content-type-1: artist
+:content-type-1-capitalized: Artist
 :content-type-2: animal
 :content-type-2-capitalized: Animal
 :content-type-3: legendaryCreature

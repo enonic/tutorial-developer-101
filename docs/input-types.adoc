@@ -251,13 +251,13 @@ The way to link to linked content in GraphQL is to add it as a field as part of 
     getChildren(key: "/my-first-site/people/")
     {
       displayName
-      ... on com_example_myproject_Person {
+      ... on {project-name-query}_{content-type-1-capitalized} {
         data {
           name
           alias
           favoriteAnimal {
             displayName
-            ... on com_example_myproject_Animal{
+            ... on {project-name-query}_Animal{
               data {
                 name
                 description
