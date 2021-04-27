@@ -1,22 +1,25 @@
 = Content and content types
 include::variables.adoc[]
 
-In this {document}, we'll start building on the app we deployed previously and generate a GraphQL API for the content we create. In doing this, we'll learn about _content types_ and how to do basic work with  Content Studio.
+In this {document}, we'll start building on the app we deployed previously and use an automatically generated GraphQL API for the content we create. In doing this, we'll learn about _content types_ and how to do basic work with  Content Studio.
 
-This {document} builds on the steps we took in the xref:basics[previous {document}], so if you haven't already done it, make sure you go through it and get everything ready.
+NOTE: This {document} builds on the steps we took in the xref:basics[previous {document}], so if you haven't already done it, make sure you go through it and get everything ready. When you're sure you're up to speed with the previous {document}, let's get get started!
 
-When you're sure you're up to speed with the previous {document}, let's get right to creating some content!
-
-== My first content type
-
-We've created our first app, but an app isn't terribly exciting if it doesn't have any content to deliver. While content _creation_ takes place inside Content Studio, Content Studio first needs to know something about what kinds of content the end user can create. Enter: _content types_.
-
-=== What are content types?
+== What are content types?
 
 Content types are schemas that tell XP what properties a piece of content of a particular type can have. That might sound confusing, but imagine for a second that we're working with forms. Content types describe what fields go in a specific form. Then a piece of content is a form that has been filled out. We'll look at an example to make this even clearer.
 
 Imagine we want our app to list people. We'll create a simple representation of a {content-type-1}: we're only interested in their name and an optional alias, nickname, or pseudonym. Here's what a {content-type-1} content type could look like. The most relevant parts are numbered and further explained below.
 
+==== Comparison of content types to other schema descriptions
+
+If you're used to working with databases, you can think of content types as table schemas and contents as the rows of a table. The properties are the columns specified by the schema.
+
+Similarly, a content type is much like a _(data) type_ or a _class_ in many programming languages: something that describes the shape of your data. A piece of content is a manifestation/instance of that data type. The properties of the content type specify what that data type contains.
+
+== My first content type
+
+We've created our first app, but an app isn't terribly exciting if it doesn't have any content to deliver. While content _creation_ takes place inside Content Studio, Content Studio first needs to know something about what kinds of content the end user can create. Enter: _content types_.
 
 .A simple content type describing the '{content-type-1}' content type
 [source,xml,subs={subs}]
@@ -61,13 +64,6 @@ For instance, if we created an entry for Belcalis Marlenis Almánzar, better kno
 ----
 
 So, to recap: _content types_ describe the shape of some data that's been grouped together. A piece of _content_ is the manifestation of that content type, populated with actual data. If it's still a bit fuzzy, don't worry! It'll become clearer once we start working with it.
-
-==== Comparison of content types to other schema descriptions
-
-If you're used to working with databases, you can think of content types as table schemas and contents as the rows of a table. The properties are the columns specified by the schema.
-
-Similarly, a content type is much like a _(data) type_ or a _class_ in many programming languages: something that describes the shape of your data. A piece of content is a manifestation/instance of that data type. The properties of the content type specify what that data type contains.
-
 
 === Creating a content type
 
@@ -127,7 +123,7 @@ image::content-studio-create-content.png[The Content Studio create content dialo
 
 Select "Site" either by clicking on it, or by navigating to it with your keyboard. You can start typing as soon as the dialog opens to filter the options too!
 
-When you select it, your browser will take you to a new tab (or window, depending on your browser settings). This page is an edit page for the site you just created.
+When you select it, your browser will take you to a new tab (or window, depending on your browser settings). This is the content creation form (or _wizard_).
 
 .Creating a new site in Content Studio.
 image::content-studio-new-site.png[Creating a new site in content studio. There is a form with site options on the left.]
@@ -287,6 +283,8 @@ Exeprimary-cute this and your response should look a little something like this:
   }
 }
 ----
+
+== Publishing and branches
 
 
 == Summary

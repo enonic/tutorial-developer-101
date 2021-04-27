@@ -6,6 +6,8 @@ When you want to ... rich text is the way to go, and if you want to work with ri
 
 We briefly mentioned the HtmlArea input type in the previous {document}, but didn't say much about it -- not because there's nothing to be said about it. The situation is actually quite the opposite. This rich text input type offers some very powerful editing capabilities and a lot of configuration options. As such, this whole {document} is dedicated to that one input type, how it works, and how to use it in a headless fashion.
 
+NOTE: The tasks in this {document} build on the content types we created and configured previously. If you want follow along to the tasks in this chapter, make sure you've followed the steps in the previous {document}s, starting from xref:content[the content types chapter].
+
 == The HtmlArea: an overview
 
 .The default HtmlArea input type

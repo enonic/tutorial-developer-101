@@ -5,6 +5,8 @@ In the previous {document}, we created a very simple content type and used it to
 
 At the end of the {document}, we'll put everything we've learned so far together.
 
+NOTE: This {document} keeps building on what we did in the previous {document}s. You'll need  to have your first app up an deployed to get started. If you haven't got that ready yet, go and have a look at the xref:content[previous chapter].
+
 == Input types overview
 
 XP provides a number of input types for you to work with. This section highlights a few types you'll be using a lot and shows off some of their special features and then mentions some of the types you're also likely to be seeing a lot of. Go to the reference docs for https://developer.enonic.com/docs/xp/stable/cms/input-types[a full list of all input types and their features].
