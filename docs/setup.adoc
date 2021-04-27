@@ -6,6 +6,8 @@
 
 Before we can start building apps and APIs, let's make sure we have the right tools available to work efficiently with XP. This {document} walks you through installing the fundamental tools we will be using throughout this guide, including a text editor, a package manager for your system, Git, and the Enonic CLI. If you've already got these installed, feel free to skip to the next chapter (or to the relevant sections if you're missing some of them).
 
+NOTE: *In a hurry?* This guide is a fairly detailed and extensive introduction to Enonic XP and how it all works. If you just want to get up and running as fast as possible, check out the https://developer.enonic.com/start[quick start docs] instead 🚀
+
 == Introducing the command line
 
 The command line -- aka _the terminal_ -- is a powerful, text-based interface for running commands on your computer. You can also use use the terminal to navigate your file system, similar to macOS`' Finder or Windows`' Explorer. The program running in the terminal (that interprets your commands) is known as a _shell_.
