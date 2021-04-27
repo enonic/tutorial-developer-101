@@ -15,20 +15,17 @@ XP provides a number of input types for you to work with. This section highlight
 
 image::input-type-text-line.png[TextLine: A single-line input field., width=800]
 
-TextLine inputs are useful for short fields that contain text. They're also supports two forms of validation out of the box: max length and regular expressions. They can be used separately or together. The max length validation specifies that a user's input can not be longer than the specified value. The regular expression validation allows you to provide a custom regex that is used to validate the input field as you wish.
+TextLine inputs are useful for short fields that contain text. They also support two forms of validation out of the box: max length and regular expressions. They can be used separately or together. The max length validation specifies that a user's input can not be longer than the specified value. The regular expression validation allows you to provide a custom regex that is used to validate the input field as you wish.
 
 NOTE: XP uses JavaScript's regex engine to validate the input. For more information on what kind of of patterns it recognizes, see https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Regular_Expressions#writing_a_regular_expression_pattern[MDN's documentation].
 
-For example, an input that only allows between characters from `a` to `z` and requires between one and seventeen characters could look like this:
-
-.A TextLine input type with
+.A simple TextLine input type with a max-length
 [source,xml]
 ----
 <input name="validation-example" type="TextLine">
   <label>TextLine input validation example.</label>
     <config>
-      <max-length>17<max-length>
-      <regexp>^[a-fA-Z]+$</regexp>
+      <max-length>42<max-length>
     </config>
 </input>
 ----
@@ -108,25 +105,6 @@ Each input type also takes an optional `config` element for extra configuration.
 To find out exactly what configuration options an input type accepts and how to configure it, visit https://developer.enonic.com/docs/xp/stable/cms/input-types[the input types documentation].
 
 All of these configuration options are described in more detail in the https://developer.enonic.com/docs/xp/stable/cms/schemas#input_types[input types schema documentation], so head over there for more information and explanation of how the various inputs work. As a bonus,
-
-=== Validation
-
-Enonic also provides XML Schema Definitions (XSDs) for text editor integration and validation of your XML schemas. To use it, add the attribute `xmlns`, `xmlns:xsi`, and `xsi:schemaLocation` to your content-type as shown below:
-
-.Using XSDs for schema validation of a content type definition.
-[source,xml]
-----
-<?xml version="1.0" encoding="utf-8"?>
-<content-type
-    xmlns="urn:enonic:xp:model:1.0"
-    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-    xsi:schemaLocation="urn:enonic:xp:model:1.0 https://raw.githubusercontent.com/enonic/xp/master/modules/core/core-api/src/main/resources/META-INF/xsd/model.xsd">
-  <display-name>person</display-name>
-  <!-- rest of content elided for brevity -->
-</content-type>
-----
-
-Note that in-editor schema validation depends on whether your text editor supports validating against XSD schemas or not.
 
 == Task: {content-type-1}s and {content-type-2}s
 

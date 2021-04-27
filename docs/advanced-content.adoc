@@ -2,7 +2,30 @@
 include::variables.adoc[]
 :mixin: creatureDescriptor
 
-Over the previous two {document}s, we've looked at content types and input types. We've explored how to use and configure input types, but we've only seen input types as standalone components. What if we want to group or reuse a set of inputs across several content types? That's what we're looking at in this {document}.
+Over the previous two {document}s, we've looked at content types and input types. We've explored how to use and configure input types, but we've only seen input types as standalone components. What if we want to group or reuse a set of inputs across several content types? We'll be looking at that in this {document}.
+
+However, before we get that far: now that our content types are getting more complex, wouldn't it be nice if we could validate them somehow?
+
+== Content type validation
+
+Enonic provides XML Schema Definitions (XSDs) for text editor integration and validation of your XML schemas. To use it, add the attribute `xmlns`, `xmlns:xsi`, and `xsi:schemaLocation` to your content types as shown below:
+
+.Using XSDs for schema validation of a content type definition.
+[source,xml]
+----
+<?xml version="1.0" encoding="utf-8"?>
+<content-type
+    xmlns="urn:enonic:xp:model:1.0"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="urn:enonic:xp:model:1.0 https://raw.githubusercontent.com/enonic/xp/master/modules/core/core-api/src/main/resources/META-INF/xsd/model.xsd">
+  <display-name>Content type display name</display-name>
+
+  <!-- rest of content elided for brevity -->
+
+</content-type>
+----
+
+Note that in-editor schema validation depends on whether your text editor supports validating against XSD schemas or not. If your editor doesn't support it out of the box, it may be available via a Language Server Protocol (LSP) client.
 
 == Mixins
 
