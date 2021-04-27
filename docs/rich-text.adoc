@@ -122,9 +122,7 @@ It'll look a little something like this:
 
 == Images
 
-If you have configured your HtmlArea to include the image tool, you can click the image button to insert an image. Once you select an image, you'll get a prompt that allows you to customize the image. You can add a caption, alt text, change the image's justification in the block, and apply predefined styles. There's also a pencil icon in the upper right corner that allows you to edit the image. This icon takes you to Content Studio's image editing facilities where you can edit the image by cropping, rotating, or flipping it. You can also add an image focal point, so that if the image gets cropped for some reason, you're in control of what part of the image remains visible.
-
-To read more about Content Studio's image handling capabilities, check out this https://enonic.com/blog/enonic-simplifies-image-problems[blog post on how Enonic simplifies your everyday image problems].
+If you have configured your HtmlArea to include the image tool, you can click the image button to insert an image. Once you select an image, you'll get a prompt that allows you to customize the image. You can add a caption, alt text, change the image's justification in the block, and apply predefined styles. There's also a pencil icon in the upper right corner that allows you to edit the image, as covered in xref:input-types#_working_with_images[a previous {document}].
 
 == Task: Add an image to an {content-type-2}
 
