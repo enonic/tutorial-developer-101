@@ -9,7 +9,7 @@ NOTE: This {document} builds on the steps we took in the xref:basics[previous {d
 
 Content types are schemas that tell XP what properties a piece of content of a particular type can have. That might sound confusing, but imagine for a second that we're working with forms. Content types describe what fields go in a specific form. Then a piece of content is a form that has been filled out. We'll look at an example to make this even clearer.
 
-Imagine we want our app to list people. We'll create a simple representation of a {content-type-1}: we're only interested in their name and an optional alias, nickname, or pseudonym. Here's what a {content-type-1} content type could look like. The most relevant parts are numbered and further explained below.
+Imagine we want our app to list {content-type-1}s. We'll create a simple representation of a {content-type-1}: we're only interested in their name and an optional alias, nickname, or pseudonym. Here's what a {content-type-1} content type could look like. The most relevant parts are numbered and further explained below.
 
 ==== Comparison of content types to other schema descriptions
 
@@ -59,16 +59,18 @@ The file that backs the above form looks like this:
 
 NOTE: Content types also have a large number of other, optional fields that we won't get into here. If you'd like to learn more about this, consult https://developer.enonic.com/docs/xp/stable/cms/content-types[the reference documentation].
 
-To create an instance of this content type, we could use Content Studio (we'll see exactly how to do this shortly!). Upon exposing it via an API, we would most likely see the piece of content exposed as JSON, so that's what we'll use to illustrate a piece of content.
+When create an instance of this content type, we would use Content Studio (as show in the image above). Upon exposing it via an API, we would most likely see the piece of content exposed as JSON, so that's what we'll use to illustrate a piece of content.
 
-For instance, if we created an entry for Belcalis Marlenis Almánzar, better known as Cardi B, then that instance of the {content-type-1} content type (that piece of content) would be represented in JSON as this:
+For instance, if we created an entry for Belcalis Marlenis Almánzar, better known as Cardi B, then that instance of the `{content-type-1-capitalized}` content type (that piece of content) could be represented in JSON as this:
 
 .A piece of content of type '{content-type-1-capitalized}'
 [source,json]
 ----
 {
   "name": "Belcalis Marlenis Almánzar",
-  "alias": "Cardi B"
+  "about": "Belcalis Marlenis Almánzar (born October 11, 1992), known
+            professionally as Cardi B, is an American rapper and
+            songwriter."
 }
 ----
 
@@ -76,11 +78,11 @@ So, to recap: _content types_ describe the shape of some data that's been groupe
 
 === Creating a content type
 
-Now that we know what a content type is, let's look at how we create them and make XP recognize them. We'll use the "{content-type-1-capitalized}" content type from before to keep things simple.
+Now that we know what a content type is, let's look at how we create them and make XP recognize them. We'll use the `{content-type-1-capitalized}` content type from before to keep things simple.
 
 XP is quite particular about project folder structure, so we need to put content types right where it expects to find them. The location is under `src/main/resources/site/content-types`.
 
-Within the `content-types` directory, we need to place another directory with the name of the content type (in our case: "{content-type-1-capitalized}"), and within that directory, we place our content type, `{content-type-1-capitalized}.xml`. As such, the full path to our content type from the project root is `src/main/resources/site/content-types/{content-type-1}/{content-type-1}.xml`.
+Within the `content-types` directory, we need to place another directory with the name of the content type (in our case: `{content-type-1-capitalized}`), and within that directory, we place our content type, `{content-type-1-capitalized}.xml`. As such, the full path to our content type from the project root is `src/main/resources/site/content-types/{content-type-1}/{content-type-1}.xml`.
 
 Now, unless you've created it manually, then that directory doesn't exist in our "{project-name}" project yet, so go ahead and create the required directories and files.
 
@@ -159,11 +161,11 @@ With the "{p1-site-name}" site highlighted, press "New ..." (or kbd:[Alt+n]!) to
 .The "Create Content" dialog with more content types
 image::content-studio-new-content.png["The \"Create Content\" dialog when creating content under the \"{p1-site-name}\" site. It contains more elements than previously, including the \"{content-type-1-capitalized}\" content type that we created earlier."]
 
-However, before we start creating people, let's create a folder. Because we'll be using this site in the coming {document}s with more content types, having some hierarchy will make things easier. Choose a new folder and call it "people".
+However, before we start creating {content-type-1}s, let's create a folder. Because we'll be using this site in the coming {document}s with more content types, having some hierarchy will make things easier. Choose a new folder and call it "{content-type-1}s".
 
-Next, let's create a few people to get used to the workflow. We'll start with Cardi B.
+Next, let's create a few {content-type-1}s to get used to the workflow. We'll start with Cardi B.
 
-. Select the people folder (make sure it's highlighted).
+. Select the {content-type-1}s folder (make sure it's highlighted).
 . Create a new {content-type-1}.
 . Give it the display name "Cardi B".
 . Enter "Belcalis Marlenis Almánzar" in the "name" field and "Cardi B" in the "alias" field.
@@ -173,12 +175,12 @@ It should look a little something like this:
 .The content form filled out for the {content-type-1} "Cardi B"
 image::content-studio-new-{content-type-1}.png[The form for "{content-type-1}" fully filled out.]
 
-Again, save and close the tab (kbd:[ctrl+enter]/kbd:[⌘+enter]). Now repeat this process for Melissa Arnette Elliott (better known as Missy Elliott) and Alecia Beth Moore (known professionally as P!nk). Be aware that Content Studio lets you nest content, so if you try and create new content when "Cardi B" is selected in the hierarchy, it'll nest the new content under "Cardi B". In our case, though, we want the people to be nested directly under the current folder, so make sure "people" folder is selected when you create new content.
+Again, save and close the tab (kbd:[ctrl+enter]/kbd:[⌘+enter]). Now repeat this process for Melissa Arnette Elliott (better known as Missy Elliott) and Alecia Beth Moore (known professionally as P!nk). Be aware that Content Studio lets you nest content, so if you try and create new content when "Cardi B" is selected in the hierarchy, it'll nest the new content under "Cardi B". In our case, though, we want the {content-type-1}s to be nested directly under the current folder, so make sure "{content-type-1}s" folder is selected when you create new content.
 
-With these people created, your content hierarchy should now list the site, the people folder, and the three people.
+With these {content-type-1}s created, your content hierarchy should now list the site, the {content-type-1}s folder, and the three {content-type-1}s.
 
 .The hierarchy as it should look after creating some content
-image::content-studio-with-people.png["The content hierarchy showing the {p1-site-name} site with \"Cardi B\", \"Missy Elliot\", \"P!nk\", and \"Templates\" listed directly underneath it.", width=350]
+image::content-studio-with-{content-type-1}s.png["The content hierarchy showing the {p1-site-name} site with \"Cardi B\", \"Missy Elliot\", \"P!nk\", and \"Templates\" listed directly underneath it.", width=350]
 
 == Querying the API
 
@@ -197,14 +199,14 @@ image::graphql-playground-empty.png[An empty GraphQL playground]
 
 In this {document}, we'll only barely dip our toes into the waters of GraphQL. We'll explore this further in a xref:headless-api[later chapter], but if you're interested, you can always check out the https://graphql.org/learn/[GraphQL docs].
 
-To see what GraphQL can do for us, let's see if we can just fetch all the people that we created. Copy the below query into your playground and run it by pressing kbd:[ctrl+enter]/kbd:[⌘+enter] or by clicking the play button.
+To see what GraphQL can do for us, let's see if we can just fetch all the {content-type-1}s that we created. Copy the below query into your playground and run it by pressing kbd:[ctrl+enter]/kbd:[⌘+enter] or by clicking the play button.
 
 .A GraphQL query fetching all content below the "{p1-site-name}" site
 [source,GraphQL,subs={subs}"]
 ----
 {
   guillotine {
-    getChildren(key: "{p1-site-path}/people")
+    getChildren(key: "{p1-site-path}/{content-type-1}s")
     {
       displayName
     }
@@ -212,9 +214,9 @@ To see what GraphQL can do for us, let's see if we can just fetch all the people
 }
 ----
 
-The result of this query should list all the people you created previously as well as the Templates directory that came with the site:
+The result of this query should list all the {content-type-1}s you created previously as well as the Templates directory that came with the site:
 
-.The result of the above query; all content nodes below "people"
+.The result of the above query; all content nodes below "{content-type-1}s"
 [source,JSON]
 ----
 {
@@ -238,12 +240,12 @@ The result of this query should list all the people you created previously as we
 
 Neat! Next, let's try a slightly more complicated query. In this one,  we'll also get the data inside the content nodes and extract their names and alias fields.
 
-.A GraphQL query that fetches all people and their data
+.A GraphQL query that fetches all {content-type-1}s and their data
 [source, GraphQL,subs={subs}]
 ----
 {
   guillotine {
-    getChildren(key: "{p1-site-path}/people/")
+    getChildren(key: "{p1-site-path}/{content-type-1}s/")
     {
       displayName
       ... on {project-name-query}_{content-type-1-Capitalized} {
@@ -259,7 +261,7 @@ Neat! Next, let's try a slightly more complicated query. In this one,  we'll als
 
 Exeprimary-cute this and your response should look a little something like this:
 
-.People and their aliases as returned by GraphQL
+.{content-type-1-capitalized}s and their aliases as returned by GraphQL
 [source,JSON]
 ----
 {

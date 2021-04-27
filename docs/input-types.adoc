@@ -124,7 +124,7 @@ Enonic also provides XML Schema Definitions (XSDs) for text editor integration a
 
 Note that in-editor schema validation depends on whether your text editor supports validating against XSD schemas or not.
 
-== Task: people and pets
+== Task: {content-type-1}s and pets
 
 Time for a little recap! We'll put together everything we've learned about content types and input types thus far to create a new data set. A solution is listed below, but try and see if you can solve it yourself first. If you're wondering how to achieve some of the goals, try consulting the documentation that's been linked to in this {document}.
 
@@ -137,7 +137,7 @@ An {content-type-2} should have the following inputs:
 . An image selector that accepts between 0 and 3 images.
 . Help text where you think it would be helpful.
 
-When you've created the content type, create a new folder in Content Studio at next to the people folder. Call it "{content-type-2}s".
+When you've created the content type, create a new folder in Content Studio at next to the {content-type-1}s folder. Call it "{content-type-2}s".
 
 For the {content-type-1} content type, here's what's going to change:
 
@@ -147,7 +147,7 @@ For the {content-type-1} content type, here's what's going to change:
 
 To verify that everything works, create some animals, and try creating a content link between a {content-type-1} and an {content-type-2}.
 
-When you've got that, create a GraphQL query that'll fetch all people and list what their favorite animals are, as well their animals' descriptions .
+When you've got that, create a GraphQL query that'll fetch all {content-type-1}s and list what their favorite animals are, as well their animals' descriptions .
 
 === Solution
 
@@ -239,16 +239,16 @@ Description:: The lion (Panthera leo) is a species in the family Felidae and a m
 Name:: Reindeer, Caribou
 Description:: The reindeer (Rangifer tarandus), also known as caribou in North America, is a species of deer with circumpolar distribution, native to Arctic, sub-Arctic, tundra, boreal, and mountainous regions of northern Europe, Siberia, and North America.
 
-Now create some links using ContentSelector from people to {content-type-2}s. The important part here is that you link some content so that we can fetch it using GraphQL. When you have created some links, let's move on to the query.
+Now create some links using ContentSelector from {content-type-1}s to {content-type-2}s. The important part here is that you link some content so that we can fetch it using GraphQL. When you have created some links, let's move on to the query.
 
-The way to link to linked content in GraphQL is to add it as a field as part of the data. This query will fetch all people and their linked {content-type-2}s:
+The way to link to linked content in GraphQL is to add it as a field as part of the data. This query will fetch all {content-type-1}s and their linked {content-type-2}s:
 
-.Query to fetch people with their associated favorite animals
+.Query to fetch {content-type-1}s with their associated favorite animals
 [source,GraphQL]
 ----
 {
   guillotine {
-    getChildren(key: "/my-first-site/people/")
+    getChildren(key: "/my-first-site/{content-type-1}s/")
     {
       displayName
       ... on {project-name-query}_{content-type-1-capitalized} {
@@ -273,7 +273,7 @@ The way to link to linked content in GraphQL is to add it as a field as part of 
 
 Depending on the links (and {content-type-2}s) you created, your result might look a little something like this:
 
-.The list of people with their favorite animals
+.The list of {content-type-1}s with their favorite animals
 [source,json]
 ----
 {
