@@ -53,6 +53,10 @@ In XP, image selectors are great for when you want to associate one or more imag
 
 Read more about the https://developer.enonic.com/docs/xp/stable/cms/input-types#imageselector[configuration of image selectors] in the reference docs.
 
+==== Working with images
+
+TODO
+
 === Content Selector
 
 image::input-type-content-selector.png[ContentSelector: An interactive content selection tool., width=800]
