@@ -1,0 +1,132 @@
+= Apps and starters
+include::variables.adoc[]
+
+With XP up and running, let's have a look at how we create applications!
+
+NOTE: This {document} builds on the steps we took in the xref:sandboxes[previous {document}], so if you haven't already done it, make sure you go through it and get everything ready. When you're sure you're up to speed with the previous {document}, let's get get started!
+
+== Projects and starters
+
+Creating a project from scratch can be a daunting task for any system you're not familiar with. To make things easier for you, Enonic provides a range of different project templates (known as _starters_). We'll make use of these throughout this tutorial.
+
+NOTE: The complete list of starters can be found on https://market.enonic.com/starters[the Enonic Market].
+
+For our first project, we'll use the "Headless CMS" starter. This starter is tailored to start creating your own headless content API, but is fairly minimal. We'll use this to familiarize ourselves with how an XP app is structured and how to upload an app to XP.
+
+Here's how to use the CLI to create your first app.
+
+. Launch a new terminal
+. When creating a project via the CLI, it creates a folder in your current working directory, so navigate to wherever you want your project to reside. Then, run this command:
+
+    enonic project create
+
+. Choose `Headless CMS starter` from the list of available starters.
+. When prompted enter the name, press kbd:[enter] to accept the default.
++
+NOTE: Project names matter. XP does not support running two apps with the same name within a single instance.
++
+. Use the default values for destination folder and version. If the destination folder already exists, you'll have to either choose another name for the folder or remove or rename the folder that already exists.
+. When prompted to select a sandbox, choose the  `tutorial` sandbox we created previously.
+. Finally, press kbd:[enter] to skip opening the starter documentation. If you answer yes, the documentation for this starter will open in your browser. This is useful if you're using a starter you're not familiar with (and aren't following a guide).
+
+If you used the default values as specified in the steps, a directory named `{project-name}/` should have been created during the process. If you used a different project name or project directory name, your directory will have a different name.
+
+The project directory contains a fairly minimal XP application. The most relevant parts of the directory are:
+
+.Essential XP project structure
+[source,files]
+----
+build.gradle <--1-->
+gradle.properties <--2-->
+src/
+  main/
+    resources/ <!--3-->
+----
+
+<1> The main build file for defining dependencies and more build-related details.
+<2> Contains the standard project settings, as defined by the CLI.
+<3> The main project folder. JavaScript code and assets are placed here.
+
+== Building and deploying
+
+Now that we've set up a project, let's see how we build (or _compile_) the project and then how we deploy it to our XP instance. Again, the CLI is key to making this process as smooth as possible.
+
+Here are the steps we need to take:
+
+. Change to the project directory:
++
+[subs="attributes"]
+----
+cd {project-name}
+----
++
+. If your sandbox isn't already running, start it by using this command:
++
+  enonic sandbox start
++
+This will start the sandbox belonging to the current project directory.
+
+. Start the build with Enonic CLI:
+
+    enonic project build
+
+While building your project, the CLI will print what it's doing to your terminal. It will look something like this:
+
+.Sample output from build process
+----
+Building in sandbox 'tutorial'...
+Starting a Gradle Daemon (subsequent builds will be faster)
+
+BUILD SUCCESSFUL in 5s
+3 actionable tasks: 3 executed
+----
+
+After the build has finished, you'll have a new file in your project directory, located under the `build/libs` subdirectory. Assuming you have used the default name, it'll be located at `build/libs/{project-name}.jar` when at the project root. This file is the executable file that contains your application.
+
+To deploy the app to the sandbox, use the CLI again. From the project root folder, run:
+
+    enonic project deploy
+
+This copies the application file to your sandbox's `home/deploy/` folder. XP picks up on this automatically and starts the app for you.
+
+NOTE: The `enonic project deploy` command will build your project if you have made changes since the last build or haven't built yet. It will also ask whether you want to start the appropriate sandbox if it isn't already running.
+
+To confirm that your application was started correctly, you can look at the logs in the sandbox's terminal window. They should say something like this:
+
+.Application output
+[subs="attributes"]
+----
+[...] - Local application [{project-name-full}] installed successfully
+[...] - Application [{project-name-full}] started successfully
+----
+
+You can also verify that the application was installed correctly by using the admin console ({xp-url}): Open the "Applications" app from the main launcher panel and look for your application in the list.
+
+
+.The applications list with the headless starter installed
+image::applications-headless.png["The applications list with a few applications installed. Also shows application details, such as content install time, version, and required XP system version for the selected application."]
+
+You've now successfully built and deployed your first Enonic XP application. Well done! Now let's look at creating content.
+
+=== Changing the display name of an application
+You might have noticed that the application we created was listed as "Headless Starter" in the applications list above. What if you wanted to change that to something more descriptive? To do that, we can head to the `gradle.properties` file in the project's root directory. Change the `appDisplayName` to whatever you want it to display.
+
+Similarly, you can change your application's description to something more appropriate `src/main/resources/application.xml` by replacing the stock text inside of the `description` element.
+
+=== What if the application doesn't show up?
+
+If the application doesn't show up under the Applications tab in XP after you've run `enonic project deploy`, check the logs (for the build first, and then for XP) for errors. The build might have failed or something may have gone wrong when deploying.
+
+If the build works, but nothing shows up in the Applications tab, make sure you're running the right sandbox. The CLI deploys to the sandbox specified in the project's `.enonic` file (in the project directory root). This has to match the name of the sandbox that's running.
+
+If you've checked that you're running the right sandbox and that the build succeeds, but you're still not seeing the application, you can do a manual deploy. The project build result is available in the `build/libs` directory of the project. You can copy this `.jar` file to the sandbox's `home/deploy` directory. This will make XP pick it up. If you've used the suggested names in the steps above (and the default directories for XP configuration), this command will move the file for you on Unix systems when run from the project root:
+
+[subs="attributes"]
+  mv build/libs/{project-name}.jar ~/.enonic/sandboxes/tutorial/home/deploy/
+
+NOTE: If you have to deploy manually when going through this tutorial, please get in touch on https://discuss.enonic.com[discuss.enonic.com] so we can improve the documentation and the process.
+
+
+== Next
+
+In the next {document} we'll start adding content to the app we just deployed and see how we get a GraphQL API automatically generated for it. We'll keep working on the app over the next couple {document}s, so keep it close!

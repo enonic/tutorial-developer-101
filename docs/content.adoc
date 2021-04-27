@@ -3,7 +3,7 @@ include::variables.adoc[]
 
 In this {document}, we'll start building on the app we deployed previously and use an automatically generated GraphQL API for the content we create. In doing this, we'll learn about _content types_ and how to do basic work with  Content Studio.
 
-NOTE: This {document} builds on the steps we took in the xref:basics[previous {document}], so if you haven't already done it, make sure you go through it and get everything ready. When you're sure you're up to speed with the previous {document}, let's get get started!
+NOTE: This {document} builds on the system we set up in the previous few {document}s, so make sure you've got XP up and running and your app deployed if you want to follow along with this {document}.
 
 == What are content types?
 
