@@ -5,71 +5,75 @@
       "document": "setup"
     },
     {
-      "title": "2 - Development basics",
+      "title": "2 - Sandboxes and instances",
+      "document": "sandboxes"
+    },
+    {
+      "title": "3 - Development basics",
       "document": "basics"
     },
     {
-      "title": "3 - Creating content",
+      "title": "4 - Creating content",
       "document": "content"
     },
     {
-      "title": "4 - Input types",
+      "title": "5 - Input types",
       "document": "input-types"
     },
     {
-      "title": "5 - Rich text",
+      "title": "6 - Rich text",
       "document": "rich-text"
     },
     {
-      "title": "6 - Advanced content types",
+      "title": "7 - Advanced content types",
       "document": "advanced-content"
     },
     {
-      "title": "7 - Headless API",
+      "title": "8 - Headless API",
       "document": "headless-api"
     },
     {
-      "title": "8 - Controllers",
+      "title": "9 - Controllers",
       "document": "controllers"
     },
     {
-      "title": "9 - Assets",
+      "title": "10 - Assets",
       "document": "assets"
     },
     {
-      "title": "10 - The Content API",
+      "title": "11 - The Content API",
       "document": "content-api"
     },
     {
-      "title": "11 - Filters and routing",
+      "title": "12 - Filters and routing",
       "document": "content-api"
     },
     {
-      "title": "12 - Pages",
+      "title": "13 - Pages",
       "document": "pages"
     },
     {
-      "title": "13 - The Enonic Market",
+      "title": "14 - The Enonic Market",
       "document": "market"
     },
     {
-      "title": "14 - Authentication & Authorization",
+      "title": "15 - Authentication & Authorization",
       "document": "auth"
     },
     {
-      "title": "15 - Storing data",
+      "title": "16 - Storing data",
       "document": "storage"
     },
     {
-      "title": "16 - Admin extensions",
+      "title": "17 - Admin extensions",
       "document": "admin"
     },
     {
-      "title": "17 - Deployment",
+      "title": "18 - Deployment",
       "document": "deployment"
     },
     {
-      "title": "18 - Next steps",
+      "title": "19 - Next steps",
       "document": "next"
     }
   ]

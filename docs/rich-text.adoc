@@ -215,7 +215,7 @@ exports.macro = (context) => {
 <1> The header parameter is available in the `context.params` object, while the body is available as a property on the `context` object directly.
 <2> What you return from the macro is what it will be replaced with. In this case, that's the modified text.
 
-Now make sure this is deployed to your XP instance (check xref:basics#_sandboxes[the section on sandboxes in for how to start it]) either by having it run in development mode or by xref:basics#_building_and_deploying[redeploying your app].
+Now make sure this is deployed to your XP instance (check xref:sandboxes#_sandboxes[the section on sandboxes in for how to start it]) either by having it run in development mode or by xref:apps#_building_and_deploying[redeploying your app].
 
 Now we can either add this manually or by using the macro tool in the HtmlArea toolbar. If we use the macro tool we also get to preview the macro.
 
