@@ -7,9 +7,9 @@ NOTE: This {document} builds on the steps we took in the xref:basics[previous {d
 
 == What are content types?
 
-Content types are schemas that tell XP what properties a piece of content of a particular type can have. That might sound confusing, but imagine for a second that we're working with forms. Content types describe what fields go in a specific form. Then a piece of content is a form that has been filled out. We'll look at an example to make this even clearer.
+Content types are schemas that tell XP what properties a piece of content of a particular type can have. That might sound confusing, but imagine for a second that we're working with forms. Content types describe what fields go in a specific form. Then a piece of content is a form that has been filled out.
 
-Imagine we want our app to list {content-type-1}s. We'll create a simple representation of a {content-type-1}: we're only interested in their name and an optional alias, nickname, or pseudonym. Here's what a {content-type-1} content type could look like. The most relevant parts are numbered and further explained below.
+In short: _content types_ describe the shape of some data that's been grouped together. A piece of _content_ is the manifestation of that content type, populated with actual data. If it's still a bit fuzzy, don't worry! It'll become clearer once we start working with it.
 
 ==== Comparison of content types to other schema descriptions
 
@@ -19,16 +19,20 @@ Similarly, a content type is much like a _(data) type_ or a _class_ in many prog
 
 == Task: My first content type
 
-We've created our first app, but an app isn't terribly exciting if it doesn't have any content to deliver. While content _creation_ takes place inside Content Studio, Content Studio first needs to know something about what kinds of content the end user can create. Enter: _content types_.
-
-By the end of this section we'll have created a content type that gives us a simple form that looks like this in Content Studio:
+Now that we know what a content type is, let's look at how we create them and make XP recognize them. By the end of this section we'll have created a content type that gives us a simple form that looks like this in Content Studio:
 
 .The target for our first content type
 image::content-type-target.png["A content creation form with name and biography fields", width=800]
 
-The file that backs the above form looks like this:
+XP is quite particular about project folder structure, so we need to put content types right where it expects to find them. The location is under `src/main/resources/site/content-types`.
 
-.A simple content type describing the '{content-type-1}' content type
+Within the `content-types` directory, we need to place another directory with the name of the content type (in our case: `{content-type-1-capitalized}`), and within that directory, we place our content type, `{content-type-1-capitalized}.xml`. As such, the full path to our content type from the project root is `src/main/resources/site/content-types/{content-type-1}/{content-type-1}.xml`.
+
+Now, unless you've created it manually, then that directory doesn't exist in our "{project-name}" project yet, so go ahead and create the required directories and files.
+
+In the `{content-type-1}.xml` file, place the following contents:
+
+.The '{content-type-1-capitalized}' content type
 [source,xml,subs={subs}]
 ----
 <content-type>
@@ -58,57 +62,6 @@ The file that backs the above form looks like this:
 <4> This is a property of the content type. The `type` attribute specifies what kind of input field the user will see in Content Studio, and the `label` specifies how the input will be labeled.
 
 NOTE: Content types also have a large number of other, optional fields that we won't get into here. If you'd like to learn more about this, consult https://developer.enonic.com/docs/xp/stable/cms/content-types[the reference documentation].
-
-When create an instance of this content type, we would use Content Studio (as show in the image above). Upon exposing it via an API, we would most likely see the piece of content exposed as JSON, so that's what we'll use to illustrate a piece of content.
-
-For instance, if we created an entry for Belcalis Marlenis Almánzar, better known as Cardi B, then that instance of the `{content-type-1-capitalized}` content type (that piece of content) could be represented in JSON as this:
-
-.A piece of content of type '{content-type-1-capitalized}'
-[source,json]
-----
-{
-  "name": "Belcalis Marlenis Almánzar",
-  "about": "Belcalis Marlenis Almánzar (born October 11, 1992), known
-            professionally as Cardi B, is an American rapper and
-            songwriter."
-}
-----
-
-So, to recap: _content types_ describe the shape of some data that's been grouped together. A piece of _content_ is the manifestation of that content type, populated with actual data. If it's still a bit fuzzy, don't worry! It'll become clearer once we start working with it.
-
-=== Creating a content type
-
-Now that we know what a content type is, let's look at how we create them and make XP recognize them. We'll use the `{content-type-1-capitalized}` content type from before to keep things simple.
-
-XP is quite particular about project folder structure, so we need to put content types right where it expects to find them. The location is under `src/main/resources/site/content-types`.
-
-Within the `content-types` directory, we need to place another directory with the name of the content type (in our case: `{content-type-1-capitalized}`), and within that directory, we place our content type, `{content-type-1-capitalized}.xml`. As such, the full path to our content type from the project root is `src/main/resources/site/content-types/{content-type-1}/{content-type-1}.xml`.
-
-Now, unless you've created it manually, then that directory doesn't exist in our "{project-name}" project yet, so go ahead and create the required directories and files.
-
-In the `{content-type-1}.xml` file, place the following contents:
-
-.The {content-type-1-capitalized} content type
-[source,xml]
-----
-<?xml version="1.0" encoding="utf-8"?>
-<content-type>
-  <display-name>{content-type-1-capitalized}</display-name>
-  <description>A description of a {content-type-1}</description>
-  <super-type>base:structured</super-type>
-  <form>
-
-    <input name="name" type="TextLine">
-      <label>Name</label>
-    </input>
-
-    <input name="alias" type="TextLine">
-      <label>Alias</label>
-    </input>
-
-  </form>
-</content-type>
-----
 
 Now run:
 
