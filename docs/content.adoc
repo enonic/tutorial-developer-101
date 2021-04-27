@@ -214,7 +214,7 @@ Neat! Next, let's try a slightly more complicated query. In this one,  we'll als
     getChildren(key: "{p1-site-path}/{content-type-1}s/")
     {
       displayName
-      ... on {project-name-query}_{content-type-1-Capitalized} {
+      ... on {project-name-query}_{content-type-1-capitalized} {
         data {
           name
           about
