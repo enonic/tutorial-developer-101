@@ -232,7 +232,7 @@ Here's how to use the CLI to create your first app.
     enonic project create
 
 . Choose `Headless CMS starter` from the list of available starters.
-. When prompted enter the name `{project-name-full}` and  press kbd:[enter] to accept.
+. When prompted enter the name, press kbd:[enter] to accept the default.
 +
 NOTE: Project names matter. XP does not support running two apps with the same name within a single instance.
 +

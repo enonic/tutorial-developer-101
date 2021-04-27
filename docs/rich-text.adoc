@@ -261,7 +261,7 @@ We can fetch this in it's entirety with the following query:
     getChildren(key: "/my-first-site/animals/")
     {
       displayName
-      ... on com_gettingstarted_content_Animal {
+      ... on com_example_myproject_Animal {
         data {
           name
           description {
@@ -313,7 +313,7 @@ Additionally, we can also pass a `processHtml` argument to the description field
     getChildren(key: "/my-first-site/{content-type-2}s/")
     {
       displayName
-      ... on com_gettingstarted_content_{content-type-2-capitalized} {
+      ... on com_example_myproject_{content-type-2-capitalized} {
         data {
           name
           description(processHtml: {imageWidths: [50,200]}) {

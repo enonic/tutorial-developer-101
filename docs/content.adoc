@@ -241,7 +241,7 @@ Neat! Next, let's try a slightly more complicated query. In this one,  we'll als
     getChildren(key: "{p1-site-path}/people/")
     {
       displayName
-      ... on com_gettingstarted_content_{content-type-Capitalized} {
+      ... on com_example_myproject_{content-type-Capitalized} {
         data {
           name
           alias

@@ -4,8 +4,8 @@
 :document: chapter
 :xp-url: http://localhost:8080
 :cs-url: {xp-url}/admin/tool/com.enonic.app.contentstudio/main
-:project-name-prefix: com.gettingstarted.
-:project-name: content
+:project-name-prefix: com.example.
+:project-name: myproject
 :project-name-full: {project-name-prefix}{project-name}
 :p1-site-name: My First Site
 :p1-site-path: /my-first-site
