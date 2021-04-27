@@ -121,19 +121,32 @@ Next, let's create a few {content-type-1}s to get used to the workflow. We'll st
 . Select the {content-type-1}s folder (make sure it's highlighted).
 . Create a new {content-type-1}.
 . Give it the display name "Cardi B".
-. Enter "Belcalis Marlenis Almánzar" in the "name" field and "Cardi B" in the "alias" field.
+. Use these details to fill in the form:
++
+.Artist details (https://en.wikipedia.org/wiki/Cardi_B[Cardi B on Wikipedia])
+Name:: Belcalis Marlenis Almánzar
+About:: Belcalis Marlenis Almánzar (born October 11, 1992), known professionally as Cardi B, is an American rapper and songwriter. Born and raised in New York City, she became an Internet celebrity by achieving popularity on Vine and Instagram.
 
 It should look a little something like this:
 
 .The content form filled out for the {content-type-1} "Cardi B"
-image::content-studio-new-{content-type-1}.png[The form for "{content-type-1}" fully filled out.]
+image::content-type-target.png[The form for "{content-type-1}" fully filled out., width=800]
 
-Again, save and close the tab (kbd:[ctrl+enter]/kbd:[⌘+enter]). Now repeat this process for Melissa Arnette Elliott (better known as Missy Elliott) and Alecia Beth Moore (known professionally as P!nk). Be aware that Content Studio lets you nest content, so if you try and create new content when "Cardi B" is selected in the hierarchy, it'll nest the new content under "Cardi B". In our case, though, we want the {content-type-1}s to be nested directly under the current folder, so make sure "{content-type-1}s" folder is selected when you create new content.
+Again, save and close the tab (kbd:[ctrl+enter]/kbd:[⌘+enter]). Now repeat this process for these next two entries. Be aware that Content Studio lets you nest content, so if you try and create new content when "Cardi B" is selected in the hierarchy, it'll nest the new content under "Cardi B". In our case, though, we want the {content-type-1}s to be nested directly under the current folder, so make sure "{content-type-1}s" folder is selected when you create new content.
+
+.Missy Elliott (https://en.wikipedia.org/wiki/Missy_Elliott[Missy Elliott on Wikipedia])
+Name:: Melissa Arnette Elliott
+About:: Melissa Arnette Elliott (born July 1, 1971) is an American rapper, singer, songwriter, and record producer. She embarked on her music career with R&B girl group Sista in the early-mid 1990s and later became a member of the Swing Mob collective along with childhood friend and longtime collaborator Timbaland, with whom she worked on projects for American R&B acts Aaliyah, 702, Total, and SWV.
+
+
+.P!nk (https://en.wikipedia.org/wiki/Pink_(singer)[P!nk on Wikipedia])
+Name:: Alecia Beth Moore
+About:: Alecia Beth Moore (born September 8, 1979), known professionally as Pink (stylized as P!nk), is an American singer and songwriter. She was originally a member of the girl group Choice. In 1995, LaFace Records saw potential in Pink and offered her a solo recording contract.
 
 With these {content-type-1}s created, your content hierarchy should now list the site, the {content-type-1}s folder, and the three {content-type-1}s.
 
 .The hierarchy as it should look after creating some content
-image::content-studio-with-{content-type-1}s.png["The content hierarchy showing the {p1-site-name} site with \"Cardi B\", \"Missy Elliot\", \"P!nk\", and \"Templates\" listed directly underneath it.", width=350]
+image::content-studio-with-{content-type-1}s.png["The content hierarchy showing the {p1-site-name} site with \"Cardi B\", \"Missy Elliot\", \"P!nk\", and \"Templates\" listed directly underneath it.", width=800]
 
 == Querying the API
 
@@ -150,7 +163,7 @@ After navigating to {p1-api-url}, you'll find the _GraphQL playground_ waiting f
 .The GraphQL playground
 image::graphql-playground-empty.png[An empty GraphQL playground]
 
-In this {document}, we'll only barely dip our toes into the waters of GraphQL. We'll explore this further in a xref:headless-api[later chapter], but if you're interested, you can always check out the https://graphql.org/learn/[GraphQL docs].
+In this {document}, we'll only barely dip our toes into the waters of GraphQL. We'll explore this further in the coming {document}s, but if you're interested, you can always check out the https://graphql.org/learn/[GraphQL docs].
 
 To see what GraphQL can do for us, let's see if we can just fetch all the {content-type-1}s that we created. Copy the below query into your playground and run it by pressing kbd:[ctrl+enter]/kbd:[⌘+enter] or by clicking the play button.
 
@@ -204,7 +217,7 @@ Neat! Next, let's try a slightly more complicated query. In this one,  we'll als
       ... on {project-name-query}_{content-type-1-Capitalized} {
         data {
           name
-          alias
+          about
         }
       }
     }
@@ -212,7 +225,7 @@ Neat! Next, let's try a slightly more complicated query. In this one,  we'll als
 }
 ----
 
-Exeprimary-cute this and your response should look a little something like this:
+Execute this and your response should look a little something like this:
 
 .{content-type-1-capitalized}s and their aliases as returned by GraphQL
 [source,JSON]
@@ -222,24 +235,24 @@ Exeprimary-cute this and your response should look a little something like this:
     "guillotine": {
       "getChildren": [
         {
-          "displayName": "P!nk",
-          "data": {
-            "name": "Alecia Beth Moore",
-            "alias": "P!nk"
-          }
-        },
-        {
           "displayName": "Missy Elliott",
           "data": {
             "name": "Melissa Arnette Elliott",
-            "alias": "Missy Elliott"
+            "about": "Melissa Arnette Elliott (born July 1, 1971) is an American rapper, singer, songwriter, and record producer. She embarked on her music career with R&B girl group Sista in the early-mid 1990s and later became a member of the Swing Mob collective along with childhood friend and longtime collaborator Timbaland, with whom she worked on projects for American R&B acts Aaliyah, 702, Total, and SWV."
+          }
+        },
+        {
+          "displayName": "P!nk",
+          "data": {
+            "name": "Alecia Beth Moore",
+            "about": "Alecia Beth Moore (born September 8, 1979), known professionally as Pink (stylized as P!nk), is an American singer and songwriter. She was originally a member of the girl group Choice. In 1995, LaFace Records saw potential in Pink and offered her a solo recording contract."
           }
         },
         {
           "displayName": "Cardi B",
           "data": {
             "name": "Belcalis Marlenis Almánzar",
-            "alias": "Cardi B"
+            "about": "Belcalis Marlenis Almánzar (born October 11, 1992), known professionally as Cardi B, is an American rapper and songwriter. Born and raised in New York City, she became an Internet celebrity by achieving popularity on Vine and Instagram."
           }
         }
       ]
