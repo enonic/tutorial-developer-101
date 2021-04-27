@@ -17,14 +17,3 @@ NOTE: *tl;dr* Head over to our https://developer.enonic.com/quickstart[Quickstar
 . <<rich-text#, Rich text>>
 . <<advanced-content#, Advanced content types>>
 . <<headless-api#, Headless API>>
-. <<controllers#, Controllers>>
-. <<assets#, Assets>>
-. <<content-api#, The Content API>>
-. <<content-api#, Filters and routing>>
-. <<pages#, Pages>>
-. <<market#, The Enonic Market>>
-. <<auth#, Authentication & Authorization>>
-. <<storage#, Storing data>>
-. <<admin#, Admin extensions>>
-. <<deployment#, Deployment>>
-. <<next#, Next steps>>
