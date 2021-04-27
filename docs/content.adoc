@@ -1,9 +1,12 @@
 = Content and content types
 include::variables.adoc[]
+:about-cardi: Belcalis Marlenis Almánzar (born October 11, 1992), known professionally as Cardi B, is an American rapper and songwriter.
+:about-missy: Melissa Arnette Elliott (born July 1, 1971) is an American rapper, singer, songwriter, and record producer.
+:about-pink: Alecia Beth Moore (born September 8, 1979), known professionally as Pink (stylized as P!nk), is an American singer and songwriter.
 
 In this {document}, we'll start building on the app we deployed previously and use an automatically generated GraphQL API for the content we create. In doing this, we'll learn about _content types_ and how to do basic work with  Content Studio.
 
-NOTE: This {document} builds on the system we set up in the previous few {document}s, so make sure you've got XP up and running and your app deployed if you want to follow along with this {document}.
+NOTE: This {document} builds on the system we set up in the previous few {document}s, so if you haven't already done it, make sure you go through it and get everything ready. When you're sure you're up to speed with the previous {document}, let's get get started!
 
 == What are content types?
 
@@ -125,7 +128,7 @@ Next, let's create a few {content-type-1}s to get used to the workflow. We'll st
 +
 .Artist details (https://en.wikipedia.org/wiki/Cardi_B[Cardi B on Wikipedia])
 Name:: Belcalis Marlenis Almánzar
-About:: Belcalis Marlenis Almánzar (born October 11, 1992), known professionally as Cardi B, is an American rapper and songwriter. Born and raised in New York City, she became an Internet celebrity by achieving popularity on Vine and Instagram.
+About:: {about-cardi}
 
 It should look a little something like this:
 
@@ -136,12 +139,12 @@ Again, save and close the tab (kbd:[ctrl+enter]/kbd:[⌘+enter]). Now repeat thi
 
 .Missy Elliott (https://en.wikipedia.org/wiki/Missy_Elliott[Missy Elliott on Wikipedia])
 Name:: Melissa Arnette Elliott
-About:: Melissa Arnette Elliott (born July 1, 1971) is an American rapper, singer, songwriter, and record producer. She embarked on her music career with R&B girl group Sista in the early-mid 1990s and later became a member of the Swing Mob collective along with childhood friend and longtime collaborator Timbaland, with whom she worked on projects for American R&B acts Aaliyah, 702, Total, and SWV.
+About:: {about-missy}
 
 
 .P!nk (https://en.wikipedia.org/wiki/Pink_(singer)[P!nk on Wikipedia])
 Name:: Alecia Beth Moore
-About:: Alecia Beth Moore (born September 8, 1979), known professionally as Pink (stylized as P!nk), is an American singer and songwriter. She was originally a member of the girl group Choice. In 1995, LaFace Records saw potential in Pink and offered her a solo recording contract.
+About:: {about-pink}
 
 With these {content-type-1}s created, your content hierarchy should now list the site, the {content-type-1}s folder, and the three {content-type-1}s.
 
@@ -228,7 +231,7 @@ Neat! Next, let's try a slightly more complicated query. In this one,  we'll als
 Execute this and your response should look a little something like this:
 
 .{content-type-1-capitalized}s and their aliases as returned by GraphQL
-[source,JSON]
+[source,JSON,subs={subs}]
 ----
 {
   "data": {
@@ -238,21 +241,21 @@ Execute this and your response should look a little something like this:
           "displayName": "Missy Elliott",
           "data": {
             "name": "Melissa Arnette Elliott",
-            "about": "Melissa Arnette Elliott (born July 1, 1971) is an American rapper, singer, songwriter, and record producer. She embarked on her music career with R&B girl group Sista in the early-mid 1990s and later became a member of the Swing Mob collective along with childhood friend and longtime collaborator Timbaland, with whom she worked on projects for American R&B acts Aaliyah, 702, Total, and SWV."
+            "about": "{about-missy}"
           }
         },
         {
           "displayName": "P!nk",
           "data": {
             "name": "Alecia Beth Moore",
-            "about": "Alecia Beth Moore (born September 8, 1979), known professionally as Pink (stylized as P!nk), is an American singer and songwriter. She was originally a member of the girl group Choice. In 1995, LaFace Records saw potential in Pink and offered her a solo recording contract."
+            "about": "{about-pink}"
           }
         },
         {
           "displayName": "Cardi B",
           "data": {
             "name": "Belcalis Marlenis Almánzar",
-            "about": "Belcalis Marlenis Almánzar (born October 11, 1992), known professionally as Cardi B, is an American rapper and songwriter. Born and raised in New York City, she became an Internet celebrity by achieving popularity on Vine and Instagram."
+            "about": "{about-cardi}"
           }
         }
       ]
@@ -263,7 +266,8 @@ Execute this and your response should look a little something like this:
 
 == Publishing and branches
 
-TODO
+You might have noticed the yellow circles with exclamation marks that
+
 
 == Summary
 
