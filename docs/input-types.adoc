@@ -246,7 +246,6 @@ The way to link to linked content in GraphQL is to add it as a field as part of 
             ... on {project-name-query}_{content-type-2-capitalized}{
               data {
                 otherNames
-                images
               }
             }
           }
@@ -275,11 +274,6 @@ Depending on the links (and {content-type-2}s) you created, your result might lo
               "data": {
                 "otherNames": [
                   "Caribou"
-                ],
-                "images": [
-                  {
-                    "_path": "/my-first-site/animals/reindeer/reindeer.jpg"
-                  }
                 ]
               }
             }
@@ -292,15 +286,7 @@ Depending on the links (and {content-type-2}s) you created, your result might lo
             "favoriteAnimal": {
               "displayName": "Lion",
               "data": {
-                "otherNames": [],
-                "images": [
-                  {
-                    "_path": "/my-first-site/animals/lion/female-lion.jpg"
-                  },
-                  {
-                    "_path": "/my-first-site/animals/lion/male-lion.jpg"
-                  }
-                ]
+                "otherNames": []
               }
             }
           }
@@ -314,11 +300,6 @@ Depending on the links (and {content-type-2}s) you created, your result might lo
               "data": {
                 "otherNames": [
                   "Caribou"
-                ],
-                "images": [
-                  {
-                    "_path": "/my-first-site/animals/reindeer/reindeer.jpg"
-                  }
                 ]
               }
             }
@@ -332,20 +313,42 @@ Depending on the links (and {content-type-2}s) you created, your result might lo
 
 === Fetching images
 
+What about fetching the images on the {content-type-2}s? Let's look at a slightly more advanced query. Use the display name for one of the {content-type-2}s that you uploaded an image to to filter the content types you're interested in. Then, specify that you only want the first image in the list. This query is a bit more advanced that what we've seen so far, so it deserves a little bit of explanation:
+
 .An image query
 [source,xml,subs={subs}]
 ----
 {
   guillotine {
-    query(contentTypes:"media:image") {
+    query(contentTypes:"com.example.myproject:{content-type-2}",
+      query: "displayName = 'Lion'") { <--.-->
       displayName
-      _path
+        ... on {project-name-query}_{content-type-2-capitalized} {
+        data {
+          images(first: 1) { <--.-->
+            ...on media_Image {
+              displayName
+              imageUrl(scale:"width(400)", type:absolute) <--.-->
+              mediaUrl <--.-->
+            }
+          }
+        }
+      }
     }
   }
 }
 ----
 
-.An image searh result
+<.> Using the `query` parameter, we can specify a query string to search only for specific content. The query uses Enonic's node query language (NoQL). The  https://developer.enonic.com/docs/xp/stable/storage/noql[NoQL reference docs] have a very detailed overview over the syntax if you're interested.
+<.> Because `images` is a list, we specify that we're only interested in the first element.
+<.> `imageUrl` requires you to specify a `scale` function. In this case, we're asking for a picture that's 400 pixels wide. The height will be depend on the image's aspect ratio. For more info on scaling, see https://developer.enonic.com/docs/xp/stable/runtime/engines/site-engine/image-service#scaling_methods[the scaling methods documentation].
+<.> Where `imageUrl` gets a scaled and cropped version of the image, `mediaUrl` points you to the raw file instead.
+
+
+Using this query, you'll end up with something like this (though naturally, your id's are likely to look a little different):
+
+
+.An image search result
 [source,json]
 ----
 {
@@ -353,16 +356,16 @@ Depending on the links (and {content-type-2}s) you created, your result might lo
     "guillotine": {
       "query": [
         {
-          "displayName": "female-lion",
-          "_path": "/my-first-site/animals/lion/female-lion.jpg"
-        },
-        {
-          "displayName": "male-lion",
-          "_path": "/my-first-site/animals/lion/male-lion.jpg"
-        },
-        {
-          "displayName": "reindeer",
-          "_path": "/my-first-site/animals/reindeer/reindeer.jpg"
+          "displayName": "Lion",
+          "data": {
+            "images": [
+              {
+                "displayName": "female-lion",
+                "imageUrl": "http://localhost:8080/site/default/draft/my-first-site/_/image/238ba006-f596-46ef-b404-6459c4c774b5:44fd5b74270e5261b5852cabbb89b4bf588aaf35/width-400/female-lion.jpg",
+                "mediaUrl": "/site/default/draft/my-first-site/_/attachment/inline/238ba006-f596-46ef-b404-6459c4c774b5:810ee47b2966db876c658635d0060a19b8d5f57a/female-lion.jpg"
+              }
+            ]
+          }
         }
       ]
     }
