@@ -54,7 +54,18 @@ Read more about the https://developer.enonic.com/docs/xp/stable/cms/input-types#
 
 Content Studio's comes with built-in image editing facilities where you can edit the image by cropping, rotating, or flipping it. You can also add an image focal point, so that if the image gets cropped for some reason, you're in control of what part of the image remains visible.
 
-To read more about Content Studio's image handling capabilities, check out this https://enonic.com/blog/enonic-simplifies-image-problems[blog post on how Enonic simplifies your everyday image problems].
+.The image selector with uploaded and selected images
+image::input-type-image-selector-highlighted-image.png["The image selector input field with two images of lions -- one male, one female - - below. Under the images, there's a set of buttons saying 'edit' and 'remove'.", width=800]
+
+After you've added an image (or several), you can highlight it and click the edit button. This will take you to the image editing form. Here, you can edit the image and image metadata, including (but definitely not limited to) image alt text, caption, copyright information, location data, and much more.
+
+For image editing, you can crop, flip, and rotate the image, as well add a focal point. The latter is an important tool for images that may display at different ratios depending on screen sizes. When an image gets fitted to a container, it's easy for the important part of the image to get cropped out. Content Studio solves this by letting you specify a focal point manually.
+
+.Setting the focal point
+image::image-editing-focal-point.png[An image with a focal point around the key part of the image,width=800]
+
+
+NOTE: If you'd like to lean more about image editing, https://enonic.com/blog/enonic-simplifies-image-problems[blog post on how Enonic simplifies your everyday image problems] has lots of great information about Content Studio's image handling capabilities.
 
 === Content Selector
 
@@ -121,7 +132,7 @@ An {content-type-2} should have the following inputs:
 
 . Use its species name, e.g. "elephant", as its display name. Use the `display-name-label` element to label it as "species" (hint: see https://developer.enonic.com/docs/xp/stable/cms/content-types#form_definition[the content type form definition] for info on how to use `display-name-label`).
 . An {content-type-2} can also have alternative names for its species (for instance, the reindeer is also known as caribou). Allow the user to add as many alternative names as they want.
-. An image selector that accepts between 0 and 3 images.
+. An image selector that accepts between 0 and 3 images. You should also add at least one image and try out the XP image editing tools. Make sure the focal point is on the {content-type-2}s head.
 . Help text where you think it would be helpful.
 
 When you've created the content type, create a new folder in Content Studio at next to the {content-type-1}s folder. Call it "{content-type-2}s".
