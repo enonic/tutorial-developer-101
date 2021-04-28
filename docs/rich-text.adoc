@@ -1,6 +1,7 @@
 = Rich text: HtmlArea
 include::variables.adoc[]
 :macro-name: screamingSnakeCase
+:macro-app: Panel Macros
 
 When you want to ... rich text is the way to go, and if you want to work with rich text in Content Studio, HtmlArea is your friend.
 
@@ -137,7 +138,7 @@ In a new file, `src/main/resources/site/styles.xml`, place the following simple 
 [source,xml,subs={subs}]
 ----
 <styles>
-  <image name="editor-style-image-black">
+  <image name="conteditor-style-grayscale">
     <display-name>Grayscale</display-name>
     <filter>hsbcolorize(0x000000); grayscale(); border(6, 0x000000)</filter>
   </image>
@@ -155,11 +156,63 @@ image::rich-text-insert-image-styled.png["The insert image dialog showing the re
 
 === Headless: fetching image styles
 
+[source,GraphQL,subs={subs}]
+----
+{
+  guillotine {
+    query(contentTypes:"com.example.myproject:animal",
+      query: "displayName = 'Lion'") {
+      displayName
+			... on com_example_myproject_Animal {
+        data {
+          description {
+            images {
+              image {
+              	... on media_Image {
+                	imageUrl(scale:"width(500)",type:absolute)
+              	}
+              }
+
+              style {
+                name
+                aspectRatio
+                filter
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
+----
+ But what do I do with the style info? Apply that in CSS?
+
 == Macros
 
-Macros allow you to easily add content and formatting to your rich text area. When the page is rendered, the macro call is resolved and replaced. When the macro is resolved, it will either add text to your page or styles or scripts. See the https://developer.enonic.com/docs/xp/stable/cms/macros[macro reference docs] for a more in-depth explanation of how this works. In this guide, we'll see some examples of macros and then look at how we can create our own.
+Macros enable you to insert rich components into your text. When the page is rendered, the macro call is resolved and replaced. When the macro is resolved, it will either add text to your page or styles or scripts. See the https://developer.enonic.com/docs/xp/stable/cms/macros[macro reference docs] for a more in-depth explanation of how this works. In this section, we'll install a macro from an external application (_{macro-app}_), and see how to use it.
+
+=== Task: Install the {macro-app} package
+
+The {macro-app} package comes with a set of macros that let you put text differently colored items with icons.
+
+.The {macro-app} in action
+image::macros-panel-macros.jpg["The Panel Macros package in action, showing differently colored panels." , width=600]
+
+To use these macros, we first need to install the {macro-app}.
+
+. Navigate to the Applications page (via the XP menu).
+. Press "Install"
+. Search for and install the "{macro-app}" app.
+. Edit your site ({p1-site-name}). In the applications dropdown, find {macro-app}, and add it.
+. Save and exit.
+
+
 
 === Using macros
+
+To add a macro to your HtmlArea, the easiest (and recommended) way is to use the macro tool.
+
 
 Adding macros to HtmlAreas looks quite a lot like the XML configuration we've been doing up until now, except that we use square brackets instead of angle brackets (`[]` instead of `<>`). You specify the name and any required attributes. Some macros are self-closing and accept no contents, while others accept content and must be closed later. To close a self-closing macro, add a `/` before the first closing bracket (`]`).
 
@@ -172,9 +225,6 @@ Adding macros to HtmlAreas looks quite a lot like the XML configuration we've be
   [contentMacro param="value"]This content goes inside the macro![/contentMacro]
 
 A good example of what macros can be useful for is the https://market.enonic.com/vendors/enonic/com.enonic.app.panelmacros[`Panel Macros` XP app] which gives you colored panels that you can add important text to.
-
-.The Panel Macros package image
-image::macros-panel-macros.jpg["The Panel Macros package in action, showing differently colored panels." , width=600]
 
 To use it, you'd pick your desired panel type (as listed in https://github.com/enonic/app-panel-macros#readme[the library documentation]), such as `success`. If you also want a header, you can specify that using the `header` attribute. If we wanted a `success` panel with a header, we'd add something like this to our HtmlArea:
 
