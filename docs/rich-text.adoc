@@ -10,9 +10,6 @@ NOTE: The tasks in this {document} build on the content types we created and con
 
 == The HtmlArea: an overview
 
-.The default HtmlArea input type
-image::input-type-html-area.png[HtmlArea: A rich text input field with visible formatting options., width=600]
-
 The HtmlArea input type gives you a multi-line input field with rich formatting options, much like what you're used to from your favorite word processor. It supports text formatting and justification, lists, links, and even lets you insert images.
 
 You can configure the HtmlArea to be exactly what you want by dictating what formatting tools to include or exclude (the `include` and `exclude` attributes, respectively), by what heading levels are allowed (`allowedHeadings`), and by giving it a default value (`default`).
@@ -23,21 +20,18 @@ Additionally, the HtmlArea supports the use of _macros_. Macros let you automati
 
 We can use the HtmlArea's `config` section to specify which rich text controls should be available when editing. Using a combination of the `include` and `exclude` tags, we can customize the input's appearance.
 
-If you want to include all controls, use `<include>*</include>` as shown below:
+By default, it includes a limited, but useful selection of tools at your disposal. Using `<include>*</include>` as an option is the same as including the default tools.
 
-.The HtmlArea configured to include everything
+.The HtmlArea with default configuration
 [source,xml]
 ----
 <input type="HtmlArea" name="everything">
   <label>HtmlArea with 'include *'</label>
-  <config>
-    <include>*</include>
-  </config>
 </input>
 ----
 
-.An HtmlArea input with `<include>*</include>`
-image::input-type-html-area-all-controls.png["An HtmlArea configured to include all editing tools.", width=600]
+.The default HtmlArea input type
+image::input-type-html-area.png[HtmlArea: A rich text input field with visible formatting options., width=600]
 
 
 If you want to exclude all controls, use `<exclude>*</exclude>`:
@@ -54,7 +48,7 @@ If you want to exclude all controls, use `<exclude>*</exclude>`:
 </input>
 ----
 
-.An HtmlArea exput with `<exclude>*</exclude>`
+.An HtmlArea exput with `<exclude>*</exclude>` and a selection of tools.
 image::input-type-html-area-no-controls.png[An HtmlArea configured to exclude all editing tools., width=600]
 
 Finally, if you want to exclude most tools, but not all, you can exclude all and then add back in the ones you want:
@@ -77,9 +71,7 @@ image::input-type-html-area-some-controls.png[An HtmlArea configured to include 
 
 == Task: Add a rich text area to your {content-type-2-capitalized} content type
 
-Your {content-type-2-capitalized} already has a TextArea input type for 'description'. Let's upgrade that to an HtmlArea input type.
-
-The input should be optional have at most a single occurrence. You can include any editor tools you want, but it must at least have the `image` and `macro` tools, as we'll be using these later. Otherwise, configure it as you want.
+Let's add a rich-text description to our {content-type-2}s. The input should be optional have at most a single occurrence. You can include any editor tools you want, but it must at least have the `image` and `macro` tools, as we'll be using these later. Otherwise, configure it as you want.
 
 Once you've done that, add some text to one of your {content-type-2}s and try out the HtmlArea.
 
@@ -95,14 +87,16 @@ It'll look a little something like this:
   <super-type>base:structured</super-type>
   <form>
 
-    <input name="name" type="TextLine">
-      <label>Name</label>
-      <help-text>
-        Put the name of the animal here. You can be as
-        specific or as vague as you like. "Dog" is just as good as
-        "Canis lupus familiaris".
-      </help-text>
-      <occurrences minimum="1" maximum="0"></occurrences>
+    <input type="TextLine" name="otherNames">
+      <label>Other names</label>
+      <help-text>Other names for this species.</help-text>
+      <occurrences minimum="0" maximum="0" />
+    </input>
+
+    <input name="images" type="ImageSelector">
+      <label>Images</label>
+      <help-text>Images of the animal</help-text>
+      <occurrences minimum="0" maximum="3" /> <!--4-->
     </input>
 
     <input name="description" type="HtmlArea">
@@ -122,11 +116,44 @@ It'll look a little something like this:
 
 == Images
 
-If you have configured your HtmlArea to include the image tool, you can click the image button to insert an image. Once you select an image, you'll get a prompt that allows you to customize the image. You can add a caption, alt text, change the image's justification in the block, and apply predefined styles. There's also a pencil icon in the upper right corner that allows you to edit the image, as covered in xref:input-types#_working_with_images[a previous {document}].
+If you have configured your HtmlArea to include the image tool, you can click the image button to insert an image. Once you select an image, you'll get a prompt that allows you to customize the image. You can add a caption, alt text, change the image's justification in the block, and apply predefined image styles. There's also a pencil icon in the upper right corner that allows you to edit the image, as covered in xref:input-types#_working_with_images[a previous {document}].
 
-== Task: Add an image to an {content-type-2}
+== Task: Add an image to an {content-type-2} and style it
 
 Try out the image controls that Content Studio gives you by uploading a picture and seeing what you can do with it. Remember to click the pencil icon to try the advanced editing tools such as cropping and focal points.
+
+We looked at xref:input-types#_working_with_images[editing images in the previous {document}], but the HtmlArea also offers you something called "image styles", which we'll have a look at now.
+
+When you insert an image via the HtmlArea toolbar, you'll be greeted by the "insert image" dialog:
+
+.The HtmlArea insert image dialog. Photo by https://unsplash.com/@kydroon[Kurt Cotoaga] 🦁
+image::rich-text-insert-image.png["The insert image dialog, showing the image, an image styles dropdown, caption, and alt text fields", width=800]
+
+If you try and access the "image styles" dropdown, you'll find that it's only got two options and neither of them seem to do much. To make this more exciting, let's also create a custom image style.
+
+In a new file, `src/main/resources/site/styles.xml`, place the following simple style configuration:
+
+.A very basic styles configuration
+[source,xml,subs={subs}]
+----
+<styles>
+  <image name="editor-style-image-black">
+    <display-name>Grayscale</display-name>
+    <filter>hsbcolorize(0x000000); grayscale(); border(6, 0x000000)</filter>
+  </image>
+</styles>
+----
+
+The above configuration turns the image into grayscale and adds a border to the image.
+
+NOTE: https://developer.enonic.com/docs/xp/stable/cms/styles[The styles reference docs] have more information on how you can style your images, so go check it out for a deeper dive.
+
+With this style picked up by XP, you'll have the "Grayscale" option available in the image styles dropdown. Select it to apply it to the image.
+
+.An image with applied image style
+image::rich-text-insert-image-styled.png["The insert image dialog showing the results of applying the image styles to the image", width=800]
+
+=== Headless: fetching image styles
 
 == Macros
 
