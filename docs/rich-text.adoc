@@ -27,7 +27,7 @@ By default, it includes a limited, but useful selection of tools at your disposa
 [source,xml]
 ----
 <input type="HtmlArea" name="everything">
-  <label>HtmlArea with 'include *'</label>
+  <label>HtmlArea</label>
 </input>
 ----
 
