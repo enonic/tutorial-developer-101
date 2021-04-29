@@ -151,7 +151,7 @@ NOTE: https://developer.enonic.com/docs/xp/stable/cms/styles[The styles referenc
 
 With this style picked up by XP, you'll have the "Grayscale" option available in the image styles dropdown. Select it to apply it to the image.
 
-.An image with applied image style
+.An image with an image style applied
 image::rich-text-insert-image-styled.png["The insert image dialog showing the results of applying the image styles to the image", width=800]
 
 === Headless: fetching images and styles from HtmlArea
