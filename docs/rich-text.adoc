@@ -307,7 +307,7 @@ You can extract the properties that you specified in your `styles.xml` previousl
 
 Macros enable you to insert rich components into your text. When the page is rendered, the macro call is resolved and replaced. When the macro is resolved, it will either add text to your page or styles or scripts. See the https://developer.enonic.com/docs/xp/stable/cms/macros[macro reference docs] for a more in-depth explanation of how this works. In this section, we'll install a macro from an external application (_{macro-app}_), and see how to use it.
 
-=== Task: Install the {macro-app} package
+=== Task: Install and use the {macro-app} package
 
 The {macro-app} package comes with a set of macros that let you put text differently colored items with icons.
 
@@ -322,11 +322,34 @@ To use these macros, we first need to install the {macro-app}.
 . Edit your site ({p1-site-name}). In the applications dropdown, find {macro-app}, and add it.
 . Save and exit.
 
-
-
-=== Using macros
-
 To add a macro to your HtmlArea, the easiest (and recommended) way is to use the macro tool.
+
+Open up an {content-type-2} and try it out! The below example will use the "reindeer" created earlier.
+
+. In the "Description" field, click the "insert macro" tool.
+. Select one of the panels. If you have no preference, try the "Info panel".
+. Add a header and some text to it. For reindeer, try:
++
+.Reindeer macro data
+Header:: Habitats
+Text:: Reindeer are native to Arctic, sub-Arctic, tundra, boreal, and mountainous regions of northern Europe, Siberia, and North America.
+
++
+
+.The insert macro form with reindeer data
+image::macros-insert-macro.png["A form with 'header' and 'description' fields. Used to set macro parameters.", width=800]
+. Try out the preview and see your macro in action
++
+.The macro preview function
+image::macros-preview-macro.png["The text we specified in the macro preview form inside a light blue box with an icon attached", width=800]
+
+For more information on macros, including how to create your very own macros, refer back to https://developer.enonic.com/docs/xp/stable/cms/macros[the macro reference docs] from before.
+
+=== Headless: Macros in headless contexts
+
+What
+
+=== Task: Us
 
 
 Adding macros to HtmlAreas looks quite a lot like the XML configuration we've been doing up until now, except that we use square brackets instead of angle brackets (`[]` instead of `<>`). You specify the name and any required attributes. Some macros are self-closing and accept no contents, while others accept content and must be closed later. To close a self-closing macro, add a `/` before the first closing bracket (`]`).
