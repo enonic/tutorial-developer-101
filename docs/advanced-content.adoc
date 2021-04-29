@@ -37,7 +37,7 @@ Mixins go in in the `/src/main/resources/site/mixins` directory, following the s
 
 Save this file in `/src/main/resources/site/mixins/{mixin}/{mixin}.xml`:
 
-[src, xml, subs={subs}]
+[src, xml, {subs}]
 ----
 <mixin>
   <display-name>Creature descriptor</display-name>
@@ -66,7 +66,7 @@ Save this file in `/src/main/resources/site/mixins/{mixin}/{mixin}.xml`:
 We can then update the `{content-type-2-capitalized}` to use this mixin instead. Now it'll look a little something like this:o
 
 .The `{content-type-2-capitalized}` content type using a mixin
-[src,xml,subs={subs}]
+[src,xml,{subs}]
 ----
 <content-type>
   <display-name>Animal</display-name>
@@ -81,7 +81,7 @@ We can then update the `{content-type-2-capitalized}` to use this mixin instead.
 ----
 
 .The `{content-type-3-capitalized}` content type
-[source,xml,subs={subs}]
+[source,xml,{subs}]
 ----
 <content-type>
   <display-name>Legendary Creature</display-name>
@@ -120,7 +120,7 @@ Let's add an item set to the `{content-type-1-capitalized}`. All the people we e
 To add an item set, use it as you would any other input type: place it within the `form` element of a content type. If we add it to the `{content-type-1-capitalized}` content type, it'd look something like this:
 
 .{content-type-1-capitalized} with an added Item Set
-[source,xml,subs={subs}]
+[source,xml,{subs}]
 ----
 <content-type>
   <display-name>person</display-name>

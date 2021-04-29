@@ -17,4 +17,4 @@
 :content-type-2-capitalized: Animal
 :content-type-3: legendaryCreature
 :content-type-3-capitalized: LegendaryCreature
-:subs: "attributes+"
+:subs: subs="attributes+"

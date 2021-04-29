@@ -150,7 +150,7 @@ When you've got that, create a GraphQL query that'll fetch all {content-type-1}s
 First, we'll create the animal content type. In `src/main/resources/site/content-types/{content-type-2}/{content-type-2}.xml`, place the following content:
 
 .The {content-type-2} content type
-[source,xml,subs={subs}]
+[source,xml,{subs}]
 ----
 <content-type>
   <display-name>{content-type-2-capitalized}</display-name>
@@ -183,7 +183,7 @@ First, we'll create the animal content type. In `src/main/resources/site/content
 Next, we'll update the `{content-type-1-capitalized}` content type.
 
 .An updated {content-type-1}
-[source,xml,subs={subs}]
+[source,xml,{subs}]
 ----
 <content-type>
   <display-name>{content-type-1-capitalized}</display-name>
@@ -231,7 +231,7 @@ Now create some links using ContentSelector from {content-type-1}s to {content-t
 The way to link to linked content in GraphQL is to add it as a field as part of the data. This query will fetch all {content-type-1}s and their linked {content-type-2}s:
 
 .Query to fetch {content-type-1}s with their associated favorite animals
-[source,GraphQL,subs={subs}]
+[source,GraphQL,{subs}]
 ----
 {
   guillotine {
@@ -316,7 +316,7 @@ Depending on the links (and {content-type-2}s) you created, your result might lo
 What about fetching the images on the {content-type-2}s? Let's look at a slightly more advanced query. Use the display name for one of the {content-type-2}s that you uploaded an image to to filter the content types you're interested in. Then, specify that you only want the first image in the list. This query is a bit more advanced that what we've seen so far, so it deserves a little bit of explanation:
 
 .An image query
-[source,xml,subs={subs}]
+[source,xml,{subs}]
 ----
 {
   guillotine {

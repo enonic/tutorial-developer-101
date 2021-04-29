@@ -36,7 +36,7 @@ Now, unless you've created it manually, then that directory doesn't exist in our
 In the `{content-type-1}.xml` file, place the following contents:
 
 .The '{content-type-1-capitalized}' content type
-[source,xml,subs={subs}]
+[source,xml,{subs}]
 ----
 <content-type>
   <display-name>{content-type-1-capitalized}</display-name> <!--1-->
@@ -171,7 +171,7 @@ In this {document}, we'll only barely dip our toes into the waters of GraphQL. W
 To see what GraphQL can do for us, let's see if we can just fetch all the {content-type-1}s that we created. Copy the below query into your playground and run it by pressing kbd:[ctrl+enter]/kbd:[⌘+enter] or by clicking the play button.
 
 .A GraphQL query fetching all content below the "{p1-site-name}" site
-[source,GraphQL,subs={subs}"]
+[source,GraphQL,{subs}"]
 ----
 {
   guillotine {
@@ -210,7 +210,7 @@ The result of this query should list all the {content-type-1}s you created previ
 Neat! Next, let's try a slightly more complicated query. In this one,  we'll also get the data inside the content nodes and extract their names and alias fields.
 
 .A GraphQL query that fetches all {content-type-1}s and their data
-[source, GraphQL,subs={subs}]
+[source, GraphQL,{subs}]
 ----
 {
   guillotine {
@@ -231,7 +231,7 @@ Neat! Next, let's try a slightly more complicated query. In this one,  we'll als
 Execute this and your response should look a little something like this:
 
 .{content-type-1-capitalized}s and their aliases as returned by GraphQL
-[source,JSON,subs={subs}]
+[source,JSON,{subs}]
 ----
 {
   "data": {

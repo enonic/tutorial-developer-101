@@ -79,7 +79,7 @@ Once you've done that, add some text to one of your {content-type-2}s and try ou
 It'll look a little something like this:
 
 .{content-type-2-capitalized} with an HtmlArea input type
-[source,xml,subs={subs}]
+[source,xml,{subs}]
 ----
 <?xml version="1.0" encoding="utf-8"?>
 <content-type>
@@ -135,7 +135,7 @@ If you try and access the "image styles" dropdown, you'll find that it's only go
 In a new file, `src/main/resources/site/styles.xml`, place the following simple style configuration:
 
 .A very basic styles configuration
-[source,xml,subs={subs}]
+[source,xml,{subs}]
 ----
 <styles>
   <image name="conteditor-style-grayscale">
@@ -154,25 +154,111 @@ With this style picked up by XP, you'll have the "Grayscale" option available in
 .An image with applied image style
 image::rich-text-insert-image-styled.png["The insert image dialog showing the results of applying the image styles to the image", width=800]
 
-=== Headless: fetching image styles
+=== Headless: fetching images and styles from HtmlArea
 
-[source,GraphQL,subs={subs}]
+When you add a an image to a rich text input, you can fetch it via GraphQL using the `processedHtml` sub selection of your rich text field.  Let's look at how that works. To start us off, this query finds the piece of content that we added the added the image to (the "Lion" 🦁) and extracts its processed HTML from its description.
+
+This simple query just fetches the processed HTML of the HTML area:
+
+.Fetching rich text
+[source,GraphQL,{subs}]
+----
+{
+  guillotine {
+    query(contentTypes:"{project-name-full}:{content-type-2}",
+      query: "displayName = 'Lion'") {
+      ... on {project-name-query}_{content-type-2-Capitalized} {
+        data {
+          description {
+            processedHtml
+          }
+        }
+      }
+    }
+  }
+}
+----
+
+In the returned HTML, you can see the image with styles applied. If you extract the `src` value and add it after `localhost:8080` (or any other instance), you should find the image with styles applied.
+
+.The query result for the processed HTML
+[source,json]
+----
+{
+  "data": {
+    "guillotine": {
+      "query": [
+        {
+          "data": {
+            "description": {
+              "processedHtml": "<figure class=\"captioned editor-align-justify editor-style-grayscale\"><img alt=\"A yawning lion cub\" src=\"/site/default/draft/my-first-site/_/image/ef8605b1-6966-4011-bbfe-65c4c2e9ec86:d5d96909fc488356fd24e67763cbb1868b3f77c3/width-768/lion-cub.jpg?filter=hsbcolorize%280x000000%29%3B+grayscale%28%29%3B+border%286%2C+0x000000%29\" data-image-ref=\"23dc2b52-2e06-46cc-b42c-953ef51ae650\" style=\"width:100%\" />\n<figcaption>Soooo sleepy 😪</figcaption>\n</figure>\n\n<p>&nbsp;</p>\n"
+            }
+          }
+        }
+      ]
+    }
+  }
+}
+----
+
+But wait, there's more! You can also get the image in different sizes (using https://developer.mozilla.org/en-US/docs/Web/API/HTMLImageElement/srcset[the `srcset` attribute (MDN)]) by adding a `processHtml` argument to `description`:
+
+.Fetching rich text with `srcset`
+[source,GraphQL,{subs}]
+----
+{
+  guillotine {
+    query(contentTypes:"{project-name-full}:{content-type-2}",
+      query: "displayName = 'Lion'") {
+      ... on {project-name-query}_{content-type-2-Capitalized} {
+        data {
+          description(processHtml: {imageWidths: [200, 500]}) {
+            processedHtml
+          }
+        }
+      }
+    }
+  }
+}
+----
+
+That'll get you a result that looks like this:
+
+.Result with `srcset`
+[source,json]
+----
+{
+  "data": {
+    "guillotine": {
+      "query": [
+        {
+          "data": {
+            "description": {
+              "processedHtml": "<figure class=\"captioned editor-align-justify editor-style-grayscale\"><img alt=\"A yawning lion cub\" src=\"/site/default/draft/my-first-site/_/image/ef8605b1-6966-4011-bbfe-65c4c2e9ec86:d5d96909fc488356fd24e67763cbb1868b3f77c3/width-768/lion-cub.jpg?filter=hsbcolorize%280x000000%29%3B+grayscale%28%29%3B+border%286%2C+0x000000%29\" data-image-ref=\"21d88d0f-aa30-4c0b-9830-37893f9ff642\" srcset=\"/site/default/draft/my-first-site/_/image/ef8605b1-6966-4011-bbfe-65c4c2e9ec86:d5d96909fc488356fd24e67763cbb1868b3f77c3/width-200/lion-cub.jpg?filter=hsbcolorize%280x000000%29%3B+grayscale%28%29%3B+border%286%2C+0x000000%29 200w,/site/default/draft/my-first-site/_/image/ef8605b1-6966-4011-bbfe-65c4c2e9ec86:d5d96909fc488356fd24e67763cbb1868b3f77c3/width-500/lion-cub.jpg?filter=hsbcolorize%280x000000%29%3B+grayscale%28%29%3B+border%286%2C+0x000000%29 500w\" style=\"width:100%\" />\n<figcaption>Soooo sleepy 😪</figcaption>\n</figure>\n\n<p>&nbsp;</p>\n"
+            }
+          }
+        }
+      ]
+    }
+  }
+}
+----
+
+If reading escaped HTML in a JSON string isn't your favorite thing, the important part of the above result is that we've gotten a `srcset` attribute for our image, which means that the browser will pick the size of the image that best suits the current situation (based on screen sizes etc.), and use a smaller image when possible. This means fewer bytes across the wire and faster load times!
+
+And finally, what if we want to extract styling info? In our case, the styling is done on the server, but in case you want to fetch and use that for some reason, we can do that too:
+
+.Fetching image styles from an HtmlArea
+[source,GraphQL,{subs}]
 ----
 {
   guillotine {
     query(contentTypes:"com.example.myproject:animal",
       query: "displayName = 'Lion'") {
-      displayName
-			... on com_example_myproject_Animal {
+      ... on com_example_myproject_Animal {
         data {
           description {
             images {
-              image {
-              	... on media_Image {
-                	imageUrl(scale:"width(500)",type:absolute)
-              	}
-              }
-
               style {
                 name
                 aspectRatio
@@ -186,7 +272,36 @@ image::rich-text-insert-image-styled.png["The insert image dialog showing the re
   }
 }
 ----
- But what do I do with the style info? Apply that in CSS?
+
+You can extract the properties that you specified in your `styles.xml` previously:
+
+.The result of fetching image styles
+[source,json]
+----
+{
+  "data": {
+    "guillotine": {
+      "query": [
+        {
+          "data": {
+            "description": {
+              "images": [
+                {
+                  "style": {
+                    "name": "editor-style-grayscale",
+                    "aspectRatio": null,
+                    "filter": "hsbcolorize(0x000000); grayscale(); border(6, 0x000000)"
+                  }
+                }
+              ]
+            }
+          }
+        }
+      ]
+    }
+  }
+}
+----
 
 == Macros
 
@@ -331,7 +446,7 @@ image::rich-text-content-macro-image["An {content-type-2} with an image and a ma
 We can fetch this in it's entirety with the following query:
 
 .A query for {content-type-2}s
-[source,graphql,subs={subs}]
+[source,graphql,{subs}]
 ----
 {
   guillotine {
@@ -356,7 +471,7 @@ The only thing about this query that we haven't seen before, is that `descriptio
 The above query will yield something like this (depending on how many {content-type-2}s you have).
 
 .A response to the {content-type-2} query
-[source,json,subs={subs}]
+[source,json,{subs}]
 ----
 {
   "data": {
@@ -383,7 +498,7 @@ The above query will yield something like this (depending on how many {content-t
 Additionally, we can also pass a `processHtml` argument to the description field and specify what sort of image widths we want. This is great for responsiveness and not serving your users larger images than what they need on their devices. For instance, if we want to get images sized at 50 and 200 pixels wide, we could write a query as below. This time we'll also include the `raw` rich text so you can compare the differences:
 
 .A query that specifies image widths
-[source,GraphQL,subs={subs}]
+[source,GraphQL,{subs}]
 ----
 {
   guillotine {
@@ -407,7 +522,7 @@ Additionally, we can also pass a `processHtml` argument to the description field
 That'll get us back something that looks like the following:
 
 .A response including raw and processed HTML
-[source,json,subs={subs}]
+[source,json,{subs}]
 ----
 {
   "data": {
