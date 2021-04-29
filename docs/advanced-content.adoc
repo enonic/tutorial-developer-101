@@ -51,6 +51,10 @@ For the {content-type-2}s we've created thus far, we've brought in data and imag
 - Add the X-data to your site, but only to the `{content-type-2-capitalized}` content type.
 - Try adding some references to one of your {content-type-2}s.
 
+==== Solution
+
+ The X-data schema is very similar to the content type schemas we've worked with previously, so there's no real surprises here; just remember to wrap everything in an `x-data` tag:
+
 .The {x-data} X-data schema
 [source,xml,{subs}]
 ----
@@ -65,11 +69,13 @@ For the {content-type-2}s we've created thus far, we've brought in data and imag
 </x-data>
 ----
 
+Next, you need to reference the X-data in your `site.xml` and tell XP what content types it applies to. To do that, add an `x-data` tag in `site.xml` that has a `name` attribute that matches the name of your X-data ({x-data}). Make sure you add the `x-data` element before the `form` and `mappings` elements.
+
 .The updated site.xml
 [source,xml,{subs}]
 ----
 <site>
-  <x-data name="{x-data}" allowContentTypes="{project-name-full}:{content-type-2}"/>
+  <x-data name="{x-data}" allowContentTypes="{project-name-full}:{content-type-2}"/> <--.-->
   <form/>
   <mappings>
     <mapping controller="/controllers/graphql.js" order="50">
@@ -79,7 +85,11 @@ For the {content-type-2}s we've created thus far, we've brought in data and imag
 </site>
 ----
 
-Make sure you add the `x-data` element before the `form` and `mappings` elements.
+<.> We use a regular expression to restrict which content types the X-data should apply to. In this case: only to `{content-type-2-capitalized}`
+
+
+
+
 
 === Headless: fetching X-data
 
