@@ -1,6 +1,7 @@
 = Advanced content
 include::variables.adoc[]
-:mixin: creatureDescriptor
+:x-data: references
+:x-data-capitalized: References
 
 Over the previous two {document}s, we've looked at content types and input types. We've explored how to use and configure input types, but we've only seen input types as standalone components. What if we want to group or reuse a set of inputs across several content types? We'll be looking at that in this {document}.
 
@@ -29,9 +30,58 @@ Note that in-editor schema validation depends on whether your text editor suppor
 
 == Mixins
 
-The first and simplest option for reuse is _mixins_ . Mixins allow you to reuse fields across several content types. They won't look or behave any different from if you manually typed the same fields into multiple content types, but it lets you keep them in sync.  Mixins go in in the `/src/main/resources/site/mixins` directory, following the same naming pattern as the other schemas we've seen (`<mixin-name>/<mixin-name>.xml`).
+The first and simplest option for reuse is _mixins_. Mixins allow you to reuse fields across several content types. They won't look or behave any different from if you manually typed the same fields into multiple content types, but it lets you keep them in sync.  Mixins go in in the `/src/main/resources/site/mixins` directory, following the same naming pattern as the other schemas we've seen (`<mixin-name>/<mixin-name>.xml`).
 
 To learn more about mixins, consult https://developer.enonic.com/docs/xp/stable/cms/mixins[the mixins reference documentation].
+
+== X-data
+
+X-data (short for _eXtra-data_) is a way for you to dynamically add extra data to some or all content types belonging to a site. In Content Studio, they'll be displayed as a separate field set below the content type's normal fields.
+
+By configuring your application's `site.xml` (`src/main/resources/site/site.xml`) you can select which X-data schemas to add and to which content types, and whether to make the X-data optional or not. Go to the https://developer.enonic.com/docs/xp/stable/cms/x-data[X-data documentation] to read more about how.
+
+As per usual, X-data schemas follow this naming and placement convention: `src/main/resources/site/x-data/<x-data-name>/<x-data-name>.xml`.
+
+=== Task: add reference data
+
+For the {content-type-2}s we've created thus far, we've brought in data and images from Wikipedia, but we haven't indicated this anywhere. If we wanted to indicate where we got some information from, we could do it using X-data. Your task is:
+
+- Create a new X-data type. Call it {x-data}.
+- It should have a single input field, "reference", that can have as many occurrences as the user wants
+- Add the X-data to your site, but only to the `{content-type-2-capitalized}` content type.
+- Try adding some references to one of your {content-type-2}s.
+
+.The {x-data} X-data schema
+[source,xml,{subs}]
+----
+<x-data>
+  <display-name>References</display-name>
+  <form>
+    <input type="TextLine" name="reference">
+      <label>Reference</label>
+      <occurrences minimum="0" maximum="0" />
+    </input>
+  </form>
+</x-data>
+----
+
+.The updated site.xml
+[source,xml,{subs}]
+----
+<site>
+  <x-data name="{x-data}" allowContentTypes="{project-name-full}:{content-type-2}"/>
+  <form/>
+  <mappings>
+    <mapping controller="/controllers/graphql.js" order="50">
+      <pattern>/api</pattern>
+    </mapping>
+  </mappings>
+</site>
+----
+
+Make sure you add the `x-data` element before the `form` and `mappings` elements.
+
+=== Headless: fetching X-data
 
 == Item sets
 
