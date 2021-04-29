@@ -29,79 +29,9 @@ Note that in-editor schema validation depends on whether your text editor suppor
 
 == Mixins
 
-The first and simplest option for reuse is _mixins_ (https://developer.enonic.com/docs/xp/stable/cms/mixins[mixins reference documentation]). Mixins allow you to reuse fields across several content types. They won't look or behave any different from if you manually typed the same fields into multiple content types, but it lets you keep them in sync. To demonstrate this, we'll create a `{content-type-3-capitalized}` content type that shares most of its configuration with the `{content-type-2-capitalized}` content type, but which also adds some extra fields.
+The first and simplest option for reuse is _mixins_ . Mixins allow you to reuse fields across several content types. They won't look or behave any different from if you manually typed the same fields into multiple content types, but it lets you keep them in sync.  Mixins go in in the `/src/main/resources/site/mixins` directory, following the same naming pattern as the other schemas we've seen (`<mixin-name>/<mixin-name>.xml`).
 
-We'll want to reuse the `name` and `description` fields from animal, but a `{content-type-3-capitalized}` should also have a list of sources it appears in, such as mythology or stories. We'll start by extracting the `name` and `description` fields into a mixin.
-
-Mixins go in in the `/src/main/resources/site/mixins` directory, following the same naming pattern as the other schemas we've seen. Let's create a `{mixin}` mixin.
-
-Save this file in `/src/main/resources/site/mixins/{mixin}/{mixin}.xml`:
-
-[src, xml, {subs}]
-----
-<mixin>
-  <display-name>Creature descriptor</display-name>
-  <form>
-    <input name="name" type="TextLine">
-      <label>Name</label>
-      <help-text>Put the names of the creature here. You can be as
-      specific or as vague as you like.
-      </help-text>
-      <occurrences minimum="1" maximum="0"></occurrences>
-    </input>
-
-    <input name="description" type="HtmlArea" >
-      <label>Description</label>
-      <help-text>Describe the creature. Where its habitats are, what it
-      eats, etc.</help-text>
-      <config>
-        <exclude>*</exclude>
-        <include>Format Macro Image</include>
-      </config>
-    </input>
-  </form>
-</mixin>
-----
-
-We can then update the `{content-type-2-capitalized}` to use this mixin instead. Now it'll look a little something like this:o
-
-.The `{content-type-2-capitalized}` content type using a mixin
-[src,xml,{subs}]
-----
-<content-type>
-  <display-name>Animal</display-name>
-  <description>An animal that lives on planet Earth</description>
-  <super-type>base:structured</super-type>
-  <form>
-
-    <mixin name="creatureDescriptor"/>
-
-  </form>
-</content-type>
-----
-
-.The `{content-type-3-capitalized}` content type
-[source,xml,{subs}]
-----
-<content-type>
-  <display-name>Legendary Creature</display-name>
-  <description>A mythological creature</description>
-  <display-name-expression>${name}</display-name-expression>
-  <super-type>base:structured</super-type>
-  <form>
-
-    <mixin name="creatureDescriptor"/>
-
-    <input type="TextLine" name="appearsIn">
-      <label>Appears in:</label>
-      <occurrences minimum="0" maximum="0" />
-    </input>
-  </form>
-</content-type>
-----
-
-Mixins provide a handy way of reusing the same inputs across different content types. However, if you want to group a set of fields as a logical unit, you may be better off looking at item sets. Luckily, that's coming right up.
-
+To learn more about mixins, consult https://developer.enonic.com/docs/xp/stable/cms/mixins[the mixins reference documentation].
 
 == Item sets
 
