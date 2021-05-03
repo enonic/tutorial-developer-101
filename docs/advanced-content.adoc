@@ -194,24 +194,21 @@ image::item-set-album.png["An example of using the Album item set with two album
 
 == Option sets
 
-Option sets enable editors (working in Content Studio) to choose from a set of predefined options. While this might sound similar to the ComboBox element, option sets also come with the option of attaching other input types (arbitrarily nested data) to each choice. Option sets can be either single-select or multi-select variants.
+Option sets enable editors (working in Content Studio) to choose from a set of predefined options. This is similar to the ComboBox element, but option sets also allow options to carry extra data.
+
+To illustrate this, let's take the item set task we just did. We could (and will in the next task) expand this list to also include singles and film appearances. To do that, each entry could be one of album, single, or film appearance. Depending on the kind of entry, it would also have different associated data. For instance, a film might also note the role played.
+
+Option sets where users can select only one of a number of options are known as _single-select_ option sets. You can also use a _multi-select_ option set if the user should be able to select multiple options simultaneously. We'll look at this too in a task below.
 
 The https://developer.enonic.com/docs/xp/stable/cms/sets#option_set[option set reference documentation] provides a good overview (with accompanying pictures) of how option sets work. Additionally, https://developer.enonic.com/docs/xp/stable/cms/schemas#option_set[the option set schema overview] is very thorough and full of examples on how to use the various configuration options.
 
+=== Task: extend album list for {content-type-1}s
 
-=== Comparison to other data structures
-
-As their name would imply, option sets are basically sets of option. For each entry, you can choose whether to include it or not. Depending on the number of options you can choose (single-select vs multi-select), option sets work a little differently. Single-select option sets, work the same as union types or enums in a number of programming languages: you can pick one, and each option can have it's separate piece of associated data. Multi-selects essentially allow you to choose any combination of the options. (For those of you into combinatorics, that means we can get up to 2^n^ (where n is the number of options) variations if you can choose as many options as you want 🤓)
-
-
-=== Task: add habitat and dietary data to {content-type-2}s
+=== Task: add habitat data to {content-type-2}s
 
 In this section, we'll use option sets to add some extra data to our `{content-type-2-capitalized}` data type. Our goal is:
 
-- Add an option set for feeding behavior. It should have two options
-.. Herbivore, which has no associated data
-.. Carnivore, which allows the user to add any number of prey
-- Add an option for habitat. The user should be able to select as many as they want from the 7 continents to indicate where the animal lives.
+- Add an option for habitat. The user should be able to select as many as they want from the 7 continents to indicate where the animal lives. Each option should have an associated TextArea called "notes", where the user can add more data for each option.
 
 As before, we use option sets as we would any other input type:
 
