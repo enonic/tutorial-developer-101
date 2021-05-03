@@ -1,7 +1,7 @@
 = Advanced content
 include::variables.adoc[]
-:x-data: references
-:x-data-capitalized: References
+:x-data: notes
+:x-data-capitalized: Notes
 
 Over the previous two {document}s, we've looked at content types and input types. We've explored how to use and configure input types, but we've only seen input types as standalone components. What if we want to group or reuse a set of inputs across several content types? We'll be looking at that in this {document}.
 
@@ -53,16 +53,16 @@ For the {content-type-2}s we've created thus far, we've brought in data and imag
 
 ==== Solution
 
- The X-data schema is very similar to the content type schemas we've worked with previously, so there's no real surprises here; just remember to wrap everything in an `x-data` tag:
+The X-data schema is very similar to the content type schemas we've worked with previously, so there's no real surprises here; just remember to wrap everything in an `x-data` tag:
 
 .The {x-data} X-data schema
 [source,xml,{subs}]
 ----
 <x-data>
-  <display-name>References</display-name>
+  <display-name>{x-data-Capitalized}</display-name>
   <form>
-    <input type="TextLine" name="reference">
-      <label>Reference</label>
+    <input type="TextLine" name="notes">
+      <label>Notes</label>
       <occurrences minimum="0" maximum="0" />
     </input>
   </form>
@@ -87,11 +87,58 @@ Next, you need to reference the X-data in your `site.xml` and tell XP what conte
 
 <.> We use a regular expression to restrict which content types the X-data should apply to. In this case: only to `{content-type-2-capitalized}`
 
+Now, if you open Content Studio, you should be able to add references to your {content-type-2-capitalized} content:
 
-
+.Adding a reference
+image::x-data-example.png["The content form for Lion with an additional 'References' section below the usual inputs. The first reference, a TextLine input, points to the Wikipedia article.'", width=600]
 
 
 === Headless: fetching X-data
+
+When working headlessly, you can easily fetch X-data by querying for the `x` property of your content type. This query will fetch
+
+.Querying for X-data
+[source,GraphQL,{subs}]
+----
+{
+  guillotine {
+    query(contentTypes:"{project-name-full}:{content-type-2}",
+      query: "displayName = 'Lion'") {
+      ... on {project-name-query}_{content-type-2-Capitalized} {
+        x {
+          name
+          data
+        }
+      }
+    }
+  }
+}
+----
+
+So if you've added some references to your "Lion", you'll get something like this back:
+
+.X-data results
+[source,json]
+----
+{
+  "data": {
+    "guillotine": {
+      "query": [
+        {
+          "x": [
+            {
+              "name": "com-example-myproject:notes",
+              "data": "{references=Lion (Wikipedia): https://en.wikipedia.org/wiki/Lion}"
+            }
+          ]
+        }
+      ]
+    }
+  }
+}
+----
+
+TODO: explain how to use the `x[].data` property?
 
 == Item sets
 
