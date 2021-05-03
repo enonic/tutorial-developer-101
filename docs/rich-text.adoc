@@ -303,7 +303,7 @@ You can extract the properties that you specified in your `styles.xml` previousl
 
 == Macros
 
-Macros enable you to insert rich components into your text. When the page is rendered, the macro call is resolved and replaced. When the macro is resolved, it will either add text to your page or styles or scripts. See the https://developer.enonic.com/docs/xp/stable/cms/macros[macro reference docs] for a more in-depth explanation of how this works. In this section, we'll install a macro from an external application (_{macro-app}_), and see how to use it.
+Macros enable you to insert rich components into your text. When the page is rendered, the macro call is resolved and replaced. When the macro is resolved, it will either add text to your page or styles or scripts. See the https://developer.enonic.com/docs/xp/stable/cms/macros[macro reference docs] for a more in-depth explanation of how this works. In this section, we'll install a macro from an external application (_{macro-app}_), and look at how to use it. We'll also see how macros behave in a headless context.
 
 === Task: Install and use the {macro-app} package
 
@@ -345,7 +345,67 @@ For more information on macros, including how to create your very own macros, re
 
 === Headless: Macros in headless contexts
 
-What
+In headless contexts, you don't get macros fully rendered. Instead, XP inserts `<editor-macro>` elements into the output of the HtmlArea. Each `<editor-macro>` has a `data-macro-ref` attribute that contains a unique reference. Use this reference to match it up with the macro data.
+
+NOTE: When working headlessly, macros contain only data and _not_ any form of markup. In other words: the client needs to construct the markup and styling itself. Thus, the preview you see in Content Studio does not reflect what you get in a headless context. You would have to implement the markup and styling yourself.
+
+Let's try and fetch the macro you just added to your {content-type-2}:
+
+.Query that fetches all macro info from an HtmlArea
+[source,GraphQL,{subs}]
+----
+{
+  guillotine {
+    query(contentTypes:"{project-name-full}:{content-type-2}",
+      query: "displayName = 'Reindeer'") {
+      ... on {project-name-query}_{content-type-2-capitalized} {
+        data {
+          description {
+            processedHtml
+            macrosAsJson
+          }
+        }
+      }
+    }
+  }
+}
+----
+
+.Macro query result
+[source,json]
+----
+{
+  "data": {
+    "guillotine": {
+      "query": [
+        {
+          "data": {
+            "description": { <--.-->
+              "processedHtml": "<p><editor-macro data-macro-name=\"info\" data-macro-ref=\"b226bdbb-a781-44e8-9402-dfc5d086af41\">Reindeer are native to Arctic, sub-Arctic, tundra, boreal, and mountainous regions of northern Europe, Siberia, and North America.</editor-macro></p>\n",
+              "macrosAsJson": [ <--.-->
+                {
+                  "ref": "b226bdbb-a781-44e8-9402-dfc5d086af41",
+                  "name": "info",
+                  "descriptor": "com.enonic.app.panelmacros:info",
+                  "config": {
+                    "info": {
+                      "body": "Reindeer are native to Arctic, sub-Arctic, tundra, boreal, and mountainous regions of northern Europe, Siberia, and North America.",
+                      "header": "Habitats"
+                    }
+                  }
+                }
+              ]
+            }
+          }
+        }
+      ]
+    }
+  }
+}
+----
+
+<.> The description now contains `<editor-macro>` tags in its `processedHtml` property.
+<.> Using the `macrosAsJson` property, you can get the type and content of the macros.
 
 == Next
 
