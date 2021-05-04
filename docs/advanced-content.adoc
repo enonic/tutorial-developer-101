@@ -171,7 +171,7 @@ To add an item set, use it as you would any other input type: place it within th
       <label>Album</label>
       <occurrences minimum="0" maximum="0" />
       <items>
-        <input name="Title" type="TextLine">
+        <input name="title" type="TextLine">
           <label>Title</label>
           <occurrences minimum="1" maximum="1" />
           </input>
@@ -190,6 +190,59 @@ Note that the remaining fields of the form have been left out in the above examp
 With this new item set, we can add as many albums as we want:
 
 image::item-set-album.png["An example of using the Album item set with two albums included.", width=800]
+
+=== Headless: fetching item sets
+
+Getting item sets via GraphQL is not much different than anything else we've seen:
+
+.Fetching albums
+[source,GraphQL,{subs}]
+----
+{
+  guillotine {
+    query(contentTypes:"{project-name-full}:{content-type-1}",
+      query: "displayName = 'P!nk'") {
+      ... on {project-name-query}_{content-type-1-capitalized} {
+        data {
+          albums {
+            title
+            releaseYear
+          }
+        }
+      }
+    }
+  }
+}
+----
+
+With some data added for P!nk, you'd get a result like this:
+
+.Album data
+[source,json]
+----
+{
+  "data": {
+    "guillotine": {
+      "query": [
+        {
+          "data": {
+            "albums": [
+              {
+                "title": "The Truth About Love",
+                "releaseYear": "2012"
+              },
+              {
+                "title": "Beautiful Trauma",
+                "releaseYear": "2017"
+              }
+            ]
+          }
+        }
+      ]
+    }
+  }
+}
+----
 
 
 == Option sets
@@ -338,6 +391,76 @@ Filling this out, it could look like this (with data appropriate for lion):
 .Distribution and feeding behavior for Lion
 image::option-sets.png["Diet and distribution data filled out for reindeer", width=800]
 
+=== Headless: fetching option set data
+
+When fetching option set data, you can get the list of currently selected items and each item separately.
+
+.Querying for feeding behavior and distribution
+[source,GraphQL,{subs}]
+----
+{
+  guillotine {
+    query(contentTypes:"{project-name-full}:{content-type-2}",
+      query: "displayName = 'Lion'") {
+      ... on {project-name-query}_{content-type-2-capitalized} {
+        data {
+          feedingBehavior {
+            _selected <--.-->
+            carnivore { <--.-->
+              prey
+            }
+          }
+          distribution {
+            _selected
+            africa {
+              notes
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+----
+
+<.> This provides data about what the {content-type-2}s selected feeding behavior is.
+<.> This gives more data about a particular option
+
+.Query result
+[source,json]
+----
+{
+  "data": {
+    "guillotine": {
+      "query": [
+        {
+          "data": {
+            "feedingBehavior": {
+              "_selected": "carnivore",
+              "carnivore": {
+                "prey": [
+                  "Zebra",
+                  "Giraffe"
+                ]
+              }
+            },
+            "distribution": {
+              "_selected": [
+                "africa",
+                "asia"
+              ],
+              "africa": {
+                "notes": "African lions live in scattered populations across Sub-Saharan Africa. The lion prefers grassy plains and savannahs, scrub bordering rivers and open woodlands with bushes. It is absent from rainforests and rarely enters closed forests."
+              }
+            }
+          }
+        }
+      ]
+    }
+  }
+}
+----
 
 === Task (bonus): extend album list for {content-type-1}s
 
@@ -363,7 +486,7 @@ Which approach is best depends on your circumstances and personal preference. So
               <label>Album</label>
               <occurrences minimum="0" maximum="0" />
               <items>
-                <input name="Title" type="TextLine">
+                <input name="title" type="TextLine">
                   <label>Title</label>
                   <occurrences minimum="1" maximum="1" />
                 </input>
@@ -382,7 +505,7 @@ Which approach is best depends on your circumstances and personal preference. So
               <label>Film</label>
               <occurrences minimum="0" maximum="0" />
               <items>
-                <input name="Title" type="TextLine">
+                <input name="title" type="TextLine">
                   <label>Title</label>
                   <occurrences minimum="1" maximum="1" />
                 </input>
@@ -412,7 +535,7 @@ Which approach is best depends on your circumstances and personal preference. So
             <option name="album">
               <label>Album</label>
               <items>
-                <input name="Title" type="TextLine">
+                <input name="title" type="TextLine">
                   <label>Title</label>
                   <occurrences minimum="1" maximum="1" />
                 </input>
