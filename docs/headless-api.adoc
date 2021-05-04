@@ -75,15 +75,11 @@ The controller takes care of generating the schema and providing the API endpoin
 
 To learn more about the Guillotine library, how it works, and how you deploy it, check out the https://developer.enonic.com/docs/guillotine/stable[Guillotine reference docs].
 
-== Advanced querying: using the _search_ function
+== Advanced querying: using the _query_ function
 
-== How does it work in XP?
+And how it relates to NoQL.
 
-In XP, `lib-guillotine` creates the API for us ...
-
-To check it out, you can head to {p1-api-url}.
-
-== Still want to learn more?
+=== Still want to learn more?
 
 The https://graphql.org/learn/[_Introduction to GraphQL_ documentation] is a good place to start! It walks you through
 
