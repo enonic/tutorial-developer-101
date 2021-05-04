@@ -11,6 +11,53 @@ If you've been wondering how the GraphQL API we've been querying up until now wa
 
 If you're familiar with GraphQL, however, you might have noticed that we have not performed any mutations yet. The reason for that is simple: Guillotine only exposes the read-only part of the Enonic Content API, so mutations are not available.
 
+== How does it appear?
+
+[source,groovy]
+----
+plugins {
+    id 'com.enonic.xp.app' version '3.0.0'
+}
+
+apply plugin: "com.enonic.xp.app"
+
+app {
+    name = "${appName}"
+    displayName = "${appDisplayName}"
+    vendorName = "${vendorName}"
+    vendorUrl = "${vendorUrl}"
+    systemVersion = "${xpVersion}"
+}
+
+dependencies {
+    compile "com.enonic.xp:portal-api:${xpVersion}"
+    include "com.enonic.xp:lib-websocket:${xpVersion}"
+    include "com.enonic.lib:lib-guillotine:5.0.1"
+    include "com.enonic.lib:lib-graphql-playground:0.0.1"
+}
+
+repositories {
+    mavenLocal()
+    jcenter()
+    xp.enonicRepo( 'dev' )
+}
+----
+
+[source,xml]
+----
+<?xml version="1.0" encoding="UTF-8"?>
+<site>
+  <x-data name="notes" allowContentTypes="com.example.myproject:animal" />
+  <x-data name="testX" allowContentTypes="com.example.myproject:artist" />
+  <form />
+  <mappings>
+    <mapping controller="/controllers/graphql.js" order="50">
+      <pattern>/api</pattern>
+    </mapping>
+  </mappings>
+</site>
+----
+
 == What is GraphQL?
 
 (basic explanation of what GraphQL is and why we use it?)
