@@ -13,10 +13,11 @@ If you're familiar with GraphQL, you might have noticed that we have not perform
 
 === Integrating Guillotine
 
-When
+When we created an app in xref:apps#_projects_and_starters[a previous chapter], we used the headless starter, which comes which comes with Guillotine integrated. As such, we haven't had to worry ourselves with how to integrate it with XP. However, to better understand how it works, let's have a little peek under the hood.
 
-To use guillotine in an app,
+The recommended way to embed Guillotine within your app is to use it as a library. To do this,  add a dependency on the library in the `build.gradle` at the root of your project. The `build.gradle` file that comes with the headless starter will look something like this:
 
+.A `build.gradle` file as included with the headless starter
 [source,groovy]
 ----
 plugins {
@@ -36,7 +37,7 @@ app {
 dependencies {
     compile "com.enonic.xp:portal-api:${xpVersion}"
     include "com.enonic.xp:lib-websocket:${xpVersion}"
-    include "com.enonic.lib:lib-guillotine:5.0.1"
+    include "com.enonic.lib:lib-guillotine:5.0.1" <--.-->
     include "com.enonic.lib:lib-graphql-playground:0.0.1"
 }
 
@@ -47,18 +48,32 @@ repositories {
 }
 ----
 
+<.> This line includes Guillotine version 5.0.1
+
+This tells XP that we're going to be using the library. However, it doesn't do anything just yet. To make it work, we're going to need to create a _mapping_ and a _controller_. Both of these concepts will be explained in more detail in a later chapter, but the short form is that a _mapping_ routes HTTP requests to a path to a _controller_. The controller is then responsible for processing and responding to the HTTP request.
+
+The headless starter takes care of this for us by mapping requests to an `/api` path to a controller named `graphql.js` using the `mappings` element:
+
+.A `site.xml` file with mappings
 [source,xml]
 ----
 <?xml version="1.0" encoding="UTF-8"?>
 <site>
   <form />
   <mappings>
-    <mapping controller="/controllers/graphql.js" order="50">
-      <pattern>/api</pattern>
+    <mapping controller="/controllers/graphql.js" order="50"> <--.-->
+      <pattern>/api</pattern> <--.-->
     </mapping>
   </mappings>
 </site>
 ----
+
+<.> This tells XP that requests that match this mapping's pattern should be routed to the `/controllers/graphql.js` controller
+<.> This pattern tells XP that what reuqests to send to this mapping's controller. In this case, it's any requests to `<site-url>/api`, where `<site-url>` is the URL for your site.
+
+The controller takes care of generating the schema and providing the API endpoints and logic. The headless starter comes with a default controller that provides the schema and the GraphQL playground that we've been using thus for. It's too long to include in this guide, but if you want to have a look at it, the https://github.com/enonic/starter-headless/blob/master/src/main/resources/controllers/graphql.js[headless starter GraphQL controller] is available on GitHub.
+
+To learn more about the Guillotine library, how it works, and how you deploy it, check out the https://developer.enonic.com/docs/guillotine/stable[Guillotine reference docs].
 
 == Advanced querying: using the _search_ function
 
