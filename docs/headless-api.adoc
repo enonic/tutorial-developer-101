@@ -1,7 +1,7 @@
 = Headless API
 include::variables.adoc[]
 
-By now we've constructed a fair few GraphQL queries, but we haven't really taken much time to explain the queries. In this {document} we'll be looking a bit closer at how headless APIs work in XP. At the same time, we'll have a little look at what GraphQL is.
+In the {document}s leading up to this, we've seen a number of GraphQL queries. We've also mentioned that it's an application called _Guillotine_ that's responsible for generating the GraphQL API. However, we haven't yet looked at how the API is integrated into an application. That's what this {document} is for, along with a slightly more advanced search technique using something called _queries_.
 
 NOTE: This section should reference the https://developer.enonic.com/guides/headless-cms-intro[headless CMS intro guide]  somehow, but I'm not sure how best to do that yet.
 
@@ -9,9 +9,13 @@ NOTE: This section should reference the https://developer.enonic.com/guides/head
 
 If you've been wondering how the GraphQL API we've been querying up until now was created: the Guillotine library is the answer. The Guillotine library analyzes all the content in your applications and generates an API from that. It' s an optional library that comes preconfigured with the headless starter that we used back xref:apps#_projects_and_starters[way back when we first created our app in a previous {document}]. Guillotine provides direct, typed, and documented access to content within your site.
 
-If you're familiar with GraphQL, however, you might have noticed that we have not performed any mutations yet. The reason for that is simple: Guillotine only exposes the read-only part of the Enonic Content API, so mutations are not available.
+If you're familiar with GraphQL, you might have noticed that we have not performed any mutations yet. The reason for that is simple: Guillotine only exposes the read-only part of the Enonic Content API, so mutations are not available.
 
-== How does it appear?
+=== Integrating Guillotine
+
+When
+
+To use guillotine in an app,
 
 [source,groovy]
 ----
@@ -47,8 +51,6 @@ repositories {
 ----
 <?xml version="1.0" encoding="UTF-8"?>
 <site>
-  <x-data name="notes" allowContentTypes="com.example.myproject:animal" />
-  <x-data name="testX" allowContentTypes="com.example.myproject:artist" />
   <form />
   <mappings>
     <mapping controller="/controllers/graphql.js" order="50">
@@ -58,27 +60,13 @@ repositories {
 </site>
 ----
 
-== What is GraphQL?
-
-(basic explanation of what GraphQL is and why we use it?)
-
-GraphQL is a _graph query language_, and it ...
-
-It's also become very popular lately ...
+== Advanced querying: using the _search_ function
 
 == How does it work in XP?
 
 In XP, `lib-guillotine` creates the API for us ...
 
 To check it out, you can head to {p1-api-url}.
-
-== Let's build a query
-
-We'll walk the user through the basics of creating a query, including syntax, filtering, sorting, and picking which properties to expose.
-
-== Query by using content relations
-
-We'll dig a little deeper and work with some more advanced queries, including querying by using content relations.
 
 == Still want to learn more?
 
