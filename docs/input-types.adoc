@@ -5,7 +5,7 @@ In the previous {document}, we created a very simple content type and used it to
 
 At the end of the {document}, we'll put everything we've learned so far together.
 
-NOTE: This {document} keeps building on what we did in the previous {document}s. You'll need  to have your first app up an deployed to get started. If you haven't got that ready yet, go and have a look at the xref:content[previous chapter].
+NOTE: {see-prev-docs}
 
 == Input types overview
 

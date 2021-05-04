@@ -16,3 +16,4 @@
 :content-type-2: animal
 :content-type-2-capitalized: Animal
 :subs: subs="attributes+"
+:see-prev-docs: The examples in this {document} build on work done in previous {document}s (starting with xref:sandboxes[the sandboxes chapter]). If you want to follow along with the examples, make sure you're all caught up.

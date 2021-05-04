@@ -3,7 +3,7 @@ include::variables.adoc[]
 
 With XP up and running, let's have a look at how we create applications!
 
-NOTE: This {document} builds on the steps we took in the xref:sandboxes[previous {document}], so if you haven't already done it, make sure you go through it and get everything ready. When you're sure you're up to speed with the previous {document}, let's get get started!
+NOTE: {see-prev-docs}
 
 == Projects and starters
 

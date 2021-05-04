@@ -7,6 +7,8 @@ Over the previous two {document}s, we've looked at content types and input types
 
 However, before we get that far: now that our content types are getting more complex, wouldn't it be nice if we could validate them somehow?
 
+NOTE: {see-prev-docs}
+
 == Content type validation
 
 Enonic provides XML Schema Definitions (XSDs) for text editor integration and validation of your XML schemas. To use it, add the attribute `xmlns`, `xmlns:xsi`, and `xsi:schemaLocation` to your content types as shown below:
