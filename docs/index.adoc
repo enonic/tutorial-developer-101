@@ -1,11 +1,11 @@
 = Getting started with Enonic
 include::variables.adoc[]
 
-This tutorial is an in-depth guide to getting started with the Enonic platform. It covers installing the necessary tools, running your own instance of Enonic XP, and how to work with content on the Enonic platform.
+This tutorial is an in-depth guide to getting started with Enonic XP. It covers installing the necessary tools, running your own instance of XP, and how to work with content.
 
 If you're looking for the _tl;dr:_, then head on over to the https://developer.enonic.com/start[quickstart page] to install the Enonic CLI and build your first XP app in minutes.
 
-More content will be coming to the guide shortly ( ... ish).
+More content will be added to the guide shortly ( ... ish).
 
 == Tutorial overview
 

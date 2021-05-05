@@ -9,7 +9,7 @@ There's lots to cover, so let's get to it, shall we?
 
 NOTE: If you haven't installed the Enonic CLI yet, be sure to check out the xref:setup#_installing_the_enonic_cli[installation instructions in the previous {document}].
 
-The Enonic command line interface is a powerful tool, built specifically for the Enonic platform. The CLI allows you to interact with XP instances and deploy and develop apps.
+The Enonic command line interface is a powerful tool, built specifically for Enonic XP. The CLI allows you to interact with XP instances and deploy and develop apps.
 
 To see all available options, run the following command in your terminal:
 
@@ -215,7 +215,3 @@ image::xp-tour-2.png[A description of XP applications and the Enonic Market., wi
 image::xp-tour-3.png["A prompt to install a set of applications from the Enonic Market including Content Studio, Live Trace, and Data Toolbox.", width=890]
 
 NOTE: If the welcome tour does not start automatically or if you want to take it again, you can always click the "XP Tour" icon on the home screen to start it manually.
-
-== Next
-
-Now that we've got XP up and running, let's create and deploy our first app.

@@ -298,7 +298,3 @@ In short:
 . Include child items.
 . Mark as ready.
 . Publish 🚀
-
-== Next
-
-Next we'll focus a little more on input types. The content types we created in this {document} were exceedingly simple. What if you want to create something more complex? Chances are XP has got just what you need, and if it doesn't, it provides you the tools to make what you need yourself!

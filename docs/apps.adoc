@@ -125,8 +125,3 @@ If you've checked that you're running the right sandbox and that the build succe
   mv build/libs/{project-name}.jar ~/.enonic/sandboxes/tutorial/home/deploy/
 
 NOTE: If you have to deploy manually when going through this tutorial, please get in touch on https://discuss.enonic.com[discuss.enonic.com] so we can improve the documentation and the process.
-
-
-== Next
-
-In the next {document} we'll start adding content to the app we just deployed and see how we get a GraphQL API automatically generated for it. We'll keep working on the app over the next couple {document}s, so keep it close!

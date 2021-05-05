@@ -374,7 +374,3 @@ Using this query, you'll end up with something like this (though naturally, your
   }
 }
 ----
-
-== Next
-
-The next {document} is dedicated to rich text editing using the HtmlArea input type. The HtmlArea has a lot of knobs to twist and turn, so it's worth getting to know it properly.

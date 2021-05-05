@@ -565,7 +565,3 @@ Which approach is best depends on your circumstances and personal preference. So
       </items>
     </item-set>
 ----
-
-== Next
-
-In the next {document}, we'll take a break from looking at content types and input types, and have a brief look at using GraphQL for queries.

@@ -5,7 +5,7 @@ Before we can start building apps and APIs, let's make sure we have the right to
 
 NOTE: *In a hurry?* This guide is a fairly detailed and extensive introduction to Enonic XP and how it all works. If you just want to get up and running as fast as possible, check out the https://developer.enonic.com/start[quick start docs] instead 🚀
 
-== Introducing the command line
+== The command line
 
 The command line -- aka _the terminal_ -- is a powerful, text-based interface for running commands on your computer. You can also use use the terminal to navigate your file system, similar to macOS`' Finder or Windows`' Explorer. The program running in the terminal (that interprets your commands) is known as a _shell_.
 
@@ -56,7 +56,7 @@ To verify that it's installed and available, run the following command in your t
 
     snap version
 
-== Installing the Enonic CLI
+== The Enonic CLI
 
 Now, we'll install the Enonic CLI via the package manager we just set up. The CLI provides a number of enonic-specific commands designed to make working with XP fast, easy, and efficient.
 
@@ -106,6 +106,8 @@ Once you have installed Git, you can verify that it's working correctly by runni
 
     git version
 
+TIP: Want to learn more about Git? Check out https://guides.github.com/introduction/git-handbook/[this useful Git handbook by Github].
+
 
 === macOS
 
@@ -128,7 +130,7 @@ To install Git with Snapcraft, run the following command:
    sudo snap install git
 
 
-== Set up a text editor
+== Text editors
 
 Text editors (or just _editors_ for short) are applications that are designed primarily for editing plain text and often specifically for working with code. They are therefore commonly used for programming. Note that text editors are different from _word processors_ such as Microsoft Word, which are not suited to programming.
 
@@ -143,7 +145,7 @@ https://code.visualstudio.com/[Visual Studio Code] (often shortened to _VS Code_
 
 You can navigate to the https://code.visualstudio.com/Download[download page] and download and install the version matching your operating system. Alternatively, if you're getting into this whole package manager business, it's also available in all package managers listed above. The install instructions will vary, though, so you'll have to figure that out on your own.
 
-==== Install Prettier plugin
+==== Install Prettier
 
 While not mandatory, we also recommend you install the https://marketplace.visualstudio.com/items?itemName=esbenp.prettier-vscode["Prettier - Code formatter" plugin ]
 to help keep your code nicely formatted. It helps to keep your code easier to read.
@@ -162,12 +164,3 @@ When the installation is finished, you must restart VS Code to activate the Pret
 Congrats! You've installed a package manager, Git, the Enonic CLI and a text editor. You're now set up to start working with Enonic XP 🚀
 
 Keep your new tools at hand; we'll be using them heavily throughout this guide, so you'll have lots of time to get to know them better.
-
-=== Useful links
-
-* We'll start using the Enonic CLI in the next chapter, and we'll explain everything as we go along. However, if you want to, you can check out the https://developer.enonic.com/docs/enonic-cli/[reference documentation] for a full overview over how it works.
-* Want to learn more about Git? Check out https://guides.github.com/introduction/git-handbook/[this useful Git handbook by Github].
-
-=== Next
-
-In the next step, we'll cover the basics of working with XP and the CLI.

@@ -406,7 +406,3 @@ Let's try and fetch the macro you just added to your {content-type-2}:
 
 <.> The description now contains `<editor-macro>` tags in its `processedHtml` property.
 <.> Using the `macrosAsJson` property, you can get the type and content of the macros.
-
-== Next
-
-We've looked at using simple input types to create content, but what if we want to do something more advanced? Next up: advanced content types, where we'll learn about grouping inputs together.
