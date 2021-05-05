@@ -19,7 +19,7 @@
 :see-prev-docs: The examples in this {document} build on work done in previous {document}s (starting with xref:sandboxes[the sandboxes chapter]). If you want to follow along with the examples, make sure you're all caught up.
 :title-setup: Setting up your development environment
 :title-sandboxes: Sandboxes and instances
-:title-apps: Apps and starters
+:title-apps: Application development
 :title-content: Content and content types
 :title-input-types: Input types
 :title-rich-text: Rich text: HtmlArea
