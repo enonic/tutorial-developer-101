@@ -62,12 +62,6 @@ Here are the steps we need to take:
 cd {project-name}
 ----
 +
-. If your sandbox isn't already running, start it by using this command:
-+
-  enonic sandbox start
-+
-This will start the sandbox belonging to the current project directory.
-
 . Start the build with Enonic CLI:
 
     enonic project build
@@ -108,7 +102,7 @@ You can also verify that the application was installed correctly by using the ad
 .The applications list with the headless starter installed
 image::applications-headless.png["The applications list with a few applications installed. Also shows application details, such as content install time, version, and required XP system version for the selected application."]
 
-You've now successfully built and deployed your first Enonic XP application. Well done! Now let's look at creating content.
+You've now successfully built and deployed your first Enonic XP application.
 
 === Changing the display name of an application
 You might have noticed that the application we created was listed as "Headless Starter" in the applications list above. What if you wanted to change that to something more descriptive? To do that, we can head to the `gradle.properties` file in the project's root directory. Change the `appDisplayName` to whatever you want it to display.
