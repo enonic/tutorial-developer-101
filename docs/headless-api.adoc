@@ -1,9 +1,9 @@
 = Headless API
 include::variables.adoc[]
 
-In the {document}s leading up to this, we've seen a number of GraphQL queries. We've also mentioned that it's an application called _Guillotine_ that's responsible for generating the GraphQL API. However, we haven't yet looked at how the API is integrated into an application. That's what this {document} is for, along with a slightly more advanced search technique using something called _queries_.
+In the {document}s leading up to this, we've seen a number of GraphQL queries. We've also mentioned that it's an application called _Guillotine_ that's responsible for generating the GraphQL API. However, we haven't yet looked at how the API is integrated into an application. This {document} addresses that and also gives us a slightly deeper look at writing GraphQL queries.
 
-NOTE: This section should reference the https://developer.enonic.com/guides/headless-cms-intro[headless CMS intro guide]  somehow, but I'm not sure how best to do that yet.
+NOTE: {see-prev-docs} In this {document}, you won't be building anything new, but we use the data set that we've created thus far.
 
 == The Guillotine library
 
@@ -75,12 +75,155 @@ The controller takes care of generating the schema and providing the API endpoin
 
 To learn more about the Guillotine library, how it works, and how you deploy it, check out the https://developer.enonic.com/docs/guillotine/stable[Guillotine reference docs].
 
-== Advanced querying: using the _query_ function
+== Advanced querying
 
-And how it relates to NoQL.
+When making a Guillotine query, you can use the `query` function underneath `guillotine` to specify what you want. This function accepts a number of optional, named arguments to help you hone in on exactly what you're looking for. These arguments are:
 
-=== Still want to learn more?
+`contentTypes`:: The content types we're looking for. Can either be a lone string if you're looking for a single content type, e.g. or a list if you want to search among multiple types:
++
+.Querying for a single content type
+  query(contentTypes: "{project-name-full}:{content-type-1}")
++
+.Querying for multiple content types
+  query(contentTypes: "{project-name-full}:{content-type-1}", "{project-name-full}:{content-type-2}")
++
+`filters` :: A list of filters to apply to the results after the query has been executed. We won't get into them here, so if you want to learn more about them, head to the https://developer.enonic.com/docs/xp/stable/storage/filters[filters documentation].
+`first`:: Specify how many nodes you want at most in your result. If your query yields a list of results, you can specify that you only want the first `n` results, where `n` is a positive integer. Works well in concert with offset.
+`offset`:: Specify how many results you want to cut from the beginning of the list of results. Most commonly used for pagination.
+`query`:: A https://developer.enonic.com/docs/xp/stable/storage/noql#query[NoQL query] string.
+`sort`:: A https://developer.enonic.com/docs/xp/stable/storage/noql#sort[NoQL sort] string.
 
-The https://graphql.org/learn/[_Introduction to GraphQL_ documentation] is a good place to start! It walks you through
+For instance, using the data set we've created previously in this guide, we could run a query like this:
 
-https://developer.enonic.com/docs/guillotine/stable[the Guillotine reference docs] are also a great place to go for some more info.
+.A Guillotine query using some of the arguments mentioned.
+[source,GraphQL,{subs}]
+----
+{
+  guillotine {
+    query(
+      first: 3,
+      offset: 1,
+      contentTypes:
+      [ "{project-name-full}:{content-type-1}",
+	"{project-name-full}:{content-type-2}" ],
+      sort: "displayName desc") {
+      displayName
+      contentType {
+        displayName
+      }
+    }
+  }
+}
+----
+
+This query would produce a result like the following:
+
+.Guillotine query result
+[source,json]
+----
+{
+  "data": {
+    "guillotine": {
+      "query": [
+        {
+          "displayName": "P!nk",
+          "contentType": {
+            "displayName": "Artist"
+          }
+        },
+        {
+          "displayName": "Missy Elliott",
+          "contentType": {
+            "displayName": "Artist"
+          }
+        },
+        {
+          "displayName": "Lion",
+          "contentType": {
+            "displayName": "Animal"
+          }
+        }
+      ]
+    }
+  }
+}
+----
+
+To perform a more advanced query, you can use the `query` parameter. The following query uses the https://developer.enonic.com/docs/xp/stable/storage/noql#ngram[n-gram query functionality] to find all the {content-type-1}s that mention `rap` somewhere in their data.
+
+.A Guillotine query using _nGram_ search functionality
+[source,GraphQL,{subs}]
+----
+{
+  guillotine {
+    query(
+      contentTypes: "{project-name-full}:{content-type-1}"
+      query: "ngram('_allText', 'rap')"
+      sort: "displayName asc") {
+      displayName
+    }
+  }
+}
+----
+
+The result would look something like this:
+
+.Rap results
+[source,json]
+----
+{
+  "data": {
+    "guillotine": {
+      "query": [
+        {
+          "displayName": "Cardi B"
+        },
+        {
+          "displayName": "Missy Elliott"
+        }
+      ]
+    }
+  }
+}
+----
+
+Naturally, you can also use the standard boolean operators to combine or negate clauses. If you wanted to find all {content-type-1}s that mention both rapping and singing, you could try a query like this:
+
+.Querying for {content-type-1}s who both rap and sing
+[source,GraphQL,{subs}]
+----
+{
+  guillotine {
+    query(
+      contentTypes: "{project-name-full}:{content-type-1}"
+      query: "ngram('_allText', 'rap') AND ngram('_allText', 'sing')"
+      sort: "displayName asc") {
+      displayName
+    }
+  }
+}
+----
+
+And find out that with our data set, there's only one:
+
+.Rappers and singers
+[source,json]
+----
+{
+  "data": {
+    "guillotine": {
+      "query": [
+        {
+          "displayName": "Missy Elliott"
+        }
+      ]
+    }
+  }
+}
+----
+
+== Learn more
+
+For a detailed overview of the node query language and an extensive example selection, https://developer.enonic.com/docs/xp/stable/storage/noql[the NoQL reference] is the place to go. For more query examples and information about how to get up and running with Guillotine, you can check out https://developer.enonic.com/guides/headless-cms-intro[the headless CMS intro guide].
+
+If you want to learn more about GraphQL, the https://graphql.org/learn/[_Introduction to GraphQL_ documentation] is a good place to start.
