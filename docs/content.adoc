@@ -79,7 +79,7 @@ After the preceding few steps, everything is ready for us to create some actual 
 .An empty content studio
 image::content-studio-empty.png[What Content Studio looks like when it's completely empty.]
 
-=== Creating a site
+=== Task: Creating a site
 
 Before we can create our content, we need a _site_ to hold it. Sites are a special content type that ships with Content Studio. It's one of a very small number of content types that we can place at the very root of the content hierarchy. A site is like a root node that we can nest other content under. When we create a new site, we can also specify which applications it uses, and that's where our application comes into play.
 
@@ -110,7 +110,7 @@ To confirm and return to the Content Studio hierarchy, you can either press "Sav
 
 When you return to the Content Studio hierarchy view, you should now see your site listed. If you expand it, you'll find that there is also a node called "Templates" underneath it. We can ignore this for now, but we'll learn more about it later.
 
-=== Add some friends
+=== Task: Add some friends
 
 With the "{p1-site-name}" site highlighted, press "New ..." (or kbd:[Alt+n]!) to open the "Create Content" menu again. This time around, you should have some more choices than what you did previously, including our very own content type "{content-type-1-capitalized}"!
 
@@ -151,7 +151,7 @@ With these {content-type-1}s created, your content hierarchy should now list the
 .The hierarchy as it should look after creating some content
 image::content-studio-with-{content-type-1}s.png["The content hierarchy showing the {p1-site-name} site with \"Cardi B\", \"Missy Elliot\", \"P!nk\", and \"Templates\" listed directly underneath it.", width=800]
 
-== Querying the API
+== Headless: Querying the API
 
 So we've created a custom content type and used it to create content, but what good is content if we can't access it from anywhere? Luckily, the headless starter kit has our backs! When using the headless starter kit, we get a GraphQL API automatically generated without any additional work.
 

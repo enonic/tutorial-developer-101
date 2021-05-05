@@ -228,6 +228,8 @@ Description:: The reindeer (Rangifer tarandus), also known as caribou in North A
 
 Now create some links using ContentSelector from {content-type-1}s to {content-type-2}s. The important part here is that you link some content so that we can fetch it using GraphQL (remember: you'll find the playground at {p1-api-url}). When you have created some links, let's move on to the query.
 
+== Headless: fetching linked content and images
+
 The way to link to linked content in GraphQL is to add it as a field as part of the data. This query will fetch all {content-type-1}s and their linked {content-type-2}s:
 
 .Query to fetch {content-type-1}s with their associated favorite animals
