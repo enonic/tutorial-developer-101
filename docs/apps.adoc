@@ -47,6 +47,8 @@ src/
 <2> Contains the standard project settings, as defined by the CLI.
 <3> The main project folder. JavaScript code and assets are placed here.
 
+TIP: If you need to start your sandbox and your current working directory is an XP project directory, then the projects assigned sandbox will be started automatically.
+
 == Building and deploying
 
 Now that we've set up a project, let's see how we build (or _compile_) the project and then how we deploy it to our XP instance. Again, the CLI is key to making this process as smooth as possible.

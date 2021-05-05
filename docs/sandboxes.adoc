@@ -83,20 +83,16 @@ When talking about _sandboxes_, we're actually talking about local instances of 
 
 Let's create a new sandbox by using the CLI. When you create a new sandbox, the CLI will present you with a few questions for configuring the sandbox, such as the sandbox name. To respond to a question, type in the desired response and press kbd:[enter].
 
-[NOTE]
-====
-If you press kbd:[enter] without entering a response, the CLI will use the default response. The default response to a question is listed in parentheses after the question. For instance, the prompt for a sandbox name might look like this:
-
-    ? Sandbox name (Sandbox1)
-
-Here, `Sandbox1` is the default response.
-====
-
 Run the following command to get started:
 
     enonic sandbox create
 
 When prompted, give your sandbox the name: `tutorial`. Next, when asked which XP distribution you want, use the latest one (at the top of the list).
+
+[TIP]
+====
+If you press kbd:[enter] without entering a response, the CLI will use the default response. The default response to a question is listed in parentheses after the question.
+====
 
 The CLI will download the Enonic XP SDK distribution for your operating system and link it to the sandbox.
 
@@ -111,11 +107,14 @@ Once completed, we can use the CLI to start the sandbox:
 
     enonic sandbox start
 
-Optionally, you can run the sandbox with the `--dev` flag. This makes the sandbox automatically pick up certain changes to deployed applications, including most of the work we'll be doing in the coming {document}s. Read https://developer.enonic.com/docs/xp/stable/apps/build-system#development_mode[more about dev mode] in the reference docs. With the flag, the command would be
+[TIP]
+====
+You can also run the sandbox with the `--dev` flag. This makes the sandbox automatically pick up certain changes to deployed applications, including most of the work we'll be doing in the coming {document}s. Read https://developer.enonic.com/docs/xp/stable/apps/build-system#development_mode[more about dev mode] in the reference docs. With the flag, the command would be
 
   enonic sandbox start --dev
+====
 
-If you're in an XP project directory, this will start the sandbox belonging to this project automatically. Otherwise, you'll have to select which sandbox to start. If that's the case, choose the `tutorial` sandbox and watch it boot up in your terminal. The boot output should look something like this, but with values adjusted for your system.
+Choose the `tutorial` sandbox and watch it boot up in your terminal. The boot output should look something like this, but with values adjusted for your system.
 
 .Output when booting sandbox
 ----
@@ -201,15 +200,9 @@ You should see the default XP login screen:
 image::xp-login.png[The XP login screen.]
 
 
-From the login screen, click "log in without a user". When working on a local development environment, we don't need to concern ourselves with users and administrators, so we'll get back to that in xref:chapter#_section[chapter X]. (TODO: do we? we should cover this at some point.)
+From the login screen, click "log in without a user". What this actually does is log you in as the XP instance's super user. Because we're working on a local development environment for now, we won't concern ourselves with users and administrators. We'll talk more about this in a later chapter.
 
 After signing in, you will be greeted by the XP welcome tour. Complete the tour and install the applications listed in the final step. You'll need some of them later in this tutorial.
-
-.The first step of the welcome tour
-image::xp-tour-1.png[A popup describing the tools and navigation system of Enonic XP., width=890]
-
-.The second step of the welcome tour
-image::xp-tour-2.png[A description of XP applications and the Enonic Market., width=890]
 
 .The final step of the welcome tour
 image::xp-tour-3.png["A prompt to install a set of applications from the Enonic Market including Content Studio, Live Trace, and Data Toolbox.", width=890]
