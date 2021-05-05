@@ -1,19 +1,19 @@
 {
   "menuItems": [
     {
-      "title": "1 - Setting your development environment",
+      "title": "1 - Environment setup",
       "document": "setup"
     },
     {
-      "title": "2 - Sandboxes and instances",
+      "title": "2 - Sandboxes",
       "document": "sandboxes"
     },
     {
-      "title": "3 - Development basics",
-      "document": "basics"
+      "title": "3 - Apps",
+      "document": "sandboxes"
     },
     {
-      "title": "4 - Creating content",
+      "title": "4 - Content",
       "document": "content"
     },
     {
@@ -25,7 +25,7 @@
       "document": "rich-text"
     },
     {
-      "title": "7 - Advanced content types",
+      "title": "7 - Advanced content",
       "document": "advanced-content"
     },
     {
