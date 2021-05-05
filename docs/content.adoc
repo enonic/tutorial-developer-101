@@ -14,13 +14,9 @@ Content types are schemas that tell XP what properties a piece of content of a p
 
 In short: _content types_ describe the shape of some data that's been grouped together. A piece of _content_ is the manifestation of that content type, populated with actual data. If it's still a bit fuzzy, don't worry! It'll become clearer once we start working with it.
 
-==== Comparison of content types to other schema descriptions
+If you're used to working with databases, you can think of content types as table schemas and contents as the rows of a table. The properties are the columns specified by the schema. Similarly, a content type is much like a _(data) type_ or a _class_ in many programming languages: something that describes the shape of your data. A piece of content is a manifestation/instance of that data type. The properties of the content type specify what that data type contains.
 
-If you're used to working with databases, you can think of content types as table schemas and contents as the rows of a table. The properties are the columns specified by the schema.
-
-Similarly, a content type is much like a _(data) type_ or a _class_ in many programming languages: something that describes the shape of your data. A piece of content is a manifestation/instance of that data type. The properties of the content type specify what that data type contains.
-
-== Task: My first content type
+== Task: The {content-type-1} content type
 
 Now that we know what a content type is, let's look at how we create them and make XP recognize them. By the end of this section we'll have created a content type that gives us a simple form that looks like this in Content Studio:
 
@@ -72,7 +68,7 @@ Now run:
 
 If everything goes well, you should see your sandbox logs update now. And that's the basics of creating new content types. Next, let's turn our eyes to Content Studio and create some actual content!
 
-== Content Creation 101
+== Sites
 
 After the preceding few steps, everything is ready for us to create some actual content! So with your sandbox up and running, and navigate to {cs-url}[Content Studio]. You should be met with an empty studio that tells you you are "wasting this space":
 
@@ -110,7 +106,7 @@ To confirm and return to the Content Studio hierarchy, you can either press "Sav
 
 When you return to the Content Studio hierarchy view, you should now see your site listed. If you expand it, you'll find that there is also a node called "Templates" underneath it. We can ignore this for now, but we'll learn more about it later.
 
-=== Task: Add some friends
+== Task: Content creation
 
 With the "{p1-site-name}" site highlighted, press "New ..." (or kbd:[Alt+n]!) to open the "Create Content" menu again. This time around, you should have some more choices than what you did previously, including our very own content type "{content-type-1-capitalized}"!
 
@@ -151,6 +147,41 @@ With these {content-type-1}s created, your content hierarchy should now list the
 .The hierarchy as it should look after creating some content
 image::content-studio-with-{content-type-1}s.png["The content hierarchy showing the {p1-site-name} site with \"Cardi B\", \"Missy Elliot\", \"P!nk\", and \"Templates\" listed directly underneath it.", width=800]
 
+== Branches and publishing
+
+You might have noticed the yellow circles with exclamation marks displayed on all the content we've been working on, both in the wizard and in the content grid. This is how Content Studio indicates whether something is published or not and whether there are any errors with it. There are four states:
+
+Error (red circle with a cross):: This indicates that there is something wrong with your content. Because XP uses structured content it can also validate content as it is created. If something doesn't conform to the specified schema (for example: a required field has no value), it will fail to validate and be marked with this symbol.
+Work in progress (yellow circle with exclamation mark):: This symbol indicates that this piece of content has unpublished changes. That could be either because this is new content that has never been published, or it could be because there have been changes to this piece of content since it was last published.
+Ready for publishing (green circle with a check mark):: This piece of content is marked as ready to be published.
+Published (no icon):: This piece of content is published and has not been modified since.
+
+.Content status symbols
+image::content-studio-content-status.png[Three pieces of content displaying the three statuses that a piece of content can have, width=400]
+
+So what does it mean for content to be published? It doesn't make much of a difference to us at this stage of the tutorial, but for when you're working on production systems, it's very important. So let's talk briefly about Content Studio's branching and publishing system.
+
+Content Studio operates with two branches: a draft branch where you work and edit, and a branch that holds the published content, known as the master branch. When you work on something in Content Studio, you're working on the draft branch. When you publish something, the master branch gets updated with the new content. When you edit that same piece of content in Content Studio again, you're back to working on the draft, and you have to publish it to see changes to the published content.
+
+To publish a piece of content, you can either right click it or use the shortcut kbd:[ctrl+Alt+P]/kbd:[⌘+Alt+P].
+
+
+=== Task: publish your site!
+
+Let's give this publishing thing a try! We'll publish the whole site at once. Select your your site and publish it. You'll be greeted by the Content Studio publishing wizard.
+
+.The Content Studio publishing wizard 🪄
+image::content-studio-publishing-wizard.png[A dialog with a list of the content to be published and button saying 'publish now']
+
+You'll find that the "Publish now" button isn't available just yet. For content to be published, you must first _mark it as ready_. But before we do that, we should also make sure that we select all the content that belongs under the site too. By default, publishing a piece of content doesn't publish items nested under it. To include nested content, press the "include child items" icon to the left of the content icon (the one that looks sort of like a fork or a three-legged octopus). Next, select the "mark as ready" option from the button dropdown. It'll mark your content as ready to publish. Now press "publish now".
+
+In short:
+
+. Select your site. Publish.
+. Include child items.
+. Mark as ready.
+. Publish 🚀
+
 == Headless: Querying the API
 
 So we've created a custom content type and used it to create content, but what good is content if we can't access it from anywhere? Luckily, the headless starter kit has our backs! When using the headless starter kit, we get a GraphQL API automatically generated without any additional work.
@@ -175,7 +206,7 @@ To see what GraphQL can do for us, let's see if we can just fetch all the {conte
 ----
 {
   guillotine {
-    getChildren(key: "{p1-site-path}/{content-type-1}s")
+    getChildren(key: "${site}/{content-type-1}s")
     {
       displayName
     }
@@ -214,7 +245,7 @@ Neat! Next, let's try a slightly more complicated query. In this one,  we'll als
 ----
 {
   guillotine {
-    getChildren(key: "{p1-site-path}/{content-type-1}s/")
+    getChildren(key: "${site}/{content-type-1}s/")
     {
       displayName
       ... on {project-name-query}_{content-type-1-capitalized} {
@@ -263,38 +294,3 @@ Execute this and your response should look a little something like this:
   }
 }
 ----
-
-== Publishing and branches
-
-You might have noticed the yellow circles with exclamation marks displayed on all the content we've been working on, both in the wizard and in the content grid. This is how Content Studio indicates whether something is published or not and whether there are any errors with it. There are four states:
-
-Error (red circle with a cross):: This indicates that there is something wrong with your content. Because XP uses structured content it can also validate content as it is created. If something doesn't conform to the specified schema (for example: a required field has no value), it will fail to validate and be marked with this symbol.
-Work in progress (yellow circle with exclamation mark):: This symbol indicates that this piece of content has unpublished changes. That could be either because this is new content that has never been published, or it could be because there have been changes to this piece of content since it was last published.
-Ready for publishing (green circle with a check mark):: This piece of content is marked as ready to be published.
-Published (no icon):: This piece of content is published and has not been modified since.
-
-.Content status symbols
-image::content-studio-content-status.png[Three pieces of content displaying the three statuses that a piece of content can have, width=400]
-
-So what does it mean for content to be published? It doesn't make much of a difference to us at this stage of the tutorial, but for when you're working on production systems, it's very important. So let's talk briefly about Content Studio's branching and publishing system.
-
-Content Studio operates with two branches: a draft branch where you work and edit, and a branch that holds the published content, known as the master branch. When you work on something in Content Studio, you're working on the draft branch. When you publish something, the master branch gets updated with the new content. When you edit that same piece of content in Content Studio again, you're back to working on the draft, and you have to publish it to see changes to the published content.
-
-To publish a piece of content, you can either right click it or use the shortcut kbd:[ctrl+Alt+P]/kbd:[⌘+Alt+P].
-
-
-=== Task: publish your site!
-
-Let's give this publishing thing a try! We'll publish the whole site at once. Select your your site and publish it. You'll be greeted by the Content Studio publishing wizard.
-
-.The Content Studio publishing wizard 🪄
-image::content-studio-publishing-wizard.png[A dialog with a list of the content to be published and button saying 'publish now']
-
-You'll find that the "Publish now" button isn't available just yet. For content to be published, you must first _mark it as ready_. But before we do that, we should also make sure that we select all the content that belongs under the site too. By default, publishing a piece of content doesn't publish items nested under it. To include nested content, press the "include child items" icon to the left of the content icon (the one that looks sort of like a fork or a three-legged octopus). Next, select the "mark as ready" option from the button dropdown. It'll mark your content as ready to publish. Now press "publish now".
-
-In short:
-
-. Select your site. Publish.
-. Include child items.
-. Mark as ready.
-. Publish 🚀

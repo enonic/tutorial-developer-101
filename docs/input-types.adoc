@@ -237,7 +237,7 @@ The way to link to linked content in GraphQL is to add it as a field as part of 
 ----
 {
   guillotine {
-    getChildren(key: "{p1-site-path}/{content-type-1}s/")
+    getChildren(key: "${site}/{content-type-1}s/")
     {
       displayName
       ... on {project-name-query}_{content-type-1-capitalized} {
