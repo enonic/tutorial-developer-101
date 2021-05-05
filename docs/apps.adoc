@@ -1,4 +1,4 @@
-= Apps and starters
+= {title-apps}
 include::variables.adoc[]
 
 With XP up and running, let's have a look at how we create applications!

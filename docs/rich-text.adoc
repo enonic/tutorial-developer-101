@@ -1,4 +1,4 @@
-= Rich text: HtmlArea
+= {title-rich-text}
 include::variables.adoc[]
 :macro-name: screamingSnakeCase
 :macro-app: Panel Macros

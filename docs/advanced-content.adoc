@@ -1,4 +1,4 @@
-= Advanced content
+= {title-advanced-content}
 include::variables.adoc[]
 :x-data: notes
 :x-data-capitalized: Notes

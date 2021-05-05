@@ -1,4 +1,4 @@
-= Content and content types
+= {title-content}
 include::variables.adoc[]
 :about-cardi: Belcalis Marlenis Almánzar (born October 11, 1992), known professionally as Cardi B, is an American rapper and songwriter.
 :about-missy: Melissa Arnette Elliott (born July 1, 1971) is an American rapper, singer, songwriter, and record producer.
