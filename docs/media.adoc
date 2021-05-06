@@ -1,0 +1,2 @@
+= {title-media}
+include::variables.adoc[]

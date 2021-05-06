@@ -21,9 +21,11 @@
 :title-sandboxes: Sandboxes and instances
 :title-apps: Application development
 :title-content: Content and content types
+:title-media: Media and images
+:title-sets: Sets
 :title-input-types: Input types
 :title-rich-text: Rich text: HtmlArea
-:title-advanced-content: Advanced content
+:title-advanced-content: X-data and mixins
 :title-headless-api: Headless API
 :image-xs: width=600
 :image-s: width=750
