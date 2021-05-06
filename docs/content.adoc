@@ -10,9 +10,7 @@ NOTE: {see-prev-docs}
 
 == What are content types?
 
-Content types are schemas that tell XP what properties a piece of content of a particular type can have. That might sound confusing, but imagine for a second that we're working with forms. Content types describe what fields go in a specific form. Then a piece of content is a form that has been filled out.
-
-In short: _content types_ describe the shape of some data that's been grouped together. A piece of _content_ is the manifestation of that content type, populated with actual data. If it's still a bit fuzzy, don't worry! It'll become clearer once we start working with it.
+Content types are schemas that tell XP what properties a piece of content of a particular type can have. Think of a piece of content as a collection of data. Its content type describes what data that piece of content can and must have.
 
 If you're used to working with databases, you can think of content types as table schemas and contents as the rows of a table. The properties are the columns specified by the schema. Similarly, a content type is much like a _(data) type_ or a _class_ in many programming languages: something that describes the shape of your data. A piece of content is a manifestation/instance of that data type. The properties of the content type specify what that data type contains.
 
