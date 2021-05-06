@@ -25,3 +25,8 @@
 :title-rich-text: Rich text: HtmlArea
 :title-advanced-content: Advanced content
 :title-headless-api: Headless API
+:image-xs: width=600
+:image-s: width=750
+:image-m: width=900
+:image-l: width=1050
+:image-xl: width=1200

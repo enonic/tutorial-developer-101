@@ -208,3 +208,8 @@ After signing in, you will be greeted by the XP welcome tour. Complete the tour 
 image::xp-tour-3.png["A prompt to install a set of applications from the Enonic Market including Content Studio, Live Trace, and Data Toolbox.", width=890]
 
 NOTE: If the welcome tour does not start automatically or if you want to take it again, you can always click the "XP Tour" icon on the home screen to start it manually.
+
+The applications in the welcome tour all modify the XP admin experience, so once you've installed them, you'll get some extra entries in the XP admin menu that you can explore:
+
+.The XP admin menu with new entries
+image::admin-menu-with-apps.png["The XP Admin menu with extra apps installed. It shows the newly added apps between the menu items 'Home' and 'Users'.", {image-xs}]
