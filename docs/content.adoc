@@ -19,7 +19,7 @@ If you're used to working with databases, you can think of content types as tabl
 Now that we know what a content type is, let's look at how we create them and make XP recognize them. By the end of this section we'll have created a content type that gives us a simple form that looks like this in Content Studio:
 
 .The target for our first content type
-image::content-type-target.png["A content creation form with name and biography fields", width=800]
+image::content-type-target.png["A content creation form with name and biography fields", {image-xl}]
 
 XP is quite particular about project folder structure, so we need to put content types right where it expects to find them. The location is under `src/main/resources/site/content-types`.
 
@@ -71,7 +71,7 @@ If everything goes well, you should see your sandbox logs update now. And that's
 After the preceding few steps, everything is ready for us to create some actual content! So with your sandbox up and running, and navigate to {cs-url}[Content Studio]. You should be met with an empty studio that tells you you are "wasting this space":
 
 .An empty content studio
-image::content-studio-empty.png[What Content Studio looks like when it's completely empty.]
+image::content-studio-empty.png[What Content Studio looks like when it's completely empty., {image-xl}]
 
 === Task: Creating a site
 
@@ -82,14 +82,14 @@ To get going, press the "New..." button in the command bar. This will bring up a
 TIP: You can also use the keyboard shortcut kbd:[Alt+n] to bring up the "Create Content" dialog.
 
 .The Content Studio create content dialog
-image::content-studio-create-content.png[The Content Studio create content dialog.]
+image::content-studio-create-content.png[The Content Studio create content dialog., {image-xl}]
 
 Select "Site" either by clicking on it, or by navigating to it with your keyboard. You can start typing as soon as the dialog opens to filter the options too!
 
 When you select it, your browser will take you to a new tab (or window, depending on your browser settings). This is the content creation form (or _wizard_).
 
 .Creating a new site in Content Studio.
-image::content-studio-new-site.png[Creating a new site in content studio. There is a form with site options on the left.]
+image::content-studio-new-site.png[Creating a new site in content studio. There is a form with site options on the left., {image-xl}]
 
 Add the site name in the first field (with the `<Display Name>` placeholder). It's our first site, so let's go with "{p1-site-name}". Notice that when you do this, the path below the input field gets automatically updated to match what you input. You can manually override the path if you wish, but we'll leave it as is for now.
 
@@ -113,7 +113,7 @@ When you return to the Content Studio hierarchy view, you should now see your si
 With the "{p1-site-name}" site highlighted, press "New ..." to open the "Create Content" menu again. This time around, you should have some more choices than what you did previously, including our very own content type "{content-type-1-capitalized}"!
 
 .The "Create Content" dialog with more content types
-image::content-studio-new-content.png["The \"Create Content\" dialog when creating content under the \"{p1-site-name}\" site. It contains more elements than previously, including the \"{content-type-1-capitalized}\" content type that we created earlier."]
+image::content-studio-new-content.png["The \"Create Content\" dialog when creating content under the \"{p1-site-name}\" site. It contains more elements than previously, including the \"{content-type-1-capitalized}\" content type that we created earlier.", {image-xl}]
 
 However, before we start creating {content-type-1}s, let's create a folder. Because we'll be using this site in the coming {document}s with more content types, having some hierarchy will make things easier. Choose a new folder and call it "{content-type-1}s".
 
@@ -131,7 +131,7 @@ About:: {about-cardi}
 It should look a little something like this:
 
 .The content form filled out for the {content-type-1} "Cardi B"
-image::content-type-filled-out.png[The form for "{content-type-1}" fully filled out., width=800]
+image::content-type-filled-out.png[The form for "{content-type-1}" fully filled out., {image-xl}]
 
 Again, save and close the tab. Now repeat this process for these next two entries. Be aware that Content Studio lets you nest content, so if you try and create new content when "Cardi B" is selected in the hierarchy, it'll nest the new content under "Cardi B". In our case, though, we want the {content-type-1}s to be nested directly under the current folder, so make sure "{content-type-1}s" folder is selected when you create new content.
 
@@ -147,7 +147,7 @@ About:: {about-pink}
 With these {content-type-1}s created, your content hierarchy should now list the site, the {content-type-1}s folder, and the three {content-type-1}s.
 
 .The hierarchy as it should look after creating some content
-image::content-studio-with-{content-type-1}s.png["The content hierarchy showing the {p1-site-name} site with \"Cardi B\", \"Missy Elliot\", \"P!nk\", and \"Templates\" listed directly underneath it.", width=800]
+image::content-studio-with-{content-type-1}s.png["The content hierarchy showing the {p1-site-name} site with \"Cardi B\", \"Missy Elliot\", \"P!nk\", and \"Templates\" listed directly underneath it.", {image-xl}]
 
 == Branches and publishing
 
@@ -159,7 +159,7 @@ Ready for publishing (green circle with a check mark):: This piece of content is
 Published (no icon):: This piece of content is published and has not been modified since.
 
 .Content status symbols
-image::content-studio-content-status.png[Three pieces of content displaying the three statuses that a piece of content can have, width=400]
+image::content-studio-content-status.png[Three pieces of content displaying the three statuses that a piece of content can have, {image-m}]
 
 So what does it mean for content to be published? It doesn't make much of a difference to us at this stage of the tutorial, but for when you're working on production systems, it's very important. So let's talk briefly about Content Studio's branching and publishing system.
 
@@ -175,7 +175,7 @@ TIP: You can also publish a piece of content by using the keyboard shortcut kbd:
 Let's give this publishing thing a try! We'll publish the whole site at once. Select your your site and publish it. You'll be greeted by the Content Studio publishing wizard.
 
 .The Content Studio publishing wizard 🪄
-image::content-studio-publishing-wizard.png[A dialog with a list of the content to be published and button saying 'publish now']
+image::content-studio-publishing-wizard.png[A dialog with a list of the content to be published and button saying 'publish now', {image-xl}]
 
 You'll find that the "Publish now" button isn't available just yet. For content to be published, you must first _mark it as ready_. But before we do that, we should also make sure that we select all the content that belongs under the site too. By default, publishing a piece of content doesn't publish items nested under it. To include nested content, press the "include child items" icon to the left of the content icon (the one that looks sort of like a fork or a three-legged octopus). Next, select the "mark as ready" option from the button dropdown. It'll mark your content as ready to publish. Now press "publish now".
 
@@ -199,7 +199,7 @@ NOTE: If you have used a different name than "{p1-site-name}" for your site, you
 After navigating to the API, you'll find the _GraphQL playground_ waiting for you. The GraphQL playground is an interactive API explorer for GraphQL APIs. You enter your query in the text area to your left and when you execute it, you'll get the results of the query on the other side of the screen.
 
 .The GraphQL playground
-image::graphql-playground-empty.png[An empty GraphQL playground]
+image::graphql-playground-empty.png[An empty GraphQL playground, {image-xl}]
 
 In this {document}, we'll only barely dip our toes into the waters of GraphQL. We'll explore this further in the coming {document}s, but if you're interested, you can always check out the https://graphql.org/learn/[GraphQL docs].
 

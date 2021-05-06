@@ -92,7 +92,7 @@ Next, you need to reference the X-data in your `site.xml` and tell XP what conte
 Now, if you open Content Studio, you should be able to add references to your {content-type-2-capitalized} content:
 
 .Adding a reference
-image::x-data-example.png["The content form for Lion with an additional 'References' section below the usual inputs. The first reference, a TextLine input, points to the Wikipedia article.'", width=600]
+image::x-data-example.png["The content form for Lion with an additional 'References' section below the usual inputs. The first reference, a TextLine input, points to the Wikipedia article.'", {image-xl}]
 
 
 === Headless: fetching X-data
@@ -191,7 +191,7 @@ Note that the remaining fields of the form have been left out in the above examp
 
 With this new item set, we can add as many albums as we want:
 
-image::item-set-album.png["An example of using the Album item set with two albums included.", width=800]
+image::item-set-album.png["An example of using the Album item set with two albums included.", {image-m}]
 
 === Headless: fetching item sets
 
@@ -391,7 +391,7 @@ Notice that the use of the `mixin` helps us both reduce duplication and keep all
 Filling this out, it could look like this (with data appropriate for lion):
 
 .Distribution and feeding behavior for Lion
-image::option-sets.png["Diet and distribution data filled out for reindeer", width=800]
+image::option-sets.png["Diet and distribution data filled out for reindeer", {image-xl}]
 
 === Headless: fetching option set data
 

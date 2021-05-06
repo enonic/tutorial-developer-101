@@ -13,7 +13,7 @@ XP provides a number of input types for you to work with. This section highlight
 
 === TextLine
 
-image::input-type-text-line.png[TextLine: A single-line input field., width=800]
+image::input-type-text-line.png[TextLine: A single-line input field., {image-m}]
 
 TextLine inputs are useful for short fields that contain text. They also support two forms of validation out of the box: max length and regular expressions. They can be used separately or together. The max length validation specifies that a user's input can not be longer than the specified value. The regular expression validation allows you to provide a custom regex that is used to validate the input field as you wish.
 
@@ -34,7 +34,7 @@ Further, if you want to provide a default value for a TextLine input, you can do
 
 === ImageSelector
 
-image::input-type-image-selector.png[ImageSelector: An interactive image selection tool., width=800]
+image::input-type-image-selector.png[ImageSelector: An interactive image selection tool., {image-xl}]
 
 Images are a key part of many web experiences: they add color, break up the content, and gives the reader something to rest their eyes on. XP's image selector allows you to select an image for a piece of content and also to upload new images.
 
@@ -55,21 +55,21 @@ Read more about the https://developer.enonic.com/docs/xp/stable/cms/input-types#
 Content Studio's comes with built-in image editing facilities where you can edit the image by cropping, rotating, or flipping it. You can also add an image focal point, so that if the image gets cropped for some reason, you're in control of what part of the image remains visible.
 
 .The image selector with uploaded and selected images
-image::input-type-image-selector-highlighted-image.png["The image selector input field with two images of lions -- one male, one female - - below. Under the images, there's a set of buttons saying 'edit' and 'remove'.", width=800]
+image::input-type-image-selector-highlighted-image.png["The image selector input field with two images of lions -- one male, one female - - below. Under the images, there's a set of buttons saying 'edit' and 'remove'.", {image-xl}]
 
 After you've added an image (or several), you can highlight it and click the edit button. This will take you to the image editing form. Here, you can edit the image and image metadata, including (but definitely not limited to) image alt text, caption, copyright information, location data, and much more.
 
 For image editing, you can crop, flip, and rotate the image, as well add a focal point. The latter is an important tool for images that may display at different ratios depending on screen sizes. When an image gets fitted to a container, it's easy for the important part of the image to get cropped out. Content Studio solves this by letting you specify a focal point manually.
 
 .Setting the focal point
-image::image-editing-focal-point.png[An image with a focal point around the key part of the image,width=800]
+image::image-editing-focal-point.png[An image with a focal point around the key part of the image, {image-xl}]
 
 
 NOTE: If you'd like to lean more about image editing, https://enonic.com/blog/enonic-simplifies-image-problems[blog post on how Enonic simplifies your everyday image problems] has lots of great information about Content Studio's image handling capabilities.
 
 === Content Selector
 
-image::input-type-content-selector.png[ContentSelector: An interactive content selection tool., width=800]
+image::input-type-content-selector.png[ContentSelector: An interactive content selection tool., {image-xl}]
 
 The image selector we just saw is actually a specialized form of the more complex ContentSelector input type. The ContentSelector input type allows you to reference other content. Let's say you have two content types: one of type person and one of type food. If you want to be able to specify which dishes the person likes, you could use a content type to create a reference from the person to their favored dish.
 
@@ -126,7 +126,7 @@ Time for a little recap! We'll put together everything we've learned about conte
 Your task is to create a new content type: `{content-type-2-capitalized}` and to update the `{content-type-1-capitalized}` content type with new constraints and fields. By the end of this {document}, you should have content types that look like this in Content Studio:
 
 .The target for this task: {content-type-2} and {content-type-1}
-image::{content-type-2}-and-{content-type-1}-target.png["An {content-type-2} content wizard next to an {content-type-1} wizard"]
+image::{content-type-2}-and-{content-type-1}-target.png["An {content-type-2} content wizard next to an {content-type-1} wizard", {image-xl}]
 
 An {content-type-2} should have the following inputs:
 

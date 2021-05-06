@@ -100,7 +100,7 @@ You can also verify that the application was installed correctly by using the ad
 
 
 .The applications list with the headless starter installed
-image::applications-headless.png["The applications list with a few applications installed. Also shows application details, such as content install time, version, and required XP system version for the selected application."]
+image::applications-headless.png["The applications list with a few applications installed. Also shows application details, such as content install time, version, and required XP system version for the selected application.", {image-xl}]
 
 You've now successfully built and deployed your first Enonic XP application.
 

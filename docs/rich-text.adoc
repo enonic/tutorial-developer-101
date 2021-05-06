@@ -30,7 +30,7 @@ By default, it includes a limited, but useful selection of tools at your disposa
 ----
 
 .The default HtmlArea input type
-image::input-type-html-area.png[HtmlArea: A rich text input field with visible formatting options., width=600]
+image::input-type-html-area.png[HtmlArea: A rich text input field with visible formatting options., {image-s}]
 
 
 If you want to exclude all controls, use `<exclude>*</exclude>`:
@@ -48,7 +48,7 @@ If you want to exclude all controls, use `<exclude>*</exclude>`:
 ----
 
 .An HtmlArea exput with `<exclude>*</exclude>` and a selection of tools.
-image::input-type-html-area-no-controls.png[An HtmlArea configured to exclude all editing tools., width=600]
+image::input-type-html-area-no-controls.png[An HtmlArea configured to exclude all editing tools., {image-s}]
 
 Finally, if you want to exclude most tools, but not all, you can exclude all and then add back in the ones you want:
 
@@ -66,7 +66,7 @@ Finally, if you want to exclude most tools, but not all, you can exclude all and
 ----
 
 .An HtmlArea with a selection of tools and `<exclude>*</exclude>`
-image::input-type-html-area-some-controls.png[An HtmlArea configured to include a selection of editing tools., width=600]
+image::input-type-html-area-some-controls.png[An HtmlArea configured to include a selection of editing tools., {image-s}]
 
 == Task: Add a rich text area to your {content-type-2-capitalized} content type
 
@@ -126,7 +126,7 @@ We looked at xref:input-types#_working_with_images[editing images in the previou
 When you insert an image via the HtmlArea toolbar, you'll be greeted by the "insert image" dialog:
 
 .The HtmlArea insert image dialog. Photo by https://unsplash.com/@kydroon[Kurt Cotoaga] 🦁
-image::rich-text-insert-image.png["The insert image dialog, showing the image, an image styles dropdown, caption, and alt text fields", width=800]
+image::rich-text-insert-image.png["The insert image dialog, showing the image, an image styles dropdown, caption, and alt text fields", {image-l}]
 
 If you try and access the "image styles" dropdown, you'll find that it's only got two options and neither of them seem to do much. To make this more exciting, let's also create a custom image style.
 
@@ -150,7 +150,7 @@ NOTE: https://developer.enonic.com/docs/xp/stable/cms/styles[The styles referenc
 With this style picked up by XP, you'll have the "Grayscale" option available in the image styles dropdown. Select it to apply it to the image.
 
 .An image with an image style applied
-image::rich-text-insert-image-styled.png["The insert image dialog showing the results of applying the image styles to the image", width=800]
+image::rich-text-insert-image-styled.png["The insert image dialog showing the results of applying the image styles to the image", {image-l}]
 
 === Headless: fetching images and styles from HtmlArea
 
@@ -310,7 +310,7 @@ Macros enable you to insert rich components into your text. When the page is ren
 The {macro-app} package comes with a set of macros that let you put text differently colored items with icons.
 
 .The {macro-app} in action
-image::macros-panel-macros.jpg["The Panel Macros package in action, showing differently colored panels." , width=600]
+image::macros-panel-macros.jpg["The Panel Macros package in action, showing differently colored panels." , {image-m}]
 
 To use these macros, we first need to install the {macro-app}.
 
@@ -335,11 +335,11 @@ Text:: Reindeer are native to Arctic, sub-Arctic, tundra, boreal, and mountainou
 +
 
 .The insert macro form with reindeer data
-image::macros-insert-macro.png["A form with 'header' and 'description' fields. Used to set macro parameters.", width=800]
+image::macros-insert-macro.png["A form with 'header' and 'description' fields. Used to set macro parameters.", {image-xl}]
 . Try out the preview and see your macro in action
 +
 .The macro preview function
-image::macros-preview-macro.png["The text we specified in the macro preview form inside a light blue box with an icon attached", width=800]
+image::macros-preview-macro.png["The text we specified in the macro preview form inside a light blue box with an icon attached", {image-xl}]
 
 For more information on macros, including how to create your very own macros, refer back to https://developer.enonic.com/docs/xp/stable/cms/macros[the macro reference docs] from before.
 
