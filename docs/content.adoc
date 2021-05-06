@@ -79,7 +79,9 @@ image::content-studio-empty.png[What Content Studio looks like when it's complet
 
 Before we can create our content, we need a _site_ to hold it. Sites are a special content type that ships with Content Studio. It's one of a very small number of content types that we can place at the very root of the content hierarchy. A site is like a root node that we can nest other content under. When we create a new site, we can also specify which applications it uses, and that's where our application comes into play.
 
-To get going, press the "New..." button in the command bar or use the keyboard shortcut kbd:[Alt+n]. This will bring up a "Create Content" dialog that looks something like this:
+To get going, press the "New..." button in the command bar. This will bring up a "Create Content" dialog that looks something like this:
+
+TIP: You can also use the keyboard shortcut kbd:[Alt+n] to bring up the "Create Content" dialog.
 
 .The Content Studio create content dialog
 image::content-studio-create-content.png[The Content Studio create content dialog.]
@@ -100,15 +102,17 @@ The next field, "Applications", is important. This is where we tell Content Stud
 Your site form should now look a little something like this.
 
 .A filled out site creation form
-image::content-studio-site-filled-out.png[What the site form looks like after filling out the necessary fields.]
+image::content-studio-site-filled-out.png[What the site form looks like after filling out the necessary fields., {image-xl}]
 
-To confirm and return to the Content Studio hierarchy, you can either press "Save" in the menu bar or use the keyboard shortcut: kbd:[ctrl+enter] on Linux and Windows and kbd:[⌘+enter] on macOS. The keyboard shortcut will also close the tab for you after saving. If you clicked the "Save" button in the menu, feel free to close the tab manually (you won't be needing it again).
+To confirm and return to the Content Studio hierarchy, press "Save" in the menu bar. Feel free to close the tab (you won't be needing it again).
+
+TIP: The keyboard shortcut: kbd:[ctrl+enter] on Linux and Windows and kbd:[⌘+enter] on macOS also saves the content for you. Additionally, the keyboard shortcut will also close the tab for you after saving.
 
 When you return to the Content Studio hierarchy view, you should now see your site listed. If you expand it, you'll find that there is also a node called "Templates" underneath it. We can ignore this for now, but we'll learn more about it later.
 
 == Task: Content creation
 
-With the "{p1-site-name}" site highlighted, press "New ..." (or kbd:[Alt+n]!) to open the "Create Content" menu again. This time around, you should have some more choices than what you did previously, including our very own content type "{content-type-1-capitalized}"!
+With the "{p1-site-name}" site highlighted, press "New ..." to open the "Create Content" menu again. This time around, you should have some more choices than what you did previously, including our very own content type "{content-type-1-capitalized}"!
 
 .The "Create Content" dialog with more content types
 image::content-studio-new-content.png["The \"Create Content\" dialog when creating content under the \"{p1-site-name}\" site. It contains more elements than previously, including the \"{content-type-1-capitalized}\" content type that we created earlier."]
@@ -131,7 +135,7 @@ It should look a little something like this:
 .The content form filled out for the {content-type-1} "Cardi B"
 image::content-type-filled-out.png[The form for "{content-type-1}" fully filled out., width=800]
 
-Again, save and close the tab (kbd:[ctrl+enter]/kbd:[⌘+enter]). Now repeat this process for these next two entries. Be aware that Content Studio lets you nest content, so if you try and create new content when "Cardi B" is selected in the hierarchy, it'll nest the new content under "Cardi B". In our case, though, we want the {content-type-1}s to be nested directly under the current folder, so make sure "{content-type-1}s" folder is selected when you create new content.
+Again, save and close the tab. Now repeat this process for these next two entries. Be aware that Content Studio lets you nest content, so if you try and create new content when "Cardi B" is selected in the hierarchy, it'll nest the new content under "Cardi B". In our case, though, we want the {content-type-1}s to be nested directly under the current folder, so make sure "{content-type-1}s" folder is selected when you create new content.
 
 .Missy Elliott (https://en.wikipedia.org/wiki/Missy_Elliott[Missy Elliott on Wikipedia])
 Name:: Melissa Arnette Elliott
@@ -163,7 +167,9 @@ So what does it mean for content to be published? It doesn't make much of a diff
 
 Content Studio operates with two branches: a draft branch where you work and edit, and a branch that holds the published content, known as the master branch. When you work on something in Content Studio, you're working on the draft branch. When you publish something, the master branch gets updated with the new content. When you edit that same piece of content in Content Studio again, you're back to working on the draft, and you have to publish it to see changes to the published content.
 
-To publish a piece of content, you can either right click it or use the shortcut kbd:[ctrl+Alt+P]/kbd:[⌘+Alt+P].
+To publish a piece of content, right click it and select "Publish".
+
+TIP: You can also publish a piece of content by using the keyboard shortcut kbd:[ctrl+Alt+P]/kbd:[⌘+Alt+P].
 
 
 === Task: publish your site!
