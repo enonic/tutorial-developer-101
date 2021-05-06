@@ -196,9 +196,9 @@ NOTE: GraphQL is a graph "query language". It allows you to create highly specif
 
 The headless starter uses an XP library called https://market.enonic.com/vendors/enonic/guillotine-headless-lib[Guillotine] to dynamically expose all our editorial content. We'll learn more about how this works later, but for now (with the default configuration) we can find the API at {p1-api-url}.
 
-NOTE: If you have used a different name than "{p1-site-name}" for your site, you'll have to modify the URL a little: Switch `{p1-site-path}` for the path of your site.
+NOTE: If you have used a different name than "{p1-site-name}" for your site, you'll have to modify the URL a little: Switch `{p1-site-path}` for the path of your site. See the Guillotine reference docs for an https://developer.enonic.com/docs/guillotine/stable/usage#context[explanation of how the URL is generated].
 
-After navigating to {p1-api-url}, you'll find the _GraphQL playground_ waiting for you. The GraphQL playground is an interactive API explorer for GraphQL APIs. You enter your query in the text area to your left and when you execute it, you'll get the results of the query on the other side of the screen.
+After navigating to the API, you'll find the _GraphQL playground_ waiting for you. The GraphQL playground is an interactive API explorer for GraphQL APIs. You enter your query in the text area to your left and when you execute it, you'll get the results of the query on the other side of the screen.
 
 .The GraphQL playground
 image::graphql-playground-empty.png[An empty GraphQL playground]
