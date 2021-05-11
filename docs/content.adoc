@@ -172,7 +172,7 @@ TIP: You can also publish a piece of content by using the keyboard shortcut kbd:
 
 === Task: publish your site!
 
-Let's give this publishing thing a try! We'll publish the whole site at once. Select your your site and publish it. You'll be greeted by the Content Studio publishing wizard.
+Let's give this publishing thing a try! We'll publish the whole site at once. Select your site and publish it. You'll be greeted by the Content Studio publishing wizard.
 
 .The Content Studio publishing wizard 🪄
 image::content-studio-publishing-wizard.png[A dialog with a list of the content to be published and button saying 'publish now', {image-xl}]
@@ -186,6 +186,27 @@ In short:
 . Mark as ready.
 . Publish 🚀
 
-== Data Toolbox
+== Task: Data Toolbox
 
-One of the applications we installed previously is _Data Toolbox_. Data Toolbox provides you with a web interface to visualize and manipulate your XP data.
+One of the applications we installed previously is _Data Toolbox_. Data Toolbox provides you with a web interface to visualize and manipulate your XP data. We'll now see how to inspect our content using Data Toolbox.
+
+. Open the XP admin menu and select Data Toolbox. You should have this app installed from when you xref:sandboxes#_admin_console[took the welcome tour].
++
+.Data Toolbox
+image::data-toolbox-landing-page.png["The Data Toolbox landing page: grid of icons for administrative actions and accompanying explanations. ",{image-xl}]
++
+. Navigate to the "Data Tree" menu. In this menu, the toolbox lists repositories within your XP instance. There are three repositories listed:
+`com.enonic.cms.default`:: This is the repository that holds your content.
+`system.auditlog`:: This is where the _audit log_ is stored. The audit log allows you to see a log of everything that's been done in your XP instance, such as content creation, user administration, etc., and also tells you when it was done and by whom.
+`system-repo`:: This is where XP stores data about your system, such as external applications and identity data.
++
+. Navigate through to `com.enonic.cms.default`.
+. Next up is a list of branches (xref:content#_branches_and_publishing[as discussed above]). As long as you've published your content, you can choose either one of these.
+. Keep navigating further down the tree: `[root]` -> `content` -> `{p1-site-slug}`.
+. When you've reached `{p1-site-slug}` you should see all the content of your site listed. Navigate to `{content-type-1}s` to find actual pieces of content.
+. Choose one of your {content-type-1}s and check out both the info view and the JSON view, available via the buttons in the table row.
++
+.The Data Toolbox node info view
+image::data-toolbox-info-view.png["The Data Toolbox info view. the view contains options for exporting, moving, and deleting the node, as well as for displaying permissions for the node, versions of the node, and indexing data (and much more).",{image-xl}]
+
+Inspecting content is only a fraction of what Data Toolbox can do: it's a versatile and powerful administrative tool, and we'll see more of it in a later {document}.

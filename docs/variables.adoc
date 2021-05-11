@@ -9,8 +9,8 @@
 :project-name-full: {project-name-prefix}{project-name}
 :project-name-query: com_example_{project-name}
 :p1-site-name: My First Site
-:p1-site-path: /my-first-site
-:p1-api-url: {xp-url}/site/default/draft{p1-site-path}/api
+:p1-site-slug: my-first-site
+:p1-api-url: {xp-url}/site/default/draft/{p1-site-slug}/api
 :content-type-1: artist
 :content-type-1-capitalized: Artist
 :content-type-2: animal
