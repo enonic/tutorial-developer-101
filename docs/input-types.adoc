@@ -38,8 +38,6 @@ image::input-type-image-selector.png[ImageSelector: An interactive image selecti
 
 Images are a key part of many web experiences: they add color, break up the content, and gives the reader something to rest their eyes on. XP's image selector allows you to select an image for a piece of content and also to upload new images.
 
-In XP, image selectors are great for when you want to associate one or more images with piece of content. For instance, if you're creating an animal data set, you might want to have an image of what each animal looks like both as a young and as an adult.
-
 .An minimal ImageSelector configuration
 [source,xml]
 ----
