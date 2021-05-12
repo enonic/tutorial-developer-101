@@ -149,7 +149,7 @@ With these {content-type-1}s created, your content hierarchy should now list the
 .The hierarchy as it should look after creating some content
 image::content-studio-with-{content-type-1}s.png["The content hierarchy showing the {p1-site-name} site with \"Cardi B\", \"Missy Elliot\", \"P!nk\", and \"Templates\" listed directly underneath it.", {image-xl}]
 
-== Branches and publishing
+== Publishing
 
 You might have noticed the yellow circles with exclamation marks displayed on all the content we've been working on, both in the wizard and in the content grid. This is how Content Studio indicates whether something is published or not and whether there are any errors with it. There are four states:
 
@@ -159,7 +159,7 @@ Ready for publishing (green circle with a check mark):: This piece of content is
 Published (no icon):: This piece of content is published and has not been modified since.
 
 .Content status symbols
-image::content-studio-content-status.png[Three pieces of content displaying the three statuses that a piece of content can have, {image-m}]
+image::content-studio-content-status.png[Three pieces of content displaying the three statuses that a piece of content can have, {image-xs}]
 
 So what does it mean for content to be published? It doesn't make much of a difference to us at this stage of the tutorial, but for when you're working on production systems, it's very important. So let's talk briefly about Content Studio's branching and publishing system.
 
