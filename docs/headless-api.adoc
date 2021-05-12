@@ -1,10 +1,11 @@
 = {title-headless-api}
 include::variables.adoc[]
 
-In the {document}s leading up to this, we've seen a number of GraphQL queries. We've also mentioned that it's an application called _Guillotine_ that's responsible for generating the GraphQL API. However, we haven't yet looked at how the API is integrated into an application. This {document} addresses that and also gives us a slightly deeper look at writing GraphQL queries.
+Now that we've created some content, let's see how we can use it in a headless fashion. This {document} introduces _Guillotine_, the library that's responsible for automatically generating GraphQL APIs for your content.
+
+For the rest of this guide, whenever we're demonstrating headless functionality, we'll be using concepts introduced in this {document}. When we're talking headless functionality specifically, it'll be under a header that specifies it. If you're not interested in working headlessly, feel free to skip these sections.
 
 NOTE: {see-prev-docs} In this {document}, you won't be building anything new, but we use the data set that we've created thus far.
-
 
 == Headless: Querying the API
 
