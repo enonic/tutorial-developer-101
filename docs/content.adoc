@@ -208,5 +208,15 @@ image::data-toolbox-landing-page.png["The Data Toolbox landing page: grid of ico
 +
 .The Data Toolbox node info view
 image::data-toolbox-info-view.png["The Data Toolbox info view. the view contains options for exporting, moving, and deleting the node, as well as for displaying permissions for the node, versions of the node, and indexing data (and much more).",{image-xl}]
++
+. To inspect the data associated with the {content-type-1}, you can select "Display properties", which will bring up data about the node, such as its display name, its owner, when it was created, etc.
++
+.The display properties view
+image::data-toolbox-properties.png["A table with columns 'name', 'index, 'value', and 'type' that describes the node. Example names are 'valid', 'type', 'displayName'.", {image-xl}]
++
+. Finally, you can navigate to the `data` property, where you'll find the data stored on the {content-type-1}.
++
+.The properties.data view
+image::data-toolbox-properties-data.png["A table showing the data we stored about the {content-type-1} previously.", {image-xl}]
 
 Inspecting content is only a fraction of what Data Toolbox can do: it's a versatile and powerful administrative tool, and we'll see more of it in a later {document}.
