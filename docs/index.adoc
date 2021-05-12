@@ -13,7 +13,9 @@ More content will be added to the guide shortly ( ... ish).
 . <<sandboxes#, {title-sandboxes}>>
 . <<apps#, {title-apps}>>
 . <<content#, {title-content}>>
+. <<headless-api#, {title-headless-api}>>
+. <<media#, {title-media}>>
 . <<input-types#, {title-input-types}>>
+. <<sets#, {title-sets}>>
 . <<rich-text#, {title-rich-text}>>
 . <<advanced-content#, {title-advanced-content}>>
-. <<headless-api#, {title-headless-api}>>

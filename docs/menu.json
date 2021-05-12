@@ -17,20 +17,28 @@
       "document": "content"
     },
     {
-      "title": "5 - Input types",
+      "title": "4 - Headless API",
+      "document": "headless-api"
+    },
+    {
+      "title": "5 - Media and images",
+      "document": "media"
+    },
+    {
+      "title": "6 - Input types",
       "document": "input-types"
     },
     {
-      "title": "6 - Rich text",
+      "title": "7 - Sets",
+      "document": "sets"
+    },
+    {
+      "title": "7 - Rich text",
       "document": "rich-text"
     },
     {
-      "title": "7 - Advanced content",
+      "title": "8 - X-data",
       "document": "advanced-content"
-    },
-    {
-      "title": "8 - Headless API",
-      "document": "headless-api"
     }
   ]
 }
