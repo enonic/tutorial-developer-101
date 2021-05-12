@@ -3,15 +3,13 @@ include::variables.adoc[]
 
 Now that we've created some content, let's see how we can use it in a headless fashion. This {document} introduces _Guillotine_, the library that's responsible for automatically generating GraphQL APIs for your content.
 
+
+
 For the rest of this guide, whenever we're demonstrating headless functionality, we'll be using concepts introduced in this {document}. When we're talking headless functionality specifically, it'll be under a header that specifies it. If you're not interested in working headlessly, feel free to skip these sections.
 
 NOTE: {see-prev-docs} In this {document}, you won't be building anything new, but we use the data set that we've created thus far.
 
-== Headless: Querying the API
-
-So we've created a custom content type and used it to create content, but what good is content if we can't access it from anywhere? Luckily, the headless starter kit has our backs! When using the headless starter kit, we get a GraphQL API automatically generated without any additional work.
-
-NOTE: GraphQL is a graph "query language". It allows you to create highly specific queries for exactly the content that you need.
+== The GraphQL playground
 
 The headless starter uses an XP library called https://market.enonic.com/vendors/enonic/guillotine-headless-lib[Guillotine] to dynamically expose all our editorial content. We'll learn more about how this works later, but for now (with the default configuration) we can find the API at {p1-api-url}.
 
@@ -22,9 +20,59 @@ After navigating to the API, you'll find the _GraphQL playground_ waiting for yo
 .The GraphQL playground
 image::graphql-playground-empty.png[An empty GraphQL playground, {image-xl}]
 
-In this {document}, we'll only barely dip our toes into the waters of GraphQL. We'll explore this further in the coming {document}s, but if you're interested, you can always check out the https://graphql.org/learn/[GraphQL docs].
+GraphQL is a graph "query language". It allows you to create highly specific queries for exactly the content that you need (see the https://graphql.org/learn/[GraphQL docs to learn more]).
 
-To see what GraphQL can do for us, let's see if we can just fetch all the {content-type-1}s that we created. Copy the below query into your playground and run it by pressing kbd:[ctrl+enter]/kbd:[⌘+enter] or by clicking the play button.
+== Task: The `guillotine` field
+
+The `guillotine` field allows you to query the API for content. We'll see more advanced examples of this later in this {document}, but for now we'll focus on the top level queries.
+
+TIP: The GraphQL playground offers completion candidates for fields. You can use this to interactively explore the API. You can also open the schema and documentation from the right-hand side menu tabs.
+
+The `guillotine` field has sub-properties that you can query for. Each instance of the API runs on a site, so we can ask Guillotine about its site and about the children of the site. Copy the below query into your playground and run it by pressing kbd:[ctrl+enter]/kbd:[⌘+enter] or by clicking the play button.
+
+.A GraphQL query getting data about the site and its children
+[source,xml]
+----
+{
+  guillotine {
+    getSite {
+      displayName
+    }
+    getChildren {
+      displayName
+    }
+  }
+}
+----
+
+The response to the query is returned as JSON. In this case, it would contain the name of the site ({p1-site-name}), as well as the immediate children of the site: the "{content-type-1}" folder we created and the "Templates" that was already there.
+
+.The site info response
+[source,json]
+----
+{
+  "data": {
+    "guillotine": {
+      "getSite": {
+        "displayName": "My First Site"
+      },
+      "getChildren": [
+        {
+          "displayName": "artists"
+        },
+        {
+          "displayName": "Templates"
+        }
+      ]
+    }
+  }
+}
+----
+
+
+== Task: Querying for {content-type-1}s
+
+Let's look writing slightly more complex queries that get us information about the artists we've created. To start with, let's see if we can just fetch all the {content-type-1}s that we created.
 
 .A GraphQL query fetching all content below the "{p1-site-name}" site
 [source,GraphQL,{subs}"]
@@ -39,7 +87,7 @@ To see what GraphQL can do for us, let's see if we can just fetch all the {conte
 }
 ----
 
-The result of this query should list all the {content-type-1}s you created previously as well as the Templates directory that came with the site:
+The result of this query should list all the {content-type-1}s you created previously:
 
 .The result of the above query; all content nodes below "{content-type-1}s"
 [source,JSON]
@@ -97,21 +145,21 @@ Execute this and your response should look a little something like this:
           "displayName": "Missy Elliott",
           "data": {
             "name": "Melissa Arnette Elliott",
-            "about": "{about-missy}"
+            "about": "{content-about-missy}"
           }
         },
         {
           "displayName": "P!nk",
           "data": {
             "name": "Alecia Beth Moore",
-            "about": "{about-pink}"
+            "about": "{content-about-pink}"
           }
         },
         {
           "displayName": "Cardi B",
           "data": {
             "name": "Belcalis Marlenis Almánzar",
-            "about": "{about-cardi}"
+            "about": "{content-about-cardi}"
           }
         }
       ]
@@ -123,7 +171,7 @@ Execute this and your response should look a little something like this:
 
 == The Guillotine library
 
-If you've been wondering how the GraphQL API we've been querying up until now was created: the Guillotine library is the answer. The Guillotine library analyzes all the content in your applications and generates an API from that. It' s an optional library that comes preconfigured with the headless starter that we used back xref:apps#_projects_and_starters[way back when we first created our app in a previous {document}]. Guillotine provides direct, typed, and documented access to content within your site.
+If you've been wondering how the GraphQL API we've been querying up until now was created: the Guillotine library is the answer. The Guillotine library analyzes all the content in your applications and generates an API from that. It' s an optional library that comes preconfigured with the headless starter that we used back xref:apps#_projects_and_starters[back when we first created our app in a previous {document}]. Guillotine provides direct, typed, and documented access to content within your site.
 
 If you're familiar with GraphQL, you might have noticed that we have not performed any mutations yet. The reason for that is simple: Guillotine only exposes the read-only part of the Enonic Content API, so mutations are not available.
 
@@ -217,8 +265,8 @@ For instance, using the data set we've created previously in this guide, we coul
 {
   guillotine {
     query(
-      first: 3,
-      offset: 1,
+      first: 2,
+      offset: 0,
       contentTypes:
       [ "{project-name-full}:{content-type-1}",
 	"{project-name-full}:{content-type-2}" ],
@@ -231,6 +279,8 @@ For instance, using the data set we've created previously in this guide, we coul
   }
 }
 ----
+
+NOTE: If a content type doesn't exist, such as in the above query, GraphQL will process the query as normal: it just won't find any results of that type.
 
 This query would produce a result like the following:
 
@@ -251,12 +301,6 @@ This query would produce a result like the following:
           "displayName": "Missy Elliott",
           "contentType": {
             "displayName": "Artist"
-          }
-        },
-        {
-          "displayName": "Lion",
-          "contentType": {
-            "displayName": "Animal"
           }
         }
       ]

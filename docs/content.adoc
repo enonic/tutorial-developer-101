@@ -1,8 +1,5 @@
 = {title-content}
 include::variables.adoc[]
-:about-cardi: Belcalis Marlenis Almánzar (born October 11, 1992), known professionally as Cardi B, is an American rapper and songwriter.
-:about-missy: Melissa Arnette Elliott (born July 1, 1971) is an American rapper, singer, songwriter, and record producer.
-:about-pink: Alecia Beth Moore (born September 8, 1979), known professionally as Pink (stylized as P!nk), is an American singer and songwriter.
 
 In this {document}, we'll start building on the app we deployed previously and use an automatically generated GraphQL API for the content we create. In doing this, we'll learn about _content types_ and how to do basic work with  Content Studio.
 
@@ -126,7 +123,7 @@ Next, let's create a few {content-type-1}s to get used to the workflow. We'll st
 +
 .Artist details (https://en.wikipedia.org/wiki/Cardi_B[Cardi B on Wikipedia])
 Name:: Belcalis Marlenis Almánzar
-About:: {about-cardi}
+About:: {content-about-cardi}
 
 It should look a little something like this:
 
@@ -137,12 +134,12 @@ Again, save and close the tab. Now repeat this process for these next two entrie
 
 .Missy Elliott (https://en.wikipedia.org/wiki/Missy_Elliott[Missy Elliott on Wikipedia])
 Name:: Melissa Arnette Elliott
-About:: {about-missy}
+About:: {content-about-missy}
 
 
 .P!nk (https://en.wikipedia.org/wiki/Pink_(singer)[P!nk on Wikipedia])
 Name:: Alecia Beth Moore
-About:: {about-pink}
+About:: {content-about-pink}
 
 With these {content-type-1}s created, your content hierarchy should now list the site, the {content-type-1}s folder, and the three {content-type-1}s.
 

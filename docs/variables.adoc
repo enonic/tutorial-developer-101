@@ -15,6 +15,9 @@
 :content-type-1-capitalized: Artist
 :content-type-2: animal
 :content-type-2-capitalized: Animal
+:content-about-cardi: Belcalis Marlenis Almánzar (born October 11, 1992), known professionally as Cardi B, is an American rapper and songwriter.
+:content-about-missy: Melissa Arnette Elliott (born July 1, 1971) is an American rapper, singer, songwriter, and record producer.
+:content-about-pink: Alecia Beth Moore (born September 8, 1979), known professionally as Pink (stylized as P!nk), is an American singer and songwriter.
 :subs: subs="attributes+"
 :see-prev-docs: The examples in this {document} build on work done in previous {document}s (starting with xref:sandboxes[the sandboxes chapter]). If you want to follow along with the examples, make sure you're all caught up.
 :title-setup: Setting up your development environment
