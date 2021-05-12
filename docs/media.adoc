@@ -1,5 +1,6 @@
 = {title-media}
 include::variables.adoc[]
+:image-folder: images
 
 Naturally, XP can also store any files you would want to serve or associate with any data. This {document} explores how XP stores uploaded data and focuses on how its image tools work. At the end of a chapter we'll walk through how to use images in a headless fashion.
 
@@ -7,9 +8,56 @@ NOTE: {see-prev-docs}. This {document} requires that you've got your site up and
 
 == Media types
 
+Media types are content types that ship with XP. When you upload a file to XP, XP will assign it one of the following media types based on the file's content:
+
+Text (`media:text`)::
+    Plain text files
+Data (`media:data`)::
+    Miscellaneous binary file formats
+Audio (`media:audio`)::
+    Audio files
+Video (`media:video`)::
+    Video files
+Image (`media:image`)::
+    Bitmap image files
+Vector (`media:vector`)::
+    Vector graphic files like `.svg`
+Archive (`media:archive`)::
+    File archives, such as `.zip`, `.tar` and `.jar`
+Document (`media:document`)::
+    Text documents with advanced formatting, such as `.doc`, `.odt` and `.pdf`
+Spreadsheet (`media:spreadsheet`)::
+    Spreadsheet files
+Presentation (`media:presentation`)::
+    Presentation files, such as Keynote and PowerPoint
+Code (`media:code`)::
+    Files with computer code, such as `.c`, `.pl` or `.java`
+Executable (`media:executable`)::
+    Executable application files
+Unknown (`media:unknown`)::
+    Everything else
+
+To upload files to XP, use the _content selector_. You can associate content selectors with your own custom content types (more about this in the xref:input-types#_content_selector[{document on input types}]), or you can upload them directly through the "create content" dialog.
+
 == Task: Uploading images
 
+To get familiar with uploading media to XP, let's start with one of the most common media types on the web: images!
+
+For the purposes of this {document}, you should work with an image where the important part isn't centered in the shot. If you have one yourself, feel free to use that. If not, how about using https://unsplash.com/photos/8oLnCRz7hwM[this picture of a lion] by https://unsplash.com/@keyursphotography[Keyur Nandaniya]?
+
+.A lion in brown grass
+image::image-to-upload.jpg["A Lion relaxing in brown grass. The lion is in the lower left quadrant.",{image-xl}]
+
+Once you have your image, create a folder and upload the image:
+
+. Create an images folder and call it {image-folder}. Just like the "{content-type-1}" folder we created previously, place the folder directly under your site.
+. Open the "create content" dialog. Press the upload button to bring up your OS's file browsing dialog and select your image. You can also drag and drop the image from your file system browser onto the dialog.
+
+And that's all it takes to upload files to Content Studio!
+
 == Editing images and setting focal points
+
+=== Task:
 
 == Media in Data Toolbox
 
