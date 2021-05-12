@@ -1,2 +1,60 @@
 = {title-media}
 include::variables.adoc[]
+
+Naturally, XP can also store any files you would want to serve or associate with any data. This {document} explores how XP stores uploaded data and focuses on how its image tools work. At the end of a chapter we'll walk through how to use images in a headless fashion.
+
+NOTE: {see-prev-docs}. This {document} requires that you've got your site up and running.
+
+== Media types
+
+== Task: Uploading images
+
+== Editing images and setting focal points
+
+== Media in Data Toolbox
+
+- the _attachment_ property
+- 👆 can be shown using json (remove all the extra stuff):
+
+----
+// ....
+  "data": {
+    "media": {
+      "attachment": "image-needs-focus.jpg",
+      "focalPoint": {
+        "x": 0.253125,
+        "y": 0.6470312118530274
+      },
+      "zoomPosition": {
+        "left": 0,
+        "top": 0,
+        "right": 1,
+        "bottom": 1
+      },
+      "cropPosition": {
+        "left": 0,
+        "top": 0,
+        "right": 1,
+        "bottom": 1,
+        "zoom": 1
+      }
+    }
+  },
+// ....
+----
+
+== Headless: retrieving images
+
+----
+{
+  guillotine {
+    getChildren(
+      key: "${site}/images") {
+      displayName
+      ... on media_Image {
+        imageUrl(type: absolute, scale: "block(3000,200)")
+      }
+    }
+  }
+}
+----
