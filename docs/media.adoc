@@ -8,42 +8,24 @@ NOTE: {see-prev-docs} This {document} requires that you've got your site up and 
 
 == Media types
 
-Media types are content types that ship with XP. When you upload a file to XP, XP will assign it one of the following media types based on the file's content:
+Media types are content types that ship with XP. When you upload a file to XP, XP will assign it one of a number of preexisting media types based on the file's content. Some common media types are images, audio, video, and executables.
 
-Text (`media:text`)::
-    Plain text files
-Data (`media:data`)::
-    Miscellaneous binary file formats
-Audio (`media:audio`)::
-    Audio files
-Video (`media:video`)::
-    Video files
-Image (`media:image`)::
-    Bitmap image files
-Vector (`media:vector`)::
-    Vector graphic files like `.svg`
-Archive (`media:archive`)::
-    File archives, such as `.zip`, `.tar` and `.jar`
-Document (`media:document`)::
-    Text documents with advanced formatting, such as `.doc`, `.odt` and `.pdf`
-Spreadsheet (`media:spreadsheet`)::
-    Spreadsheet files
-Presentation (`media:presentation`)::
-    Presentation files, such as Keynote and PowerPoint
-Code (`media:code`)::
-    Files with computer code, such as `.c`, `.pl` or `.java`
-Executable (`media:executable`)::
-    Executable application files
-Unknown (`media:unknown`)::
-    Everything else
+For a full overview of all the media types baked into XP, see the https://developer.enonic.com/docs/xp/stable/cms/content-types#media[reference docs for media content types].
 
-To upload files to XP, use the _content selector_. You can associate content selectors with your own custom content types (more about this in the xref:input-types#_content_selector[{document on input types}]), or you can upload them directly through the "create content" dialog.
+== Uploading media
+
+To upload files to Content Studio, use the "create content" dialog. You can either click the "upload" icon in the dialog or you can drag and drop the files from your file explorer.
+
+.Dragging and dropping files to the "create content dialog"
+image::media-drag-and-drop.png["The",{image-m}]
+
+This process is the same for whatever media type you want to upload.
 
 == Task: Uploading images
 
-To get familiar with uploading media to XP, let's start with one of the most common media types on the web: images! This process will also allow you to upload any other media type.
+To get familiar with uploading media to XP, let's start with one of the most common media types on the web: images! As mentioned abov, this process will also work for any other media type.
 
-For the purposes of this {document}, you should work with an image where the important part isn't centered in the shot. If you have one yourself, feel free to use that. If not, how about using https://unsplash.com/photos/8oLnCRz7hwM[this picture of a lion] by https://unsplash.com/@keyursphotography[Keyur Nandaniya]?
+For the purposes of the tasks in this {document}, you should work with an image where the important part isn't centered in the shot. If you have one yourself, feel free to use that. If not, how about using https://unsplash.com/photos/8oLnCRz7hwM[this picture of a lion] by https://unsplash.com/@keyursphotography[Keyur Nandaniya]?
 
 .A lion in brown grass
 image::image-to-upload.jpg["A Lion relaxing in brown grass. The lion is in the lower left quadrant.",{image-xl}]
@@ -102,8 +84,8 @@ For instance, if you have a look at the image you uploaded earlier, you should s
       }
     }
   },
-  "attachment": {
-    "name": "lion.jpg", <--.-->
+  "attachment": { <--.-->
+    "name": "lion.jpg",
     "label": "source",
     "binary": "lion.jpg",
     "mimeType": "image/jpeg",
@@ -113,11 +95,37 @@ For instance, if you have a look at the image you uploaded earlier, you should s
 // ....
 ----
 
-<.> A reference to the attachment specified in the `attachment` property.
+<.> References the name of the attachment specified in the `attachment` property.
 <.> The position of the focal point specified in the previous task.
 <.> The image attachment with data about the file, such as MIME type and size.
 
-== Headless: images
+== Headless
+
+Guillotine makes it easy to fetch the data that you've uploaded. Some functionality is shared between all media types, while other queries only work on specific media types. We'll look at how to fetch general media and then have a closer look at what we can do with images.
+
+=== General media
+
+To get the resource URL of media you have uploaded, use the `mediaUrl` property on any media type. For instance, to get the URL of the raw image you uploaded previously, you could use a query like this:
+
+[source, GraphQL]
+----
+{
+  guillotine {
+    getChildren(
+      key: "${site}/images") {
+      displayName
+      ... on media_Image { <--.-->
+        mediaUrl <--.-->
+      }
+    }
+  }
+}
+----
+
+<.> This allows us to query properties that belong to the `media:Image` type.
+<.> The `mediaUrl` property (also avalible on all other media types) gives you the relative path (from the server) to the media
+
+=== Images
 
 XP supports a number of image manipulation functions on the fly. When querying for an image via the GraphQL API, you can use the `imageUrl` function to specify scale and filters for the result you want.
 
@@ -136,7 +144,7 @@ For instance, we could get all the images under the `images` folder, scaled to 7
     getChildren(
       key: "${site}/images") {
       displayName
-      ... on media_Image { <--.-->
+      ... on media_Image {
         imageUrl( <--.-->
           type: absolute, <--.-->
           scale: "block(750,600)", <--.-->
@@ -147,7 +155,6 @@ For instance, we could get all the images under the `images` folder, scaled to 7
 }
 ----
 
-<.> This allows us to get properties that belong to the `media:Image` type.
 <.> The `imageUrl` function lets you specify how you want the images to look.
 <.> The `type` argument specifies whether the URL should be absolute or relative to the server.
 <.> The scale argument specifies the dimensions of the image.
@@ -171,3 +178,8 @@ The above query should return a response that looks a little something like this
   }
 }
 ----
+
+Which, if you have followed the steps in this {document}, should show you something like this if you try and navigate to the `imageUrl` property value:
+
+.The processed image
+image::image-processed.jpg["The lion image, cropped, in black and white, and flipped upside down.",{image-s}]
