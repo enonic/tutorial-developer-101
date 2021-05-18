@@ -123,9 +123,10 @@ XP supports a number of image manipulation functions on the fly. When querying f
 
 The scale argument is required and allows you to specify how you want to crop the image. Common scaling functions include _block_, which allows you to specify width and height and _width_ which scales the image proportionally to the specified width. https://developer.enonic.com/docs/xp/stable/runtime/engines/site-engine/image-service#scaling_methods[The scaling methods reference docs] show off all the available scaling functions with examples of how they affect the image.
 
-As the name implies, the filters argument lets you apply filters to the image. Use filters to apply coloration functions and to rotate and flip images on the fly. https://developer.enonic.com/docs/xp/stable/runtime/engines/site-engine/image-service#filters[The filters documentation] has an exhaustive list of the available filters.
+As the name implies, the filters argument lets you apply filters to the image. Use filters to apply coloration functions and to rotate and flip images on the fly. To combine filters, separate them with a semicolon.
+https://developer.enonic.com/docs/xp/stable/runtime/engines/site-engine/image-service#filters[The filters documentation] has an exhaustive list of the available filters.
 
-For instance, we could get all the images under the `images` folder, scaled to 750x600 pixels and in grayscale with a query like this:
+For instance, we could get all the images under the `images` folder, scaled to 750x600 pixels, in grayscale, and flipped upside down with a query like this:
 
 .A GraphQL query that both scales and applies a filter to images in the `images` folder
 [source, GraphQL]
@@ -139,7 +140,7 @@ For instance, we could get all the images under the `images` folder, scaled to 7
         imageUrl( <--.-->
           type: absolute, <--.-->
           scale: "block(750,600)", <--.-->
-          filter: "grayscale()") <--.-->
+          filter: "grayscale(); flipv()") <--.-->
       }
     }
   }
@@ -163,7 +164,7 @@ The above query should return a response that looks a little something like this
       "getChildren": [
         {
           "displayName": "lion",
-          "imageUrl": "http://localhost:8080/site/default/draft/my-first-site/_/image/3443336b-71e3-40a8-9a04-bc59eae934f8:7e7185830ee56f651aee49bf4aa98231ff8c1ecb/block-750-600/lion.jpg?filter=grayscale%28%29"
+          "imageUrl": "http://localhost:8080/site/default/draft/my-first-site/_/image/01ecdce7-01b7-43cb-a5e3-d0ef64a4356e:d7939cce949cd3832c987820caa361c4aec72598/block-750-600/image-to-upload-copy.jpg?filter=flipv%28%29%3B+grayscale%28%29"
         }
       ]
     }
