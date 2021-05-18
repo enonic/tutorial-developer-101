@@ -1,15 +1,43 @@
 = {title-input-types}
 include::variables.adoc[]
 
-In the previous {document}, we created a very simple content type and used it to create some content. However, in real world settings, you're likely to going to want to use more complex content types with different kinds of data (such as images). In this {document}  we'll be looking at some of the basic input types that come with XP and what we use them for.
-
-At the end of the {document}, we'll put everything we've learned so far together.
+The content types we've created previously in this guide have only used some basic inputs, but Content Studio has a lot more up its sleeve than just TextLines and TextAreas. This {document} explains how you can configure input types and introduces more new input types.
 
 NOTE: {see-prev-docs}
 
-== Input types overview
+== Basics
 
 XP provides a number of input types for you to work with. This section highlights a few types you'll be using a lot and shows off some of their special features and then mentions some of the types you're also likely to be seeing a lot of. Go to the reference docs for https://developer.enonic.com/docs/xp/stable/cms/input-types[a full list of all input types and their features].
+
+=== Configuration
+
+
+All input types share a number of options that affect how they act ...
+
+// use textline to illustrate here
+
+In the work we did in the previous {document}, we did some very minor configuration of the input types. In the sections above, we have seen a little more of what you can do, such as adding validation and specifying what formatting features the user should get.
+
+All input types share the same configuration options. In the XML schema, these configuration options go directly under the `input` tag. Additionally, the `config` tag can hold input-specific configuration.
+
+These full list of available configuration options is:
+
+`label` (required):: What the input should be labeled as in the content form.
+`occurrences` (optional):: Specifies the minimum and maximum instances of this field. Defaults to "one optional".
+`default` (optional):: Gives a default value to the input.
+`help-text` (optional):: Lets you specify a description of the input field to show to the user.
+`config` (optional):: Input type-specific configuration.
++
+Each input type also takes an optional `config` element for extra configuration. Because the input types are so different to each other, they all support different options. This is what allows us to use regex validation for TextLine inputs, configure formatting options for HtmlAreas, and what numeric values a Long or a Double input accepts.
++
+To find out exactly what configuration options an input type accepts and how to configure it, visit https://developer.enonic.com/docs/xp/stable/cms/input-types[the input types documentation].
+
+All of these configuration options are described in more detail in the https://developer.enonic.com/docs/xp/stable/cms/schemas#input_types[input types schema documentation], so head over there for more information and explanation of how the various inputs work. As a bonus,
+
+.TextLine inputs showing common configuration options
+image::input-type-common-configuration.png["Three TextLine inputs showing all the common configuration options: labels, help text, default text, and occurrences.",{image-xl}]
+
+
 
 === TextLine
 
@@ -32,7 +60,7 @@ NOTE: XP uses JavaScript's regex engine to validate the input. For more informat
 
 Further, if you want to provide a default value for a TextLine input, you can do that by using the `default` configuration option. For an example of how to do this and for more information on the TextLine input, visit the https://developer.enonic.com/docs/xp/stable/cms/input-types#textline[reference docs].
 
-=== ImageSelector
+== ImageSelector
 
 image::input-type-image-selector.png[ImageSelector: An interactive image selection tool., {image-xl}]
 
@@ -65,7 +93,7 @@ image::image-editing-focal-point.png[An image with a focal point around the key 
 
 NOTE: If you'd like to lean more about image editing, https://enonic.com/blog/enonic-simplifies-image-problems[blog post on how Enonic simplifies your everyday image problems] has lots of great information about Content Studio's image handling capabilities.
 
-=== Content Selector
+== ContentSelector
 
 image::input-type-content-selector.png[ContentSelector: An interactive content selection tool., {image-xl}]
 
@@ -86,7 +114,7 @@ https://developer.enonic.com/docs/xp/stable/cms/input-types#contentselector[The 
 </input>
 ----
 
-=== More useful input types
+== More useful input types
 
 Some other very useful input types that it's worth looking into are:
 
@@ -96,26 +124,6 @@ https://developer.enonic.com/docs/xp/stable/cms/input-types#date[Date] and https
 https://developer.enonic.com/docs/xp/stable/cms/input-types#geopoint[GeoPoint]:: Stores GPS coordinates.
 https://developer.enonic.com/docs/xp/stable/cms/input-types#htmlarea[HtmlArea]:: Provides a rich text, multi-line input. We'll discuss this in detail in xref:rich-text[the next {document}].
 https://developer.enonic.com/docs/xp/stable/cms/input-types#textarea[TextArea]:: Provides a multi-line text input with optional max length.
-
-== Input type configuration
-
-In the work we did in the previous {document}, we did some very minor configuration of the input types. In the sections above, we have seen a little more of what you can do, such as adding validation and specifying what formatting features the user should get.
-
-All input types share the same configuration options. In the XML schema, these configuration options go directly under the `input` tag. Additionally, the `config` tag can hold input-specific configuration.
-
-These full list of available configuration options is:
-
-`label` (required):: What the input should be labeled as in the content form.
-`occurrences` (optional):: Specifies the minimum and maximum instances of this field. Defaults to "one optional".
-`default` (optional):: Gives a default value to the input.
-`help-text` (optional):: Lets you specify a description of the input field to show to the user.
-`config` (optional):: Input type-specific configuration.
-+
-Each input type also takes an optional `config` element for extra configuration. Because the input types are so different to each other, they all support different options. This is what allows us to use regex validation for TextLine inputs, configure formatting options for HtmlAreas, and what numeric values a Long or a Double input accepts.
-+
-To find out exactly what configuration options an input type accepts and how to configure it, visit https://developer.enonic.com/docs/xp/stable/cms/input-types[the input types documentation].
-
-All of these configuration options are described in more detail in the https://developer.enonic.com/docs/xp/stable/cms/schemas#input_types[input types schema documentation], so head over there for more information and explanation of how the various inputs work. As a bonus,
 
 == Task: {content-type-1}s and {content-type-2}s
 
