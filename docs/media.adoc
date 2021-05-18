@@ -4,7 +4,7 @@ include::variables.adoc[]
 
 Naturally, XP can also store any files you would want to serve or associate with any data. This {document} explores how XP stores uploaded data and focuses on how its image tools work. At the end of a chapter we'll walk through how to use images in a headless fashion.
 
-NOTE: {see-prev-docs}. This {document} requires that you've got your site up and running.
+NOTE: {see-prev-docs} This {document} requires that you've got your site up and running.
 
 == Media types
 
@@ -41,7 +41,7 @@ To upload files to XP, use the _content selector_. You can associate content sel
 
 == Task: Uploading images
 
-To get familiar with uploading media to XP, let's start with one of the most common media types on the web: images!
+To get familiar with uploading media to XP, let's start with one of the most common media types on the web: images! This process will also allow you to upload any other media type.
 
 For the purposes of this {document}, you should work with an image where the important part isn't centered in the shot. If you have one yourself, feel free to use that. If not, how about using https://unsplash.com/photos/8oLnCRz7hwM[this picture of a lion] by https://unsplash.com/@keyursphotography[Keyur Nandaniya]?
 
@@ -57,7 +57,31 @@ And that's all it takes to upload files to Content Studio!
 
 == Editing images and setting focal points
 
-=== Task:
+Content Studio comes with a suite of image editing tools built in. After uploading an image to Content Studio, you can find it in the content grid and select it to bring up the image's content form.
+
+.The image content form
+image::image-content-form.png["A content form showing the image with image editing tools, inputs for caption, alternative text, copyright, and tags.",{image-xl}]
+
+The content form allows you to provide an image caption, alt text, copyright and tag info. You can also add image properties such as dimensions, and where the image was taken and with what gear.
+
+The image editing tools allow you to crop, flip, and rotate the image as well as to set what's known as _autofocus_. The autofocus control allows you to set an image focal point that XP will always keep in view, regardless of how the image is cropped. Without setting a focal point, XP will focus around the center of the image when cropping.
+
+TIP: You can read more about https://enonic.com/blog/enonic-simplifies-image-problems[how Enonic simplifies your everyday image problems] to get more info about how to use images in a traditional CMS model and for a quick overview of the autofocus feature.
+
+=== Task: Using autofocus
+
+Because we chose an image with an off-center subject, the image might get cropped such that the lion disappears from the image. For instance, a small, square crop might turn out like this:
+
+.Cropped image without focal point
+image::image-cropped-unfocused.jpg["A crop of the lion in the savannah image. The image is square and the only part of the lion that is visible is part of its hind leg.",{image-s}]
+
+To  get around this, try the autofocus tool. When you click it, a red circle will show up over the image. This circle indicates where the focal point is. Move the circle onto the lion and press "apply".
+
+image::image-editing-focal-point.png["The lion image with a red circle indicating the focal point around its head.",{image-xl}]
+
+Now, when the image gets cropped, XP will take care of keeping the lion in focus, both in traditional CMS solutions and in headless modes:
+
+image::image-cropped-focused.jpg["A crop of the lion in the savannah. In this square image, the lion is in full view square in the center.",{image-s}]
 
 == Media in Data Toolbox
 
