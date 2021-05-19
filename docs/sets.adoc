@@ -1,2 +1,475 @@
 = {title-sets}
 include::variables.adoc[]
+
+XP also offers ways for you to group inputs, both visually and structurally. Collectively, these are known as sets. This {document} explains what they are and how to use them.
+
+NOTE: {see-prev-docs}
+
+== Field sets
+
+Field sets are the simplest form of sets XP offers. Field sets group inputs visually and have no effect on the data model. In a schema, the field set element wraps the input elements it should contain. To create a field set that contains a TextLine and a TextArea, the markup would look like this:
+
+.A field set
+[source, xml]
+----
+<field-set>
+  <label>FieldSet</label>
+  <items> <--.-->
+    <input type="TextLine" name="fieldSetTextLine">
+      <label>Heading</label>
+    </input>
+    <input type="TextArea" name="fieldSetTextArea">
+      <label>Text</label>
+      <help-text>Write something? 🖊️</help-text>
+    </input>
+  </items>
+</field-set>
+----
+
+<.> Use the `items` element place other inputs inside the field set.
+
+.A field set grouping
+image::field-set.png["A field set containing TextLine and TextArea inputs. The field set groups them visually and adds a shared heading.",{image-s}]
+
+
+== Item sets
+
+.An item set containing contact info
+image::item-set-sample.png["A pair of visually grouped inputs on a card element. The card has a header that says 'contact info'. There is also a button to add more contact info forms.",{image-s}]
+
+Item sets also allow you to group input fields, but as opposed to field sets, item sets group values _both_ visually _and_ on a structural level. Item sets can be arbitrarily nested.
+
+The https://developer.enonic.com/docs/xp/stable/cms/sets#item_set[item set documentation] does a standout job of explaining exactly how they work, so check that out for an overview. https://developer.enonic.com/docs/xp/stable/cms/schemas#item_set[The item set schema documentation] contains all the information you'd need on how to create an item set schema.
+
+=== Comparison to other data structures
+
+If you're used to working with JSON data or similar data structures, you can think of item sets as JSON objects. They allow you to group a number of input types together into one unit (object). You can also nest them arbitrarily to create more complex structures.
+
+== Task: adding an item set to `{content-type-1-capitalized}`
+
+Let's add an item set to the `{content-type-1-capitalized}`. All the people we entered back in xref:content#_add_some_friends[the content chapter] are successful musical artists, so we can create an item set for albums they have released.
+
+To add an item set, use it as you would any other input type: place it within the `form` element of a content type. If we add it to the `{content-type-1-capitalized}` content type, it'd look something like this:
+
+.{content-type-1-capitalized} with an added Item Set
+[source,xml,{subs}]
+----
+<content-type>
+  <display-name>{content-type-1-capitalized}</display-name>
+  <description>A description of an {content-type-1}</description>
+  <super-type>base:structured</super-type>
+  <form>
+
+    <!-- Other fields elided for brevity -->
+
+    <item-set name="albums">
+      <label>Album</label>
+      <occurrences minimum="0" maximum="0" />
+      <items> <--.-->
+        <input name="title" type="TextLine">
+          <label>Title</label>
+          <occurrences minimum="1" maximum="1" />
+          </input>
+          <input type="TextLine" name="releaseYear">
+            <label>Release year</label>
+          </input>
+      </items>
+    </item-set>
+
+  </form>
+</content-type>
+----
+
+<.> Much like with field sets, use the `items` element to nest inputs within the item set.
+
+Note that the remaining fields of the form have been left out in the above example.
+
+With this new item set, we can add as many albums as we want:
+
+image::item-set-album.png["An example of using the Album item set with two albums included.", {image-m}]
+
+
+
+== Option sets
+
+.A multi-select option set
+image::option-set-sample.png["An input form labelled 'multi-selection'. The user has selected one out of four options. Some options contain extra data such as an image selector or other input fields.",{image-s}]
+
+Option sets enable editors (working in Content Studio) to choose from a set of predefined options. This is similar to the ComboBox element, but option sets also allow options to carry extra data.
+
+To illustrate this, consider the item set task we just did. We could expand this list to also include film appearances. To do that, each entry could be either an album _or_ film appearance. Depending on the kind of entry, it would also have different associated data. While title and release year might be enough for an album, it might be useful to add a list of roles to film entries.
+
+Option sets where users can select only one of a number of options are known as _single-select_ option sets. You can also use a _multi-select_ option set if the user should be able to select multiple options simultaneously. We'll look at this too in a task below.
+
+The https://developer.enonic.com/docs/xp/stable/cms/sets#option_set[option set reference documentation] provides a good overview (with accompanying pictures) of how option sets work. Additionally, https://developer.enonic.com/docs/xp/stable/cms/schemas#option_set[the option set schema overview] is very thorough and full of examples on how to use the various configuration options.
+
+== Mixins
+
+_Mixins_ facilitate a form of reuse in XP. They allow you to reuse fields across several content types. They won't look or behave any different from if you manually typed the same fields into multiple content types, but it lets you keep them in sync.  Mixins go in the `/src/main/resources/site/mixins` directory, following the same naming pattern as the other schemas we've seen (`<mixin-name>/<mixin-name>.xml`).
+
+We'll see them in the upcoming task, but if you want to learn more about them, consult https://developer.enonic.com/docs/xp/stable/cms/mixins[the mixins reference documentation].
+
+== Task: add distribution and dietary data to {content-type-2}s
+
+In this section, we'll use option sets to add some extra data to our `{content-type-2-capitalized}` data type. Our goal is:
+
+- Add an option for distribution across continents. The user should be able to select as many as they want from the 7 continents to indicate where the animal lives. Each option should have an associated TextArea called "notes", where the user can add more data for each option.
+- Because each distribution option should have the same fields, create a mixin to reuse it.
+- Add an option set for feeding behavior. Intentionally simplified, this option set should indicate whether the animal is a herbivore or a carnivore, and if it is a carnivore, it should also let the user add a list of prey.
+
+Start by creating the mixin. Call it `distributionData` and place it in `src/main/resources/site/mixins/distributionData/distributionData.xml`. It only contains a text area:
+
+.The `distributionData` mixin
+[source,xml,{subs}]
+----
+<mixin>
+  <display-name>Distribution data</display-name>
+  <form>
+
+    <input type="TextArea" name="notes">
+      <label>Notes</label>
+    </input>
+
+  </form>
+</mixin>
+----
+
+Moving onto our {content-type-2}s, add the new option sets. As before, we use option sets as we would any other input type.
+
+.The `{content-type-2-capitalized}` content type with new option sets
+[source,xml]
+----
+<?xml version="1.0" encoding="utf-8"?>
+<content-type>
+  <display-name>Animal</display-name>
+  <description>An animal that lives on planet Earth</description>
+  <super-type>base:structured</super-type>
+  <form>
+
+    <!-- other fields elided for brevity -->
+
+    <option-set name="feedingBehavior">
+      <label>Feeding behavior</label>
+      <options minimum="1" maximum="1"> <--.-->
+
+        <option name="herbivore"> <--.-->
+          <help-text>Subsists primarily on plant material.</help-text>
+          <label>Herbivore</label>
+        </option>
+
+        <option name="carnivore"> <--.-->
+          <label>Carnivore</label>
+          <help-text>Subsists primarily on animal tissue and meat.</help-text>
+          <items>
+            <input name="prey" type="TextLine">
+              <label>Prey</label>
+              <occurrences minimum="0" maximum="0" />
+            </input>
+          </items>
+        </option>
+
+      </options>
+    </option-set>
+
+    <option-set name="distribution">
+      <label>Distribution across continents</label>
+      <help-text>Continents where the animal can be found in the wild</help-text>
+      <options minimum="0" maximum="0"> <--.-->
+
+        <option name="africa">
+          <label>Africa</label>
+          <items>
+            <mixin name="distributionData" />
+          </items>
+        </option>
+
+        <option name="antarctica">
+          <label>Antarctica</label>
+          <items>
+            <mixin name="distributionData" />
+          </items>
+        </option>
+
+        <option name="asia">
+          <label>Asia</label>
+          <items>
+            <mixin name="distributionData" />
+          </items>
+        </option>
+
+        <option name="australia">
+          <label>Australia</label>
+          <items>
+            <mixin name="distributionData" />
+          </items>
+        </option>
+
+        <option name="europe">
+          <label>Europe</label>
+          <items>
+            <mixin name="distributionData" />
+          </items>
+        </option>
+
+        <option name="northAmerica">
+          <label>North America</label>
+          <items>
+            <mixin name="distributionData" />
+          </items>
+        </option>
+
+        <option name="southAmerica">
+          <label>South America</label>
+          <items>
+            <mixin name="distributionData" />
+          </items>
+        </option>
+
+      </options>
+    </option-set>
+
+  </form>
+</content-type>
+----
+
+<1> This specifies that if you add feeding behavior, you must select one of the options, and you can not select more than one.
+<2> The herbivore option has no associated data, so it consists solely of a label.
+<3> The carnivore option allows you to optionally specify prey for the animal.
+<4> This specifies that you can add as many distributions as you want.
+
+Notice that the use of the `mixin` helps us both reduce duplication and keep all options in sync. If we wanted to add more data, such as current population, we would only have to add it to the `mixin` to have it duplicate to all distributions.
+
+Filling this out, it could look like this (with data appropriate for lion):
+
+.Distribution and feeding behavior for Lion
+image::option-sets.png["Diet and distribution data filled out for lion. The feeding behaviour selected is 'Carnivore' and the list of prey includes zebras and giraffes. For the distribution data, Africa and Asia is selected, with a short text about how Lions live in these areas today.", {image-xl}]
+
+== Task (bonus): extend album list for {content-type-1}s
+
+We can also arbitrarily nest item sets and option sets. As mentioned above, try to extend the album list for {content-type-1}s to also allow for films. How you do this is up to you, but there are two main approaches:
+
+. Wrap two item sets in an option set: Create an option set at the top level and allow the user to select as many options as they want. The options could be "Filmography" and "Discography", where the former has an item set with film data as associated content, and the latter an item set with album data.
+
+. Make each item in the item set an option set. Keep the item set as is, but make every entry be _either_ an album _or_ a film.
+
+Which approach is best depends on your circumstances and personal preference. Solutions to both approaches are listed below.
+
+.Wrapping item sets in an option set
+[source,xml]
+----
+<option-set name="media">
+      <label>Media appearances</label>
+      <options minimum="0" maximum="0">
+
+        <option name="discography">
+          <label>Discography</label>
+          <items>
+            <item-set name="albums">
+              <label>Album</label>
+              <occurrences minimum="0" maximum="0" />
+              <items>
+                <input name="title" type="TextLine">
+                  <label>Title</label>
+                  <occurrences minimum="1" maximum="1" />
+                </input>
+                <input type="TextLine" name="releaseYear">
+                  <label>Release year</label>
+                </input>
+              </items>
+            </item-set>
+          </items>
+        </option>
+
+        <option name="filmography">
+          <label>Filmography</label>
+          <items>
+            <item-set name="films">
+              <label>Film</label>
+              <occurrences minimum="0" maximum="0" />
+              <items>
+                <input name="title" type="TextLine">
+                  <label>Title</label>
+                  <occurrences minimum="1" maximum="1" />
+                </input>
+                <input type="TextLine" name="role">
+                  <label>Role</label>
+                  <occurrences minimum="0" maximum="0" />
+                </input>
+              </items>
+            </item-set>
+          </items>
+        </option>
+
+      </options>
+    </option-set>
+----
+
+.Each item can be either a film _or_ an album
+[source,xml]
+----
+<item-set name="media">
+      <label>Media</label>
+      <items>
+        <option-set name="kind">
+          <label>Media type</label>
+          <options minimum="1" maximum="1">
+
+            <option name="album">
+              <label>Album</label>
+              <items>
+                <input name="title" type="TextLine">
+                  <label>Title</label>
+                  <occurrences minimum="1" maximum="1" />
+                </input>
+                <input type="TextLine" name="releaseYear">
+                  <label>Release year</label>
+                </input>
+              </items>
+            </option>
+
+            <option name="film">
+              <label>Film</label>
+              <items>
+                <input type="TextLine" name="title">
+                  <label>Title</label>
+                </input>
+                <input type="TextLine" name="roles">
+                  <label>Role</label>
+                  <occurrences minimum="0" maximum="0" />
+                </input>
+              </items>
+            </option>
+
+          </options>
+        </option-set>
+      </items>
+    </item-set>
+----
+
+== Headless
+
+Let's look at how option and item sets work in headless contexts.
+
+=== Item sets
+
+Getting item sets via GraphQL is not much different than anything else we've seen:
+
+.Fetching albums
+[source,GraphQL,{subs}]
+----
+{
+  guillotine {
+    query(contentTypes:"{project-name-full}:{content-type-1}",
+      query: "displayName = 'P!nk'") {
+      ... on {project-name-query}_{content-type-1-capitalized} {
+        data {
+          albums {
+            title
+            releaseYear
+          }
+        }
+      }
+    }
+  }
+}
+----
+
+With some data added for P!nk, you'd get a result like this:
+
+.Album data
+[source,json]
+----
+{
+  "data": {
+    "guillotine": {
+      "query": [
+        {
+          "data": {
+            "albums": [
+              {
+                "title": "The Truth About Love",
+                "releaseYear": "2012"
+              },
+              {
+                "title": "Beautiful Trauma",
+                "releaseYear": "2017"
+              }
+            ]
+          }
+        }
+      ]
+    }
+  }
+}
+----
+
+=== Option sets
+
+When fetching option set data, you can get the list of currently selected items and each item separately.
+
+.Querying for feeding behavior and distribution
+[source,GraphQL,{subs}]
+----
+{
+  guillotine {
+    query(contentTypes:"{project-name-full}:{content-type-2}",
+      query: "displayName = 'Lion'") {
+      ... on {project-name-query}_{content-type-2-capitalized} {
+        data {
+          feedingBehavior {
+            _selected <--.-->
+            carnivore { <--.-->
+              prey
+            }
+          }
+          distribution {
+            _selected
+            africa {
+              notes
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+----
+
+<.> This provides data about what the {content-type-2}s selected feeding behavior is.
+<.> This gives more data about a particular option
+
+.Query result
+[source,json]
+----
+{
+  "data": {
+    "guillotine": {
+      "query": [
+        {
+          "data": {
+            "feedingBehavior": {
+              "_selected": "carnivore",
+              "carnivore": {
+                "prey": [
+                  "Zebra",
+                  "Giraffe"
+                ]
+              }
+            },
+            "distribution": {
+              "_selected": [
+                "africa",
+                "asia"
+              ],
+              "africa": {
+                "notes": "African lions live in scattered populations across Sub-Saharan Africa. The lion prefers grassy plains and savannahs, scrub bordering rivers and open woodlands with bushes. It is absent from rainforests and rarely enters closed forests."
+              }
+            }
+          }
+        }
+      ]
+    }
+  }
+}
+----
