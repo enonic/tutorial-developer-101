@@ -199,6 +199,11 @@ For more information on macros, including how to create your very own macros, re
 
 == Headless
 
+When you fetch rich text content via GraphQL, the response is formatted as unstyled, semantic HTML. It's up to you to style the content when displaying it on the client. There are some exceptions, however:
+
+- Image styles (as applied in the editor) are returned with the image.
+- Macros use a special element `<editor-macro>`, which you need to replace with the processed output of the macro on the client.
+
 === Images and styles
 
 When you add a an image to a rich text input, you can fetch it via GraphQL using the `processedHtml` sub selection of your rich text field.  Let's look at how that works. To start us off, this query finds the piece of content that we added the added the image to (the "Lion" 🦁) and extracts its processed HTML from its description.
@@ -236,7 +241,7 @@ In the returned HTML, you can see the image with styles applied. If you extract 
         {
           "data": {
             "description": {
-              "processedHtml": "<figure class=\"captioned editor-align-justify editor-style-grayscale\"><img alt=\"A yawning lion cub\" src=\"/site/default/draft/my-first-site/_/image/ef8605b1-6966-4011-bbfe-65c4c2e9ec86:d5d96909fc488356fd24e67763cbb1868b3f77c3/width-768/lion-cub.jpg?filter=hsbcolorize%280x000000%29%3B+grayscale%28%29%3B+border%286%2C+0x000000%29\" data-image-ref=\"23dc2b52-2e06-46cc-b42c-953ef51ae650\" style=\"width:100%\" />\n<figcaption>Soooo sleepy 😪</figcaption>\n</figure>\n\n<p>&nbsp;</p>\n"
+              "processedHtml": "<div>\n<div>\n<div contenteditable=\"false\" tabindex=\"-1\">\n<figure class=\"captioned editor-align-justify editor-style-grayscale\" data-widget=\"image\"><img alt=\"A yawning lion cub\" src=\"/site/default/draft/my-first-site/_/image/ef8605b1-6966-4011-bbfe-65c4c2e9ec86:d5d96909fc488356fd24e67763cbb1868b3f77c3/block-768-768/lion-cub.jpg?filter=hsbcolorize%280x000000%29%3B+grayscale%28%29%3B+border%286%2C+0x000000%29\" data-image-ref=\"103d21b9-de86-4a9c-ab3d-82859a2ccf31\" style=\"width:100%\" />\n<figcaption>Soooo sleepy 😪</figcaption>\n</figure>\n</div>\n</div>\n</div>\n\n<p>&nbsp;</p>\n"
             }
           }
         }
@@ -279,7 +284,7 @@ That'll get you a result that looks like this:
         {
           "data": {
             "description": {
-              "processedHtml": "<figure class=\"captioned editor-align-justify editor-style-grayscale\"><img alt=\"A yawning lion cub\" src=\"/site/default/draft/my-first-site/_/image/ef8605b1-6966-4011-bbfe-65c4c2e9ec86:d5d96909fc488356fd24e67763cbb1868b3f77c3/width-768/lion-cub.jpg?filter=hsbcolorize%280x000000%29%3B+grayscale%28%29%3B+border%286%2C+0x000000%29\" data-image-ref=\"21d88d0f-aa30-4c0b-9830-37893f9ff642\" srcset=\"/site/default/draft/my-first-site/_/image/ef8605b1-6966-4011-bbfe-65c4c2e9ec86:d5d96909fc488356fd24e67763cbb1868b3f77c3/width-200/lion-cub.jpg?filter=hsbcolorize%280x000000%29%3B+grayscale%28%29%3B+border%286%2C+0x000000%29 200w,/site/default/draft/my-first-site/_/image/ef8605b1-6966-4011-bbfe-65c4c2e9ec86:d5d96909fc488356fd24e67763cbb1868b3f77c3/width-500/lion-cub.jpg?filter=hsbcolorize%280x000000%29%3B+grayscale%28%29%3B+border%286%2C+0x000000%29 500w\" style=\"width:100%\" />\n<figcaption>Soooo sleepy 😪</figcaption>\n</figure>\n\n<p>&nbsp;</p>\n"
+              "processedHtml": "<div>\n<div>\n<div contenteditable=\"false\" tabindex=\"-1\">\n<figure class=\"captioned editor-align-justify editor-style-grayscale\" data-widget=\"image\"><img alt=\"A yawning lion cub\" src=\"/site/default/draft/my-first-site/_/image/ef8605b1-6966-4011-bbfe-65c4c2e9ec86:d5d96909fc488356fd24e67763cbb1868b3f77c3/block-768-768/lion-cub.jpg?filter=hsbcolorize%280x000000%29%3B+grayscale%28%29%3B+border%286%2C+0x000000%29\" data-image-ref=\"e5be0ead-e803-4af6-a6c4-7edc004038b3\" srcset=\"/site/default/draft/my-first-site/_/image/ef8605b1-6966-4011-bbfe-65c4c2e9ec86:d5d96909fc488356fd24e67763cbb1868b3f77c3/block-200-200/lion-cub.jpg?filter=hsbcolorize%280x000000%29%3B+grayscale%28%29%3B+border%286%2C+0x000000%29 200w,/site/default/draft/my-first-site/_/image/ef8605b1-6966-4011-bbfe-65c4c2e9ec86:d5d96909fc488356fd24e67763cbb1868b3f77c3/block-500-500/lion-cub.jpg?filter=hsbcolorize%280x000000%29%3B+grayscale%28%29%3B+border%286%2C+0x000000%29 500w\" style=\"width:100%\" />\n<figcaption>Soooo sleepy 😪</figcaption>\n</figure>\n</div>\n</div>\n</div>\n\n<p>&nbsp;</p>\n"
             }
           }
         }
@@ -334,7 +339,7 @@ You can extract the properties that you specified in your `styles.xml` previousl
                 {
                   "style": {
                     "name": "editor-style-grayscale",
-                    "aspectRatio": null,
+                    "aspectRatio": "1:1",
                     "filter": "hsbcolorize(0x000000); grayscale(); border(6, 0x000000)"
                   }
                 }
