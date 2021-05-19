@@ -12,15 +12,7 @@ XP provides a number of input types for you to work with. This section highlight
 === Configuration
 
 
-All input types share a number of options that affect how they act ...
-
-// use textline to illustrate here
-
-In the work we did in the previous {document}, we did some very minor configuration of the input types. In the sections above, we have seen a little more of what you can do, such as adding validation and specifying what formatting features the user should get.
-
-All input types share the same configuration options. In the XML schema, these configuration options go directly under the `input` tag. Additionally, the `config` tag can hold input-specific configuration.
-
-These full list of available configuration options is:
+All input types share a number of options that affect how they act. These options are:
 
 `label` (required):: What the input should be labeled as in the content form.
 `occurrences` (optional):: Specifies the minimum and maximum instances of this field. Defaults to "one optional".
@@ -28,37 +20,96 @@ These full list of available configuration options is:
 `help-text` (optional):: Lets you specify a description of the input field to show to the user.
 `config` (optional):: Input type-specific configuration.
 +
-Each input type also takes an optional `config` element for extra configuration. Because the input types are so different to each other, they all support different options. This is what allows us to use regex validation for TextLine inputs, configure formatting options for HtmlAreas, and what numeric values a Long or a Double input accepts.
+The `config` element is for input-specific configuration. Because the input types are so different to each other, they all support different options. The `config` element allows us to use regex validation for TextLine inputs, configure formatting options for HtmlAreas, and to dictate what numeric values a Long or a Double input accepts.
 +
 To find out exactly what configuration options an input type accepts and how to configure it, visit https://developer.enonic.com/docs/xp/stable/cms/input-types[the input types documentation].
 
-All of these configuration options are described in more detail in the https://developer.enonic.com/docs/xp/stable/cms/schemas#input_types[input types schema documentation], so head over there for more information and explanation of how the various inputs work. As a bonus,
+All of these configuration options are described in more detail in the https://developer.enonic.com/docs/xp/stable/cms/schemas#input_types[input types schema documentation], so head over there for more information and explanation of how the various inputs work.
+
+To show an example of the configuration options work, let's examine some TextLine inputs with different configurations.
+
+.TextLine inputs using all the shared configuration options
+[source,xml]
+----
+<input type="TextLine" name="textlineRequired">
+  <label>Required input with default</label> <--.-->
+  <help-text>This text should provide additional information to the user.</help-text> <--.-->
+  <occurrences minimum="1" maximum="1" /> <--.-->
+  <default>This is a required input with a default value.</default> <--.-->
+</input>
+
+<input type="TextLine" name="textlineOptional">
+  <label>Optional input</label>
+  <occurrences minimum="0" maximum="1" /> <--.-->
+</input>
+
+<input type="TextLine" name="textlineList">
+  <label>Input list</label>
+  <help-text>This input can have as many values as you want.</help-text>
+  <occurrences minimum="0" maximum="0" /> <--.-->
+</input>
+----
+
+<.> The label is shown above the input and provides context to the user.
+<.> The help-text can provide extra context and information to the user. It's hidden by default, but can be shown by activating the help text button.
+<.> This instance of the `occurrences` element specifies that this is a _required_ input. It must have _at least_ one and _at most_ one value.
+<.> The default value gets added to the input by default. The user can manually override this.
+<.> When you specify `minimum="0"` and `maximum="1"` on an `occurrences` element, that makes the input optional. This is the default.
+<.> When you set `maximum="0"` on an `occurrences` element, the user can add as many values as they want to.
+
+This set of inputs would be rendered as in the following picture. As specified in the above configuration, notice:
+
+- The required input field has a red asterisk to signify that it must be filled out.
+- The required input field already has a value provided via the `default` configuration option.
+- The help texts for the required input field and for the input list are both visible
+- The input list has controls to add more inputs and remove existing inputs
+
 
 .TextLine inputs showing common configuration options
 image::input-type-common-configuration.png["Three TextLine inputs showing all the common configuration options: labels, help text, default text, and occurrences.",{image-xl}]
 
+==== Occurrences
 
+In XP, each input can be either a single value or a list of values. To control how this works, use the `occurrences` element. The element has two required attributes, `minimum` and `maximum`. Use these to control the number of instances the user can create.
 
-=== TextLine
+The `minimum` attribute specifies that the user must fill out _at least_ this many instances of the field. Usually it is set to `0` or `1`. A zero indicates that the field is optional and that the user does not need to fill it out. A one means the field is required.
 
-image::input-type-text-line.png[TextLine: A single-line input field., {image-m}]
+The `maximum` attribute tells XP how many instances the input field can have _at most_. `0` is a special value here, indicating that the user can have _as many as they want_ (in other words: there is no maximum).
 
-TextLine inputs are useful for short fields that contain text. They also support two forms of validation out of the box: max length and regular expressions. They can be used separately or together. The max length validation specifies that a user's input can not be longer than the specified value. The regular expression validation allows you to provide a custom regex that is used to validate the input field as you wish.
+A couple of common configuration tricks:
 
-NOTE: XP uses JavaScript's regex engine to validate the input. For more information on what kind of of patterns it recognizes, see https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Regular_Expressions#writing_a_regular_expression_pattern[MDN's documentation].
+- If you don't add an `occurrences` element, XP uses the default, which is `minimum="0"`, `maximum="1"`, meaning that the input is optional.
 
-.A simple TextLine input type with a max-length
-[source,xml]
-----
-<input name="validation-example" type="TextLine">
-  <label>TextLine input validation example.</label>
-    <config>
-      <max-length>42<max-length>
-    </config>
-</input>
-----
+- To make the input required, set both `minimum` and `maximum` to `1`.
 
-Further, if you want to provide a default value for a TextLine input, you can do that by using the `default` configuration option. For an example of how to do this and for more information on the TextLine input, visit the https://developer.enonic.com/docs/xp/stable/cms/input-types#textline[reference docs].
+- To create a list of inputs, set `maximum` to `0` (if there is no limit to how many items the user can add) or to the desired maximum.
+
+NOTE: If `maximum` is greater than `0`, make sure that `minimum` is less than or equal to `maximum`. Otherwise, the input will never be considered valid according to XP.
+
+=== Common inputs
+
+Apart from the input types we've already gotten familiar with, XP also has input types created for other kinds of data. You can always find the full list over https://developer.enonic.com/docs/xp/stable/cms/input-types[at the input types reference docs], but some useful and common ones are:
+
+https://developer.enonic.com/docs/xp/stable/cms/input-types#combobox[ComboBox]:: A dropdown menu containing predefined options for the user to select from. Allows selection of one or more options.
++
+.The ComboBox input type
+image::input-type-combo-box.webp["A standard select list / dropdown list / combo box input type with a few visible dummy options.",{image-s}]
++
+https://developer.enonic.com/docs/xp/stable/cms/input-types#date[Date] and https://developer.enonic.com/docs/xp/stable/cms/input-types#datetime[DateTime]:: Provides an interactive date picker (with a time component in DateTime's case) to save date and times.
++
+.The DateTime input type
+image::input-type-date-time.webp["A calendar showing year and month with a time indicator to the side.",{image-s}]
++
+https://developer.enonic.com/docs/xp/stable/cms/input-types#geopoint[GeoPoint]:: Stores GPS coordinates.
++
+.The GeoPoint input type
+image::input-type-geo-point.webp["A text line input with coordinates.",{image-s}]
++
+https://developer.enonic.com/docs/xp/stable/cms/input-types#htmlarea[HtmlArea]:: Provides a rich text, multi-line input. We'll discuss this in detail in xref:rich-text[the next {document}].
++
+image::input-type-html-area.png["A text area with a tools ribbon on the top. The ribbon provides rich text tools such as justification, macro insertion, text styles, etc.",{image-s}]
+
+Additionally, XP has more complex input types, which we'll look at next.
 
 == ImageSelector
 
@@ -76,22 +127,10 @@ Images are a key part of many web experiences: they add color, break up the cont
 
 Read more about the https://developer.enonic.com/docs/xp/stable/cms/input-types#imageselector[configuration of image selectors] in the reference docs.
 
-==== Working with images
-
-Content Studio's comes with built-in image editing facilities where you can edit the image by cropping, rotating, or flipping it. You can also add an image focal point, so that if the image gets cropped for some reason, you're in control of what part of the image remains visible.
+After you've added an image (or several), you can highlight it and click the edit button. This will take you to the image editing form. This is the same form as we saw in xref:media#_editing_images[the previous {document}].
 
 .The image selector with uploaded and selected images
 image::input-type-image-selector-highlighted-image.png["The image selector input field with two images of lions -- one male, one female - - below. Under the images, there's a set of buttons saying 'edit' and 'remove'.", {image-xl}]
-
-After you've added an image (or several), you can highlight it and click the edit button. This will take you to the image editing form. Here, you can edit the image and image metadata, including (but definitely not limited to) image alt text, caption, copyright information, location data, and much more.
-
-For image editing, you can crop, flip, and rotate the image, as well add a focal point. The latter is an important tool for images that may display at different ratios depending on screen sizes. When an image gets fitted to a container, it's easy for the important part of the image to get cropped out. Content Studio solves this by letting you specify a focal point manually.
-
-.Setting the focal point
-image::image-editing-focal-point.png[An image with a focal point around the key part of the image, {image-xl}]
-
-
-NOTE: If you'd like to lean more about image editing, https://enonic.com/blog/enonic-simplifies-image-problems[blog post on how Enonic simplifies your everyday image problems] has lots of great information about Content Studio's image handling capabilities.
 
 == ContentSelector
 
@@ -114,17 +153,6 @@ https://developer.enonic.com/docs/xp/stable/cms/input-types#contentselector[The 
 </input>
 ----
 
-== More useful input types
-
-Some other very useful input types that it's worth looking into are:
-
-https://developer.enonic.com/docs/xp/stable/cms/input-types#checkbox[CheckBox]:: A trusty input checkbox. Indicates whether something is in one of two states.
-https://developer.enonic.com/docs/xp/stable/cms/input-types#combobox[ComboBox]:: A dropdown menu containing predefined options for the user to select from. Allows selection of one or more options.
-https://developer.enonic.com/docs/xp/stable/cms/input-types#date[Date] and https://developer.enonic.com/docs/xp/stable/cms/input-types#datetime[DateTime]:: Provides an interactive date picker (with a time component in DateTime's case) to save date and times.
-https://developer.enonic.com/docs/xp/stable/cms/input-types#geopoint[GeoPoint]:: Stores GPS coordinates.
-https://developer.enonic.com/docs/xp/stable/cms/input-types#htmlarea[HtmlArea]:: Provides a rich text, multi-line input. We'll discuss this in detail in xref:rich-text[the next {document}].
-https://developer.enonic.com/docs/xp/stable/cms/input-types#textarea[TextArea]:: Provides a multi-line text input with optional max length.
-
 == Task: {content-type-1}s and {content-type-2}s
 
 Time for a little recap! We'll put together everything we've learned about content types and input types thus far to create a new data set. A solution is listed below, but try and see if you can solve it yourself first. If you're wondering how to achieve some of the goals, try consulting the documentation that's been linked to in this {document}.
@@ -137,8 +165,8 @@ image::{content-type-2}-and-{content-type-1}-target.png["An {content-type-2} con
 An {content-type-2} should have the following inputs:
 
 . Use its species name, e.g. "elephant", as its display name. Use the `display-name-label` element to label it as "species" (hint: see https://developer.enonic.com/docs/xp/stable/cms/content-types#form_definition[the content type form definition] for info on how to use `display-name-label`).
-. An {content-type-2} can also have alternative names for its species (for instance, the reindeer is also known as caribou). Allow the user to add as many alternative names as they want.
-. An image selector that accepts between 0 and 3 images. You should also add at least one image and try out the XP image editing tools. Make sure the focal point is on the {content-type-2}s head.
+. An {content-type-2} can also have alternative names for its species (for instance, the reindeer is also known as _caribou_). Allow the user to add as many alternative names as they want.
+. An image selector that accepts between 0 and 3 images.
 . Help text where you think it would be helpful.
 
 When you've created the content type, create a new folder in Content Studio at next to the {content-type-1}s folder. Call it "{content-type-2}s".
@@ -167,14 +195,14 @@ First, we'll create the animal content type. In `src/main/resources/site/content
 
     <input type="TextLine" name="otherNames">
       <label>Other names</label>
-      <help-text>Other names for this species.</help-text> <!--.-->
-      <occurrences minimum="0" maximum="0" /> <!--.-->
+      <help-text>Other names for this species.</help-text>
+      <occurrences minimum="0" maximum="0" />
     </input>
 
     <input name="images" type="ImageSelector">
       <label>Images</label>
       <help-text>Images of the animal</help-text>
-      <occurrences minimum="0" maximum="3" /> <!--.-->
+      <occurrences minimum="0" maximum="3" />
     </input>
 
   </form>
@@ -182,9 +210,6 @@ First, we'll create the animal content type. In `src/main/resources/site/content
 ----
 
 <.> This field lets you customize what Content Studio calls the "display name" field and what it puts in the placeholder text.
-<.> This help text explains what we want in the "name" field, in case the user wants more information.
-<.> The `occurrences` element specifies how many occurrences a field can have. Setting `maximum="0"` is how you indicate that there is no upper limit to how many occurrences a field can have.
-<.> This `occurrences` element specifies that the user can supply between zero and three images.
 
 Next, we'll update the `{content-type-1-capitalized}` content type.
 
@@ -232,9 +257,11 @@ Description:: The lion (Panthera leo) is a species in the family Felidae and a m
 Name:: Reindeer, Caribou
 Description:: The reindeer (Rangifer tarandus), also known as caribou in North America, is a species of deer with circumpolar distribution, native to Arctic, sub-Arctic, tundra, boreal, and mountainous regions of northern Europe, Siberia, and North America.
 
-Now create some links using ContentSelector from {content-type-1}s to {content-type-2}s. The important part here is that you link some content so that we can fetch it using GraphQL (remember: you'll find the playground at {p1-api-url}). When you have created some links, let's move on to the query.
+Now create some links using ContentSelector from {content-type-1}s to {content-type-2}s.
 
 == Headless: fetching linked content and images
+
+TIP: Remember: you'll find the playground at {p1-api-url}.
 
 The way to link to linked content in GraphQL is to add it as a field as part of the data. This query will fetch all {content-type-1}s and their linked {content-type-2}s:
 
@@ -311,68 +338,6 @@ Depending on the links (and {content-type-2}s) you created, your result might lo
                 ]
               }
             }
-          }
-        }
-      ]
-    }
-  }
-}
-----
-
-=== Fetching images
-
-What about fetching the images on the {content-type-2}s? Let's look at a slightly more advanced query. Use the display name for one of the {content-type-2}s that you uploaded an image to to filter the content types you're interested in. Then, specify that you only want the first image in the list. This query is a bit more advanced that what we've seen so far, so it deserves a little bit of explanation:
-
-.An image query
-[source,xml,{subs}]
-----
-{
-  guillotine {
-    query(contentTypes:"com.example.myproject:{content-type-2}",
-      query: "displayName = 'Lion'") { <--.-->
-      displayName
-        ... on {project-name-query}_{content-type-2-capitalized} {
-        data {
-          images(first: 1) { <--.-->
-            ...on media_Image {
-              displayName
-              imageUrl(scale:"width(400)", type:absolute) <--.-->
-              mediaUrl <--.-->
-            }
-          }
-        }
-      }
-    }
-  }
-}
-----
-
-<.> Using the `query` parameter, we can specify a query string to search only for specific content. The query uses Enonic's node query language (NoQL). The  https://developer.enonic.com/docs/xp/stable/storage/noql[NoQL reference docs] have a very detailed overview over the syntax if you're interested.
-<.> Because `images` is a list, we specify that we're only interested in the first element.
-<.> `imageUrl` requires you to specify a `scale` function. In this case, we're asking for a picture that's 400 pixels wide. The height will be depend on the image's aspect ratio. For more info on scaling, see https://developer.enonic.com/docs/xp/stable/runtime/engines/site-engine/image-service#scaling_methods[the scaling methods documentation].
-<.> Where `imageUrl` gets a scaled and cropped version of the image, `mediaUrl` points you to the raw file instead.
-
-
-Using this query, you'll end up with something like this (though naturally, your id's are likely to look a little different):
-
-
-.An image search result
-[source,json]
-----
-{
-  "data": {
-    "guillotine": {
-      "query": [
-        {
-          "displayName": "Lion",
-          "data": {
-            "images": [
-              {
-                "displayName": "female-lion",
-                "imageUrl": "http://localhost:8080/site/default/draft/my-first-site/_/image/238ba006-f596-46ef-b404-6459c4c774b5:44fd5b74270e5261b5852cabbb89b4bf588aaf35/width-400/female-lion.jpg",
-                "mediaUrl": "/site/default/draft/my-first-site/_/attachment/inline/238ba006-f596-46ef-b404-6459c4c774b5:810ee47b2966db876c658635d0060a19b8d5f57a/female-lion.jpg"
-              }
-            ]
           }
         }
       ]

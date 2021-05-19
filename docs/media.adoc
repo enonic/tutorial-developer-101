@@ -37,7 +37,7 @@ Once you have your image, create a folder and upload the image:
 
 And that's all it takes to upload files to Content Studio!
 
-== Editing images and setting focal points
+== Editing images
 
 Content Studio comes with a suite of image editing tools built in. After uploading an image to Content Studio, you can find it in the content grid and select it to bring up the image's content form.
 
