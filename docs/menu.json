@@ -17,27 +17,27 @@
       "document": "content"
     },
     {
-      "title": "4 - Headless API",
+      "title": "5 - Headless API",
       "document": "headless-api"
     },
     {
-      "title": "5 - Media and images",
+      "title": "6 - Media and images",
       "document": "media"
     },
     {
-      "title": "6 - Input types",
+      "title": "7 - Input types",
       "document": "input-types"
     },
     {
-      "title": "7 - Sets",
+      "title": "8 - Sets",
       "document": "sets"
     },
     {
-      "title": "7 - Rich text",
+      "title": "9 - Rich text",
       "document": "rich-text"
     },
     {
-      "title": "8 - X-data",
+      "title": "10 - X-data",
       "document": "advanced-content"
     }
   ]

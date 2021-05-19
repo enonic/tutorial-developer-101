@@ -21,8 +21,8 @@
 :subs: subs="attributes+"
 :see-prev-docs: The examples in this {document} build on work done in previous {document}s (starting with xref:sandboxes[the sandboxes chapter]). If you want to follow along with the examples, make sure you're all caught up.
 :title-setup: Setting up your development environment
-:title-sandboxes: Sandboxes and instances
-:title-apps: Application development
+:title-sandboxes: Sandboxes
+:title-apps: App development
 :title-content: Content and content types
 :title-media: Media and images
 :title-sets: Sets
