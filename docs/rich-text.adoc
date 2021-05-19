@@ -137,12 +137,15 @@ In a new file, `src/main/resources/site/styles.xml`, place the following simple 
 <styles>
   <image name="conteditor-style-grayscale">
     <display-name>Grayscale</display-name>
-    <filter>hsbcolorize(0x000000); grayscale(); border(6, 0x000000)</filter>
+    <aspect-ratio>1:1</aspect-ratio> <--.-->
+    <filter>hsbcolorize(0x000000); grayscale(); border(6, 0x000000)</filter> <--.-->
   </image>
 </styles>
 ----
 
-The above configuration turns the image into grayscale and adds a border to the image.
+<.> The aspect ratio controls how the image is displayed. 1:1 makes the image square.
+<.> The filters add a grayscale effect and then a border
+
 
 NOTE: https://developer.enonic.com/docs/xp/stable/cms/styles[The styles reference docs] have more information on how you can style your images, so go check it out for a deeper dive.
 
