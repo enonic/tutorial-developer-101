@@ -28,7 +28,7 @@
 :title-sets: Sets
 :title-input-types: Input types
 :title-rich-text: Rich text: HtmlArea
-:title-advanced-content: X-data and mixins
+:title-advanced-content: X-data
 :title-headless-api: Headless API
 :image-xs: width=600
 :image-s: width=750

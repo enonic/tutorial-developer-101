@@ -3,21 +3,15 @@ include::variables.adoc[]
 :x-data: notes
 :x-data-capitalized: Notes
 
-Over the previous two {document}s, we've looked at content types and input types. We've explored how to use and configure input types, but we've only seen input types as standalone components. What if we want to group or reuse a set of inputs across several content types? We'll be looking at that in this {document}.
-
-However, before we get that far: now that our content types are getting more complex, wouldn't it be nice if we could validate them somehow?
+X-data (short for _eXtra-data_) is a way for you to dynamically add extra data to some or all content types belonging to a site. In Content Studio, they'll be displayed as a separate field set below the content type's normal fields.
 
 NOTE: {see-prev-docs}
-
-== X-data
-
-X-data (short for _eXtra-data_) is a way for you to dynamically add extra data to some or all content types belonging to a site. In Content Studio, they'll be displayed as a separate field set below the content type's normal fields.
 
 By configuring your application's `site.xml` (`src/main/resources/site/site.xml`) you can select which X-data schemas to add and to which content types, and whether to make the X-data optional or not. Go to the https://developer.enonic.com/docs/xp/stable/cms/x-data[X-data documentation] to read more about how.
 
 As per usual, X-data schemas follow this naming and placement convention: `src/main/resources/site/x-data/<x-data-name>/<x-data-name>.xml`.
 
-=== Task: add reference data
+== Task: add reference data
 
 For the {content-type-2}s we've created thus far, we've brought in data and images from Wikipedia, but we haven't indicated this anywhere. If we wanted to indicate where we got some information from, we could do it using X-data. Your task is:
 
@@ -64,11 +58,11 @@ Next, you need to reference the X-data in your `site.xml` and tell XP what conte
 
 Now, if you open Content Studio, you should be able to add references to your {content-type-2-capitalized} content:
 
-.Adding a reference
+.{content-type-2-capitalized} with {x-data}
 image::x-data-example.png["The content form for Lion with an additional 'References' section below the usual inputs. The first reference, a TextLine input, points to the Wikipedia article.'", {image-xl}]
 
 
-=== Headless: fetching X-data
+== Headless
 
 When working headlessly, you can easily fetch X-data by querying for the `x` property of your content type. This query will fetch
 
@@ -112,5 +106,3 @@ So if you've added some references to your "Lion", you'll get something like thi
   }
 }
 ----
-
-TODO: explain how to use the `x[].data` property?
