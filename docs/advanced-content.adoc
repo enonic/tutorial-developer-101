@@ -9,27 +9,6 @@ However, before we get that far: now that our content types are getting more com
 
 NOTE: {see-prev-docs}
 
-== Content type validation
-
-Enonic provides XML Schema Definitions (XSDs) for text editor integration and validation of your XML schemas. To use it, add the attribute `xmlns`, `xmlns:xsi`, and `xsi:schemaLocation` to your content types as shown below:
-
-.Using XSDs for schema validation of a content type definition.
-[source,xml]
-----
-<?xml version="1.0" encoding="utf-8"?>
-<content-type
-    xmlns="urn:enonic:xp:model:1.0"
-    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-    xsi:schemaLocation="urn:enonic:xp:model:1.0 https://raw.githubusercontent.com/enonic/xp/master/modules/core/core-api/src/main/resources/META-INF/xsd/model.xsd">
-  <display-name>Content type display name</display-name>
-
-  <!-- rest of content elided for brevity -->
-
-</content-type>
-----
-
-Note that in-editor schema validation depends on whether your text editor supports validating against XSD schemas or not. If your editor doesn't support it out of the box, it may be available via a Language Server Protocol (LSP) client.
-
 == X-data
 
 X-data (short for _eXtra-data_) is a way for you to dynamically add extra data to some or all content types belonging to a site. In Content Studio, they'll be displayed as a separate field set below the content type's normal fields.
