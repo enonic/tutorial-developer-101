@@ -18,14 +18,12 @@ Now that we know what a content type is, let's look at how we create them and ma
 .The target for our first content type
 image::content-type-target.png["A content creation form with name and biography fields", {image-xl}]
 
-XP is quite particular about project folder structure, so we need to put content types right where it expects to find them. The location is under `src/main/resources/site/content-types`.
+. To get started, make sure you're in the project folder (`{project-name}`) that you created in a previous {document}. All paths will be relative to this root folder.
+. Create a directory for content types: `src/main/resources/site/content-types`. XP is quite particular about project folder structure, so you need to put content types right where it expects to find them.
+. Within the `content-types` directory, XP expects another folder with the name of the content type (`{content-type-1}`) which contains (at least) an XML schema called `{content-type-1}.xml`. The full path to our content type from the project root is `src/main/resources/site/content-types/{content-type-1}/{content-type-1}.xml`. Create the `{content-type-1}` directory and `{content-type-1}.xml` file.
 
-Within that directory, XP expects another folder with the name of the content type (`{content-type-1}`) which contains (at least) an XML schema called `{content-type-1}.xml`. The full path to our content type from the project root is `src/main/resources/site/content-types/{content-type-1}/{content-type-1}.xml`.
-
-Now, unless you've created it manually, then that directory doesn't exist in our "{project-name}" project yet, so go ahead and create the required directories and files.
-
-In the `{content-type-1}.xml` file, place the following contents:
-
+. In the `{content-type-1}.xml` file, place the following contents:
++
 .The '{content-type-1-capitalized}' content type
 [source,xml,{subs}]
 ----
@@ -49,15 +47,15 @@ In the `{content-type-1}.xml` file, place the following contents:
   </form>
 </content-type>
 ----
-
++
 <1> This is the name of the content type and is what will be displayed in Content Studio when you create a piece of content of this type.
 <2> This is a short description of what the content type is. It's not strictly required, but it's highly recommended to add a description to all your content types.
 <3> This is where we specify what properties this content type contains. The contents of this tag control what we see and are able to edit in Content Studio.
 <4> This is a property of the content type. The `type` attribute specifies what kind of input field the user will see in Content Studio, and the `label` specifies how the input will be labeled.
-
++
 NOTE: Content types also have a large number of other, optional fields that we won't get into here. If you'd like to learn more about this, consult https://developer.enonic.com/docs/xp/stable/cms/content-types[the reference documentation].
-
-Now run:
++
+. Now run:
 
   enonic project deploy
 
@@ -74,25 +72,23 @@ image::content-studio-empty.png[What Content Studio looks like when it's complet
 
 Before we can create our content, we need a _site_ to hold it. Sites are a special content type that ships with Content Studio. It's one of a very small number of content types that we can place at the very root of the content hierarchy. A site is like a root node that we can nest other content under. When we create a new site, we can also specify which applications it uses, and that's where our application comes into play.
 
-To get going, press the "New..." button in the command bar. This will bring up a "Create Content" dialog that looks something like this:
-
+. To get going, press the "New..." button in the command bar. This will bring up a "Create Content" dialog that looks something like this:
++
 TIP: You can also use the keyboard shortcut kbd:[Alt+n] to bring up the "Create Content" dialog.
-
++
 .The Content Studio create content dialog
 image::content-studio-create-content.png[The Content Studio create content dialog., {image-xl}]
-
-Select "Site" either by clicking on it, or by navigating to it with your keyboard. You can start typing as soon as the dialog opens to filter the options too!
-
++
+. Select "Site" either by clicking on it, or by navigating to it with your keyboard. You can start typing as soon as the dialog opens to filter the options too!
++
 When you select it, your browser will take you to a new tab (or window, depending on your browser settings). This is the content creation form (or _wizard_).
-
++
 .Creating a new site in Content Studio.
 image::content-studio-new-site.png[Creating a new site in content studio. There is a form with site options on the left., {image-xl}]
 
-Add the site name in the first field (with the `<Display Name>` placeholder). It's our first site, so let's go with "{p1-site-name}". Notice that when you do this, the path below the input field gets automatically updated to match what you input. You can manually override the path if you wish, but we'll leave it as is for now.
-
-The description field is used to describe what the site is about. It's an optional field, so you can either leave it blank or add a description of your liking.
-
-The next field, "Applications", is important. This is where we tell Content Studio what sort of applications the site uses and thus what content types we can create within it. Select the "Headless Starter" app.
+. Add the site name in the first field (with the `<Display Name>` placeholder). It's our first site, so let's go with "{p1-site-name}". Notice that when you do this, the path below the input field gets automatically updated to match what you input. You can manually override the path if you wish, but we'll leave it as is for now.
+. The description field is used to describe what the site is about. It's an optional field, so you can either leave it blank or add a description of your liking.
+. The next field, "Applications", is important. This is where we tell Content Studio what sort of applications the site uses and thus what content types we can create within it. Select the "Headless Starter" app.
 
 Your site form should now look a little something like this.
 
@@ -125,18 +121,19 @@ Next, let's create a few {content-type-1}s to get used to the workflow. We'll st
 Name:: Belcalis Marlenis Almánzar
 About:: {content-about-cardi}
 
-It should look a little something like this:
-
++
 .The content form filled out for the {content-type-1} "Cardi B"
 image::content-type-filled-out.png[The form for "{content-type-1}" fully filled out., {image-xl}]
++
 
-Again, save and close the tab. Now repeat this process for these next two entries. Be aware that Content Studio lets you nest content, so if you try and create new content when "Cardi B" is selected in the hierarchy, it'll nest the new content under "Cardi B". In our case, though, we want the {content-type-1}s to be nested directly under the current folder, so make sure "{content-type-1}s" folder is selected when you create new content.
-
+. Again, save and close the tab. Now repeat this process for these next two entries. Be aware that Content Studio lets you nest content, so if you try and create new content when "Cardi B" is selected in the hierarchy, it'll nest the new content under "Cardi B". In our case, though, we want the {content-type-1}s to be nested directly under the current folder, so make sure "{content-type-1}s" folder is selected when you create new content.
++
 .Missy Elliott (https://en.wikipedia.org/wiki/Missy_Elliott[Missy Elliott on Wikipedia])
 Name:: Melissa Arnette Elliott
 About:: {content-about-missy}
 
 
++
 .P!nk (https://en.wikipedia.org/wiki/Pink_(singer)[P!nk on Wikipedia])
 Name:: Alecia Beth Moore
 About:: {content-about-pink}
