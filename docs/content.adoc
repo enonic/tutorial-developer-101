@@ -1,7 +1,7 @@
 = {title-content}
 include::variables.adoc[]
 
-In this {document}, we'll start building on the app we deployed previously and use an automatically generated GraphQL API for the content we create. In doing this, we'll learn about _content types_ and how to do basic work with  Content Studio.
+In this {document}, we'll start working with sites and content types in XP. We'll look at how we create content and how it's stored, as well as how to create and publish sites.
 
 NOTE: {see-prev-docs}
 
