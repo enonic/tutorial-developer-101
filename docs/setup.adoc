@@ -1,5 +1,5 @@
 = {title-setup}
-include::variables.adoc[]
+include::.variables.adoc[]
 :description: {description-setup}
 
 Before we can start building apps and APIs, let's make sure we have the right tools available to work efficiently with XP. This {document} walks you through installing the fundamental tools we will be using throughout this guide, including a text editor, a package manager for your system, Git, and the Enonic CLI. If you've already got these installed, feel free to skip to the next chapter (or to the relevant sections if you're missing some of them).

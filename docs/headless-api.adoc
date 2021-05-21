@@ -1,5 +1,5 @@
 = {title-headless-api}
-include::variables.adoc[]
+include::.variables.adoc[]
 :description: {description-headless-api}
 
 Now that we've created some content, let's see how we can use it in a headless fashion. This {document} introduces _Guillotine_, the library that's responsible for automatically generating GraphQL APIs for your content.

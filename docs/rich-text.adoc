@@ -1,5 +1,5 @@
 = {title-rich-text}
-include::variables.adoc[]
+include::.variables.adoc[]
 :macro-name: screamingSnakeCase
 :macro-app: Panel Macros
 :description: {description-rich-text}

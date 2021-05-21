@@ -1,5 +1,5 @@
 = {title-sandboxes}
-include::variables.adoc[]
+include::.variables.adoc[]
 :description: {description-sandboxes}
 
 In this {document} we'll introduce the fundamental concepts of Enonic XP development. You'll get a brief introduction to the Enonic command line interface (CLI), XP _sandboxes_, starter kits, and building and deploying apps on XP. By the end of the {document} you'll have spun up an instance of XP and deployed an app to it.

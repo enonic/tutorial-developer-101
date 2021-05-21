@@ -1,5 +1,5 @@
 = {title-media}
-include::variables.adoc[]
+include::.variables.adoc[]
 :image-folder: images
 :description: {description-media}
 

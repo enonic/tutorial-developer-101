@@ -1,5 +1,5 @@
 = {title-apps}
-include::variables.adoc[]
+include::.variables.adoc[]
 :description: {description-apps}
 
 With XP up and running, let's have a look at how we create applications!
