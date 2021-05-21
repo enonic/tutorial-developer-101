@@ -1,5 +1,0 @@
-= Assets
-:toc: right
-:imagesdir: media
-
-Explain how to use and manage assets in XP. Should probably link to lib-static.

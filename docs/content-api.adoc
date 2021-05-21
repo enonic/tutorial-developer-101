@@ -1,6 +1,0 @@
-= The Content API
-:toc: right
-:imagesdir: media
-
-Let's learn about reading content! This section focuses on reading
-data from the Content API. Writing data will be explored later.

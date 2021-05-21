@@ -1,5 +1,0 @@
-= The Enonic Market
-:toc: right
-:imagesdir: media
-
-A short, optional chapter in which we introduce the Enonic Market.
