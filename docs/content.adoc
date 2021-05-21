@@ -18,6 +18,12 @@ Now that we know what a content type is, let's look at how we create them and ma
 .The target for our first content type
 image::content-type-target.png["A content creation form with name and biography fields", {image-xl}]
 
+.Image with exact width
+image::content-type-target.png["A content creation form with name and biography fields", width=2751]
+
+.Image without width
+image::content-type-target.png["A content creation form with name and biography fields"]
+
 XP is quite particular about project folder structure, so we need to put content types right where it expects to find them. The location is under `src/main/resources/site/content-types`.
 
 Within that directory, XP expects another folder with the name of the content type (`{content-type-1}`) which contains (at least) an XML schema called `{content-type-1}.xml`. The full path to our content type from the project root is `src/main/resources/site/content-types/{content-type-1}/{content-type-1}.xml`.
