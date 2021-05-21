@@ -9,21 +9,27 @@ NOTE: {see-prev-docs}
 
 By configuring your application's `site.xml` (`src/main/resources/site/site.xml`) you can select which X-data schemas to add and to which content types, and whether to make the X-data optional or not. Go to the https://developer.enonic.com/docs/xp/stable/cms/x-data[X-data documentation] to read more about how.
 
-As per usual, X-data schemas follow this naming and placement convention: `src/main/resources/site/x-data/<x-data-name>/<x-data-name>.xml`.
+As per usual, X-data schemas follow this naming and placement convention (from the project root): `src/main/resources/site/x-data/<x-data-name>/<x-data-name>.xml`.
+
 
 == Task: add reference data
 
-For the {content-type-2}s we've created thus far, we've brought in data and images from Wikipedia, but we haven't indicated this anywhere. If we wanted to indicate where we got some information from, we could do it using X-data. Your task is:
+For the {content-type-2}s we've created thus far, we've brought in data and images from Wikipedia, but we haven't indicated this anywhere. If we wanted to indicate where we got some information from, we could do it using X-data. The end result will have extra form fields to add references.
 
-- Create a new X-data type. Call it {x-data}.
-- It should have a single input field, "reference", that can have as many occurrences as the user wants
+.{content-type-2-capitalized} with an added X-data _{x-data}_ field set.
+image::x-data-empty.png["The reindeer content form with an added field set labeled {x-data} at the end of the form.",{image-xl}]
+
+Your task is:
+
+- Create a new X-data type. Call it "{x-data}".
+- It should have a single input field, "references", that can have as many occurrences as the user wants
 - Add the X-data to your site, but only to the `{content-type-2-capitalized}` content type.
 - Try adding some references to one of your {content-type-2}s.
 
 ==== Solution
 
-The X-data schema is very similar to the content type schemas we've worked with previously, so there's no real surprises here; just remember to wrap everything in an `x-data` tag:
-
+. Create the {x-data} schema in the file `src/main/resources/site/x-data/{x-data}/{x-data}.xml`. The X-data schema is very similar to the content type schemas we've worked with previously, so there's no real surprises here; just remember to wrap everything in an `x-data` tag:
++
 .The {x-data} X-data schema
 [source,xml,{subs}]
 ----
@@ -38,13 +44,13 @@ The X-data schema is very similar to the content type schemas we've worked with 
 </x-data>
 ----
 
-Next, you need to reference the X-data in your `site.xml` and tell XP what content types it applies to. To do that, add an `x-data` tag in `site.xml` that has a `name` attribute that matches the name of your X-data ({x-data}). Make sure you add the `x-data` element before the `form` and `mappings` elements.
-
+. Add a reference the X-data in your `site.xml` and tell XP what content types it applies to. To do that, add an `x-data` tag in `site.xml` that has a `name` attribute that matches the name of your X-data ({x-data}). Make sure you add the `x-data` element before the `form` and `mappings` elements.
++
 .The updated site.xml
 [source,xml,{subs}]
 ----
 <site>
-  <x-data name="{x-data}" allowContentTypes="{project-name-full}:{content-type-2}"/> <--.-->
+  <x-data name="{x-data}" allowContentTypes="{content-type-2}"/> <--.-->
   <form/>
   <mappings>
     <mapping controller="/controllers/graphql.js" order="50">
@@ -53,14 +59,13 @@ Next, you need to reference the X-data in your `site.xml` and tell XP what conte
   </mappings>
 </site>
 ----
++
+<.> We use a regular expression to restrict which content types the X-data should apply to. In this case: only to `{content-type-2-capitalized}`. To reference types outside of the current project, preface the type name with the project name. E.g. `{project-name-full}:{content-type-2}`. For content types belonging to the current project, that's not necessary.
 
-<.> We use a regular expression to restrict which content types the X-data should apply to. In this case: only to `{content-type-2-capitalized}`
-
-Now, if you open Content Studio, you should be able to add references to your {content-type-2-capitalized} content:
-
-.{content-type-2-capitalized} with {x-data}
+. Now, open Content Studio, and add references to your {content-type-2-capitalized} content:
++
+.{content-type-2-capitalized} with references added
 image::x-data-example.png["The content form for Lion with an additional 'References' section below the usual inputs. The first reference, a TextLine input, points to the Wikipedia article.'", {image-xl}]
-
 
 == Headless
 
