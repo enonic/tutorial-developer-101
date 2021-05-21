@@ -5,11 +5,7 @@ The content types we've created previously in this guide have only used some bas
 
 NOTE: {see-prev-docs}
 
-== Basics
-
-XP provides a number of input types for you to work with. This section highlights a few types you'll be using a lot and shows off some of their special features and then mentions some of the types you're also likely to be seeing a lot of. Go to the reference docs for https://developer.enonic.com/docs/xp/stable/cms/input-types[a full list of all input types and their features].
-
-=== Configuration
+== Configuration
 
 
 All input types share a number of options that affect how they act. These options are:
@@ -21,10 +17,8 @@ All input types share a number of options that affect how they act. These option
 `config` (optional):: Input type-specific configuration.
 +
 The `config` element is for input-specific configuration. Because the input types are so different to each other, they all support different options. The `config` element allows us to use regex validation for TextLine inputs, configure formatting options for HtmlAreas, and to dictate what numeric values a Long or a Double input accepts.
-+
-To find out exactly what configuration options an input type accepts and how to configure it, visit https://developer.enonic.com/docs/xp/stable/cms/input-types[the input types documentation].
 
-All of these configuration options are described in more detail in the https://developer.enonic.com/docs/xp/stable/cms/schemas#input_types[input types schema documentation], so head over there for more information and explanation of how the various inputs work.
+All of the shared configuration options (`label`, `occurrences`, etc.) are described in more detail in the https://developer.enonic.com/docs/xp/stable/cms/schemas#input_types[input types schema documentation]. Additionally, all input types and their respective `config` options are listed in the https://developer.enonic.com/docs/xp/stable/cms/input-types[the input types documentation].
 
 To show an example of the configuration options work, let's examine some TextLine inputs with different configurations.
 
@@ -86,7 +80,7 @@ A couple of common configuration tricks:
 
 NOTE: If `maximum` is greater than `0`, make sure that `minimum` is less than or equal to `maximum`. Otherwise, the input will never be considered valid according to XP.
 
-=== Common inputs
+== Common inputs
 
 Apart from the input types we've already gotten familiar with, XP also has input types created for other kinds of data. You can always find the full list over https://developer.enonic.com/docs/xp/stable/cms/input-types[at the input types reference docs], but some useful and common ones are:
 
@@ -162,18 +156,18 @@ Your task is to create a new content type: `{content-type-2-capitalized}` and to
 .The target for this task: {content-type-2} and {content-type-1}
 image::{content-type-2}-and-{content-type-1}-target.png["An {content-type-2} content wizard next to an {content-type-1} wizard", {image-xl}]
 
-An {content-type-2} should have the following inputs:
+{content-type-2-capitalized} constraints:
 
-. Use its species name, e.g. "elephant", as its display name. Use the `display-name-label` element to label it as "species" (hint: see https://developer.enonic.com/docs/xp/stable/cms/content-types#form_definition[the content type form definition] for info on how to use `display-name-label`).
-. An {content-type-2} can also have alternative names for its species (for instance, the reindeer is also known as _caribou_). Allow the user to add as many alternative names as they want.
-. An image selector that accepts between 0 and 3 images.
-. Help text where you think it would be helpful.
+* Make the display name use "species" as its label. _Hint: check out https://developer.enonic.com/docs/xp/stable/cms/content-types#form_definition[the content type form definition] and look for something that allows you to do this._
+* An {content-type-2} can also have alternative names for its species (for instance, the reindeer is also known as _caribou_). Allow the user to add as many alternative names as they want.
+* An image selector that accepts between 0 and 3 images.
+* Help text where you think it would be helpful.
 
 When you've created the content type, create a new folder in Content Studio at next to the {content-type-1}s folder. Call it "{content-type-2}s".
 
 For the {content-type-1} content type, here's what's going to change:
 
-. Add a ContentSelector input that allows only content of the "{content-type-2-capitalized}" type and that must be nested under the site's "{content-type-2}s" folder. Call it `favorite{content-type-2-capitalized}`.
+* Add a ContentSelector input that allows only content of the "{content-type-2-capitalized}" type and that must be nested under the site's "{content-type-2}s" folder. Call it `favorite{content-type-2-capitalized}`.
 
 To verify that everything works, create some animals, and try creating a content link between a {content-type-1} and an {content-type-2}.
 
@@ -181,8 +175,8 @@ When you've got that, create a GraphQL query that'll fetch all {content-type-1}s
 
 === Solution
 
-First, we'll create the animal content type. In `src/main/resources/site/content-types/{content-type-2}/{content-type-2}.xml`, place the following content:
-
+. Create the animal content type. In `src/main/resources/site/content-types/{content-type-2}/{content-type-2}.xml`, place the following content:
++
 .The {content-type-2} content type
 [source,xml,{subs}]
 ----
@@ -208,11 +202,11 @@ First, we'll create the animal content type. In `src/main/resources/site/content
   </form>
 </content-type>
 ----
-
++
 <.> This field lets you customize what Content Studio calls the "display name" field and what it puts in the placeholder text.
-
-Next, we'll update the `{content-type-1-capitalized}` content type.
-
++
+. Next, update the `{content-type-1-capitalized}` content type.
++
 .An updated {content-type-1}
 [source,xml,{subs}]
 ----
@@ -244,20 +238,20 @@ Next, we'll update the `{content-type-1-capitalized}` content type.
   </form>
 </content-type>
 ----
-
++
 <.> This ContentSelector uses the `config` section to narrow the possible types of content to only be `{content-type-2-capitalized}`
-
-Nice! Now, go and create some {content-type-2}s. Either pick your favorites, or, if you're not feeling creative, add these (content from Wikipedia), :
-
++
+. Create some {content-type-2}s. Either pick your favorites, or, if you're not feeling creative, add these (content from Wikipedia), :
++
 .Lion (https://en.wikipedia.org/wiki/Lion[Wiki article for lion])
 Name:: Lion
 Description:: The lion (Panthera leo) is a species in the family Felidae and a member of the genus Panthera. It has a muscular, deep-chested body, short, rounded head, round ears, and a hairy tuft at the end of its tail.
-
++
 .Reindeer (https://en.wikipedia.org/wiki/Reindeer[Wiki article for reindeer])
 Name:: Reindeer, Caribou
 Description:: The reindeer (Rangifer tarandus), also known as caribou in North America, is a species of deer with circumpolar distribution, native to Arctic, sub-Arctic, tundra, boreal, and mountainous regions of northern Europe, Siberia, and North America.
 
-Now create some links using ContentSelector from {content-type-1}s to {content-type-2}s.
+. Create some links using ContentSelector from {content-type-1}s to {content-type-2}s to get familiar with linking content.
 
 == Headless: fetching linked content and images
 
