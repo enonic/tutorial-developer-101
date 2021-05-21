@@ -2,6 +2,7 @@
 include::variables.adoc[]
 :macro-name: screamingSnakeCase
 :macro-app: Panel Macros
+:description: {description-rich-text}
 
 If you want to work with rich text in Content Studio, HtmlArea is your friend.  This rich text input type offers some very powerful editing capabilities and a lot of configuration options. This whole {document} is dedicated to the HtmlArea: how it works and how to use it in a headless fashion.
 

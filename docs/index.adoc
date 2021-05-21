@@ -1,21 +1,54 @@
-= Getting started with Enonic
+= Getting started with Enonic XP
 include::variables.adoc[]
 
-This tutorial is an in-depth guide to getting started with Enonic XP. It covers installing the necessary tools, running your own instance of XP, and how to work with content.
+Hey! 👋 Welcome to this in-depth guide to getting started with Enonic XP. This guide covers installing the necessary tools, running your own instance of XP, and how to work with content.
 
-If you're looking for the _tl;dr:_, then head on over to the https://developer.enonic.com/start[quickstart page] to install the Enonic CLI and build your first XP app in minutes.
+This guide is aimed at people new to Enonic XP and will (eventually) cover everything you need to know to go from zero to hero 🦸‍♀️
 
-More content will be added to the guide shortly ( ... ish).
+NOTE: *In a hurry?* This guide is a fairly detailed and extensive introduction to Enonic XP and how it all works. If you just want to get up and running as fast as possible, check out the https://developer.enonic.com/start[quick start docs] instead 🚀
+
+This guide is currently under development and will be updated with new content from time to time. If you have any questions or find any errors (or have any other feedback), don't hesitate to  https://github.com/enonic/doc-getting-started/[create an issue over at GitHub] ☺️📣
+
+Good luck! 🙌
 
 == Tutorial overview
 
 . <<setup#, {title-setup}>>
++
+{description-setup}
++
 . <<sandboxes#, {title-sandboxes}>>
++
+{description-sandboxes}
++
 . <<apps#, {title-apps}>>
++
+{description-apps}
++
 . <<content#, {title-content}>>
++
+{description-content}
++
 . <<headless-api#, {title-headless-api}>>
++
+{description-headless-api}
++
 . <<media#, {title-media}>>
++
+{description-media}
++
 . <<input-types#, {title-input-types}>>
++
+{description-input-types}
++
 . <<sets#, {title-sets}>>
++
+{description-sets}
++
 . <<rich-text#, {title-rich-text}>>
++
+{description-rich-text}
++
 . <<advanced-content#, {title-advanced-content}>>
++
+{description-advanced-content}

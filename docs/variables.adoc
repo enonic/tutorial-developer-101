@@ -35,3 +35,13 @@
 :image-m: width=900
 :image-l: width=1050
 :image-xl: width=1200
+:description-setup: Starting from scratch, this {document} takes you through how to install all the necessary tools to get started with XP development.
+:description-sandboxes: The fundamentals of Enonic XP development: sandboxes and the Enonic CLI.
+:description-apps: Learn how to create XP projects and how to build and deploy your apps to an XP instance.
+:description-content: Content types are one of the most essential building blocks of XP. Get familiar with what they are and how to create and use them in this {document}.
+:description-headless-api: What is a headless CMS without an API? Learn about the Guillotine library and the powers it unlocks here!
+:description-media: How does XP deal with images and other media? This {document} covers XP media support, how to upload and query for media, and how to work with images.
+:description-input-types: Take your content types to the next level with more advanced input types. Learn how to configure input types, what kinds there are, and how to link content together!
+:description-sets: XP has a number of ways to group inputs together. Learn all about them in this {document}.
+:description-rich-text: Rich text is an incredibly powerful editing tool and an important part of the XP experience. Learn how to configure it here!
+:description-advanced-content: X-data is a way for you to add extra data to all your content types in a simple manner. This {document} covers what it is and how to use it.

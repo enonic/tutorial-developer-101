@@ -1,5 +1,6 @@
 = {title-sets}
 include::variables.adoc[]
+:description: {description-sets}
 
 XP also offers ways for you to group inputs, both visually and structurally. Collectively, these are known as sets. This {document} explains what they are and how to use them.
 

@@ -1,5 +1,6 @@
 = {title-input-types}
 include::variables.adoc[]
+:description: {description-input-types}
 
 The content types we've created previously in this guide have only used some basic inputs, but Content Studio has a lot more up its sleeve than just TextLines and TextAreas. This {document} explains how you can configure input types and introduces more new input types.
 

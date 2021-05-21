@@ -1,6 +1,7 @@
 = {title-media}
 include::variables.adoc[]
 :image-folder: images
+:description: {description-media}
 
 Naturally, XP can also store any files you would want to serve or associate with any data. This {document} explores how XP stores uploaded data and focuses on how its image tools work. At the end of a chapter we'll walk through how to use images in a headless fashion.
 
