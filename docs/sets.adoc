@@ -109,7 +109,7 @@ _Mixins_ facilitate a form of reuse in XP. They allow you to reuse fields across
 
 We'll see them in the upcoming task, but if you want to learn more about them, consult https://developer.enonic.com/docs/xp/stable/cms/mixins[the mixins reference documentation].
 
-== Task: add distribution and dietary data to {content-type-2}s
+== Task: add option sets
 
 In this section, we'll use option sets to add some extra data to our `{content-type-2-capitalized}` data type. Our goal is:
 
@@ -117,26 +117,12 @@ In this section, we'll use option sets to add some extra data to our `{content-t
 - Because each distribution option should have the same fields, create a mixin to reuse it.
 - Add an option set for feeding behavior. Intentionally simplified, this option set should indicate whether the animal is a herbivore or a carnivore, and if it is a carnivore, it should also let the user add a list of prey.
 
-Start by creating the mixin. Call it `distributionData` and place it in `src/main/resources/site/mixins/distributionData/distributionData.xml`. It only contains a text area:
 
-.The `distributionData` mixin
-[source,xml,{subs}]
-----
-<mixin>
-  <display-name>Distribution data</display-name>
-  <form>
+=== Single-select: dietary data
 
-    <input type="TextArea" name="notes">
-      <label>Notes</label>
-    </input>
+Open your {content-type-2} content type and add a single-select option set.  As before, we use option sets as we would any other input type.
 
-  </form>
-</mixin>
-----
-
-Moving onto our {content-type-2}s, add the new option sets. As before, we use option sets as we would any other input type.
-
-.The `{content-type-2-capitalized}` content type with new option sets
+.The `{content-type-2-capitalized}` content type with feeding behavior
 [source,xml]
 ----
 <?xml version="1.0" encoding="utf-8"?>
@@ -170,6 +156,49 @@ Moving onto our {content-type-2}s, add the new option sets. As before, we use op
 
       </options>
     </option-set>
+
+  </form>
+</content-type>
+----
+
+
+<1> This specifies that if you add feeding behavior, you must select one of the options, and you can not select more than one.
+<2> The herbivore option has no associated data, so it consists solely of a label.
+<3> The carnivore option allows you to optionally specify prey for the animal.
+
+
+=== Multi-select: distribution
+
+. Start by creating the mixin. Call it `distributionData` and place it in `src/main/resources/site/mixins/distributionData/distributionData.xml`. It only contains a text area:
++
+.The `distributionData` mixin
+[source,xml,{subs}]
+----
+<mixin>
+  <display-name>Distribution data</display-name>
+  <form>
+
+    <input type="TextArea" name="notes">
+      <label>Notes</label>
+    </input>
+
+  </form>
+</mixin>
+----
+
+. Moving onto our {content-type-2}s, add the multi-select option set.
+
+.The `{content-type-2-capitalized}` content type with distribution data
+[source,xml]
+----
+<?xml version="1.0" encoding="utf-8"?>
+<content-type>
+  <display-name>Animal</display-name>
+  <description>An animal that lives on planet Earth</description>
+  <super-type>base:structured</super-type>
+  <form>
+
+    <!-- other fields elided for brevity -->
 
     <option-set name="distribution">
       <label>Distribution across continents</label>
@@ -231,15 +260,13 @@ Moving onto our {content-type-2}s, add the new option sets. As before, we use op
   </form>
 </content-type>
 ----
-
-<1> This specifies that if you add feeding behavior, you must select one of the options, and you can not select more than one.
-<2> The herbivore option has no associated data, so it consists solely of a label.
-<3> The carnivore option allows you to optionally specify prey for the animal.
-<4> This specifies that you can add as many distributions as you want.
+<.> This specifies that you can add as many distributions as you want.
 
 Notice that the use of the `mixin` helps us both reduce duplication and keep all options in sync. If we wanted to add more data, such as current population, we would only have to add it to the `mixin` to have it duplicate to all distributions.
 
-Filling this out, it could look like this (with data appropriate for lion):
+=== Result
+
+With the new option sets and added, the Lion entry could look something like this:
 
 .Distribution and feeding behavior for Lion
 image::option-sets.png["Diet and distribution data filled out for lion. The feeding behaviour selected is 'Carnivore' and the list of prey includes zebras and giraffes. For the distribution data, Africa and Asia is selected, with a short text about how Lions live in these areas today.", {image-xl}]
@@ -254,11 +281,15 @@ We can also arbitrarily nest item sets and option sets. As mentioned above, try 
 
 Which approach is best depends on your circumstances and personal preference. Solutions to both approaches are listed below.
 
+=== Option A: Top level option set
+
+Create a top level option set and add two item sets (one for discography, one for filmography) to it:
+
 .Wrapping item sets in an option set
 [source,xml]
 ----
-<option-set name="media">
-      <label>Media appearances</label>
+<option-set name="mixedMediaA">
+      <label>Mixed Media A</label>
       <options minimum="0" maximum="0">
 
         <option name="discography">
@@ -304,11 +335,18 @@ Which approach is best depends on your circumstances and personal preference. So
     </option-set>
 ----
 
+image::sets-option-set+item-set.png["An item set wrapping an option set. The option set has nested item sets within. Showing data about P!nk.",{image-xl}]
+
+=== Option B: top level item set
+
+Create a top level item set and nest option sets within:
+
 .Each item can be either a film _or_ an album
 [source,xml]
 ----
-<item-set name="media">
-      <label>Media</label>
+    <item-set name="mixedMediaB">
+      <label>Mixed Media B</label>
+      <occurrences minimum="0" maximum="0" />
       <items>
         <option-set name="kind">
           <label>Media type</label>
@@ -346,7 +384,9 @@ Which approach is best depends on your circumstances and personal preference. So
     </item-set>
 ----
 
-== Headless
+image::sets-item-set+option-set.png["An item set wrapping underlying option sets. Data about P!nk.",{image-xl}]
+
+== Headless: fetching item sets and option sets
 
 Let's look at how option and item sets work in headless contexts.
 
