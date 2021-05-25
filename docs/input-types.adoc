@@ -122,7 +122,7 @@ Images are a key part of many web experiences: they add color, break up the cont
 
 Read more about the https://developer.enonic.com/docs/xp/stable/cms/input-types#imageselector[configuration of image selectors] in the reference docs.
 
-After you've added an image (or several), you can highlight it and click the edit button. This will take you to the image editing form. This is the same form as we saw in xref:media#_editing_images[the previous {document}].
+After you've added an image (or several), you can highlight it and click the edit button. This will take you to the image editing form. This is the same form as we saw in xref:media-and-images#_editing_images[the previous {document}].
 
 .The image selector with uploaded and selected images
 image::input-type-image-selector-highlighted-image.png["The image selector input field with two images of lions -- one male, one female - - below. Under the images, there's a set of buttons saying 'edit' and 'remove'.", {image-xl}]
