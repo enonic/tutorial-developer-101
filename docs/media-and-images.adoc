@@ -1,7 +1,7 @@
-= {title-media}
+= {title-media-and-images}
 include::.variables.adoc[]
 :image-folder: images
-:description: {description-media}
+:description: {description-media-and-images}
 
 Naturally, XP can also store any files you would want to serve or associate with any data. This {document} explores how XP stores uploaded data and focuses on how its image tools work. At the end of a chapter we'll walk through how to use images in a headless fashion.
 
@@ -18,7 +18,7 @@ For a full overview of all the media types baked into XP, see the https://develo
 To upload files to Content Studio, use the "create content" dialog. You can either click the "upload" icon in the dialog or you can drag and drop the files from your file explorer.
 
 .Dragging and dropping files to the "create content dialog"
-image::media-drag-and-drop.png["The",{image-m}]
+image::media-drag-and-drop.png["The drag and drop interface. Three file icons being dragged onto a large, blue, circular drop zone.",{image-m}]
 
 This process is the same for whatever media type you want to upload.
 
