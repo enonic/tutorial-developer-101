@@ -1,8 +1,8 @@
-= {title-advanced-content}
+= {title-x-data}
 include::.variables.adoc[]
 :x-data: notes
 :x-data-capitalized: Notes
-:description: {description-advanced-content}
+:description: {description-x-data}
 
 X-data (short for _eXtra-data_) is a way for you to dynamically add extra data to some or all content types belonging to a site. In Content Studio, they'll be displayed as a separate field set below the content type's normal fields.
 

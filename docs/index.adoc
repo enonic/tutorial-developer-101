@@ -33,9 +33,9 @@ Good luck! 🙌
 +
 {description-headless-api}
 +
-. <<media#, {title-media}>>
+. <<media-and-images#, {title-media-and-images}>>
 +
-{description-media}
+{description-media-and-images}
 +
 . <<input-types#, {title-input-types}>>
 +
@@ -49,6 +49,6 @@ Good luck! 🙌
 +
 {description-rich-text}
 +
-. <<advanced-content#, {title-advanced-content}>>
+. <<x-data#, {title-x-data}>>
 +
-{description-advanced-content}
+{description-x-data}

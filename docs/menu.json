@@ -22,7 +22,7 @@
     },
     {
       "title": "6 - Media and images",
-      "document": "media"
+      "document": "media-and-images"
     },
     {
       "title": "7 - Input types",
@@ -38,7 +38,7 @@
     },
     {
       "title": "10 - X-data",
-      "document": "advanced-content"
+      "document": "x-data"
     }
   ]
 }
