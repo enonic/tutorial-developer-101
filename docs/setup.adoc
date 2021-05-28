@@ -62,14 +62,14 @@ Now, we'll install the Enonic CLI via the package manager we just set up. The CL
 
 [NOTE]
 ====
-While we heavily recommend using a package manager, you can also download and install the executables manually if you prefer. To do that, find your desired version and operating system https://repo.enonic.com/public/com/enonic/cli/enonic/[here], download the files you need, and install them as you would any other binary files on your system.
+While we heavily recommend using a package manager, you can also download and install the executables manually if you prefer. To do that, visit the https://repo.enonic.com/public/com/enonic/cli/enonic/[the Enonic CLI public repo], download the files that correspond to the desired CLI version and your OS, and install them as you would any other binary files on your system.
 ====
 
-Follow the instructions for your specific operating system below. When you have installed the CLI, verify that it's working by running
+=== Installation
 
-  enonic version
+The steps differ depending on your OS. Follow the steps below that best match your OS.
 
-=== macOS
+==== macOS
 
 From your terminal:
 
@@ -83,7 +83,7 @@ From your terminal:
 
 To upgrade to newer versions of enonic CLI when they become available, run the command `brew upgrade enonic`
 
-=== Windows
+==== Windows
 
 From a Powershell terminal:
 
@@ -97,7 +97,7 @@ From a Powershell terminal:
 
 To upgrade to newer versions of enonic CLI when they become available, run the command `scoop update enonic`
 
-=== Linux
+==== Linux
 
 From your terminal, run the following command:
 
@@ -105,21 +105,24 @@ From your terminal, run the following command:
 
 Snap automatically keeps your snaps updated. To manually force an update, run the command `sudo snap refresh enonic`
 
+=== Verification
+
+When you have installed the CLI, verify that it's working by running
+
+  enonic version
 
 == Git
 
 Git is a free and open source _distributed version control system_. Later on in this tutorial, we will create new Enonic development projects using _starters_. The Enonic CLI uses Git to download these starters and to prepare the files for your project locally.
 
-To install Git, follow the notes for your operating system below.
-
-Once you have installed Git, you can verify that it's working correctly by running the following command:
-
-    git version
-
 TIP: Want to learn more about Git? Check out https://guides.github.com/introduction/git-handbook/[this useful Git handbook by Github].
 
 
-=== macOS
+=== Installation
+
+To install Git, follow the notes for your operating system below.
+
+==== macOS
 
 NOTE: Apple maintains its own fork of Git. If you have XCode installed, you already have Git installed too.
 
@@ -127,17 +130,23 @@ To install Git via Homebrew, run this command:
 
     brew install git
 
-=== Windows
+==== Windows
 
 To install Git using Scoop, run the following command from Powershell:
 
     scoop install git
 
-=== Linux
+==== Linux
 
 To install Git with Snapcraft, run the following command:
 
    sudo snap install git
+
+=== Verification
+
+Once you have installed Git, you can verify that it's working correctly by running the following command:
+
+    git version
 
 
 == Text editors
