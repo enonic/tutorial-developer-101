@@ -99,7 +99,7 @@ image::content-studio-site-filled-out.png[What the site form looks like after fi
 
 To confirm and return to the Content Studio hierarchy, press "Save" in the menu bar. Feel free to close the tab (you won't be needing it again).
 
-TIP: The keyboard shortcut: kbd:[ctrl+enter] on Linux and Windows and kbd:[⌘+enter] on macOS also saves the content for you. Additionally, the keyboard shortcut will also close the tab for you after saving.
+TIP: You can also use the keyboard shortcut kbd:[ctrl+s] on Linux and Windows and kbd:[⌘+s] on macOS to save your content. Additionally kbd:[ctrl+enter]/kbd:[⌘+enter] saves the content for you and then closes the tab for you.
 
 When you return to the Content Studio hierarchy view, you should now see your site listed. If you expand it, you'll find that there is also a node called "Templates" underneath it. We can ignore this for now, but we'll learn more about it later.
 
