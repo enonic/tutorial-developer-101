@@ -74,7 +74,7 @@ image::content-studio-empty.png[What Content Studio looks like when it's complet
 
 Before we can create our content, we need a _site_ to hold it. Sites are a special content type that ships with Content Studio. It's one of a very small number of content types that we can place at the very root of the content hierarchy. A site is like a root node that we can nest other content under. When we create a new site, we can also specify which applications it uses, and that's where our application comes into play.
 
-. To get going, press the "New..." button in the command bar. This will bring up a "Create Content" dialog that looks something like this:
+. To get going, press the "New..." button in the toolbar. This will bring up a "Create Content" dialog that looks something like this:
 +
 TIP: You can also use the keyboard shortcut kbd:[Alt+n] to bring up the "Create Content" dialog.
 +
