@@ -21,7 +21,8 @@ image::content-type-target.png["A content creation form with name and biography 
 
 . To get started, make sure you're in the project folder (`{project-name}`) that you created in a previous {document}. All paths will be relative to this root folder.
 . Create a directory for content types: `src/main/resources/site/content-types`. XP is quite particular about project folder structure, so you need to put content types right where it expects to find them.
-. Within the `content-types` directory, XP expects another folder with the name of the content type (`{content-type-1}`) which contains (at least) an XML schema called `{content-type-1}.xml`. The full path to our content type from the project root is `src/main/resources/site/content-types/{content-type-1}/{content-type-1}.xml`. Create the `{content-type-1}` directory and `{content-type-1}.xml` file.
+. Create a directory called `{content-type-1}` in the newly created `content-types` directory. XP expects all content types to have their own directories.
+. Within the `{content-type-1}` directory, create a file called `{content-type-1}.xml`. The file name must match the directory name  (except for the file extension). The full path to the content type from the project root should thus be `src/main/resources/site/content-types/{content-type-1}/{content-type-1}.xml`.
 
 . In the `{content-type-1}.xml` file, place the following contents:
 +
@@ -37,7 +38,7 @@ image::content-type-target.png["A content creation form with name and biography 
     <input name="name" type="TextLine"> <--4-->
       <label>Name</label>
       <help-text>
-        The artist's name (if different from their professional moniker).
+        The {content-type-1}'s name (if different from their professional moniker).
       </help-text>
     </input>
 
