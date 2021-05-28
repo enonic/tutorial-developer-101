@@ -80,7 +80,7 @@ BUILD SUCCESSFUL in 5s
 
 After the build has finished, you'll have a new file in your project directory, located under the `build/libs` subdirectory. Assuming you have used the default name, it'll be located at `build/libs/{project-name}.jar` when at the project root. This file is the executable file that contains your application.
 
-To deploy the app to the sandbox, use the CLI again. From the project root folder, run:
+To deploy the app to the sandbox, use the CLI again. Keep the server running and in a different terminal, run this from the project root folder:
 
     enonic project deploy
 
