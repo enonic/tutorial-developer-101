@@ -71,18 +71,28 @@ Follow the instructions for your specific operating system below. When you have 
 
 === macOS
 
-From your terminal, run the following commands:
+From your terminal:
+
+. Make the `enonic/cli` repository via https://docs.brew.sh/Taps[Homebrew's tap functionality]
 
     brew tap enonic/cli
+
+. Install the CLI
+
     brew install enonic
 
 To upgrade to newer versions of enonic CLI when they become available, run the command `brew upgrade enonic`
 
 === Windows
 
-From a Powershell terminal, run the following commands:
+From a Powershell terminal:
+
+. Make the CLI https://scoop.netlify.app/concepts/#buckets[bucket] available to install
 
     scoop bucket add enonic https://github.com/enonic/cli-scoop
+
+. Install the CLI
+
     scoop install enonic
 
 To upgrade to newer versions of enonic CLI when they become available, run the command `scoop update enonic`
