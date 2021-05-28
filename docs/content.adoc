@@ -2,7 +2,7 @@
 include::.variables.adoc[]
 :description: {description-content}
 
-In this {document}, we'll start working with sites and content types in XP. We'll look at how we create content and how it's stored, as well as how to create and publish sites.
+In this {document}, we'll start working with sites and content types in XP. We'll look at how we create content and how it's stored, as well as how to create and publish sites. To achieve this, we'll start working with and getting familiar with _Content Studio_, XP's content editing suite.
 
 NOTE: {see-prev-docs}
 
@@ -14,7 +14,7 @@ If you're used to working with databases, you can think of content types as tabl
 
 == Task: The {content-type-1} content type
 
-Now that we know what a content type is, let's look at how we create them and make XP recognize them. By the end of this section we'll have created a content type that gives us a simple form that looks like this in Content Studio:
+Now that we know what a content type is, let's look at how we create them and make XP recognize them. By the end of this section we'll have created a content type that gives us a simple form that would look like the screenshot below in Content Studio. We'll see how to find and fill in the form in the following sections.
 
 .The target for our first content type
 image::content-type-target.png["A content creation form with name and biography fields", {image-xl}]
