@@ -146,9 +146,6 @@ Text editors (or just _editors_ for short) are applications that are designed pr
 
 If you do not yet have an editor you like, follow the steps below to get started with one.
 
-
-designed specifically for writing computer code. There are a range of available editors out there. If you do not already have a good editor, follow the steps below to get one.
-
 === Download Visual Studio Code
 
 https://code.visualstudio.com/[Visual Studio Code] (often shortened to _VS Code_ or simply _Code_) is one of the most popular text editors around at the moment. It's free, open source, and available on all major platforms.
