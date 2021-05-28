@@ -214,3 +214,5 @@ The applications in the welcome tour all modify the XP admin experience, so once
 
 .The XP admin menu with new entries
 image::admin-menu-with-apps.png["The XP Admin menu with extra apps installed. It shows the newly added apps between the menu items 'Home' and 'Users'.", {image-xs}]
+
+NOTE: XP localizes the admin menu item names, so they might be translated to another language based on your settings.
