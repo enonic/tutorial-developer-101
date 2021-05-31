@@ -207,7 +207,7 @@ When you fetch rich text content via GraphQL, the response is formatted as unsty
 
 === Images and styles
 
-When you add a an image to a rich text input, you can fetch it via GraphQL using the `processedHtml` sub selection of your rich text field.  Let's look at how that works. To start us off, this query finds the piece of content that we added the added the image to (the "Lion" 🦁) and extracts its processed HTML from its description.
+When you add a an image to a rich text input, you can fetch it via GraphQL using the `processedHtml` sub selection of your rich text field.  Let's look at how that works. To start us off, this query finds the piece of content that we added the image to (the "Lion" 🦁) and extracts its processed HTML from its description.
 
 This simple query just fetches the processed HTML of the HTML area:
 
