@@ -62,7 +62,7 @@ Now, we'll install the Enonic CLI via the package manager we just set up. The CL
 
 [NOTE]
 ====
-While we heavily recommend using a package manager, you can also download and install the executables manually if you prefer. To do that, visit the https://repo.enonic.com/public/com/enonic/cli/enonic/[the Enonic CLI public repo], download the files that correspond to the desired CLI version and your OS, and install them as you would any other binary files on your system.
+While we heavily recommend using a package manager, you can also download and install the executables manually if you prefer. To do that, visit the https://repo.enonic.com/public/com/enonic/cli/enonic/[the Enonic CLI public repo], download the files that correspond to the desired CLI version and your OS, and install them as you would any other binary files on your system. There is also https://repo.enonic.com/public/com/enonic/cli/installer/cli-windows/1.0.0/cli-windows-1.0.0.exe[a Windows installer for the CLI] available.
 ====
 
 === Installation
