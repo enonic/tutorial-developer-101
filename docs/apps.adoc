@@ -48,7 +48,11 @@ src/
 <2> Contains the standard project settings, as defined by the CLI.
 <3> The main project folder. JavaScript code and assets are placed here.
 
-TIP: If you need to start your sandbox and your current working directory is an XP project directory, then the projects assigned sandbox will be started automatically.
+Each XP project is linked to one and only one sandbox. If you want to change the sandbox that a project is linked to, use the command
+
+  enonic project sandbox
+
+And select the desired sandbox.
 
 == Building and deploying
 
