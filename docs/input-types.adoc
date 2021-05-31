@@ -100,7 +100,7 @@ https://developer.enonic.com/docs/xp/stable/cms/input-types#geopoint[GeoPoint]::
 .The GeoPoint input type
 image::input-type-geo-point.webp["A text line input with coordinates.",{image-s}]
 +
-https://developer.enonic.com/docs/xp/stable/cms/input-types#htmlarea[HtmlArea]:: Provides a rich text, multi-line input. We'll discuss this in detail in xref:rich-text[the next {document}].
+https://developer.enonic.com/docs/xp/stable/cms/input-types#htmlarea[HtmlArea]:: Provides a rich text, multi-line input. We'll discuss this in detail in xref:rich-text#[the next {document}].
 +
 image::input-type-html-area.png["A text area with a tools ribbon on the top. The ribbon provides rich text tools such as justification, macro insertion, text styles, etc.",{image-s}]
 
