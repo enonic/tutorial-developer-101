@@ -165,13 +165,13 @@ NOTE: To stop your sandbox, press kbd:[ctrl-c] in the terminal hosting the proce
 If you have problems booting the sandbox, it may be that one or more of the ports used by XP are already in use. The command should warn you if something doesn't work right. It'll do this in one of two ways:
 
 . If the CLI checks for the availability of some ports when starting up. If one of these ports isn't available, the CLI will abort with a message like this:
-
++
 ----
 Port 8080 is not available, stop the app using it first!
 ----
 
 . For ports where the CLI doesn't check for availability before starting, you might get an exception in the boot log. This is usually identifiable by a printed stack trace in your logs. Here's an example from what happens if port 4848 isn't available. The `[...]` replaces most of the stack trace for legibility reasons.
-
++
 ----
 2021-04-06 11:24:01,168 ERROR c.e.xp.web.jetty.impl.JettyActivator - bundle com.enonic.xp.web.jetty:7.6.1 (80)[com.enonic.xp.web.jetty.impl.JettyActivator(171)] : The activate method has thrown an exception
 org.apache.felix.log.LogException: java.io.IOException: Failed to bind to 0.0.0.0/0.0.0.0:4848
