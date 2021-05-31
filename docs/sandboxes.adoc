@@ -80,7 +80,7 @@ GLOBAL OPTIONS:
 
 == Sandboxes
 
-When talking about _sandboxes_, we're actually talking about local instances of Enonic XP. Having a local (and running) instance of XP is essential for an effective development workflow.
+When talking about _sandboxes_, we're actually talking about local instances of Enonic XP. Having a local (and running) instance of XP is essential for an effective development workflow. Using sandboxes allows you to run different versions of XP because each sandbox has an associated XP version. In this guide, though, we'll stick to using a single sandbox.
 
 Let's create a new sandbox by using the CLI. When you create a new sandbox, the CLI will present you with a few questions for configuring the sandbox, such as the sandbox name. To respond to a question, type in the desired response and press kbd:[enter].
 
