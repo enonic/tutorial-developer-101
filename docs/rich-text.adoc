@@ -68,6 +68,8 @@ Finally, if you want to exclude most tools, but not all, you can exclude all and
 .An HtmlArea with a selection of tools and `<exclude>*</exclude>`
 image::input-type-html-area-some-controls.png[An HtmlArea configured to include a selection of editing tools., {image-s}]
 
+For a full overview of the available text tools and HtmlArea configuration options, visit the https://developer.enonic.com/docs/xp/stable/cms/input-types#htmlarea[HtmlArea input type reference docs]. Additionally, you can find a more thorough explanation of the toolbar and its tools in https://developer.enonic.com/docs/content-studio/stable/editor/rich-text-editor[the rich text editor reference documentation].
+
 == Task: {content-type-2-capitalized} rich text
 
 Let's add a rich-text description to our {content-type-2}s. The input should be optional have at most a single occurrence. You can include any editor tools you want, but it must at least have the `image` and `macro` tools, as we'll be using these later. Otherwise, configure it as you want.
@@ -207,7 +209,7 @@ When you fetch rich text content via GraphQL, the response is formatted as unsty
 
 === Images and styles
 
-When you add a an image to a rich text input, you can fetch it via GraphQL using the `processedHtml` sub selection of your rich text field.  Let's look at how that works. To start us off, this query finds the piece of content that we added the added the image to (the "Lion" 🦁) and extracts its processed HTML from its description.
+When you add a an image to a rich text input, you can fetch it via GraphQL using the `processedHtml` sub selection of your rich text field.  Let's look at how that works. To start us off, this query finds the piece of content that we added the image to (the "Lion" 🦁) and extracts its processed HTML from its description.
 
 This simple query just fetches the processed HTML of the HTML area:
 

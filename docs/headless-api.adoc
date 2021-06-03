@@ -77,7 +77,7 @@ The response to the query is returned as JSON. In this case, it would contain th
 
 == {content-type-1-capitalized} queries
 
-Let's look writing slightly more complex queries that get us information about the artists we've created. To start with, let's see if we can just fetch all the {content-type-1}s that we created.
+Let's look at writing slightly more complex queries that get us information about the artists we've created. To start with, let's see if we can just fetch all the {content-type-1}s that we created.
 
 .A GraphQL query fetching all content below the "{p1-site-name}" site
 [source,GraphQL,{subs}"]
@@ -324,7 +324,7 @@ If you're familiar with GraphQL, you might have noticed that we have not perform
 
 === Integrating Guillotine
 
-When we created an app in xref:apps#_projects_and_starters[a previous chapter], we used the headless starter, which comes which comes with Guillotine integrated. As such, we haven't had to worry ourselves with how to integrate it with XP. However, to better understand how it works, let's have a little peek under the hood.
+When we created an app in xref:apps#_projects_and_starters[a previous chapter], we used the headless starter, which comes with Guillotine integrated. As such, we haven't had to worry ourselves with how to integrate it with XP. However, to better understand how it works, let's have a little peek under the hood.
 
 To embed Guillotine in your app,  add a dependency on the library in the `build.gradle` at the root of your project. The `build.gradle` file that comes with the headless starter will look something like this:
 
