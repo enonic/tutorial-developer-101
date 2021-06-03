@@ -380,7 +380,7 @@ The headless starter takes care of this for us by mapping requests to an `/api` 
 ----
 
 <.> This tells XP that requests that match this mapping's pattern should be routed to the `/controllers/graphql.js` controller
-<.> This pattern tells XP that what reuqests to send to this mapping's controller. In this case, it's any requests to `<site-url>/api`, where `<site-url>` is the URL for your site.
+<.> This pattern tells XP that what requests to send to this mapping's controller. In this case, it's any requests to `<site-url>/api`, where `<site-url>` is the URL for your site.
 
 The controller takes care of generating the schema and providing the API endpoints and logic. The headless starter comes with a default controller that provides the schema and the GraphQL playground that we've been using thus for. It's too long to include in this guide, but if you want to have a look at it, the https://github.com/enonic/starter-headless/blob/master/src/main/resources/controllers/graphql.js[headless starter GraphQL controller] is available on GitHub.
 
