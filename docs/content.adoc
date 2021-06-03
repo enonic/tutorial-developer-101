@@ -65,7 +65,7 @@ If everything goes well, you should see your sandbox logs update now. And that's
 
 == Sites
 
-After the preceding few steps, everything is ready for us to create some actual content! So with your sandbox up and running, and navigate to {cs-url}[Content Studio]. You should be met with an empty studio that tells you you are "wasting this space":
+After the preceding few steps, everything is ready for us to create some actual content! With your sandbox up and running, navigate to {cs-url}[Content Studio]. You should be met with an empty studio that tells you are "wasting this space":
 
 .An empty content studio
 image::content-studio-empty.png[What Content Studio looks like when it's completely empty., {image-xl}]
