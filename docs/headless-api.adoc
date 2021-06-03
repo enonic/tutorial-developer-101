@@ -116,9 +116,11 @@ The result of this query should list all the {content-type-1}s you created previ
 }
 ----
 
-Neat! Next, let's try a slightly more complicated query. In this one,  we'll also get the data inside the content nodes and extract their names and alias fields.
+Neat! Next, let's try a slightly more complicated query. In this one,  we'll also get the data inside the content nodes and extract their names and alias fields. Because all content shares the `displayName` property, you can query for it without specifying what type it belongs to. However, to get fields that exist on the {content-type-1-capitalized} type, you need to specifically tell GraphQL what type you're looking for via _inline fragments_. Inline fragments start with `... on` and then specify the content type you want.
 
-.A GraphQL query that fetches all {content-type-1}s and their data
+TIP: Learn more about inline fragments at https://graphql.org/learn/queries/#inline-fragments[the GraphQL documentation's _Inline Fragments_ section]
+
+.A GraphQL query that fetches all {content-type-1}s and their data using inline fragments
 [source, GraphQL,{subs}]
 ----
 {
@@ -126,7 +128,7 @@ Neat! Next, let's try a slightly more complicated query. In this one,  we'll als
     getChildren(key: "${site}/{content-type-1}s/")
     {
       displayName
-      ... on {project-name-query}_{content-type-1-capitalized} {
+      ... on {project-name-query}_{content-type-1-capitalized} { <--.-->
         data {
           name
           about
@@ -136,6 +138,8 @@ Neat! Next, let's try a slightly more complicated query. In this one,  we'll als
   }
 }
 ----
+
+<.>   This inline fragment lets us extract extra data from content of the {content-type-1-capitalized} type.
 
 Execute this and your response should look a little something like this:
 
