@@ -318,7 +318,7 @@ And find out that with our data set, there's only one:
 
 == The Guillotine library
 
-If you've been wondering how the GraphQL API we've been querying up until now was created: the Guillotine library is the answer. The Guillotine library analyzes all the content in your applications and generates an API from that. It' s an optional library that comes preconfigured with the headless starter that we used back xref:apps#_projects_and_starters[back when we first created our app in a previous {document}]. Guillotine provides direct, typed, and documented access to content within your site.
+If you've been wondering how the GraphQL API we've been querying up until now was created: the Guillotine library is the answer. The Guillotine library analyzes all the content in your applications and generates an API from that. It' s an optional library that comes preconfigured with the headless starter that we used xref:apps#_projects_and_starters[back when we first created our app in a previous {document}]. Guillotine provides direct, typed, and documented access to content within your site.
 
 If you're familiar with GraphQL, you might have noticed that we have not performed any mutations yet. The reason for that is simple: Guillotine only exposes the read-only part of the Enonic Content API, so mutations are not available.
 
