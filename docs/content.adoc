@@ -14,6 +14,8 @@ Content types are schemas that tell XP what properties a piece of content of a p
 
 If you're used to working with databases, you can think of content types as table schemas and contents as the rows of a table. The properties are the columns specified by the schema. Similarly, a content type is much like a _(data) type_ or a _class_ in many programming languages: something that describes the shape of your data. A piece of content is a manifestation/instance of that data type. The properties of the content type specify what that data type contains.
 
+IMPORTANT: Content types belong to XP applications. If you stop or remove an application that contains a content type, you'll no longer be able to create content of that type, and rendering and previewing content of that type will not work.
+
 == Task: The {content-type-1} content type
 
 Now that we know what a content type is, let's look at how we create them and make XP recognize them. By the end of this section we'll have created a content type that gives us a simple form that would look like the screenshot below in Content Studio. We'll see how to find and fill in the form in the following sections.
