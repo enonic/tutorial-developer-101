@@ -1,4 +1,4 @@
-= Getting started with Enonic XP
+= Introduction to Enonic
 include::.variables.adoc[]
 
 Hey! 👋 Welcome to this in-depth guide to getting started with Enonic XP. This guide covers installing the necessary tools, running your own instance of XP, and how to work with content.
