@@ -1,5 +1,9 @@
 = Introduction to Enonic
 include::.variables.adoc[]
+:section-1: Installing Tools and Initial Setup
+:section-2: Working with Content
+:section-3: Advanced Content Creation
+
 
 Hey! 👋 Welcome to this in-depth guide to getting started with Enonic XP. This guide covers installing the necessary tools, running your own instance of XP, and how to work with content.
 
@@ -11,7 +15,11 @@ This guide is currently under development and will be updated with new content f
 
 Good luck! 🙌
 
-== Tutorial overview
+== Overview
+
+This introduction can be broken down into separate sections. If you're new to development or Enonic, you should start at the _{section-1}_ section and maybe skip the first {document}. If you want to dive right in to creating content, check out the {document}s under _{section-2}_. If you understand the basics, check out the {document}s under _{section-3}_ to take your skills to the next level.
+
+=== {section-1}
 
 . <<setup#, {title-setup}>>
 +
@@ -24,7 +32,8 @@ Good luck! 🙌
 . <<apps#, {title-apps}>>
 +
 {description-apps}
-+
+
+=== {section-2}
 . <<content#, {title-content}>>
 +
 {description-content}
@@ -40,7 +49,8 @@ Good luck! 🙌
 . <<input-types#, {title-input-types}>>
 +
 {description-input-types}
-+
+
+=== {section-3}
 . <<sets#, {title-sets}>>
 +
 {description-sets}
