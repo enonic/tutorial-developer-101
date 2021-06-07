@@ -348,7 +348,7 @@ app {
 dependencies {
     compile "com.enonic.xp:portal-api:${xpVersion}"
     include "com.enonic.xp:lib-websocket:${xpVersion}"
-    include "com.enonic.lib:lib-guillotine:5.0.1" <--.-->
+    include "com.enonic.lib:lib-guillotine:5.1.0" <--.-->
     include "com.enonic.lib:lib-graphql-playground:0.0.1"
 }
 
@@ -359,7 +359,7 @@ repositories {
 }
 ----
 
-<.> This line includes Guillotine version 5.0.1
+<.> This line includes Guillotine version 5.1.0
 
 This tells XP that we're going to be using the library. However, it doesn't do anything just yet. To make it work, we're going to need to create a _mapping_ and a _controller_. Both of these concepts will be explained in more detail in a later chapter, but the short form is that a _mapping_ routes HTTP requests to a path to a _controller_. The controller is then responsible for processing and responding to the HTTP request.
 
