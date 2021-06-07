@@ -4,7 +4,7 @@ include::.variables.adoc[]
 
 In this {document}, we'll start working with sites and content types in XP. We'll look at how we create content and how it's stored, as well as how to create and publish sites. To achieve this, we'll start working with and getting familiar with _Content Studio_, XP's content editing suite.
 
-This {document} gives a brief introduction to Content Studio and how to use it. For a more comprehensive overview, head to the https://developer.enonic.com/docs/content-studio/stable[Content Studio reference documentation].
+This {document} gives a brief introduction to Content Studio and how to use it. For a more comprehensive overview, watch https://www.youtube.com/watch?v=tR9KHOcZOs0[this short video on Content Studio basics] or head to the https://developer.enonic.com/docs/content-studio/stable[Content Studio reference documentation].
 
 NOTE: {see-prev-docs}
 
@@ -18,7 +18,7 @@ IMPORTANT: Content types belong to XP applications. If you stop or remove an app
 
 == Task: The {content-type-1} content type
 
-Now that we know what a content type is, let's look at how we create them and make XP recognize them. By the end of this section we'll have created a content type that gives us a simple form that would look like the screenshot below in Content Studio. We'll see how to find and fill in the form in the following sections.
+Now that we know what a content type is, let's look at how we create them and how we make XP recognize them. We'll create a content type that contains two input fields. When shown in Content Studio, it will look like this:
 
 .The target for our first content type
 image::content-type-target.png["A content creation form with name and biography fields", {image-xl}]
@@ -67,9 +67,17 @@ NOTE: Content types also have a large number of other, optional fields that we w
 
 If everything goes well, you should see your sandbox logs update now. And that's the basics of creating new content types. Next, let's turn our eyes to Content Studio and create some actual content!
 
+== Content Studio
+
+As mentioned in the introduction, Content Studio is XP's content management interface. Use it to navigate, create, edit, and publish content and sites. Content Studio also lets you preview pages and other content types that have a visual component.
+
+To access Content Studio from the XP landing page (or anywhere in XP), use the admin menu and select "Content Studio".
+
+Wanna get a quick overview over Content Studio? Watch https://www.youtube.com/watch?v=tR9KHOcZOs0[this short video on Content Studio basics] for a quick overview of how Content Studio works and what you can do with it. If you'd rather just keep reading: we'll introduce everything as we go along, so you should be able to follow anyway.
+
 == Sites
 
-After the preceding few steps, everything is ready for us to create some actual content! With your sandbox up and running, navigate to {cs-url}[Content Studio]. You should be met with an empty studio that tells you are "wasting this space":
+Now we're finally ready to create some actual content! With your sandbox up and running, navigate to {cs-url}[Content Studio]. You should be met with an empty studio that tells you are "wasting this space":
 
 .An empty content studio
 image::content-studio-empty.png[What Content Studio looks like when it's completely empty., {image-xl}]
