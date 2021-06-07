@@ -3,6 +3,7 @@ include::.variables.adoc[]
 :section-1: Installing Tools and Initial Setup
 :section-2: Working with Content
 :section-3: Advanced Content Creation
+:section-4: Deployment and Next Steps
 
 
 Hey! 👋 Welcome to this in-depth guide to getting started with Enonic XP. This guide covers installing the necessary tools, running your own instance of XP, and how to work with content.
@@ -62,3 +63,9 @@ This introduction can be broken down into separate sections. If you're new to de
 . <<x-data#, {title-x-data}>>
 +
 {description-x-data}
+
+=== {section-4}
+
+. <<deployment#, {title-deployment}>>
++
+{description-deployment}

@@ -39,6 +39,10 @@
     {
       "title": "10 - X-data",
       "document": "x-data"
+    },
+    {
+      "title": "11 - Deployment and next steps",
+      "document": "deployment"
     }
   ]
 }
