@@ -1,2 +1,82 @@
 = {title-deployment}
 include::.variables.adoc[]
+
+Now that you're more familiar with XP, with content, and with Guillotine, let's have a look at how you deploy XP. Working on your local copy is great for development, but you can't really expose what you build to someone else that way. For that, you need to deploy XP and your app to somewhere. In this {document}, we'll give a high-level overview of how you do just that.
+
+
+== Deployment
+
+You can configure and deploy XP in a number of different ways to suit your particular needs. Which solution is right for you will depend on what requirements you have for scalability, performance, and isolation.
+
+https://developer.enonic.com/docs/xp/stable/deployment/strategies[The deployment strategies documentation] mentions the following strategies:
+
+Single node:: The most basic way to deploy XP, where it's limited to a single node. The node both serves applications and handles storage.
+Basic cluster:: A basic cluster that provides redundancy and scalability for your services. In this model, the nodes use a distributed storage model.
+Auto-scaling cluster:: The auto-scaling option is similar to the basic cluster, but because it separates back end and front end nodes, it's able to quickly scale the number of instances in your cluster based on traffic.
+Microservice cluster:: The microservice option provides added isolation compared to the auto-scaling approach. It's the most versatile of all the options, but also the most complex.
+
+For a more detailed overview over how each approach works, refer again to the https://developer.enonic.com/docs/xp/stable/deployment/strategies[deployment strategies chapter of the XP reference docs].
+
+=== Installation
+
+When you have settled on a deployment strategy, you'll need to install XP on your desired nodes. You can do this manually using an appropriate package manager or by copying files over, or you can use the Docker image that we provide.
+
+If you choose to use the Docker image, you can read more about the configuration options and how to use it in https://developer.enonic.com/docs/xp/stable/deployment/docker[the Docker image documentation].
+
+Additionally, if you're running Kubernetes, we also provide a https://github.com/enonic/xp-operator[Kubernetes operator] that makes it easy to set up XP in a Kubernetes cluster.
+
+=== Operating remote nodes
+
+You can configure the Enonic CLI to communicate with remote XP instances. This makes it easy to manage your nodes' applications and data.
+
+The https://developer.enonic.com/docs/enonic-cli/master/xp#environment_variables[CLI documentation] has more details on how you configure your CLI to interface with remote instances.
+
+=== Virtual hosts: managing paths
+
+Virtual hosts (vhosts) let you safely expose services (such as sites and web apps) through public domains. XP provides the following endpoints by default:
+
+`localhost:8080/webapp/<app-name>/`:: Web app engine
+`localhost:8080/site/<repo>/<branch>/<path>`:: Site engine
+`localhost:8080/admin/`:: Admin engine
+
+Vhosts allow you to route traffic to domains and URL patterns to service paths of your choosing.
+
+For instance, if you own the `example.com` domain and use XP to serve the content at that URL, you could create a mapping so that any traffic to `example.com` is re-routed to XP's `8080/site/default/master/homepage`, assuming that's where you keep the content you want to serve.
+
+To configure vhosts, create a vhost configuration file and place it in `XP_HOME/config/com.enonic.xp.web.vhost.cfg`, where `XP_HOME` is your XP distribution's installation folder (read more about that in the https://developer.enonic.com/docs/xp/stable/deployment/distro[distributions chapter]).
+
+This example vhost config would set up the mapping listed above plus an additional mapping of `example.com/admin` to `8080/admin`:
+
+[src,properties]
+----
+enabled = true <--.-->
+
+mapping.example.host = example.com
+mapping.example.source = / <--.-->
+mapping.example.target = /site/default/master/homepage
+
+mapping.adm.host = example.com
+mapping.adm.source = /admin <--.-->
+mapping.adm.target = /admin
+mapping.adm.idProvider.system = default
+----
+
+<.> Enable vhosts configuration
+<.> Map  everything from `/` (the base path) to the following target
+<.> Map `/admin`  to `/admin` and add an ID provider.
+
+Using the above mapping, requests to `example.com/some/path` would be redirected to `8080/site/default/master/homepage/some/path` and `example.com/admin` `8080/admin`.
+
+Visit the https://developer.enonic.com/docs/xp/stable/deployment/vhosts[vhosts reference documentation] for a more thorough explanation of how they work and further reading.
+
+=== Need an installation?
+
+If you want to try and set up a an XP deployment, but don't have the necessary resources available, or if you just want to try it out, get in touch with us at mailto:info@enonic.com[info@enonic.com].
+
+== What's next?
+
+Congrats! You've reached the end of the introduction for now. This document is still a work in progress and new content will be added at a later date. If you'd like to go further now, why don't you try one of the following guides which introduce extra aspects of the XP experience?
+
+https://developer.enonic.com/guides/headless-cms-intro[Introduction to headless CMS]:: If you've enjoyed the headless aspects of this introduction, why not visit this guide to further your knowledge of how to use the GraphQL API and how to customize it.
+https://developer.enonic.com/guides/my-first-site[My first site]:: If you're interested in building a traditional CMS-based application with server rendered pages, this is the guide for you. It covers building pages and using more Content Studio building blocks such as regions, parts, and page templates.
+https://developer.enonic.com/guides/my-first-webapp[My first webapp]:: If you're more interested in building web apps than web sites, how about this guide which focuses more on the web app aspects, including JavaScript controllers, serving assets, and routing.
