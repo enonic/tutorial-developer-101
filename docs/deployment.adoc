@@ -1,5 +1,6 @@
 = {title-deployment}
 include::.variables.adoc[]
+:description: {description-deployment}
 
 Now that you're more familiar with XP, with content, and with Guillotine, let's have a look at how you deploy XP. Working on your local copy is great for development, but you can't really expose what you build to someone else that way. For that, you need to deploy XP and your app to somewhere. In this {document}, we'll give a high-level overview of how you do just that.
 
