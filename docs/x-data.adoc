@@ -67,3 +67,44 @@ Your task is:
 +
 .{content-type-2-capitalized} with references added
 image::x-data-example.png["The content form for Lion with an additional 'References' section below the usual inputs. The first reference, a TextLine input, points to the Wikipedia article.'", {image-xl}]
+
+== Headless
+
+When working headlessly, you can easily fetch X-data by querying for the `xAsJson` field of your content type. This query will return the content's associated X-data as a JSON object.
+
+.Querying for X-data
+[source,GraphQL,{subs}]
+----
+{
+  guillotine {
+    query(contentTypes:"{project-name-full}:{content-type-2}",
+      query: "displayName = 'Lion'") {
+      xAsJson
+    }
+  }
+}
+----
+
+So if you've added some references to your "Lion", you'll get something like this back. Notice how the JSON data is structured in a hierarchical fashion.
+
+.X-data results
+[source,json]
+----
+{
+  "data": {
+    "guillotine": {
+      "query": [
+        {
+          "xAsJson": {
+            "com-example-myproject": {
+              "notes": {
+                "references": "Lion (Wikipedia): https://en.wikipedia.org/wiki/Lion"
+              }
+            }
+          }
+        }
+      ]
+    }
+  }
+}
+----
