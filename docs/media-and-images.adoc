@@ -87,6 +87,8 @@ The content form allows you to provide an image caption, alt text, copyright and
 
 The image editing tools allow you to crop, flip, and rotate the image as well as to set what's known as _autofocus_. The autofocus control allows you to set an image focal point that XP will always keep in view, regardless of how the image is cropped. Without setting a focal point, XP will focus around the center of the image when cropping.
 
+You can always reset the edits you've made to an image by using the 'reset filters' button.
+
 TIP: You can read more about https://enonic.com/blog/enonic-simplifies-image-problems[how Enonic simplifies your everyday image problems] to get more info about how to use images in a traditional CMS model and for a quick overview of the autofocus feature.
 
 === Task: Using autofocus
