@@ -4,6 +4,8 @@ include::.variables.adoc[]
 
 The content types we've created previously in this guide have only used two basic input types: TextLine and TextArea. However, Content Studio has a lot more up its sleeve than that! Input types dictate what kind of data the user can or must add any piece of content. This {document} introduces more new types of inputs and explains how you can configure them to your liking.
 
+NOTE: If you're used to working with HTML, be aware that XP's `input` elements are _not_ the same as HTML `input` elements.
+
 NOTE: {see-prev-docs}
 
 == Configuration
