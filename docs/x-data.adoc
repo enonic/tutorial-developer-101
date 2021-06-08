@@ -48,6 +48,9 @@ Your task is:
 
 . Add a reference the X-data in your `site.xml` and tell XP what content types it applies to. To do that, add an `x-data` tag in `site.xml` that has a `name` attribute that matches the name of your X-data ({x-data}). Make sure you add the `x-data` element before the `form` and `mappings` elements.
 +
+Like with fields within a content type form, X-data can be optional or required. If X-data is optional, you need to manually add it to a piece of content. If it is required, it will be added automatically. Note that a piece of X-data being required does not mean that its fields are required. To mark X-data as optional, use `optional="true"` as described under the https://developer.enonic.com/docs/xp/stable/cms/x-data#configuration[X-data configuration section in the XP reference docs].
+
++
 .The updated site.xml
 [source,xml,{subs}]
 ----
