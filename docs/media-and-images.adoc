@@ -103,10 +103,12 @@ To  get around this, try the autofocus tool.
 . Click the autofocus tool.A red circle will show up over the image. This circle indicates where the focal point is.
 . Move the circle onto the lion (or whatever your focal point is) and press "apply".
 +
+.The focal point editor
 image::image-editing-focal-point.png["The lion image with a red circle indicating the focal point around its head.",{image-xl}]
 
 Now, when the image gets cropped, XP will take care of keeping the lion in focus, both in traditional CMS solutions and in headless modes:
 
+.The same image with the same crop, but with a focal point
 image::image-cropped-focused.jpg["A crop of the lion in the savannah. In this square image, the lion is in full view square in the center.",{image-s}]
 
 == Headless

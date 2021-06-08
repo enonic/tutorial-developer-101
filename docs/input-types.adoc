@@ -102,12 +102,14 @@ image::input-type-geo-point.webp["A text line input with coordinates.",{image-s}
 +
 https://developer.enonic.com/docs/xp/stable/cms/input-types#htmlarea[HtmlArea]:: Provides a rich text, multi-line input. We'll discuss this in detail in xref:rich-text#[the next {document}].
 +
+.The HtmlArea input type
 image::input-type-html-area.png["A text area with a tools ribbon on the top. The ribbon provides rich text tools such as justification, macro insertion, text styles, etc.",{image-s}]
 
 Additionally, XP has more complex input types, which we'll look at next.
 
 == ImageSelector
 
+.The ImageSelector input type
 image::input-type-image-selector.png[ImageSelector: An interactive image selection tool., {image-xl}]
 
 Images are a key part of many web experiences: they add color, break up the content, and gives the reader something to rest their eyes on. XP's image selector allows you to select an image for a piece of content and also to upload new images.
@@ -129,6 +131,7 @@ image::input-type-image-selector-highlighted-image.png["The image selector input
 
 == ContentSelector
 
+.The ContentSelector input type
 image::input-type-content-selector.png[ContentSelector: An interactive content selection tool., {image-xl}]
 
 The image selector we just saw is actually a specialized form of the more complex ContentSelector input type. The ContentSelector input type allows you to reference other content. Let's say you have two content types: one of type person and one of type food. If you want to be able to specify which dishes the person likes, you could use a content type to create a reference from the person to their favored dish.
