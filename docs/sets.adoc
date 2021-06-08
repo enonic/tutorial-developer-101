@@ -338,7 +338,7 @@ Create a top level option set and add two item sets (one for discography, one fo
 ----
 
 .Option A
-image::sets-option-set+item-set.png["An item set wrapping an option set. The option set has nested item sets within. Showing data about P!nk.",{image-xl}]
+image::sets-option-set-wrapping-item-set.png["An item set wrapping an option set. The option set has nested item sets within. Showing data about P!nk.",{image-xl}]
 
 === Option B: top level item set
 
@@ -388,7 +388,7 @@ Create a top level item set and nest option sets within:
 ----
 
 .Option B
-image::sets-item-set+option-set.png["An item set wrapping underlying option sets. Data about P!nk.",{image-xl}]
+image::sets-item-set-wrapping-option-set.png["An item set wrapping underlying option sets. Data about P!nk.",{image-xl}]
 
 == Headless: fetching item sets and option sets
 
