@@ -70,7 +70,7 @@ image::input-type-html-area-some-controls.png[An HtmlArea configured to include 
 
 For a full overview of the available text tools and HtmlArea configuration options, visit the https://developer.enonic.com/docs/xp/stable/cms/input-types#htmlarea[HtmlArea input type reference docs]. Additionally, you can find a more thorough explanation of the toolbar and its tools in https://developer.enonic.com/docs/content-studio/stable/editor/rich-text-editor[the rich text editor reference documentation].
 
-== Task: {content-type-2-capitalized} rich text
+=== Task: {content-type-2-capitalized} rich text
 
 Let's add a rich-text description to our {content-type-2}s. The input should be optional have at most a single occurrence. You can include any editor tools you want, but it must at least have the `image` and `macro` tools, as we'll be using these later. Otherwise, configure it as you want.
 
@@ -119,7 +119,7 @@ It'll look a little something like this:
 
 If you have configured your HtmlArea to include the image tool, you can click the image button to insert an image. Once you select an image, you'll get a prompt that allows you to customize the image. You can add a caption, alt text, change the image's justification in the block, and apply predefined image styles. There's also a pencil icon in the upper right corner that allows you to edit the image, as covered in xref:input-types#_working_with_images[a previous {document}].
 
-== Task: {content-type-2-capitalized} pictures
+=== Task: {content-type-2-capitalized} pictures
 
 Try out the image controls that Content Studio gives you by uploading a picture and seeing what you can do with it. Remember to click the pencil icon to try the advanced editing tools such as cropping and focal points.
 
@@ -162,7 +162,7 @@ image::rich-text-insert-image-styled.png["The insert image dialog showing the re
 
 Macros enable you to insert rich components into your text. When the page is rendered, the macro call is resolved and replaced. When the macro is resolved, it will either add text to your page or styles or scripts. See the https://developer.enonic.com/docs/xp/stable/cms/macros[macro reference docs] for a more in-depth explanation of how this works. In this section, we'll install a macro from an external application (_{macro-app}_), and look at how to use it. We'll also see how macros behave in a headless context.
 
-== Task: {macro-app}
+=== Task: {macro-app}
 
 The {macro-app} package comes with a set of macros that let you put text differently colored items with icons.
 
