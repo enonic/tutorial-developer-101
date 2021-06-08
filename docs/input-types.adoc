@@ -135,7 +135,7 @@ image::input-type-content-selector.png[ContentSelector: An interactive content s
 
 The image selector we just saw is actually a specialized form of the more complex ContentSelector input type. The ContentSelector input type allows you to reference other content. Let's say you have two content types: one of type person and one of type food. If you want to be able to specify which dishes the person likes, you could use a content type to create a reference from the person to their favored dish.
 
-Because referencing other content types comes with a lot of variability, the ContentSelector type has configuration options to support this. You can choose to allow only certain content types or only content that's available at a certain path. You can also change how the selector is presented to the user, including how it should present available content to the user and whether it should list content status.
+Because referencing other content types comes with a lot of variability, the ContentSelector type has configuration options to support this. You can choose to allow only certain content types or only content that's available at a certain path. You can also change whether the selector should show content in a tree-style hierarchy or as a flat list of content.
 
 https://developer.enonic.com/docs/xp/stable/cms/input-types#contentselector[The full list of ContentSelector configuration options] is available in the reference docs, including a number of examples to explain content inclusion and exclusion. However, a simple configuration could look like this:
 
