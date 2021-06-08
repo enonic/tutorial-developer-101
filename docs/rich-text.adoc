@@ -125,15 +125,22 @@ Try out the image controls that Content Studio gives you by uploading a picture 
 
 We looked at xref:input-types#_working_with_images[editing images in the previous {document}], but the HtmlArea also offers you something called "image styles", which we'll have a look at now.
 
-When you insert an image via the HtmlArea toolbar, you'll be greeted by the "insert image" dialog:
-
+. Insert an image. Use the "insert image" button in the toolbar.
++
+.The toolbar with the image tool highlighted
+image::rich-text-toolbar-image-highlight.png[The rich text toolbar with the image tool circled by a blue circle.,{image-l}]
++
+NOTE: You can also use kbd:[ctrl+L] to insert an image.
++
+. You'll be greeted by the "insert image" dialog:
++
 .The HtmlArea insert image dialog. Photo by https://unsplash.com/@kydroon[Kurt Cotoaga] 🦁
 image::rich-text-insert-image.png["The insert image dialog, showing the image, an image styles dropdown, caption, and alt text fields", {image-l}]
-
-If you try and access the "image styles" dropdown, you'll find that it's only got two options and neither of them seem to do much. To make this more exciting, let's also create a custom image style.
-
++
+. If you try and access the "image styles" dropdown, you'll find that it's only got two options and neither of them seem to do much. To make this more exciting, let's also create a custom image style.
++
 In a new file, `src/main/resources/site/styles.xml`, place the following simple style configuration:
-
++
 .A very basic styles configuration
 [source,xml,{subs}]
 ----
@@ -145,15 +152,14 @@ In a new file, `src/main/resources/site/styles.xml`, place the following simple 
   </image>
 </styles>
 ----
-
++
 <.> The aspect ratio controls how the image is displayed. 1:1 makes the image square.
 <.> The filters add a grayscale effect and then a border
-
-
++
 NOTE: https://developer.enonic.com/docs/xp/stable/cms/styles[The styles reference docs] have more information on how you can style your images, so go check it out for a deeper dive.
-
-With this style picked up by XP, you'll have the "Grayscale" option available in the image styles dropdown. Select it to apply it to the image.
-
++
+. With this style picked up by XP, you'll have the "Grayscale" option available in the image styles dropdown. Select it to apply it to the image.
++
 .An image with an image style applied
 image::rich-text-insert-image-styled.png["The insert image dialog showing the results of applying the image styles to the image", {image-l}]
 
