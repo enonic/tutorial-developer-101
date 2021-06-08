@@ -185,6 +185,10 @@ To use these macros, we first need to install the {macro-app}.
 
 To add a macro to your HtmlArea, the easiest (and recommended) way is to use the macro tool.
 
+.The toolbar with the macro tool highlighted
+image::rich-text-toolbar-macro-highlight.png[The rich text toolbar with the macro button circled by a blue circle.,{image-l}]
+
+
 Open up an {content-type-2} and try it out! The below example will use the "reindeer" created earlier.
 
 . In the "Description" field, click the "insert macro" tool.
