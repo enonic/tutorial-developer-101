@@ -83,7 +83,7 @@ Content Studio comes with a suite of image editing tools built in. After uploadi
 .The image content form
 image::image-content-form.png["A content form showing the image with image editing tools, inputs for caption, alternative text, copyright, and tags.",{image-xl}]
 
-The content form allows you to provide an image caption, alt text, copyright and tag info. You can also add image properties such as dimensions, and where the image was taken and with what gear.
+The content form allows you to provide an image caption, alt text, copyright and tag info. You can also add image properties such as dimensions, and where the image was taken and with what gear. Note that changing these properties, including size, width, height, etc, does not affect the image in any way.
 
 The image editing tools allow you to crop, flip, and rotate the image as well as to set what's known as _autofocus_. The autofocus control allows you to set an image focal point that XP will always keep in view, regardless of how the image is cropped. Without setting a focal point, XP will focus around the center of the image when cropping.
 
