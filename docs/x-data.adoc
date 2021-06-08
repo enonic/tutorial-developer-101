@@ -12,6 +12,7 @@ By configuring your application's `site.xml` (`src/main/resources/site/site.xml`
 
 As per usual, X-data schemas follow this naming and placement convention (from the project root): `src/main/resources/site/x-data/<x-data-name>/<x-data-name>.xml`.
 
+NOTE: X-data share some similarities to mixins (which we saw in the <<sets#_mixins, {document} on sets>>), but they work at a higher level. Both allow you to group fields and add them, but mixins add fields to a content type's form, while X-data adds fields to a piece of content itself. Further, you configure X-data at a global level, while you configure mixins at a content type level.
 
 == Task: add reference data
 
