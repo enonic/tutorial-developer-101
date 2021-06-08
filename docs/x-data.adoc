@@ -12,6 +12,7 @@ By configuring your application's `site.xml` (`src/main/resources/site/site.xml`
 
 As per usual, X-data schemas follow this naming and placement convention (from the project root): `src/main/resources/site/x-data/<x-data-name>/<x-data-name>.xml`.
 
+NOTE: X-data share some similarities to mixins (which we saw in the <<sets#_mixins, {document} on sets>>), but they work at a higher level. Both allow you to group fields and add them, but mixins add fields to a content type's form, while X-data adds fields to a piece of content itself. Further, you configure X-data at a global level, while you configure mixins at a content type level.
 
 == Task: add reference data
 
@@ -46,6 +47,9 @@ Your task is:
 ----
 
 . Add a reference the X-data in your `site.xml` and tell XP what content types it applies to. To do that, add an `x-data` tag in `site.xml` that has a `name` attribute that matches the name of your X-data ({x-data}). Make sure you add the `x-data` element before the `form` and `mappings` elements.
++
+Like with fields within a content type form, X-data can be optional or required. If X-data is optional, you need to manually add it to a piece of content. If it is required, it will be added automatically. Note that a piece of X-data being required does not mean that its fields are required. To mark X-data as optional, use `optional="true"` as described under the https://developer.enonic.com/docs/xp/stable/cms/x-data#configuration[X-data configuration section in the XP reference docs].
+
 +
 .The updated site.xml
 [source,xml,{subs}]

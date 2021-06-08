@@ -61,6 +61,8 @@ image::content-type-target.png["A content creation form with name and biography 
 +
 NOTE: Content types also have a large number of other, optional fields that we won't get into here. If you'd like to learn more about this, consult https://developer.enonic.com/docs/xp/stable/cms/content-types[the reference documentation].
 +
+NOTE: XP's `input` elements are _not_ the same as HTML `input` elements. To read more about it, <<input-types#, see the {document} on input types>>.
+.
 . Now run:
 
   enonic project deploy
