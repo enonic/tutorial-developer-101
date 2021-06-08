@@ -79,7 +79,7 @@ Wanna get a quick overview over Content Studio? Watch https://www.youtube.com/wa
 
 == Sites
 
-Now we're finally ready to create some actual content! With your sandbox up and running, navigate to {cs-url}[Content Studio]. You should be met with an empty studio that tells you are "wasting this space":
+Now we're finally ready to create some actual content! With your sandbox up and running, navigate to Content Studio. You should be met with an empty studio that tells you are "wasting this space":
 
 .An empty content studio
 image::content-studio-empty.png[What Content Studio looks like when it's completely empty., {image-xl}]

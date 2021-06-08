@@ -93,7 +93,7 @@ TIP: You can read more about https://enonic.com/blog/enonic-simplifies-image-pro
 
 === Task: Using autofocus
 
-NOTE: This task is mostly an exercise in tooling. To see the results of your editing, check out the xref:media#_images["Headless: images"] section below.
+NOTE: This task is mostly an exercise in tooling. To see the results of your editing, check out the <<#_images, "Headless: images">> section below.
 
 Because we chose an image with an off-center subject, the image might get cropped such that the lion disappears from the image. For instance, a small, square crop might turn out like this:
 
