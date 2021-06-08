@@ -72,7 +72,7 @@ For a full overview of the available text tools and HtmlArea configuration optio
 
 === Task: {content-type-2-capitalized} rich text
 
-Let's add a rich-text description to our {content-type-2}s. The input should be optional have at most a single occurrence. You can include any editor tools you want, but it must at least have the `image` and `macro` tools, as we'll be using these later. Otherwise, configure it as you want.
+Let's add a rich-text description to our {content-type-2}s. The input should be optional and have at most a single occurrence. You can include any editor tools you want, but it must at least have the `image` and `macro` tools, as we'll be using these later. Otherwise, configure it as you want.
 
 Once you've done that, add some text to one of your {content-type-2}s and try out the HtmlArea.
 

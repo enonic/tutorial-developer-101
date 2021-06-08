@@ -87,6 +87,7 @@ Note that the remaining fields of the form have been left out in the above examp
 
 With this new item set, we can add as many albums as we want:
 
+.Item set for albums
 image::item-set-album.png["An example of using the Album item set with two albums included.", {image-m}]
 
 
@@ -336,6 +337,7 @@ Create a top level option set and add two item sets (one for discography, one fo
     </option-set>
 ----
 
+.Option A
 image::sets-option-set+item-set.png["An item set wrapping an option set. The option set has nested item sets within. Showing data about P!nk.",{image-xl}]
 
 === Option B: top level item set
@@ -385,6 +387,7 @@ Create a top level item set and nest option sets within:
     </item-set>
 ----
 
+.Option B
 image::sets-item-set+option-set.png["An item set wrapping underlying option sets. Data about P!nk.",{image-xl}]
 
 == Headless: fetching item sets and option sets
