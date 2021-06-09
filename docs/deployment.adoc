@@ -26,12 +26,6 @@ If you choose to use the Docker image, you can read more about the configuration
 
 Additionally, if you're running Kubernetes, we also provide a https://github.com/enonic/xp-operator[Kubernetes operator] that makes it easy to set up XP in a Kubernetes cluster.
 
-=== Operating remote nodes
-
-You can configure the Enonic CLI to communicate with remote XP instances. This makes it easy to manage your nodes' applications and data.
-
-The https://developer.enonic.com/docs/enonic-cli/master/xp#environment_variables[CLI documentation] has more details on how you configure your CLI to interface with remote instances.
-
 === Virtual hosts: managing paths
 
 Virtual hosts (vhosts) let you safely expose services (such as sites and web apps) through public domains. XP provides the following endpoints by default:
