@@ -1,6 +1,7 @@
 = {title-deployment}
 include::.variables.adoc[]
 :description: {description-deployment}
+:vhost-host: xp-admin.com
 
 Working on your local copy is great for development, but you can't expose what you build to someone else that way. For that, you need to deploy XP and your app to somewhere. In this {document}, we'll give a high-level overview of how you do just that.
 
@@ -25,43 +26,88 @@ If relying on cloud services isn't for you, you can also self-host the Enonic pl
 
 To learn more about self-hosting and deployment strategies, check out https://developer.enonic.com/docs/xp/stable/deployment[the _deployment_ section of the XP reference docs].
 
-== Virtual hosts: managing paths
+== Uploading apps
 
-Virtual hosts (vhosts) let you safely expose services (such as sites and web apps) through public domains. XP provides the following endpoints by default:
+Regardless of how you deploy your XP instance, uploading your XP apps is the same.
 
-`localhost:8080/webapp/<app-name>/`:: Web app engine
-`localhost:8080/site/<repo>/<branch>/<path>`:: Site engine
-`localhost:8080/admin/`:: Admin engine
+To upload an app:
 
-Vhosts allow you to route traffic to domains and URL patterns to service paths of your choosing.
+. Log into your XP deployment
+. Use the admin menu to navigate to the applications page
+. Choose install from the toolbar and upload your application `.jar` file. You can drag and drop your application or navigate the file hierarchy via the upload button.
++
+.Drag and drop applications to upload them
+image::deployment-app-upload.png["The application installation menu with a blue overlay. The overlay says 'drop files to upload'",{image-xl}]
+// TODO: add image here
 
-For instance, if you own the `example.com` domain and use XP to serve the content at that URL, you could create a mapping so that any traffic to `example.com` is re-routed to XP's `:8080/site/default/master/homepage`, assuming that's where you keep the content you want to serve.
+== Virtual hosts: pretty paths
 
-To configure vhosts, create a vhost configuration file and place it in `XP_HOME/config/com.enonic.xp.web.vhost.cfg`, where `XP_HOME` is your XP distribution's installation folder (read more about that in the https://developer.enonic.com/docs/xp/stable/deployment/distro[distributions chapter]).
+When accessing XP resources such as the GraphQL API explorer in this tutorial, the URLs have been long and unsightly. When working in production environment, this isn't something you want. Instead, you want short, pretty URLs that are easy to remember. Virtual hosts (_vhosts_) configuration lets you do just that.
 
-This example vhost config would set up the mapping listed above plus an additional mapping of `example.com/admin` to `:8080/admin`:
+Your vhosts file is a configuration file that sits in your XP sandbox's configuration directory. This file contains mappings from public-facing URLs to internal URLs. This lets the user access `{p1-site-slug}.com/api` and retrieve content from `/site/default/master/{p1-site-slug}/api`.
 
-[src,properties]
+An example vhosts file that achieves the mapping mentioned could contain the following:
+
+[src,properties,{subs}]
 ----
 enabled = true <--.-->
 
-mapping.example.host = example.com
+mapping.example.host = {p1-site-slug}.com <--.-->
 mapping.example.source = / <--.-->
-mapping.example.target = /site/default/master/homepage
-
-mapping.adm.host = example.com
-mapping.adm.source = /admin <--.-->
-mapping.adm.target = /admin
-mapping.adm.idProvider.system = default
+mapping.example.target = /site/default/master/{p1-site-slug}/
 ----
-
 <.> Enable vhosts configuration
-<.> Map  everything from `/` (the base path) to the following target
-<.> Map `/admin`  to `/admin` and add an ID provider.
+<.> Intercept requests to `{p1-site-slug}.com`
+<.> Map any request that starts with this path ...
+<.> ... to the internal URL.
 
-Using the above mapping, requests to `example.com/some/path` would be redirected to `8080/site/default/master/homepage/some/path` and `example.com/admin` `8080/admin`.
+To read more about virtual hosts, head to the https://developer.enonic.com/docs/xp/stable/deployment/vhosts[_Vhosts_ section of the deployment documentation].
 
-Visit the https://developer.enonic.com/docs/xp/stable/deployment/vhosts[vhosts reference documentation] for a more thorough explanation of how they work and further reading.
+=== Task: local vhosts config
+
+To explore how vhosts mappings work, let's configure vhosts for our local XP instance. Then, to test it, we'll configure our local `hosts` file.
+
+. Find and open your sandbox's vhosts file. From your user's home directory, the path will be `.enonic/sandboxes/<sandbox-name>/home/config/com.enonic.xp.web.vhost.cfg`, where `<sandbox-name>` varies depending on which sandbox you want to configure. If it is your first one, it'll be `Sandbox1`.
+
+. Update the vhosts file.
++
+[source,config,{subs}]
+----
+enabled = true
+
+mapping.admin.host = {vhost-host} <--.-->
+mapping.admin.source = /
+mapping.admin.target = /admin
+mapping.admin.idProvider.system = default
+
+mapping.localhost.host = localhost <--.-->
+mapping.localhost.source = /
+mapping.localhost.target = /
+mapping.localhost.idProvider.system = default
+----
++
+<.> If requests go to `xp-admin.com:8080`, send them to `:8080/admin`
+<.> This block allows the localhost mappings to keep working. Without this, `localhost:8080` wouldn't work anymore.
++
+. If you're watching your XP process, you should see a message like this:
+
+  2021-06-09 13:49:43,405 INFO  c.e.x.s.i.config.ConfigInstallerImpl - Loaded config for [com.enonic.xp.web.vhost]
+  2021-06-09 13:49:43,411 INFO  c.e.x.w.v.i.c.VirtualHostServiceImpl - Virtual host is enabled and mappings updated.
++
+This means that XP has updated the mappings and is ready to go.
+
+. To test this out, update your local hosts file (https://en.wikipedia.org/wiki/Hosts_%28file%29[_hosts file_ on Wikipedia]) to point `{vhost-host}` to `127.0.0.1` by adding the following line to the file:
++
+[source,conf,{subs}]
+----
+127.0.0.1 {vhost-host}
+----
++
+TIP: On Linux and macOS you'll find the hosts file at `/etc/hosts`. On Windows, it's located at  `c:\Windows\System32\Drivers\etc\hosts`
+
+. Now access `http://xp-admin.com:8080` in your browser. If all has gone well, you should see the familiar XP login screen.
++
+NOTE: If you're not seeing anything or aren't able to access the resources, that may be due to a browser setting. Try using a different browser and see if that makes a difference.
 
 == What's next?
 
