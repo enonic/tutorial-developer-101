@@ -42,11 +42,11 @@ Virtual hosts (vhosts) let you safely expose services (such as sites and web app
 
 Vhosts allow you to route traffic to domains and URL patterns to service paths of your choosing.
 
-For instance, if you own the `example.com` domain and use XP to serve the content at that URL, you could create a mapping so that any traffic to `example.com` is re-routed to XP's `8080/site/default/master/homepage`, assuming that's where you keep the content you want to serve.
+For instance, if you own the `example.com` domain and use XP to serve the content at that URL, you could create a mapping so that any traffic to `example.com` is re-routed to XP's `:8080/site/default/master/homepage`, assuming that's where you keep the content you want to serve.
 
 To configure vhosts, create a vhost configuration file and place it in `XP_HOME/config/com.enonic.xp.web.vhost.cfg`, where `XP_HOME` is your XP distribution's installation folder (read more about that in the https://developer.enonic.com/docs/xp/stable/deployment/distro[distributions chapter]).
 
-This example vhost config would set up the mapping listed above plus an additional mapping of `example.com/admin` to `8080/admin`:
+This example vhost config would set up the mapping listed above plus an additional mapping of `example.com/admin` to `:8080/admin`:
 
 [src,properties]
 ----
