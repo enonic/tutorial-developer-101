@@ -105,9 +105,28 @@ This means that XP has updated the mappings and is ready to go.
 +
 TIP: On Linux and macOS you'll find the hosts file at `/etc/hosts`. On Windows, it's located at  `c:\Windows\System32\Drivers\etc\hosts`
 
-. Now access `http://xp-admin.com:8080` in your browser. If all has gone well, you should see the familiar XP login screen.
-+
-NOTE: If you're not seeing anything or aren't able to access the resources, that may be due to a browser setting. Try using a different browser and see if that makes a difference.
+. Now access `http://{vhost-host}:8080` in your browser. If all has gone well, you should see the familiar XP login screen.
+
+
+==== Troubleshooting
+
+If you're not seeing anything when you direct your browser to `http://{vhost-host}:8080` or aren't able to access the resources, that may be due to a browser setting. Try using a different browser and see if that makes a difference. Alternatively, you can try running
+
+[source,bash,{subs}]
+----
+curl -v {vhost-host}:8080/tools
+----
+
+If the connection is successful, one of the lines in the output should say something to the effect of
+
+[{subs}]
+----
+* Connected to {vhost-host} (127.0.0.1) port 8080 (#0)
+----
+
+and you should get a massive block of HTML printed to the terminal. This HTML is the content of the login page in raw form.
+
+You might not be able to do much with that output, but it means the mapping has worked successfully, which is the important part for this task.
 
 == What's next?
 
