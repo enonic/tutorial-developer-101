@@ -2,31 +2,30 @@
 include::.variables.adoc[]
 :description: {description-deployment}
 
-Now that you're more familiar with XP, with content, and with Guillotine, let's have a look at how you deploy XP. Working on your local copy is great for development, but you can't really expose what you build to someone else that way. For that, you need to deploy XP and your app to somewhere. In this {document}, we'll give a high-level overview of how you do just that.
-
+Working on your local copy is great for development, but you can't expose what you build to someone else that way. For that, you need to deploy XP and your app to somewhere. In this {document}, we'll give a high-level overview of how you do just that.
 
 == Deployment
 
-You can configure and deploy XP in a number of different ways to suit your particular needs. Which solution is right for you will depend on what requirements you have for scalability, performance, and isolation.
+You have two main choices for deploying XP:
 
-https://developer.enonic.com/docs/xp/stable/deployment/strategies[The deployment strategies documentation] mentions the following strategies:
+* Run it _as a service_ on the Enonic Cloud
+* Self-host it
 
-Single node:: The most basic way to deploy XP, where it's limited to a single node. The node both serves applications and handles storage.
-Basic cluster:: A basic cluster that provides redundancy and scalability for your services. In this model, the nodes use a distributed storage model.
-Auto-scaling cluster:: The auto-scaling option is similar to the basic cluster, but because it separates back end and front end nodes, it's able to quickly scale the number of instances in your cluster based on traffic.
-Microservice cluster:: The microservice option provides added isolation compared to the auto-scaling approach. It's the most versatile of all the options, but also the most complex.
+Enonic recommends using Enonic Cloud for a smoother experience, but you can choose to self-host it yourself if that better suits your requirements.
 
-For a more detailed overview over how each approach works, refer again to the https://developer.enonic.com/docs/xp/stable/deployment/strategies[deployment strategies chapter of the XP reference docs].
+=== Enonic Cloud
 
-=== Installation
+Enonic offers a fully managed way to run XP, known as the Enonic Cloud. As a user of Enonic Cloud, you can sit back and relax and let Enonic take care of all your infrastructure, including monitoring, backups, automation, and more.
 
-When you have settled on a deployment strategy, you'll need to install XP on your desired nodes. You can do this manually using an appropriate package manager or by copying files over, or you can use the Docker image that we provide.
+This is by far the easiest way to get an XP installation up and running. To learn more about it and get a free trial, head over to https://enonic.com/platform/platform-as-a-service[the Platform as a Service page].
 
-If you choose to use the Docker image, you can read more about the configuration options and how to use it in https://developer.enonic.com/docs/xp/stable/deployment/docker[the Docker image documentation].
+=== Self-hosted
 
-Additionally, if you're running Kubernetes, we also provide a https://github.com/enonic/xp-operator[Kubernetes operator] that makes it easy to set up XP in a Kubernetes cluster.
+If relying on cloud services isn't for you, you can also self-host the Enonic platform. There's a number of different deployment strategies to choose from, based on what suits your particular situation the best.
 
-=== Virtual hosts: managing paths
+To learn more about self-hosting and deployment strategies, check out https://developer.enonic.com/docs/xp/stable/deployment[the _deployment_ section of the XP reference docs].
+
+== Virtual hosts: managing paths
 
 Virtual hosts (vhosts) let you safely expose services (such as sites and web apps) through public domains. XP provides the following endpoints by default:
 
@@ -63,10 +62,6 @@ mapping.adm.idProvider.system = default
 Using the above mapping, requests to `example.com/some/path` would be redirected to `8080/site/default/master/homepage/some/path` and `example.com/admin` `8080/admin`.
 
 Visit the https://developer.enonic.com/docs/xp/stable/deployment/vhosts[vhosts reference documentation] for a more thorough explanation of how they work and further reading.
-
-=== Need an installation?
-
-If you want to try and set up a an XP deployment, but don't have the necessary resources available, or if you just want to try it out, get in touch with us at mailto:info@enonic.com[info@enonic.com].
 
 == What's next?
 
