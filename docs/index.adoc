@@ -22,50 +22,50 @@ This introduction can be broken down into separate sections. If you're new to de
 
 === {section-1}
 
-. <<setup#, {title-setup}>>
+* <<setup#, {title-setup}>>
 +
 {description-setup}
 +
-. <<sandboxes#, {title-sandboxes}>>
+* <<sandboxes#, {title-sandboxes}>>
 +
 {description-sandboxes}
 +
-. <<apps#, {title-apps}>>
+* <<apps#, {title-apps}>>
 +
 {description-apps}
 
 === {section-2}
-. <<content#, {title-content}>>
+* <<content#, {title-content}>>
 +
 {description-content}
 +
-. <<headless-api#, {title-headless-api}>>
+* <<headless-api#, {title-headless-api}>>
 +
 {description-headless-api}
 +
-. <<media-and-images#, {title-media-and-images}>>
+* <<media-and-images#, {title-media-and-images}>>
 +
 {description-media-and-images}
 +
-. <<input-types#, {title-input-types}>>
+* <<input-types#, {title-input-types}>>
 +
 {description-input-types}
 
 === {section-3}
-. <<sets#, {title-sets}>>
+* <<sets#, {title-sets}>>
 +
 {description-sets}
 +
-. <<rich-text#, {title-rich-text}>>
+* <<rich-text#, {title-rich-text}>>
 +
 {description-rich-text}
 +
-. <<x-data#, {title-x-data}>>
+* <<x-data#, {title-x-data}>>
 +
 {description-x-data}
 
 === {section-4}
 
-. <<deployment#, {title-deployment}>>
+* <<deployment#, {title-deployment}>>
 +
 {description-deployment}
