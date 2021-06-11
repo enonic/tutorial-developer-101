@@ -116,17 +116,17 @@ is: `docs/media`
 
 File names with a leading `.` will _not_ be picked up by the build system.
 
-### 🏗️ Building and deployment
+### 👷‍♀️ Building and deployment
 
 Building the project locally requires Java.
 
-#### Building the project locally
+#### 🏗️ Building the project locally
 
 To build the documentation run
 
   `./gradlew asciidoctor`
 
-#### Testing / verifying
+#### 🚦 Testing / verifying
 
 Before committing, consider validating links using:
 
@@ -136,7 +136,7 @@ The output report will be created in: `build/report/htmlchecks/index.html`
 
 This should be run before every release cycle at the _very_ least.
 
-#### Deploying
+#### 🚢 Deploying
 
 Changes to the master branch are automatically synced to the
 enonic.com XP instance (as long as the build system works as expected).
