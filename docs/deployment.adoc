@@ -7,28 +7,23 @@ Working on your local copy is great for development, but you can't expose what y
 
 == Deployment
 
-You have two main choices for deploying XP:
-
-* Run it _as a service_ on the Enonic Cloud
-* Self-host it
-
-Enonic recommends using Enonic Cloud for a smoother experience, but you can choose to self-host it yourself if that better suits your requirements.
+You have two main choices for deploying XP, as described below:
 
 === Enonic Cloud
 
-Enonic offers a fully managed way to run XP, known as the Enonic Cloud. As a user of Enonic Cloud, you can sit back and relax and let Enonic take care of all your infrastructure, including monitoring, backups, automation, and more.
+This is our fully managed and hassle free hosting option. Sit back, relax and let Enonic take care of your infrastructure, including monitoring, backups, automation, and more.
 
-This is by far the easiest way to get an XP installation up and running. To learn more about it and get a free trial, head over to https://enonic.com/platform/platform-as-a-service[the Platform as a Service page].
+Enonic Cloud is the easiest way of getting Enonic up and running. To learn more about it and get a free trial, head over to https://enonic.com/platform/platform-as-a-service[the Platform as a Service page].
 
-=== Self-hosted
+=== Self-hosted (Software)
 
-If relying on cloud services isn't for you, you can also self-host the Enonic platform. There's a number of different deployment strategies to choose from, based on what suits your particular situation the best.
+If Enonic Cloud isn't for you, you can also run the Enonic platform yourself. There's a number of different deployment strategies and subscription options to choose from, based on what suits your particular situation best.
 
-To learn more about self-hosting and deployment strategies, check out https://developer.enonic.com/docs/xp/stable/deployment[the _deployment_ section of the XP reference docs].
+To learn more about our software offerings and deployment strategies, check out https://developer.enonic.com/docs/xp/stable/deployment[the _deployment_ section of the XP reference docs].
 
 == Uploading apps
 
-Regardless of how you deploy your XP instance, uploading your XP apps is the same.
+Regardless of how you deploy your XP instance, installing your application can be done in the same way.
 
 To upload an app:
 
@@ -40,7 +35,10 @@ To upload an app:
 image::deployment-app-upload.png["The application installation menu with a blue overlay. The overlay says 'drop files to upload'",{image-xl}]
 // TODO: add image here
 
-== Virtual hosts: pretty paths
+NOTE: Deployment can also be done directly from https://developer.enonic.com/docs/enonic-cli/master/xp#app[CLI], which is useful in a https://developer.enonic.com/guides/ci-cd-for-xp-apps[Continuous Integration] setup.
+
+
+== Virtual hosts = pretty URLs
 
 When accessing XP resources such as the GraphQL API explorer in this tutorial, the URLs have been long and unsightly. When working in production environment, this isn't something you want. Instead, you want short, pretty URLs that are easy to remember. Virtual hosts (_vhosts_) configuration lets you do just that.
 
