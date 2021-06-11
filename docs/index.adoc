@@ -18,7 +18,9 @@ Good luck! 🙌
 
 Below is an overview of the various chapters in this guide.
 
-=== {section-1}
+[sidebar]
+.{section-1}
+--
 
 <<setup#, {title-setup}>>::
 {description-setup}
@@ -26,8 +28,11 @@ Below is an overview of the various chapters in this guide.
 {description-sandboxes}
 <<apps#, {title-apps}>>::
 {description-apps}
+--
 
-=== {section-2}
+[sidebar]
+.{section-2}
+--
 
 <<content#, {title-content}>>::
 {description-content}
@@ -37,8 +42,11 @@ Below is an overview of the various chapters in this guide.
 {description-media-and-images}
 <<input-types#, {title-input-types}>>::
 {description-input-types}
+--
 
-=== {section-3}
+[sidebar]
+.{section-3}
+--
 
 <<sets#, {title-sets}>>::
 {description-sets}
@@ -46,8 +54,12 @@ Below is an overview of the various chapters in this guide.
 {description-rich-text}
 <<x-data#, {title-x-data}>>::
 {description-x-data}
+--
 
-=== {section-4}
+[sidebar]
+.{section-1}
+--
 
 <<deployment#, {title-deployment}>>::
 {description-deployment}
+--
