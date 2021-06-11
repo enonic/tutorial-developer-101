@@ -67,6 +67,28 @@ In the documents, at current, images are given one of a number of
 predefined sizes (defined in the variables file) to give a sense of
 consistency. This may change in the future.
 
+#### 📛 Variables and their use
+
+This guide makes extensive use of variables. Variables can either be
+chapter/document-specific and placed in the files or shared. Whenever
+you need to refer to the same thing in multiple documents, consider
+using shared variables. Shared variables are located in the
+`.variables.adoc` file.
+
+The naming scheme is a bit haphazard, but try and make the name unique
+and in line with other related variables if they exist.
+
+While many things can be stored in variables, chapter titles and
+descriptions should in particular be stored as shared variables so
+they can be used in both the index file and in the corresponding chapter.
+
+To include the variables file in a document, add the following line
+before your other variable declarations:
+
+``` asciidoc
+include::.variables.adoc[]
+```
+
 #### 👀 Previewing the content
 
 While working on the docs, you might want to see how it renders to
@@ -83,33 +105,41 @@ up by the extension.
 
 #### 🗄 File organization
 
+The documentation files should all be placed in the `docs` directory directly.
+
 #### 🖼️ Images
 
-#### 📛 Variables and their use
+Images go in the `media` subdirectory of the `docs` directory. That
+is: `docs/media`
 
-#### 🤫 Hidden files
+#### 🤫 Hiding files from the build system
 
-### Building and deployment
+File names with a leading `.` will _not_ be picked up by the build system.
 
-## Building the project locally
+### 🏗️ Building and deployment
 
-To build the documentation:
+Building the project locally requires Java.
+
+#### Building the project locally
+
+To build the documentation run
 
   `./gradlew asciidoctor`
 
+#### Testing / verifying
 
-## Testing / verifying
-
-NB! Before committing, remember to validate all links using:
+Before committing, consider validating links using:
 
   `./gradlew htmlSanityCheck`
 
 The output report will be created in: `build/report/htmlchecks/index.html`
 
+This should be run before every release cycle at the _very_ least.
 
-## Changes to master are automatically synced.
+#### Deploying
 
-Right now there are some issues
+Changes to the master branch are automatically synced to the
+enonic.com XP instance (as long as the build system works as expected).
 
 [^1]: At least that's the current state of things. It may make sense
     to group chapters by content rather than by order in the future.
