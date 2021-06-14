@@ -57,7 +57,7 @@ Below is an overview of the various chapters in this guide.
 --
 
 [sidebar]
-.{section-1}
+.{section-4}
 --
 
 <<deployment#, {title-deployment}>>::
