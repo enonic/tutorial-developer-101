@@ -31,6 +31,7 @@
 :title-x-data: X-data
 :title-headless-api: Headless API
 :title-deployment: Deployment and next steps
+:title-iam: IAM: identities and providers
 :image-xs: width=600
 :image-s: width=750
 :image-m: width=900
@@ -47,3 +48,4 @@
 :description-rich-text: Rich text is an incredibly powerful editing tool and an important part of the XP experience. Learn how to configure it here!
 :description-x-data: X-data is a way for you to add extra data to all your content types in a simple manner. This {document} covers what it is and how to use it.
 :description-deployment: How do you actually deploy Enonic XP and use it for more than local development? And where do you go from here to learn more?
+:description-iam: How do you restrict access to your sites? What kinds of access control exist for XP? This {document} explores users, roles, groups, and identity providers.

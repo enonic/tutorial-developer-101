@@ -43,6 +43,10 @@
     {
       "title": "11 - Deployment",
       "document": "deployment"
+    },
+    {
+      "title": "12 - IAM",
+      "document": "iam"
     }
   ]
 }
