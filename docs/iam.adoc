@@ -1,3 +1,19 @@
 = {title-iam}
 include::.variables.adoc[]
 :description: {description-iam}
+
+Might want to link to the https://developer.enonic.com/docs/xp/stable/iam[IAM docs]
+
+There's also this article about https://developer.enonic.com/docs/content-studio/stable/permissions[article  about Content Studio permissions]
+
+== Users, groups, and roles
+This does not need to be a deep dive on these topics, but it should give the reader an overview of what these are and why they exist. Should also mention the granularity with which they can be applied.
+
+== ID providers
+Talk about what ID providers are and what problems they solve. Mention and show (market results for) different ID providers.
+
+ID providers need vhosts to work.
+
+== Task: restrict admin access
+
+Use the simple ID provider to restrict access to /admin.
