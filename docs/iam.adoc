@@ -7,12 +7,24 @@ Might want to link to the https://developer.enonic.com/docs/xp/stable/iam[IAM do
 There's also this article about https://developer.enonic.com/docs/content-studio/stable/permissions[article  about Content Studio permissions]
 
 == Users, groups, and roles
-This does not need to be a deep dive on these topics, but it should give the reader an overview of what these are and why they exist. Should also mention the granularity with which they can be applied.
+// This does not need to be a deep dive on these topics, but it should give the reader an overview of what these are and why they exist. Should also mention the granularity with which they can be applied.
+
+Before we can look at restricting access we need to look at users, groups, and roles.
 
 == ID providers
+
+docs: https://developer.enonic.com/docs/xp/stable/framework/idprovider
+
 Talk about what ID providers are and what problems they solve. Mention and show (market results for) different ID providers.
 
 ID providers need vhosts to work.
+
+The docs say:
+
+[quote]
+Avoid placing your regular users in the system ID provider, rather create a new ID provider instead.
+
+Why is that? Does it mean that if you have users of the site (not staff who are working on the backend), then they should be stored somewhere else? Or does is this also for editors etc?
 
 == Task: restrict admin access
 
