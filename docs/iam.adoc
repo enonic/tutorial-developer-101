@@ -1,6 +1,7 @@
 = {title-iam}
 include::.variables.adoc[]
 :description: {description-iam}
+:host: xp-admin.com
 
 Might want to link to the https://developer.enonic.com/docs/xp/stable/iam[IAM docs]
 
@@ -26,6 +27,25 @@ Avoid placing your regular users in the system ID provider, rather create a new 
 
 Why is that? Does it mean that if you have users of the site (not staff who are working on the backend), then they should be stored somewhere else? Or does is this also for editors etc?
 
+So how do you restrict access to a site? ID providers is how! ID providers offer a pluggable abstraction layer for user authentication.
+
 == Task: restrict admin access
 
 Use the simple ID provider to restrict access to /admin.
+
+Steps:
+
+. Install Simple ID Provider from the [Enonic Market]
+. Navigate to the "Users" entry in the admin panel
+. Create a new ID provider at the root level
+. Create a user that goes along with this
+. Add this entry to your vhost config:
++
+[source,properties,{subs}]
+----
+mapping.admin.host = {host}
+mapping.admin.source = /
+mapping.admin.target = /admin
+mapping.admin.idProvider.simple = default
+----
+. Navigate to {host}:8080 and  log in.
