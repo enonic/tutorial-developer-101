@@ -7,10 +7,22 @@ Might want to link to the https://developer.enonic.com/docs/xp/stable/iam[IAM do
 
 There's also this article about https://developer.enonic.com/docs/content-studio/stable/permissions[article  about Content Studio permissions]
 
+Before diving into ID providers, there are a few concepts you should be aware of and understand.
+
 == Users, groups, and roles
 // This does not need to be a deep dive on these topics, but it should give the reader an overview of what these are and why they exist. Should also mention the granularity with which they can be applied.
 
 Before we can look at restricting access we need to look at users, groups, and roles.
+
+== Permissions
+
+When creating an ID provider, you need to specify who can modify it (you do this via the permissions). By default, it ships with the following permission set:
+
+Authenticated (`/roles/system.authenticated`):: Read
+Administrator (`/roles/system.admin`):: Administrator
+Users Administrator (`/roles/system.user.admin`):: Administrator
+
+👆️What does 'read' mean here?:: A permission of 'read' means that any user who is logged in (and thus fulfills the "authenticated" requirement) can _see_ and open the info on this ID provider. However, if they try and save any edits they make to the page, they will not be saved.
 
 == ID providers
 
