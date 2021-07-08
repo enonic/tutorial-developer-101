@@ -7,12 +7,14 @@ Might want to link to the https://developer.enonic.com/docs/xp/stable/iam[IAM do
 
 There's also this article about https://developer.enonic.com/docs/content-studio/stable/permissions[article  about Content Studio permissions]
 
-Before diving into ID providers, there are a few concepts you should be aware of and understand.
+When you deploy  your XP instance to anywhere outside of your own, local computer, you're most likely going to want to restrict access to parts of it. You very likely aren't going to want to leave your admin pages open to the public, and in many cases you're also going to want to create content that requires a user to log in before accessing it. To facilitate that, XP uses something called identity providers (_ID providers_ for short).
 
-== Users, groups, and roles
+This {document} covers the basics of _Identity and Access Management_ (IAM) in XP. It covers _users_, _groups_, and _roles_, _permissions_, and finally how to set up and configure ID providers in XP.
+
+== Principals: Users, groups, and roles
 // This does not need to be a deep dive on these topics, but it should give the reader an overview of what these are and why they exist. Should also mention the granularity with which they can be applied.
 
-Before we can look at restricting access we need to look at users, groups, and roles.
+
 
 == Permissions
 
