@@ -14,9 +14,24 @@ This {document} covers the basics of _Identity and Access Management_ (IAM) in X
 == Principals: Users, groups, and roles
 // This does not need to be a deep dive on these topics, but it should give the reader an overview of what these are and why they exist. Should also mention the granularity with which they can be applied.
 
+https://en.wikipedia.org/wiki/Principal_(computer_security)[According to Wikipedia], A _principal_ is
 
+[quote, Wikipedia: Principal (computer security)]
+ [...] an entity that can be authenticated by a computer system or network. [...] Principals can be individual people, computers, services, computational entities such as processes and threads, or any group of such things.
+
+The XP IAM system has three principles: _users_, _groups_, and _roles_.
+
+A _user_ is ...
+
+A _group_, as the name implies is a group of users. This is ...
+
+A _role_ ...
+
+Q: Can roles do anything that groups cannot?:: A: 🤷
 
 == Permissions
+
+What are permissions? You can give permissions to roles, to groups, and to individual users. But why?
 
 When creating an ID provider, you need to specify who can modify it (you do this via the permissions). By default, it ships with the following permission set:
 
