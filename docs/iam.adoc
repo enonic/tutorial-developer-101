@@ -45,7 +45,7 @@ So how do you restrict access to a site? ID providers is how! ID providers offer
 
 Use the simple ID provider to restrict access to /admin.
 
-NOTE: To be able to log in, you *need* at least the "Administration Console Login" (/roles/system.admin.login) role *OR* the "Administrator" (/roles/system.admin) role
+NOTE: To be able to log in, you *need* at least the "Administration Console Login" (/roles/system.admin.login) role *OR* the "Administrator" (/roles/system.admin) role. This _is_ mentioned in the IAM docs, but is not made very obvious to the user.
 
 Steps:
 
