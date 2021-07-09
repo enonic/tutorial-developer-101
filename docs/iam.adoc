@@ -29,7 +29,7 @@ A _role_ provides application-specific functionality. Each application can bundl
 
 == Permissions
 
-Permissions tell the system what actions a user, group, or role can perform. Use them to give fine-grained access to items in the NoSQL storage .
+Permissions tell the system what actions a user, group, or role can perform. That is: permissions grant authorization to perform certain actions. Use them to give fine-grained access to items in the NoSQL storage .
 
 .Questions
 - What items are in NoSQL storage? Should it be NoQL storage?
