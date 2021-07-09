@@ -29,10 +29,19 @@ A _role_ provides application-specific functionality. Each application can bundl
 
 == Permissions
 
-Permissions
+Permissions tell the system what actions a user, group, or role can perform. Use them to give fine-grained access to items in the NoSQL storage .
 
+.Questions
+- What items are in NoSQL storage? Should it be NoQL storage?
+- What sort of items have permissions and what sort of items do not?
 
-What are permissions? You can give permissions to roles, to groups, and to individual users. But why?
+For instance, if you wanted to assign let a group create users in an ID provider, you could grant the group permissions on the ID provider page, assuming you have the necessary permissions to do so.
+
+.ID provider permissions input element
+image::iam-assign-permissions.png["A permissions form element for an ID provider. There is a dropdown open for a custom group, which asks which permissions to grant. The options are 'read', 'create users' 'write users', 'id provider manager', and 'administrator'."]
+
+== ID providers
+
 
 When creating an ID provider, you need to specify who can modify it (you do this via the permissions). By default, it ships with the following permission set:
 
@@ -42,7 +51,7 @@ Users Administrator (`/roles/system.user.admin`):: Administrator
 
 👆️What does 'read' mean here?:: A permission of 'read' means that any user who is logged in (and thus fulfills the "authenticated" requirement) can _see_ and open the info on this ID provider. However, if they try and save any edits they make to the page, they will not be saved.
 
-== ID providers
+
 
 docs: https://developer.enonic.com/docs/xp/stable/framework/idprovider
 
