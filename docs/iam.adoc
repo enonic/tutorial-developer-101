@@ -42,6 +42,22 @@ image::iam-assign-permissions.png["A permissions form element for an ID provider
 
 == ID providers
 
+The last piece of the IAM puzzle is ID providers. ID providers are what allows your users to log and authenticate. ID providers is also how you _create_ users in XP.
+
+ID providers consist of:
+
+- a unique name
+- an ID provider application that controls how authentication works
+- permissions that control who can manage the ID provider
+
+That's right. ID providers wrap ID provider applications, which are also usually referred to only as _ID providers_. That can get a bit confusing, but I'm sure you can get through it.
+
+We have two _separate_ forms of ID providers: _ID provider applications_ (often just referred to as _ID providers_), which provide the logic and mechanisms to authenticate, and the _ID providers_ you create in the Users application. The ID providers you create _use_ ID provider applications for their logic, but also add their own configuration via their names and permissions. That way, you can have multiple ID providers that use the same authentication logic (the ID provider application).
+
+ID providers are hooked up to sites or applications via https://developer.enonic.com/docs/xp/stable/deployment/vhosts[virtual hosts] and control access to certain URLs. You can use separate ID providers for separate paths.
+
+== Task: restrict admin access
+
 
 When creating an ID provider, you need to specify who can modify it (you do this via the permissions). By default, it ships with the following permission set:
 
@@ -51,24 +67,6 @@ Users Administrator (`/roles/system.user.admin`):: Administrator
 
 👆️What does 'read' mean here?:: A permission of 'read' means that any user who is logged in (and thus fulfills the "authenticated" requirement) can _see_ and open the info on this ID provider. However, if they try and save any edits they make to the page, they will not be saved.
 
-
-
-docs: https://developer.enonic.com/docs/xp/stable/framework/idprovider
-
-Talk about what ID providers are and what problems they solve. Mention and show (market results for) different ID providers.
-
-ID providers need vhosts to work.
-
-The docs say:
-
-[quote]
-Avoid placing your regular users in the system ID provider, rather create a new ID provider instead.
-
-Why is that? Does it mean that if you have users of the site (not staff who are working on the backend), then they should be stored somewhere else? Or does is this also for editors etc?
-
-So how do you restrict access to a site? ID providers is how! ID providers offer a pluggable abstraction layer for user authentication.
-
-== Task: restrict admin access
 
 Use the simple ID provider to restrict access to /admin.
 
