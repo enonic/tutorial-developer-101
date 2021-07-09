@@ -38,6 +38,7 @@ image::deployment-app-upload.png["The application installation menu with a blue 
 NOTE: Deployment can also be done directly from https://developer.enonic.com/docs/enonic-cli/master/xp#app[CLI], which is useful in a https://developer.enonic.com/guides/ci-cd-for-xp-apps[Continuous Integration] setup.
 
 
+[#vhosts]
 == Virtual hosts = pretty URLs
 
 When accessing XP resources such as the GraphQL API explorer in this tutorial, the URLs have been long and unsightly. When working in production environment, this isn't something you want. Instead, you want short, pretty URLs that are easy to remember. Virtual hosts (_vhosts_) configuration lets you do just that.

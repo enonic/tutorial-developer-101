@@ -2,10 +2,7 @@
 include::.variables.adoc[]
 :description: {description-iam}
 :host: xp-admin.com
-
-Might want to link to the https://developer.enonic.com/docs/xp/stable/iam[IAM docs]
-
-There's also this article about https://developer.enonic.com/docs/content-studio/stable/permissions[article  about Content Studio permissions]
+:provider: my provider
 
 When you deploy  your XP instance to anywhere outside of your own, local computer, you're most likely going to want to restrict access to parts of it. You very likely aren't going to want to leave your admin pages open to the public, and in many cases you're also going to want to create content that requires a user to log in before accessing it. To facilitate that, XP uses something called identity providers (_ID providers_ for short).
 
@@ -29,7 +26,7 @@ A _role_ provides application-specific functionality. Each application can bundl
 
 == Permissions
 
-Permissions tell the system what actions a user, group, or role can perform. That is: permissions grant authorization to perform certain actions. Use them to give fine-grained access to items in the NoSQL storage .
+Permissions tell the system what actions a user, group, or role can perform. That is: permissions grant authorization to perform certain actions. Use them to give fine-grained access to items in the NoSQL storage, such as pieces of content in Content Studio or ..?
 
 .Questions
 - What items are in NoSQL storage? Should it be NoQL storage?
@@ -58,33 +55,101 @@ ID providers are hooked up to sites or applications via https://developer.enonic
 
 == Task: restrict admin access
 
+Time to put what we have learned about in this {document} to use! Combined with what we covered <<deployment#vhosts, about virtual hosts in the previous {document}>>, we'll use a new ID provider to secure the admin console of our XP instance.
 
-When creating an ID provider, you need to specify who can modify it (you do this via the permissions). By default, it ships with the following permission set:
+When you're done with the task you'll have:
 
-Authenticated (`/roles/system.authenticated`):: Read
-Administrator (`/roles/system.admin`):: Administrator
-Users Administrator (`/roles/system.user.admin`):: Administrator
+. installed Simple ID Provider
+. created your own id provider and a user
+. configured your xp instance's vhosts to use your new id provider
 
-👆️What does 'read' mean here?:: A permission of 'read' means that any user who is logged in (and thus fulfills the "authenticated" requirement) can _see_ and open the info on this ID provider. However, if they try and save any edits they make to the page, they will not be saved.
+So let's get started!
 
+=== Step 1: Install the Simple ID Provider app
 
-Use the simple ID provider to restrict access to /admin.
+The first thing you need to do is to install the Simple ID Provider app:
 
-NOTE: To be able to log in, you *need* at least the "Administration Console Login" (/roles/system.admin.login) role *OR* the "Administrator" (/roles/system.admin) role. This _is_ mentioned in the IAM docs, but is not made very obvious to the user.
+. Navigate to the Applications tab in the admin menu.
+. Press "Install" and search for Simple ID Provider.
++
+.Installing the Simple ID Provider app
+image::iam-install-simple-id-provider.png["A search field with containing 'simple id provider'. There is one result showing: the Simple ID Provider app. To the right is an 'install' button."]
++
+. Install the application.
 
-Steps:
+=== Step 2: Create your ID provider
 
-. Install Simple ID Provider from the [Enonic Market]
-. Navigate to the "Users" entry in the admin panel
-. Create a new ID provider at the root level
-. Create a user that goes along with this
-. Add this entry to your vhost config:
+Now that you have the ID provider app installed, let's create the ID provider in the Users app.
+
+. Navigate to Users from the Admin panel.
+. Press "New..." and select the ID Provider option from the dialog.
++
+.Creating an ID provider
+image::iam-create-id-provider.png["A header saying 'Create New' and a list of options: 'user', 'user group', 'ID provider', 'role'."]
++
+. Call the provider "{provider}" and give it an optional description if you want to.
+. In the application input field, select the Simple ID Provider.
+. If you want to, you can use the edit button to configure the ID provider app. The edit button looks like the end of a pencil.
++
+.Configuring the ID provider
+image::iam-configure-id-provider-app.png["A configuration form allowing you to configure 'title', 'theme', whether to use a gravatar picture, 'session timeout', and what to do when a user forgets their password."]
++
+. You can inspect the "Permissions" input field if you're interested and assign any extra permissions. However, the defaults will suffice for this task.
+. Save the ID provider and return to the Users app.
+
+=== Step 3: Create a user
+
+Now that you have an ID provider, you can create a user!
+
+. In the Users app's content grid, navigate to the provider you just created ({provider}). Expand it and select the "Users" folder that's nested beneath it.
+. The "New..." button should now say "New User". Press it and create a new user.
+. Provide the user with an appropriate name
+. Add an email and a password. The email does not have to be real and is simply used as a login name. Remember what you put as the password: you'll need it later.
+. Assign the "Administrator" role to your user.
++
+NOTE: Your user needs to have at least one of the "Administrator" and "Administration Console Login" roles assigned to be able to log in
++
+.An example user creation form
+image::iam-user-creation-form.png["A user creation form filled out. It contains values for 'email', 'password' and 'roles'."]
++
+. Save the user.
+
+=== Step 4: Configure vhosts
+
+With the ID provider and user created, all we need to do is to wire up the id provider.
+
+. Find your sandbox's vhost config file. As a reminder, its default location is at `.enonic/sandboxes/<sandbox-name>/home/config/com.enonic.xp.web.vhost.cfg` from your home directory.
+. Edit the vhost config and add the following block:
 +
 [source,properties,{subs}]
 ----
 mapping.admin.host = {host}
 mapping.admin.source = /
 mapping.admin.target = /admin
-mapping.admin.idProvider.simple = default
+mapping.admin.idProvider.my-provider = default
 ----
-. Navigate to {host}:8080 and  log in.
++
+. Next, to make sure that you can reach the host, update your system hosts file and add the following mapping:
++
+[source, hosts, {subs}]
+----
+127.0.0.1 {host}
+----
+
+
+=== Step 5: Log in
+
+Now everything should be ready to go, so let's try it out.
+
+. Head to {host}:8080. You should be greeted with something that looks a bit like this (depending on how you customized the application):
++
+.Login form
+image::iam-id-provider-login.png["A short login form requiring email and password."]
++
+. Fill out the form and log in. Use the credentials for the user you created previously.
+
+If all goes well, you should be taken to the admin console and your username should show in the bottom of the admin panel. If something didn't work: go over the steps above and make sure you've followed them correctly.
+
+== Further reading
+
+If you'd like to learn more about IAM in XP, you can head to the https://developer.enonic.com/docs/xp/stable/iam[IAM docs]. You can also find https://developer.enonic.com/docs/xp/stable/framework/idprovider[documentation on ID providers] and https://developer.enonic.com/docs/content-studio/stable/permissions[permissions in Content Studio] if you want to keep reading.
