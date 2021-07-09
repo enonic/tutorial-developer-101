@@ -19,17 +19,18 @@ https://en.wikipedia.org/wiki/Principal_(computer_security)[According to Wikiped
 [quote, Wikipedia: Principal (computer security)]
  [...] an entity that can be authenticated by a computer system or network. [...] Principals can be individual people, computers, services, computational entities such as processes and threads, or any group of such things.
 
-The XP IAM system has three principles: _users_, _groups_, and _roles_.
+The XP IAM system has three principals: _users_, _groups_, and _roles_.
 
-A _user_ is ...
+A _user_ is the most basic kind of principal. As you might expect, they correspond to login credentials and are typically given out to each physical user. A user principal can be a member of any number of groups and be assigned any number of roles.
 
-A _group_, as the name implies is a group of users. This is ...
+A _group_ is a collection of users. Each group can contain any number of users. Additionally, a group may be assigned any number of roles. Each member that is part of a group is then also assigned all the roles that a group has.
 
-A _role_ ...
-
-Q: Can roles do anything that groups cannot?:: A: 🤷
+A _role_ provides application-specific functionality. Each application can bundle a number of roles, each of which gives the assignee permission to perform certain actions related to the application. For instance: the _Administrator_ role comes bundled with XP. Any user with this role (either directly or transitively via their group) gets full access to all content and admin tools in XP.
 
 == Permissions
+
+Permissions
+
 
 What are permissions? You can give permissions to roles, to groups, and to individual users. But why?
 
