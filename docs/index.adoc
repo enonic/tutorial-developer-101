@@ -3,7 +3,7 @@ include::.variables.adoc[]
 :section-1: Installing tools and initial setup
 :section-2: Working with content
 :section-3: Advanced content modelling
-:section-4: Deployment, access control, and next steps
+:section-4: Deployment and next steps
 
 
 Hi👋, and welcome to this in-depth guide to get familiar with Enonic. The guide is aimed at people new to Enonic, covering everything you need to know for a flying start 🦸‍♀️
@@ -62,7 +62,4 @@ Below is an overview of the various chapters in this guide.
 
 <<deployment#, {title-deployment}>>::
 {description-deployment}
-<<iam#, {title-iam}>>::
-{description-iam}
-
 --
