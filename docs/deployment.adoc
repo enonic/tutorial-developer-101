@@ -1,7 +1,7 @@
 = {title-deployment}
 include::.variables.adoc[]
 :description: {description-deployment}
-:vhost-host: xp-admin.com
+:vhost-host: xp-api.com
 
 Working on your local copy is great for development, but you can't expose what you build to someone else that way. For that, you need to deploy XP and your app to somewhere. In this {document}, we'll give a high-level overview of how you do just that.
 
@@ -76,8 +76,8 @@ enabled = true
 
 mapping.admin.host = {vhost-host} <--.-->
 mapping.admin.source = /
-mapping.admin.target = /admin
-mapping.admin.idProvider.system = default
+mapping.admin.target = /site/default/draft/{p1-site-slug}/api
+
 
 mapping.localhost.host = localhost <--.-->
 mapping.localhost.source = /
@@ -85,7 +85,7 @@ mapping.localhost.target = /
 mapping.localhost.idProvider.system = default
 ----
 +
-<.> If requests go to `xp-admin.com:8080`, send them to `:8080/admin`
+<.> If requests go to `{vhost-host}.com:8080`, send them to `:8080{p1-api-path}`
 <.> This block allows the localhost mappings to keep working. Without this, `localhost:8080` wouldn't work anymore.
 +
 . If you're watching your XP process, you should see a message like this:

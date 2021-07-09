@@ -10,7 +10,8 @@
 :project-name-query: com_example_{project-name}
 :p1-site-name: My First Site
 :p1-site-slug: my-first-site
-:p1-api-url: {xp-url}/site/default/draft/{p1-site-slug}/api
+:p1-api-path: /site/default/draft/{p1-site-slug}/api
+:p1-api-url: {xp-url}{p1-api-path}
 :content-type-1: artist
 :content-type-1-capitalized: Artist
 :content-type-2: animal
