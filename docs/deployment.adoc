@@ -106,26 +106,29 @@ This means that XP has updated the mappings and is ready to go.
 +
 TIP: On Linux and macOS you'll find the hosts file at `/etc/hosts`. On Windows, it's located at  `c:\Windows\System32\Drivers\etc\hosts`
 
-. Now access `http://{vhost-host}:8080` in your browser. If all has gone well, you should see the familiar XP login screen.
+. Now access `http://{vhost-host}:8080/api` in your browser. If all has gone well, you should see the GraphQL API explorer.
 
 
 ==== Troubleshooting
 
-If you're not seeing anything when you direct your browser to `http://{vhost-host}:8080` or aren't able to access the resources, that may be due to a browser setting. Try using a different browser and see if that makes a difference. Alternatively, you can try running
+If you're not seeing anything when you direct your browser to `http://{vhost-host}:8080/api` or aren't able to access the resources, that may be due to a browser setting. Try using a different browser and see if that makes a difference. Alternatively, you can try running
 
 [source,bash,{subs}]
 ----
-curl -v {vhost-host}:8080/tools
+curl --head {vhost-host}:8080/api
 ----
 
-If the connection is successful, one of the lines in the output should say something to the effect of
+If the connection is successful, your output should look something like this:
 
 [{subs}]
 ----
-* Connected to {vhost-host} (127.0.0.1) port 8080 (#0)
+HTTP/1.1 200 OK <--.-->
+Date: Wed, 04 Aug 2021 09:32:22 GMT
+Content-Type: text/html;charset=utf-8
+Content-Length: 1657
 ----
 
-and you should get a massive block of HTML printed to the terminal. This HTML is the content of the login page in raw form.
+<.> This indicates that the request was successful. This is the most important part. As long as it says `200 OK` you can ignore the rest of the message. You can https://en.wikipedia.org/wiki/List_of_HTTP_status_codes[read more about HTTP status codes on Wikipedia]
 
 You might not be able to do much with that output, but it means the mapping has worked successfully, which is the important part for this task.
 
