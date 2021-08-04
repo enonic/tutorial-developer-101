@@ -1,7 +1,8 @@
 = {title-deployment}
 include::.variables.adoc[]
 :description: {description-deployment}
-:vhost-host: xp-api.com
+:vhost-host: xp-site.com
+:next-chapter: <<iam#, next chapter>>
 
 Working on your local copy is great for development, but you can't expose what you build to someone else that way. For that, you need to deploy XP and your app to somewhere. In this {document}, we'll give a high-level overview of how you do just that.
 
@@ -66,6 +67,8 @@ To read more about virtual hosts, head to the https://developer.enonic.com/docs/
 
 To explore how vhosts mappings work, let's configure vhosts for our local XP instance. Then, to test it, we'll configure our local `hosts` file.
 
+NOTE: Because we'll create a mapping to the published version of the site, you should make sure your site is published as described in <<content#publishing, the content chapter>>. Mapping to the draft version of your site would require changing the site's permissions, which isn't covered until the {next-chapter}.
+
 . Find and open your sandbox's vhosts file. From your user's home directory, the path will be `.enonic/sandboxes/<sandbox-name>/home/config/com.enonic.xp.web.vhost.cfg`, where `<sandbox-name>` varies depending on which sandbox you want to configure. If it is your first one, it'll be `Sandbox1`.
 
 . Update the vhosts file.
@@ -74,10 +77,9 @@ To explore how vhosts mappings work, let's configure vhosts for our local XP ins
 ----
 enabled = true
 
-mapping.admin.host = {vhost-host} <--.-->
-mapping.admin.source = /
-mapping.admin.target = /site/default/draft/{p1-site-slug}/api
-
+mapping.site.host = {vhost-host} <--.-->
+mapping.site.source = /
+mapping.site.target = /site/default/master/{p1-site-slug}/api
 
 mapping.localhost.host = localhost <--.-->
 mapping.localhost.source = /
@@ -86,7 +88,7 @@ mapping.localhost.idProvider.system = default
 ----
 +
 <.> If requests go to `{vhost-host}.com:8080`, send them to `:8080{p1-api-path}`
-<.> This block allows the localhost mappings to keep working. Without this, `localhost:8080` wouldn't work anymore.
+<.> This block allows the localhost mappings to keep working. Without this, `localhost:8080` wouldn't work anymore. We'll talk more about the ID provider line in the {next-chapter}.
 +
 . If you're watching your XP process, you should see a message like this:
 
@@ -127,10 +129,6 @@ and you should get a massive block of HTML printed to the terminal. This HTML is
 
 You might not be able to do much with that output, but it means the mapping has worked successfully, which is the important part for this task.
 
-== What's next?
+== Next steps
 
-Congrats! You've reached the end of the introduction for now. This document is still a work in progress and new content will be added at a later date. If you'd like to go further now, why don't you try one of the following guides which introduce extra aspects of the XP experience?
-
-https://developer.enonic.com/guides/headless-cms-intro[Introduction to headless CMS]:: If you've enjoyed the headless aspects of this introduction, why not visit this guide to further your knowledge of how to use the GraphQL API and how to customize it.
-https://developer.enonic.com/guides/my-first-site[My first site]:: If you're interested in building a traditional CMS-based application with server rendered pages, this is the guide for you. It covers building pages and using more Content Studio building blocks such as regions, parts, and page templates.
-https://developer.enonic.com/guides/my-first-webapp[My first webapp]:: If you're more interested in building web apps than web sites, how about this guide which focuses more on the web app aspects, including JavaScript controllers, serving assets, and routing.
+Nice work; you've exposed the site to the web and given everyone access to it! But you've also given _everyone_ access to it. Often, you'll want to restrict access to certain parts of your site and require users to log in. The {next-chapter} covers permissions and access control.

@@ -181,6 +181,7 @@ Enonic provides XML Schema Definitions (XSDs) for text editor integration and va
 
 Note that in-editor schema validation depends on whether your text editor supports validating against XSD schemas or not. If your editor doesn't support it out of the box, it may be available via a Language Server Protocol (LSP) client.
 
+[#publishing]
 == Publishing
 
 You might have noticed the yellow circles with exclamation marks displayed on all the content we've been working on, both in the wizard and in the content grid. This is how Content Studio indicates whether something is published or not and whether there are any errors with it. There are four states:

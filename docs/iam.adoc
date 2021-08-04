@@ -153,3 +153,11 @@ If all goes well, you should be taken to the admin console and your username sho
 == Further reading
 
 If you'd like to learn more about IAM in XP, you can head to the https://developer.enonic.com/docs/xp/stable/iam[IAM docs]. You can also find https://developer.enonic.com/docs/xp/stable/framework/idprovider[documentation on ID providers] and https://developer.enonic.com/docs/content-studio/stable/permissions[permissions in Content Studio] if you want to keep reading.
+
+== What's next?
+
+Congrats! You've reached the end of the introduction for now. This guide is still a work in progress and new content will be added at a later date. If you'd like to keep learning, how about checking out one of the following guides?
+
+https://developer.enonic.com/guides/headless-cms-intro[Introduction to headless CMS]:: If you've enjoyed the headless aspects of this introduction, why not visit this guide to further your knowledge of how to use the GraphQL API and how to customize it.
+https://developer.enonic.com/guides/my-first-site[My first site]:: If you're interested in building a traditional CMS-based application with server rendered pages, this is the guide for you. It covers building pages and using more Content Studio building blocks such as regions, parts, and page templates.
+https://developer.enonic.com/guides/my-first-webapp[My first webapp]:: If you're more interested in building web apps than web sites, how about this guide which focuses more on the web app aspects, including JavaScript controllers, serving assets, and routing.
