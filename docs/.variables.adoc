@@ -31,7 +31,7 @@
 :title-rich-text: Rich text: HtmlArea
 :title-x-data: X-data
 :title-headless-api: Headless API
-:title-deployment: Deployment and next steps
+:title-deployment: Deployment
 :title-iam: IAM: identities and providers
 :image-xs: width=600
 :image-s: width=750
