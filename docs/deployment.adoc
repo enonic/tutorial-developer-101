@@ -54,12 +54,12 @@ enabled = true <--.-->
 
 mapping.example.host = {p1-site-slug}.com <--.-->
 mapping.example.source = / <--.-->
-mapping.example.target = /site/default/master/{p1-site-slug}/
+mapping.example.target = /site/default/master/{p1-site-slug}/ <--.-->
 ----
 <.> Enable vhosts configuration
 <.> Intercept requests to `{p1-site-slug}.com`
 <.> Map any request that starts with this path ...
-<.> ... to the internal URL.
+<.> ... to this internal URL.
 
 To read more about virtual hosts, head to the https://developer.enonic.com/docs/xp/stable/deployment/vhosts[_Vhosts_ section of the deployment documentation].
 
