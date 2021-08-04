@@ -87,7 +87,7 @@ mapping.localhost.target = /
 mapping.localhost.idProvider.system = default
 ----
 +
-<.> If requests go to `{vhost-host}.com:8080`, send them to `:8080{p1-api-path}`
+<.> If requests go to `{vhost-host}`, send them to the target at `{p1-api-path}`. Note that this does not affect port mapping, so you'd still need to append the port (`:8080`) for your local setup.
 <.> This block allows the localhost mappings to keep working. Without this, `localhost:8080` wouldn't work anymore. We'll talk more about the ID provider line in the {next-chapter}.
 +
 . If you're watching your XP process, you should see a message like this:
