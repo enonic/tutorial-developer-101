@@ -3,49 +3,118 @@ include::.variables.adoc[]
 :description: {description-deployment}
 :vhost-host: xp-admin.com
 
-Working on your local copy is great for development, but you can't expose what you build to someone else that way. For that, you need to deploy XP and your app to somewhere. In this {document}, we'll give a high-level overview of how you do just that.
+Next, we'll look into how you can deploy your application for real-life usage. There are essentially two options - Enonic Cloud, and everything else.
 
-== Deployment
+== Deploy to Enonic Cloud
 
-You have two main choices for deploying XP, as described below:
+Enonic Cloud is our fully managed and hassle free hosting option. Sit back, relax and let Enonic take care of your infrastructure, monitoring, backups, etc.
 
-=== Enonic Cloud
+Enough with the sales pitch. Follow the steps below to get deploy your app on Enonic Cloud:
 
-This is our fully managed and hassle free hosting option. Sit back, relax and let Enonic take care of your infrastructure, including monitoring, backups, automation, and more.
+=== Task: Install application
+. Sign up for a free trial by visiting https://cloud.enonic.com (no credit card needed)
+. Create a new solution (NB! Choose the `CMS essentials` template) - go with the default values
+. Connect CLI to the cloud by running this command, and follow the instructions:
++
+[source,bash,{subs}]
+----
+enonic cloud login
+----
++ 
+. From your project folder, install the app by running this command:
++
+[source,bash,{subs}]
+----
+enonic cloud app install
+----
++ 
+. From the Cloud console, verify that the app was installed to your selected environment.
 
-Enonic Cloud is the easiest way of getting Enonic up and running. To learn more about it and get a free trial, head over to https://enonic.com/platform/platform-as-a-service[the Platform as a Service page].
+=== Task: import and publish your content
 
-=== Self-hosted (Software)
+Since the cloud is a completely new environment, the content you created locally will not be available here.
 
-If Enonic Cloud isn't for you, you can also run the Enonic platform yourself. There's a number of different deployment strategies and subscription options to choose from, based on what suits your particular situation best.
+You can choose to 
+a) manually create new content on the server, or 
+b) export and import content from your local machine to the server.
 
-To learn more about our software offerings and deployment strategies, check out https://developer.enonic.com/docs/xp/stable/deployment[the _deployment_ section of the XP reference docs].
+Lets do the import:
 
-== Uploading apps
+. In your local sandbox - Using Content Studio, select the root item in your content structure (the site)
+. Open the Content Studio right hand panel called `Data toolbox`
+. Click export, select and download the export (this will place a zip file on your local device)
+. Via Cloud Console, sign into to your environment by clicking the login button for your environment.
+. Launch Content Studio, and open the `Data toolbox` panel on your server instance.
+. Using Data toolbox, upload and import the file that was saved on your local device. Content studio should now fill up with content items.
+. Finally, select the root item, and select `Publish tree` from the top right action menu in Content studio. After publishing, validate that your content is listed as "Published".
 
-Regardless of how you deploy your XP instance, installing your application can be done in the same way.
+With the app installed, and fresh content available - we are ready for the final step.
 
-To upload an app:
+=== Task: Go live
+To make your content accessible publicly, the final step is to create a Route. Follow these steps to complete the task:
 
-. Log into your XP deployment
-. Use the admin menu to navigate to the applications page
+. From the Cloud console, go to `Routes` and click create. Choose the following options:
++
+* Choose target environment (if there are more than one)
+* Accept the default domain
+* Use the internal path `/site/default/master/my-first-site` (Given that this actually matches your content)
+* The public path could be `/imadeit`
++
+. Once the route has been created, you may click its link in the Cloud console to visit it. 
+
+NOTE: Remember to add /api to your browser's URL in order to access the GraphQL API
+
+Congratulations, you are now live :-)
+
+For more information on Enonic Cloud, visit https://enonic.com/platform/cloud[the Enonic Cloud marketing page].
+
+== Deploy elsewhere
+
+If Enonic Cloud isn't your thing, you need to start by getting the platform (Enonic XP) up and running, before you can actually deploy your application.
+
+Enonic XP is compatibile with just about any public cloud out there. There's a number of different deployment strategies and subscription options to choose from, based on what suits your particular situation best.
+
+Setting up the entire platform is beyond the scope of this tutorial. As such, we'll focus on the steps required for getting your app live - assuming you already have the platform running. 
+
+For more details on deplying the platform, check out https://developer.enonic.com/docs/xp/stable/deployment[the _deployment_ section of the XP reference docs].
+
+
+=== Installing the app
+
+Regardless of how you deploy your XP instance, installing commonly done in one of two ways:
+
+=== Task: Alt 1 - via Admin Console
+
+Follow these simple steps:
+
+NOTE: Your application executable (*.jar file) can be found in `project-folder/build/libs/`
+
+. Log into your XP deployment (user must have Administrator priveliges)
+. Use the XP to navigate to the applications page
 . Choose install from the toolbar and upload your application `.jar` file. You can drag and drop your application or navigate the file hierarchy via the upload button.
 +
 .Drag and drop applications to upload them
 image::deployment-app-upload.png["The application installation menu with a blue overlay. The overlay says 'drop files to upload'",{image-xl}]
 // TODO: add image here
 
-NOTE: Deployment can also be done directly from https://developer.enonic.com/docs/enonic-cli/master/xp#app[CLI], which is useful in a https://developer.enonic.com/guides/ci-cd-for-xp-apps[Continuous Integration] setup.
+
+=== Alt 2: via API
+
+If you have access to your server's management API (available on port 4848), you can also deploy directly via this endpoint, or by using the https://developer.enonic.com/docs/enonic-cli/master/xp#app[CLI].
+
+This is most commonly used in a https://developer.enonic.com/guides/ci-cd-for-xp-apps[Continuous Integration/Delivery] setup, where your build server automatically checks out, builds and installs the application.
 
 
 [#vhosts]
-== Virtual hosts = pretty URLs
+=== Virtual hosts = pretty URLs
 
-When accessing XP resources such as the GraphQL API explorer in this tutorial, the URLs have been long and unsightly. When working in production environment, this isn't something you want. Instead, you want short, pretty URLs that are easy to remember. Virtual hosts (_vhosts_) configuration lets you do just that.
+When accessing XP resources such as the GraphQL API explorer in this tutorial, the URLs have been long and unsightly. In a production setting you want short, pretty URLs that are easy to remember. Virtual host (_vhosts_) configuration lets you do just that.
 
-Your vhosts file is a configuration file that sits in your XP sandbox's configuration directory. This file contains mappings from public-facing URLs to internal URLs. This lets the user access `{p1-site-slug}.com/api` and retrieve content from `/site/default/master/{p1-site-slug}/api`.
+Setting up a vhost is only required once per application/site you want deploy.
 
-An example vhosts file that achieves the mapping mentioned could contain the following:
+Vhosts can be defined in your sandbox's configuration directory. This file contains mappings from public-facing URLs to internal URLs. For instance, this lets the user access `{p1-site-slug}.com/api` and while retrieving content from `/site/default/master/{p1-site-slug}/api`.
+
+An example vhosts file that achieves the mapping mentioned would look something like this:
 
 [src,properties,{subs}]
 ----
@@ -60,13 +129,14 @@ mapping.example.target = /site/default/master/{p1-site-slug}/
 <.> Map any request that starts with this path ...
 <.> ... to the internal URL.
 
-To read more about virtual hosts, head to the https://developer.enonic.com/docs/xp/stable/deployment/vhosts[_Vhosts_ section of the deployment documentation].
+For more details on virtual hosts, head to the https://developer.enonic.com/docs/xp/stable/deployment/vhosts[_Vhosts_ section of the deployment documentation].
 
-=== Task: local vhosts config
+=== Task: Setup vhosts in your Sandbox
 
-To explore how vhosts mappings work, let's configure vhosts for our local XP instance. Then, to test it, we'll configure our local `hosts` file.
+To explore how vhost mappings work, let's configure vhosts for our local XP instance. 
+Then, to test it, we'll have override your computer's DNS resolver by updating it's `hosts` file.
 
-. Find and open your sandbox's vhosts file. From your user's home directory, the path will be `.enonic/sandboxes/<sandbox-name>/home/config/com.enonic.xp.web.vhost.cfg`, where `<sandbox-name>` varies depending on which sandbox you want to configure. If it is your first one, it'll be `Sandbox1`.
+. Find and open your sandbox's vhosts file. From your user's home directory, the path will be `.enonic/sandboxes/<sandbox-name>/home/config/com.enonic.xp.web.vhost.cfg`, where `<sandbox-name>` varies depending on which sandbox you want to configure. For instance, it might be `Sandbox1`.
 
 . Update the vhosts file.
 +
@@ -107,7 +177,7 @@ TIP: On Linux and macOS you'll find the hosts file at `/etc/hosts`. On Windows, 
 . Now access `http://{vhost-host}:8080` in your browser. If all has gone well, you should see the familiar XP login screen.
 
 
-==== Troubleshooting
+=== Vhost troubleshooting
 
 If you're not seeing anything when you direct your browser to `http://{vhost-host}:8080` or aren't able to access the resources, that may be due to a browser setting. Try using a different browser and see if that makes a difference. Alternatively, you can try running
 
@@ -123,13 +193,14 @@ If the connection is successful, one of the lines in the output should say somet
 * Connected to {vhost-host} (127.0.0.1) port 8080 (#0)
 ----
 
-and you should get a massive block of HTML printed to the terminal. This HTML is the content of the login page in raw form.
+and you should get a massive block of HTML printed to the terminal. 
+This HTML is the content of the login page in raw form.
 
 You might not be able to do much with that output, but it means the mapping has worked successfully, which is the important part for this task.
 
 == What's next?
 
-Congrats! You've reached the end of the introduction for now. This document is still a work in progress and new content will be added at a later date. If you'd like to go further now, why don't you try one of the following guides which introduce extra aspects of the XP experience?
+Congrats! You've reached the end of this introduction. If you'd like to go further now, try one of the following guides which introduce additional aspects of the Enonic experience?
 
 https://developer.enonic.com/guides/headless-cms-intro[Introduction to headless CMS]:: If you've enjoyed the headless aspects of this introduction, why not visit this guide to further your knowledge of how to use the GraphQL API and how to customize it.
 https://developer.enonic.com/guides/my-first-site[My first site]:: If you're interested in building a traditional CMS-based application with server rendered pages, this is the guide for you. It covers building pages and using more Content Studio building blocks such as regions, parts, and page templates.
