@@ -20,7 +20,7 @@ It should output something that looks a bit like this:
 
 .Main help page
 ----
-Enonic CLI v.1.5.1
+Enonic CLI v.2.1.1
 Manage XP instances, home folders and projects
 
 USAGE:
@@ -35,9 +35,13 @@ COMMANDS:
      repo      Tune and manage repositories
      cms       CMS commands
      system    System commands
+     auditlog  Manage audit log repository
      latest    Check for latest version
      vacuum    Removes old version history and segments from content storage
      help, h   Shows a list of commands or help for one command
+
+CLOUD COMMANDS:
+     cloud  Manage Enonic cloud
 
 PROJECT COMMANDS:
      sandbox  Manage XP development instances
@@ -63,15 +67,15 @@ USAGE:
    Enonic CLI sandbox [global options] command [command options] [arguments...]
 
 VERSION:
-   1.5.1
+   2.1.1
 
 COMMANDS:
-     list, ls         List all sandboxes
-     start            Start the sandbox.
-     stop             Stop the sandbox started in detached mode.
-     create           Create a new sandbox.
-     delete, del, rm  Delete a sandbox
-     upgrade, up      Upgrades the distribution version.
+   list, ls         List all sandboxes
+   start            Start the sandbox.
+   stop             Stop the sandbox started in detached mode.
+   create           Create a new sandbox.
+   delete, del, rm  Delete a sandbox
+   upgrade, up      Upgrades the distribution version.
 
 GLOBAL OPTIONS:
    --help, -h  show help
@@ -99,9 +103,9 @@ The CLI will download the Enonic XP SDK distribution for your operating system a
 
 .Creating a sandbox
 ----
-? Sandbox name: tutorial
-? Enonic XP distribution: mac-sdk-7.2.0
-Downloading distro [===================>--------------------------------]  37.64%
+? Sandbox name tutorial
+? Enonic XP distribution: mac-sdk-7.7.3 (latest,stable)
+Downloading distro [===============>-----------------------------------------------------------------------------]  16.55%
 ----
 
 Once completed, we can use the CLI to start the sandbox:
