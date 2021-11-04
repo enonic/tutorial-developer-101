@@ -199,7 +199,7 @@ Content Studio operates with two branches: a draft branch where you work and edi
 
 To publish a piece of content, right click it and select "Publish".
 
-TIP: You can also publish a piece of content by using the keyboard shortcut kbd:[ctrl+Alt+P]/kbd:[⌘+Alt+P].
+TIP: You can also publish a piece of content by using the keyboard shortcut kbd:[Ctrl+Alt+P]/kbd:[control+option+P].
 
 
 === Task: publish your site!
@@ -227,10 +227,11 @@ One of the applications we installed previously is _Data Toolbox_. Data Toolbox 
 .Data Toolbox
 image::data-toolbox-landing-page.png["The Data Toolbox landing page: grid of icons for administrative actions and accompanying explanations. ",{image-xl}]
 +
-. Navigate to the "Data Tree" menu. In this menu, the toolbox lists repositories within your XP instance. There are three repositories listed:
+. Navigate to the "Data Tree" menu. In this menu, the toolbox lists repositories within your XP instance. There are four repositories listed:
 `com.enonic.cms.default`:: This is the repository that holds your content.
 `system.auditlog`:: This is where the _audit log_ is stored. The audit log allows you to see a log of everything that's been done in your XP instance, such as content creation, user administration, etc., and also tells you when it was done and by whom.
 `system-repo`:: This is where XP stores data about your system, such as external applications and identity data.
+`system.scheduler`:: This is a separate repository where scheduled jobs are stored (new in 7.7.0).
 +
 . Navigate through to `com.enonic.cms.default`.
 . Next up is a list of branches (xref:content#_branches_and_publishing[as discussed above]). As long as you've published your content, you can choose either one of these.
