@@ -1,4 +1,4 @@
-= Introduction to Enonic
+= Developer 101 - Introduction to Enonic
 include::.variables.adoc[]
 :section-1: Installing tools and initial setup
 :section-2: Working with content
@@ -6,11 +6,11 @@ include::.variables.adoc[]
 :section-4: Deployment and next steps
 
 
-Hi👋, and welcome to this in-depth guide to get familiar with Enonic. The guide is aimed at people new to Enonic, covering everything you need to know for a flying start 🦸‍♀️
+Hi👋, and welcome to this in-depth guide to get familiar with Enonic. The guide is aimed at people new to Enonic, covering everything you need to know for a flying start.
 
 NOTE: *In a hurry?* If you just want to get up and running as fast as possible, check out the https://developer.enonic.com/start[quick start docs] instead 🚀
 
-This guide is currently under development and will be updated with new content from time to time. If you have any questions or find any errors (or have any other feedback), don't hesitate to  https://github.com/enonic/doc-getting-started/[create an issue over at GitHub] ☺️📣
+ If you have any questions or find any errors (or have any other feedback), don't hesitate to  https://github.com/enonic/doc-developer-101/[create an issue over at GitHub^] 📣
 
 Good luck! 🙌
 

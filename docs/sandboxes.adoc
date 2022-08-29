@@ -197,17 +197,29 @@ If some ports are unavailable, you'll have to find out what programs are using t
 == Admin console
 
 With your sandbox running, lets have a look at XP's admin console.
-Point your browser to http://localhost:8080.
+Point your browser to http://localhost:8080[http://localhost:8080^].
 
-You should see the default XP login screen:
+You should see the XP boot page:
+
+.XP Boot page
+image::xp-boot.png[The XP boot page, {image-l}]
+
+The boot page gives an overview of endpoints (as mentioned above) and any other services that may be running on this instance. Click "Admin Console Login" to move on.
+
+You should now see the following:
 
 .The XP login screen
-image::xp-login.png[The XP login screen., {image-xl}]
+image::xp-login.png[The XP login screen, {image-xl}]
 
+NOTE: THe background picture gets updated with new versions of XP
 
-From the login screen, click "log in without a user". What this actually does is log you in as the XP instance's super user. Because we're working on a local development environment for now, we won't concern ourselves with users and administrators. We'll talk more about this in a later chapter.
+From the login screen, click ".. or log in without a user". 
 
-After signing in, you will be greeted by the XP welcome tour. Complete the tour and install the applications listed in the final step. You'll need some of them later in this tutorial.
+What this actually does is log you in as the XP instance's super user. 
+Because we're working on a local development environment for now, we won't concern ourselves with users and administrators. 
+We'll talk more about this in a later chapter.
+
+After signing in - if this is the first time you use XP, you will be greeted by the XP welcome tour. Complete the tour and install the applications listed in the final step. You'll need some of them later in this tutorial.
 
 .The final step of the welcome tour
 image::xp-tour-3.png["A prompt to install a set of applications from the Enonic Market including Content Studio, Live Trace, and Data Toolbox.", {image-s}]
@@ -219,4 +231,4 @@ The applications in the welcome tour all modify the XP admin experience, so once
 .The XP admin menu with new entries
 image::admin-menu-with-apps.png["The XP Admin menu with extra apps installed. It shows the newly added apps between the menu items 'Home' and 'Users'.", {image-xs}]
 
-NOTE: XP localizes the admin menu item names, so they might be translated to another language based on your settings.
+NOTE: XP localizes the admin interface automatically based on your browsers preferred language, so things may be translated to another language based you your setup.
