@@ -4,92 +4,86 @@ include::.variables.adoc[]
 :x-data-capitalized: Notes
 :description: {description-x-data}
 
-X-data (short for _eXtra-data_) is a way for you to dynamically add extra data to some or all content types belonging to a site. In Content Studio, they'll be displayed as a separate field set below the content type's normal fields.
+X-data (short for _eXtra-data_) is a smart way of dynamically extending existing content types with more fields. For instance, you may install a new app that will extend your schema with new fields.
+
+In Content Studio, X-data is visually displayed as a new step in the form, listed below the content type's standard fields.
 
 NOTE: {see-prev-docs}
 
-By configuring your application's `site.xml` (`src/main/resources/site/site.xml`) you can select which X-data schemas to add and to which content types, and whether to make the X-data optional or not. Go to the https://developer.enonic.com/docs/xp/stable/cms/x-data[X-data documentation] to read more about how.
+== Task: SEO Metafields 
+The fastest way of getting to know X-data is by installing an app.
 
-As per usual, X-data schemas follow this naming and placement convention (from the project root): `src/main/resources/site/x-data/<x-data-name>/<x-data-name>.xml`.
-
-NOTE: X-data share some similarities to mixins (which we saw in the <<sets#_mixins, {document} on sets>>), but they work at a higher level. Both allow you to group fields and add them, but mixins add fields to a content type's form, while X-data adds fields to a piece of content itself. Further, you configure X-data at a global level, while you configure mixins at a content type level.
-
-== Task: add reference data
-
-For the {content-type-2}s we've created thus far, we've brought in data and images from Wikipedia, but we haven't indicated this anywhere. If we wanted to indicate where we got some information from, we could do it using X-data. The end result will have extra form fields to add references.
-
-.{content-type-2-capitalized} with an added X-data _{x-data}_ field set.
-image::x-data-empty.png["The reindeer content form with an added field set labeled {x-data} at the end of the form.",{image-xl}]
-
-Your task is:
-
-- Create a new X-data type. Call it "{x-data}".
-- It should have a single input field, "references", that can have as many occurrences as the user wants
-- Add the X-data to your site, but only to the `{content-type-2-capitalized}` content type.
-- Try adding some references to one of your {content-type-2}s.
-
-==== Solution
-
-. Create the {x-data} schema in the file `src/main/resources/site/x-data/{x-data}/{x-data}.xml`. The X-data schema is very similar to the content type schemas we've worked with previously, so there's no real surprises here; just remember to wrap everything in an `x-data` tag:
+. Install the https://market.enonic.com/vendors/enonic/seo-metafields[SEO Metafields app].
 +
-.The {x-data} X-data schema
-[source,xml,{subs}]
+image::x-data-seo-app-install.png["Install SEO Metafields app",{image-l}]
++
+. Edit and add the app to your site.
++
+. Immediately after adding the app to your site, the form should refresh - and add a new step "SEO Metafields":
++
+image::x-data-seo-fields.png["SEO form step and additional fields appear.",{image-xl}]
+
+So, now you have some additional fields for the site. If you check some of your other content items, like an {content-type-2}. You will see the fields are there as well.
+
+image::x-data-seo-animal.png["SEO fields available for the animals content type as well.",{image-xl}]
+
+== Task: Bring your own
+
+Similar to content types, X-data schemas have a specific naming and placement convention within your app: `src/main/resources/site/x-data/<xdata-name>/<xdata-name>.xml`.
+
+. Create x-data schema
++
+This time, we'll give you some slack, and let you choose the name and fields of the X-data yourself. However, the form needs to be wrapped in the following schema:
++
+.Basic X-data schema
+[source,xml]
 ----
 <x-data>
-  <display-name>{x-data-Capitalized}</display-name>
+  <display-name>My Xdata</display-name>
   <form>
-    <input type="TextLine" name="notes">
-      <label>Notes</label>
-      <occurrences minimum="0" maximum="0" />
-    </input>
+    Your form config goes here
   </form>
 </x-data>
 ----
-
-. Add a reference the X-data in your `site.xml` and tell XP what content types it applies to. To do that, add an `x-data` tag in `site.xml` that has a `name` attribute that matches the name of your X-data ({x-data}). Make sure you add the `x-data` element before the `form` and `mappings` elements.
 +
-Like with fields within a content type form, X-data can be optional or required. If X-data is optional, you need to manually add it to a piece of content. If it is required, it will be added automatically. Note that a piece of X-data being required does not mean that its fields are required. To mark X-data as optional, use `optional="true"` as described under the https://developer.enonic.com/docs/xp/stable/cms/x-data#configuration[X-data configuration section in the XP reference docs].
-
+. Additionally, you need to define the injection rules for the X-data
 +
-.The updated site.xml
+You do this via the site.xml.
++
+.src/main/resources/site/site.xml
 [source,xml,{subs}]
 ----
 <site>
-  <x-data name="{x-data}" allowContentTypes="{content-type-2}"/> <--.-->
+  <x-data name="<xdata-name>" allowContentTypes="{content-type-2}"/> <--.-->
   <form/>
-  <mappings>
-    <mapping controller="/controllers/graphql.js" order="50">
-      <pattern>/api</pattern>
-    </mapping>
-  </mappings>
 </site>
 ----
 +
-<.> We use a regular expression to restrict which content types the X-data should apply to. In this case: only to `{content-type-2-capitalized}`. To reference types outside of the current project, preface the type name with the project name. E.g. `{project-name-full}:{content-type-2}`. For content types belonging to the current project, that's not necessary.
+NOTE: For more details and configuration options for X-data, visit https://developer.enonic.com/docs/xp/stable/cms/x-data[the X-data documentation].
 
-. Now, open Content Studio, and add references to your {content-type-2-capitalized} content:
-+
-.{content-type-2-capitalized} with references added
-image::x-data-example.png["The content form for Lion with an additional 'References' section below the usual inputs. The first reference, a TextLine input, points to the Wikipedia article.'", {image-xl}]
+
+Once your app is redeployed, when editing the animals form, should see yet another X-data step in the form. Sweet.
 
 == Headless
 
-When working headlessly, you can easily fetch X-data by querying for the `xAsJson` field of your content type. This query will return the content's associated X-data as a JSON object.
+As you might expect, your x-data fields are also available via the Guillotine API.
+
+Use the following query to quickly access all x-data fields in your content.
 
 .Querying for X-data
 [source,GraphQL,{subs}]
 ----
 {
   guillotine {
-    query(contentTypes:"{project-name-full}:{content-type-2}",
-      query: "displayName = 'Lion'") {
+    query(query: "displayName = 'Lynx'") {
+      displayName
       xAsJson
     }
   }
 }
 ----
 
-So if you've added some references to your "Lion", you'll get something like this back. Notice how the JSON data is structured in a hierarchical fashion.
+If you've added any values to your Lynx's SEO fields, this is what you might get.
 
 .X-data results
 [source,json]
@@ -99,10 +93,12 @@ So if you've added some references to your "Lion", you'll get something like thi
     "guillotine": {
       "query": [
         {
+          "displayName": "Lynx",
           "xAsJson": {
-            "com-example-myproject": {
-              "notes": {
-                "references": "Lion (Wikipedia): https://en.wikipedia.org/wiki/Lion"
+            "com-enonic-app-metafields": {
+              "meta-data": {
+                "seoTitle": "Meet the bobcat",
+                "blockRobots": false
               }
             }
           }
@@ -112,3 +108,27 @@ So if you've added some references to your "Lion", you'll get something like thi
   }
 }
 ----
+
+Should you require specific fields only, or wish to drill into more details, for instance by following a reference, use the typed graphQL fields instead of xAsJson. For instance like this:
+
+.X-data seoTitle field query
+[source,GraphQL]
+----
+
+{
+  guillotine {
+    query(query: "displayName = 'Lynx'") {
+      displayName
+      x {
+        com_enonic_app_metafields {
+          meta_data {
+            seoTitle
+          }
+        }
+      }
+    }
+  }
+}
+----
+
+If you made it here - you are officially equipped with an essential overview of Enonic's content fundamental content modelling capabilities. 🙌

@@ -2,17 +2,17 @@
 include::.variables.adoc[]
 :description: {description-apps}
 
-With XP up and running, let's have a look at how we create applications!
+Applications is the defacto way of adding functionality and scheamas to Enonic XP. Lets have a look at how they work!
 
 NOTE: {see-prev-docs}
 
 == Projects and starters
 
-Creating a project from scratch can be a daunting task for any system you're not familiar with. To make things easier for you, Enonic provides a range of different project templates (known as _starters_). We'll make use of these throughout this tutorial.
+Creating a project from scratch can be a daunting task for any system you're not familiar with. To make things easier for you, Enonic provides a range of different templates (known as _starters_). We'll make use of these throughout this tutorial.
 
 NOTE: The complete list of starters can be found on https://market.enonic.com/starters[the Enonic Market].
 
-For our first project, we'll use the "Headless CMS" starter. This starter is tailored to start creating your own headless content API, but is fairly minimal. We'll use this to familiarize ourselves with how an XP app is structured and how to upload an app to XP.
+For our first project, we'll use the "Vanilla" starter. This starter contains the bare minimum. We'll use this to familiarize ourselves with how an XP app is structured and how to deploy it on your sandbox.
 
 Here's how to use the CLI to create your first app.
 
@@ -21,7 +21,7 @@ Here's how to use the CLI to create your first app.
 
     enonic project create
 
-. Choose `Headless CMS starter` from the list of available starters.
+. Choose `Vanilla starter` from the list of available starters.
 . When prompted enter the name, press kbd:[enter] to accept the default.
 +
 NOTE: Project names matter. XP does not support running two apps with the same name within a single instance.
@@ -56,7 +56,7 @@ And select the desired sandbox.
 
 == Building and deploying
 
-Now that we've set up a project, let's see how we build (or _compile_) the project and then how we deploy it to our XP instance. Again, the CLI is key to making this process as smooth as possible.
+Now that we've set up a project, let's see how we build (or _compile_) the project and then how we deploy it to the sandbox. Again, the CLI is key to making this process as smooth as possible.
 
 Here are the steps we need to take:
 
@@ -82,6 +82,8 @@ BUILD SUCCESSFUL in 5s
 3 actionable tasks: 3 executed
 ----
 
+TIP: *Gradle got you worried?* Enonic uses Gradle to support other programming languages and tools beyond JavaScript. Just stay calm and continue the journey ( ‾ʖ̫‾).
+
 After the build has finished, you'll have a new file in your project directory, located under the `build/libs` subdirectory. Assuming you have used the default name, it'll be located at `build/libs/{project-name}.jar` when at the project root. This file is the executable file that contains your application.
 
 To deploy the app to the sandbox, use the CLI again. Keep the server running and in a different terminal, run this from the project root folder:
@@ -105,7 +107,7 @@ You can also verify that the application was installed correctly by using the ad
 
 
 .The applications list with the headless starter installed
-image::applications-headless.png["The applications list with a few applications installed. Also shows application details, such as content install time, version, and required XP system version for the selected application.", {image-xl}]
+image::applications-vanilla.png["The applications list with a few applications installed. Also shows application details, such as content install time, version, and required XP system version for the selected application.", {image-xl}]
 
 You've now successfully built and deployed your first Enonic XP application.
 
@@ -125,4 +127,4 @@ If you've checked that you're running the right sandbox and that the build succe
 [subs="attributes"]
   mv build/libs/{project-name}.jar ~/.enonic/sandboxes/tutorial/home/deploy/
 
-NOTE: If you have to deploy manually when going through this tutorial, please get in touch on https://discuss.enonic.com[discuss.enonic.com] so we can improve the documentation and the process.
+NOTE: If you have to deploy manually when going through this tutorial, please get in touch on https://slack.enonic.com[the community slack] so we can improve the documentation and the process.

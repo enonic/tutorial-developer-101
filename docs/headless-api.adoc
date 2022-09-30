@@ -2,55 +2,62 @@
 include::.variables.adoc[]
 :description: {description-headless-api}
 
-Now that we've created some content, let's see how we can use it in a headless fashion. This {document} introduces _Guillotine_, the library that's responsible for automatically generating GraphQL APIs for your content.
+Now that we've created some content, let's see how we can access and use it in via API - headless style. This {document} introduces _Guillotine_, the app that's responsible for automatically generating GraphQL APIs for your content.
 
-NOTE: This {document} is optional. If you're not interested in working headlessly, feel free to skip this {document}. You can always come back later ☺️
+NOTE: Enonic XP is very flexible, and provides multiple ways of exposing and using content. If you are not interested in accessing content via the standard headless API, feel free to skip this {document} and the sections mentioning "Headless" in the rest of the tutorial.
 
-For the rest of this guide, whenever we're demonstrating headless functionality, we'll be using concepts introduced in this {document}. When we're talking headless functionality specifically, it'll be under a header that specifies it. If you're not interested in working headlessly, feel free to skip these sections.
+NOTE: You won't be building anything new in this {chapter}, but we use the data set and everything that you've created over the previous {document}s.
 
-NOTE: {see-prev-docs} In this {document}, you won't be building anything new, but we use the data set that we've created thus far.
+== Installing Guillotine
 
-== The API explorer
+The first thing you need to do in order to get going is installing the Guillotine application. It is available on https://market.enonic.com/vendors/enonic/guillotine[Enonic Market].
 
-The headless starter uses an XP library called https://market.enonic.com/vendors/enonic/guillotine-headless-lib[Guillotine] to dynamically expose all our editorial content. We'll learn more about how this works later, but for now (with the default configuration) we can find the API at {p1-api-url}.
+Fortunately, you can install Guillotine directly from your Enonic XP instance's admin console.
 
-NOTE: If you have used a different name than "{p1-site-name}" for your site, you'll have to modify the URL a little: Switch `{p1-site-slug}` for the path of your site. See the Guillotine reference docs for an https://developer.enonic.com/docs/guillotine/stable/usage#context[explanation of how the URL is generated].
+. From the XP menu (top right), choose `Applications`.
+. Click kbd:[Install] from the top menu
+. Search for `Guillotine`, and click kbd:[Install]`.
++
+image::install-guillotine.png[Install Guillotine application dialog, {image-xl}]
 
-After navigating to the API, you'll find an interactive API explorer for GraphQL APIs waiting for you. You enter your query in the text area to your left and when you execute it, you'll get the results of the query on the other side of the screen.
+That's it! 🎉
 
- There are tabs marked "schema" and "docs" on the right-hand side of the window. You can use these to look at the structure of the data that you can query for.
+== Query playground
 
-.The API explorer
-image::graphql-playground-empty.png[An empty GraphQL playground, {image-xl}]
+Back in Content Studio, you should now have access to a new item called `Query playground` in the left hand menu. Open it, and you should see this:
 
-GraphQL is a graph "query language". It allows you to create highly specific queries for exactly the content that you need (see the https://graphql.org/learn/[GraphQL docs to learn more]).
+image::query-playground-empty.png[API browser integrated in Content Studio, {image-xl}]
+
+Query playground is an interactive GraphQL API explorer. You enter your query in the text area to your left and when you execute it, you'll get the results of the query on the other side of the screen.
+
+The "Docs" tab on the right-hand side can be used to see all details of the underlying GraphQL schema.
 
 == Guillotine queries
 
-The `guillotine` field allows you to query the API for content. We'll see more advanced examples of this later in this {document}, but for now we'll focus on the top level queries.
+GraphQL is a graph "query language". It allows you to create highly specific queries for exactly the content that you need (visit the https://graphql.org/learn/[official GraphQL docs to learn more]).
 
-TIP: The API explorer offers completion candidates for fields. You can use this to interactively explore the API. You can also open the schema and documentation from the right-hand side menu tabs.
+TIP: The API explorer offers autocompletion for fields. You can use this to interactively explore the API. You can also open the schema and documentation from the right-hand side menu tabs.
 
-The `guillotine` field has sub-properties that you can query for. Each instance of the API runs on a site, so we can ask Guillotine about its site and about the children of the site. Copy the below query into your explorer and run it by clicking the play button.
+
+To get started, copy the below query into your the query playground (left hand panel) and run it by clicking the play button.
 
 TIP: You can also run queries by using the keyboard shortcut kbd:[ctrl+enter]/kbd:[⌘+enter] .
 
-.A GraphQL query getting data about the site and its children
+.A GraphQL query getting data about the root items in the project
 [source,xml]
 ----
 {
   guillotine {
-    getSite {
-      displayName
-    }
     getChildren {
       displayName
+      _path
+      _id
     }
   }
 }
 ----
 
-The response to the query is returned as JSON. In this case, it would contain the name of the site ({p1-site-name}), as well as the immediate children of the site: the "{content-type-1}" folder we created and the "Templates" that was already there.
+The response is returned as JSON. In this case, it will contain the  contain the site ({p1-site-name}), and your images folder. For each item you will also see it's name, and location within the project structure.
 
 .The site info response
 [source,json]
@@ -58,15 +65,14 @@ The response to the query is returned as JSON. In this case, it would contain th
 {
   "data": {
     "guillotine": {
-      "getSite": {
-        "displayName": "My First Site"
-      },
       "getChildren": [
         {
-          "displayName": "artists"
+          "displayName": "Images",
+          "_path": "/images"
         },
         {
-          "displayName": "Templates"
+          "displayName": "My first site",
+          "_path": "/my-first-site"
         }
       ]
     }
@@ -74,10 +80,62 @@ The response to the query is returned as JSON. In this case, it would contain th
 }
 ----
 
+.To fetch the children of the site, try this
+[source,xml]
+----
+{
+  guillotine {
+    getChildren(key: "/my-first-site") {
+      displayName
+      _path
+    }
+  }
+}
+----
 
-== {content-type-1-capitalized} queries
+The response will contain the immediate children of the site: the "{content-type-1}" folder we created and the "Templates" folder that was already there.
+
+.The site info response
+[source,json]
+----
+{
+  "data": {
+    "guillotine": {
+      "getChildren": [
+        {
+          "displayName": "artists",
+          "_path": "/my-first-site/artists"
+        },
+        {
+          "displayName": "Templates",
+          "_path": "/my-first-site/templates"
+        }
+      ]
+    }
+  }
+}
+----
+
+== Site Context
+
+Throughout this tutorial we will primarily be working in the context of this site - for this specific purpose, Guillotine supports a so-called site context, which will simplify your queries.
+
+Open the "Request headers" section of Query playground, and paste the following configuration:
+
+  {
+    "X-Guillotine-SiteKey": "/my-first-site"
+  }
+
+NOTE: The SiteKey, may either be the site's path, or unique identifier. Using the ID is safe as you don't need to know the exact location of the site within your structure.
+
+When executing queries, you now have a few new tricks available, as you will see in the examples below
+
+
+=== {content-type-1-capitalized} queries
 
 Let's look at writing slightly more complex queries that get us information about the artists we've created. To start with, let's see if we can just fetch all the {content-type-1}s that we created.
+
+This time, we will use the ${site} placeholder to specify the path
 
 .A GraphQL query fetching all content below the "{p1-site-name}" site
 [source,GraphQL,{subs}"]
@@ -178,9 +236,9 @@ Execute this and your response should look a little something like this:
 ----
 
 
-== Advanced querying
+== Advanced queries
 
-When making a Guillotine query, you can use the `query` field underneath `guillotine` to specify what you want. This field accepts a number of optional, named arguments to help you hone in on exactly what you're looking for. These arguments are:
+The `query` field underneath `guillotine` allows you to search the system for what you want. This field accepts a number of optional, named arguments to help you hone in on exactly what you're looking for. These arguments are:
 
 `contentTypes`:: The content types we're looking for. Can either be a lone string if you're looking for a single content type, or a list if you want to search among multiple types.
 `filters` :: A list of filters to apply to the results after the query has been executed. We won't get into them here, so if you want to learn more about them, head to the https://developer.enonic.com/docs/xp/stable/storage/filters[filters documentation].
@@ -243,7 +301,7 @@ This query would produce a result like the following:
 }
 ----
 
-To perform a more advanced query, you can use the `query` parameter. The following query uses the https://developer.enonic.com/docs/xp/stable/storage/noql#ngram[n-gram query functionality] to find all the {content-type-1}s that mention `rap` somewhere in their data.
+To perform a more advanced query, you can use the `query` parameter. The following GraphQL query uses the https://developer.enonic.com/docs/xp/stable/storage/noql#ngram[n-gram query functionality] to find all the {content-type-1}s that have a term (part of a text) that starts with `rap` somewhere in their data.
 
 .A Guillotine query using _nGram_ search functionality
 [source,GraphQL,{subs}]
@@ -316,78 +374,8 @@ And find out that with our data set, there's only one:
 }
 ----
 
-== The Guillotine library
-
-If you've been wondering how the GraphQL API we've been querying up until now was created: the Guillotine library is the answer. The Guillotine library analyzes all the content in your applications and generates an API from that. It' s an optional library that comes preconfigured with the headless starter that we used xref:apps#_projects_and_starters[back when we first created our app in a previous {document}]. Guillotine provides direct, typed, and documented access to content within your site.
-
-If you're familiar with GraphQL, you might have noticed that we have not performed any mutations yet. The reason for that is simple: Guillotine only exposes the read-only part of the Enonic Content API, so mutations are not available.
-
-=== Integrating Guillotine
-
-When we created an app in xref:apps#_projects_and_starters[a previous chapter], we used the headless starter, which comes with Guillotine integrated. As such, we haven't had to worry ourselves with how to integrate it with XP. However, to better understand how it works, let's have a little peek under the hood.
-
-To embed Guillotine in your app,  add a dependency on the library in the `build.gradle` at the root of your project. The `build.gradle` file that comes with the headless starter will look something like this:
-
-.A `build.gradle` file as included with the headless starter
-[source,groovy]
-----
-plugins {
-    id 'com.enonic.xp.app' version '3.0.0'
-}
-
-apply plugin: "com.enonic.xp.app"
-
-app {
-    name = "${appName}"
-    displayName = "${appDisplayName}"
-    vendorName = "${vendorName}"
-    vendorUrl = "${vendorUrl}"
-    systemVersion = "${xpVersion}"
-}
-
-dependencies {
-    compile "com.enonic.xp:portal-api:${xpVersion}"
-    include "com.enonic.xp:lib-websocket:${xpVersion}"
-    include "com.enonic.lib:lib-guillotine:5.1.0" <--.-->
-    include "com.enonic.lib:lib-graphql-playground:0.0.1"
-}
-
-repositories {
-    mavenLocal()
-    mavenCentral()
-    xp.enonicRepo( 'dev' )
-}
-----
-
-<.> This line includes Guillotine version 5.1.0
-
-This tells XP that we're going to be using the library. However, it doesn't do anything just yet. To make it work, we're going to need to create a _mapping_ and a _controller_. Both of these concepts will be explained in more detail in a later chapter, but the short form is that a _mapping_ routes HTTP requests to a path to a _controller_. The controller is then responsible for processing and responding to the HTTP request.
-
-The headless starter takes care of this for us by mapping requests to an `/api` path to a controller named `graphql.js` using the `mappings` element:
-
-.A `site.xml` file with mappings
-[source,xml]
-----
-<?xml version="1.0" encoding="UTF-8"?>
-<site>
-  <form />
-  <mappings>
-    <mapping controller="/controllers/graphql.js" order="50"> <--.-->
-      <pattern>/api</pattern> <--.-->
-    </mapping>
-  </mappings>
-</site>
-----
-
-<.> This tells XP that requests that match this mapping's pattern should be routed to the `/controllers/graphql.js` controller
-<.> This pattern tells XP that what requests to send to this mapping's controller. In this case, it's any requests to `<site-url>/api`, where `<site-url>` is the URL for your site.
-
-The controller takes care of generating the schema and providing the API endpoints and logic. The headless starter comes with a default controller that provides the schema and the GraphQL playground that we've been using thus for. It's too long to include in this guide, but if you want to have a look at it, the https://github.com/enonic/starter-headless/blob/master/src/main/resources/controllers/graphql.js[headless starter GraphQL controller] is available on GitHub.
-
-To learn more about the Guillotine library, how it works, and how you deploy it, check out the https://developer.enonic.com/docs/guillotine/stable[Guillotine reference docs].
-
 == Learn more
 
-For a detailed overview of the node query language and an extensive example selection, https://developer.enonic.com/docs/xp/stable/storage/noql[the NoQL reference] is the place to go. For more query examples and information about how to get up and running with Guillotine, you can check out https://developer.enonic.com/guides/headless-cms-intro[the headless CMS intro guide].
+For a detailed overview of the query language and an extensive example selection, https://developer.enonic.com/docs/xp/stable/storage/noql[the NoQL reference] is the place to go. For more query examples and information about how to get up and running with Guillotine, you can check out https://developer.enonic.com/docs/headless-cms-intro[the headless CMS intro guide] or the https://developer.enonic.com/docs/guillotine[Guillotine docs].
 
-If you want to learn more about GraphQL, the https://graphql.org/learn/[_Introduction to GraphQL_ documentation] is a good place to start.
+If you want to learn more about GraphQL in general, the https://graphql.org/learn/[_Introduction to GraphQL_ documentation] is a good place to start.

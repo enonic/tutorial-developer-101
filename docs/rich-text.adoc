@@ -70,13 +70,11 @@ image::input-type-html-area-some-controls.png[An HtmlArea configured to include 
 
 For a full overview of the available text tools and HtmlArea configuration options, visit the https://developer.enonic.com/docs/xp/stable/cms/input-types#htmlarea[HtmlArea input type reference docs]. Additionally, you can find a more thorough explanation of the toolbar and its tools in https://developer.enonic.com/docs/content-studio/stable/editor/rich-text-editor[the rich text editor reference documentation].
 
-=== Task: {content-type-2-capitalized} rich text
+=== Task: {content-type-2-capitalized} description
 
-Let's add a rich-text description to our {content-type-2}s. The input should be optional and have at most a single occurrence. You can include any editor tools you want, but it must at least have the `image` and `macro` tools, as we'll be using these later. Otherwise, configure it as you want.
+Let's add a rich-text description field to our {content-type-2}s. The input should be optional and have at most a single occurrence. You can include any editor tools you want, but it must at least have the `Link` ,`Image` and `Macro` tools, as we'll be using these later. Otherwise, configure it as you want.
 
-Once you've done that, add some text to one of your {content-type-2}s and try out the HtmlArea.
-
-It'll look a little something like this:
+Your content type should now look something like this:
 
 .{content-type-2-capitalized} with an HtmlArea input type
 [source,xml,{subs}]
@@ -97,7 +95,7 @@ It'll look a little something like this:
     <input name="images" type="ImageSelector">
       <label>Images</label>
       <help-text>Images of the animal</help-text>
-      <occurrences minimum="0" maximum="3" /> <!--4-->
+      <occurrences minimum="0" maximum="3" />
     </input>
 
     <input name="description" type="HtmlArea">
@@ -107,7 +105,7 @@ It'll look a little something like this:
       </help-text>
       <config>
         <exclude>*</exclude>
-        <include>Format Macro Image</include>
+        <include>Format Link Macro Image</include>
       </config>
     </input>
 
@@ -115,17 +113,48 @@ It'll look a little something like this:
 </content-type>
 ----
 
+With the new content type deployed, you are ready to complete the specific tasks below.
+
+== Links 
+
+In addition to good old URLs, in the HtmlArea, you may also insert links to other content items, links to download media files, or links to e-mail.
+
+An important feature, is that when creating internal links (content or media links), Enonic will save a references to the target items, similar to how the ContentSelector works. This is useful when looking for usage and dependencies between content items later.
+
+NOTE: Because links are created using the item's unique id. It is perfectly safe to move items around in the tree structure, or change it's path name. The links will not break.
+
+=== Task: Internal link
+
+In this task, you'll create an internal link to another {content-type-2}. 
+
+Create a new {content-type-2}, "Lynx".
+
+. In the `Description` field, type some text, i.e. "Lynx are cats, just like lions". Select the "lions" text and click "insert link" in the toolbar.
++
+NOTE: You can also use kbd:[ctrl+K] to insert the link.
++
+. You'll be greeted by the "Insert link" dialog:
+.Choose the content tab, and select the previously created "Lion" as the target item
++
+image::rich-text-insert-content-link.png[Screenshot of the insert link dialog.,{image-l}]
+
+When done, save the item - but keep the tab open to complete the upcoming tasks
+
 == Images
 
-If you have configured your HtmlArea to include the image tool, you can click the image button to insert an image. Once you select an image, you'll get a prompt that allows you to customize the image. You can add a caption, alt text, change the image's justification in the block, and apply predefined image styles. There's also a pencil icon in the upper right corner that allows you to edit the image, as covered in xref:input-types#_working_with_images[a previous {document}].
+With the image tool enabled, you insert an image anywhere within your document. During the insert process, you may customize the image further. 
+
+The following options are available: Caption, alt text, change the image's justification, and apply a predefined image styles. 
 
 === Task: {content-type-2-capitalized} pictures
 
-Try out the image controls that Content Studio gives you by uploading a picture and seeing what you can do with it. Remember to click the pencil icon to try the advanced editing tools such as cropping and focal points.
+Try out the image controls that Content Studio give you by uploading a picture and seeing what you can do with it. 
 
-We looked at xref:input-types#_working_with_images[editing images in the previous {document}], but the HtmlArea also offers you something called "image styles", which we'll have a look at now.
+We looked at xref:input-types#_working_with_images[editing images in the previous {document}], but when inserting images in the HtmlArea, you also have something called "image styles", which we'll have a look at now.
 
-. Insert an image. Use the "insert image" button in the toolbar.
+Continue editing the "Lynx" content created in the previous task.
+
+. Insert an image below the existing text. Use the "insert image" button in the toolbar.
 +
 .The toolbar with the image tool highlighted
 image::rich-text-toolbar-image-highlight.png[The rich text toolbar with the image tool circled by a blue circle.,{image-l}]
@@ -137,15 +166,15 @@ NOTE: You can also use kbd:[ctrl+L] to insert an image.
 .The HtmlArea insert image dialog. Photo by https://unsplash.com/@kydroon[Kurt Cotoaga] 🦁
 image::rich-text-insert-image.png["The insert image dialog, showing the image, an image styles dropdown, caption, and alt text fields", {image-l}]
 +
-. If you try and access the "image styles" dropdown, you'll find that it's only got two options and neither of them seem to do much. To make this more exciting, let's also create a custom image style.
+. When accessing the "image styles" dropdown, you'll find that it's only got two options and neither of them seem to do much. To make this more exciting, let's also create a custom image style.
 +
-In a new file, `src/main/resources/site/styles.xml`, place the following simple style configuration:
+In your app, add a new file:
 +
-.A very basic styles configuration
+.src/main/resources/site/styles.xml
 [source,xml,{subs}]
 ----
 <styles>
-  <image name="conteditor-style-grayscale">
+  <image name="square-grayscale">
     <display-name>Grayscale</display-name>
     <aspect-ratio>1:1</aspect-ratio> <--.-->
     <filter>hsbcolorize(0x000000); grayscale(); border(6, 0x000000)</filter> <--.-->
@@ -156,21 +185,24 @@ In a new file, `src/main/resources/site/styles.xml`, place the following simple 
 <.> The aspect ratio controls how the image is displayed. 1:1 makes the image square.
 <.> The filters add a grayscale effect and then a border
 +
-NOTE: https://developer.enonic.com/docs/xp/stable/cms/styles[The styles reference docs] have more information on how you can style your images, so go check it out for a deeper dive.
+NOTE: https://developer.enonic.com/docs/xp/stable/cms/styles[The styles reference doc] has more information on how you can style your images, so go check it out for a deeper dive.
 +
 . With this style picked up by XP, you'll have the "Grayscale" option available in the image styles dropdown. Select it to apply it to the image.
 +
-.An image with an image style applied
+.Example image with an the style applied
 image::rich-text-insert-image-styled.png["The insert image dialog showing the results of applying the image styles to the image", {image-l}]
 
 
 == Macros
 
-Macros enable you to insert rich components into your text. When the page is rendered, the macro call is resolved and replaced. When the macro is resolved, it will either add text to your page or styles or scripts. See the https://developer.enonic.com/docs/xp/stable/cms/macros[macro reference docs] for a more in-depth explanation of how this works. In this section, we'll install a macro from an external application (_{macro-app}_), and look at how to use it. We'll also see how macros behave in a headless context.
+Macros enable you to insert custom components within your rich text field. When the content is rendered, the macro is replaced with the actual component implementation.
+
+Similar to content types, macros can define forms that help editors configure them.
+
 
 === Task: {macro-app}
 
-The {macro-app} package comes with a set of macros that let you put text differently colored items with icons.
+The {macro-app} app comes with a set of pre-defined macros that may look something like this when rendered:
 
 .The {macro-app} in action
 image::macros-panel-macros.jpg["The Panel Macros package in action, showing differently colored panels." , {image-m}]
@@ -183,53 +215,45 @@ To use these macros, we first need to install the {macro-app}.
 . Edit your site ({p1-site-name}). In the applications dropdown, find {macro-app}, and add it.
 . Save and exit.
 
-To add a macro to your HtmlArea, the easiest (and recommended) way is to use the macro tool.
+Next up, let's add a macro to the "Lynx" content item.
 
-.The toolbar with the macro tool highlighted
+.The toolbar with the macro button highlighted
 image::rich-text-toolbar-macro-highlight.png[The rich text toolbar with the macro button circled by a blue circle.,{image-l}]
 
-
-Open up an {content-type-2} and try it out! The below example will use the "reindeer" created earlier.
-
-. In the "Description" field, click the "insert macro" tool.
+. Click "insert macro".
 . Select one of the panels. If you have no preference, try the "Info panel".
-. Add a header and some text to it. For reindeer, try:
+. Add a header and some text to it. For instance:
 +
-.Reindeer macro data
+.Lynx macro content
 Header:: Habitats
-Text:: Reindeer are native to Arctic, sub-Arctic, tundra, boreal, and mountainous regions of northern Europe, Siberia, and North America.
-
+Text:: The lynx inhabits high altitude forests with dense cover of shrubs, reeds, and tall grass.
 +
-
-.The insert macro form with reindeer data
+.The insert macro form with habitat data
 image::macros-insert-macro.png["A form with 'header' and 'description' fields. Used to set macro parameters.", {image-xl}]
-. Try out the preview and see your macro in action
+. If configured, you may also get a preview of what the macro will look like.
 +
 .The macro preview function
 image::macros-preview-macro.png["The text we specified in the macro preview form inside a light blue box with an icon attached", {image-xl}]
 
-For more information on macros, including how to create your very own macros, refer back to https://developer.enonic.com/docs/xp/stable/cms/macros[the macro reference docs] from before.
+NOTE: The Macro can be previewed because the {macro-app} includes a standard preview. 
+
+For more information on macros, including how to create your very own, visit to https://developer.enonic.com/docs/xp/stable/cms/macros[the macro reference docs].
 
 == Headless
 
-When you fetch rich text content via GraphQL, the response is formatted as unstyled, semantic HTML. It's up to you to style the content when displaying it on the client. There are some exceptions, however:
+When fetching rich text via the Guillotine API, the most commonly used output is "processed html". This is essentially unstyled, semantic HTML. It's then up to you to style the content in your client.
 
-- Image styles (as applied in the editor) are returned with the image.
-- Macros use a special element `<editor-macro>`, which you need to replace with the processed output of the macro on the client.
+Links, images and macros will potentially require additional client-side processing.
 
-=== Images and styles
+The following query returns the "Lynx" content, and the `description` field al processed HTML.
 
-When you add a an image to a rich text input, you can fetch it via GraphQL using the `processedHtml` sub selection of your rich text field.  Let's look at how that works. To start us off, this query finds the piece of content that we added the image to (the "Lion" 🦁) and extracts its processed HTML from its description.
-
-This simple query just fetches the processed HTML of the HTML area:
-
-.Fetching rich text
+.Fetching rich text via Headless API
 [source,GraphQL,{subs}]
 ----
 {
   guillotine {
-    query(contentTypes:"{project-name-full}:{content-type-2}",
-      query: "displayName = 'Lion'") {
+    query(query: "displayName = 'Lynx'")
+     {
       ... on {project-name-query}_{content-type-2-Capitalized} {
         data {
           description {
@@ -242,9 +266,7 @@ This simple query just fetches the processed HTML of the HTML area:
 }
 ----
 
-In the returned HTML, you can see the image with styles applied. If you extract the `src` value and add it after `localhost:8080` (or any other instance), you should find the image with styles applied.
-
-.The query result for the processed HTML
+.The query result may look something like this
 [source,json]
 ----
 {
@@ -254,7 +276,7 @@ In the returned HTML, you can see the image with styles applied. If you extract 
         {
           "data": {
             "description": {
-              "processedHtml": "<div>\n<div>\n<div contenteditable=\"false\" tabindex=\"-1\">\n<figure class=\"captioned editor-align-justify editor-style-grayscale\" data-widget=\"image\"><img alt=\"A yawning lion cub\" src=\"/site/default/draft/my-first-site/_/image/ef8605b1-6966-4011-bbfe-65c4c2e9ec86:d5d96909fc488356fd24e67763cbb1868b3f77c3/block-768-768/lion-cub.jpg?filter=hsbcolorize%280x000000%29%3B+grayscale%28%29%3B+border%286%2C+0x000000%29\" data-image-ref=\"103d21b9-de86-4a9c-ab3d-82859a2ccf31\" style=\"width:100%\" />\n<figcaption>Soooo sleepy 😪</figcaption>\n</figure>\n</div>\n</div>\n</div>\n\n<p>&nbsp;</p>\n"
+              "processedHtml": "<p>Lynx are cats, just like <a href=\"/admin/site/preview/default/draft/my-first-site/animals/lion\" data-link-ref=\"b5ccb5ff-7458-4dae-8a4c-bc3f5df9fc63\" title=\"The big cat\">lions</a>.</p>\n\n<figure class=\"captioned conteditor-style-grayscale editor-align-justify\"><img alt=\"A yawning lion cub\" src=\"/admin/site/preview/default/draft/_/image/450a1e29-891b-4d5e-977c-719b5a2b9782:ad62be20ff5129561409bcf5b8aae435e980d09a/width-768/lion-cub.jpg\" data-image-ref=\"3c4d6ce4-4536-4d96-a65d-3e0b81f44f27\" style=\"width:100%\" />\n<figcaption>So sleepy 🤗</figcaption>\n</figure>\n\n<p><editor-macro data-macro-name=\"info\" data-macro-ref=\"1c8cbb83-f0e5-45ce-8027-ced88d165a2d\">The lynx inhabits high altitude forests with dense cover of shrubs, reeds, and tall grass.</editor-macro></p>\n"
             }
           }
         }
@@ -264,15 +286,108 @@ In the returned HTML, you can see the image with styles applied. If you extract 
 }
 ----
 
-But wait, there's more! You can also get the image in different sizes (using https://developer.mozilla.org/en-US/docs/Web/API/HTMLImageElement/srcset[the `srcset` attribute (MDN)]) by adding a `processHtml` argument to `description`:
+By unescaping the HTML, you will find the following:
+
+.Processed HTML output
+[source,html]
+----
+<p>
+  Lynx are cats, just like <a href="/admin/site/preview/default/draft/my-first-site/animals/lion" data-link-ref="b5ccb5ff-7458-4dae-8a4c-bc3f5df9fc63" title="The big cat">lions</a>.
+</p>
+
+<figure class="captioned square-grayscale editor-align-justify">
+  <img 
+    alt="A yawning lion cub" 
+    src="/admin/site/preview/default/draft/_/image/450a1e29-891b-4d5e-977c-719b5a2b9782:ad62be20ff5129561409bcf5b8aae435e980d09a/block-768-768/lion-cub.jpg?filter=hsbcolorize%280x000000%29%3B+grayscale%28%29%3B+border%286%2C+0x000000%29"
+    data-image-ref="3c4d6ce4-4536-4d96-a65d-3e0b81f44f27"
+    style="width:100%" />
+  <figcaption>So sleepy 🤗</figcaption>
+</figure>
+
+<p>
+  <editor-macro 
+    data-macro-name="info"
+    data-macro-ref="1c8cbb83-f0e5-45ce-8027-ced88d165a2d">The lynx inhabits high altitude forests with dense cover of shrubs, reeds, and tall grass.
+  </editor-macro>
+</p>
+----
+
+With the excepton of macro's this is all valid HTML. Below, you'll learn more about handling these elements.
+
+=== Links
+
+Looking specifically at the processed html link output above, the most interesting part is the `data-link-ref` attribute.
+
+NOTE: Wondering why the href points to a location within the admin? No worries. Guillotine automatically generates contextual links. When deploying the API to production, you may customize the base url as see fit.
+
+This example is an internal link, you may want access more details about it, for instance to override the URL, optimize accessibility etc. To acccess these details, you need to extend your query with the links field:
+
+.Query for link details
+[source,GraphQL]
+----
+{
+  guillotine {
+    query(query: "displayName = 'Lynx'")
+     {
+      ... on com_example_myproject_Animal {
+        data {
+          description {
+            processedHtml
+            links {
+              ref
+              uri
+              content {
+                displayName
+                _path
+                type
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
+----
+
+By executing this query, you will get some more data. Specifically:
+
+.Link query result
+[source,GraphQL]
+----
+...
+"links": [
+  {
+    "ref": "6931439f-6c4a-4f66-9838-cbd7a0726e80",
+    "uri": "content://90685b2f-041d-4114-8828-cf3b68501d3c",
+    "content": {
+      "displayName": "Lion",
+      "_path": "/my-first-site/animals/lion",
+      "type": "com.example.myproject:animal"
+    }
+  }]
+...
+----
+
+As you can see, you now have access to the full name of the referenced item, as well as it's type. Use the ref values from the HTML link element to match it with the specific link data - as you may have more than one link.
+
+Cool, right?
+
+
+=== Image srcset
+
+In the processed HTML, you can see the `<img>` element with style attributes. Additionally, by looking more closely at the `src` value, you will find that the style settings are applied in the image service URL.
+
+  ..../_/image/<id>:<version>/block-768-768/lion-cub.jpg?filter=hsbcolorize%280x000000%29%3B+grayscale%28%29%3B+border%286%2C+0x000000%29
+
+But wait, there's more! If you want to optimize how fast images load on various devices, Guillotine can also return the image in multiple different sizes (using https://developer.mozilla.org/en-US/docs/Web/API/HTMLImageElement/srcset[the `srcset` attribute (MDN)]). This is achieved by adding an argument to the `description` field:
 
 .Fetching rich text with `srcset`
 [source,GraphQL,{subs}]
 ----
 {
   guillotine {
-    query(contentTypes:"{project-name-full}:{content-type-2}",
-      query: "displayName = 'Lion'") {
+    query(query: "displayName = 'Lynx'") {
       ... on {project-name-query}_{content-type-2-Capitalized} {
         data {
           description(processHtml: {imageWidths: [200, 500]}) {
@@ -285,39 +400,30 @@ But wait, there's more! You can also get the image in different sizes (using htt
 }
 ----
 
-That'll get you a result that looks like this:
+This time, you should find the '<img>' element will include srcset with links to a 200w and 500w respectively.
 
-.Result with `srcset`
-[source,json]
+.Img tag, now with srcset
+[source,Html]
 ----
-{
-  "data": {
-    "guillotine": {
-      "query": [
-        {
-          "data": {
-            "description": {
-              "processedHtml": "<div>\n<div>\n<div contenteditable=\"false\" tabindex=\"-1\">\n<figure class=\"captioned editor-align-justify editor-style-grayscale\" data-widget=\"image\"><img alt=\"A yawning lion cub\" src=\"/site/default/draft/my-first-site/_/image/ef8605b1-6966-4011-bbfe-65c4c2e9ec86:d5d96909fc488356fd24e67763cbb1868b3f77c3/block-768-768/lion-cub.jpg?filter=hsbcolorize%280x000000%29%3B+grayscale%28%29%3B+border%286%2C+0x000000%29\" data-image-ref=\"e5be0ead-e803-4af6-a6c4-7edc004038b3\" srcset=\"/site/default/draft/my-first-site/_/image/ef8605b1-6966-4011-bbfe-65c4c2e9ec86:d5d96909fc488356fd24e67763cbb1868b3f77c3/block-200-200/lion-cub.jpg?filter=hsbcolorize%280x000000%29%3B+grayscale%28%29%3B+border%286%2C+0x000000%29 200w,/site/default/draft/my-first-site/_/image/ef8605b1-6966-4011-bbfe-65c4c2e9ec86:d5d96909fc488356fd24e67763cbb1868b3f77c3/block-500-500/lion-cub.jpg?filter=hsbcolorize%280x000000%29%3B+grayscale%28%29%3B+border%286%2C+0x000000%29 500w\" style=\"width:100%\" />\n<figcaption>Soooo sleepy 😪</figcaption>\n</figure>\n</div>\n</div>\n</div>\n\n<p>&nbsp;</p>\n"
-            }
-          }
-        }
-      ]
-    }
-  }
-}
+<img alt="kurt-cotoaga-huXZH43-qiw-unsplash.jpg" 
+  src=".../block-768-768/lion-cub.jpg?filter=..."
+  data-image-ref="b1cf729f-2191-4f03-bdf9-95c7e9076e5a" 
+  srcset=".../block-200-200/lion-cub.jpg?filter=... 200w,.../block-500-500/lion-cub.jpg?filter=... 500w" 
+  style="width:100%" />
 ----
 
-If reading escaped HTML in a JSON string isn't your favorite thing, the important part of the above result is that we've gotten a `srcset` attribute for our image, which means that the browser will pick the size of the image that best suits the current situation (based on screen sizes etc.), and use a smaller image when possible. This means fewer bytes across the wire and faster load times!
+NOTE: URLs about above were shortened for readability
 
-And finally, what if we want to extract styling info? In our case, the styling is done on the server, but in case you want to fetch and use that for some reason, we can do that too:
+=== Image details
 
-.Fetching image styles from an HtmlArea
+If you prefer to handle all details related to images yourself, or optimize the markup further, you may access more details about the image - like you did for links.
+
+.Get description with image style details
 [source,GraphQL,{subs}]
 ----
 {
   guillotine {
-    query(contentTypes:"com.example.myproject:animal",
-      query: "displayName = 'Lion'") {
+    query(query: "displayName = 'Lynx'") {
       ... on com_example_myproject_Animal {
         data {
           description {
@@ -338,50 +444,36 @@ And finally, what if we want to extract styling info? In our case, the styling i
 
 You can extract the properties that you specified in your `styles.xml` previously:
 
-.The result of fetching image styles
+.Additional result of fetching image styles
 [source,json]
 ----
-{
-  "data": {
-    "guillotine": {
-      "query": [
-        {
-          "data": {
-            "description": {
-              "images": [
-                {
-                  "style": {
-                    "name": "editor-style-grayscale",
-                    "aspectRatio": "1:1",
-                    "filter": "hsbcolorize(0x000000); grayscale(); border(6, 0x000000)"
-                  }
-                }
-              ]
-            }
-          }
-        }
-      ]
+...
+"images": [
+  {
+    "style": {
+      "name": "editor-style-grayscale",
+      "aspectRatio": "1:1",
+      "filter": "hsbcolorize(0x000000); grayscale(); border(6, 0x000000)"
     }
   }
-}
+]
+...
 ----
 
 === Macros
 
-In headless contexts, you don't get macros fully rendered. Instead, XP inserts `<editor-macro>` elements into the output of the HtmlArea. Each `<editor-macro>` has a `data-macro-ref` attribute that contains a unique reference. Use this reference to match it up with the macro data.
+In the headless context, the client is responsible for rendering of your content. In the case of macros - this gets obvious. 
 
-NOTE: When working headlessly, macros contain only data and _not_ any form of markup. In other words: the client needs to construct the markup and styling itself. Thus, the preview you see in Content Studio does not reflect what you get in a headless context. You would have to implement the markup and styling yourself.
+In the processed HTML, each macro is represented by an `<editor-macro>` element containing a unique reference key. As for links and images, this reference can be used to access detailed data fields for the macro.
 
-Let's try and fetch the macro you just added to your {content-type-2}:
-
-.Query that fetches all macro info from an HtmlArea
+.Query that fetches all macro data
 [source,GraphQL,{subs}]
 ----
 {
   guillotine {
-    query(contentTypes:"{project-name-full}:{content-type-2}",
-      query: "displayName = 'Reindeer'") {
-      ... on {project-name-query}_{content-type-2-capitalized} {
+    query(query: "displayName = 'Lynx'")
+     {
+      ... on com_example_myproject_Animal {
         data {
           description {
             processedHtml
@@ -394,38 +486,83 @@ Let's try and fetch the macro you just added to your {content-type-2}:
 }
 ----
 
-.Macro query result
+
+.MacrosAsJson response (extract)
 [source,json]
 ----
+...
+"macrosAsJson": [
+  {
+    "ref": "9b983010-9bb3-4b96-8200-92d43f9c2140",
+    "name": "info",
+    "descriptor": "com.enonic.app.panelmacros:info",
+    "config": {
+      "info": {
+        "body": "The lynx inhabits high altitude forests with dense cover of shrubs, reeds, and tall grass.",
+        "header": "Habitats"
+      }
+    }
+  }
+]
+...
+----
+
+To access specific macros and fields, like for content type may use the full GraphQL schema. Try the following:
+
+NOTE: If you used a different macro than the "Info" macro, the query must be updated to match the specific macro.
+
+.Query that fetches the fields for the info macro 
+[source,GraphQL,{subs}]
+----
 {
-  "data": {
-    "guillotine": {
-      "query": [
-        {
-          "data": {
-            "description": { <--.-->
-              "processedHtml": "<p><editor-macro data-macro-name=\"info\" data-macro-ref=\"b226bdbb-a781-44e8-9402-dfc5d086af41\">Reindeer are native to Arctic, sub-Arctic, tundra, boreal, and mountainous regions of northern Europe, Siberia, and North America.</editor-macro></p>\n",
-              "macrosAsJson": [ <--.-->
-                {
-                  "ref": "b226bdbb-a781-44e8-9402-dfc5d086af41",
-                  "name": "info",
-                  "descriptor": "com.enonic.app.panelmacros:info",
-                  "config": {
-                    "info": {
-                      "body": "Reindeer are native to Arctic, sub-Arctic, tundra, boreal, and mountainous regions of northern Europe, Siberia, and North America.",
-                      "header": "Habitats"
-                    }
-                  }
-                }
-              ]
+  guillotine {
+    query(query: "displayName = 'Lynx'")
+     {
+      ... on com_example_myproject_Animal {
+        data {
+          description {
+            processedHtml
+            macros{
+              ref
+              descriptor
+              name
+              config {
+                info {
+                  header
+                }             
+              }
             }
           }
         }
-      ]
+      }
     }
   }
 }
 ----
 
-<.> The description now contains `<editor-macro>` tags in its `processedHtml` property.
-<.> Using the `macrosAsJson` property, you can get the type and content of the macros.
+This time, you only get the explicit fields you were looking for
+
+.Output from the field-based query
+[source,json]
+----
+...
+"macros": [
+  {
+    "ref": "2f7601da-e586-414e-a387-b2e76731f4bb",
+    "descriptor": "com.enonic.app.panelmacros:info",
+    "name": "info",
+    "config": {
+      "info": {
+        "header": "Habitats",
+      }
+    }
+  }
+]
+...
+----
+
+By accessing the macro config, you are able to down drill into every single field, accessing all the details you actually you need.
+
+That's a wrap for rich text handling!
+
+

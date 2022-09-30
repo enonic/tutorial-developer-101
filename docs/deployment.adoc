@@ -3,7 +3,7 @@ include::.variables.adoc[]
 :description: {description-deployment}
 :vhost-host: xp-admin.com
 
-Next, we'll look into how you can deploy your application for real-life usage. There are essentially two options - Enonic Cloud, and everything else.
+In this final chapter, we'll look into how you can deploy your application for real-life usage. There are essentially two options - Enonic Cloud, and everything else.
 
 == Deploy to Enonic Cloud
 
@@ -13,7 +13,7 @@ Enough with the sales pitch. Follow the steps below to get deploy your app on En
 
 === Task: Install application
 . Sign up for a free trial by visiting https://cloud.enonic.com (no credit card needed)
-. Create a new solution (NB! Choose the `CMS essentials` template) - go with the default values
+. Create a new solution. Choose the `CMS essentials` template, and go with the default values
 . Connect CLI to the cloud by running this command, and follow the instructions:
 +
 [source,bash,{subs}]
@@ -32,20 +32,20 @@ enonic cloud app install
 
 === Task: import and publish your content
 
-Since the cloud is a completely new environment, the content you created locally will not be available here.
+Since the cloud instance is a completely new environment, the content you created locally will not be available here.
 
 You can choose to 
 a) manually create new content on the server, or 
 b) export and import content from your local machine to the server.
 
-Lets do the import:
+Lets try the import:
 
-. In your local sandbox - Using Content Studio, select the root item in your content structure (the site)
-. Open the Content Studio right hand panel called `Data toolbox`
+. In your local sandbox - Using Content Studio, select the root item you want to export (for instance the site)
+. From the context panel on the right, open the `Data toolbox` widget.
 . Click export, select and download the export (this will place a zip file on your local device)
-. Via Cloud Console, sign into to your environment by clicking the login button for your environment.
+. Via Cloud Console, sign into to your XP environment by clicking the login button for your environment.
 . Launch Content Studio, and open the `Data toolbox` panel on your server instance.
-. Using Data toolbox, upload and import the file that was saved on your local device. Content studio should now fill up with content items.
+. Using Data toolbox, upload and then import the file that was saved on your local device. Content studio should now fill up with content items.
 . Finally, select the root item, and select `Publish tree` from the top right action menu in Content studio. After publishing, validate that your content is listed as "Published".
 
 With the app installed, and fresh content available - we are ready for the final step.
@@ -57,14 +57,12 @@ To make your content accessible publicly, the final step is to create a Route. F
 +
 * Choose target environment (if there are more than one)
 * Accept the default domain
-* Use the internal path `/site/default/master/my-first-site` (Given that this actually matches your content)
-* The public path could be `/imadeit`
+* Use the internal path `/site/default/master` (Given that this actually matches your content project)
+* The public path could for instance be `/imadeit`
 +
 . Once the route has been created, you may click its link in the Cloud console to visit it. 
 
-NOTE: Remember to add /api to your browser's URL in order to access the GraphQL API
-
-Congratulations, you are now live :-)
+Congratulations, your API is now live, with your content :-)
 
 For more information on Enonic Cloud, visit https://enonic.com/platform/cloud[the Enonic Cloud marketing page].
 
@@ -81,7 +79,7 @@ For more details on deplying the platform, check out https://developer.enonic.co
 
 === Installing the app
 
-Regardless of how you deploy your XP instance, installing commonly done in one of two ways:
+Regardless of how you deploy your XP instance, installing your app is commonly done in one of two ways:
 
 === Task: Alt 1 - via Admin Console
 
@@ -89,20 +87,18 @@ Follow these simple steps:
 
 NOTE: Your application executable (*.jar file) can be found in `project-folder/build/libs/`
 
-. Log into your XP deployment (user must have Administrator priveliges)
-. Use the XP to navigate to the applications page
-. Choose install from the toolbar and upload your application `.jar` file. You can drag and drop your application or navigate the file hierarchy via the upload button.
+. Log into the XP admin console (user must have Administrator priveliges)
+. From the XP menu, open the Applications tool.
+. Choose install from the toolbar, and upload your application `.jar` file. You can drag and drop your application or navigate the file hierarchy via the upload button.
 +
 .Drag and drop applications to upload them
 image::deployment-app-upload.png["The application installation menu with a blue overlay. The overlay says 'drop files to upload'",{image-xl}]
-// TODO: add image here
-
 
 === Alt 2: via API
 
-If you have access to your server's management API (available on port 4848), you can also deploy directly via this endpoint, or by using the https://developer.enonic.com/docs/enonic-cli/master/xp#app[CLI].
+If you have access to your server's management API (available on port 4848), you can also deploy directly via this endpoint, or by using https://developer.enonic.com/docs/enonic-cli/master/xp#app[the CLI].
 
-This is most commonly used in a https://developer.enonic.com/guides/ci-cd-for-xp-apps[Continuous Integration/Delivery] setup, where your build server automatically checks out, builds and installs the application.
+This approach is most commonly used in a https://developer.enonic.com/guides/ci-cd-for-xp-apps[Continuous Integration/Delivery] setup, where your build server automatically checks out, builds and installs the application.
 
 
 [#vhosts]
@@ -122,10 +118,10 @@ enabled = true <--.-->
 
 mapping.example.host = {p1-site-slug}.com <--.-->
 mapping.example.source = / <--.-->
-mapping.example.target = /site/default/master/{p1-site-slug}/
+mapping.example.target = /site/default/master
 ----
 <.> Enable vhosts configuration
-<.> Intercept requests to `{p1-site-slug}.com`
+<.> For all requests to `{p1-site-slug}.com`
 <.> Map any request that starts with this path ...
 <.> ... to the internal URL.
 
@@ -176,7 +172,6 @@ TIP: On Linux and macOS you'll find the hosts file at `/etc/hosts`. On Windows, 
 
 . Now access `http://{vhost-host}:8080` in your browser. If all has gone well, you should see the familiar XP login screen.
 
-
 === Vhost troubleshooting
 
 If you're not seeing anything when you direct your browser to `http://{vhost-host}:8080` or aren't able to access the resources, that may be due to a browser setting. Try using a different browser and see if that makes a difference. Alternatively, you can try running
@@ -202,6 +197,7 @@ You might not be able to do much with that output, but it means the mapping has 
 
 Congrats! You've reached the end of this introduction. If you'd like to go further now, try one of the following guides which introduce additional aspects of the Enonic experience?
 
-https://developer.enonic.com/guides/headless-cms-intro[Introduction to headless CMS]:: If you've enjoyed the headless aspects of this introduction, why not visit this guide to further your knowledge of how to use the GraphQL API and how to customize it.
-https://developer.enonic.com/guides/my-first-site[My first site]:: If you're interested in building a traditional CMS-based application with server rendered pages, this is the guide for you. It covers building pages and using more Content Studio building blocks such as regions, parts, and page templates.
-https://developer.enonic.com/guides/my-first-webapp[My first webapp]:: If you're more interested in building web apps than web sites, how about this guide which focuses more on the web app aspects, including JavaScript controllers, serving assets, and routing.
+https://developer.enonic.com/docs/headless-cms-intro[Introduction to headless CMS]:: If you've enjoyed the headless aspects of this introduction, why not visit this guide to further your knowledge of how to use the GraphQL API and how to customize it.
+https://developer.enonic.com/docs/next.xp[Building sites with Enonic and Next.js]:: Everything you need to start building Next.js-based sites with Enonic as your CMS. This integration allow editors to enjoy full WYSIWYG editing
+https://developer.enonic.com/guides/my-first-site[My first site]:: If you're interested in building a traditional CMS-based application with server rendered pages in Enonic (no 3rd party framework required), this is the guide for you. It covers building pages and using building blocks such as regions, parts, and page templates.
+https://developer.enonic.com/guides/my-first-webapp[My first webapp]:: Build webapps and APIs directly in Enonic. Focuses on JavaScript controllers, serving assets, and routing.

@@ -65,7 +65,7 @@ This set of inputs would be rendered as in the following picture. As specified i
 .TextLine inputs showing common configuration options
 image::input-type-common-configuration.png["Three TextLine inputs showing all the common configuration options: labels, help text, default text, and occurrences.",{image-xl}]
 
-==== Occurrences
+=== Occurrences
 
 The occurrences configuration option decides how XP treats the input value. Use occurrences to indicate whether an input is expected to be a list or a single element and whether the input is required or not. The occurrences element has two required attributes, `minimum` and `maximum`. Use these to control the number of instances the user can create.
 
@@ -142,7 +142,7 @@ Because referencing other content types comes with a lot of variability, the Con
 
 https://developer.enonic.com/docs/xp/stable/cms/input-types#contentselector[The full list of ContentSelector configuration options] is available in the reference docs, including a number of examples to explain content inclusion and exclusion. However, a simple configuration could look like this:
 
-.A basic ContentSelector configuration that only allows one content type
+.A basic ContentSelector configuration that only allows one specific content type
 [source, xml]
 ----
 <input name="mycontentselector" type="ContentSelector">
@@ -261,11 +261,9 @@ Description:: The reindeer (Rangifer tarandus), also known as caribou in North A
 
 == Headless: fetching linked content and images
 
-TIP: Remember: you'll find the playground at {p1-api-url}.
+Finally, it's time to introduce the grapqh in GraphQL. A ContentSelector input will store a reference to the target content item. When using the Guillotine API, you may simply follow this reference to access the target content, and access it's fields instantly. 
 
-The way to link to linked content in GraphQL is to add it as a field as part of the data. This query will fetch all {content-type-1}s and their linked {content-type-2}s:
-
-.Query to fetch {content-type-1}s with their associated favorite animals
+.Fetch {content-type-1}s and their associated favorite animals
 [source,GraphQL,{subs}]
 ----
 {

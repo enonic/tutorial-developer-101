@@ -2,19 +2,19 @@
 include::.variables.adoc[]
 :description: {description-content}
 
-In this {document}, we'll start working with sites and content types in XP. We'll look at how we create content and how it's stored, as well as how to create and publish sites. To achieve this, we'll start working with and getting familiar with _Content Studio_, XP's content editing suite.
+In this {document}, we'll start working with content types in XP. We'll look at how we create content and how it's stored, as well as how to create and publish it. To achieve this, we'll start working with and getting familiar with _Content Studio_, XP's content editing suite.
 
-This {document} gives a brief introduction to Content Studio and how to use it. For a more comprehensive overview, watch https://www.youtube.com/watch?v=tR9KHOcZOs0[this short video on Content Studio basics] or head to the https://developer.enonic.com/docs/content-studio/stable[Content Studio reference documentation].
+This {document} only gives you a brief introduction to Content Studio and how to use it. For a more comprehensive overview, watch https://www.youtube.com/watch?v=tR9KHOcZOs0[this short video on Content Studio basics] or head to the https://developer.enonic.com/docs/content-studio/stable[Content Studio reference documentation].
 
 NOTE: {see-prev-docs}
 
 == What are content types?
 
-Content types are schemas that tell XP what properties a piece of content of a particular type can have. Think of a piece of content as a collection of data. Its content type describes what data that piece of content can and must have.
+Every content item created in Enonic has a specific content type. The content type defines the data fields (aka properties) that piece of content can and must have.
 
-If you're used to working with databases, you can think of content types as table schemas and contents as the rows of a table. The properties are the columns specified by the schema. Similarly, a content type is much like a _(data) type_ or a _class_ in many programming languages: something that describes the shape of your data. A piece of content is a manifestation/instance of that data type. The properties of the content type specify what that data type contains.
+A JavaScript analogy: If a content type is a JSON schema, the content item is a JSON that matches the schema. Actually, this is not so far from how things actually work - as you will see later 😊
 
-IMPORTANT: Content types belong to XP applications. If you stop or remove an application that contains a content type, you'll no longer be able to create content of that type, and rendering and previewing content of that type will not work.
+IMPORTANT: Content types are defined and installed via applications. If you stop or remove an application that contains a content type, you'll no longer be able to create or edit content of that type.
 
 == Task: The {content-type-1} content type
 
@@ -23,9 +23,9 @@ Now that we know what a content type is, let's look at how we create them and ho
 .The target for our first content type
 image::content-type-target.png["A content creation form with name and biography fields", {image-xl}]
 
-. To get started, make sure you're in the project folder (`{project-name}`) that you created in a previous {document}. All paths will be relative to this root folder.
-. Create a directory for content types: `src/main/resources/site/content-types`. XP is quite particular about project folder structure, so you need to put content types right where it expects to find them.
-. Create a directory called `{content-type-1}` in the newly created `content-types` directory. XP expects all content types to have their own directories.
+. To get started, make sure you're in the project folder (`{project-name}/`) that you created in a previous {document}. All paths will be relative to this root folder.
+. Create a directory for content types: `src/main/resources/site/content-types/`. XP is quite particular about project folder structure, so you need to put content types right where it expects to find them.
+. Create a directory called `{content-type-1}` in the newly created `content-types/` directory. XP expects all content types to have their own directories.
 . Within the `{content-type-1}` directory, create a file called `{content-type-1}.xml`. The file name must match the directory name  (except for the file extension). The full path to the content type from the project root should thus be `src/main/resources/site/content-types/{content-type-1}/{content-type-1}.xml`.
 
 . In the `{content-type-1}.xml` file, place the following contents:
@@ -54,10 +54,10 @@ image::content-type-target.png["A content creation form with name and biography 
 </content-type>
 ----
 +
-<1> This is the name of the content type and is what will be displayed in Content Studio when you create a piece of content of this type.
-<2> This is a short description of what the content type is. It's not strictly required, but it's highly recommended to add a description to all your content types.
-<3> This is where we specify what properties this content type contains. The contents of this tag control what we see and are able to edit in Content Studio.
-<4> This is a property of the content type. The `type` attribute specifies what kind of input field the user will see in Content Studio, and the `label` specifies how the input will be labeled.
+<1> This is what will be displayed in Content Studio when creating new content.
+<2> This is an optional description, but it is still recommended to add, as it will make life easier for your editors.
+<3> This is where we specify which fields (aka inputs) this content type shall have, basically the form, as seen in Content Studio.
+<4> The `type` attribute specifies what kind of input input the user will see in Content Studio, and the `label` specifies how the input will be labeled.
 +
 NOTE: Content types also have a large number of other, optional fields that we won't get into here. If you'd like to learn more about this, consult https://developer.enonic.com/docs/xp/stable/cms/content-types[the reference documentation].
 +
@@ -73,20 +73,22 @@ If everything goes well, you should see your sandbox logs update now. And that's
 
 As mentioned in the introduction, Content Studio is XP's content management interface. Use it to navigate, create, edit, and publish content and sites. Content Studio also lets you preview pages and other content types that have a visual component.
 
-To access Content Studio from the XP landing page (or anywhere in XP), use the admin menu and select "Content Studio".
+To access Content Studio from the XP home page (or anywhere in XP), use the top right XP menu and select "Content Studio".
 
-Wanna get a quick overview over Content Studio? Watch https://www.youtube.com/watch?v=tR9KHOcZOs0[this short video on Content Studio basics] for a quick overview of how Content Studio works and what you can do with it. If you'd rather just keep reading: we'll introduce everything as we go along, so you should be able to follow anyway.
+Wanna get a quick overview over Content Studio? Watch https://www.youtube.com/watch?v=tR9KHOcZOs0[this short video on Content Studio basics] for a quick overview of how Content Studio works and what you can do with it. If you'd rather just keep reading: we'll introduce everything as we go along.
 
 == Sites
 
-Now we're finally ready to create some actual content! With your sandbox up and running, navigate to Content Studio. You should be met with an empty studio that tells you are "wasting this space":
+You're finally ready to create some actual content! With your sandbox up and running, navigate to Content Studio. You should be met with an empty studio that tells you are "wasting this space":
 
 .An empty content studio
 image::content-studio-empty.png[What Content Studio looks like when it's completely empty., {image-xl}]
 
 === Task: Creating a site
 
-Before we can create our content, we need a _site_ to hold it. Sites are a special content type that ships with Content Studio. It's one of a very small number of content types that we can place at the very root of the content hierarchy. A site is like a root node that we can nest other content under. When we create a new site, we can also specify which applications it uses, and that's where our application comes into play.
+Before you can create content, you need a _site_. Sites are a special content type that ships with Content Studio. It's one of a very small number of content types that we can place at the very root of the content hierarchy. A site is like a root node that we can nest other content under. 
+
+When we create a new site, we can also specify which applications it uses, and that's where our application comes into play.
 
 . To get going, press the "New..." button in the toolbar. This will bring up a "Create Content" dialog that looks something like this:
 +
@@ -102,16 +104,16 @@ When you select it, your browser will take you to a new tab (or window, dependin
 .Creating a new site in Content Studio.
 image::content-studio-new-site.png[Creating a new site in content studio. There is a form with site options on the left., {image-xl}]
 
-. Add the site name in the first field (with the `<Display Name>` placeholder). It's our first site, so let's go with "{p1-site-name}". Notice that when you do this, the path below the input field gets automatically updated to match what you input. You can manually override the path if you wish, but we'll leave it as is for now.
-. The description field is used to describe what the site is about. It's an optional field, so you can either leave it blank or add a description of your liking.
-. The next field, "Applications", is important. This is where we tell Content Studio what sort of applications the site uses and thus what content types we can create within it. Select the "Headless Starter" app.
+. Add the site name in the first field (the one with the `<Display Name>` placeholder). Being your first site, how about using "{p1-site-name}". Notice that when you do this, the path below the input field gets automatically updated to match what you input. You can manually override the path if you wish, but we'll leave it as is for now.
+. The `description` field is used to describe what the site is about. It's an optional field, so you can leave it blank.
+. The next field, `Applications, is important. This is where we tell Content Studio what sort of applications the site uses and thus what content types we can create within it. Now, select the "Vanilla Example" app.
 
 Your site form should now look a little something like this.
 
 .A filled out site creation form
 image::content-studio-site-filled-out.png[What the site form looks like after filling out the necessary fields., {image-xl}]
 
-To confirm and return to the Content Studio hierarchy, press "Save" in the menu bar. Feel free to close the tab (you won't be needing it again).
+To confirm and return to the Content Studio hierarchy, press kbd:[Save] in the menu bar. Feel free to close the tab (you won't be needing it again).
 
 TIP: You can also use the keyboard shortcut kbd:[ctrl+s] on Linux and Windows and kbd:[⌘+s] on macOS to save your content. Additionally kbd:[ctrl+enter]/kbd:[⌘+enter] saves the content for you and then closes the tab for you.
 

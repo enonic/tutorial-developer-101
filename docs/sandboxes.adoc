@@ -2,7 +2,7 @@
 include::.variables.adoc[]
 :description: {description-sandboxes}
 
-In this {document} we'll introduce the fundamental concepts of Enonic XP development. You'll get a brief introduction to the Enonic command line interface (CLI), XP _sandboxes_, starter kits, and building and deploying apps on XP. By the end of the {document} you'll have spun up an instance of XP and deployed an app to it.
+In this {document} we'll introduce the fundamental concepts of Enonic XP. You'll get a brief introduction to the Enonic command line interface (CLI), XP _sandboxes_, starter kits, and building and deploying on XP. By the end of the {document} you'll have spun up an instance of XP and deployed an app to it.
 
 There's lots to cover, so let's get to it, shall we?
 
@@ -20,7 +20,7 @@ It should output something that looks a bit like this:
 
 .Main help page
 ----
-Enonic CLI v.2.1.1
+Enonic CLI v.2.3.1
 Manage XP instances, home folders and projects
 
 USAGE:
@@ -39,10 +39,10 @@ COMMANDS:
      latest    Check for latest version
      vacuum    Removes old version history and segments from content storage
      help, h   Shows a list of commands or help for one command
-
+   
 CLOUD COMMANDS:
      cloud  Manage Enonic cloud
-
+   
 PROJECT COMMANDS:
      sandbox  Manage XP development instances
      project  Manage XP development projects
@@ -67,7 +67,7 @@ USAGE:
    Enonic CLI sandbox [global options] command [command options] [arguments...]
 
 VERSION:
-   2.1.1
+   2.3.1
 
 COMMANDS:
    list, ls         List all sandboxes
@@ -81,10 +81,11 @@ GLOBAL OPTIONS:
    --help, -h  show help
 ----
 
-
 == Sandboxes
 
-When talking about _sandboxes_, we're actually talking about local instances of Enonic XP. Having a local (and running) instance of XP is essential for an effective development workflow. Using sandboxes allows you to run different versions of XP because each sandbox has an associated XP version. In this guide, though, we'll stick to using a single sandbox.
+When talking about _sandboxes_, we're actually discussing local instances of Enonic XP. Having a local (and running) instance of XP is essential for an effective development workflow. 
+
+Sandboxes allow you to run different versions of XP because each sandbox has an associated XP version. In this guide, though, we'll stick to using a single sandbox.
 
 Let's create a new sandbox by using the CLI. When you create a new sandbox, the CLI will present you with a few questions for configuring the sandbox, such as the sandbox name. To respond to a question, type in the desired response and press kbd:[enter].
 
@@ -99,12 +100,12 @@ When prompted, give your sandbox the name: `tutorial`. Next, when asked which XP
 If you press kbd:[enter] without entering a response, the CLI will use the default response. The default response to a question is listed in parentheses after the question.
 ====
 
-The CLI will download the Enonic XP SDK distribution for your operating system and link it to the sandbox.
+The CLI will now download the Enonic XP SDK distribution for your operating system and link it to the sandbox.
 
 .Creating a sandbox
 ----
 ? Sandbox name tutorial
-? Enonic XP distribution: mac-sdk-7.7.3 (latest,stable)
+? Enonic XP distribution: mac-sdk-7.11.0 (latest,stable)
 Downloading distro [===============>-----------------------------------------------------------------------------]  16.55%
 ----
 
@@ -114,7 +115,7 @@ Once completed, we can use the CLI to start the sandbox:
 
 [TIP]
 ====
-You can also run the sandbox with the `--dev` flag. This makes the sandbox automatically pick up certain changes to deployed applications, including most of the work we'll be doing in the coming {document}s. Read https://developer.enonic.com/docs/xp/stable/apps/build-system#development_mode[more about dev mode] in the reference docs. With the flag, the command would be
+You can also run the sandbox with the `--dev` flag. This makes the sandbox automatically pick up certain changes to locally deployed applications, including most of the work we'll be doing in the coming {document}s. Read https://developer.enonic.com/docs/xp/stable/apps/build-system#development_mode[more about dev mode] in the reference docs. With the flag, the command would be
 
   enonic sandbox start --dev
 ====
@@ -130,15 +131,14 @@ _  _ \_  __ \  __ \_  __ \_  /_  ___/   __  |/_/__  __ \
 \___//_/ /_/\____//_/ /_//_/  \___/     /_/|_| _  .___/
                                                /_/
 
-# Enonic XP 7.6.1
-# Built on 2021-02-25T14:26:46Z (hash = 6359021fdb52fda156e39465d824153c915d903c, branch = 7.6)
-# OpenJDK 64-Bit Server VM 11.0.10 (AdoptOpenJDK)
-# Linux 5.4.108 (amd64)
-# Install directory is $HOME/.enonic/distributions/enonic-xp-linux-sdk-7.6.1
+# Enonic XP 7.10.3
+# Built on 2022-08-31T13:24:37Z (hash = e4ea190187bd27bc1143a29c4ff2c80e564f58c0, branch = e4ea190187bd27bc1143a29c4ff2c80e564f58c0)
+# OpenJDK 64-Bit Server VM 11.0.15 (GraalVM Community)
+# Mac OS X 12.4 (x86_64)
+# Install directory is $HOME/.enonic/distributions/enonic-xp-mac-sdk-7.10.3
 # Home directory is $HOME/.enonic/sandboxes/tutorial/home
 [...]
 ----
-
 
 The initial output gives you a lot of information about this sandbox, including its home and install directories. We won't be needing them in this {document}, but knowing where you can find these details might be useful at a later time.
 
@@ -196,7 +196,7 @@ If some ports are unavailable, you'll have to find out what programs are using t
 
 == Admin console
 
-With your sandbox running, lets have a look at XP's admin console.
+With your sandbox running, lets have a look at XP's web interface.
 Point your browser to http://localhost:8080[http://localhost:8080^].
 
 You should see the XP boot page:
@@ -211,7 +211,7 @@ You should now see the following:
 .The XP login screen
 image::xp-login.png[The XP login screen, {image-xl}]
 
-NOTE: THe background picture gets updated with new versions of XP
+NOTE: The background picture gets updated with every new version of XP
 
 From the login screen, click ".. or log in without a user". 
 
@@ -228,7 +228,7 @@ NOTE: If the welcome tour does not start automatically or if you want to take it
 
 The applications in the welcome tour all modify the XP admin experience, so once you've installed them, you'll get some extra entries in the XP admin menu that you can explore:
 
-.The XP admin menu with new entries
+.The XP menu with new entries
 image::admin-menu-with-apps.png["The XP Admin menu with extra apps installed. It shows the newly added apps between the menu items 'Home' and 'Users'.", {image-xs}]
 
-NOTE: XP localizes the admin interface automatically based on your browsers preferred language, so things may be translated to another language based you your setup.
+NOTE: XP localizes the admin interface automatically based on your browsers preferred language, so things may be translated to another language based you your settings.

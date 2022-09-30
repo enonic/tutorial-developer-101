@@ -3,13 +3,13 @@ include::.variables.adoc[]
 :image-folder: images
 :description: {description-media-and-images}
 
-Naturally, XP can also store any files you would want to serve or associate with any data. This {document} explores how XP stores uploaded data and focuses on how its image tools work. At the end of the chapter we'll walk through how to use images in a headless fashion.
+Naturally, XP can also store any files you would want to serve or associate with your content. This {document} explores how XP stores uploaded data and focuses on how its image tools work. At the end of the chapter we'll walk through how to use images in a headless fashion.
 
 NOTE: {see-prev-docs} This {document} requires that you've got your site up and running.
 
 == Media types
 
-Media types are content types that ship with XP. When you upload a file to XP, XP will assign it one of a number of preexisting media types based on the file's content. Some common media types are images, audio, video, and executables.
+Media types are standard content types that ship with XP. When you upload a file to XP, XP will assign it one of a number of preexisting media types based on the file's content. Some common media types are images, audio, video, and executables.
 
 For a full overview of all the media types baked into XP, see the https://developer.enonic.com/docs/xp/stable/cms/content-types#media[reference docs for media content types].
 
@@ -28,7 +28,7 @@ To get familiar with uploading media to XP, let's start with one of the most com
 
 . Find an image to upload. For the purposes of the tasks in this {document}, you should work with an image where the important part isn't centered in the shot. If you have one yourself, feel free to use that. If not, how about using https://unsplash.com/photos/8oLnCRz7hwM[this picture of a lion] by https://unsplash.com/@keyursphotography[Keyur Nandaniya]?
 
-. Create a folder for your images. Call it "{image-folder}". Just like the "{content-type-1}" folder we created previously, place the folder directly under your site.
+. Create a folder for your images. Call it "{image-folder}". Just like the "{content-type-1}" folder we created previously, you may place the folder anywhere in your project structure.
 . Open the "create content" dialog. Press the upload button to bring up your OS's file browsing dialog and select your image. You can also drag and drop the image from your file system browser onto the dialog.
 
 And that's all it takes to upload files to Content Studio!
@@ -70,7 +70,7 @@ For instance, if you have a look at the image you uploaded earlier, you should s
 
 == XP's image service
 
-Whenever XP serves you an image, either via the headless API or in a traditional CMS solution, the image is served via https://developer.enonic.com/docs/xp/stable/runtime/engines/site-engine/image-service[XP's image service].
+Whenever XP serves you an image, the image is served via https://developer.enonic.com/docs/xp/stable/runtime/engines/site-engine/image-service[XP's image service].
 
 The image service takes care of scaling and applying filters to your images based on parameters you give it. For instance, it's common to want to have all images in a section conform to the same dimensions. But because images are generally of different shapes and sizes, this might require cropping the image. The image service takes care of that for you as long as you specify what you want.
 
@@ -113,7 +113,7 @@ Now, when the image gets cropped, XP will take care of keeping the lion in focus
 .The same image with the same crop, but with a focal point
 image::image-cropped-focused.jpg["A crop of the lion in the savannah. In this square image, the lion is in full view square in the center.",{image-s}]
 
-== Headless
+== Headless API
 
 Guillotine makes it easy to fetch the data that you've uploaded. Some functionality is shared between all media types, while other queries only work on specific media types. We'll look at how to fetch general media and then have a closer look at what we can do with images.
 
@@ -125,8 +125,8 @@ To get the resource URL of media you have uploaded, use the `mediaUrl` property 
 ----
 {
   guillotine {
-    getChildren(
-      key: "${site}/images") {
+    query(
+      contentTypes: "media:image") {
       displayName
       ... on media_Image { <--.-->
         mediaUrl <--.-->
@@ -136,8 +136,25 @@ To get the resource URL of media you have uploaded, use the `mediaUrl` property 
 }
 ----
 
-<.> This allows us to query properties that belong to the `media:Image` type.
-<.> The `mediaUrl` property (also available on all other media types) gives you the relative path (from the server) to the media
+<.> This allows us to query properties that belong to the `media:Image` GraphQL type.
+<.> The `mediaUrl` property (also available on all other media types) gives you a URL from where the raw file can be downloaded.
+
+.The response would look something like this:
+[source,json]
+----
+{
+  "data": {
+    "guillotine": {
+      "query": [
+        {
+          "displayName": "lion",
+          "mediaUrl": "/admin/site/preview/default/draft/_/attachment/inline/3eb3c7d7-b929-4eb8-9a55-8d6121335a65:f091f93b4d4290bdc4b1ba5dec97f6beead34873/lion.jpg"
+        }
+      ]
+    }
+  }
+}
+----
 
 === Images
 
@@ -148,15 +165,15 @@ The scale argument is required and allows you to specify how you want to crop th
 As the name implies, the filters argument lets you apply filters to the image. Use filters to apply coloration functions and to rotate and flip images on the fly. To combine filters, separate them with a semicolon.
 https://developer.enonic.com/docs/xp/stable/runtime/engines/site-engine/image-service#filters[The filters documentation] has an exhaustive list of the available filters.
 
-For instance, we could get all the images under the `images` folder, scaled to 750x600 pixels, in grayscale, and flipped upside down with a query like this:
+For instance, we could get all the images under the `images` folder, scaled to 750x600 pixels, in grayscale, with a query like this:
 
 .A GraphQL query that both scales and applies a filter to images in the `images` folder
 [source, GraphQL]
 ----
 {
   guillotine {
-    getChildren(
-      key: "${site}/images") {
+    query(
+      contentTypes: "media:image") {
       displayName
       ... on media_Image {
         imageUrl( <--.-->
