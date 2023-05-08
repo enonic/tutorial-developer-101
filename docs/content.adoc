@@ -34,12 +34,12 @@ image::content-type-target.png["A content creation form with name and biography 
 [source,xml,{subs}]
 ----
 <content-type>
-  <display-name>{content-type-1-capitalized}</display-name> <!--1-->
-  <description>Information about an {content-type-1}</description> <!--2-->
+  <display-name>{content-type-1-capitalized}</display-name> // <1>
+  <description>Information about an {content-type-1}</description> // <2>
   <super-type>base:structured</super-type>
-  <form> <--3-->
+  <form> // <3>
 
-    <input name="name" type="TextLine"> <--4-->
+    <input name="name" type="TextLine"> // <4>
       <label>Name</label>
       <help-text>
         The {content-type-1}'s name (if different from their professional moniker).

@@ -176,14 +176,14 @@ In your app, add a new file:
 <styles>
   <image name="square-grayscale">
     <display-name>Grayscale</display-name>
-    <aspect-ratio>1:1</aspect-ratio> <--.-->
-    <filter>hsbcolorize(0x000000); grayscale(); border(6, 0x000000)</filter> <--.-->
+    <aspect-ratio>1:1</aspect-ratio> // <1>
+    <filter>hsbcolorize(0x000000); grayscale(); border(6, 0x000000)</filter> // <2>
   </image>
 </styles>
 ----
 +
-<.> The aspect ratio controls how the image is displayed. 1:1 makes the image square.
-<.> The filters add a grayscale effect and then a border
+<1> The aspect ratio controls how the image is displayed. 1:1 makes the image square.
+<2> The filters add a grayscale effect and then a border
 +
 NOTE: https://developer.enonic.com/docs/xp/stable/cms/styles[The styles reference doc] has more information on how you can style your images, so go check it out for a deeper dive.
 +

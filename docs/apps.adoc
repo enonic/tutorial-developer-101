@@ -37,11 +37,11 @@ The project directory contains a fairly minimal XP application. The most relevan
 .Essential XP project structure
 [source,files]
 ----
-build.gradle <--1-->
-gradle.properties <--2-->
+build.gradle // <1>
+gradle.properties // <2>
 src/
   main/
-    resources/ <!--3-->
+    resources/ // <3>
 ----
 
 <1> The main build file for defining dependencies and more build-related details.
