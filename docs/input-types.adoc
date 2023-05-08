@@ -29,30 +29,30 @@ To show an example of the configuration options work, let's examine some TextLin
 [source,xml]
 ----
 <input type="TextLine" name="textlineRequired">
-  <label>Required input with default</label> <--.-->
-  <help-text>This text should provide additional information to the user.</help-text> <--.-->
-  <occurrences minimum="1" maximum="1" /> <--.-->
-  <default>This is a required input with a default value.</default> <--.-->
+  <label>Required input with default</label> // <1>
+  <help-text>This text should provide additional information to the user.</help-text> // <2>
+  <occurrences minimum="1" maximum="1" /> // <3>
+  <default>This is a required input with a default value.</default> // <4>
 </input>
 
 <input type="TextLine" name="textlineOptional">
   <label>Optional input</label>
-  <occurrences minimum="0" maximum="1" /> <--.-->
+  <occurrences minimum="0" maximum="1" /> // <5>
 </input>
 
 <input type="TextLine" name="textlineList">
   <label>Input list</label>
   <help-text>This input can have as many values as you want.</help-text>
-  <occurrences minimum="0" maximum="0" /> <--.-->
+  <occurrences minimum="0" maximum="0" /> // <6>
 </input>
 ----
 
-<.> The label is shown above the input and provides context to the user.
-<.> The help-text can provide extra context and information to the user. It's hidden by default, but can be shown by activating the help text button.
-<.> This instance of the `occurrences` element specifies that this is a _required_ input. It must have _at least_ one and _at most_ one value.
-<.> The default value gets added to the input by default. The user can manually override this.
-<.> When you specify `minimum="0"` and `maximum="1"` on an `occurrences` element, that makes the input optional. This is the default.
-<.> When you set `maximum="0"` on an `occurrences` element, the user can add as many values as they want to.
+<1> The label is shown above the input and provides context to the user.
+<2> The help-text can provide extra context and information to the user. It's hidden by default, but can be shown by activating the help text button.
+<3> This instance of the `occurrences` element specifies that this is a _required_ input. It must have _at least_ one and _at most_ one value.
+<4> The default value gets added to the input by default. The user can manually override this.
+<5> When you specify `minimum="0"` and `maximum="1"` on an `occurrences` element, that makes the input optional. This is the default.
+<6> When you set `maximum="0"` on an `occurrences` element, the user can add as many values as they want to.
 
 This set of inputs would be rendered as in the following picture. As specified in the above configuration, notice:
 
@@ -189,7 +189,7 @@ When you've got that, create a GraphQL query that'll fetch all {content-type-1}s
 <content-type>
   <display-name>{content-type-2-capitalized}</display-name>
   <description>An {content-type-2} that lives on planet Earth</description>
-  <display-name-label>Species</display-name-label> <!--.-->
+  <display-name-label>Species</display-name-label> // <1>
   <super-type>base:structured</super-type>
   <form>
 
@@ -209,7 +209,7 @@ When you've got that, create a GraphQL query that'll fetch all {content-type-1}s
 </content-type>
 ----
 +
-<.> This field lets you customize what Content Studio calls the "display name" field and what it puts in the placeholder text.
+<1> This field lets you customize what Content Studio calls the "display name" field and what it puts in the placeholder text.
 +
 . Next, update the `{content-type-1-capitalized}` content type.
 +
@@ -233,7 +233,7 @@ When you've got that, create a GraphQL query that'll fetch all {content-type-1}s
       <label>About the {content-type-1}</label>
     </input>
 
-    <input name="favoriteAnimal" type="ContentSelector"> <!--.-->
+    <input name="favoriteAnimal" type="ContentSelector"> // <1>
       <label>Favorite animal</label>
       <config>
         <allowContentType>animal</allowContentType>
@@ -245,7 +245,7 @@ When you've got that, create a GraphQL query that'll fetch all {content-type-1}s
 </content-type>
 ----
 +
-<.> This ContentSelector uses the `config` section to narrow the possible types of content to only be `{content-type-2-capitalized}`
+<1> This ContentSelector uses the `config` section to narrow the possible types of content to only be `{content-type-2-capitalized}`
 +
 . Create some {content-type-2}s. Either pick your favorites, or, if you're not feeling creative, add these (content from Wikipedia), :
 +

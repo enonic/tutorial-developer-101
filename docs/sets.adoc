@@ -15,7 +15,7 @@ Field sets are the simplest form of sets XP offers. Field sets group inputs visu
 ----
 <field-set>
   <label>FieldSet</label>
-  <items> <--.-->
+  <items> // <1>
     <input type="TextLine" name="fieldSetTextLine">
       <label>Heading</label>
     </input>
@@ -27,7 +27,7 @@ Field sets are the simplest form of sets XP offers. Field sets group inputs visu
 </field-set>
 ----
 
-<.> Use the `items` element place other inputs inside the field set.
+<1> Use the `items` element place other inputs inside the field set.
 
 .A field set grouping
 image::field-set.png["A field set containing TextLine and TextArea inputs. The field set groups them visually and adds a shared heading.",{image-s}]
@@ -66,7 +66,7 @@ To add an item set, use it as you would any other input type: place it within th
     <item-set name="albums">
       <label>Album</label>
       <occurrences minimum="0" maximum="0" />
-      <items> <--.-->
+      <items> // <1>
         <input name="title" type="TextLine">
           <label>Title</label>
           <occurrences minimum="1" maximum="1" />
@@ -81,7 +81,7 @@ To add an item set, use it as you would any other input type: place it within th
 </content-type>
 ----
 
-<.> Much like with field sets, use the `items` element to nest inputs within the item set.
+<1> Much like with field sets, use the `items` element to nest inputs within the item set.
 
 Note that the remaining fields of the form have been left out in the above example.
 
@@ -138,14 +138,14 @@ Open your {content-type-2} content type and add a single-select option set.  As 
 
     <option-set name="feedingBehavior">
       <label>Feeding behavior</label>
-      <options minimum="1" maximum="1"> <--.-->
+      <options minimum="1" maximum="1"> // <1>
 
-        <option name="herbivore"> <--.-->
+        <option name="herbivore"> // <2>
           <help-text>Subsists primarily on plant material.</help-text>
           <label>Herbivore</label>
         </option>
 
-        <option name="carnivore"> <--.-->
+        <option name="carnivore"> // <3>
           <label>Carnivore</label>
           <help-text>Subsists primarily on animal tissue and meat.</help-text>
           <items>
@@ -205,7 +205,7 @@ Open your {content-type-2} content type and add a single-select option set.  As 
     <option-set name="distribution">
       <label>Distribution across continents</label>
       <help-text>Continents where the animal can be found in the wild</help-text>
-      <options minimum="0" maximum="0"> <--.-->
+      <options minimum="0" maximum="0"> // <1>
 
         <option name="africa">
           <label>Africa</label>
@@ -262,7 +262,7 @@ Open your {content-type-2} content type and add a single-select option set.  As 
   </form>
 </content-type>
 ----
-<.> This specifies that you can add as many distributions as you want.
+<1> This specifies that you can add as many distributions as you want.
 
 Notice that the use of the `mixin` helps us both reduce duplication and keep all options in sync. If we wanted to add more data, such as current population, we would only have to add it to the `mixin` to have it duplicate to all distributions.
 
@@ -461,8 +461,8 @@ When fetching option set data, you can get the list of currently selected items 
       ... on {project-name-query}_{content-type-2-capitalized} {
         data {
           feedingBehavior {
-            _selected <--.-->
-            carnivore { <--.-->
+            _selected // <1>
+            carnivore { // <2>
               prey
             }
           }
@@ -480,8 +480,8 @@ When fetching option set data, you can get the list of currently selected items 
 
 ----
 
-<.> This provides data about what the {content-type-2}s selected feeding behavior is.
-<.> This gives more data about a particular option
+<1> This provides data about what the {content-type-2}s selected feeding behavior is.
+<2> This gives more data about a particular option
 
 .Query result
 [source,json]

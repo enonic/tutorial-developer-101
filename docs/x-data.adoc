@@ -54,7 +54,7 @@ You do this via the site.xml.
 [source,xml,{subs}]
 ----
 <site>
-  <x-data name="<xdata-name>" allowContentTypes="{content-type-2}"/> <--.-->
+  <x-data name="<xdata-name>" allowContentTypes="{content-type-2}"/>
   <form/>
 </site>
 ----

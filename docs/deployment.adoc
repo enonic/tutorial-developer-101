@@ -114,16 +114,16 @@ An example vhosts file that achieves the mapping mentioned would look something 
 
 [src,properties,{subs}]
 ----
-enabled = true <--.-->
+enabled = true // <1>
 
-mapping.example.host = {p1-site-slug}.com <--.-->
-mapping.example.source = / <--.-->
-mapping.example.target = /site/default/master
+mapping.example.host = {p1-site-slug}.com // <2>
+mapping.example.source = / // <3>
+mapping.example.target = /site/default/master // <4>
 ----
-<.> Enable vhosts configuration
-<.> For all requests to `{p1-site-slug}.com`
-<.> Map any request that starts with this path ...
-<.> ... to the internal URL.
+<1> Enable vhosts configuration
+<2> For all requests to `{p1-site-slug}.com`
+<3> Map any request that starts with this path ...
+<4> ... to the internal URL.
 
 For more details on virtual hosts, head to the https://developer.enonic.com/docs/xp/stable/deployment/vhosts[_Vhosts_ section of the deployment documentation].
 
@@ -140,19 +140,19 @@ Then, to test it, we'll have override your computer's DNS resolver by updating i
 ----
 enabled = true
 
-mapping.admin.host = {vhost-host} <--.-->
+mapping.admin.host = {vhost-host} // <1>
 mapping.admin.source = /
 mapping.admin.target = /admin
 mapping.admin.idProvider.system = default
 
-mapping.localhost.host = localhost <--.-->
+mapping.localhost.host = localhost // <2>
 mapping.localhost.source = /
 mapping.localhost.target = /
 mapping.localhost.idProvider.system = default
 ----
 +
-<.> If requests go to `xp-admin.com:8080`, send them to `:8080/admin`
-<.> This block allows the localhost mappings to keep working. Without this, `localhost:8080` wouldn't work anymore.
+<1> If requests go to `xp-admin.com:8080`, send them to `:8080/admin`
+<2> This block allows the localhost mappings to keep working. Without this, `localhost:8080` wouldn't work anymore.
 +
 . If you're watching your XP process, you should see a message like this:
 

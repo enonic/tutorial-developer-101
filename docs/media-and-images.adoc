@@ -45,14 +45,14 @@ For instance, if you have a look at the image you uploaded earlier, you should s
 // ....
   "data": {
     "media": {
-      "attachment": "lion.jpg", <--.-->
-      "focalPoint": { <--.-->
+      "attachment": "lion.jpg", // <1>
+      "focalPoint": { // <2>
         "x": 0.246875,
         "y": 0.6653906106948853
       }
     }
   },
-  "attachment": { <--.-->
+  "attachment": { // <3>
     "name": "lion.jpg",
     "label": "source",
     "binary": "lion.jpg",
@@ -63,9 +63,9 @@ For instance, if you have a look at the image you uploaded earlier, you should s
 // ....
 ----
 
-<.> References the name of the attachment specified in the `attachment` property.
-<.> If you have set a focal point, its position will also show up here. See the next task for how to set one.
-<.> The image attachment with data about the file, such as MIME type and size.
+<1> References the name of the attachment specified in the `attachment` property.
+<2> If you have set a focal point, its position will also show up here. See the next task for how to set one.
+<3> The image attachment with data about the file, such as MIME type and size.
 
 
 == XP's image service
@@ -128,16 +128,16 @@ To get the resource URL of media you have uploaded, use the `mediaUrl` property 
     query(
       contentTypes: "media:image") {
       displayName
-      ... on media_Image { <--.-->
-        mediaUrl <--.-->
+      ... on media_Image { // <1>
+        mediaUrl // <2>
       }
     }
   }
 }
 ----
 
-<.> This allows us to query properties that belong to the `media:Image` GraphQL type.
-<.> The `mediaUrl` property (also available on all other media types) gives you a URL from where the raw file can be downloaded.
+<1> This allows us to query properties that belong to the `media:Image` GraphQL type.
+<2> The `mediaUrl` property (also available on all other media types) gives you a URL from where the raw file can be downloaded.
 
 .The response would look something like this:
 [source,json]
@@ -176,20 +176,20 @@ For instance, we could get all the images under the `images` folder, scaled to 7
       contentTypes: "media:image") {
       displayName
       ... on media_Image {
-        imageUrl( <--.-->
-          type: absolute, <--.-->
-          scale: "block(600,700)", <--.-->
-          filter: "grayscale(); border(10, 0x000000)") <--.-->
+        imageUrl( // <1>
+          type: absolute, // <2>
+          scale: "block(600,700)", // <3>
+          filter: "grayscale(); border(10, 0x000000)") // <4>
       }
     }
   }
 }
 ----
 
-<.> The `imageUrl` function lets you specify how you want the images to look.
-<.> The `type` argument specifies whether the URL should be absolute or relative to the server.
-<.> The scale argument specifies the dimensions of the image.
-<.> The filter argument lets you apply filters.
+<1> The `imageUrl` function lets you specify how you want the images to look.
+<2> The `type` argument specifies whether the URL should be absolute or relative to the server.
+<3> The scale argument specifies the dimensions of the image.
+<4> The filter argument lets you apply filters.
 
 The above query should return a response that looks a little something like this:
 
