@@ -5,9 +5,8 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="generator" content="Asciidoctor 2.0.20">
-<meta name="description" content="{description-apps}">
-<meta name="author" content="Unresolved directive in apps.adoc - include::.variables.adoc[]">
-<title>{title-apps}</title>
+<meta name="description" content="Learn how to create XP projects and how to build and deploy your apps to an XP instance.">
+<title>App development</title>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,300italic,400,400italic,600,600italic%7CNoto+Serif:400,400italic,700,700italic%7CDroid+Sans+Mono:400,700">
 <style>
 /*! Asciidoctor default stylesheet | MIT License | https://asciidoctor.org */
@@ -438,10 +437,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 </head>
 <body class="article toc2 toc-right">
 <div id="header">
-<h1>{title-apps}</h1>
-<div class="details">
-<span id="author" class="author">Unresolved directive in apps.adoc - include::.variables.adoc[]</span><br>
-</div>
+<h1>App development</h1>
 <div id="toc" class="toc2">
 <div id="toctitle">Table of Contents</div>
 <ul class="sectlevel1">
@@ -468,7 +464,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <i class="fa icon-note" title="Note"></i>
 </td>
 <td class="content">
-{see-prev-docs}
+The tasks and examples in this chapter are based on work done in previous chapters (starting with <a href="sandboxes.ahtml">the sandboxes chapter</a>). If you want to follow along with the examples, make sure you&#8217;re all caught up.
 </td>
 </tr>
 </table>
@@ -516,7 +512,7 @@ The complete list of starters can be found on <a href="https://market.enonic.com
 <p>Choose <code>Vanilla starter</code> from the list of available starters.</p>
 </li>
 <li>
-<p>When prompted enter the name, press kbd:[enter] to accept the default.</p>
+<p>When prompted enter the name, press <kbd>enter</kbd> to accept the default.</p>
 <div class="admonitionblock note">
 <table>
 <tr>
@@ -537,12 +533,12 @@ Project names matter. XP does not support running two apps with the same name wi
 <p>When prompted to select a sandbox, choose the  <code>tutorial</code> sandbox we created previously.</p>
 </li>
 <li>
-<p>Finally, press kbd:[enter] to skip opening the starter documentation. If you answer yes, the documentation for this starter will open in your browser. This is useful if you&#8217;re using a starter you&#8217;re not familiar with (and aren&#8217;t following a guide).</p>
+<p>Finally, press <kbd>enter</kbd> to skip opening the starter documentation. If you answer yes, the documentation for this starter will open in your browser. This is useful if you&#8217;re using a starter you&#8217;re not familiar with (and aren&#8217;t following a guide).</p>
 </li>
 </ol>
 </div>
 <div class="paragraph">
-<p>If you used the default values as specified in the steps, a directory named <code>{project-name}/</code> should have been created during the process. If you used a different project name or project directory name, your directory will have a different name.</p>
+<p>If you used the default values as specified in the steps, a directory named <code>myproject/</code> should have been created during the process. If you used a different project name or project directory name, your directory will have a different name.</p>
 </div>
 <div class="paragraph">
 <p>The project directory contains a fairly minimal XP application. The most relevant parts of the directory are:</p>
@@ -601,7 +597,7 @@ src/
 <p>Change to the project directory:</p>
 <div class="listingblock">
 <div class="content">
-<pre>cd {project-name}</pre>
+<pre>cd myproject</pre>
 </div>
 </div>
 </li>
@@ -641,7 +637,7 @@ BUILD SUCCESSFUL in 5s
 </table>
 </div>
 <div class="paragraph">
-<p>After the build has finished, you&#8217;ll have a new file in your project directory, located under the <code>build/libs</code> subdirectory. Assuming you have used the default name, it&#8217;ll be located at <code>build/libs/{project-name}.jar</code> when at the project root. This file is the executable file that contains your application.</p>
+<p>After the build has finished, you&#8217;ll have a new file in your project directory, located under the <code>build/libs</code> subdirectory. Assuming you have used the default name, it&#8217;ll be located at <code>build/libs/myproject.jar</code> when at the project root. This file is the executable file that contains your application.</p>
 </div>
 <div class="paragraph">
 <p>To deploy the app to the sandbox, use the CLI again. Keep the server running and in a different terminal, run this from the project root folder:</p>
@@ -672,16 +668,16 @@ The <code>enonic project deploy</code> command will build your project if you ha
 <div class="listingblock">
 <div class="title">Application output</div>
 <div class="content">
-<pre>[...] - Local application [{project-name-full}] installed successfully
-[...] - Application [{project-name-full}] started successfully</pre>
+<pre>[...] - Local application [com.example.myproject] installed successfully
+[...] - Application [com.example.myproject] started successfully</pre>
 </div>
 </div>
 <div class="paragraph">
-<p>You can also verify that the application was installed correctly by using the admin console ({xp-url}): Open the "Applications" app from the main launcher panel and look for your application in the list.</p>
+<p>You can also verify that the application was installed correctly by using the admin console (<a href="http://localhost:8080" class="bare">http://localhost:8080</a>): Open the "Applications" app from the main launcher panel and look for your application in the list.</p>
 </div>
 <div class="imageblock">
 <div class="content">
-<img src="applications-vanilla.png" alt="The applications list with a few applications installed. Also shows application details, such as content install time, version, and required XP system version for the selected application." width="{image-xl}">
+<img src="media/applications-vanilla.png" alt="The applications list with a few applications installed. Also shows application details, such as content install time, version, and required XP system version for the selected application." width="1200">
 </div>
 <div class="title">Figure 1. The applications list with the headless starter installed</div>
 </div>
@@ -710,7 +706,7 @@ The <code>enonic project deploy</code> command will build your project if you ha
 </div>
 <div class="literalblock">
 <div class="content">
-<pre>mv build/libs/{project-name}.jar ~/.enonic/sandboxes/tutorial/home/deploy/</pre>
+<pre>mv build/libs/myproject.jar ~/.enonic/sandboxes/tutorial/home/deploy/</pre>
 </div>
 </div>
 <div class="admonitionblock note">
@@ -731,7 +727,7 @@ If you have to deploy manually when going through this tutorial, please get in t
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2023-08-04 10:51:27 UTC
+Last updated 2023-08-04 10:57:18 UTC
 </div>
 </div>
 </body>

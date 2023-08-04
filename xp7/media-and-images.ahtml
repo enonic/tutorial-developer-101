@@ -5,9 +5,8 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="generator" content="Asciidoctor 2.0.20">
-<meta name="description" content="{description-media-and-images}">
-<meta name="author" content="Unresolved directive in media-and-images.adoc - include::.variables.adoc[]">
-<title>{title-media-and-images}</title>
+<meta name="description" content="How does XP deal with images and other media? This chapter covers XP media support, how to upload and query for media, and how to work with images.">
+<title>Media and images</title>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,300italic,400,400italic,600,600italic%7CNoto+Serif:400,400italic,700,700italic%7CDroid+Sans+Mono:400,700">
 <style>
 /*! Asciidoctor default stylesheet | MIT License | https://asciidoctor.org */
@@ -438,10 +437,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 </head>
 <body class="article toc2 toc-right">
 <div id="header">
-<h1>{title-media-and-images}</h1>
-<div class="details">
-<span id="author" class="author">Unresolved directive in media-and-images.adoc - include::.variables.adoc[]</span><br>
-</div>
+<h1>Media and images</h1>
 <div id="toc" class="toc2">
 <div id="toctitle">Table of Contents</div>
 <ul class="sectlevel1">
@@ -468,7 +464,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <div id="preamble">
 <div class="sectionbody">
 <div class="paragraph">
-<p>Naturally, XP can also store any files you would want to serve or associate with your content. This {document} explores how XP stores uploaded data and focuses on how its image tools work. At the end of the chapter we&#8217;ll walk through how to use images in a headless fashion.</p>
+<p>Naturally, XP can also store any files you would want to serve or associate with your content. This chapter explores how XP stores uploaded data and focuses on how its image tools work. At the end of the chapter we&#8217;ll walk through how to use images in a headless fashion.</p>
 </div>
 <div class="admonitionblock note">
 <table>
@@ -477,7 +473,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <i class="fa icon-note" title="Note"></i>
 </td>
 <td class="content">
-{see-prev-docs} This {document} requires that you&#8217;ve got your site up and running.
+The tasks and examples in this chapter are based on work done in previous chapters (starting with <a href="sandboxes.ahtml">the sandboxes chapter</a>). If you want to follow along with the examples, make sure you&#8217;re all caught up. This chapter requires that you&#8217;ve got your site up and running.
 </td>
 </tr>
 </table>
@@ -503,7 +499,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 </div>
 <div class="imageblock">
 <div class="content">
-<img src="media-drag-and-drop.png" alt="The drag and drop interface. Three file icons being dragged onto a large, blue, circular drop zone." width="{image-m}">
+<img src="media/media-drag-and-drop.png" alt="The drag and drop interface. Three file icons being dragged onto a large, blue, circular drop zone." width="900">
 </div>
 <div class="title">Figure 1. Dragging and dropping files to the "create content dialog"</div>
 </div>
@@ -521,10 +517,10 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <div class="olist arabic">
 <ol class="arabic">
 <li>
-<p>Find an image to upload. For the purposes of the tasks in this {document}, you should work with an image where the important part isn&#8217;t centered in the shot. If you have one yourself, feel free to use that. If not, how about using <a href="https://unsplash.com/photos/8oLnCRz7hwM">this picture of a lion</a> by <a href="https://unsplash.com/@keyursphotography">Keyur Nandaniya</a>?</p>
+<p>Find an image to upload. For the purposes of the tasks in this chapter, you should work with an image where the important part isn&#8217;t centered in the shot. If you have one yourself, feel free to use that. If not, how about using <a href="https://unsplash.com/photos/8oLnCRz7hwM">this picture of a lion</a> by <a href="https://unsplash.com/@keyursphotography">Keyur Nandaniya</a>?</p>
 </li>
 <li>
-<p>Create a folder for your images. Call it "images". Just like the "{content-type-1}" folder we created previously, you may place the folder anywhere in your project structure.</p>
+<p>Create a folder for your images. Call it "images". Just like the "artist" folder we created previously, you may place the folder anywhere in your project structure.</p>
 </li>
 <li>
 <p>Open the "create content" dialog. Press the upload button to bring up your OS&#8217;s file browsing dialog and select your image. You can also drag and drop the image from your file system browser onto the dialog.</p>
@@ -540,7 +536,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <h2 id="media_in_data_toolbox"><a class="link" href="#media_in_data_toolbox">Media in Data Toolbox</a></h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>Like we saw in the <a href="content.ahtml#_task_data_toolbox">{document} on content</a>, Data Toolbox lets you view and edit your content. Images and other media are also available in Data Toolbox as content, but in addition to the same properties you saw previously, media also have a property called <code>attachment</code>. The attachment specifies the actual media file that you have uploaded.</p>
+<p>Like we saw in the <a href="content.ahtml#_task_data_toolbox">chapter on content</a>, Data Toolbox lets you view and edit your content. Images and other media are also available in Data Toolbox as content, but in addition to the same properties you saw previously, media also have a property called <code>attachment</code>. The attachment specifies the actual media file that you have uploaded.</p>
 </div>
 <div class="paragraph">
 <p>For instance, if you have a look at the image you uploaded earlier, you should see that it points to the image file you uploaded. If you added a focal point, you&#8217;ll see that specified under the <code>media</code> property too. If you view the content as JSON, some relevant parts of the structure are the <code>data</code> and <code>attachment</code> properties:</p>
@@ -609,7 +605,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 </div>
 <div class="imageblock">
 <div class="content">
-<img src="image-content-form.png" alt="A content form showing the image with image editing tools, inputs for caption, alternative text, copyright, and tags." width="{image-xl}">
+<img src="media/image-content-form.png" alt="A content form showing the image with image editing tools, inputs for caption, alternative text, copyright, and tags." width="1200">
 </div>
 <div class="title">Figure 2. The image content form</div>
 </div>
@@ -653,7 +649,7 @@ This task is mostly an exercise in tooling. To see the results of your editing, 
 </div>
 <div class="imageblock">
 <div class="content">
-<img src="image-cropped-unfocused.jpg" alt="A crop of the lion in the savannah image. The image is square and the only part of the lion that is visible is part of its hind leg." width="{image-s}">
+<img src="media/image-cropped-unfocused.jpg" alt="A crop of the lion in the savannah image. The image is square and the only part of the lion that is visible is part of its hind leg." width="750">
 </div>
 <div class="title">Figure 3. Cropped image without focal point</div>
 </div>
@@ -669,7 +665,7 @@ This task is mostly an exercise in tooling. To see the results of your editing, 
 <p>Move the circle onto the lion (or whatever your focal point is) and press "apply".</p>
 <div class="imageblock">
 <div class="content">
-<img src="image-editing-focal-point.png" alt="The lion image with a red circle indicating the focal point around its head." width="{image-xl}">
+<img src="media/image-editing-focal-point.png" alt="The lion image with a red circle indicating the focal point around its head." width="1200">
 </div>
 <div class="title">Figure 4. The focal point editor</div>
 </div>
@@ -681,7 +677,7 @@ This task is mostly an exercise in tooling. To see the results of your editing, 
 </div>
 <div class="imageblock">
 <div class="content">
-<img src="image-cropped-focused.jpg" alt="A crop of the lion in the savannah. In this square image, the lion is in full view square in the center." width="{image-s}">
+<img src="media/image-cropped-focused.jpg" alt="A crop of the lion in the savannah. In this square image, the lion is in full view square in the center." width="750">
 </div>
 <div class="title">Figure 5. The same image with the same crop, but with a focal point</div>
 </div>
@@ -819,11 +815,11 @@ This task is mostly an exercise in tooling. To see the results of your editing, 
 </div>
 </div>
 <div class="paragraph">
-<p>Which, if you have followed the steps in this {document}, should show you something like this if you try and navigate to the <code>imageUrl</code> property value:</p>
+<p>Which, if you have followed the steps in this chapter, should show you something like this if you try and navigate to the <code>imageUrl</code> property value:</p>
 </div>
 <div class="imageblock">
 <div class="content">
-<img src="image-processed.jpg" alt="The lion image, cropped, in black and white, and flipped upside down." width="{image-s}">
+<img src="media/image-processed.jpg" alt="The lion image, cropped, in black and white, and flipped upside down." width="750">
 </div>
 <div class="title">Figure 6. The processed image</div>
 </div>
@@ -833,7 +829,7 @@ This task is mostly an exercise in tooling. To see the results of your editing, 
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2023-08-04 10:51:27 UTC
+Last updated 2023-08-04 10:57:18 UTC
 </div>
 </div>
 </body>

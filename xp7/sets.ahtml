@@ -5,9 +5,8 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="generator" content="Asciidoctor 2.0.20">
-<meta name="description" content="{description-sets}">
-<meta name="author" content="Unresolved directive in sets.adoc - include::.variables.adoc[]">
-<title>{title-sets}</title>
+<meta name="description" content="XP has a number of ways to group inputs together. Learn all about them in this chapter.">
+<title>Sets</title>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,300italic,400,400italic,600,600italic%7CNoto+Serif:400,400italic,700,700italic%7CDroid+Sans+Mono:400,700">
 <style>
 /*! Asciidoctor default stylesheet | MIT License | https://asciidoctor.org */
@@ -438,10 +437,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 </head>
 <body class="article toc2 toc-right">
 <div id="header">
-<h1>{title-sets}</h1>
-<div class="details">
-<span id="author" class="author">Unresolved directive in sets.adoc - include::.variables.adoc[]</span><br>
-</div>
+<h1>Sets</h1>
 <div id="toc" class="toc2">
 <div id="toctitle">Table of Contents</div>
 <ul class="sectlevel1">
@@ -451,7 +447,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <li><a href="#comparison_to_other_data_structures">Comparison to other data structures</a></li>
 </ul>
 </li>
-<li><a href="#task_adding_an_item_set_to_content_type_1_capitalized">Task: adding an item set to <code>{content-type-1-capitalized}</code></a></li>
+<li><a href="#task_adding_an_item_set_to_artist">Task: adding an item set to <code>Artist</code></a></li>
 <li><a href="#option_sets">Option sets</a></li>
 <li><a href="#mixins">Mixins</a></li>
 <li><a href="#task_add_option_sets">Task: add option sets</a>
@@ -461,7 +457,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <li><a href="#result">Result</a></li>
 </ul>
 </li>
-<li><a href="#task_bonus_extend_album_list_for_content_type_1s">Task (bonus): extend album list for {content-type-1}s</a>
+<li><a href="#task_bonus_extend_album_list_for_artists">Task (bonus): extend album list for artists</a>
 <ul class="sectlevel2">
 <li><a href="#option_a_top_level_option_set">Option A: Top level option set</a></li>
 <li><a href="#option_b_top_level_item_set">Option B: top level item set</a></li>
@@ -480,7 +476,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <div id="preamble">
 <div class="sectionbody">
 <div class="paragraph">
-<p>XP also offers ways for you to group inputs, both visually and structurally. Collectively, these are known as sets. This {document} explains what they are and how to use them.</p>
+<p>XP also offers ways for you to group inputs, both visually and structurally. Collectively, these are known as sets. This chapter explains what they are and how to use them.</p>
 </div>
 <div class="admonitionblock note">
 <table>
@@ -489,7 +485,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <i class="fa icon-note" title="Note"></i>
 </td>
 <td class="content">
-{see-prev-docs}
+The tasks and examples in this chapter are based on work done in previous chapters (starting with <a href="sandboxes.ahtml">the sandboxes chapter</a>). If you want to follow along with the examples, make sure you&#8217;re all caught up.
 </td>
 </tr>
 </table>
@@ -529,7 +525,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 </div>
 <div class="imageblock">
 <div class="content">
-<img src="field-set.png" alt="A field set containing TextLine and TextArea inputs. The field set groups them visually and adds a shared heading." width="{image-s}">
+<img src="media/field-set.png" alt="A field set containing TextLine and TextArea inputs. The field set groups them visually and adds a shared heading." width="750">
 </div>
 <div class="title">Figure 1. A field set grouping</div>
 </div>
@@ -540,7 +536,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <div class="sectionbody">
 <div class="imageblock">
 <div class="content">
-<img src="item-set-sample.png" alt="A pair of visually grouped inputs on a card element. The card has a header that says 'contact info'. There is also a button to add more contact info forms." width="{image-s}">
+<img src="media/item-set-sample.png" alt="A pair of visually grouped inputs on a card element. The card has a header that says 'contact info'. There is also a button to add more contact info forms." width="750">
 </div>
 <div class="title">Figure 2. An item set containing contact info</div>
 </div>
@@ -559,20 +555,20 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 </div>
 </div>
 <div class="sect1">
-<h2 id="task_adding_an_item_set_to_content_type_1_capitalized"><a class="link" href="#task_adding_an_item_set_to_content_type_1_capitalized">Task: adding an item set to <code>{content-type-1-capitalized}</code></a></h2>
+<h2 id="task_adding_an_item_set_to_artist"><a class="link" href="#task_adding_an_item_set_to_artist">Task: adding an item set to <code>Artist</code></a></h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>Let&#8217;s add an item set to the <code>{content-type-1-capitalized}</code>. All the people we entered back in <a href="content.ahtml#_add_some_friends">the content chapter</a> are successful musical artists, so we can create an item set for albums they have released.</p>
+<p>Let&#8217;s add an item set to the <code>Artist</code>. All the people we entered back in <a href="content.ahtml#_add_some_friends">the content chapter</a> are successful musical artists, so we can create an item set for albums they have released.</p>
 </div>
 <div class="paragraph">
-<p>To add an item set, use it as you would any other input type: place it within the <code>form</code> element of a content type. If we add it to the <code>{content-type-1-capitalized}</code> content type, it&#8217;d look something like this:</p>
+<p>To add an item set, use it as you would any other input type: place it within the <code>form</code> element of a content type. If we add it to the <code>Artist</code> content type, it&#8217;d look something like this:</p>
 </div>
 <div class="listingblock">
-<div class="title">{content-type-1-capitalized} with an added Item Set</div>
+<div class="title">Artist with an added Item Set</div>
 <div class="content">
 <pre class="highlight"><code class="language-xml" data-lang="xml">&lt;content-type&gt;
-  &lt;display-name&gt;{content-type-1-capitalized}&lt;/display-name&gt;
-  &lt;description&gt;A description of an {content-type-1}&lt;/description&gt;
+  &lt;display-name&gt;Artist&lt;/display-name&gt;
+  &lt;description&gt;A description of an artist&lt;/description&gt;
   &lt;super-type&gt;base:structured&lt;/super-type&gt;
   &lt;form&gt;
 
@@ -612,7 +608,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 </div>
 <div class="imageblock">
 <div class="content">
-<img src="item-set-album.png" alt="An example of using the Album item set with two albums included." width="{image-m}">
+<img src="media/item-set-album.png" alt="An example of using the Album item set with two albums included." width="900">
 </div>
 <div class="title">Figure 3. Item set for albums</div>
 </div>
@@ -623,7 +619,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <div class="sectionbody">
 <div class="imageblock">
 <div class="content">
-<img src="option-set-sample.png" alt="An input form labelled 'multi-selection'. The user has selected one out of four options. Some options contain extra data such as an image selector or other input fields." width="{image-s}">
+<img src="media/option-set-sample.png" alt="An input form labelled 'multi-selection'. The user has selected one out of four options. Some options contain extra data such as an image selector or other input fields." width="750">
 </div>
 <div class="title">Figure 4. A multi-select option set</div>
 </div>
@@ -656,7 +652,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <h2 id="task_add_option_sets"><a class="link" href="#task_add_option_sets">Task: add option sets</a></h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>In this section, we&#8217;ll use option sets to add some extra data to our <code>{content-type-2-capitalized}</code> data type. Our goal is:</p>
+<p>In this section, we&#8217;ll use option sets to add some extra data to our <code>Animal</code> data type. Our goal is:</p>
 </div>
 <div class="ulist">
 <ul>
@@ -674,10 +670,10 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <div class="sect2">
 <h3 id="single_select_dietary_data"><a class="link" href="#single_select_dietary_data">Single-select: dietary data</a></h3>
 <div class="paragraph">
-<p>Open your {content-type-2} content type and add a single-select option set.  As before, we use option sets as we would any other input type.</p>
+<p>Open your animal content type and add a single-select option set.  As before, we use option sets as we would any other input type.</p>
 </div>
 <div class="listingblock">
-<div class="title">The <code>{content-type-2-capitalized}</code> content type with feeding behavior</div>
+<div class="title">The <code>Animal</code> content type with feeding behavior</div>
 <div class="content">
 <pre class="highlight"><code class="language-xml" data-lang="xml">&lt;?xml version="1.0" encoding="utf-8"?&gt;
 &lt;content-type&gt;
@@ -755,12 +751,12 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 </div>
 </li>
 <li>
-<p>Moving onto our {content-type-2}s, add the multi-select option set.</p>
+<p>Moving onto our animals, add the multi-select option set.</p>
 </li>
 </ol>
 </div>
 <div class="listingblock">
-<div class="title">The <code>{content-type-2-capitalized}</code> content type with distribution data</div>
+<div class="title">The <code>Animal</code> content type with distribution data</div>
 <div class="content">
 <pre class="highlight"><code class="language-xml" data-lang="xml">&lt;?xml version="1.0" encoding="utf-8"?&gt;
 &lt;content-type&gt;
@@ -851,7 +847,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 </div>
 <div class="imageblock">
 <div class="content">
-<img src="option-sets.png" alt="Diet and distribution data filled out for lion. The feeding behaviour selected is 'Carnivore' and the list of prey includes zebras and giraffes. For the distribution data, Africa and Asia is selected, with a short text about how Lions live in these areas today." width="{image-xl}">
+<img src="media/option-sets.png" alt="Diet and distribution data filled out for lion. The feeding behaviour selected is 'Carnivore' and the list of prey includes zebras and giraffes. For the distribution data, Africa and Asia is selected, with a short text about how Lions live in these areas today." width="1200">
 </div>
 <div class="title">Figure 5. Distribution and feeding behavior for Lion</div>
 </div>
@@ -859,10 +855,10 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 </div>
 </div>
 <div class="sect1">
-<h2 id="task_bonus_extend_album_list_for_content_type_1s"><a class="link" href="#task_bonus_extend_album_list_for_content_type_1s">Task (bonus): extend album list for {content-type-1}s</a></h2>
+<h2 id="task_bonus_extend_album_list_for_artists"><a class="link" href="#task_bonus_extend_album_list_for_artists">Task (bonus): extend album list for artists</a></h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>We can also arbitrarily nest item sets and option sets. As mentioned above, try to extend the album list for {content-type-1}s to also allow for films. How you do this is up to you, but there are two main approaches:</p>
+<p>We can also arbitrarily nest item sets and option sets. As mentioned above, try to extend the album list for artists to also allow for films. How you do this is up to you, but there are two main approaches:</p>
 </div>
 <div class="olist arabic">
 <ol class="arabic">
@@ -934,7 +930,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 </div>
 <div class="imageblock">
 <div class="content">
-<img src="sets-option-set-wrapping-item-set.png" alt="An item set wrapping an option set. The option set has nested item sets within. Showing data about P!nk." width="{image-xl}">
+<img src="media/sets-option-set-wrapping-item-set.png" alt="An item set wrapping an option set. The option set has nested item sets within. Showing data about P!nk." width="1200">
 </div>
 <div class="title">Figure 6. Option A</div>
 </div>
@@ -989,7 +985,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 </div>
 <div class="imageblock">
 <div class="content">
-<img src="sets-item-set-wrapping-option-set.png" alt="An item set wrapping underlying option sets. Data about P!nk." width="{image-xl}">
+<img src="media/sets-item-set-wrapping-option-set.png" alt="An item set wrapping underlying option sets. Data about P!nk." width="1200">
 </div>
 <div class="title">Figure 7. Option B</div>
 </div>
@@ -1012,9 +1008,9 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <div class="content">
 <pre class="highlight"><code class="language-GraphQL" data-lang="GraphQL">{
   guillotine {
-    query(contentTypes:"{project-name-full}:{content-type-1}",
+    query(contentTypes:"com.example.myproject:artist",
       query: "displayName = 'P!nk'") {
-      ... on {project-name-query}_{content-type-1-capitalized} {
+      ... on com_example_myproject_Artist {
         data {
           albums {
             title
@@ -1068,9 +1064,9 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <div class="content">
 <pre class="highlight"><code class="language-GraphQL" data-lang="GraphQL">{
   guillotine {
-    query(contentTypes:"{project-name-full}:{content-type-2}",
+    query(contentTypes:"com.example.myproject:animal",
       query: "displayName = 'Lion'") {
-      ... on {project-name-query}_{content-type-2-capitalized} {
+      ... on com_example_myproject_Animal {
         data {
           feedingBehavior {
             _selected <i class="conum" data-value="1"></i><b>(1)</b>
@@ -1095,7 +1091,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <table>
 <tr>
 <td><i class="conum" data-value="1"></i><b>1</b></td>
-<td>This provides data about what the {content-type-2}s selected feeding behavior is.</td>
+<td>This provides data about what the animals selected feeding behavior is.</td>
 </tr>
 <tr>
 <td><i class="conum" data-value="2"></i><b>2</b></td>
@@ -1144,7 +1140,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2023-08-04 10:51:27 UTC
+Last updated 2023-08-04 10:57:18 UTC
 </div>
 </div>
 </body>

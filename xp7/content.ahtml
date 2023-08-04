@@ -5,9 +5,8 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="generator" content="Asciidoctor 2.0.20">
-<meta name="description" content="{description-content}">
-<meta name="author" content="Unresolved directive in content.adoc - include::.variables.adoc[]">
-<title>{title-content}</title>
+<meta name="description" content="Content types are one of the most essential building blocks of XP. Get familiar with what they are and how to create and use them in this chapter.">
+<title>Content and content types</title>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,300italic,400,400italic,600,600italic%7CNoto+Serif:400,400italic,700,700italic%7CDroid+Sans+Mono:400,700">
 <style>
 /*! Asciidoctor default stylesheet | MIT License | https://asciidoctor.org */
@@ -438,15 +437,12 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 </head>
 <body class="article toc2 toc-right">
 <div id="header">
-<h1>{title-content}</h1>
-<div class="details">
-<span id="author" class="author">Unresolved directive in content.adoc - include::.variables.adoc[]</span><br>
-</div>
+<h1>Content and content types</h1>
 <div id="toc" class="toc2">
 <div id="toctitle">Table of Contents</div>
 <ul class="sectlevel1">
 <li><a href="#what_are_content_types">What are content types?</a></li>
-<li><a href="#task_the_content_type_1_content_type">Task: The {content-type-1} content type</a></li>
+<li><a href="#task_the_artist_content_type">Task: The artist content type</a></li>
 <li><a href="#content_studio">Content Studio</a></li>
 <li><a href="#sites">Sites</a>
 <ul class="sectlevel2">
@@ -468,10 +464,10 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <div id="preamble">
 <div class="sectionbody">
 <div class="paragraph">
-<p>In this {document}, we&#8217;ll start working with content types in XP. We&#8217;ll look at how we create content and how it&#8217;s stored, as well as how to create and publish it. To achieve this, we&#8217;ll start working with and getting familiar with <em>Content Studio</em>, XP&#8217;s content editing suite.</p>
+<p>In this chapter, we&#8217;ll start working with content types in XP. We&#8217;ll look at how we create content and how it&#8217;s stored, as well as how to create and publish it. To achieve this, we&#8217;ll start working with and getting familiar with <em>Content Studio</em>, XP&#8217;s content editing suite.</p>
 </div>
 <div class="paragraph">
-<p>This {document} only gives you a brief introduction to Content Studio and how to use it. For a more comprehensive overview, watch <a href="https://www.youtube.com/watch?v=tR9KHOcZOs0">this short video on Content Studio basics</a> or head to the <a href="https://developer.enonic.com/docs/content-studio/stable">Content Studio reference documentation</a>.</p>
+<p>This chapter only gives you a brief introduction to Content Studio and how to use it. For a more comprehensive overview, watch <a href="https://www.youtube.com/watch?v=tR9KHOcZOs0">this short video on Content Studio basics</a> or head to the <a href="https://developer.enonic.com/docs/content-studio/stable">Content Studio reference documentation</a>.</p>
 </div>
 <div class="admonitionblock note">
 <table>
@@ -480,7 +476,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <i class="fa icon-note" title="Note"></i>
 </td>
 <td class="content">
-{see-prev-docs}
+The tasks and examples in this chapter are based on work done in previous chapters (starting with <a href="sandboxes.ahtml">the sandboxes chapter</a>). If you want to follow along with the examples, make sure you&#8217;re all caught up.
 </td>
 </tr>
 </table>
@@ -511,51 +507,51 @@ Content types are defined and installed via applications. If you stop or remove 
 </div>
 </div>
 <div class="sect1">
-<h2 id="task_the_content_type_1_content_type"><a class="link" href="#task_the_content_type_1_content_type">Task: The {content-type-1} content type</a></h2>
+<h2 id="task_the_artist_content_type"><a class="link" href="#task_the_artist_content_type">Task: The artist content type</a></h2>
 <div class="sectionbody">
 <div class="paragraph">
 <p>Now that we know what a content type is, let&#8217;s look at how we create them and how we make XP recognize them. We&#8217;ll create a content type that contains two input fields. When shown in Content Studio, it will look like this:</p>
 </div>
 <div class="imageblock">
 <div class="content">
-<img src="content-type-target.png" alt="A content creation form with name and biography fields" width="{image-xl}">
+<img src="media/content-type-target.png" alt="A content creation form with name and biography fields" width="1200">
 </div>
 <div class="title">Figure 1. The target for our first content type</div>
 </div>
 <div class="olist arabic">
 <ol class="arabic">
 <li>
-<p>To get started, make sure you&#8217;re in the project folder (<code>{project-name}/</code>) that you created in a previous {document}. All paths will be relative to this root folder.</p>
+<p>To get started, make sure you&#8217;re in the project folder (<code>myproject/</code>) that you created in a previous chapter. All paths will be relative to this root folder.</p>
 </li>
 <li>
 <p>Create a directory for content types: <code>src/main/resources/site/content-types/</code>. XP is quite particular about project folder structure, so you need to put content types right where it expects to find them.</p>
 </li>
 <li>
-<p>Create a directory called <code>{content-type-1}</code> in the newly created <code>content-types/</code> directory. XP expects all content types to have their own directories.</p>
+<p>Create a directory called <code>artist</code> in the newly created <code>content-types/</code> directory. XP expects all content types to have their own directories.</p>
 </li>
 <li>
-<p>Within the <code>{content-type-1}</code> directory, create a file called <code>{content-type-1}.xml</code>. The file name must match the directory name  (except for the file extension). The full path to the content type from the project root should thus be <code>src/main/resources/site/content-types/{content-type-1}/{content-type-1}.xml</code>.</p>
+<p>Within the <code>artist</code> directory, create a file called <code>artist.xml</code>. The file name must match the directory name  (except for the file extension). The full path to the content type from the project root should thus be <code>src/main/resources/site/content-types/artist/artist.xml</code>.</p>
 </li>
 <li>
-<p>In the <code>{content-type-1}.xml</code> file, place the following contents:</p>
+<p>In the <code>artist.xml</code> file, place the following contents:</p>
 <div class="listingblock">
-<div class="title">The '{content-type-1-capitalized}' content type</div>
+<div class="title">The 'Artist' content type</div>
 <div class="content">
 <pre class="highlight"><code class="language-xml" data-lang="xml">&lt;content-type&gt;
-  &lt;display-name&gt;{content-type-1-capitalized}&lt;/display-name&gt; <i class="conum" data-value="1"></i><b>(1)</b>
-  &lt;description&gt;Information about an {content-type-1}&lt;/description&gt; <i class="conum" data-value="2"></i><b>(2)</b>
+  &lt;display-name&gt;Artist&lt;/display-name&gt; <i class="conum" data-value="1"></i><b>(1)</b>
+  &lt;description&gt;Information about an artist&lt;/description&gt; <i class="conum" data-value="2"></i><b>(2)</b>
   &lt;super-type&gt;base:structured&lt;/super-type&gt;
   &lt;form&gt; <i class="conum" data-value="3"></i><b>(3)</b>
 
     &lt;input name="name" type="TextLine"&gt; <i class="conum" data-value="4"></i><b>(4)</b>
       &lt;label&gt;Name&lt;/label&gt;
       &lt;help-text&gt;
-        The {content-type-1}'s name (if different from their professional moniker).
+        The artist's name (if different from their professional moniker).
       &lt;/help-text&gt;
     &lt;/input&gt;
 
     &lt;input type="TextArea" name="about"&gt;
-      &lt;label&gt;About the {content-type-1}&lt;/label&gt;
+      &lt;label&gt;About the artist&lt;/label&gt;
     &lt;/input&gt;
 
   &lt;/form&gt;
@@ -601,7 +597,7 @@ Content types also have a large number of other, optional fields that we won&#82
 <i class="fa icon-note" title="Note"></i>
 </td>
 <td class="content">
-XP&#8217;s <code>input</code> elements are <em>not</em> the same as HTML <code>input</code> elements. To read more about it, <a href="input-types.ahtml">see the {document} on input types</a>.
+XP&#8217;s <code>input</code> elements are <em>not</em> the same as HTML <code>input</code> elements. To read more about it, <a href="input-types.ahtml">see the chapter on input types</a>.
 .
 </td>
 </tr>
@@ -645,7 +641,7 @@ XP&#8217;s <code>input</code> elements are <em>not</em> the same as HTML <code>i
 </div>
 <div class="imageblock">
 <div class="content">
-<img src="content-studio-empty.png" alt="What Content Studio looks like when it&#8217;s completely empty." width="{image-xl}">
+<img src="media/content-studio-empty.png" alt="What Content Studio looks like when it&#8217;s completely empty." width="1200">
 </div>
 <div class="title">Figure 2. An empty content studio</div>
 </div>
@@ -668,14 +664,14 @@ XP&#8217;s <code>input</code> elements are <em>not</em> the same as HTML <code>i
 <i class="fa icon-tip" title="Tip"></i>
 </td>
 <td class="content">
-You can also use the keyboard shortcut kbd:[Alt+n] to bring up the "Create Content" dialog.
+You can also use the keyboard shortcut <span class="keyseq"><kbd>Alt</kbd>+<kbd>n</kbd></span> to bring up the "Create Content" dialog.
 </td>
 </tr>
 </table>
 </div>
 <div class="imageblock">
 <div class="content">
-<img src="content-studio-create-content.png" alt="The Content Studio create content dialog." width="{image-xl}">
+<img src="media/content-studio-create-content.png" alt="The Content Studio create content dialog." width="1200">
 </div>
 <div class="title">Figure 3. The Content Studio create content dialog</div>
 </div>
@@ -687,13 +683,13 @@ You can also use the keyboard shortcut kbd:[Alt+n] to bring up the "Create Conte
 </div>
 <div class="imageblock">
 <div class="content">
-<img src="content-studio-new-site.png" alt="Creating a new site in content studio. There is a form with site options on the left." width="{image-xl}">
+<img src="media/content-studio-new-site.png" alt="Creating a new site in content studio. There is a form with site options on the left." width="1200">
 </div>
 <div class="title">Figure 4. Creating a new site in Content Studio.</div>
 </div>
 </li>
 <li>
-<p>Add the site name in the first field (the one with the <code>&lt;Display Name&gt;</code> placeholder). Being your first site, how about using "{p1-site-name}". Notice that when you do this, the path below the input field gets automatically updated to match what you input. You can manually override the path if you wish, but we&#8217;ll leave it as is for now.</p>
+<p>Add the site name in the first field (the one with the <code>&lt;Display Name&gt;</code> placeholder). Being your first site, how about using "My First Site". Notice that when you do this, the path below the input field gets automatically updated to match what you input. You can manually override the path if you wish, but we&#8217;ll leave it as is for now.</p>
 </li>
 <li>
 <p>The <code>description</code> field is used to describe what the site is about. It&#8217;s an optional field, so you can leave it blank.</p>
@@ -708,12 +704,12 @@ You can also use the keyboard shortcut kbd:[Alt+n] to bring up the "Create Conte
 </div>
 <div class="imageblock">
 <div class="content">
-<img src="content-studio-site-filled-out.png" alt="What the site form looks like after filling out the necessary fields." width="{image-xl}">
+<img src="media/content-studio-site-filled-out.png" alt="What the site form looks like after filling out the necessary fields." width="1200">
 </div>
 <div class="title">Figure 5. A filled out site creation form</div>
 </div>
 <div class="paragraph">
-<p>To confirm and return to the Content Studio hierarchy, press kbd:[Save] in the menu bar. Feel free to close the tab (you won&#8217;t be needing it again).</p>
+<p>To confirm and return to the Content Studio hierarchy, press <kbd>Save</kbd> in the menu bar. Feel free to close the tab (you won&#8217;t be needing it again).</p>
 </div>
 <div class="admonitionblock tip">
 <table>
@@ -722,7 +718,7 @@ You can also use the keyboard shortcut kbd:[Alt+n] to bring up the "Create Conte
 <i class="fa icon-tip" title="Tip"></i>
 </td>
 <td class="content">
-You can also use the keyboard shortcut kbd:[ctrl+s] on Linux and Windows and kbd:[⌘+s] on macOS to save your content. Additionally kbd:[ctrl+enter]/kbd:[⌘+enter] saves the content for you and then closes the tab for you.
+You can also use the keyboard shortcut <span class="keyseq"><kbd>ctrl</kbd>+<kbd>s</kbd></span> on Linux and Windows and <span class="keyseq"><kbd>⌘</kbd>+<kbd>s</kbd></span> on macOS to save your content. Additionally <span class="keyseq"><kbd>ctrl</kbd>+<kbd>enter</kbd></span>/<span class="keyseq"><kbd>⌘</kbd>+<kbd>enter</kbd></span> saves the content for you and then closes the tab for you.
 </td>
 </tr>
 </table>
@@ -737,27 +733,27 @@ You can also use the keyboard shortcut kbd:[ctrl+s] on Linux and Windows and kbd
 <h2 id="task_content_creation"><a class="link" href="#task_content_creation">Task: Content creation</a></h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>With the "{p1-site-name}" site highlighted, press "New &#8230;&#8203;" to open the "Create Content" menu again. This time around, you should have some more choices than what you did previously, including our very own content type "{content-type-1-capitalized}"!</p>
+<p>With the "My First Site" site highlighted, press "New &#8230;&#8203;" to open the "Create Content" menu again. This time around, you should have some more choices than what you did previously, including our very own content type "Artist"!</p>
 </div>
 <div class="imageblock">
 <div class="content">
-<img src="content-studio-new-content.png" alt="The &quot;Create Content&quot; dialog when creating content under the &quot;{p1-site-name}&quot; site. It contains more elements than previously, including the &quot;{content-type-1-capitalized}&quot; content type that we created earlier." width="{image-xl}">
+<img src="media/content-studio-new-content.png" alt="The &quot;Create Content&quot; dialog when creating content under the &quot;My First Site&quot; site. It contains more elements than previously, including the &quot;Artist&quot; content type that we created earlier." width="1200">
 </div>
 <div class="title">Figure 6. The "Create Content" dialog with more content types</div>
 </div>
 <div class="paragraph">
-<p>However, before we start creating {content-type-1}s, let&#8217;s create a folder. Because we&#8217;ll be using this site in the coming {document}s with more content types, having some hierarchy will make things easier. Choose a new folder and call it "{content-type-1}s".</p>
+<p>However, before we start creating artists, let&#8217;s create a folder. Because we&#8217;ll be using this site in the coming chapters with more content types, having some hierarchy will make things easier. Choose a new folder and call it "artists".</p>
 </div>
 <div class="paragraph">
-<p>Next, let&#8217;s create a few {content-type-1}s to get used to the workflow. We&#8217;ll start with Cardi B.</p>
+<p>Next, let&#8217;s create a few artists to get used to the workflow. We&#8217;ll start with Cardi B.</p>
 </div>
 <div class="olist arabic">
 <ol class="arabic">
 <li>
-<p>Select the {content-type-1}s folder (make sure it&#8217;s highlighted).</p>
+<p>Select the artists folder (make sure it&#8217;s highlighted).</p>
 </li>
 <li>
-<p>Create a new {content-type-1}.</p>
+<p>Create a new artist.</p>
 </li>
 <li>
 <p>Give it the display name "Cardi B".</p>
@@ -773,19 +769,19 @@ You can also use the keyboard shortcut kbd:[ctrl+s] on Linux and Windows and kbd
 </dd>
 <dt class="hdlist1">About</dt>
 <dd>
-<p>{content-about-cardi}</p>
+<p>Belcalis Marlenis Almánzar (born October 11, 1992), known professionally as Cardi B, is an American rapper and songwriter.</p>
 </dd>
 </dl>
 </div>
 <div class="imageblock">
 <div class="content">
-<img src="content-type-filled-out.png" alt="The form for &quot;{content-type-1}&quot; fully filled out." width="{image-xl}">
+<img src="media/content-type-filled-out.png" alt="The form for &quot;artist&quot; fully filled out." width="1200">
 </div>
-<div class="title">Figure 7. The content form filled out for the {content-type-1} "Cardi B"</div>
+<div class="title">Figure 7. The content form filled out for the artist "Cardi B"</div>
 </div>
 </li>
 <li>
-<p>Again, save and close the tab. Now repeat this process for these next two entries. Be aware that Content Studio lets you nest content, so if you try and create new content when "Cardi B" is selected in the hierarchy, it&#8217;ll nest the new content under "Cardi B". In our case, though, we want the {content-type-1}s to be nested directly under the current folder, so make sure "{content-type-1}s" folder is selected when you create new content.</p>
+<p>Again, save and close the tab. Now repeat this process for these next two entries. Be aware that Content Studio lets you nest content, so if you try and create new content when "Cardi B" is selected in the hierarchy, it&#8217;ll nest the new content under "Cardi B". In our case, though, we want the artists to be nested directly under the current folder, so make sure "artists" folder is selected when you create new content.</p>
 <div class="dlist">
 <div class="title">Missy Elliott (<a href="https://en.wikipedia.org/wiki/Missy_Elliott">Missy Elliott on Wikipedia</a>)</div>
 <dl>
@@ -795,7 +791,7 @@ You can also use the keyboard shortcut kbd:[ctrl+s] on Linux and Windows and kbd
 </dd>
 <dt class="hdlist1">About</dt>
 <dd>
-<p>{content-about-missy}</p>
+<p>Melissa Arnette Elliott (born July 1, 1971) is an American rapper, singer, songwriter, and record producer.</p>
 </dd>
 </dl>
 </div>
@@ -808,7 +804,7 @@ You can also use the keyboard shortcut kbd:[ctrl+s] on Linux and Windows and kbd
 </dd>
 <dt class="hdlist1">About</dt>
 <dd>
-<p>{content-about-pink}</p>
+<p>Alecia Beth Moore (born September 8, 1979), known professionally as Pink (stylized as P!nk), is an American singer and songwriter.</p>
 </dd>
 </dl>
 </div>
@@ -816,11 +812,11 @@ You can also use the keyboard shortcut kbd:[ctrl+s] on Linux and Windows and kbd
 </ol>
 </div>
 <div class="paragraph">
-<p>With these {content-type-1}s created, your content hierarchy should now list the site, the {content-type-1}s folder, and the three {content-type-1}s.</p>
+<p>With these artists created, your content hierarchy should now list the site, the artists folder, and the three artists.</p>
 </div>
 <div class="imageblock">
 <div class="content">
-<img src="content-studio-with-{content-type-1}s.png" alt="The content hierarchy showing the {p1-site-name} site with &quot;Cardi B&quot;, &quot;Missy Elliot&quot;, &quot;P!nk&quot;, and &quot;Templates&quot; listed directly underneath it." width="{image-xl}">
+<img src="media/content-studio-with-artists.png" alt="The content hierarchy showing the My First Site site with &quot;Cardi B&quot;, &quot;Missy Elliot&quot;, &quot;P!nk&quot;, and &quot;Templates&quot; listed directly underneath it." width="1200">
 </div>
 <div class="title">Figure 8. The hierarchy as it should look after creating some content</div>
 </div>
@@ -880,7 +876,7 @@ You can also use the keyboard shortcut kbd:[ctrl+s] on Linux and Windows and kbd
 </div>
 <div class="imageblock">
 <div class="content">
-<img src="content-studio-content-status.png" alt="Three pieces of content displaying the three statuses that a piece of content can have" width="{image-xs}">
+<img src="media/content-studio-content-status.png" alt="Three pieces of content displaying the three statuses that a piece of content can have" width="600">
 </div>
 <div class="title">Figure 9. Content status symbols</div>
 </div>
@@ -900,7 +896,7 @@ You can also use the keyboard shortcut kbd:[ctrl+s] on Linux and Windows and kbd
 <i class="fa icon-tip" title="Tip"></i>
 </td>
 <td class="content">
-You can also publish a piece of content by using the keyboard shortcut kbd:[Ctrl+Alt+P]/kbd:[control+option+P].
+You can also publish a piece of content by using the keyboard shortcut <span class="keyseq"><kbd>Ctrl</kbd>+<kbd>Alt</kbd>+<kbd>P</kbd></span>/<span class="keyseq"><kbd>control</kbd>+<kbd>option</kbd>+<kbd>P</kbd></span>.
 </td>
 </tr>
 </table>
@@ -912,7 +908,7 @@ You can also publish a piece of content by using the keyboard shortcut kbd:[Ctrl
 </div>
 <div class="imageblock">
 <div class="content">
-<img src="content-studio-publishing-wizard.png" alt="A dialog with a list of the content to be published and button saying 'publish now'" width="{image-xl}">
+<img src="media/content-studio-publishing-wizard.png" alt="A dialog with a list of the content to be published and button saying 'publish now'" width="1200">
 </div>
 <div class="title">Figure 10. The Content Studio publishing wizard 🪄</div>
 </div>
@@ -953,7 +949,7 @@ You can also publish a piece of content by using the keyboard shortcut kbd:[Ctrl
 <p>Open the XP admin menu and select Data Toolbox. You should have this app installed from when you <a href="sandboxes.ahtml#_admin_console">took the welcome tour</a>.</p>
 <div class="imageblock">
 <div class="content">
-<img src="data-toolbox-landing-page.png" alt="The Data Toolbox landing page: grid of icons for administrative actions and accompanying explanations. " width="{image-xl}">
+<img src="media/data-toolbox-landing-page.png" alt="The Data Toolbox landing page: grid of icons for administrative actions and accompanying explanations. " width="1200">
 </div>
 <div class="title">Figure 11. Data Toolbox</div>
 </div>
@@ -988,34 +984,34 @@ You can also publish a piece of content by using the keyboard shortcut kbd:[Ctrl
 <p>Next up is a list of branches (<a href="#_branches_and_publishing">as discussed above</a>). As long as you&#8217;ve published your content, you can choose either one of these.</p>
 </li>
 <li>
-<p>Keep navigating further down the tree: <code>[root]</code> &#8594; <code>content</code> &#8594; <code>{p1-site-slug}</code>.</p>
+<p>Keep navigating further down the tree: <code>[root]</code> &#8594; <code>content</code> &#8594; <code>my-first-site</code>.</p>
 </li>
 <li>
-<p>When you&#8217;ve reached <code>{p1-site-slug}</code> you should see all the content of your site listed. Navigate to <code>{content-type-1}s</code> to find actual pieces of content.</p>
+<p>When you&#8217;ve reached <code>my-first-site</code> you should see all the content of your site listed. Navigate to <code>artists</code> to find actual pieces of content.</p>
 </li>
 <li>
-<p>Choose one of your {content-type-1}s and check out both the info view and the JSON view, available via the buttons in the table row.</p>
+<p>Choose one of your artists and check out both the info view and the JSON view, available via the buttons in the table row.</p>
 <div class="imageblock">
 <div class="content">
-<img src="data-toolbox-info-view.png" alt="The Data Toolbox info view. the view contains options for exporting, moving, and deleting the node, as well as for displaying permissions for the node, versions of the node, and indexing data (and much more)." width="{image-xl}">
+<img src="media/data-toolbox-info-view.png" alt="The Data Toolbox info view. the view contains options for exporting, moving, and deleting the node, as well as for displaying permissions for the node, versions of the node, and indexing data (and much more)." width="1200">
 </div>
 <div class="title">Figure 12. The Data Toolbox node info view</div>
 </div>
 </li>
 <li>
-<p>To inspect the data associated with the {content-type-1}, you can select "Display properties", which will bring up data about the node, such as its display name, its owner, when it was created, etc.</p>
+<p>To inspect the data associated with the artist, you can select "Display properties", which will bring up data about the node, such as its display name, its owner, when it was created, etc.</p>
 <div class="imageblock">
 <div class="content">
-<img src="data-toolbox-properties.png" alt="A table with columns 'name', 'index, 'value', and 'type' that describes the node. Example names are 'valid', 'type', 'displayName'." width="{image-xl}">
+<img src="media/data-toolbox-properties.png" alt="A table with columns 'name', 'index, 'value', and 'type' that describes the node. Example names are 'valid', 'type', 'displayName'." width="1200">
 </div>
 <div class="title">Figure 13. The display properties view</div>
 </div>
 </li>
 <li>
-<p>Finally, you can navigate to the <code>data</code> property, where you&#8217;ll find the data stored on the {content-type-1}.</p>
+<p>Finally, you can navigate to the <code>data</code> property, where you&#8217;ll find the data stored on the artist.</p>
 <div class="imageblock">
 <div class="content">
-<img src="data-toolbox-properties-data.png" alt="A table showing the data we stored about the {content-type-1} previously." width="{image-xl}">
+<img src="media/data-toolbox-properties-data.png" alt="A table showing the data we stored about the artist previously." width="1200">
 </div>
 <div class="title">Figure 14. The properties.data view</div>
 </div>
@@ -1023,14 +1019,14 @@ You can also publish a piece of content by using the keyboard shortcut kbd:[Ctrl
 </ol>
 </div>
 <div class="paragraph">
-<p>Inspecting content is only a fraction of what Data Toolbox can do: it&#8217;s a versatile and powerful administrative tool, and we&#8217;ll see more of it in a later {document}.</p>
+<p>Inspecting content is only a fraction of what Data Toolbox can do: it&#8217;s a versatile and powerful administrative tool, and we&#8217;ll see more of it in a later chapter.</p>
 </div>
 </div>
 </div>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2023-08-04 10:51:27 UTC
+Last updated 2023-08-04 10:57:18 UTC
 </div>
 </div>
 </body>

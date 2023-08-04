@@ -5,9 +5,8 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="generator" content="Asciidoctor 2.0.20">
-<meta name="description" content="{description-setup}">
-<meta name="author" content="Unresolved directive in setup.adoc - include::.variables.adoc[]">
-<title>{title-setup}</title>
+<meta name="description" content="Starting from scratch, this chapter takes you through how to install all the necessary tools to get started with XP development.">
+<title>Setting up your development environment</title>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,300italic,400,400italic,600,600italic%7CNoto+Serif:400,400italic,700,700italic%7CDroid+Sans+Mono:400,700">
 <style>
 /*! Asciidoctor default stylesheet | MIT License | https://asciidoctor.org */
@@ -438,10 +437,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 </head>
 <body class="article toc2 toc-right">
 <div id="header">
-<h1>{title-setup}</h1>
-<div class="details">
-<span id="author" class="author">Unresolved directive in setup.adoc - include::.variables.adoc[]</span><br>
-</div>
+<h1>Setting up your development environment</h1>
 <div id="toc" class="toc2">
 <div id="toctitle">Table of Contents</div>
 <ul class="sectlevel1">
@@ -478,7 +474,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <div id="preamble">
 <div class="sectionbody">
 <div class="paragraph">
-<p>Before we can start building, let&#8217;s make sure we have the right tools available to work efficiently with XP. This {document} walks you through installing the fundamental tools we will be using throughout this guide, including a text editor, a package manager for your system, Git, and the Enonic CLI.</p>
+<p>Before we can start building, let&#8217;s make sure we have the right tools available to work efficiently with XP. This chapter walks you through installing the fundamental tools we will be using throughout this guide, including a text editor, a package manager for your system, Git, and the Enonic CLI.</p>
 </div>
 <div class="paragraph">
 <p>If you&#8217;ve already got these installed, feel free to skip to the next chapter.</p>
@@ -492,7 +488,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <p>The command line&#8201;&#8212;&#8201;aka <em>the terminal</em>&#8201;&#8212;&#8201;is a powerful, text-based interface for running commands on your computer. You can also use the terminal to navigate your file system, similar to macOS&#8217; Finder or Windows&#8217; Explorer. The program running in the terminal (that interprets your commands) is known as a <em>shell</em>.</p>
 </div>
 <div class="paragraph">
-<p>The rest of this {document} will focus primarily on working with the command line, so go ahead and open your favorite terminal. If you don&#8217;t know how to open a terminal on your system, don&#8217;t worry! Instead, check out the guide for <a href="https://www.macworld.co.uk/how-to/mac-software/how-use-terminal-on-mac-3608274/">macOS</a>, <a href="https://www.lifewire.com/how-to-open-command-prompt-2618089">Windows</a>, or <a href="https://www.howtogeek.com/140679/beginner-geek-how-to-start-using-the-linux-terminal/">Linux</a> (depending on your operating system).</p>
+<p>The rest of this chapter will focus primarily on working with the command line, so go ahead and open your favorite terminal. If you don&#8217;t know how to open a terminal on your system, don&#8217;t worry! Instead, check out the guide for <a href="https://www.macworld.co.uk/how-to/mac-software/how-use-terminal-on-mac-3608274/">macOS</a>, <a href="https://www.lifewire.com/how-to-open-command-prompt-2618089">Windows</a>, or <a href="https://www.howtogeek.com/140679/beginner-geek-how-to-start-using-the-linux-terminal/">Linux</a> (depending on your operating system).</p>
 </div>
 <div class="paragraph">
 <p>When we ask you to "run a command" later on in this document, you can assume that we&#8217;re asking you to run it in a terminal unless otherwise specified.</p>
@@ -504,7 +500,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <i class="fa icon-note" title="Note"></i>
 </td>
 <td class="content">
-To run a command in your terminal, type in the command and press kbd:[enter]. For instance, the command <code>cd myfolder</code> would change the shell&#8217;s working directory to the <code>myfolder</code> directory, assuming that it exists.
+To run a command in your terminal, type in the command and press <kbd>enter</kbd>. For instance, the command <code>cd myfolder</code> would change the shell&#8217;s working directory to the <code>myfolder</code> directory, assuming that it exists.
 </td>
 </tr>
 </table>
@@ -865,7 +861,7 @@ to help keep your code nicely formatted. It helps to keep your code easier to re
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2023-08-04 10:51:27 UTC
+Last updated 2023-08-04 10:57:18 UTC
 </div>
 </div>
 </body>

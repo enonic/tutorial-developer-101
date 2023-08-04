@@ -5,9 +5,8 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="generator" content="Asciidoctor 2.0.20">
-<meta name="description" content="{description-deployment}">
-<meta name="author" content="Unresolved directive in deployment.adoc - include::.variables.adoc[]">
-<title>{title-deployment}</title>
+<meta name="description" content="How do you actually deploy Enonic XP and use it for more than local development? And where do you go from here to learn more?">
+<title>Deployment and next steps</title>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,300italic,400,400italic,600,600italic%7CNoto+Serif:400,400italic,700,700italic%7CDroid+Sans+Mono:400,700">
 <style>
 /*! Asciidoctor default stylesheet | MIT License | https://asciidoctor.org */
@@ -438,10 +437,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 </head>
 <body class="article toc2 toc-right">
 <div id="header">
-<h1>{title-deployment}</h1>
-<div class="details">
-<span id="author" class="author">Unresolved directive in deployment.adoc - include::.variables.adoc[]</span><br>
-</div>
+<h1>Deployment and next steps</h1>
 <div id="toc" class="toc2">
 <div id="toctitle">Table of Contents</div>
 <ul class="sectlevel1">
@@ -647,7 +643,7 @@ Your application executable (*.jar file) can be found in <code>project-folder/bu
 <p>Choose install from the toolbar, and upload your application <code>.jar</code> file. You can drag and drop your application or navigate the file hierarchy via the upload button.</p>
 <div class="imageblock">
 <div class="content">
-<img src="deployment-app-upload.png" alt="The application installation menu with a blue overlay. The overlay says 'drop files to upload'" width="{image-xl}">
+<img src="media/deployment-app-upload.png" alt="The application installation menu with a blue overlay. The overlay says 'drop files to upload'" width="1200">
 </div>
 <div class="title">Figure 1. Drag and drop applications to upload them</div>
 </div>
@@ -673,7 +669,7 @@ Your application executable (*.jar file) can be found in <code>project-folder/bu
 <p>Setting up a vhost is only required once per application/site you want deploy.</p>
 </div>
 <div class="paragraph">
-<p>Vhosts can be defined in your sandbox&#8217;s configuration directory. This file contains mappings from public-facing URLs to internal URLs. For instance, this lets the user access <code>{p1-site-slug}.com/api</code> and while retrieving content from <code>/site/default/master/{p1-site-slug}/api</code>.</p>
+<p>Vhosts can be defined in your sandbox&#8217;s configuration directory. This file contains mappings from public-facing URLs to internal URLs. For instance, this lets the user access <code>my-first-site.com/api</code> and while retrieving content from <code>/site/default/master/my-first-site/api</code>.</p>
 </div>
 <div class="paragraph">
 <p>An example vhosts file that achieves the mapping mentioned would look something like this:</p>
@@ -682,7 +678,7 @@ Your application executable (*.jar file) can be found in <code>project-folder/bu
 <div class="content">
 <pre>enabled = true <i class="conum" data-value="1"></i><b>(1)</b>
 
-mapping.example.host = {p1-site-slug}.com <i class="conum" data-value="2"></i><b>(2)</b>
+mapping.example.host = my-first-site.com <i class="conum" data-value="2"></i><b>(2)</b>
 mapping.example.source = / <i class="conum" data-value="3"></i><b>(3)</b>
 mapping.example.target = /site/default/master <i class="conum" data-value="4"></i><b>(4)</b></pre>
 </div>
@@ -695,7 +691,7 @@ mapping.example.target = /site/default/master <i class="conum" data-value="4"></
 </tr>
 <tr>
 <td><i class="conum" data-value="2"></i><b>2</b></td>
-<td>For all requests to <code>{p1-site-slug}.com</code></td>
+<td>For all requests to <code>my-first-site.com</code></td>
 </tr>
 <tr>
 <td><i class="conum" data-value="3"></i><b>3</b></td>
@@ -728,7 +724,7 @@ Then, to test it, we&#8217;ll have override your computer&#8217;s DNS resolver b
 <div class="content">
 <pre class="highlight"><code class="language-config" data-lang="config">enabled = true
 
-mapping.admin.host = {vhost-host} <i class="conum" data-value="1"></i><b>(1)</b>
+mapping.admin.host = xp-admin.com <i class="conum" data-value="1"></i><b>(1)</b>
 mapping.admin.source = /
 mapping.admin.target = /admin
 mapping.admin.idProvider.system = default
@@ -768,7 +764,7 @@ mapping.localhost.idProvider.system = default</code></pre>
 <p>To test this out, update your local hosts file (<a href="https://en.wikipedia.org/wiki/Hosts_%28file%29"><em>hosts file</em> on Wikipedia</a>) to point <code>xp-admin.com</code> to <code>127.0.0.1</code> by adding the following line to the file:</p>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-conf" data-lang="conf">127.0.0.1 {vhost-host}</code></pre>
+<pre class="highlight"><code class="language-conf" data-lang="conf">127.0.0.1 xp-admin.com</code></pre>
 </div>
 </div>
 <div class="admonitionblock tip">
@@ -797,7 +793,7 @@ On Linux and macOS you&#8217;ll find the hosts file at <code>/etc/hosts</code>. 
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-bash" data-lang="bash">curl -v {vhost-host}:8080/tools</code></pre>
+<pre class="highlight"><code class="language-bash" data-lang="bash">curl -v xp-admin.com:8080/tools</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -805,7 +801,7 @@ On Linux and macOS you&#8217;ll find the hosts file at <code>/etc/hosts</code>. 
 </div>
 <div class="listingblock">
 <div class="content">
-<pre>* Connected to {vhost-host} (127.0.0.1) port 8080 (#0)</pre>
+<pre>* Connected to xp-admin.com (127.0.0.1) port 8080 (#0)</pre>
 </div>
 </div>
 <div class="paragraph">
@@ -849,7 +845,7 @@ This HTML is the content of the login page in raw form.</p>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2023-08-04 10:51:27 UTC
+Last updated 2023-08-04 10:57:18 UTC
 </div>
 </div>
 </body>

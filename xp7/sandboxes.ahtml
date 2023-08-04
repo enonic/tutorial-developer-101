@@ -5,9 +5,8 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="generator" content="Asciidoctor 2.0.20">
-<meta name="description" content="{description-sandboxes}">
-<meta name="author" content="Unresolved directive in sandboxes.adoc - include::.variables.adoc[]">
-<title>{title-sandboxes}</title>
+<meta name="description" content="The fundamentals of Enonic XP development: sandboxes and the Enonic CLI.">
+<title>Sandboxes</title>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,300italic,400,400italic,600,600italic%7CNoto+Serif:400,400italic,700,700italic%7CDroid+Sans+Mono:400,700">
 <style>
 /*! Asciidoctor default stylesheet | MIT License | https://asciidoctor.org */
@@ -438,10 +437,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 </head>
 <body class="article toc2 toc-right">
 <div id="header">
-<h1>{title-sandboxes}</h1>
-<div class="details">
-<span id="author" class="author">Unresolved directive in sandboxes.adoc - include::.variables.adoc[]</span><br>
-</div>
+<h1>Sandboxes</h1>
 <div id="toc" class="toc2">
 <div id="toctitle">Table of Contents</div>
 <ul class="sectlevel1">
@@ -459,7 +455,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <div id="preamble">
 <div class="sectionbody">
 <div class="paragraph">
-<p>In this {document} we&#8217;ll introduce the fundamental concepts of Enonic XP. You&#8217;ll get a brief introduction to the Enonic command line interface (CLI), XP <em>sandboxes</em>, starter kits, and building and deploying on XP. By the end of the {document} you&#8217;ll have spun up an instance of XP and deployed an app to it.</p>
+<p>In this chapter we&#8217;ll introduce the fundamental concepts of Enonic XP. You&#8217;ll get a brief introduction to the Enonic command line interface (CLI), XP <em>sandboxes</em>, starter kits, and building and deploying on XP. By the end of the chapter you&#8217;ll have spun up an instance of XP and deployed an app to it.</p>
 </div>
 <div class="paragraph">
 <p>There&#8217;s lots to cover, so let&#8217;s get to it, shall we?</p>
@@ -476,7 +472,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <i class="fa icon-note" title="Note"></i>
 </td>
 <td class="content">
-If you haven&#8217;t installed the Enonic CLI yet, be sure to check out the <a href="setup.ahtml#_installing_the_enonic_cli">installation instructions in the previous {document}</a>.
+If you haven&#8217;t installed the Enonic CLI yet, be sure to check out the <a href="setup.ahtml#_installing_the_enonic_cli">installation instructions in the previous chapter</a>.
 </td>
 </tr>
 </table>
@@ -577,7 +573,7 @@ GLOBAL OPTIONS:
 <p>Sandboxes allow you to run different versions of XP because each sandbox has an associated XP version. In this guide, though, we&#8217;ll stick to using a single sandbox.</p>
 </div>
 <div class="paragraph">
-<p>Let&#8217;s create a new sandbox by using the CLI. When you create a new sandbox, the CLI will present you with a few questions for configuring the sandbox, such as the sandbox name. To respond to a question, type in the desired response and press kbd:[enter].</p>
+<p>Let&#8217;s create a new sandbox by using the CLI. When you create a new sandbox, the CLI will present you with a few questions for configuring the sandbox, such as the sandbox name. To respond to a question, type in the desired response and press <kbd>enter</kbd>.</p>
 </div>
 <div class="paragraph">
 <p>Run the following command to get started:</p>
@@ -598,7 +594,7 @@ GLOBAL OPTIONS:
 </td>
 <td class="content">
 <div class="paragraph">
-<p>If you press kbd:[enter] without entering a response, the CLI will use the default response. The default response to a question is listed in parentheses after the question.</p>
+<p>If you press <kbd>enter</kbd> without entering a response, the CLI will use the default response. The default response to a question is listed in parentheses after the question.</p>
 </div>
 </td>
 </tr>
@@ -631,7 +627,7 @@ Downloading distro [===============&gt;-----------------------------------------
 </td>
 <td class="content">
 <div class="paragraph">
-<p>You can also run the sandbox with the <code>--dev</code> flag. This makes the sandbox automatically pick up certain changes to locally deployed applications, including most of the work we&#8217;ll be doing in the coming {document}s. Read <a href="https://developer.enonic.com/docs/xp/stable/apps/build-system#development_mode">more about dev mode</a> in the reference docs. With the flag, the command would be</p>
+<p>You can also run the sandbox with the <code>--dev</code> flag. This makes the sandbox automatically pick up certain changes to locally deployed applications, including most of the work we&#8217;ll be doing in the coming chapters. Read <a href="https://developer.enonic.com/docs/xp/stable/apps/build-system#development_mode">more about dev mode</a> in the reference docs. With the flag, the command would be</p>
 </div>
 <div class="literalblock">
 <div class="content">
@@ -665,7 +661,7 @@ _  _ \_  __ \  __ \_  __ \_  /_  ___/   __  |/_/__  __ \
 </div>
 </div>
 <div class="paragraph">
-<p>The initial output gives you a lot of information about this sandbox, including its home and install directories. We won&#8217;t be needing them in this {document}, but knowing where you can find these details might be useful at a later time.</p>
+<p>The initial output gives you a lot of information about this sandbox, including its home and install directories. We won&#8217;t be needing them in this chapter, but knowing where you can find these details might be useful at a later time.</p>
 </div>
 <div class="paragraph">
 <p>After the sandbox has started, you should see something like the following output in your terminal:</p>
@@ -706,7 +702,7 @@ _  _ \_  __ \  __ \_  __ \_  /_  ___/   __  |/_/__  __ \
 <i class="fa icon-note" title="Note"></i>
 </td>
 <td class="content">
-To stop your sandbox, press kbd:[ctrl-c] in the terminal hosting the process. You can also run <code>enonic sandbox stop</code> in a different terminal instance.
+To stop your sandbox, press <kbd>ctrl-c</kbd> in the terminal hosting the process. You can also run <code>enonic sandbox stop</code> in a different terminal instance.
 </td>
 </tr>
 </table>
@@ -766,7 +762,7 @@ Point your browser to <a href="http://localhost:8080" target="_blank" rel="noope
 </div>
 <div class="imageblock">
 <div class="content">
-<img src="xp-boot.png" alt="The XP boot page" width="{image-l}">
+<img src="media/xp-boot.png" alt="The XP boot page" width="1050">
 </div>
 <div class="title">Figure 1. XP Boot page</div>
 </div>
@@ -778,7 +774,7 @@ Point your browser to <a href="http://localhost:8080" target="_blank" rel="noope
 </div>
 <div class="imageblock">
 <div class="content">
-<img src="xp-login.png" alt="The XP login screen" width="{image-xl}">
+<img src="media/xp-login.png" alt="The XP login screen" width="1200">
 </div>
 <div class="title">Figure 2. The XP login screen</div>
 </div>
@@ -807,7 +803,7 @@ We&#8217;ll talk more about this in a later chapter.</p>
 </div>
 <div class="imageblock">
 <div class="content">
-<img src="xp-tour-3.png" alt="A prompt to install a set of applications from the Enonic Market including Content Studio, Live Trace, and Data Toolbox." width="{image-s}">
+<img src="media/xp-tour-3.png" alt="A prompt to install a set of applications from the Enonic Market including Content Studio, Live Trace, and Data Toolbox." width="750">
 </div>
 <div class="title">Figure 3. The final step of the welcome tour</div>
 </div>
@@ -828,7 +824,7 @@ If the welcome tour does not start automatically or if you want to take it again
 </div>
 <div class="imageblock">
 <div class="content">
-<img src="admin-menu-with-apps.png" alt="The XP Admin menu with extra apps installed. It shows the newly added apps between the menu items 'Home' and 'Users'." width="{image-xs}">
+<img src="media/admin-menu-with-apps.png" alt="The XP Admin menu with extra apps installed. It shows the newly added apps between the menu items 'Home' and 'Users'." width="600">
 </div>
 <div class="title">Figure 4. The XP menu with new entries</div>
 </div>
@@ -849,7 +845,7 @@ XP localizes the admin interface automatically based on your browsers preferred 
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2023-08-04 10:51:27 UTC
+Last updated 2023-08-04 10:57:18 UTC
 </div>
 </div>
 </body>

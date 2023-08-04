@@ -5,9 +5,8 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="generator" content="Asciidoctor 2.0.20">
-<meta name="description" content="{description-input-types}">
-<meta name="author" content="Unresolved directive in input-types.adoc - include::.variables.adoc[]">
-<title>{title-input-types}</title>
+<meta name="description" content="Take your content types to the next level with more advanced input types. Learn how to configure input types, what kinds there are, and how to link content together!">
+<title>Input types</title>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,300italic,400,400italic,600,600italic%7CNoto+Serif:400,400italic,700,700italic%7CDroid+Sans+Mono:400,700">
 <style>
 /*! Asciidoctor default stylesheet | MIT License | https://asciidoctor.org */
@@ -438,10 +437,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 </head>
 <body class="article toc2 toc-right">
 <div id="header">
-<h1>{title-input-types}</h1>
-<div class="details">
-<span id="author" class="author">Unresolved directive in input-types.adoc - include::.variables.adoc[]</span><br>
-</div>
+<h1>Input types</h1>
 <div id="toc" class="toc2">
 <div id="toctitle">Table of Contents</div>
 <ul class="sectlevel1">
@@ -453,7 +449,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <li><a href="#common_inputs">Common inputs</a></li>
 <li><a href="#imageselector">ImageSelector</a></li>
 <li><a href="#contentselector">ContentSelector</a></li>
-<li><a href="#task_content_type_1s_and_content_type_2s">Task: {content-type-1}s and {content-type-2}s</a>
+<li><a href="#task_artists_and_animals">Task: artists and animals</a>
 <ul class="sectlevel2">
 <li><a href="#solution">Solution</a></li>
 </ul>
@@ -466,7 +462,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <div id="preamble">
 <div class="sectionbody">
 <div class="paragraph">
-<p>The content types we&#8217;ve created previously in this guide have only used two basic input types: TextLine and TextArea. However, Content Studio has a lot more up its sleeve than that! Input types dictate what kind of data the user can or must add any piece of content. This {document} introduces more new types of inputs and explains how you can configure them to your liking.</p>
+<p>The content types we&#8217;ve created previously in this guide have only used two basic input types: TextLine and TextArea. However, Content Studio has a lot more up its sleeve than that! Input types dictate what kind of data the user can or must add any piece of content. This chapter introduces more new types of inputs and explains how you can configure them to your liking.</p>
 </div>
 <div class="admonitionblock note">
 <table>
@@ -487,7 +483,7 @@ If you&#8217;re used to working with HTML, be aware that XP&#8217;s <code>input<
 <i class="fa icon-note" title="Note"></i>
 </td>
 <td class="content">
-{see-prev-docs}
+The tasks and examples in this chapter are based on work done in previous chapters (starting with <a href="sandboxes.ahtml">the sandboxes chapter</a>). If you want to follow along with the examples, make sure you&#8217;re all caught up.
 </td>
 </tr>
 </table>
@@ -604,7 +600,7 @@ If you&#8217;re used to working with HTML, be aware that XP&#8217;s <code>input<
 </div>
 <div class="imageblock">
 <div class="content">
-<img src="input-type-common-configuration.png" alt="Three TextLine inputs showing all the common configuration options: labels, help text, default text, and occurrences." width="{image-xl}">
+<img src="media/input-type-common-configuration.png" alt="Three TextLine inputs showing all the common configuration options: labels, help text, default text, and occurrences." width="1200">
 </div>
 <div class="title">Figure 1. TextLine inputs showing common configuration options</div>
 </div>
@@ -663,7 +659,7 @@ If <code>maximum</code> is greater than <code>0</code>, make sure that <code>min
 <p>A dropdown menu containing predefined options for the user to select from. Allows selection of one or more options.</p>
 <div class="imageblock">
 <div class="content">
-<img src="input-type-combo-box.webp" alt="A standard select list / dropdown list / combo box input type with a few visible dummy options." width="{image-s}">
+<img src="media/input-type-combo-box.webp" alt="A standard select list / dropdown list / combo box input type with a few visible dummy options." width="750">
 </div>
 <div class="title">Figure 2. The ComboBox input type</div>
 </div>
@@ -673,7 +669,7 @@ If <code>maximum</code> is greater than <code>0</code>, make sure that <code>min
 <p>Provides an interactive date picker (with a time component in DateTime&#8217;s case) to save date and times.</p>
 <div class="imageblock">
 <div class="content">
-<img src="input-type-date-time.webp" alt="A calendar showing year and month with a time indicator to the side." width="{image-s}">
+<img src="media/input-type-date-time.webp" alt="A calendar showing year and month with a time indicator to the side." width="750">
 </div>
 <div class="title">Figure 3. The DateTime input type</div>
 </div>
@@ -683,17 +679,17 @@ If <code>maximum</code> is greater than <code>0</code>, make sure that <code>min
 <p>Stores GPS coordinates.</p>
 <div class="imageblock">
 <div class="content">
-<img src="input-type-geo-point.webp" alt="A text line input with coordinates." width="{image-s}">
+<img src="media/input-type-geo-point.webp" alt="A text line input with coordinates." width="750">
 </div>
 <div class="title">Figure 4. The GeoPoint input type</div>
 </div>
 </dd>
 <dt class="hdlist1"><a href="https://developer.enonic.com/docs/xp/stable/cms/input-types#htmlarea">HtmlArea</a></dt>
 <dd>
-<p>Provides a rich text, multi-line input. We&#8217;ll discuss this in detail in <a href="rich-text.ahtml">the next {document}</a>.</p>
+<p>Provides a rich text, multi-line input. We&#8217;ll discuss this in detail in <a href="rich-text.ahtml">the next chapter</a>.</p>
 <div class="imageblock">
 <div class="content">
-<img src="input-type-html-area.png" alt="A text area with a tools ribbon on the top. The ribbon provides rich text tools such as justification, macro insertion, text styles, etc." width="{image-s}">
+<img src="media/input-type-html-area.png" alt="A text area with a tools ribbon on the top. The ribbon provides rich text tools such as justification, macro insertion, text styles, etc." width="750">
 </div>
 <div class="title">Figure 5. The HtmlArea input type</div>
 </div>
@@ -710,7 +706,7 @@ If <code>maximum</code> is greater than <code>0</code>, make sure that <code>min
 <div class="sectionbody">
 <div class="imageblock">
 <div class="content">
-<img src="input-type-image-selector.png" alt="ImageSelector: An interactive image selection tool." width="{image-xl}">
+<img src="media/input-type-image-selector.png" alt="ImageSelector: An interactive image selection tool." width="1200">
 </div>
 <div class="title">Figure 6. The ImageSelector input type</div>
 </div>
@@ -729,11 +725,11 @@ If <code>maximum</code> is greater than <code>0</code>, make sure that <code>min
 <p>Read more about the <a href="https://developer.enonic.com/docs/xp/stable/cms/input-types#imageselector">configuration of image selectors</a> in the reference docs.</p>
 </div>
 <div class="paragraph">
-<p>After you&#8217;ve added an image (or several), you can highlight it and click the edit button. This will take you to the image editing form. This is the same form as we saw in <a href="media-and-images.ahtml#_editing_images">the previous {document}</a>.</p>
+<p>After you&#8217;ve added an image (or several), you can highlight it and click the edit button. This will take you to the image editing form. This is the same form as we saw in <a href="media-and-images.ahtml#_editing_images">the previous chapter</a>.</p>
 </div>
 <div class="imageblock">
 <div class="content">
-<img src="input-type-image-selector-highlighted-image.png" alt="The image selector input field with two images of lions&#8201;&#8212;&#8201;one male, one female - - below. Under the images, there&#8217;s a set of buttons saying 'edit' and 'remove'." width="{image-xl}">
+<img src="media/input-type-image-selector-highlighted-image.png" alt="The image selector input field with two images of lions&#8201;&#8212;&#8201;one male, one female - - below. Under the images, there&#8217;s a set of buttons saying 'edit' and 'remove'." width="1200">
 </div>
 <div class="title">Figure 7. The image selector with uploaded and selected images</div>
 </div>
@@ -744,7 +740,7 @@ If <code>maximum</code> is greater than <code>0</code>, make sure that <code>min
 <div class="sectionbody">
 <div class="imageblock">
 <div class="content">
-<img src="input-type-content-selector.png" alt="ContentSelector: An interactive content selection tool." width="{image-xl}">
+<img src="media/input-type-content-selector.png" alt="ContentSelector: An interactive content selection tool." width="1200">
 </div>
 <div class="title">Figure 8. The ContentSelector input type</div>
 </div>
@@ -771,22 +767,22 @@ If <code>maximum</code> is greater than <code>0</code>, make sure that <code>min
 </div>
 </div>
 <div class="sect1">
-<h2 id="task_content_type_1s_and_content_type_2s"><a class="link" href="#task_content_type_1s_and_content_type_2s">Task: {content-type-1}s and {content-type-2}s</a></h2>
+<h2 id="task_artists_and_animals"><a class="link" href="#task_artists_and_animals">Task: artists and animals</a></h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>Time for a little recap! We&#8217;ll put together everything we&#8217;ve learned about content types and input types thus far to create a new data set. A solution is listed below, but try and see if you can solve it yourself first. If you&#8217;re wondering how to achieve some of the goals, try consulting the documentation that&#8217;s been linked to in this {document}.</p>
+<p>Time for a little recap! We&#8217;ll put together everything we&#8217;ve learned about content types and input types thus far to create a new data set. A solution is listed below, but try and see if you can solve it yourself first. If you&#8217;re wondering how to achieve some of the goals, try consulting the documentation that&#8217;s been linked to in this chapter.</p>
 </div>
 <div class="paragraph">
-<p>Your task is to create a new content type: <code>{content-type-2-capitalized}</code> and to update the <code>{content-type-1-capitalized}</code> content type with new constraints and fields. By the end of this {document}, you should have content types that look like this in Content Studio:</p>
+<p>Your task is to create a new content type: <code>Animal</code> and to update the <code>Artist</code> content type with new constraints and fields. By the end of this chapter, you should have content types that look like this in Content Studio:</p>
 </div>
 <div class="imageblock">
 <div class="content">
-<img src="{content-type-2}-and-{content-type-1}-target.png" alt="An {content-type-2} content wizard next to an {content-type-1} wizard" width="{image-xl}">
+<img src="media/animal-and-artist-target.png" alt="An animal content wizard next to an artist wizard" width="1200">
 </div>
-<div class="title">Figure 9. The target for this task: {content-type-2} and {content-type-1}</div>
+<div class="title">Figure 9. The target for this task: animal and artist</div>
 </div>
 <div class="paragraph">
-<p>{content-type-2-capitalized} constraints:</p>
+<p>Animal constraints:</p>
 </div>
 <div class="ulist">
 <ul>
@@ -794,7 +790,7 @@ If <code>maximum</code> is greater than <code>0</code>, make sure that <code>min
 <p>Make the display name use "species" as its label. <em>Hint: check out <a href="https://developer.enonic.com/docs/xp/stable/cms/content-types#form_definition">the content type form definition</a> and look for something that allows you to do this.</em></p>
 </li>
 <li>
-<p>An {content-type-2} can also have alternative names for its species (for instance, the reindeer is also known as <em>caribou</em>). Allow the user to add as many alternative names as they want.</p>
+<p>An animal can also have alternative names for its species (for instance, the reindeer is also known as <em>caribou</em>). Allow the user to add as many alternative names as they want.</p>
 </li>
 <li>
 <p>An image selector that accepts between 0 and 3 images.</p>
@@ -805,36 +801,36 @@ If <code>maximum</code> is greater than <code>0</code>, make sure that <code>min
 </ul>
 </div>
 <div class="paragraph">
-<p>When you&#8217;ve created the content type, create a new folder in Content Studio at next to the {content-type-1}s folder. Call it "{content-type-2}s".</p>
+<p>When you&#8217;ve created the content type, create a new folder in Content Studio at next to the artists folder. Call it "animals".</p>
 </div>
 <div class="paragraph">
-<p>For the {content-type-1} content type, here&#8217;s what&#8217;s going to change:</p>
+<p>For the artist content type, here&#8217;s what&#8217;s going to change:</p>
 </div>
 <div class="ulist">
 <ul>
 <li>
-<p>Add a ContentSelector input that allows only content of the "{content-type-2-capitalized}" type and that must be nested under the site&#8217;s "{content-type-2}s" folder. Call it <code>favorite{content-type-2-capitalized}</code>.</p>
+<p>Add a ContentSelector input that allows only content of the "Animal" type and that must be nested under the site&#8217;s "animals" folder. Call it <code>favoriteAnimal</code>.</p>
 </li>
 </ul>
 </div>
 <div class="paragraph">
-<p>To verify that everything works, create some animals, and try creating a content link between a {content-type-1} and an {content-type-2}.</p>
+<p>To verify that everything works, create some animals, and try creating a content link between a artist and an animal.</p>
 </div>
 <div class="paragraph">
-<p>When you&#8217;ve got that, create a GraphQL query that&#8217;ll fetch all {content-type-1}s and list what their favorite animals are, as well their animals' descriptions .</p>
+<p>When you&#8217;ve got that, create a GraphQL query that&#8217;ll fetch all artists and list what their favorite animals are, as well their animals' descriptions .</p>
 </div>
 <div class="sect2">
 <h3 id="solution"><a class="link" href="#solution">Solution</a></h3>
 <div class="olist arabic">
 <ol class="arabic">
 <li>
-<p>Create the animal content type. In <code>src/main/resources/site/content-types/{content-type-2}/{content-type-2}.xml</code>, place the following content:</p>
+<p>Create the animal content type. In <code>src/main/resources/site/content-types/animal/animal.xml</code>, place the following content:</p>
 <div class="listingblock">
-<div class="title">The {content-type-2} content type</div>
+<div class="title">The animal content type</div>
 <div class="content">
 <pre class="highlight"><code class="language-xml" data-lang="xml">&lt;content-type&gt;
-  &lt;display-name&gt;{content-type-2-capitalized}&lt;/display-name&gt;
-  &lt;description&gt;An {content-type-2} that lives on planet Earth&lt;/description&gt;
+  &lt;display-name&gt;Animal&lt;/display-name&gt;
+  &lt;description&gt;An animal that lives on planet Earth&lt;/description&gt;
   &lt;display-name-label&gt;Species&lt;/display-name-label&gt; <i class="conum" data-value="1"></i><b>(1)</b>
   &lt;super-type&gt;base:structured&lt;/super-type&gt;
   &lt;form&gt;
@@ -865,13 +861,13 @@ If <code>maximum</code> is greater than <code>0</code>, make sure that <code>min
 </div>
 </li>
 <li>
-<p>Next, update the <code>{content-type-1-capitalized}</code> content type.</p>
+<p>Next, update the <code>Artist</code> content type.</p>
 <div class="listingblock">
-<div class="title">An updated {content-type-1}</div>
+<div class="title">An updated artist</div>
 <div class="content">
 <pre class="highlight"><code class="language-xml" data-lang="xml">&lt;content-type&gt;
-  &lt;display-name&gt;{content-type-1-capitalized}&lt;/display-name&gt;
-  &lt;description&gt;Information about an {content-type-1}&lt;/description&gt;
+  &lt;display-name&gt;Artist&lt;/display-name&gt;
+  &lt;description&gt;Information about an artist&lt;/description&gt;
   &lt;super-type&gt;base:structured&lt;/super-type&gt;
   &lt;form&gt;
 
@@ -883,7 +879,7 @@ If <code>maximum</code> is greater than <code>0</code>, make sure that <code>min
     &lt;/input&gt;
 
     &lt;input type="TextArea" name="about"&gt;
-      &lt;label&gt;About the {content-type-1}&lt;/label&gt;
+      &lt;label&gt;About the artist&lt;/label&gt;
     &lt;/input&gt;
 
     &lt;input name="favoriteAnimal" type="ContentSelector"&gt; <i class="conum" data-value="1"></i><b>(1)</b>
@@ -902,13 +898,13 @@ If <code>maximum</code> is greater than <code>0</code>, make sure that <code>min
 <table>
 <tr>
 <td><i class="conum" data-value="1"></i><b>1</b></td>
-<td>This ContentSelector uses the <code>config</code> section to narrow the possible types of content to only be <code>{content-type-2-capitalized}</code></td>
+<td>This ContentSelector uses the <code>config</code> section to narrow the possible types of content to only be <code>Animal</code></td>
 </tr>
 </table>
 </div>
 </li>
 <li>
-<p>Create some {content-type-2}s. Either pick your favorites, or, if you&#8217;re not feeling creative, add these (content from Wikipedia), :</p>
+<p>Create some animals. Either pick your favorites, or, if you&#8217;re not feeling creative, add these (content from Wikipedia), :</p>
 <div class="dlist">
 <div class="title">Lion (<a href="https://en.wikipedia.org/wiki/Lion">Wiki article for lion</a>)</div>
 <dl>
@@ -932,7 +928,7 @@ If <code>maximum</code> is greater than <code>0</code>, make sure that <code>min
 </div>
 </li>
 <li>
-<p>Create some links using ContentSelector from {content-type-1}s to {content-type-2}s to get familiar with linking content.</p>
+<p>Create some links using ContentSelector from artists to animals to get familiar with linking content.</p>
 </li>
 </ol>
 </div>
@@ -946,19 +942,19 @@ If <code>maximum</code> is greater than <code>0</code>, make sure that <code>min
 <p>Finally, it&#8217;s time to introduce the grapqh in GraphQL. A ContentSelector input will store a reference to the target content item. When using the Guillotine API, you may simply follow this reference to access the target content, and access it&#8217;s fields instantly.</p>
 </div>
 <div class="listingblock">
-<div class="title">Fetch {content-type-1}s and their associated favorite animals</div>
+<div class="title">Fetch artists and their associated favorite animals</div>
 <div class="content">
 <pre class="highlight"><code class="language-GraphQL" data-lang="GraphQL">{
   guillotine {
-    getChildren(key: "${site}/{content-type-1}s/")
+    getChildren(key: "${site}/artists/")
     {
       displayName
-      ... on {project-name-query}_{content-type-1-capitalized} {
+      ... on com_example_myproject_Artist {
         data {
           name
           favoriteAnimal {
             displayName
-            ... on {project-name-query}_{content-type-2-capitalized}{
+            ... on com_example_myproject_Animal{
               data {
                 otherNames
               }
@@ -972,10 +968,10 @@ If <code>maximum</code> is greater than <code>0</code>, make sure that <code>min
 </div>
 </div>
 <div class="paragraph">
-<p>Depending on the links (and {content-type-2}s) you created, your result might look a little something like this:</p>
+<p>Depending on the links (and animals) you created, your result might look a little something like this:</p>
 </div>
 <div class="listingblock">
-<div class="title">The list of {content-type-1}s with their favorite animals</div>
+<div class="title">The list of artists with their favorite animals</div>
 <div class="content">
 <pre class="highlight"><code class="language-json" data-lang="json">{
   "data": {
@@ -1032,7 +1028,7 @@ If <code>maximum</code> is greater than <code>0</code>, make sure that <code>min
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2023-08-04 10:51:27 UTC
+Last updated 2023-08-04 10:57:18 UTC
 </div>
 </div>
 </body>

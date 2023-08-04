@@ -5,9 +5,8 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="generator" content="Asciidoctor 2.0.20">
-<meta name="description" content="{description-rich-text}">
-<meta name="author" content="Unresolved directive in rich-text.adoc - include::.variables.adoc[]">
-<title>{title-rich-text}</title>
+<meta name="description" content="Rich text is an incredibly powerful editing tool and an important part of the XP experience. Learn how to configure it here!">
+<title>Rich text: HtmlArea</title>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,300italic,400,400italic,600,600italic%7CNoto+Serif:400,400italic,700,700italic%7CDroid+Sans+Mono:400,700">
 <style>
 /*! Asciidoctor default stylesheet | MIT License | https://asciidoctor.org */
@@ -438,17 +437,14 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 </head>
 <body class="article toc2 toc-right">
 <div id="header">
-<h1>{title-rich-text}</h1>
-<div class="details">
-<span id="author" class="author">Unresolved directive in rich-text.adoc - include::.variables.adoc[]</span><br>
-</div>
+<h1>Rich text: HtmlArea</h1>
 <div id="toc" class="toc2">
 <div id="toctitle">Table of Contents</div>
 <ul class="sectlevel1">
 <li><a href="#overview">Overview</a></li>
 <li><a href="#configuration_of_text_tools">Configuration of text tools</a>
 <ul class="sectlevel2">
-<li><a href="#task_content_type_2_capitalized_description">Task: {content-type-2-capitalized} description</a></li>
+<li><a href="#task_animal_description">Task: Animal description</a></li>
 </ul>
 </li>
 <li><a href="#links">Links</a>
@@ -458,7 +454,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 </li>
 <li><a href="#images">Images</a>
 <ul class="sectlevel2">
-<li><a href="#task_content_type_2_capitalized_pictures">Task: {content-type-2-capitalized} pictures</a></li>
+<li><a href="#task_animal_pictures">Task: Animal pictures</a></li>
 </ul>
 </li>
 <li><a href="#macros">Macros</a>
@@ -481,7 +477,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <div id="preamble">
 <div class="sectionbody">
 <div class="paragraph">
-<p>If you want to work with rich text in Content Studio, HtmlArea is your friend.  This rich text input type offers some very powerful editing capabilities and a lot of configuration options. This whole {document} is dedicated to the HtmlArea: how it works and how to use it in a headless fashion.</p>
+<p>If you want to work with rich text in Content Studio, HtmlArea is your friend.  This rich text input type offers some very powerful editing capabilities and a lot of configuration options. This whole chapter is dedicated to the HtmlArea: how it works and how to use it in a headless fashion.</p>
 </div>
 <div class="admonitionblock note">
 <table>
@@ -490,7 +486,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <i class="fa icon-note" title="Note"></i>
 </td>
 <td class="content">
-{see-prev-docs}
+The tasks and examples in this chapter are based on work done in previous chapters (starting with <a href="sandboxes.ahtml">the sandboxes chapter</a>). If you want to follow along with the examples, make sure you&#8217;re all caught up.
 </td>
 </tr>
 </table>
@@ -502,7 +498,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <div class="sectionbody">
 <div class="imageblock">
 <div class="content">
-<img src="input-type-html-area.png" alt="A text input field with a tools ribbon just above." width="{image-s}">
+<img src="media/input-type-html-area.png" alt="A text input field with a tools ribbon just above." width="750">
 </div>
 <div class="title">Figure 1. The HtmlArea input type with the default tools selection</div>
 </div>
@@ -550,7 +546,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 </div>
 <div class="imageblock">
 <div class="content">
-<img src="input-type-html-area-no-controls.png" alt="An HtmlArea configured to exclude all editing tools." width="{image-s}">
+<img src="media/input-type-html-area-no-controls.png" alt="An HtmlArea configured to exclude all editing tools." width="750">
 </div>
 <div class="title">Figure 2. An HtmlArea exput with <code>&lt;exclude&gt;*&lt;/exclude&gt;</code> and a selection of tools.</div>
 </div>
@@ -572,7 +568,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 </div>
 <div class="imageblock">
 <div class="content">
-<img src="input-type-html-area-some-controls.png" alt="An HtmlArea configured to include a selection of editing tools." width="{image-s}">
+<img src="media/input-type-html-area-some-controls.png" alt="An HtmlArea configured to include a selection of editing tools." width="750">
 </div>
 <div class="title">Figure 3. An HtmlArea with a selection of tools and <code>&lt;exclude&gt;*&lt;/exclude&gt;</code></div>
 </div>
@@ -580,20 +576,20 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <p>For a full overview of the available text tools and HtmlArea configuration options, visit the <a href="https://developer.enonic.com/docs/xp/stable/cms/input-types#htmlarea">HtmlArea input type reference docs</a>. Additionally, you can find a more thorough explanation of the toolbar and its tools in <a href="https://developer.enonic.com/docs/content-studio/stable/editor/rich-text-editor">the rich text editor reference documentation</a>.</p>
 </div>
 <div class="sect2">
-<h3 id="task_content_type_2_capitalized_description"><a class="link" href="#task_content_type_2_capitalized_description">Task: {content-type-2-capitalized} description</a></h3>
+<h3 id="task_animal_description"><a class="link" href="#task_animal_description">Task: Animal description</a></h3>
 <div class="paragraph">
-<p>Let&#8217;s add a rich-text description field to our {content-type-2}s. The input should be optional and have at most a single occurrence. You can include any editor tools you want, but it must at least have the <code>Link</code> ,<code>Image</code> and <code>Macro</code> tools, as we&#8217;ll be using these later. Otherwise, configure it as you want.</p>
+<p>Let&#8217;s add a rich-text description field to our animals. The input should be optional and have at most a single occurrence. You can include any editor tools you want, but it must at least have the <code>Link</code> ,<code>Image</code> and <code>Macro</code> tools, as we&#8217;ll be using these later. Otherwise, configure it as you want.</p>
 </div>
 <div class="paragraph">
 <p>Your content type should now look something like this:</p>
 </div>
 <div class="listingblock">
-<div class="title">{content-type-2-capitalized} with an HtmlArea input type</div>
+<div class="title">Animal with an HtmlArea input type</div>
 <div class="content">
 <pre class="highlight"><code class="language-xml" data-lang="xml">&lt;?xml version="1.0" encoding="utf-8"?&gt;
 &lt;content-type&gt;
-  &lt;display-name&gt;{content-type-2-capitalized}&lt;/display-name&gt;
-  &lt;description&gt;An {content-type-2} that lives on planet Earth&lt;/description&gt;
+  &lt;display-name&gt;Animal&lt;/display-name&gt;
+  &lt;description&gt;An animal that lives on planet Earth&lt;/description&gt;
   &lt;super-type&gt;base:structured&lt;/super-type&gt;
   &lt;form&gt;
 
@@ -654,10 +650,10 @@ Because links are created using the item&#8217;s unique id. It is perfectly safe
 <div class="sect2">
 <h3 id="task_internal_link"><a class="link" href="#task_internal_link">Task: Internal link</a></h3>
 <div class="paragraph">
-<p>In this task, you&#8217;ll create an internal link to another {content-type-2}.</p>
+<p>In this task, you&#8217;ll create an internal link to another animal.</p>
 </div>
 <div class="paragraph">
-<p>Create a new {content-type-2}, "Lynx".</p>
+<p>Create a new animal, "Lynx".</p>
 </div>
 <div class="olist arabic">
 <ol class="arabic">
@@ -670,7 +666,7 @@ Because links are created using the item&#8217;s unique id. It is perfectly safe
 <i class="fa icon-note" title="Note"></i>
 </td>
 <td class="content">
-You can also use kbd:[ctrl+K] to insert the link.
+You can also use <span class="keyseq"><kbd>ctrl</kbd>+<kbd>K</kbd></span> to insert the link.
 </td>
 </tr>
 </table>
@@ -681,7 +677,7 @@ You can also use kbd:[ctrl+K] to insert the link.
 .Choose the content tab, and select the previously created "Lion" as the target item</p>
 <div class="imageblock">
 <div class="content">
-<img src="rich-text-insert-content-link.png" alt="Screenshot of the insert link dialog." width="{image-l}">
+<img src="media/rich-text-insert-content-link.png" alt="Screenshot of the insert link dialog." width="1050">
 </div>
 </div>
 </li>
@@ -703,12 +699,12 @@ You can also use kbd:[ctrl+K] to insert the link.
 <p>The following options are available: Caption, alt text, change the image&#8217;s justification, and apply a predefined image styles.</p>
 </div>
 <div class="sect2">
-<h3 id="task_content_type_2_capitalized_pictures"><a class="link" href="#task_content_type_2_capitalized_pictures">Task: {content-type-2-capitalized} pictures</a></h3>
+<h3 id="task_animal_pictures"><a class="link" href="#task_animal_pictures">Task: Animal pictures</a></h3>
 <div class="paragraph">
 <p>Try out the image controls that Content Studio give you by uploading a picture and seeing what you can do with it.</p>
 </div>
 <div class="paragraph">
-<p>We looked at <a href="input-types.ahtml#_working_with_images">editing images in the previous {document}</a>, but when inserting images in the HtmlArea, you also have something called "image styles", which we&#8217;ll have a look at now.</p>
+<p>We looked at <a href="input-types.ahtml#_working_with_images">editing images in the previous chapter</a>, but when inserting images in the HtmlArea, you also have something called "image styles", which we&#8217;ll have a look at now.</p>
 </div>
 <div class="paragraph">
 <p>Continue editing the "Lynx" content created in the previous task.</p>
@@ -719,7 +715,7 @@ You can also use kbd:[ctrl+K] to insert the link.
 <p>Insert an image below the existing text. Use the "insert image" button in the toolbar.</p>
 <div class="imageblock">
 <div class="content">
-<img src="rich-text-toolbar-image-highlight.png" alt="The rich text toolbar with the image tool circled by a blue circle." width="{image-l}">
+<img src="media/rich-text-toolbar-image-highlight.png" alt="The rich text toolbar with the image tool circled by a blue circle." width="1050">
 </div>
 <div class="title">Figure 4. The toolbar with the image tool highlighted</div>
 </div>
@@ -730,7 +726,7 @@ You can also use kbd:[ctrl+K] to insert the link.
 <i class="fa icon-note" title="Note"></i>
 </td>
 <td class="content">
-You can also use kbd:[ctrl+L] to insert an image.
+You can also use <span class="keyseq"><kbd>ctrl</kbd>+<kbd>L</kbd></span> to insert an image.
 </td>
 </tr>
 </table>
@@ -740,7 +736,7 @@ You can also use kbd:[ctrl+L] to insert an image.
 <p>You&#8217;ll be greeted by the "insert image" dialog:</p>
 <div class="imageblock">
 <div class="content">
-<img src="rich-text-insert-image.png" alt="The insert image dialog, showing the image, an image styles dropdown, caption, and alt text fields" width="{image-l}">
+<img src="media/rich-text-insert-image.png" alt="The insert image dialog, showing the image, an image styles dropdown, caption, and alt text fields" width="1050">
 </div>
 <div class="title">Figure 5. The HtmlArea insert image dialog. Photo by <a href="https://unsplash.com/@kydroon">Kurt Cotoaga</a> 🦁</div>
 </div>
@@ -791,7 +787,7 @@ You can also use kbd:[ctrl+L] to insert an image.
 <p>With this style picked up by XP, you&#8217;ll have the "Grayscale" option available in the image styles dropdown. Select it to apply it to the image.</p>
 <div class="imageblock">
 <div class="content">
-<img src="rich-text-insert-image-styled.png" alt="The insert image dialog showing the results of applying the image styles to the image" width="{image-l}">
+<img src="media/rich-text-insert-image-styled.png" alt="The insert image dialog showing the results of applying the image styles to the image" width="1050">
 </div>
 <div class="title">Figure 6. Example image with an the style applied</div>
 </div>
@@ -817,7 +813,7 @@ You can also use kbd:[ctrl+L] to insert an image.
 </div>
 <div class="imageblock">
 <div class="content">
-<img src="macros-panel-macros.jpg" alt="The Panel Macros package in action, showing differently colored panels." width="{image-m}">
+<img src="media/macros-panel-macros.jpg" alt="The Panel Macros package in action, showing differently colored panels." width="900">
 </div>
 <div class="title">Figure 7. The Panel Macros in action</div>
 </div>
@@ -836,7 +832,7 @@ You can also use kbd:[ctrl+L] to insert an image.
 <p>Search for and install the "Panel Macros" app.</p>
 </li>
 <li>
-<p>Edit your site ({p1-site-name}). In the applications dropdown, find Panel Macros, and add it.</p>
+<p>Edit your site (My First Site). In the applications dropdown, find Panel Macros, and add it.</p>
 </li>
 <li>
 <p>Save and exit.</p>
@@ -848,7 +844,7 @@ You can also use kbd:[ctrl+L] to insert an image.
 </div>
 <div class="imageblock">
 <div class="content">
-<img src="rich-text-toolbar-macro-highlight.png" alt="The rich text toolbar with the macro button circled by a blue circle." width="{image-l}">
+<img src="media/rich-text-toolbar-macro-highlight.png" alt="The rich text toolbar with the macro button circled by a blue circle." width="1050">
 </div>
 <div class="title">Figure 8. The toolbar with the macro button highlighted</div>
 </div>
@@ -874,7 +870,7 @@ You can also use kbd:[ctrl+L] to insert an image.
 <p>The lynx inhabits high altitude forests with dense cover of shrubs, reeds, and tall grass.</p>
 <div class="imageblock">
 <div class="content">
-<img src="macros-insert-macro.png" alt="A form with 'header' and 'description' fields. Used to set macro parameters." width="{image-xl}">
+<img src="media/macros-insert-macro.png" alt="A form with 'header' and 'description' fields. Used to set macro parameters." width="1200">
 </div>
 <div class="title">Figure 9. The insert macro form with habitat data</div>
 </div>
@@ -886,7 +882,7 @@ You can also use kbd:[ctrl+L] to insert an image.
 <p>If configured, you may also get a preview of what the macro will look like.</p>
 <div class="imageblock">
 <div class="content">
-<img src="macros-preview-macro.png" alt="The text we specified in the macro preview form inside a light blue box with an icon attached" width="{image-xl}">
+<img src="media/macros-preview-macro.png" alt="The text we specified in the macro preview form inside a light blue box with an icon attached" width="1200">
 </div>
 <div class="title">Figure 10. The macro preview function</div>
 </div>
@@ -930,7 +926,7 @@ The Macro can be previewed because the Panel Macros includes a standard preview.
   guillotine {
     query(query: "displayName = 'Lynx'")
      {
-      ... on {project-name-query}_{content-type-2-Capitalized} {
+      ... on com_example_myproject_Animal {
         data {
           description {
             processedHtml
@@ -1086,7 +1082,7 @@ Wondering why the href points to a location within the admin? No worries. Guillo
 <pre class="highlight"><code class="language-GraphQL" data-lang="GraphQL">{
   guillotine {
     query(query: "displayName = 'Lynx'") {
-      ... on {project-name-query}_{content-type-2-Capitalized} {
+      ... on com_example_myproject_Animal {
         data {
           description(processHtml: {imageWidths: [200, 500]}) {
             processedHtml
@@ -1299,7 +1295,7 @@ If you used a different macro than the "Info" macro, the query must be updated t
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2023-08-04 10:51:27 UTC
+Last updated 2023-08-04 10:57:18 UTC
 </div>
 </div>
 </body>

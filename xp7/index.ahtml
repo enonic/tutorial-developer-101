@@ -5,7 +5,6 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="generator" content="Asciidoctor 2.0.20">
-<meta name="author" content="Unresolved directive in index.adoc - include::.variables.adoc[]">
 <title>Developer 101 - Introduction to Enonic</title>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,300italic,400,400italic,600,600italic%7CNoto+Serif:400,400italic,700,700italic%7CDroid+Sans+Mono:400,700">
 <style>
@@ -438,9 +437,6 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <body class="article toc2 toc-right">
 <div id="header">
 <h1>Developer 101 - Introduction to Enonic</h1>
-<div class="details">
-<span id="author" class="author">Unresolved directive in index.adoc - include::.variables.adoc[]</span><br>
-</div>
 <div id="toc" class="toc2">
 <div id="toctitle">Table of Contents</div>
 <ul class="sectlevel1">
@@ -485,17 +481,17 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <div class="title">Installing tools and initial setup</div>
 <div class="dlist">
 <dl>
-<dt class="hdlist1"><a href="setup.ahtml">{title-setup}</a></dt>
+<dt class="hdlist1"><a href="setup.ahtml">Setting up your development environment</a></dt>
 <dd>
-<p>{description-setup}</p>
+<p>Starting from scratch, this chapter takes you through how to install all the necessary tools to get started with XP development.</p>
 </dd>
-<dt class="hdlist1"><a href="sandboxes.ahtml">{title-sandboxes}</a></dt>
+<dt class="hdlist1"><a href="sandboxes.ahtml">Sandboxes</a></dt>
 <dd>
-<p>{description-sandboxes}</p>
+<p>The fundamentals of Enonic XP development: sandboxes and the Enonic CLI.</p>
 </dd>
-<dt class="hdlist1"><a href="apps.ahtml">{title-apps}</a></dt>
+<dt class="hdlist1"><a href="apps.ahtml">App development</a></dt>
 <dd>
-<p>{description-apps}</p>
+<p>Learn how to create XP projects and how to build and deploy your apps to an XP instance.</p>
 </dd>
 </dl>
 </div>
@@ -506,21 +502,21 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <div class="title">Working with content</div>
 <div class="dlist">
 <dl>
-<dt class="hdlist1"><a href="content.ahtml">{title-content}</a></dt>
+<dt class="hdlist1"><a href="content.ahtml">Content and content types</a></dt>
 <dd>
-<p>{description-content}</p>
+<p>Content types are one of the most essential building blocks of XP. Get familiar with what they are and how to create and use them in this chapter.</p>
 </dd>
-<dt class="hdlist1"><a href="headless-api.ahtml">{title-headless-api}</a></dt>
+<dt class="hdlist1"><a href="headless-api.ahtml">Headless API</a></dt>
 <dd>
-<p>{description-headless-api}</p>
+<p>What is a headless CMS without an API? Learn about the Guillotine library and the powers it unlocks here!</p>
 </dd>
-<dt class="hdlist1"><a href="media-and-images.ahtml">{title-media-and-images}</a></dt>
+<dt class="hdlist1"><a href="media-and-images.ahtml">Media and images</a></dt>
 <dd>
-<p>{description-media-and-images}</p>
+<p>How does XP deal with images and other media? This chapter covers XP media support, how to upload and query for media, and how to work with images.</p>
 </dd>
-<dt class="hdlist1"><a href="input-types.ahtml">{title-input-types}</a></dt>
+<dt class="hdlist1"><a href="input-types.ahtml">Input types</a></dt>
 <dd>
-<p>{description-input-types}</p>
+<p>Take your content types to the next level with more advanced input types. Learn how to configure input types, what kinds there are, and how to link content together!</p>
 </dd>
 </dl>
 </div>
@@ -531,17 +527,17 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <div class="title">Advanced content modelling</div>
 <div class="dlist">
 <dl>
-<dt class="hdlist1"><a href="sets.ahtml">{title-sets}</a></dt>
+<dt class="hdlist1"><a href="sets.ahtml">Sets</a></dt>
 <dd>
-<p>{description-sets}</p>
+<p>XP has a number of ways to group inputs together. Learn all about them in this chapter.</p>
 </dd>
-<dt class="hdlist1"><a href="rich-text.ahtml">{title-rich-text}</a></dt>
+<dt class="hdlist1"><a href="rich-text.ahtml">Rich text: HtmlArea</a></dt>
 <dd>
-<p>{description-rich-text}</p>
+<p>Rich text is an incredibly powerful editing tool and an important part of the XP experience. Learn how to configure it here!</p>
 </dd>
-<dt class="hdlist1"><a href="x-data.ahtml">{title-x-data}</a></dt>
+<dt class="hdlist1"><a href="x-data.ahtml">X-data</a></dt>
 <dd>
-<p>{description-x-data}</p>
+<p>X-data is a way for you to add extra data to all your content types in a simple manner. This chapter covers what it is and how to use it.</p>
 </dd>
 </dl>
 </div>
@@ -552,9 +548,9 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <div class="title">Deployment and next steps</div>
 <div class="dlist">
 <dl>
-<dt class="hdlist1"><a href="deployment.ahtml">{title-deployment}</a></dt>
+<dt class="hdlist1"><a href="deployment.ahtml">Deployment and next steps</a></dt>
 <dd>
-<p>{description-deployment}</p>
+<p>How do you actually deploy Enonic XP and use it for more than local development? And where do you go from here to learn more?</p>
 </dd>
 </dl>
 </div>
@@ -565,7 +561,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2023-08-04 10:51:27 UTC
+Last updated 2023-08-04 10:57:18 UTC
 </div>
 </div>
 </body>

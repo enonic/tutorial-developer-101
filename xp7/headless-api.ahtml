@@ -5,9 +5,8 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="generator" content="Asciidoctor 2.0.20">
-<meta name="description" content="{description-headless-api}">
-<meta name="author" content="Unresolved directive in headless-api.adoc - include::.variables.adoc[]">
-<title>{title-headless-api}</title>
+<meta name="description" content="What is a headless CMS without an API? Learn about the Guillotine library and the powers it unlocks here!">
+<title>Headless API</title>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,300italic,400,400italic,600,600italic%7CNoto+Serif:400,400italic,700,700italic%7CDroid+Sans+Mono:400,700">
 <style>
 /*! Asciidoctor default stylesheet | MIT License | https://asciidoctor.org */
@@ -438,10 +437,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 </head>
 <body class="article toc2 toc-right">
 <div id="header">
-<h1>{title-headless-api}</h1>
-<div class="details">
-<span id="author" class="author">Unresolved directive in headless-api.adoc - include::.variables.adoc[]</span><br>
-</div>
+<h1>Headless API</h1>
 <div id="toc" class="toc2">
 <div id="toctitle">Table of Contents</div>
 <ul class="sectlevel1">
@@ -450,7 +446,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <li><a href="#guillotine_queries">Guillotine queries</a></li>
 <li><a href="#site_context">Site Context</a>
 <ul class="sectlevel2">
-<li><a href="#content_type_1_capitalized_queries">{content-type-1-capitalized} queries</a></li>
+<li><a href="#artist_queries">Artist queries</a></li>
 </ul>
 </li>
 <li><a href="#advanced_queries">Advanced queries</a></li>
@@ -462,7 +458,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <div id="preamble">
 <div class="sectionbody">
 <div class="paragraph">
-<p>Now that we&#8217;ve created some content, let&#8217;s see how we can access and use it in via API - headless style. This {document} introduces <em>Guillotine</em>, the app that&#8217;s responsible for automatically generating GraphQL APIs for your content.</p>
+<p>Now that we&#8217;ve created some content, let&#8217;s see how we can access and use it in via API - headless style. This chapter introduces <em>Guillotine</em>, the app that&#8217;s responsible for automatically generating GraphQL APIs for your content.</p>
 </div>
 <div class="admonitionblock note">
 <table>
@@ -471,7 +467,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <i class="fa icon-note" title="Note"></i>
 </td>
 <td class="content">
-Enonic XP is very flexible, and provides multiple ways of exposing and using content. If you are not interested in accessing content via the standard headless API, feel free to skip this {document} and the sections mentioning "Headless" in the rest of the tutorial.
+Enonic XP is very flexible, and provides multiple ways of exposing and using content. If you are not interested in accessing content via the standard headless API, feel free to skip this chapter and the sections mentioning "Headless" in the rest of the tutorial.
 </td>
 </tr>
 </table>
@@ -483,7 +479,7 @@ Enonic XP is very flexible, and provides multiple ways of exposing and using con
 <i class="fa icon-note" title="Note"></i>
 </td>
 <td class="content">
-You won&#8217;t be building anything new in this {chapter}, but we use the data set and everything that you&#8217;ve created over the previous {document}s.
+You won&#8217;t be building anything new in this {chapter}, but we use the data set and everything that you&#8217;ve created over the previous chapters.
 </td>
 </tr>
 </table>
@@ -505,13 +501,13 @@ You won&#8217;t be building anything new in this {chapter}, but we use the data 
 <p>From the XP menu (top right), choose <code>Applications</code>.</p>
 </li>
 <li>
-<p>Click kbd:[Install] from the top menu</p>
+<p>Click <kbd>Install</kbd> from the top menu</p>
 </li>
 <li>
-<p>Search for <code>Guillotine</code>, and click kbd:[Install]`.</p>
+<p>Search for <code>Guillotine</code>, and click <kbd>Install</kbd>`.</p>
 <div class="imageblock">
 <div class="content">
-<img src="install-guillotine.png" alt="Install Guillotine application dialog" width="{image-xl}">
+<img src="media/install-guillotine.png" alt="Install Guillotine application dialog" width="1200">
 </div>
 </div>
 </li>
@@ -530,7 +526,7 @@ You won&#8217;t be building anything new in this {chapter}, but we use the data 
 </div>
 <div class="imageblock">
 <div class="content">
-<img src="query-playground-empty.png" alt="API browser integrated in Content Studio" width="{image-xl}">
+<img src="media/query-playground-empty.png" alt="API browser integrated in Content Studio" width="1200">
 </div>
 </div>
 <div class="paragraph">
@@ -569,7 +565,7 @@ The API explorer offers autocompletion for fields. You can use this to interacti
 <i class="fa icon-tip" title="Tip"></i>
 </td>
 <td class="content">
-You can also run queries by using the keyboard shortcut kbd:[ctrl+enter]/kbd:[⌘+enter] .
+You can also run queries by using the keyboard shortcut <span class="keyseq"><kbd>ctrl</kbd>+<kbd>enter</kbd></span>/<span class="keyseq"><kbd>⌘</kbd>+<kbd>enter</kbd></span> .
 </td>
 </tr>
 </table>
@@ -589,7 +585,7 @@ You can also run queries by using the keyboard shortcut kbd:[ctrl+enter]/kbd:[�
 </div>
 </div>
 <div class="paragraph">
-<p>The response is returned as JSON. In this case, it will contain the  contain the site ({p1-site-name}), and your images folder. For each item you will also see it&#8217;s name, and location within the project structure.</p>
+<p>The response is returned as JSON. In this case, it will contain the  contain the site (My First Site), and your images folder. For each item you will also see it&#8217;s name, and location within the project structure.</p>
 </div>
 <div class="listingblock">
 <div class="title">The site info response</div>
@@ -626,7 +622,7 @@ You can also run queries by using the keyboard shortcut kbd:[ctrl+enter]/kbd:[�
 </div>
 </div>
 <div class="paragraph">
-<p>The response will contain the immediate children of the site: the "{content-type-1}" folder we created and the "Templates" folder that was already there.</p>
+<p>The response will contain the immediate children of the site: the "artist" folder we created and the "Templates" folder that was already there.</p>
 </div>
 <div class="listingblock">
 <div class="title">The site info response</div>
@@ -683,19 +679,19 @@ The SiteKey, may either be the site&#8217;s path, or unique identifier. Using th
 <p>When executing queries, you now have a few new tricks available, as you will see in the examples below</p>
 </div>
 <div class="sect2">
-<h3 id="content_type_1_capitalized_queries"><a class="link" href="#content_type_1_capitalized_queries">{content-type-1-capitalized} queries</a></h3>
+<h3 id="artist_queries"><a class="link" href="#artist_queries">Artist queries</a></h3>
 <div class="paragraph">
-<p>Let&#8217;s look at writing slightly more complex queries that get us information about the artists we&#8217;ve created. To start with, let&#8217;s see if we can just fetch all the {content-type-1}s that we created.</p>
+<p>Let&#8217;s look at writing slightly more complex queries that get us information about the artists we&#8217;ve created. To start with, let&#8217;s see if we can just fetch all the artists that we created.</p>
 </div>
 <div class="paragraph">
 <p>This time, we will use the ${site} placeholder to specify the path</p>
 </div>
 <div class="listingblock">
-<div class="title">A GraphQL query fetching all content below the "{p1-site-name}" site</div>
+<div class="title">A GraphQL query fetching all content below the "My First Site" site</div>
 <div class="content">
 <pre class="highlight"><code class="language-GraphQL" data-lang="GraphQL">{
   guillotine {
-    getChildren(key: "${site}/{content-type-1}s")
+    getChildren(key: "${site}/artists")
     {
       displayName
     }
@@ -704,10 +700,10 @@ The SiteKey, may either be the site&#8217;s path, or unique identifier. Using th
 </div>
 </div>
 <div class="paragraph">
-<p>The result of this query should list all the {content-type-1}s you created previously:</p>
+<p>The result of this query should list all the artists you created previously:</p>
 </div>
 <div class="listingblock">
-<div class="title">The result of the above query; all content nodes below "{content-type-1}s"</div>
+<div class="title">The result of the above query; all content nodes below "artists"</div>
 <div class="content">
 <pre class="highlight"><code class="language-JSON" data-lang="JSON">{
   "data": {
@@ -729,7 +725,7 @@ The SiteKey, may either be the site&#8217;s path, or unique identifier. Using th
 </div>
 </div>
 <div class="paragraph">
-<p>Neat! Next, let&#8217;s try a slightly more complicated query. In this one,  we&#8217;ll also get the data inside the content nodes and extract their names and alias fields. Because all content shares the <code>displayName</code> property, you can query for it without specifying what type it belongs to. However, to get fields that exist on the {content-type-1-capitalized} type, you need to specifically tell GraphQL what type you&#8217;re looking for via <em>inline fragments</em>. Inline fragments start with <code>&#8230;&#8203; on</code> and then specify the content type you want.</p>
+<p>Neat! Next, let&#8217;s try a slightly more complicated query. In this one,  we&#8217;ll also get the data inside the content nodes and extract their names and alias fields. Because all content shares the <code>displayName</code> property, you can query for it without specifying what type it belongs to. However, to get fields that exist on the Artist type, you need to specifically tell GraphQL what type you&#8217;re looking for via <em>inline fragments</em>. Inline fragments start with <code>&#8230;&#8203; on</code> and then specify the content type you want.</p>
 </div>
 <div class="admonitionblock tip">
 <table>
@@ -744,14 +740,14 @@ Learn more about inline fragments at <a href="https://graphql.org/learn/queries/
 </table>
 </div>
 <div class="listingblock">
-<div class="title">A GraphQL query that fetches all {content-type-1}s and their data using inline fragments</div>
+<div class="title">A GraphQL query that fetches all artists and their data using inline fragments</div>
 <div class="content">
 <pre class="highlight"><code class="language-GraphQL" data-lang="GraphQL">{
   guillotine {
-    getChildren(key: "${site}/{content-type-1}s/")
+    getChildren(key: "${site}/artists/")
     {
       displayName
-      ... on {project-name-query}_{content-type-1-capitalized} { <i class="conum" data-value="1"></i><b>(1)</b>
+      ... on com_example_myproject_Artist { <i class="conum" data-value="1"></i><b>(1)</b>
         data {
           name
           about
@@ -766,7 +762,7 @@ Learn more about inline fragments at <a href="https://graphql.org/learn/queries/
 <table>
 <tr>
 <td><i class="conum" data-value="1"></i><b>1</b></td>
-<td>This inline fragment lets us extract extra data from content of the {content-type-1-capitalized} type.</td>
+<td>This inline fragment lets us extract extra data from content of the Artist type.</td>
 </tr>
 </table>
 </div>
@@ -774,7 +770,7 @@ Learn more about inline fragments at <a href="https://graphql.org/learn/queries/
 <p>Execute this and your response should look a little something like this:</p>
 </div>
 <div class="listingblock">
-<div class="title">{content-type-1-capitalized}s and their aliases as returned by GraphQL</div>
+<div class="title">Artists and their aliases as returned by GraphQL</div>
 <div class="content">
 <pre class="highlight"><code class="language-JSON" data-lang="JSON">{
   "data": {
@@ -784,21 +780,21 @@ Learn more about inline fragments at <a href="https://graphql.org/learn/queries/
           "displayName": "Missy Elliott",
           "data": {
             "name": "Melissa Arnette Elliott",
-            "about": "{content-about-missy}"
+            "about": "Melissa Arnette Elliott (born July 1, 1971) is an American rapper, singer, songwriter, and record producer."
           }
         },
         {
           "displayName": "P!nk",
           "data": {
             "name": "Alecia Beth Moore",
-            "about": "{content-about-pink}"
+            "about": "Alecia Beth Moore (born September 8, 1979), known professionally as Pink (stylized as P!nk), is an American singer and songwriter."
           }
         },
         {
           "displayName": "Cardi B",
           "data": {
             "name": "Belcalis Marlenis Almánzar",
-            "about": "{content-about-cardi}"
+            "about": "Belcalis Marlenis Almánzar (born October 11, 1992), known professionally as Cardi B, is an American rapper and songwriter."
           }
         }
       ]
@@ -856,8 +852,8 @@ Learn more about inline fragments at <a href="https://graphql.org/learn/queries/
       first: 2,
       offset: 0,
       contentTypes:
-      [ "{project-name-full}:{content-type-1}", <i class="conum" data-value="1"></i><b>(1)</b>
-	"{project-name-full}:{content-type-2}" ],
+      [ "com.example.myproject:artist", <i class="conum" data-value="1"></i><b>(1)</b>
+	"com.example.myproject:animal" ],
       sort: "displayName desc") {
       displayName
       contentType {
@@ -917,7 +913,7 @@ If a content type doesn&#8217;t exist, such as in the above query, GraphQL will 
 </div>
 </div>
 <div class="paragraph">
-<p>To perform a more advanced query, you can use the <code>query</code> parameter. The following GraphQL query uses the <a href="https://developer.enonic.com/docs/xp/stable/storage/noql#ngram">n-gram query functionality</a> to find all the {content-type-1}s that have a term (part of a text) that starts with <code>rap</code> somewhere in their data.</p>
+<p>To perform a more advanced query, you can use the <code>query</code> parameter. The following GraphQL query uses the <a href="https://developer.enonic.com/docs/xp/stable/storage/noql#ngram">n-gram query functionality</a> to find all the artists that have a term (part of a text) that starts with <code>rap</code> somewhere in their data.</p>
 </div>
 <div class="listingblock">
 <div class="title">A Guillotine query using <em>nGram</em> search functionality</div>
@@ -925,7 +921,7 @@ If a content type doesn&#8217;t exist, such as in the above query, GraphQL will 
 <pre class="highlight"><code class="language-GraphQL" data-lang="GraphQL">{
   guillotine {
     query(
-      contentTypes: "{project-name-full}:{content-type-1}"
+      contentTypes: "com.example.myproject:artist"
       query: "ngram('_allText', 'rap')"
       sort: "displayName asc") {
       displayName
@@ -957,15 +953,15 @@ If a content type doesn&#8217;t exist, such as in the above query, GraphQL will 
 </div>
 </div>
 <div class="paragraph">
-<p>Naturally, you can also use the standard boolean operators to combine or negate clauses. If you wanted to find all {content-type-1}s that mention both rapping and singing, you could try a query like this:</p>
+<p>Naturally, you can also use the standard boolean operators to combine or negate clauses. If you wanted to find all artists that mention both rapping and singing, you could try a query like this:</p>
 </div>
 <div class="listingblock">
-<div class="title">Querying for {content-type-1}s who both rap and sing</div>
+<div class="title">Querying for artists who both rap and sing</div>
 <div class="content">
 <pre class="highlight"><code class="language-GraphQL" data-lang="GraphQL">{
   guillotine {
     query(
-      contentTypes: "{project-name-full}:{content-type-1}"
+      contentTypes: "com.example.myproject:artist"
       query: "ngram('_allText', 'rap') AND ngram('_allText', 'sing')"
       sort: "displayName asc") {
       displayName
@@ -1009,7 +1005,7 @@ If a content type doesn&#8217;t exist, such as in the above query, GraphQL will 
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2023-08-04 10:51:27 UTC
+Last updated 2023-08-04 10:57:18 UTC
 </div>
 </div>
 </body>

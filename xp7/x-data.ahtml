@@ -5,9 +5,8 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="generator" content="Asciidoctor 2.0.20">
-<meta name="description" content="{description-x-data}">
-<meta name="author" content="Unresolved directive in x-data.adoc - include::.variables.adoc[]">
-<title>{title-x-data}</title>
+<meta name="description" content="X-data is a way for you to add extra data to all your content types in a simple manner. This chapter covers what it is and how to use it.">
+<title>X-data</title>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,300italic,400,400italic,600,600italic%7CNoto+Serif:400,400italic,700,700italic%7CDroid+Sans+Mono:400,700">
 <style>
 /*! Asciidoctor default stylesheet | MIT License | https://asciidoctor.org */
@@ -438,10 +437,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 </head>
 <body class="article toc2 toc-right">
 <div id="header">
-<h1>{title-x-data}</h1>
-<div class="details">
-<span id="author" class="author">Unresolved directive in x-data.adoc - include::.variables.adoc[]</span><br>
-</div>
+<h1>X-data</h1>
 <div id="toc" class="toc2">
 <div id="toctitle">Table of Contents</div>
 <ul class="sectlevel1">
@@ -467,7 +463,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <i class="fa icon-note" title="Note"></i>
 </td>
 <td class="content">
-{see-prev-docs}
+The tasks and examples in this chapter are based on work done in previous chapters (starting with <a href="sandboxes.ahtml">the sandboxes chapter</a>). If you want to follow along with the examples, make sure you&#8217;re all caught up.
 </td>
 </tr>
 </table>
@@ -486,7 +482,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <p>Install the <a href="https://market.enonic.com/vendors/enonic/seo-metafields">SEO Metafields app</a>.</p>
 <div class="imageblock">
 <div class="content">
-<img src="x-data-seo-app-install.png" alt="Install SEO Metafields app" width="{image-l}">
+<img src="media/x-data-seo-app-install.png" alt="Install SEO Metafields app" width="1050">
 </div>
 </div>
 </li>
@@ -497,18 +493,18 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <p>Immediately after adding the app to your site, the form should refresh - and add a new step "SEO Metafields":</p>
 <div class="imageblock">
 <div class="content">
-<img src="x-data-seo-fields.png" alt="SEO form step and additional fields appear." width="{image-xl}">
+<img src="media/x-data-seo-fields.png" alt="SEO form step and additional fields appear." width="1200">
 </div>
 </div>
 </li>
 </ol>
 </div>
 <div class="paragraph">
-<p>So, now you have some additional fields for the site. If you check some of your other content items, like an {content-type-2}. You will see the fields are there as well.</p>
+<p>So, now you have some additional fields for the site. If you check some of your other content items, like an animal. You will see the fields are there as well.</p>
 </div>
 <div class="imageblock">
 <div class="content">
-<img src="x-data-seo-animal.png" alt="SEO fields available for the animals content type as well." width="{image-xl}">
+<img src="media/x-data-seo-animal.png" alt="SEO fields available for the animals content type as well." width="1200">
 </div>
 </div>
 </div>
@@ -547,7 +543,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <div class="title">src/main/resources/site/site.xml</div>
 <div class="content">
 <pre class="highlight"><code class="language-xml" data-lang="xml">&lt;site&gt;
-  &lt;x-data name="&lt;xdata-name&gt;" allowContentTypes="{content-type-2}"/&gt;
+  &lt;x-data name="&lt;xdata-name&gt;" allowContentTypes="animal"/&gt;
   &lt;form/&gt;
 &lt;/site&gt;</code></pre>
 </div>
@@ -651,7 +647,7 @@ For more details and configuration options for X-data, visit <a href="https://de
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2023-08-04 10:51:27 UTC
+Last updated 2023-08-04 10:57:18 UTC
 </div>
 </div>
 </body>
