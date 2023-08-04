@@ -1,0 +1,9 @@
+{
+  "versions": [
+    {
+      "label": "xp7",
+      "checkout": "master",
+      "latest": true
+    }
+  ]
+}
