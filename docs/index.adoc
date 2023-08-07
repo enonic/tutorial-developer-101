@@ -1,64 +1,6 @@
 = Developer 101 - Introduction to Enonic
-include::.variables.adoc[]
-:section-1: Installing tools and initial setup
-:section-2: Working with content
-:section-3: Advanced content modelling
-:section-4: Deployment and next steps
 
-👋 Hi, and welcome to this in-depth tutorial to get familiar with Enonic. The guide is aimed at people new to Enonic, covering everything you need to know for a flying start.
-
-NOTE: *In a hurry?* If you just want to get up and running as fast as possible, check out the https://developer.enonic.com/start[quick start docs] instead 🚀
-
-If you have any questions, or just want to get in touch - visit our https://discuss.enonic.com[Forum^] or join our https://slack.enonic.com/[Community Slack channel^]
-
-Good luck! 🙌
-
-== Overview
-
-Below is an overview of the various chapters in this guide.
-
-[sidebar]
-.{section-1}
---
-
-<<setup#, {title-setup}>>::
-{description-setup}
-<<sandboxes#, {title-sandboxes}>>::
-{description-sandboxes}
-<<apps#, {title-apps}>>::
-{description-apps}
---
-
-[sidebar]
-.{section-2}
---
-
-<<content#, {title-content}>>::
-{description-content}
-<<headless-api#, {title-headless-api}>>::
-{description-headless-api}
-<<media-and-images#, {title-media-and-images}>>::
-{description-media-and-images}
-<<input-types#, {title-input-types}>>::
-{description-input-types}
---
-
-[sidebar]
-.{section-3}
---
-
-<<sets#, {title-sets}>>::
-{description-sets}
-<<rich-text#, {title-rich-text}>>::
-{description-rich-text}
-<<x-data#, {title-x-data}>>::
-{description-x-data}
---
-
-[sidebar]
-.{section-4}
---
-
-<<deployment#, {title-deployment}>>::
-{description-deployment}
---
+// IN PROGRESS
+// setup.adoc
+// sandbox-welcome
+// ...
