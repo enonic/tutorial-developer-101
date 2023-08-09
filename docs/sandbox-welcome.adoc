@@ -166,7 +166,7 @@ What this actually does is log you in as the XP instance's super user.
 
 Because we're working on a local development environment for now, we won't concern ourselves with users and administrators. We'll talk more about this in a later {document}.
 
-You should now be on the admin dashboard. The right menu, aka _"XP admin menu"_, is responsible to allow navigation through installed apps on your XP instance. By now you should only have two apps installed:
+You should now be on the admin dashboard. The right menu, aka _"XP admin menu"_, is responsible to allow navigation through some of the installed apps on your XP instance. By now you should only have two apps installed:
 
 - app-users, to manage permissions for users, user groups and roles on your local XP instance (_sandbox_)
 - app-applications, to install, uninstall and update installed applications on your _sandbox_

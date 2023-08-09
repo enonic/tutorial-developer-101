@@ -22,7 +22,7 @@
 :see-prev-docs: The tasks and examples in this {document} are based on work done in previous {document}s (starting with <<sandboxes#, the sandboxes chapter>>). If you want to follow along with the examples, make sure you're all caught up.
 :title-setup: Setting up your development environment
 :title-sandbox-welcome: Sandbox Welcome
-:title-apps: App development
+:title-apps: Your first App
 :title-content: Content and content types
 :title-media-and-images: Media and images
 :title-sets: Sets
