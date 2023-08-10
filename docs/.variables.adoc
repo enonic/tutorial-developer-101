@@ -21,7 +21,7 @@
 :subs: subs="attributes+"
 :see-prev-docs: The tasks and examples in this {document} are based on work done in previous {document}s (starting with <<sandboxes#, the sandboxes chapter>>). If you want to follow along with the examples, make sure you're all caught up.
 :title-setup: Setting up your development environment
-:title-sandboxes: Sandboxes
+:title-sandbox-welcome: Sandbox Welcome
 :title-apps: App development
 :title-content: Content and content types
 :title-media-and-images: Media and images
@@ -38,7 +38,7 @@
 :image-l: width=1050
 :image-xl: width=1200
 :description-setup: Starting from scratch, this {document} takes you through how to install all the necessary tools to get started with XP development.
-:description-sandboxes: The fundamentals of Enonic XP development: sandboxes and the Enonic CLI.
+:description-sandbox-welcome: Introducing a fundamental concept of Enonic XP development: sandboxes.
 :description-apps: Learn how to create XP projects and how to build and deploy your apps to an XP instance.
 :description-content: Content types are one of the most essential building blocks of XP. Get familiar with what they are and how to create and use them in this {document}.
 :description-headless-api: What is a headless CMS without an API? Learn about the Guillotine library and the powers it unlocks here!
