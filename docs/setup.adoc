@@ -2,130 +2,164 @@
 include::.variables.adoc[]
 :description: {description-setup}
 
-Before we can start building, let's make sure we have the right tools available to work efficiently with XP. This {document} walks you through installing the fundamental tools we will be using throughout this guide, including a text editor, a package manager for your system, Git, and the Enonic CLI. 
+Before we can start building, let's make sure we have the right tools available to start developing efficiently with XP. In general, they are:
 
-If you've already got these installed, feel free to skip to the next chapter.
+- Basic command line (aka _terminal_) knowledge -> _executing commands through text_
+- Enonic CLI -> _managing your XP projects_
+- Git and Github -> _versioning your XP projects_
+- Integrated Development Environment -> _coding your XP projects_
+
+If you've already got those configured and installed, feel free to skip to the next chapter.
 
 == The command line
 
 The command line -- aka _the terminal_ -- is a powerful, text-based interface for running commands on your computer. You can also use the terminal to navigate your file system, similar to macOS`' Finder or Windows`' Explorer. The program running in the terminal (that interprets your commands) is known as a _shell_.
 
-The rest of this {document} will focus primarily on working with the command line, so go ahead and open your favorite terminal. If you don't know how to open a terminal on your system, don't worry! Instead, check out the guide for https://www.macworld.co.uk/how-to/mac-software/how-use-terminal-on-mac-3608274/[macOS], https://www.lifewire.com/how-to-open-command-prompt-2618089[Windows], or https://www.howtogeek.com/140679/beginner-geek-how-to-start-using-the-linux-terminal/[Linux] (depending on your operating system).
+If you are insecure about basic terminal knowledge, we recommend the following introductory guides (depending on your operating system):
+
+- https://www.macworld.co.uk/how-to/mac-software/how-use-terminal-on-mac-3608274/[macOS]
+- https://www.lifewire.com/how-to-open-command-prompt-2618089[Windows]
+- https://www.howtogeek.com/140679/beginner-geek-how-to-start-using-the-linux-terminal/[Linux]
 
 When we ask you to "run a command" later on in this document, you can assume that we're asking you to run it in a terminal unless otherwise specified.
 
-NOTE: To run a command in your terminal, type in the command and press kbd:[enter]. For instance, the command `cd myfolder` would change the shell's working directory to the `myfolder` directory, assuming that it exists.
-
-== Package managers
-Enonic provides a command line interface (CLI) for working with XP. To make it easy to install and keep it updated, we distribute it via a number of _package managers_. Package managers are terminal-based "app stores" that focus on developer and command line tools.
-
-Find the section below for your operating system to see what package managers we support and how to install them.
-
-=== macOS: Homebrew
-
-For macOS, we distribute the Enonic CLI through the popular package manager https://brew.sh/[Homebrew]. Homebrew lets you install, uninstall, and manage your command line tools, including updating them when new versions are made available.
-
-To install Homebrew, follow the instructions in the link above or run the following command:
-
-  /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
-
-Once installed, run the following command in your terminal to verify that everything is working:
-
-    brew help
-
-=== Windows: Scoop
-
-We use the https://scoop.sh/[Scoop] package manager for Windows. To install Scoop, visit their website, or simply run these two commands from Powershell:
-
-NOTE: To launch Powershell from your regular terminal, the _Command Prompt_, simply execute the command `powershell`. The prompt should then start with `PS`.
-
-
-    set-executionpolicy remotesigned -scope currentuser
-    iwr -useb get.scoop.sh | iex
-
-To verify that Scoop was installed successfully, run the following command:
-
-    scoop help
-
-=== Linux: Snapcraft
-
-We use Snapcraft to distribute packages for Linux. Snapcraft comes preinstalled on a number of popular Linux distributions, including Ubuntu and Manjaro, and is also available for most other major Linux distributions, such as Debian, elementary OS, and Pop!_OS.
-
-Specific instructions will vary according to your distribution, so be sure to consult the https://snapcraft.io/docs/installing-snapd[snapd installation instructions] for your particular distro.
-
-To verify that it's installed and available, run the following command in your terminal. It should print out your version of Snap.
-
-    snap version
-
 == The Enonic CLI
 
-Now, we'll install the Enonic CLI via the package manager we just set up. The CLI provides a number of enonic-specific commands designed to make working with XP fast, easy, and efficient.
+Enonic provides a Command Line Interface (CLI) for working with XP. 
 
-[NOTE]
-====
-While we heavily recommend using a package manager, you can also download and install the executables manually if you prefer. To do that, visit the https://repo.enonic.com/public/com/enonic/cli/enonic/[the Enonic CLI public repo], download the files that correspond to the desired CLI version and your OS, and install them as you would any other binary files on your system. There is also https://repo.enonic.com/public/com/enonic/cli/installer/cli-windows/1.0.0/cli-windows-1.0.0.exe[a Windows installer for the CLI] available.
-====
+If the concept of CLI is new to you, you can imagine it as an interactive terminal program that will listen for some specific inputs (usually as text), and based on them execute specific tasks on your machine.
+
+The goal of our CLI is to improve the development workflow, and, by using it, you'll have an easy and quick way to manage your XP apps.
 
 === Installation
 
-The steps differ depending on your OS. Follow the steps below that best match your OS.
+The easiest and fastest way to install our CLI is by using Node Package Manager (NPM):
 
-==== macOS
+[source,shell]
+----
+npm install -g @enonic/cli 
+----
 
-From your terminal:
+Note that to run the npm install command you need to make sure that you have both Node and NPM installed on your machine. You can quickly check if they are installed by running the following commands on your terminal:
 
-. Make the `enonic/cli` repository via https://docs.brew.sh/Taps[Homebrew's tap functionality]
+[source,shell]
+----
+node -v
+----
 
-    brew tap enonic/cli
+to check the version of Node you have installed locally. Same for NPM:
 
-. Install the CLI
+[source,shell]
+----
+npm -v
+----
 
-    brew install enonic
+If they are not installed, you can head to https://nodejs.org/[nodejs.org] to proceed installing them.
 
-To upgrade to newer versions of enonic CLI when they become available, run the command `brew upgrade enonic`
-
-==== Windows
-
-From a Powershell terminal:
-
-. Make the CLI https://scoop.netlify.app/concepts/#buckets[bucket] available to install
-
-    scoop bucket add enonic https://github.com/enonic/cli-scoop
-
-. Install the CLI
-
-    scoop install enonic
-
-To upgrade to newer versions of enonic CLI when they become available, run the command `scoop update enonic`
-
-==== Linux
-
-From your terminal, run the following command:
-
-   sudo snap install enonic
-
-Snap automatically keeps your snaps updated. To manually force an update, run the command `sudo snap refresh enonic`
-
-[TIP]
+[NOTE]
 ====
- No Snap? Try this instead: ::
-
- `wget -qO- https://repo.enonic.com/public/com/enonic/cli/installer/cli-linux/1.0.0/cli-linux-1.0.0.sh | sh`
-
+Enonic CLI is also available on other package managers, such as https://developer.enonic.com/start#brew[brew] for MacOS, https://developer.enonic.com/start#scoop[scoop] for Windows and https://developer.enonic.com/start#curl[Snapcraft] on Linux.
 ====
 
 === Verification
 
-When you have installed the CLI, verify that it's working by running
+After running the installation command above, you can check if the Enonic CLI was properly installed by running
 
-  enonic version
+[source,shell]
+----
+enonic -v
+----
+
+=== Commands
+
+Let's first list some commands... run the following command in your terminal:
+
+[source,shell]
+----
+enonic
+----
+
+It should output something that looks a bit like this:
+
+.Main help page
+
+[source,shell]
+----
+Enonic CLI 2.6.1
+Manage XP instances, home folders and projects
+USAGE:
+   enonic [global options] [command] [command options] [arguments...]
+
+COMMANDS:
+     create     Create a new Enonic project
+     snapshot   Create and restore snapshots
+     dump       Dump and load complete repositories
+     export     Export data from a given repository, branch and content path.
+     import     Import data from a named export.
+     app        Install, stop and start applications
+     repo       Tune and manage repositories
+     cms        CMS commands
+     system     System commands
+     auditlog   Manage audit log repository
+     latest     Check for latest version
+     upgrade    Upgrade to the latest version
+     uninstall  Uninstall Enonic CLI
+     vacuum     Removes old version history and segments from content storage
+     help, h    Shows a list of commands or help for one command
+   
+CLOUD COMMANDS:
+     cloud  Manage Enonic cloud
+   
+PROJECT COMMANDS:
+     sandbox  Manage Enonic instances
+     project  Manage Enonic projects
+
+GLOBAL OPTIONS:
+   --help, -h     show help
+   --version, -v  print the version
+----
+
+If you want to know more about how to use one of the subcommands, you can use the `help` subcommand. For instance, if you want to know more about the `sandbox` subcommand, you can run:
+
+[source,shell]
+----
+enonic sandbox help
+----
+
+.Sandbox help page
+
+[source,shell]
+----
+NAME:
+   enonic sandbox - Manage Enonic instances
+
+USAGE:
+   enonic sandbox [global options] command [command options] [arguments...]
+
+VERSION:
+   2.6.1
+
+COMMANDS:
+   list, ls         List all sandboxes
+   start            Start the sandbox.
+   stop             Stop the sandbox started in detached mode.
+   create           Create a new sandbox.
+   delete, del, rm  Delete a sandbox
+   upgrade, up      Upgrades the distribution version.
+
+GLOBAL OPTIONS:
+   --help, -h  show help
+----
+
+As can be seen, there are a lot of commands and their subcommands to help you. On this guide, we'll only cover the necessary ones to be able to start developing on XP.
+
+NOTE: Consider checking our https://developer.enonic.com/docs/enonic-cli/stable[CLI documentation] to further investigate its capabilities.  
 
 == Git
 
 Git is a free and open source _distributed version control system_. Later on in this tutorial, we will create new Enonic development projects using _starters_. The Enonic CLI uses Git to download these starters and to prepare the files for your project locally.
 
 TIP: Want to learn more about Git? Check out https://guides.github.com/introduction/git-handbook/[this useful Git handbook by Github].
-
 
 === Installation
 
@@ -137,28 +171,38 @@ NOTE: Apple maintains its own fork of Git. If you have XCode installed, you alre
 
 To install Git via Homebrew, run this command:
 
-    brew install git
+[source,shell]
+----
+brew install git
+----
 
 ==== Windows
 
 To install Git using Scoop, run the following command from Powershell:
 
-    scoop install git
+[source,shell]
+----
+scoop install git
+----
 
 ==== Linux
 
 To install Git with Snapcraft, run the following command:
 
-   sudo snap install git
+[source,shell]
+----
+sudo snap install git
+----
 
 === Verification
 
 Once you have installed Git, you can verify that it's working correctly by running the following command:
+[source,shell]
+----
+git version
+----
 
-    git version
-
-
-== Source-code editors
+== Integrated Development Environment
 
 Source-code editors (also known as _text editors_ or just _editors_ for short) are applications designed primarily for editing plain text and often specifically for working with code. They are therefore commonly used for programming.
 
@@ -168,24 +212,12 @@ If you do not yet have an editor you like, follow the steps below to get started
 
 https://code.visualstudio.com/[Visual Studio Code] (often shortened to _VS Code_ or simply _Code_) is one of the most popular source-code editors around at the moment. It's free, open source, and available on all major platforms.
 
-You can navigate to the https://code.visualstudio.com/Download[download page] and download and install the version matching your operating system. Alternatively, if you're getting into this whole package manager business, it's also available in all package managers listed above. The install instructions will vary, though, so you'll have to figure that out on your own.
+You can navigate to their https://code.visualstudio.com/Download[download page] and install the version matching your operating system. 
 
-==== Install Prettier
-
-While not mandatory, we also recommend you install the https://marketplace.visualstudio.com/items?itemName=esbenp.prettier-vscode["Prettier - Code formatter" plugin ]
-to help keep your code nicely formatted. It helps to keep your code easier to read.
-
-Follow these steps to install the VS Code plugin:
-
-. Open the VS Code extensions panel (View => Extensions).
-. Search for: “Prettier - Code formatter”.
-. Click “Install”.
-
-When the installation is finished, you must restart VS Code to activate the Prettier.
-
+If you opt to move forward with VS code as your IDE, its worth checking some of the https://marketplace.visualstudio.com/[powerful extensions] available on their marketplace.
 
 == Summary
 
-Congrats! You've installed a package manager, Git, the Enonic CLI and a text editor. You're now set up to start working with Enonic XP 🚀
+Congrats! You've installed the Enonic CLI, Git, and an IDE. You're now set up to start working with Enonic XP 🚀
 
 Keep your new tools at hand; we'll be using them heavily throughout this guide, so you'll have lots of time to get to know them better.
