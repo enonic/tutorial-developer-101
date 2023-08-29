@@ -1,10 +1,13 @@
 = {title-rich-text}
 include::.variables.adoc[]
-:macro-name: screamingSnakeCase
 :macro-app: Panel Macros
 :description: {description-rich-text}
 
-If you want to work with rich text in Content Studio, HtmlArea is your friend.  This rich text input type offers some very powerful editing capabilities and a lot of configuration options. This whole {document} is dedicated to the HtmlArea: how it works and how to use it in a headless fashion.
+If you want to work with rich text in Content Studio, HtmlArea is the input type to go. 
+
+This rich text input type offers some very powerful editing capabilities and a lot of configuration options. 
+
+This while {document} is dedicated to https://developer.enonic.com/docs/xp/stable/cms/input-types#htmlarea[HtmlArea input type] and the Rich text editor used to define its data. For a full detailed exaplanation of the Rich text editor used in content studio, please visit the https://developer.enonic.com/docs/content-studio/stable/editor/rich-text-editor[Rich text editor reference documentation].
 
 NOTE: {see-prev-docs}
 
@@ -19,7 +22,7 @@ You can configure the HtmlArea to be exactly what you want by dictating what for
 
 Additionally, the HtmlArea supports the use of _macros_, giving you the ability to insert prefabricated rich components into your markup.
 
-== Configuration of text tools
+== HtmlArea include and exclude
 
 We can use the HtmlArea's `config` section to specify which rich text controls should be available when editing. Using a combination of the `include` and `exclude` tags, we can customize the input's appearance.
 
@@ -35,7 +38,6 @@ By default, it includes a limited, but useful selection of tools at your disposa
 
 If you want to exclude all controls, use `<exclude>*</exclude>`:
 
-
 .The HtmlArea configured to include nothing
 [source,xml]
 ----
@@ -48,7 +50,7 @@ If you want to exclude all controls, use `<exclude>*</exclude>`:
 ----
 
 .An HtmlArea exput with `<exclude>*</exclude>` and a selection of tools.
-image::input-type-html-area-no-controls.png[An HtmlArea configured to exclude all editing tools., {image-s}]
+image::input-type-html-area-no-controls.png[An HtmlArea configured to exclude all editing tools, {image-s}]
 
 Finally, if you want to exclude most tools, but not all, you can exclude all and then add back in the ones you want:
 
@@ -66,9 +68,9 @@ Finally, if you want to exclude most tools, but not all, you can exclude all and
 ----
 
 .An HtmlArea with a selection of tools and `<exclude>*</exclude>`
-image::input-type-html-area-some-controls.png[An HtmlArea configured to include a selection of editing tools., {image-s}]
+image::input-type-html-area-some-controls.png[An HtmlArea configured to include a selection of editing tools, {image-s}]
 
-For a full overview of the available text tools and HtmlArea configuration options, visit the https://developer.enonic.com/docs/xp/stable/cms/input-types#htmlarea[HtmlArea input type reference docs]. Additionally, you can find a more thorough explanation of the toolbar and its tools in https://developer.enonic.com/docs/content-studio/stable/editor/rich-text-editor[the rich text editor reference documentation].
+As introduced in the beginning, for a full overview of the available text tools and HtmlArea configuration options, visit the https://developer.enonic.com/docs/xp/stable/cms/input-types#htmlarea[HtmlArea input type reference docs].
 
 === Task: {content-type-2-capitalized} description
 
@@ -86,17 +88,7 @@ Your content type should now look something like this:
   <super-type>base:structured</super-type>
   <form>
 
-    <input type="TextLine" name="otherNames">
-      <label>Other names</label>
-      <help-text>Other names for this species.</help-text>
-      <occurrences minimum="0" maximum="0" />
-    </input>
-
-    <input name="images" type="ImageSelector">
-      <label>Images</label>
-      <help-text>Images of the animal</help-text>
-      <occurrences minimum="0" maximum="3" />
-    </input>
+    <!-- other fields elided for brevity -->
 
     <input name="description" type="HtmlArea">
       <label>Description</label>
@@ -113,13 +105,17 @@ Your content type should now look something like this:
 </content-type>
 ----
 
-With the new content type deployed, you are ready to complete the specific tasks below.
+With the new content type deployed, you are ready to continue with further tasks we'll introduce in next sections.
 
 == Links 
 
-In addition to good old URLs, in the HtmlArea, you may also insert links to other content items, links to download media files, or links to e-mail.
+In addition to good old URLs, the Rich text editor provides a more powerful way of creating links, in which you can:
 
-An important feature, is that when creating internal links (content or media links), Enonic will save a references to the target items, similar to how the ContentSelector works. This is useful when looking for usage and dependencies between content items later.
+- Reference other content items (possbily passing query parameters);
+- If the referenced content is of type media, you can set a specific link to: open the file, directly download the file, or treat it as a regular content;
+- Insert url links of type: https, http, ftp, cel or relative;
+
+An important feature, is that when creating internal links (content or media links), XP will save a references to the target items, similar to how the ContentSelector works. This is useful when looking for usage and dependencies between content items later.
 
 NOTE: Because links are created using the item's unique id. It is perfectly safe to move items around in the tree structure, or change it's path name. The links will not break.
 
@@ -136,9 +132,9 @@ NOTE: You can also use kbd:[ctrl+K] to insert the link.
 . You'll be greeted by the "Insert link" dialog:
 .Choose the content tab, and select the previously created "Lion" as the target item
 +
-image::rich-text-insert-content-link.png[Screenshot of the insert link dialog.,{image-l}]
+image::rich-text-insert-content-link.png[Screenshot of the insert link dialog,{image-l}]
 
-When done, save the item - but keep the tab open to complete the upcoming tasks
+When done, save the item - but keep the tab open to complete the upcoming tasks.
 
 == Images
 
@@ -157,13 +153,11 @@ Continue editing the "Lynx" content created in the previous task.
 . Insert an image below the existing text. Use the "insert image" button in the toolbar.
 +
 .The toolbar with the image tool highlighted
-image::rich-text-toolbar-image-highlight.png[The rich text toolbar with the image tool circled by a blue circle.,{image-l}]
-+
-NOTE: You can also use kbd:[ctrl+L] to insert an image.
+image::rich-text-toolbar-image-highlight.png[The rich text toolbar with the image tool circled by a blue circle,{image-l}]
 +
 . You'll be greeted by the "insert image" dialog:
 +
-.The HtmlArea insert image dialog. Photo by https://unsplash.com/@kydroon[Kurt Cotoaga] 🦁
+.The HtmlArea insert image dialog. Photo by https://unsplash.com/@zmachacek[Zdeněk Macháček]
 image::rich-text-insert-image.png["The insert image dialog, showing the image, an image styles dropdown, caption, and alt text fields", {image-l}]
 +
 . When accessing the "image styles" dropdown, you'll find that it's only got two options and neither of them seem to do much. To make this more exciting, let's also create a custom image style.
@@ -187,57 +181,37 @@ In your app, add a new file:
 +
 NOTE: https://developer.enonic.com/docs/xp/stable/cms/styles[The styles reference doc] has more information on how you can style your images, so go check it out for a deeper dive.
 +
-. With this style picked up by XP, you'll have the "Grayscale" option available in the image styles dropdown. Select it to apply it to the image.
+. With this style picked up by XP, you'll have the "Grayscale" option available in the image styles dropdown. Select it to apply it to the image and update your image.
 +
-.Example image with an the style applied
-image::rich-text-insert-image-styled.png["The insert image dialog showing the results of applying the image styles to the image", {image-l}]
-
+.Example of description with inserted image styled
+image::rich-text-insert-image-styled.png["The description rich text showing the results of applying the image styles to the image", {image-l}]
 
 == Macros
 
-Macros enable you to insert custom components within your rich text field. When the content is rendered, the macro is replaced with the actual component implementation.
+Macros enable you to insert custom components within your rich text field
+
+When the content is rendered, the macro is replaced with the actual component implementation.
 
 Similar to content types, macros can define forms that help editors configure them.
 
+=== Task: Embed iframe macro
 
-=== Task: {macro-app}
+The embed macro enable you to insert iframes. In our context, we'll embed this https://www.youtube.com/watch?v=gr5EwZo_CHQ[Lynx youtube video].
 
-The {macro-app} app comes with a set of pre-defined macros that may look something like this when rendered:
-
-.The {macro-app} in action
-image::macros-panel-macros.jpg["The Panel Macros package in action, showing differently colored panels." , {image-m}]
-
-To use these macros, we first need to install the {macro-app}.
-
-. Navigate to the Applications page (via the XP menu).
-. Press "Install"
-. Search for and install the "{macro-app}" app.
-. Edit your site ({p1-site-name}). In the applications dropdown, find {macro-app}, and add it.
-. Save and exit.
-
-Next up, let's add a macro to the "Lynx" content item.
+Let's add the macro to the "Lynx" content item.
 
 .The toolbar with the macro button highlighted
-image::rich-text-toolbar-macro-highlight.png[The rich text toolbar with the macro button circled by a blue circle.,{image-l}]
+image::rich-text-toolbar-macro-highlight.png[The rich text toolbar with the macro button circled by a blue circle,{image-l}]
 
 . Click "insert macro".
-. Select one of the panels. If you have no preference, try the "Info panel".
-. Add a header and some text to it. For instance:
-+
-.Lynx macro content
-Header:: Habitats
-Text:: The lynx inhabits high altitude forests with dense cover of shrubs, reeds, and tall grass.
-+
-.The insert macro form with habitat data
-image::macros-insert-macro.png["A form with 'header' and 'description' fields. Used to set macro parameters.", {image-xl}]
-. If configured, you may also get a preview of what the macro will look like.
-+
-.The macro preview function
-image::macros-preview-macro.png["The text we specified in the macro preview form inside a light blue box with an icon attached", {image-xl}]
+. Select the "Embed iframe" macro
+. Add the following iframe to it: `<iframe width="560" height="315" src="https://www.youtube.com/embed/gr5EwZo_CHQ?si=IlkTGRuGVV7BxEOs" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>`
 
-NOTE: The Macro can be previewed because the {macro-app} includes a standard preview. 
+NOTE: This macro can't be previewed because the Embed iframe macro does not includes a standard preview. 
 
-For more information on macros, including how to create your very own, visit to https://developer.enonic.com/docs/xp/stable/cms/macros[the macro reference docs].
+As you'll see in next section, when querying the description of an Animal content, you'll be able to properly get the iframe we passed to "Embed iframe" macro and process it as you'd like in your front-end.
+
+TIP: For more information on macros, including how to create your very own, visit to https://developer.enonic.com/docs/xp/stable/cms/macros[the macro reference docs].
 
 == Headless
 
@@ -276,7 +250,7 @@ The following query returns the "Lynx" content, and the `description` field al p
         {
           "data": {
             "description": {
-              "processedHtml": "<p>Lynx are cats, just like <a href=\"/admin/site/preview/default/draft/my-first-site/animals/lion\" data-link-ref=\"b5ccb5ff-7458-4dae-8a4c-bc3f5df9fc63\" title=\"The big cat\">lions</a>.</p>\n\n<figure class=\"captioned conteditor-style-grayscale editor-align-justify\"><img alt=\"A yawning lion cub\" src=\"/admin/site/preview/default/draft/_/image/450a1e29-891b-4d5e-977c-719b5a2b9782:ad62be20ff5129561409bcf5b8aae435e980d09a/width-768/lion-cub.jpg\" data-image-ref=\"3c4d6ce4-4536-4d96-a65d-3e0b81f44f27\" style=\"width:100%\" />\n<figcaption>So sleepy 🤗</figcaption>\n</figure>\n\n<p><editor-macro data-macro-name=\"info\" data-macro-ref=\"1c8cbb83-f0e5-45ce-8027-ced88d165a2d\">The lynx inhabits high altitude forests with dense cover of shrubs, reeds, and tall grass.</editor-macro></p>\n"
+              "processedHtml": "<p>Lynx are cats, just like <a href=\"/admin/site/preview/my-first-project/draft/animals/lion\" data-link-ref=\"8cc82fd1-9063-4604-9f51-5f059d7a5d2e\">lions</a>.</p>\n\n<figure class=\"captioned editor-align-justify square-grayscale\"><img alt=\"lynx.jpg\" src=\"/admin/site/preview/my-first-project/draft/_/image/be6bb93a-7d99-4ed2-b424-4e435b89f392:6a1e144ef4ebab19e9071794ad753130d5bb5497/width-768/lynx.jpg\" style=\"width:100%\" data-image-ref=\"4dced964-cd1c-445d-bb9f-80387467e165\">\n\n</figure>\n\n<p><editor-macro data-macro-name=\"embed\" data-macro-ref=\"a1490c65-3654-4b29-9b1a-eb3894b6f59f\">&lt;iframe title=\"YouTube video player\" src=\"https://www.youtube.com/embed/gr5EwZo_CHQ?si=IlkTGRuGVV7BxEOs\" height=\"315\" width=\"560\"&gt;&lt;/iframe&gt;</editor-macro></p>\n"
             }
           }
         }
@@ -292,24 +266,19 @@ By unescaping the HTML, you will find the following:
 [source,html]
 ----
 <p>
-  Lynx are cats, just like <a href="/admin/site/preview/default/draft/my-first-site/animals/lion" data-link-ref="b5ccb5ff-7458-4dae-8a4c-bc3f5df9fc63" title="The big cat">lions</a>.
+  Lynx are cats, just like <a href="/admin/site/preview/my-first-project/draft/animals/lion" data-link-ref="8cc82fd1-9063-4604-9f51-5f059d7a5d2e">lions</a>.
 </p>
 
-<figure class="captioned square-grayscale editor-align-justify">
-  <img 
-    alt="A yawning lion cub" 
-    src="/admin/site/preview/default/draft/_/image/450a1e29-891b-4d5e-977c-719b5a2b9782:ad62be20ff5129561409bcf5b8aae435e980d09a/block-768-768/lion-cub.jpg?filter=hsbcolorize%280x000000%29%3B+grayscale%28%29%3B+border%286%2C+0x000000%29"
-    data-image-ref="3c4d6ce4-4536-4d96-a65d-3e0b81f44f27"
-    style="width:100%" />
-  <figcaption>So sleepy 🤗</figcaption>
+<figure class="captioned editor-align-justify square-grayscale">
+  <img alt="lynx.jpg" src="/admin/site/preview/my-first-project/draft/_/image/be6bb93a-7d99-4ed2-b424-4e435b89f392:6a1e144ef4ebab19e9071794ad753130d5bb5497/width-768/lynx.jpg" style="width:100%" data-image-ref="4dced964-cd1c-445d-bb9f-80387467e165">
 </figure>
 
 <p>
-  <editor-macro 
-    data-macro-name="info"
-    data-macro-ref="1c8cbb83-f0e5-45ce-8027-ced88d165a2d">The lynx inhabits high altitude forests with dense cover of shrubs, reeds, and tall grass.
+  <editor-macro data-macro-name="embed" data-macro-ref="a1490c65-3654-4b29-9b1a-eb3894b6f59f">
+    &lt;iframe title=\"YouTube video player\" src=\"https://www.youtube.com/embed/gr5EwZo_CHQ?si=IlkTGRuGVV7BxEOs\" height=\"315\" width=\"560\"&gt;&lt;/iframe&gt;
   </editor-macro>
 </p>
+
 ----
 
 With the excepton of macro's this is all valid HTML. Below, you'll learn more about handling these elements.
@@ -318,9 +287,11 @@ With the excepton of macro's this is all valid HTML. Below, you'll learn more ab
 
 Looking specifically at the processed html link output above, the most interesting part is the `data-link-ref` attribute.
 
-NOTE: Wondering why the href points to a location within the admin? No worries. Guillotine automatically generates contextual links. When deploying the API to production, you may customize the base url as see fit.
+NOTE: Wondering why the href points to a location within the admin? No worries. Guillotine automatically generates contextual links. When deploying the API to production, you may customize the base url as needed.
 
-This example is an internal link, you may want access more details about it, for instance to override the URL, optimize accessibility etc. To acccess these details, you need to extend your query with the links field:
+This example is an internal link, you may want access more details about it, for instance to override the URL, optimize accessibility etc. 
+
+To acccess these details, you need to extend your query with the links field:
 
 .Query for link details
 [source,GraphQL]
@@ -358,29 +329,30 @@ By executing this query, you will get some more data. Specifically:
 ...
 "links": [
   {
-    "ref": "6931439f-6c4a-4f66-9838-cbd7a0726e80",
-    "uri": "content://90685b2f-041d-4114-8828-cf3b68501d3c",
+    "ref": "5c351456-b22f-4162-aad6-6d921c686544",
+    "uri": "content://89daa74e-1482-493d-9a22-8ec08acaf4f8",
     "content": {
       "displayName": "Lion",
-      "_path": "/my-first-site/animals/lion",
+      "_path": "/animals/lion",
       "type": "com.example.myproject:animal"
     }
-  }]
+  }
+]
 ...
 ----
 
 As you can see, you now have access to the full name of the referenced item, as well as it's type. Use the ref values from the HTML link element to match it with the specific link data - as you may have more than one link.
-
-Cool, right?
 
 
 === Image srcset
 
 In the processed HTML, you can see the `<img>` element with style attributes. Additionally, by looking more closely at the `src` value, you will find that the style settings are applied in the image service URL.
 
-  ..../_/image/<id>:<version>/block-768-768/lion-cub.jpg?filter=hsbcolorize%280x000000%29%3B+grayscale%28%29%3B+border%286%2C+0x000000%29
+  ..../_/image/<id>:<version>/width-768/lynx.jpg
 
-But wait, there's more! If you want to optimize how fast images load on various devices, Guillotine can also return the image in multiple different sizes (using https://developer.mozilla.org/en-US/docs/Web/API/HTMLImageElement/srcset[the `srcset` attribute (MDN)]). This is achieved by adding an argument to the `description` field:
+But wait, there's more! 
+
+If you want to optimize how fast images load on various devices, Guillotine can also return the image in multiple different sizes (using https://developer.mozilla.org/en-US/docs/Web/API/HTMLImageElement/srcset[the `srcset` attribute (MDN)]). This is achieved by adding an argument to the `description` field:
 
 .Fetching rich text with `srcset`
 [source,GraphQL,{subs}]
@@ -405,11 +377,11 @@ This time, you should find the '<img>' element will include srcset with links to
 .Img tag, now with srcset
 [source,Html]
 ----
-<img alt="kurt-cotoaga-huXZH43-qiw-unsplash.jpg" 
-  src=".../block-768-768/lion-cub.jpg?filter=..."
-  data-image-ref="b1cf729f-2191-4f03-bdf9-95c7e9076e5a" 
-  srcset=".../block-200-200/lion-cub.jpg?filter=... 200w,.../block-500-500/lion-cub.jpg?filter=... 500w" 
-  style="width:100%" />
+<img alt="lynx.jpg"
+  src=".../width-768/lynx.jpg"
+  style="width:100%"
+  srcset=".../width-200/lynx jpg 200w,.../width-500/lynx.jpg 500w"
+  data-image-ref="c771dac7-8158-4791-92fb-18ebd5ef2fd3" />
 ----
 
 NOTE: URLs about above were shortened for readability
@@ -424,7 +396,7 @@ If you prefer to handle all details related to images yourself, or optimize the 
 {
   guillotine {
     query(query: "displayName = 'Lynx'") {
-      ... on com_example_myproject_Animal {
+      ... on {project-name-query}_{content-type-2-Capitalized} {
         data {
           description {
             images {
@@ -493,13 +465,12 @@ In the processed HTML, each macro is represented by an `<editor-macro>` element 
 ...
 "macrosAsJson": [
   {
-    "ref": "9b983010-9bb3-4b96-8200-92d43f9c2140",
-    "name": "info",
-    "descriptor": "com.enonic.app.panelmacros:info",
+    "ref": "1f8703bc-ee13-4871-89b3-937a7299abc4",
+    "name": "embed",
+    "descriptor": "system:embed",
     "config": {
-      "info": {
-        "body": "The lynx inhabits high altitude forests with dense cover of shrubs, reeds, and tall grass.",
-        "header": "Habitats"
+      "embed": {
+        "body": "&lt;iframe title=\"YouTube video player\" src=\"https://www.youtube.com/embed/gr5EwZo_CHQ?si=IlkTGRuGVV7BxEOs\" height=\"315\" width=\"560\"&gt;&lt;/iframe&gt;"
       }
     }
   }
@@ -509,9 +480,9 @@ In the processed HTML, each macro is represented by an `<editor-macro>` element 
 
 To access specific macros and fields, like for content type may use the full GraphQL schema. Try the following:
 
-NOTE: If you used a different macro than the "Info" macro, the query must be updated to match the specific macro.
+NOTE: If you used a different macro than the "Embed iframe" macro, the query must be updated to match the specific macro.
 
-.Query that fetches the fields for the info macro 
+.Query that fetches the fields for the Embed iframe macro 
 [source,GraphQL,{subs}]
 ----
 {
@@ -522,14 +493,14 @@ NOTE: If you used a different macro than the "Info" macro, the query must be upd
         data {
           description {
             processedHtml
-            macros{
+            macros {
               ref
-              descriptor
               name
+              descriptor
               config {
-                info {
-                  header
-                }             
+                embed {
+                  body
+                }
               }
             }
           }
@@ -548,12 +519,12 @@ This time, you only get the explicit fields you were looking for
 ...
 "macros": [
   {
-    "ref": "2f7601da-e586-414e-a387-b2e76731f4bb",
-    "descriptor": "com.enonic.app.panelmacros:info",
-    "name": "info",
+    "ref": "9918c7b2-c87d-4d0b-8d6c-56ab85805f3a",
+    "name": "embed",
+    "descriptor": "system:embed",
     "config": {
-      "info": {
-        "header": "Habitats",
+      "embed": {
+        "body": "&lt;iframe title=\"YouTube video player\" src=\"https://www.youtube.com/embed/gr5EwZo_CHQ?si=IlkTGRuGVV7BxEOs\" height=\"315\" width=\"560\"&gt;&lt;/iframe&gt;"
       }
     }
   }
@@ -562,7 +533,3 @@ This time, you only get the explicit fields you were looking for
 ----
 
 By accessing the macro config, you are able to down drill into every single field, accessing all the details you actually you need.
-
-That's a wrap for rich text handling!
-
-
