@@ -294,13 +294,13 @@ This example is an internal link, you may want access more details about it, for
 To acccess these details, you need to extend your query with the links field:
 
 .Query for link details
-[source,GraphQL]
+[source,GraphQL,{subs}]
 ----
 {
   guillotine {
     query(query: "displayName = 'Lynx'")
      {
-      ... on com_example_myproject_Animal {
+      ... on {project-name-query}_{content-type-2-Capitalized} {
         data {
           description {
             processedHtml
@@ -355,7 +355,7 @@ But wait, there's more!
 If you want to optimize how fast images load on various devices, Guillotine can also return the image in multiple different sizes (using https://developer.mozilla.org/en-US/docs/Web/API/HTMLImageElement/srcset[the `srcset` attribute (MDN)]). This is achieved by adding an argument to the `description` field:
 
 .Fetching rich text with `srcset`
-[source,GraphQL,{subs}]
+[source,GraphQL,]
 ----
 {
   guillotine {
@@ -445,7 +445,7 @@ In the processed HTML, each macro is represented by an `<editor-macro>` element 
   guillotine {
     query(query: "displayName = 'Lynx'")
      {
-      ... on com_example_myproject_Animal {
+      ... on {project-name-query}_{content-type-2-Capitalized} {
         data {
           description {
             processedHtml
@@ -489,7 +489,7 @@ NOTE: If you used a different macro than the "Embed iframe" macro, the query mus
   guillotine {
     query(query: "displayName = 'Lynx'")
      {
-      ... on com_example_myproject_Animal {
+      ... on {project-name-query}_{content-type-2-Capitalized} {
         data {
           description {
             processedHtml
