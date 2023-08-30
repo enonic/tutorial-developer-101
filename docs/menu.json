@@ -6,7 +6,7 @@
     },
     {
       "title": "2 - Sandboxes",
-      "document": "sandboxes"
+      "document": "sandbox-welcome"
     },
     {
       "title": "3 - App development",
@@ -14,15 +14,15 @@
     },
     {
       "title": "4 - Content",
-      "document": "content"
+      "document": "content-studio"
     },
     {
       "title": "5 - Headless API",
       "document": "headless-api"
     },
     {
-      "title": "6 - Media and images",
-      "document": "media-and-images"
+      "title": "6 - Medias and attachments",
+      "document": "medias-and-attachments"
     },
     {
       "title": "7 - Input types",
