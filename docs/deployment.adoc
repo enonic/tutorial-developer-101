@@ -12,7 +12,12 @@ Enonic Cloud is our fully managed and hassle free hosting option. Sit back, rela
 Enough with the sales pitch. Follow the steps below to get deploy your app on Enonic Cloud:
 
 === Task: Install application
-. Sign up for a free trial by visiting https://cloud.enonic.com (no credit card needed)
+. Sign up by visiting https://cloud.enonic.com (no credit card needed)
+. After accessing your account for the first time, make sure to choose the `free trial` plan
++
+.Enonic Cloud plans
+image::enonic-cloud-free-trial.png[Enonic cloud welcome page with 3 plans, hobby, professional and enterprise,{image-l}]
++
 . Create a new solution. Choose the `CMS essentials` template, and go with the default values
 . Connect CLI to the cloud by running this command, and follow the instructions:
 +
@@ -30,23 +35,52 @@ enonic cloud app install
 + 
 . From the Cloud console, verify that the app was installed to your selected environment.
 
-=== Task: import and publish your content
+. In the end, you should get something like this in your terminal:
++
+[source,bash]
+----
+bre@bre-enonic:~/tutorial/myproject$ enonic cloud login
+
+  Your login code is <code>
+
+  Waiting for you to login .Go to this url to login: https://enonic.eu.auth0.com/activate?user_code=<code>
+
+  Waiting for you to login ... success!
+
+  Session expires at: 2023-08-31 02:18:37 +0200 CEST
+
+bre@bre-enonic:~/tutorial/myproject$ enonic cloud app install
+
+  ? Deploy '/home/bre/tutorial/myproject/build/libs/myproject.jar' to 'bre1/guide101/production/xp7'. Is this correct? Yes
+
+  Uploading jar [=======================================================================================] 100.00% 4s
+
+  Deploying jar to service 'bre1/guide101/production/xp7'
+
+  Success!
+----
+
+To make sure it all worked, click on the red "launch" button on your Cloud console Dashboard, then access the "Applications" app, and check if "My first app" is listed on the installed applications list.
+
+=== Task: Import and publish your content
 
 Since the cloud instance is a completely new environment, the content you created locally will not be available here.
 
-You can choose to 
-a) manually create new content on the server, or 
-b) export and import content from your local machine to the server.
+You can choose to:
 
-Lets try the import:
+- manually create new content on the server, or 
+- export and import content from your local machine to the server.
 
-. In your local sandbox - Using Content Studio, select the root item you want to export (for instance the site)
-. From the context panel on the right, open the `Data toolbox` widget.
-. Click export, select and download the export (this will place a zip file on your local device)
-. Via Cloud Console, sign into to your XP environment by clicking the login button for your environment.
-. Launch Content Studio, and open the `Data toolbox` panel on your server instance.
-. Using Data toolbox, upload and then import the file that was saved on your local device. Content studio should now fill up with content items.
-. Finally, select the root item, and select `Publish tree` from the top right action menu in Content studio. After publishing, validate that your content is listed as "Published".
+Lets try the second option, i.e, to export data locally and import on enonic cloud:
+
+WARNING: Before proceeding, access Content Studio on your cloud instance and make sure to create a project there assigning our app "My first app" to it. This is needed because the cloud instance is a new empty environment.
+
+. Access the Data toolbox app and go to "Data tree";
+. Navigate to `com.enonic.cms.myfirstproject` > `draft` > `[root]`, then select `content` and click on "Export selected node";
+. You'll be redirected to the "Node exports" page. Now click on the export item and then on the top right icon that says "Archive and download selected node exports". This will download a zip file locally;
+. Go back to your cloud instance, access Data toolbox "Node exports" page, click on "Upload and unarchive node exports" and then select the zip file downloaded on the previous step;
+. Vist "Data tree" page on Data toolbox and navigate to `com.enonic.cms.<name-of-your-cloud-project>` > `draft` > `[root]`, click on "Import node export" and select the one that was created on the previous step;
+. Now access Content Studio and check that your data is imported as it should. Make sure to publish everything to make it available on master branch.
 
 With the app installed, and fresh content available - we are ready for the final step.
 
@@ -57,16 +91,18 @@ To make your content accessible publicly, the final step is to create a Route. F
 +
 * Choose target environment (if there are more than one)
 * Accept the default domain
-* Use the internal path `/site/default/master` (Given that this actually matches your content project)
-* The public path could for instance be `/imadeit`
+* Use the internal path `/site/<name-of-your-cloud-project>/master`
+* The public path could for instance be `/api`
 +
-. Once the route has been created, you may click its link in the Cloud console to visit it. 
+. Congratulations, your API is now live and your content on master branch can be fetched at the `/api` route:
++
+.Querying Lion data on /api route using Altair GraphQL client
+image::graphql-altair-querying-on-exposed-route.png[Altair GraphQL client querying Lion animal data on the "/api" route defined on cloud console,{image-xl}]
 
-Congratulations, your API is now live, with your content :-)
 
-For more information on Enonic Cloud, visit https://enonic.com/platform/cloud[the Enonic Cloud marketing page].
+TIP: For more information on Enonic Cloud, visit https://enonic.com/platform/cloud-service[the Enonic Cloud marketing page].
 
-== Deploy elsewhere
+== Custom hosting
 
 If Enonic Cloud isn't your thing, you need to start by getting the platform (Enonic XP) up and running, before you can actually deploy your application.
 
@@ -74,16 +110,13 @@ Enonic XP is compatibile with just about any public cloud out there. There's a n
 
 Setting up the entire platform is beyond the scope of this tutorial. As such, we'll focus on the steps required for getting your app live - assuming you already have the platform running. 
 
-For more details on deplying the platform, check out https://developer.enonic.com/docs/xp/stable/deployment[the _deployment_ section of the XP reference docs].
-
+For more details on deplying the platform, check out https://developer.enonic.com/docs/xp/stable/deployment/strategies[the Deployment section of the XP reference docs].
 
 === Installing the app
 
 Regardless of how you deploy your XP instance, installing your app is commonly done in one of two ways:
 
-=== Task: Alt 1 - via Admin Console
-
-Follow these simple steps:
+First alternative is via Admin console. Follow these simple steps:
 
 NOTE: Your application executable (*.jar file) can be found in `project-folder/build/libs/`
 
@@ -94,12 +127,11 @@ NOTE: Your application executable (*.jar file) can be found in `project-folder/b
 .Drag and drop applications to upload them
 image::deployment-app-upload.png["The application installation menu with a blue overlay. The overlay says 'drop files to upload'",{image-xl}]
 
-=== Alt 2: via API
+Second alternative is via API:
 
 If you have access to your server's management API (available on port 4848), you can also deploy directly via this endpoint, or by using https://developer.enonic.com/docs/enonic-cli/master/xp#app[the CLI].
 
 This approach is most commonly used in a https://developer.enonic.com/guides/ci-cd-for-xp-apps[Continuous Integration/Delivery] setup, where your build server automatically checks out, builds and installs the application.
-
 
 [#vhosts]
 === Virtual hosts = pretty URLs
@@ -108,7 +140,9 @@ When accessing XP resources such as the GraphQL API explorer in this tutorial, t
 
 Setting up a vhost is only required once per application/site you want deploy.
 
-Vhosts can be defined in your sandbox's configuration directory. This file contains mappings from public-facing URLs to internal URLs. For instance, this lets the user access `{p1-site-slug}.com/api` and while retrieving content from `/site/default/master/{p1-site-slug}/api`.
+Vhosts can be defined in your sandbox's configuration directory. This file contains mappings from public-facing URLs to internal URLs. 
+
+For instance, this lets the user access `{project-name}.com/api` and while retrieving content from `/site/{project-name}/master/`.
 
 An example vhosts file that achieves the mapping mentioned would look something like this:
 
@@ -116,12 +150,12 @@ An example vhosts file that achieves the mapping mentioned would look something 
 ----
 enabled = true // <1>
 
-mapping.example.host = {p1-site-slug}.com // <2>
+mapping.example.host = {project-name}.com/api // <2>
 mapping.example.source = / // <3>
-mapping.example.target = /site/default/master // <4>
+mapping.example.target = /site/{project-name}/master // <4>
 ----
 <1> Enable vhosts configuration
-<2> For all requests to `{p1-site-slug}.com`
+<2> For all requests to `{p1-site-slug}.com/api`
 <3> Map any request that starts with this path ...
 <4> ... to the internal URL.
 
@@ -129,8 +163,7 @@ For more details on virtual hosts, head to the https://developer.enonic.com/docs
 
 === Task: Setup vhosts in your Sandbox
 
-To explore how vhost mappings work, let's configure vhosts for our local XP instance. 
-Then, to test it, we'll have override your computer's DNS resolver by updating it's `hosts` file.
+To explore how vhost mappings work, let's configure vhosts for our local XP instance, then, to test it, we'll have override your computer's DNS resolver by updating it's `hosts` file.
 
 . Find and open your sandbox's vhosts file. From your user's home directory, the path will be `.enonic/sandboxes/<sandbox-name>/home/config/com.enonic.xp.web.vhost.cfg`, where `<sandbox-name>` varies depending on which sandbox you want to configure. For instance, it might be `Sandbox1`.
 
