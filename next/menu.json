@@ -1,0 +1,48 @@
+{
+  "menuItems": [
+    {
+      "title": "1 - Environment setup",
+      "document": "setup"
+    },
+    {
+      "title": "2 - Sandboxes",
+      "document": "sandbox-welcome"
+    },
+    {
+      "title": "3 - App development",
+      "document": "apps"
+    },
+    {
+      "title": "4 - Content",
+      "document": "content-studio"
+    },
+    {
+      "title": "5 - Headless API",
+      "document": "headless-api"
+    },
+    {
+      "title": "6 - Medias and attachments",
+      "document": "medias-and-attachments"
+    },
+    {
+      "title": "7 - Input types",
+      "document": "input-types"
+    },
+    {
+      "title": "8 - Sets",
+      "document": "sets"
+    },
+    {
+      "title": "9 - Rich text",
+      "document": "rich-text"
+    },
+    {
+      "title": "10 - X-data",
+      "document": "x-data"
+    },
+    {
+      "title": "11 - Deployment",
+      "document": "deployment"
+    }
+  ]
+}

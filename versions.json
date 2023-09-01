@@ -1,9 +1,13 @@
 {
   "versions": [
     {
-      "label": "xp7",
+      "label": "stable",
       "checkout": "master",
       "latest": true
+    },
+    {
+      "label": "next",
+      "checkout": "guide-update"
     }
   ]
 }
