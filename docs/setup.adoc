@@ -4,16 +4,16 @@ include::.variables.adoc[]
 
 Before we can start building, let's make sure we have the right tools available to start developing efficiently with XP. In general, they are:
 
-- Basic command line (aka _terminal_) knowledge -> _executing commands through text_
+- Basic command line (a.k.a _terminal_) knowledge -> _executing commands through text_
 - Enonic CLI -> _managing your XP projects_
 - Git and Github -> _versioning your XP projects_
-- Integrated Development Environment -> _coding your XP projects_
+- Integrated Development Environment -> _coding your ideas into XP projects_
 
 If you've already got those configured and installed, feel free to skip to the next chapter.
 
 == The command line
 
-The command line -- aka _the terminal_ -- is a powerful, text-based interface for running commands on your computer. You can also use the terminal to navigate your file system, similar to macOS`' Finder or Windows`' Explorer. The program running in the terminal (that interprets your commands) is known as a _shell_.
+The command line is a powerful, text-based interface for running commands on your computer. You can also use the terminal to navigate your file system, similar to macOS`' Finder or Windows`' Explorer. The program running in the terminal (that interprets your commands) is known as a _shell_.
 
 If you are insecure about basic terminal knowledge, we recommend the following introductory guides (depending on your operating system):
 
@@ -21,19 +21,19 @@ If you are insecure about basic terminal knowledge, we recommend the following i
 - https://www.lifewire.com/how-to-open-command-prompt-2618089[Windows]
 - https://www.howtogeek.com/140679/beginner-geek-how-to-start-using-the-linux-terminal/[Linux]
 
-When we ask you to "run a command" later on in this document, you can assume that we're asking you to run it in a terminal unless otherwise specified.
+When we ask you to _"run a command"_ later on in this document, you can assume that we're asking you to run it in a terminal unless otherwise specified.
 
 == The Enonic CLI
 
 Enonic provides a Command Line Interface (CLI) for working with XP. 
 
-If the concept of CLI is new to you, you can imagine it as an interactive terminal program that will listen for some specific inputs (usually as text), and based on them execute specific tasks on your machine.
+If the concept of CLI is new to you, you can imagine it as an interactive terminal program that will listen for some specific inputs (usually as text), and based on them, execute specific tasks on your machine.
 
-The goal of our CLI is to improve the development workflow, and, by using it, you'll have an easy and quick way to manage your XP apps.
+The goal of the CLI is to improve the development workflow, and, by using it, you'll have an easy and quick way to manage your XP apps.
 
 === Installation
 
-The easiest and fastest way to install our CLI is by using Node Package Manager (NPM):
+The easiest and fastest way to install the CLI is by using Node Package Manager (NPM):
 
 [source,shell]
 ----
@@ -153,7 +153,7 @@ GLOBAL OPTIONS:
 
 As can be seen, there are a lot of commands and their subcommands to help you. On this guide, we'll only cover the necessary ones to be able to start developing on XP.
 
-NOTE: Consider checking our https://developer.enonic.com/docs/enonic-cli/stable[CLI documentation] to further investigate its capabilities.  
+NOTE: Consider checking the https://developer.enonic.com/docs/enonic-cli/stable[CLI documentation] to further investigate its capabilities.  
 
 == Git
 

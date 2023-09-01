@@ -60,7 +60,7 @@ To show an example of the configuration options work, let's examine some TextLin
 This set of inputs would be rendered as in the following picture. As specified in the above configuration:
 
 .TextLine inputs showing common configuration options
-image::input-type-common-configuration.png["Three TextLine inputs showing all the common configuration options: labels, help text, default text, and occurrences.",{image-xl}]
+image::input-type-common-configuration.png["Three TextLine inputs showing all the common configuration options: labels, help text, default text, and occurrences.", {image-s}, align=center]
 
 Note that:
 - The required input field has a red asterisk to signify that it must be filled out.
@@ -104,22 +104,22 @@ Apart from the input types we've already gotten familiar with, XP also has input
 https://developer.enonic.com/docs/xp/stable/cms/input-types#combobox[ComboBox]:: A dropdown menu containing predefined options for the user to select from. Allows selection of one or more options.
 +
 .The ComboBox input type
-image::input-type-combo-box.webp["A standard select list / dropdown list / combo box input type with a few visible dummy options.",{image-s}]
+image::input-type-combo-box.webp["A standard select list / dropdown list / combo box input type with a few visible dummy options.", {image-s}, align=center]
 +
 https://developer.enonic.com/docs/xp/stable/cms/input-types#date[Date] and https://developer.enonic.com/docs/xp/stable/cms/input-types#datetime[DateTime]:: Provides an interactive date picker (with a time component in DateTime's case) to save date and times.
 +
 .The DateTime input type
-image::input-type-date-time.webp["A calendar showing year and month with a time indicator to the side.",{image-s}]
+image::input-type-date-time.webp["A calendar showing year and month with a time indicator to the side.", {image-s}, align=center]
 +
 https://developer.enonic.com/docs/xp/stable/cms/input-types#geopoint[GeoPoint]:: Stores GPS coordinates.
 +
 .The GeoPoint input type
-image::input-type-geo-point.webp["A text line input with coordinates.",{image-s}]
+image::input-type-geo-point.webp["A text line input with coordinates.", {image-s}, align=center]
 +
 https://developer.enonic.com/docs/xp/stable/cms/input-types#htmlarea[HtmlArea]:: Provides a rich text, multi-line input. We'll discuss this in detail in xref:rich-text#[the next {document}].
 +
 .The HtmlArea input type
-image::input-type-html-area.png["A text area with a tools ribbon on the top. The ribbon provides rich text tools such as justification, macro insertion, text styles, etc.",{image-s}]
+image::input-type-html-area.png["A text area with a tools ribbon on the top. The ribbon provides rich text tools such as justification, macro insertion, text styles, etc.", {image-s}, align=center]
 
 Additionally, XP has more complex input types, which we'll look at next.
 

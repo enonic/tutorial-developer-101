@@ -14,7 +14,7 @@ NOTE: {see-prev-docs}
 == Overview
 
 .The HtmlArea input type with the default tools selection
-image::input-type-html-area.png["A text input field with a tools ribbon just above.",{image-s}]
+image::input-type-html-area.png["A text input field with a tools ribbon just above.", {image-s}, align=center]
 
 The HtmlArea input type gives you a multi-line input field with rich formatting options, much like what you're used to from your favorite word processor. It supports text formatting and justification, lists, links, and even lets you insert images.
 
@@ -50,7 +50,7 @@ If you want to exclude all controls, use `<exclude>*</exclude>`:
 ----
 
 .An HtmlArea exput with `<exclude>*</exclude>` and a selection of tools.
-image::input-type-html-area-no-controls.png[An HtmlArea configured to exclude all editing tools, {image-s}]
+image::input-type-html-area-no-controls.png[An HtmlArea configured to exclude all editing tools, {image-s}, align=center]
 
 Finally, if you want to exclude most tools, but not all, you can exclude all and then add back in the ones you want:
 
@@ -68,13 +68,13 @@ Finally, if you want to exclude most tools, but not all, you can exclude all and
 ----
 
 .An HtmlArea with a selection of tools and `<exclude>*</exclude>`
-image::input-type-html-area-some-controls.png[An HtmlArea configured to include a selection of editing tools, {image-s}]
+image::input-type-html-area-some-controls.png[An HtmlArea configured to include a selection of editing tools, {image-s}, align=center]
 
 As introduced in the beginning, for a full overview of the available text tools and HtmlArea configuration options, visit the https://developer.enonic.com/docs/xp/stable/cms/input-types#htmlarea[HtmlArea input type reference docs].
 
 === Task: {content-type-2-capitalized} description
 
-Let's add a rich-text description field to our {content-type-2}s. The input should be optional and have at most a single occurrence. You can include any editor tools you want, but it must at least have the `Link` ,`Image` and `Macro` tools, as we'll be using these later. Otherwise, configure it as you want.
+Let's add a rich-text description field to the {content-type-2} content type. The input should be optional and have at most a single occurrence. You can include any editor tools you want, but it must at least have the `Link` ,`Image` and `Macro` tools, as we'll be using these later. Otherwise, configure it as you want.
 
 Your content type should now look something like this:
 
@@ -196,7 +196,7 @@ Similar to content types, macros can define forms that help editors configure th
 
 === Task: Embed iframe macro
 
-The embed macro enable you to insert iframes. In our context, we'll embed this https://www.youtube.com/watch?v=gr5EwZo_CHQ[Lynx youtube video].
+The embed macro enable you to insert iframes. In this context, we'll embed this https://www.youtube.com/watch?v=gr5EwZo_CHQ[Lynx youtube video].
 
 Let's add the macro to the "Lynx" content item.
 

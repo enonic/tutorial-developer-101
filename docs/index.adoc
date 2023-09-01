@@ -7,7 +7,7 @@ include::.variables.adoc[]
 
 Hello, and welcome to this in-depth tutorial to get familiar with Enonic. The guide is aimed at people new to Enonic, covering everything you need to know for a flying start.
 
-If you have any questions, or just want to get in touch - visit our https://discuss.enonic.com[Forum^] or join our https://slack.enonic.com/[Community Slack channel^]
+If you have any questions, or just want to get in touch - visit the https://discuss.enonic.com[Forum^] or join the https://slack.enonic.com/[Community Slack channel^]
 
 Good luck! 🙌
 
@@ -16,6 +16,8 @@ NOTE: *In a hurry?* If you just want to get up and running as fast as possible, 
 == Overview
 
 Below is an overview of the various chapters in this guide.
+
+NOTE: When we mention "XP", we are referring to "Enonic XP", the hybrid CMS you're starting to learn!
 
 [sidebar]
 .{section-1}

@@ -34,7 +34,7 @@ To create a field set that contains a TextLine and a TextArea, the markup would 
 <1> Use the `items` element place other inputs inside the field set.
 
 .A field set grouping
-image::field-set.png["A field set containing TextLine and TextArea inputs. The field set groups them visually and adds a shared heading.",{image-s}]
+image::field-set.png["A field set containing TextLine and TextArea inputs. The field set groups them visually and adds a shared heading.", {image-s}, align=center]
 
 == Item sets
 
@@ -44,7 +44,7 @@ Item sets also allow you to group input fields, but as opposed to field sets, it
 - The https://developer.enonic.com/docs/xp/stable/cms/schemas#item_set[item set schema documentation] contains all the information you'd need on how to create an item set schema.
 
 .An item set containing contact info
-image::item-set-sample.png["A pair of visually grouped inputs on a card element. The card has a header that says 'contact info'. There is also a button to add more contact info forms.",{image-s}]
+image::item-set-sample.png["A pair of visually grouped inputs on a card element. The card has a header that says 'contact info'. There is also a button to add more contact info forms.", {image-s}, align=center]
 
 == Option sets
 
@@ -56,7 +56,7 @@ Option sets where users can select only one of a number of options are known as 
 - The https://developer.enonic.com/docs/xp/stable/cms/schemas#option_set[option set schema overview] is very thorough and full of examples on how to use the various configuration options.
 
 .A multi-select option set
-image::option-set-sample.png["An input form labelled 'multi-selection'. The user has selected one out of four options. Some options contain extra data such as an image selector or other input fields.",{image-s}]
+image::option-set-sample.png["An input form labelled 'multi-selection'. The user has selected one out of four options. Some options contain extra data such as an image selector or other input fields.", {image-s}, align=center]
 
 == Mixins
 
@@ -74,7 +74,7 @@ So far we've theoretically presented sets. For a proper understanding of those c
 
 === Adding an item set to {content-type-1-capitalized}
 
-Let's add an item set to the `{content-type-1-capitalized}`. Our goal will be to add a Filmography item set, featuring where and when a specific artist was featured in a movie.
+Let's add an item set to the `{content-type-1-capitalized}`. The goal will be to add a Filmography item set, featuring where and when a specific artist was featured in a movie.
 
 To add an item set, use it as you would any other input type: place it within the `form` element of a content type. 
 
@@ -124,7 +124,7 @@ image::artist-filmography-item-set.png["An example of using the Filmography item
 
 === Adding an option set to {content-type-2-capitalized}
 
-In this section, we'll use option sets to add some extra data to our `{content-type-2-capitalized}` data type. Our goal is:
+In this section, we'll use option sets to add some extra data to `{content-type-2-capitalized}` data type. The goal is:
 
 - Add an option for distribution across continents. The user should be able to select as many as they want from the 7 continents to indicate where the animal lives. Each option should have an associated `TextArea` called "notes", where the user can add more data for each option.
 - Because each distribution option should have the same fields, create a _mixin_ to reuse it.
@@ -196,7 +196,7 @@ Open your {content-type-2} content type and add a single-select option set.  As 
 </mixin>
 ----
 
-. Moving onto our {content-type-2}s, add the multi-select option set.
+. Moving onto {content-type-2}s, add the multi-select option set.
 
 .The `{content-type-2-capitalized}` content type with distribution data
 [source,xml]

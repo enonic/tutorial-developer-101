@@ -133,7 +133,7 @@ Should you require specific fields only, or wish to drill into more details, for
 }
 ----
 
-<1> This is the name of the X-data. In our case "notes" because we defined it to be like so in the `notes.xml` file
+<1> This is the name of the X-data. In this case, "notes" because we defined it to be like so in the `notes.xml` file
 <2> This is the "notes" field (TextLine input type) inside the "notes" X-data.
 
 If you made it here - you are officially equipped with an essential overview of Enonic's content fundamental content modelling capabilities. 🙌

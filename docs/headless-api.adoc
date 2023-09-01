@@ -2,7 +2,7 @@
 include::.variables.adoc[]
 :description: {description-headless-api}
 
-Enonic is a hybrid CMS, which means that it can be used to manage and deliver content to our frontend. 
+Enonic is a hybrid CMS, which means that it can be used to manage and deliver content to your frontend. 
 
 Now that we've created some content, let's see how we can access and use it in via API - headless style. 
 
@@ -32,7 +32,7 @@ Query playground is an interactive GraphQL API explorer. You enter your query in
 
 GraphQL is a graph "query language". It allows you to create highly specific queries for exactly the content that you need (visit the https://graphql.org/learn/[official GraphQL docs to learn more]).
 
-As an example on how to retrieve some minimal info about our previously created artists, run the following query:
+As an example on how to retrieve some minimal info about your previously created artists, run the following query:
 
 [source,GraphQL]
 ----
@@ -80,16 +80,16 @@ On the top search bar in the docs section, search for `artist` and locate the `c
 .The Artist schema
 image::query-playground-artist-schema.png[Query playground docs section showing the details of com_example_myproject_Artist schema, {image-xl}]
 
-Note that it's said that the `Artist` schema _implements_ the `Content` schema. This basically means that our `Artist` schema will have the structure defined by the `Content` schema, together with possibly some additional structure... in our case, this additional structure is a `data` field, defined by `com_example_myproject_Artist_Data` schema:
+Note that it's said that the `Artist` schema _implements_ the `Content` schema. This basically means that the `Artist` schema will have the structure defined by the `Content` schema, together with possibly some additional structure... in this case, that additional structure is a `data` field, defined by `com_example_myproject_Artist_Data` schema:
 
 .The Artist data schema
 image::query-playground-artist-data-schema.png[Query playground docs sections showing the details of com_example_myproject_Artist_Data schema, {image-xl}]
 
-NOTE: Note that this matches the structure defined by our Artist content type, which is a natural thing to expect.  
+NOTE: Note that this matches the structure defined by the Artist content type, which is a natural thing to expect.  
 
 === Querying with inline fragments
 
-We've used the Docs section to inspect the structure of our `Artist` schema. Let's now, based on our understanding of this schema, query to get proper data from our artists.
+We've used the Docs section to inspect the structure of the `Artist` schema. Let's now, based on a broader understanding of this schema, we'll query to get proper data from artists.
 
 Close the docs section, head back to the text area to edit your query and remove `displayName`, `_path` and `_id` from the query we introduced earlier.
 
@@ -97,10 +97,10 @@ Now, with your cursor on the inner curly braces of the query, press kbd:[ctrl+sp
 
 image::query-playground-artist-query-inspection.gif[Query playground query section showing suggested fields for content schema, {image-l}]
 
-As can be seen, we do not have the artist `name` and `about` fields available, and the reason for that is because the `getChildren` field can return any content that implements the `Content` schema, but it can't directly infer what schema that is, which in our case is the `com_example_myproject_Artist` schema:
+As can be seen, we do not have the artist `name` and `about` fields available, and the reason for that is because the `getChildren` field can return any content that implements the `Content` schema, but it can't directly infer what schema that is, which in this case is the `com_example_myproject_Artist` schema:
 
 .getChildren can't directly infer what schema is implementing Content schema
-image::query-playground-getChildren-infer.png[Query playground getChildren can't directly infer what schema is implementing Content schema, {image-l}]
+image::query-playground-getChildren-infer.png[Query playground getChildren can't directly infer what schema is implementing Content schema, {image-xs}, align=center]
 
 So to proceed, we use https://graphql.org/learn/queries/#inline-fragments[inline fragments]:
 
@@ -225,11 +225,11 @@ TIP: To learn more about query capabilities, visit the https://developer.enonic.
 
 === QueryDSL
 
-Just like there is a `query` field underneath `guillotine`, our API also provides other fields such as `queryConnection`, `queryDsl` and `queryDslConnection`.
+Just like there is a `query` field underneath `guillotine`, the API also provides other fields such as `queryConnection`, `queryDsl` and `queryDslConnection`.
 
-We'll not go into much details, but basically, the fields with _connection_ in their name have new parameters for aggregating data, whereas in the fields with _dsl_ (doman specific language), the query argument is not a string bot our own specific DSL.
+We'll not go into much details, but basically, the fields with _connection_ in their name have new parameters for aggregating data, whereas in the fields with _dsl_ (doman specific language), the query argument is not a string but Guillotine own specific DSL.
 
-To make it clear, we'll rewrite our last query that used `ngram` using the queryDsl field:
+To make it clear, we'll rewrite the last query that used `ngram` using the queryDsl field:
 
 .Querying for {content-type-1}s who both rap and sing, using queryDsl
 [source,GraphQL,{subs}]
@@ -267,13 +267,13 @@ To make it clear, we'll rewrite our last query that used `ngram` using the query
 
 As expected, the results from this and the previous query must match, since we're essentially doing the same, but with `queryDsl` it is unlikely we'll create invalid queries, since we are using a fixed structure rather than a string.
 
-NOTE: If you've previously used Elasticsearch API to query data, you'll be quite familiar with how our `queryDsl` works!
+NOTE: If you've previously used Elasticsearch API to query data, you'll be quite familiar with how `queryDsl` works!
 
 TIP: To learn more about queryDSL capabilities, visit the https://developer.enonic.com/docs/xp/stable/storage/dsl[DSL reference]
 
 === QueryDslConnection
 
-To finish this {document}, we'll add a new _birthyear_ field to our artist content type, update all artist to have data on this field, and then use `queryDslConnection` field to get aggregated data. Let's get to work!
+To finish this {document}, we'll add a new _birthyear_ field to the artist content type, update all artist to have data on this field, and then use `queryDslConnection` field to get aggregated data. Let's get to work!
 
 . Start by updating the Artist content type to the following structure: 
 
@@ -313,7 +313,7 @@ To finish this {document}, we'll add a new _birthyear_ field to our artist conte
 - Missy Elliot: 1971-07-01
 - Cardi B.: 1992-10-11
 
-. Go back to Query playground and click on the _re-fetch schema button_. This will update our Artist data schema to contain the birthday structure, which is in sync with our Artist content type structure
+. Go back to Query playground and click on the _re-fetch schema button_. This will update the Artist data schema to contain the birthday structure, which is in sync with the Artist content type structure
 
 . Run the following query on the playground:
 +
@@ -388,7 +388,7 @@ To finish this {document}, we'll add a new _birthyear_ field to our artist conte
 }
 ----
 
-And this is our results
+And this are the results
 [source, json]
 ----
 {
@@ -449,7 +449,7 @@ And this is our results
 }
 ----
 
-Which shows that two of our artists are from `Generation X`, and one of them is a `Millenial`.
+Which shows that two of those artists are from Generation X, and one of them is a Millenial.
 
 == Dive deeper
 

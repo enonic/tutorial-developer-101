@@ -108,7 +108,7 @@ TIP: You can read more about https://enonic.com/blog/enonic-simplifies-image-pro
 Because we chose an image with an off-center subject, the image might get cropped such that the lion disappears from the image. For instance, a small, square crop might turn out like this:
 
 .Cropped image without focal point
-image::image-cropped-unfocused.jpg["A crop of the lion in the savannah image. The image is square and the only part of the lion that is visible is part of its hind leg.",{image-s}]
+image::image-cropped-unfocused.jpg["A crop of the lion in the savannah image. The image is square and the only part of the lion that is visible is part of its hind leg.",{image-s}, align=center]
 
 To get around this, try the autofocus tool.
 
@@ -121,15 +121,15 @@ image::image-editing-focal-point.png["The lion image with a red circle indicatin
 Now, when the image gets cropped, XP will take care of keeping the lion in focus, both in traditional CMS solutions and in headless modes:
 
 .The same image with the same crop, but with a focal point
-image::image-cropped-focused.jpg["A crop of the lion in the savannah. In this square image, the lion is in full view square in the center.",{image-s}]
+image::image-cropped-focused.jpg["A crop of the lion in the savannah. In this square image, the lion is in full view square in the center.", {image-s}, align=center]
 
 == Attachments
 
 XP has an input type named https://developer.enonic.com/docs/xp/stable/cms/input-types#attachmentuploader[AttachmentUploader] that enables uploading of one or more files that will be stored as attachments to the current content. 
 
-This differs from the previously presented media content, which is a separate content itself that can be linked on other content types, for example, by using the https://developer.enonic.com/docs/xp/stable/cms/input-types#contentselector[ContentSelector] input type.
+This differs from the previously presented media content, which is a separate content itself that can be linked on other content types, for example, by using the https://developer.enonic.com/docs/xp/stable/cms/input-types#imageselector[ImageSelector] input type.
 
-To take a look on how attachments work, let's update our Artist content type to use the input type _AttachmentUploader_. 
+To take a look on how attachments work, let's update the Artist content type to use the input type _AttachmentUploader_. 
 
 . For that, update the _Artist.xml_ file accordingly:
 +
@@ -169,11 +169,11 @@ To take a look on how attachments work, let's update our Artist content type to 
 
 +
 . Redeploy your app
-. Add some attachments to each of our three artists. In my case I'll add images of some of their albums:
+. Add some attachments to each of the three artists. In my case I'll add images of some of their albums:
 +
 image::artists-attachments.png[Edit form of all artist content types, showing the attachments that were uploaded on each of them, {image-xl}]
 
-With that, we have not only enhanced our Artist content type with a new structure, but also added files as attachments to all of our three artists.
+With that, we have not only enhanced the Artist content type with a new structure, but also added files as attachments to all three artists.
 
 On the next section we'll show how we can retrieve this information through queries.
 
@@ -286,14 +286,14 @@ The above query should return a response that looks a little something like this
 Which, if you have followed the steps in this {document}, should show you something like this if you try and navigate to the `imageUrl` property value:
 
 .The processed image
-image::image-processed.jpg["The lion image, cropped, in black and white, and flipped upside down.",{image-s}]
+image::image-processed.jpg["The lion image, cropped, in black and white, and flipped upside down.",{image-s}, align=center]
 
 
 === Attachments
 
-Let's understand how we can retrieve our artists attachments through queries.
+Let's understand how we can retrieve artists attachments through queries.
 
-First, access the GraphQL API docs on query playground and search for the `Content` schema.  Scroll down a bit and you'll note that there is a field name _attachments_. Now look for the `com_example_myproject_Artist_Data` schema. You'll also note that, after our changes on the Attachments section, we also have a _attachments_ field there, of the same type _Attachment_ of the previous one
+First, access the GraphQL API docs on query playground and search for the `Content` schema.  Scroll down a bit and you'll note that there is a field name _attachments_. Now look for the `com_example_myproject_Artist_Data` schema. You'll also note that, after the changes on the Attachments section, we also have a _attachments_ field there, of the same type _Attachment_ of the previous one
 
 This means that we can get the attachments for each artist in two ways:
 
@@ -471,4 +471,4 @@ And if everything went fine, you should finally expect a response that looks lik
 
 As can be seen, both ways retrieve the same data, but since their access is different, the response structure is also slighly different.
 
-TIP: Under the hood, the _attachment_ field argument _attachmentUrl_ uses the our javascript lib portal https://developer.enonic.com/docs/xp/stable/api/lib-portal#attachmenturl[attachmentUrl] function, so you can follow the link to better understand the arguments that you pass to this field when creating queries that uses it. 
+TIP: Under the hood, the _attachment_ field argument _attachmentUrl_ uses Enonic's javascript lib portal https://developer.enonic.com/docs/xp/stable/api/lib-portal#attachmenturl[attachmentUrl] function, so you can follow the link to better understand the arguments that you pass to this field when creating queries that uses it. 

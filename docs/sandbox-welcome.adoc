@@ -4,7 +4,7 @@ include::.variables.adoc[]
 
 In this {document} we'll introduce a fundamental concept to start developing with Enonic XP: _sandboxes_  
 
-By the end of the this, you'll have created and started a sandbox using our CLI, understanding what it is and what is their purpose.
+By the end of the this, you'll have created and started a sandbox using the CLI, understanding what it is and what is their purpose.
 
 == What is a sandbox?
 
@@ -42,14 +42,11 @@ Sandbox 'tutorial' created with distro 'enonic-xp-linux-sdk-7.13.1'.
 bre@bre-enonic:~$ 
 ----
 
-[TIP]
-====
-If you press kbd:[enter] without entering a response, the CLI will use the default response. The default response to a question is listed in parentheses after the question.
-====
+NOTE: If you press kbd:[enter] without entering a response, the CLI will use the default response. The default response to a question is listed in brackets after the question.
 
 == Starting the sandbox
 
-Once completed, we can use the CLI to start the sandbox, i.e, run a local instance of latest XP:
+Once the sandbox creation is completed, we can use the CLI to start the sandbox, i.e, run a local instance of latest XP:
 
 [source,shell]
 ----
@@ -164,9 +161,9 @@ image::xp-dashboard.png[The XP admin dashboard, {image-xl}]
 
 What this actually does is log you in as the XP instance's super user. 
 
-Because we're working on a local development environment for now, we won't concern ourselves with users and administrators. We'll talk more about this in a later {document}.
+Because we're working on a local development environment for now, we won't concern ourselves with users and administrators.
 
-You should now be on the admin dashboard. The right menu, aka _"XP admin menu"_, is responsible to allow navigation through installed apps on your XP instance. By now you should only have two apps installed:
+You should now be on the admin dashboard. The right menu, aka _"XP admin menu"_, is responsible to allow navigation through some installed apps on your XP instance. By now you should only have two apps installed:
 
 - app-users, to manage permissions for users, user groups and roles on your local XP instance (_sandbox_)
 - app-applications, to install, uninstall and update installed applications on your _sandbox_
@@ -175,6 +172,6 @@ NOTE: If things don't look exactly the same, don't worry... on every new version
 
 == Summary
 
-Congrats! Now you understand what a _sandbox_ is, got more familiar with our CLI, and also visited the admin dashboard page for the first time. 
+Congrats! Now you understand what a _sandbox_ is, got more familiar with the CLI, and also visited the admin dashboard page for the first time. 
 
 You're now ready to move forward with an app development.

@@ -37,15 +37,15 @@
 :image-m: width=900
 :image-l: width=1050
 :image-xl: width=1200
-:description-setup: Starting from scratch, this {document} takes you through how to install all the necessary tools to get started with XP development.
+:description-setup: Starting from scratch, this {document} takes you through how to install all the necessary tools to get started with Enonic XP development.
 :description-sandbox-welcome: Introducing a fundamental concept of Enonic XP development: sandboxes.
-:description-apps: Learn how to create XP projects and how to build and deploy your apps to an XP instance.
+:description-apps: Learn how to create XP projects and how to build and deploy your apps to a XP instance.
 :description-content-studio: Get familiar with Content Studio and Content types, and start creating some content.
-:description-headless-api: What is a headless CMS without an API? Learn about the Guillotine library and the powers it unlocks here!
+:description-headless-api: What is a headless CMS without an API? Learn about the Guillotine library and the powers it unlocks here.
 :description-medias-and-attachments: How does XP deal with images and other media? This {document} covers XP media support, how to upload and query for media, how to work with images and attachments.
-:description-input-types: Take your content types to the next level with more advanced input types. Learn how to configure input types, what kinds there are, and how to link content together!
+:description-input-types: Take your content types to the next level with more advanced input types. Learn how to configure input types, what kinds there are, and how to link content together.
 :description-sets: XP has a number of ways to group inputs together. Learn all about them in this {document}.
-:description-rich-text: Rich text is an incredibly powerful editing tool and an important part of the XP experience. Learn how to configure it here!
+:description-rich-text: Rich text is an incredibly powerful editing tool and an important part of the XP experience. Learn how to configure it here.
 :description-x-data: X-data is a way for you to add extra data to all your content types in a simple manner. This {document} covers what it is and how to use it.
 :description-deployment: How do you actually deploy Enonic XP and use it for more than local development? And where do you go from here to learn more?
 :description-iam: How do you restrict access to your sites? What kinds of access control exist for XP? This {document} explores users, roles, groups, and identity providers.
