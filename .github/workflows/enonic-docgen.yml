@@ -4,6 +4,7 @@ on:
   push:
     branches:
       - "master"
+      - "guide-update"
     paths:
       - 'docs/**'
   workflow_dispatch:
