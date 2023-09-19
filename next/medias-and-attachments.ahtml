@@ -5,8 +5,8 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="generator" content="Asciidoctor 2.0.20">
-<meta name="description" content="{description-media-and-images}">
-<title>{title-media-and-images}</title>
+<meta name="description" content="How does XP deal with images and other media? This chapter covers XP media support, how to upload and query for media, how to work with images and attachments.">
+<title>Medias and attachments</title>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,300italic,400,400italic,600,600italic%7CNoto+Serif:400,400italic,700,700italic%7CDroid+Sans+Mono:400,700">
 <style>
 /*! Asciidoctor default stylesheet | MIT License | https://asciidoctor.org */
@@ -437,7 +437,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 </head>
 <body class="article toc2 toc-right">
 <div id="header">
-<h1>{title-media-and-images}</h1>
+<h1>Medias and attachments</h1>
 <div id="toc" class="toc2">
 <div id="toctitle">Table of Contents</div>
 <ul class="sectlevel1">
@@ -1171,7 +1171,7 @@ Under the hood, the <em>attachment</em> field argument <em>attachmentUrl</em> us
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2023-09-01 08:34:01 UTC
+Last updated 2023-09-19 18:19:38 UTC
 </div>
 </div>
 </body>
