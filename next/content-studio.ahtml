@@ -549,11 +549,24 @@ Privileged users can manage projects via Content Studio settings.
 <div class="paragraph">
 <p>With all this in mind, let&#8217;s now assign the previously created app to your first project:</p>
 </div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>On the green widget sidebar, click on settings</p>
+</li>
+<li>
+<p>Double click on the project you just created to edit it</p>
+</li>
+<li>
+<p>Scroll down and on the "Applications" section, select the application you&#8217;ve previously deployed to this sandbox</p>
+</li>
+</ol>
+</div>
 <div class="imageblock">
 <div class="content">
-<img src="media/content-studio-project-app-assignment.gif" alt="Assigning an app to a project in content studio." width="1200">
+<img src="media/content-studio-project-app-assignment.png" alt="Content studio assigning apps to projects walkthrough." width="1200">
 </div>
-<div class="title">Figure 3. Assigning "my first app" application to "my first project" project</div>
+<div class="title">Figure 3. Assigning your first app to your first project</div>
 </div>
 </div>
 </div>
@@ -591,7 +604,7 @@ Privileged users can manage projects via Content Studio settings.
 </div>
 <div class="imageblock text-center">
 <div class="content">
-<img src="media/app-vs-projects-flow.png" alt="Simplied flow explaining the difference between an Enonic XP project folder and its files" width="an Enonic XP app" height="and a Content Studio project">
+<img src="media/app-vs-projects-flow.png" alt="Simplied flow explaining the difference between an Enonic XP project folder and its files" width="300" height="and a Content Studio project">
 </div>
 </div>
 <div class="admonitionblock note">
@@ -742,8 +755,20 @@ XP&#8217;s <code>input</code> elements are <em>not</em> the same as HTML <code>i
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-shell" data-lang="shell">  enonic project deploy</code></pre>
+<pre class="highlight"><code class="language-shell" data-lang="shell">  enonic project dev</code></pre>
 </div>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+This command will watch changes under <code>myproject/</code> and redeploy as needed. Make sure you&#8217;re already running your sandbox with the <code>--dev</code> flag in another terminal, otherwise running enonic project dev will start the sandbox in detached mode, so you&#8217;ll lose logs. More on cli&#8217;s dev command <a href="https://developer.enonic.com/docs/enonic-cli/stable/dev#dev">here</a>.
+</td>
+</tr>
+</table>
 </div>
 <div class="paragraph">
 <p>If everything goes well, you should see your sandbox logs update now. And that&#8217;s the basics of creating new content types.</p>
@@ -782,7 +807,7 @@ This content type is only visible there because of the updates we did to the app
 <p>However, before we start creating artists, let&#8217;s create a folder.</p>
 </div>
 <div class="paragraph">
-<p>Since we&#8217;ll be using this project in the coming chapters with more content types, having some hierarchy will make things easier. Choose a new folder and call it "artists".</p>
+<p>Since we&#8217;ll be using this project in the coming chapters with more content types, having some hierarchy will make things easier. Create a new folder and call it "artists".</p>
 </div>
 <div class="paragraph">
 <p>Next, let&#8217;s create a few artists to get used to the workflow. We&#8217;ll start with Cardi B.</p>
@@ -1059,7 +1084,7 @@ You can also publish a piece of content by using the keyboard shortcut <span cla
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2023-09-19 18:19:38 UTC
+Last updated 2023-10-18 21:05:43 UTC
 </div>
 </div>
 </body>

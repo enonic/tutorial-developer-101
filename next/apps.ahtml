@@ -475,10 +475,10 @@ Not all installed apps will show on XP admin menu, this is something that is con
 </table>
 </div>
 <div class="paragraph">
-<p>To clarify on the previous claims, here are some examples of XP apps&#8230;&#8203; if you want have analytics, you can install <a href="https://market.enonic.com/vendors/enonic/google-analytics">google analytics app</a>. If you want to use Enonic XP CMS in a headless way, you can install <a href="https://market.enonic.com/vendors/enonic/guillotine">guillotine app</a>, and access the created content through a GraphQL API. At the same time, your project idea will most likely be an app.</p>
+<p>To clarify on the previous claims, here are some examples of XP apps: if you want have analytics, you can install <a href="https://market.enonic.com/vendors/enonic/google-analytics">google analytics app</a>. If you want to use Enonic XP CMS in a headless way, you can install <a href="https://market.enonic.com/vendors/enonic/guillotine">guillotine app</a>, and access the created content through a GraphQL API. At the same time, your project idea will most likely be an app.</p>
 </div>
 <div class="paragraph">
-<p>In the end, apps are compiled to .jar files (<em>build</em> processes) which are then <em>deployed</em> to XP instances to be executed.</p>
+<p>In the end, apps are compiled to .jar files (<em>build</em> process) which are then <em>deployed</em> to XP instances to be executed.</p>
 </div>
 <div class="admonitionblock note">
 <table>
@@ -498,7 +498,7 @@ The tasks and examples in this chapter are based on work done in previous chapte
 <h2 id="starters"><a class="link" href="#starters">Starters</a></h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>Creating a project from scratch can be a daunting task for any system you&#8217;re not familiar with. To make things easier for you, Enonic provides a range of different templates (known as <em>starters</em>). We&#8217;ll make use of these throughout this tutorial.</p>
+<p>Creating a project from scratch can be a daunting task for any system you&#8217;re not familiar with. To make things easier for you, Enonic provides a range of different templates (known as <em>starters</em>).</p>
 </div>
 <div class="admonitionblock note">
 <table>
@@ -775,7 +775,7 @@ If you had to deploy manually when going through this tutorial, please get in to
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2023-09-19 18:19:38 UTC
+Last updated 2023-10-18 21:05:43 UTC
 </div>
 </div>
 </body>

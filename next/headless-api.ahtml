@@ -520,7 +520,7 @@ If you are not interested in using Enonic in headless mode, you can skip to the 
 <h2 id="query_playground"><a class="link" href="#query_playground">Query playground</a></h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>Back in Content Studio, you should now have access to a new item called <code>Query playground</code> in the left hand menu. Open it, and you should see this:</p>
+<p>Back in Content Studio, you should now have access to a new item called <code>Query playground</code> in the left green widget sidebar. Open it, and you should see this:</p>
 </div>
 <div class="imageblock">
 <div class="content">
@@ -563,9 +563,9 @@ If you are not interested in using Enonic in headless mode, you can skip to the 
 </div>
 <div class="sect2">
 <h3 id="basic_buttons"><a class="link" href="#basic_buttons">Basic buttons</a></h3>
-<div class="imageblock">
+<div class="imageblock text-center">
 <div class="content">
-<img src="media/query-playground-buttons.png" alt="Query playground buttons labelled for further detailing" width="1200">
+<img src="media/query-playground-buttons-1-to-4.png" alt="Query playground buttons labelled from 1 to 4 for further detailing" width="100">
 </div>
 </div>
 <div class="olist arabic">
@@ -582,18 +582,45 @@ If you are not interested in using Enonic in headless mode, you can skip to the 
 <li>
 <p><em>copy button</em>, will copy your query to your clipboard. Shortcut is <span class="keyseq"><kbd>ctl</kbd>+<kbd>shift</kbd>+<kbd>c</kbd></span></p>
 </li>
+</ol>
+</div>
+<div class="imageblock text-center">
+<div class="content">
+<img src="media/query-playground-buttons-5-and-6.png" alt="Query playground buttons labelled as 5 and 6 for further detailing" width="50">
+</div>
+</div>
+<div class="olist arabic">
+<ol class="arabic" start="5">
 <li>
 <p><em>docs button</em>, will open a section showing all details about the schemas you have avaiable to use and query on</p>
 </li>
 <li>
 <p><em>history button</em>, will open a section showing all previously executed queries</p>
 </li>
+</ol>
+</div>
+<div class="imageblock text-center">
+<div class="content">
+<img src="media/query-playground-buttons-7-and-8.png" alt="Query playground buttons labelled as 7 and 8 for further detailing" width="200">
+</div>
+</div>
+<div class="olist arabic">
+<ol class="arabic" start="7">
 <li>
 <p><em>tab button</em>, will create new tabs for you to manage testing multiple queries</p>
 </li>
 <li>
 <p><em>draft / master buttons</em> will switch between those two repositories for your queries to run on</p>
 </li>
+</ol>
+</div>
+<div class="imageblock text-center">
+<div class="content">
+<img src="media/query-playground-buttons-9-to-11.png" alt="Query playground buttons labelled as 9 to 11 for further detailing" width="50">
+</div>
+</div>
+<div class="olist arabic">
+<ol class="arabic" start="9">
 <li>
 <p><em>re-fetch schema button</em>, will update your graphql schemas based on recent changes</p>
 </li>
@@ -962,7 +989,7 @@ To learn more about queryDSL capabilities, visit the <a href="https://developer.
 <div class="olist arabic">
 <ol class="arabic" start="2">
 <li>
-<p>Run <code>enonic project deploy</code> in the terminal on the root directory of the project</p>
+<p>If are not running the project in dev mode (<code>enonic project dev</code> introduced in the previous $chapter), make sure to run <code>enonic project deploy</code> in the terminal on the project&#8217;s root directory</p>
 </li>
 <li>
 <p>Update each of the previously created artists with the following dates:</p>
@@ -1149,7 +1176,7 @@ To learn more about queryDSL capabilities, visit the <a href="https://developer.
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2023-09-19 18:19:38 UTC
+Last updated 2023-10-18 21:05:43 UTC
 </div>
 </div>
 </body>
