@@ -8,15 +8,15 @@ For instance, if you've followed along, you already have two apps installed and 
 
 NOTE: Not all installed apps will show on XP admin menu, this is something that is configured on app level.
 
-To clarify on the previous claims, here are some examples of XP apps... if you want have analytics, you can install https://market.enonic.com/vendors/enonic/google-analytics[google analytics app]. If you want to use Enonic XP CMS in a headless way, you can install https://market.enonic.com/vendors/enonic/guillotine[guillotine app], and access the created content through a GraphQL API. At the same time, your project idea will most likely be an app.
+To clarify on the previous claims, here are some examples of XP apps: if you want have analytics, you can install https://market.enonic.com/vendors/enonic/google-analytics[google analytics app]. If you want to use Enonic XP CMS in a headless way, you can install https://market.enonic.com/vendors/enonic/guillotine[guillotine app], and access the created content through a GraphQL API. At the same time, your project idea will most likely be an app.
 
-In the end, apps are compiled to .jar files (_build_ processes) which are then _deployed_ to XP instances to be executed.
+In the end, apps are compiled to .jar files (_build_ process) which are then _deployed_ to XP instances to be executed.
 
 NOTE: {see-prev-docs}
 
 == Starters
 
-Creating a project from scratch can be a daunting task for any system you're not familiar with. To make things easier for you, Enonic provides a range of different templates (known as _starters_). We'll make use of these throughout this tutorial.
+Creating a project from scratch can be a daunting task for any system you're not familiar with. To make things easier for you, Enonic provides a range of different templates (known as _starters_).
 
 NOTE: The complete list of starters can be found on https://market.enonic.com/starters[the Enonic Market].
 

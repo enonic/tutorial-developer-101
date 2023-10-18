@@ -42,8 +42,12 @@ Therefore, if we want to enable Content Studio to manage a specific type of cont
 
 With all this in mind, let's now assign the previously created app to your first project:
 
-.Assigning "my first app" application to "my first project" project
-image::content-studio-project-app-assignment.gif["Assigning an app to a project in content studio.", {image-xl}]
+. On the green widget sidebar, click on settings
+. Double click on the project you just created to edit it
+. Scroll down and on the "Applications" section, select the application you've previously deployed to this sandbox
+
+.Assigning your first app to your first project
+image::content-studio-project-app-assignment.png["Content studio assigning apps to projects walkthrough.", {image-xl}]
 
 == Apps vs projects
 
@@ -61,7 +65,7 @@ A "_Content Studio project_", as explained in the section xref:sandboxes#task:_y
 
 In summary, you can have the following flow in mind:
 
-image::app-vs-projects-flow.png[Simplied flow explaining the difference between an Enonic XP project folder and its files, an Enonic XP app, and a Content Studio project, 300, align=center]
+image::app-vs-projects-flow.png[Simplied flow explaining the difference between an Enonic XP project folder and its files, an Enonic XP app, and a Content Studio project, width=300, align=center]
 
 NOTE: This flow is super simplified and there are a lot of details to each one of those boxes, but it should be sufficient to explain the main difference between those ideas and how they connect to eachother.
 
@@ -131,8 +135,11 @@ NOTE: XP's `input` elements are _not_ the same as HTML `input` elements. To read
 
 [source,shell]
 ----
-  enonic project deploy
+  enonic project dev
 ----
+
+NOTE: This command will watch changes under `{project-name}/` and redeploy as needed. Make sure you're already running your sandbox with the `--dev` flag in another terminal, otherwise running enonic project dev will start the sandbox in detached mode, so you'll lose logs. More on cli's dev command https://developer.enonic.com/docs/enonic-cli/stable/dev#dev[here]. 
+
 If everything goes well, you should see your sandbox logs update now. And that's the basics of creating new content types. 
 
 Next, let's go back to Content Studio and create some actual content!
@@ -150,7 +157,7 @@ image::content-studio-new-content.png["The \"Create Content\" dialog when creati
 
 However, before we start creating {content-type-1}s, let's create a folder.
 
-Since we'll be using this project in the coming {document}s with more content types, having some hierarchy will make things easier. Choose a new folder and call it "{content-type-1}s".
+Since we'll be using this project in the coming {document}s with more content types, having some hierarchy will make things easier. Create a new folder and call it "{content-type-1}s".
 
 Next, let's create a few {content-type-1}s to get used to the workflow. We'll start with Cardi B.
 
@@ -174,7 +181,6 @@ image::content-type-filled-out.png[The form for "{content-type-1}" fully filled 
 Name:: Melissa Arnette Elliott
 About:: {content-about-missy}
 
-
 +
 .P!nk (https://en.wikipedia.org/wiki/Pink_(singer)[P!nk on Wikipedia])
 Name:: Alecia Beth Moore
@@ -184,7 +190,6 @@ With these {content-type-1}s created, your content hierarchy should now list the
 
 .The hierarchy as it should look after creating some content
 image::content-studio-with-{content-type-1}s.png["The content hierarchy showing {content-type-1}s folder with \"Cardi B\", \"Missy Elliot\" and \"P!nk\" listed directly underneath it.", {image-xl}]
-
 
 === Content type validation
 

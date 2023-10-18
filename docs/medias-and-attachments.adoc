@@ -169,9 +169,7 @@ To take a look on how attachments work, let's update the Artist content type to 
 
 +
 . Redeploy your app
-. Add some attachments to each of the three artists. In my case I'll add images of some of their albums:
-+
-image::artists-attachments.png[Edit form of all artist content types, showing the attachments that were uploaded on each of them, {image-xl}]
+. Add some attachments to each of the three artists. In my case I'll add images of some of their albums.
 
 With that, we have not only enhanced the Artist content type with a new structure, but also added files as attachments to all three artists.
 

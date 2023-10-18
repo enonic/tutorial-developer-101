@@ -24,7 +24,7 @@ image::install-guillotine.png[Install Guillotine application dialog, {image-xl}]
 
 == Query playground
 
-Back in Content Studio, you should now have access to a new item called `Query playground` in the left hand menu. Open it, and you should see this:
+Back in Content Studio, you should now have access to a new item called `Query playground` in the left green widget sidebar. Open it, and you should see this:
 
 image::query-playground-empty.png[API browser integrated in Content Studio, {image-xl}]
 
@@ -57,16 +57,28 @@ Before trying to come up with complex queries, let's make familiarize ourselves 
 
 === Basic buttons
 
-image::query-playground-buttons.png[Query playground buttons labelled for further detailing, {image-xl}]
+image::query-playground-buttons-1-to-4.png[Query playground buttons labelled from 1 to 4 for further detailing, width=100, align=center]
 
 . _play button_, will execute your query. Shortcut is kbd:[ctrl+enter]
 . _prettify button_, will properly format your query, removing comments and unecessary spaces / indentation. Shortcut is kbd:[ctl+shift+p]
 . _merge fragments button_, will rewrite your query based on the declared https://graphql.org/learn/queries/#fragments[fragments]. Shortcut is kbd:[ctl+shift+m] 
 . _copy button_, will copy your query to your clipboard. Shortcut is kbd:[ctl+shift+c]
+
+image::query-playground-buttons-5-and-6.png[Query playground buttons labelled as 5 and 6 for further detailing, width=50, align=center]
+
+[start=5]
 . _docs button_, will open a section showing all details about the schemas you have avaiable to use and query on
 . _history button_, will open a section showing all previously executed queries
+
+image::query-playground-buttons-7-and-8.png[Query playground buttons labelled as 7 and 8 for further detailing, width=200, align=center]
+
+[start=7]
 . _tab button_, will create new tabs for you to manage testing multiple queries
 . _draft / master buttons_ will switch between those two repositories for your queries to run on
+
+image::query-playground-buttons-9-to-11.png[Query playground buttons labelled as 9 to 11 for further detailing, width=50, align=center]
+
+[start=9]
 . _re-fetch schema button_, will update your graphql schemas based on recent changes
 . _shortkeys button_, will open a dialog displaying all short keys that can be used to execute actions
 . _settings button_, will open settings dialog
@@ -305,7 +317,7 @@ To finish this {document}, we'll add a new _birthyear_ field to the artist conte
 ----
 
 [start=2]
-. Run `enonic project deploy` in the terminal on the root directory of the project
+. If are not running the project in dev mode (`enonic project dev` introduced in the previous ${document}), make sure to run `enonic project deploy` in the terminal on the project's root directory
 
 . Update each of the previously created artists with the following dates:
 
