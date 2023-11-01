@@ -90,7 +90,7 @@ We'll create a content type that contains two input fields. When shown in Conten
 .The target for your first content type
 image::content-type-target.png["A content creation form with name and biography fields", {image-xl}]
 
-Back to your preferred IDE, make sure you're in the project folder (`{project-name}/`) that you created in a previous {document}. All paths will be relative to this root folder.
+Back to your preferred editor, make sure you're in the project folder (`{project-name}/`) that you created in a previous {document}. All paths will be relative to this root folder.
 
 . Create a directory for content types: `src/main/resources/site/content-types/`. XP is quite particular about project folder structure, so you need to put content types right where it expects to find them.
 . Create a directory called `{content-type-1}` in the newly created `content-types/` directory. XP expects all content types to have their own directories.

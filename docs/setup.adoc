@@ -202,7 +202,7 @@ Once you have installed Git, you can verify that it's working correctly by runni
 git version
 ----
 
-== Integrated Development Environment
+== Editor
 
 Source-code editors (also known as _text editors_ or just _editors_ for short) are applications designed primarily for editing plain text and often specifically for working with code. They are therefore commonly used for programming.
 
@@ -214,10 +214,10 @@ https://code.visualstudio.com/[Visual Studio Code] (often shortened to _VS Code_
 
 You can navigate to their https://code.visualstudio.com/Download[download page] and install the version matching your operating system. 
 
-If you opt to move forward with VS code as your IDE, its worth checking some of the https://marketplace.visualstudio.com/[powerful extensions] available on their marketplace.
+If you opt to move forward with VS code as your editor, its worth checking some of the https://marketplace.visualstudio.com/[powerful extensions] available on their marketplace.
 
 == Summary
 
-Congrats! You've installed the Enonic CLI, Git, and an IDE. You're now set up to start working with Enonic XP 🚀
+Congrats! You've installed the Enonic CLI, Git, and an editor. You're now set up to start working with Enonic XP 🚀
 
 Keep your new tools at hand; we'll be using them heavily throughout this guide, so you'll have lots of time to get to know them better.
