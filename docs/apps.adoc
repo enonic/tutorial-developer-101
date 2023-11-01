@@ -4,9 +4,9 @@ include::.variables.adoc[]
 
 Applications is the defacto way of adding functionality Enonic XP. Almost everything you'll be using and interacting with in Enonic is an app. 
 
-For instance, if you've followed along, you already have two apps installed and accessible through _XP admin menu_ on the dashboard. 
+For instance, if you've followed along, you already have two apps installed and accessible through _XP menu_ on the dashboard. 
 
-NOTE: Not all installed apps will show on XP admin menu, this is something that is configured on app level.
+NOTE: Not all installed apps will show on XP menu, this is something that is configured on app level.
 
 To clarify on the previous claims, here are some examples of XP apps: if you want have analytics, you can install https://market.enonic.com/vendors/enonic/google-analytics[google analytics app]. If you want to use Enonic XP CMS in a headless way, you can install https://market.enonic.com/vendors/enonic/guillotine[guillotine app], and access the created content through a GraphQL API. At the same time, your project idea will most likely be an app.
 

@@ -12,7 +12,7 @@ NOTE: {see-prev-docs}
 
 Let's start this {document} by installing Content Studio. In order to do that, access http://localhost:8080/admin/tool/com.enonic.xp.app.applications/main[Applications app], click on the header item _"install"_, search for _"content studio"_ and finally click on the green _"install"_ button.
 
-If the app was installed successfully, you should now see it listed in _XP admin menu_ on your http://localhost:8080/admin/tool[dashboard]. Click on it to visit Content Studio's homepage.
+If the app was installed successfully, you should now see it listed in _XP menu_ on your http://localhost:8080/admin/tool[dashboard]. Click on it to visit Content Studio's homepage.
 
 === Task: your first project
 
@@ -248,7 +248,7 @@ We'll now install and give a brief introduction to the _Data Toolbox_ app, so ma
 
 Data Toolbox provides you with a web interface to visualize and manipulate your XP data. We'll now see how to inspect content using Data Toolbox.
 
-. Open the XP admin menu and select Data Toolbox. You should have this app installed from when you xref:sandboxes#_admin_console[took the welcome tour].
+. Open the XP menu and select Data Toolbox. You should have this app installed from when you xref:sandboxes#_admin_console[took the welcome tour].
 +
 .Data Toolbox
 image::data-toolbox-landing-page.png["The Data Toolbox landing page: grid of icons for administrative actions and accompanying explanations. ",{image-xl}]

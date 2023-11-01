@@ -69,7 +69,7 @@ So let's get started!
 
 The first thing you need to do is to install the Simple ID Provider app:
 
-. Navigate to the Applications tab in the admin menu.
+. Navigate to the Applications tab in the XP menu.
 . Press "Install" and search for Simple ID Provider.
 +
 .Installing the Simple ID Provider app
