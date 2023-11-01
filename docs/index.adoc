@@ -25,8 +25,8 @@ NOTE: When we mention "XP", we are referring to "Enonic XP", the hybrid CMS you'
 
 <<setup#, {title-setup}>>::
 {description-setup}
-<<sandboxes#, {title-sandbox-welcome}>>::
-{description-sandbox-welcome}
+<<sandboxes#, {title-sandbox}>>::
+{description-sandbox}
 <<apps#, {title-apps}>>::
 {description-apps}
 --

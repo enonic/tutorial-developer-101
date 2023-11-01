@@ -1,6 +1,6 @@
-= {title-sandbox-welcome}
+= {title-sandbox}
 include::.variables.adoc[]
-:description: {description-sandbox-welcome}
+:description: {description-sandbox}
 
 In this {document} we'll introduce a fundamental concept to start developing with Enonic XP: _sandboxes_  
 
