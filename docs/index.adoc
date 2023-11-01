@@ -5,7 +5,7 @@ include::.variables.adoc[]
 :section-3: Advanced content modelling
 :section-4: Deployment and next steps
 
-Hello, and welcome to this in-depth tutorial to get familiar with Enonic. The guide is aimed at people new to Enonic, covering everything you need to know for a flying start.
+Hello, and welcome to this in-depth tutorial to get familiar with Enonic. The guide is aimed at people new to Enonic, covering the essentials of content modelling and accessing the data.
 
 If you have any questions, or just want to get in touch - visit the https://discuss.enonic.com[Forum^] or join the https://slack.enonic.com/[Community Slack channel^]
 

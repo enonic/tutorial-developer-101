@@ -8,9 +8,15 @@ For instance, if you've followed along, you already have two apps installed and 
 
 NOTE: Not all installed apps will show on XP menu, this is something that is configured on app level.
 
-To clarify on the previous claims, here are some examples of XP apps: if you want have analytics, you can install https://market.enonic.com/vendors/enonic/google-analytics[google analytics app]. If you want to use Enonic XP CMS in a headless way, you can install https://market.enonic.com/vendors/enonic/guillotine[guillotine app], and access the created content through a GraphQL API. At the same time, your project idea will most likely be an app.
+To clarify on the previous claims, here are some examples of XP apps: 
 
-In the end, apps are compiled to .jar files (_build_ process) which are then _deployed_ to XP instances to be executed.
+- If you want an interface to manage content, you can install https://market.enonic.com/vendors/enonic/content-studio[content studio app]. 
+
+- If you want to use Enonic XP CMS in a headless way, you can install https://market.enonic.com/vendors/enonic/guillotine[guillotine app], and access the created content through a GraphQL API. 
+
+- Your project idea will most likely be an app.
+
+In the end, apps are compiled and then _deployed_ to XP instances to be executed.
 
 NOTE: {see-prev-docs}
 

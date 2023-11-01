@@ -2,7 +2,7 @@
 include::.variables.adoc[]
 :description: {description-headless-api}
 
-Enonic is a hybrid CMS, which means that it can be used to manage and deliver content to your frontend. 
+Enonic is a hybrid CMS. As a hybrid CMS, Enonic is both capable of managing content, and support customized delivery. In this {document} we will focus on delivery via the out-of-the-box GraphQL API.
 
 Now that we've created some content, let's see how we can access and use it in via API - headless style. 
 

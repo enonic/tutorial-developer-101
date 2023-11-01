@@ -9,7 +9,7 @@ Before we can start building, let's make sure we have the right tools available 
 - Git and Github -> _versioning your XP projects_
 - Integrated Development Environment -> _coding your ideas into XP projects_
 
-If you've already got those configured and installed, feel free to skip to the next chapter.
+TIP: If you've already got those configured and installed, feel free to skip to the next {document}.
 
 == The command line
 
