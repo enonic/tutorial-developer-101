@@ -27,7 +27,7 @@
 :title-medias-and-attachments: Medias and attachments
 :title-sets: Sets
 :title-input-types: Input types
-:title-rich-text: Rich text: HtmlArea
+:title-rich-text: Rich text
 :title-x-data: X-data
 :title-headless-api: Headless API
 :title-deployment: Deployment and next steps
