@@ -29,7 +29,7 @@
 :title-input-types: Input types
 :title-rich-text: Rich text
 :title-x-data: X-data
-:title-headless-api: Headless API
+:title-headless-api: GraphQL API
 :title-deployment: Deployment and next steps
 :title-iam: IAM: identities and providers
 :image-xs: width=600
