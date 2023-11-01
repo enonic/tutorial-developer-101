@@ -99,7 +99,7 @@ After the build has finished, you'll have a new file in your project directory, 
 
 == Deploying to sandbox
 
-_deploying_ is the term used when an app is made available to a specific XP instance, so if you made app _"A"_ available to the XP instance _"I"_, you could say that you have _deployed_ app _"A"_ to the instance _"I"_. If the app and the instance can be inferred by context, you could just say that you have _deployed_.
+_deploying_ is the term used when an app is made available to a specific XP instance.
 
 To deploy your app to the sandbox, use the CLI again. Keep the server running or run it with `enonic sandbox start --dev`, if it is not running. 
 
