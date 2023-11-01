@@ -494,7 +494,7 @@ The tasks and examples in this chapter are based on work done in previous chapte
 <p>Let&#8217;s start this chapter by installing Content Studio. In order to do that, access <a href="http://localhost:8080/admin/tool/com.enonic.xp.app.applications/main">Applications app</a>, click on the header item <em>"install"</em>, search for <em>"content studio"</em> and finally click on the green <em>"install"</em> button.</p>
 </div>
 <div class="paragraph">
-<p>If the app was installed successfully, you should now see it listed in <em>XP admin menu</em> on your <a href="http://localhost:8080/admin/tool">dashboard</a>. Click on it to visit Content Studio&#8217;s homepage.</p>
+<p>If the app was installed successfully, you should now see it listed in <em>XP menu</em> on your <a href="http://localhost:8080/admin/tool">dashboard</a>. Click on it to visit Content Studio&#8217;s homepage.</p>
 </div>
 <div class="sect2">
 <h3 id="task_your_first_project"><a class="link" href="#task_your_first_project">Task: your first project</a></h3>
@@ -663,7 +663,7 @@ As mentioned before, content types are defined and installed via applications. I
 <div class="title">Figure 4. The target for your first content type</div>
 </div>
 <div class="paragraph">
-<p>Back to your preferred IDE, make sure you&#8217;re in the project folder (<code>myproject/</code>) that you created in a previous chapter. All paths will be relative to this root folder.</p>
+<p>Back to your preferred editor, make sure you&#8217;re in the project folder (<code>myproject/</code>) that you created in a previous chapter. All paths will be relative to this root folder.</p>
 </div>
 <div class="olist arabic">
 <ol class="arabic">
@@ -1000,7 +1000,7 @@ You can also publish a piece of content by using the keyboard shortcut <span cla
 <div class="olist arabic">
 <ol class="arabic">
 <li>
-<p>Open the XP admin menu and select Data Toolbox. You should have this app installed from when you <a href="sandboxes.ahtml#_admin_console">took the welcome tour</a>.</p>
+<p>Open the XP menu and select Data Toolbox. You should have this app installed from when you <a href="sandboxes.ahtml#_admin_console">took the welcome tour</a>.</p>
 <div class="imageblock">
 <div class="content">
 <img src="media/data-toolbox-landing-page.png" alt="The Data Toolbox landing page: grid of icons for administrative actions and accompanying explanations. " width="1200">
@@ -1084,7 +1084,7 @@ You can also publish a piece of content by using the keyboard shortcut <span cla
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2023-10-18 21:05:43 UTC
+Last updated 2023-11-01 19:01:11 UTC
 </div>
 </div>
 </body>

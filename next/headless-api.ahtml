@@ -6,7 +6,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="generator" content="Asciidoctor 2.0.20">
 <meta name="description" content="What is a headless CMS without an API? Learn about the Guillotine library and the powers it unlocks here.">
-<title>Headless API</title>
+<title>GraphQL API</title>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,300italic,400,400italic,600,600italic%7CNoto+Serif:400,400italic,700,700italic%7CDroid+Sans+Mono:400,700">
 <style>
 /*! Asciidoctor default stylesheet | MIT License | https://asciidoctor.org */
@@ -437,7 +437,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 </head>
 <body class="article toc2 toc-right">
 <div id="header">
-<h1>Headless API</h1>
+<h1>GraphQL API</h1>
 <div id="toc" class="toc2">
 <div id="toctitle">Table of Contents</div>
 <ul class="sectlevel1">
@@ -465,7 +465,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <div id="preamble">
 <div class="sectionbody">
 <div class="paragraph">
-<p>Enonic is a hybrid CMS, which means that it can be used to manage and deliver content to your frontend.</p>
+<p>Enonic is a hybrid CMS. As a hybrid CMS, Enonic is both capable of managing content, and support customized delivery. In this chapter we will focus on delivery via the out-of-the-box GraphQL API.</p>
 </div>
 <div class="paragraph">
 <p>Now that we&#8217;ve created some content, let&#8217;s see how we can access and use it in via API - headless style.</p>
@@ -1176,7 +1176,7 @@ To learn more about queryDSL capabilities, visit the <a href="https://developer.
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2023-10-18 21:05:43 UTC
+Last updated 2023-11-01 19:01:11 UTC
 </div>
 </div>
 </body>

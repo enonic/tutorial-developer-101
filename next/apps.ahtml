@@ -460,7 +460,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <p>Applications is the defacto way of adding functionality Enonic XP. Almost everything you&#8217;ll be using and interacting with in Enonic is an app.</p>
 </div>
 <div class="paragraph">
-<p>For instance, if you&#8217;ve followed along, you already have two apps installed and accessible through <em>XP admin menu</em> on the dashboard.</p>
+<p>For instance, if you&#8217;ve followed along, you already have two apps installed and accessible through <em>XP menu</em> on the dashboard.</p>
 </div>
 <div class="admonitionblock note">
 <table>
@@ -469,16 +469,29 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <i class="fa icon-note" title="Note"></i>
 </td>
 <td class="content">
-Not all installed apps will show on XP admin menu, this is something that is configured on app level.
+Not all installed apps will show on XP menu, this is something that is configured on app level.
 </td>
 </tr>
 </table>
 </div>
 <div class="paragraph">
-<p>To clarify on the previous claims, here are some examples of XP apps: if you want have analytics, you can install <a href="https://market.enonic.com/vendors/enonic/google-analytics">google analytics app</a>. If you want to use Enonic XP CMS in a headless way, you can install <a href="https://market.enonic.com/vendors/enonic/guillotine">guillotine app</a>, and access the created content through a GraphQL API. At the same time, your project idea will most likely be an app.</p>
+<p>To clarify on the previous claims, here are some examples of XP apps:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>If you want an interface to manage content, you can install <a href="https://market.enonic.com/vendors/enonic/content-studio">content studio app</a>.</p>
+</li>
+<li>
+<p>If you want to use Enonic XP CMS in a headless way, you can install <a href="https://market.enonic.com/vendors/enonic/guillotine">guillotine app</a>, and access the created content through a GraphQL API.</p>
+</li>
+<li>
+<p>Your project idea will most likely be an app.</p>
+</li>
+</ul>
 </div>
 <div class="paragraph">
-<p>In the end, apps are compiled to .jar files (<em>build</em> process) which are then <em>deployed</em> to XP instances to be executed.</p>
+<p>In the end, apps are compiled and then <em>deployed</em> to XP instances to be executed.</p>
 </div>
 <div class="admonitionblock note">
 <table>
@@ -657,7 +670,7 @@ BUILD SUCCESSFUL in 5s
 <h2 id="deploying_to_sandbox"><a class="link" href="#deploying_to_sandbox">Deploying to sandbox</a></h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p><em>deploying</em> is the term used when an app is made available to a specific XP instance, so if you made app <em>"A"</em> available to the XP instance <em>"I"</em>, you could say that you have <em>deployed</em> app <em>"A"</em> to the instance <em>"I"</em>. If the app and the instance can be inferred by context, you could just say that you have <em>deployed</em>.</p>
+<p><em>deploying</em> is the term used when an app is made available to a specific XP instance.</p>
 </div>
 <div class="paragraph">
 <p>To deploy your app to the sandbox, use the CLI again. Keep the server running or run it with <code>enonic sandbox start --dev</code>, if it is not running.</p>
@@ -775,7 +788,7 @@ If you had to deploy manually when going through this tutorial, please get in to
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2023-10-18 21:05:43 UTC
+Last updated 2023-11-01 19:01:11 UTC
 </div>
 </div>
 </body>

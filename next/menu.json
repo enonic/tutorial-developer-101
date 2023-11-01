@@ -6,18 +6,18 @@
     },
     {
       "title": "2 - Sandboxes",
-      "document": "sandbox-welcome"
+      "document": "sandbox"
     },
     {
       "title": "3 - App development",
       "document": "apps"
     },
     {
-      "title": "4 - Content",
+      "title": "4 - Content Studio",
       "document": "content-studio"
     },
     {
-      "title": "5 - Headless API",
+      "title": "5 - GraphQL API",
       "document": "headless-api"
     },
     {

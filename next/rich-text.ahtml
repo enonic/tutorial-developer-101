@@ -6,7 +6,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="generator" content="Asciidoctor 2.0.20">
 <meta name="description" content="Rich text is an incredibly powerful editing tool and an important part of the XP experience. Learn how to configure it here.">
-<title>Rich text: HtmlArea</title>
+<title>Rich text</title>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,300italic,400,400italic,600,600italic%7CNoto+Serif:400,400italic,700,700italic%7CDroid+Sans+Mono:400,700">
 <style>
 /*! Asciidoctor default stylesheet | MIT License | https://asciidoctor.org */
@@ -437,7 +437,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 </head>
 <body class="article toc2 toc-right">
 <div id="header">
-<h1>Rich text: HtmlArea</h1>
+<h1>Rich text</h1>
 <div id="toc" class="toc2">
 <div id="toctitle">Table of Contents</div>
 <ul class="sectlevel1">
@@ -480,10 +480,10 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <p>If you want to work with rich text in Content Studio, HtmlArea is the input type to go.</p>
 </div>
 <div class="paragraph">
-<p>This rich text input type offers some very powerful editing capabilities and a lot of configuration options.</p>
+<p>This input type offers some very powerful editing capabilities and a lot of configuration options.</p>
 </div>
 <div class="paragraph">
-<p>This while chapter is dedicated to <a href="https://developer.enonic.com/docs/xp/stable/cms/input-types#htmlarea">HtmlArea input type</a> and the Rich text editor used to define its data. For a full detailed exaplanation of the Rich text editor used in content studio, please visit the <a href="https://developer.enonic.com/docs/content-studio/stable/editor/rich-text-editor">Rich text editor reference documentation</a>.</p>
+<p>This whole chapter is dedicated to <a href="https://developer.enonic.com/docs/xp/stable/cms/input-types#htmlarea">HtmlArea input type</a> and the editor used to define its data. For a full detailed exaplanation of the Rich text editor used in content studio, please visit the <a href="https://developer.enonic.com/docs/content-studio/stable/editor/rich-text-editor">Rich text editor reference documentation</a>.</p>
 </div>
 <div class="admonitionblock note">
 <table>
@@ -1245,7 +1245,7 @@ If you used a different macro than the "Embed iframe" macro, the query must be u
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2023-10-18 21:05:43 UTC
+Last updated 2023-11-01 19:01:11 UTC
 </div>
 </div>
 </body>

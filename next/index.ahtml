@@ -448,7 +448,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <div id="preamble">
 <div class="sectionbody">
 <div class="paragraph">
-<p>Hello, and welcome to this in-depth tutorial to get familiar with Enonic. The guide is aimed at people new to Enonic, covering everything you need to know for a flying start.</p>
+<p>Hello, and welcome to this in-depth tutorial to get familiar with Enonic. The guide is aimed at people new to Enonic, covering the essentials of content modelling and accessing the data.</p>
 </div>
 <div class="paragraph">
 <p>If you have any questions, or just want to get in touch - visit the <a href="https://discuss.enonic.com" target="_blank" rel="noopener">Forum</a> or join the <a href="https://slack.enonic.com/" target="_blank" rel="noopener">Community Slack channel</a></p>
@@ -497,7 +497,7 @@ When we mention "XP", we are referring to "Enonic XP", the hybrid CMS you&#8217;
 <dd>
 <p>Starting from scratch, this chapter takes you through how to install all the necessary tools to get started with Enonic XP development.</p>
 </dd>
-<dt class="hdlist1"><a href="sandboxes.ahtml">Sandbox Welcome</a></dt>
+<dt class="hdlist1"><a href="sandboxes.ahtml">Sandbox</a></dt>
 <dd>
 <p>Introducing a fundamental concept of Enonic XP development: sandboxes.</p>
 </dd>
@@ -518,7 +518,7 @@ When we mention "XP", we are referring to "Enonic XP", the hybrid CMS you&#8217;
 <dd>
 <p>Get familiar with Content Studio and Content types, and start creating some content.</p>
 </dd>
-<dt class="hdlist1"><a href="headless-api.ahtml">Headless API</a></dt>
+<dt class="hdlist1"><a href="headless-api.ahtml">GraphQL API</a></dt>
 <dd>
 <p>What is a headless CMS without an API? Learn about the Guillotine library and the powers it unlocks here.</p>
 </dd>
@@ -543,7 +543,7 @@ When we mention "XP", we are referring to "Enonic XP", the hybrid CMS you&#8217;
 <dd>
 <p>XP has a number of ways to group inputs together. Learn all about them in this chapter.</p>
 </dd>
-<dt class="hdlist1"><a href="rich-text.ahtml">Rich text: HtmlArea</a></dt>
+<dt class="hdlist1"><a href="rich-text.ahtml">Rich text</a></dt>
 <dd>
 <p>Rich text is an incredibly powerful editing tool and an important part of the XP experience. Learn how to configure it here.</p>
 </dd>
@@ -573,7 +573,7 @@ When we mention "XP", we are referring to "Enonic XP", the hybrid CMS you&#8217;
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2023-10-18 21:05:43 UTC
+Last updated 2023-11-01 19:01:11 UTC
 </div>
 </div>
 </body>

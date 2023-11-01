@@ -6,7 +6,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="generator" content="Asciidoctor 2.0.20">
 <meta name="description" content="Introducing a fundamental concept of Enonic XP development: sandboxes.">
-<title>Sandbox Welcome</title>
+<title>Sandbox</title>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,300italic,400,400italic,600,600italic%7CNoto+Serif:400,400italic,700,700italic%7CDroid+Sans+Mono:400,700">
 <style>
 /*! Asciidoctor default stylesheet | MIT License | https://asciidoctor.org */
@@ -437,7 +437,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 </head>
 <body class="article toc2 toc-right">
 <div id="header">
-<h1>Sandbox Welcome</h1>
+<h1>Sandbox</h1>
 <div id="toc" class="toc2">
 <div id="toctitle">Table of Contents</div>
 <ul class="sectlevel1">
@@ -717,21 +717,21 @@ The <code>[&#8230;&#8203;]</code> replaces most of the stack trace for legibilit
 <div class="title">Figure 2. The XP admin dashboard</div>
 </div>
 <div class="paragraph">
-<p>What this actually does is log you in as the XP instance&#8217;s super user.</p>
+<p>What this actually does is log you in as the XP instance&#8217;s Super User.</p>
 </div>
 <div class="paragraph">
 <p>Because we&#8217;re working on a local development environment for now, we won&#8217;t concern ourselves with users and administrators.</p>
 </div>
 <div class="paragraph">
-<p>You should now be on the admin dashboard. The right menu, aka <em>"XP admin menu"</em>, is responsible to allow navigation through some installed apps on your XP instance. By now you should only have two apps installed:</p>
+<p>You should now be on the admin dashboard. The right menu, aka <em>"XP menu"</em>, is responsible to allow navigation through some installed apps on your XP instance. By now you should only have two apps installed:</p>
 </div>
 <div class="ulist">
 <ul>
 <li>
-<p>app-users, to manage permissions for users, user groups and roles on your local XP instance (<em>sandbox</em>)</p>
+<p><em>Users</em>, to manage permissions for users, user groups and roles on your local XP instance (<em>sandbox</em>)</p>
 </li>
 <li>
-<p>app-applications, to install, uninstall and update installed applications on your <em>sandbox</em></p>
+<p><em>Applications</em>, to install, uninstall and update installed applications on your <em>sandbox</em></p>
 </li>
 </ul>
 </div>
@@ -763,7 +763,7 @@ If things don&#8217;t look exactly the same, don&#8217;t worry&#8230;&#8203; on 
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2023-10-18 21:05:43 UTC
+Last updated 2023-11-01 19:01:11 UTC
 </div>
 </div>
 </body>

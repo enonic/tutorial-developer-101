@@ -455,7 +455,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <li><a href="#verification_2">Verification</a></li>
 </ul>
 </li>
-<li><a href="#integrated_development_environment">Integrated Development Environment</a>
+<li><a href="#editor">Editor</a>
 <ul class="sectlevel2">
 <li><a href="#download_visual_studio_code">Download Visual Studio Code</a></li>
 </ul>
@@ -486,8 +486,17 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 </li>
 </ul>
 </div>
-<div class="paragraph">
-<p>If you&#8217;ve already got those configured and installed, feel free to skip to the next chapter.</p>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+If you&#8217;ve already got those configured and installed, feel free to skip to the next chapter.
+</td>
+</tr>
+</table>
 </div>
 </div>
 </div>
@@ -768,7 +777,7 @@ Apple maintains its own fork of Git. If you have XCode installed, you already ha
 </div>
 </div>
 <div class="sect1">
-<h2 id="integrated_development_environment"><a class="link" href="#integrated_development_environment">Integrated Development Environment</a></h2>
+<h2 id="editor"><a class="link" href="#editor">Editor</a></h2>
 <div class="sectionbody">
 <div class="paragraph">
 <p>Source-code editors (also known as <em>text editors</em> or just <em>editors</em> for short) are applications designed primarily for editing plain text and often specifically for working with code. They are therefore commonly used for programming.</p>
@@ -785,7 +794,7 @@ Apple maintains its own fork of Git. If you have XCode installed, you already ha
 <p>You can navigate to their <a href="https://code.visualstudio.com/Download">download page</a> and install the version matching your operating system.</p>
 </div>
 <div class="paragraph">
-<p>If you opt to move forward with VS code as your IDE, its worth checking some of the <a href="https://marketplace.visualstudio.com/">powerful extensions</a> available on their marketplace.</p>
+<p>If you opt to move forward with VS code as your editor, its worth checking some of the <a href="https://marketplace.visualstudio.com/">powerful extensions</a> available on their marketplace.</p>
 </div>
 </div>
 </div>
@@ -794,7 +803,7 @@ Apple maintains its own fork of Git. If you have XCode installed, you already ha
 <h2 id="summary"><a class="link" href="#summary">Summary</a></h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>Congrats! You&#8217;ve installed the Enonic CLI, Git, and an IDE. You&#8217;re now set up to start working with Enonic XP 🚀</p>
+<p>Congrats! You&#8217;ve installed the Enonic CLI, Git, and an editor. You&#8217;re now set up to start working with Enonic XP 🚀</p>
 </div>
 <div class="paragraph">
 <p>Keep your new tools at hand; we&#8217;ll be using them heavily throughout this guide, so you&#8217;ll have lots of time to get to know them better.</p>
@@ -804,7 +813,7 @@ Apple maintains its own fork of Git. If you have XCode installed, you already ha
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2023-10-18 21:05:43 UTC
+Last updated 2023-11-01 19:01:11 UTC
 </div>
 </div>
 </body>
