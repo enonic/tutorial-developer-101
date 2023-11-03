@@ -442,8 +442,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <div id="toctitle">Table of Contents</div>
 <ul class="sectlevel1">
 <li><a href="#starters">Starters</a></li>
-<li><a href="#building_your_app">Building your app</a></li>
-<li><a href="#deploying_to_sandbox">Deploying to sandbox</a>
+<li><a href="#deploy_your_app">Deploy your app</a>
 <ul class="sectlevel2">
 <li><a href="#changing_the_display_name_of_an_application">Changing the display name of an application</a></li>
 <li><a href="#what_if_the_application_doesnt_show_up">What if the application doesn&#8217;t show up?</a></li>
@@ -526,7 +525,7 @@ The complete list of starters can be found on <a href="https://market.enonic.com
 </table>
 </div>
 <div class="paragraph">
-<p>For your first project, we&#8217;ll use the "Vanilla" starter. This starter contains the bare minimum. We&#8217;ll use this to familiarize ourselves with how an XP app is structured and how to deploy it on your sandbox.</p>
+<p>For our first app, we&#8217;ll use the "Vanilla" starter. This starter contains the bare minimum. We&#8217;ll use this to familiarize ourselves with how an XP app is structured and how to deploy it on your sandbox.</p>
 </div>
 <div class="paragraph">
 <p>Here&#8217;s how to use the CLI to create your first app:</p>
@@ -608,10 +607,10 @@ src/
 </div>
 </div>
 <div class="sect1">
-<h2 id="building_your_app"><a class="link" href="#building_your_app">Building your app</a></h2>
+<h2 id="deploy_your_app"><a class="link" href="#deploy_your_app">Deploy your app</a></h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>Now that we&#8217;ve set up a project, let&#8217;s see how we build (or <em>compile</em>) the project and then how we deploy it to the sandbox. Again, the CLI is key to making this process as smooth as possible.</p>
+<p>Now that we&#8217;ve set up a project, let&#8217;s see how we build (or <em>compile</em>) and deploy the project to the sandbox. Again, the CLI is key to making this process as smooth as possible.</p>
 </div>
 <div class="paragraph">
 <p>Here are the steps we need to take:</p>
@@ -627,17 +626,17 @@ src/
 </div>
 </li>
 <li>
-<p>Start the build with Enonic CLI:</p>
+<p>Start the deploying with Enonic CLI:</p>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-shell" data-lang="shell">enonic project build</code></pre>
+<pre class="highlight"><code class="language-shell" data-lang="shell">enonic project dev</code></pre>
 </div>
 </div>
 </li>
 </ol>
 </div>
 <div class="paragraph">
-<p>While building your project, the CLI will print what it&#8217;s doing to your terminal. It will look something like this:</p>
+<p>While deploying the project, the CLI will print what it&#8217;s doing to your terminal. It will look something like this:</p>
 </div>
 <div class="listingblock">
 <div class="title">Sample output from build process</div>
@@ -662,29 +661,7 @@ BUILD SUCCESSFUL in 5s
 </table>
 </div>
 <div class="paragraph">
-<p>After the build has finished, you&#8217;ll have a new file in your project directory, located under the <code>build/libs</code> subdirectory. Assuming you have used the default name, it&#8217;ll be located at <code>build/libs/myproject.jar</code> when at the project root. This file is the executable file that contains your application.</p>
-</div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="deploying_to_sandbox"><a class="link" href="#deploying_to_sandbox">Deploying to sandbox</a></h2>
-<div class="sectionbody">
-<div class="paragraph">
-<p><em>deploying</em> is the term used when an app is made available to a specific XP instance.</p>
-</div>
-<div class="paragraph">
-<p>To deploy your app to the sandbox, use the CLI again. Keep the server running or run it with <code>enonic sandbox start --dev</code>, if it is not running.</p>
-</div>
-<div class="paragraph">
-<p>Now, in a different terminal, you can run the following command from the recently created project root folder, to deploy:</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="highlight"><code class="language-shell" data-lang="shell">enonic project deploy</code></pre>
-</div>
-</div>
-<div class="paragraph">
-<p>This copies the application .jar file to your sandbox&#8217;s <code>home/deploy/</code> folder. Since in this case we deployed <code>myproject.jar</code> into <code>tutorial</code> sandbox, we should expect that file to be on <code>~/.enonic/sandboxes/tutorial/home/deploy</code>.</p>
+<p>This copies the application .jar file to your sandbox&#8217;s <code>home/deploy/</code> folder when changes are made. Since in this case we deployed <code>myproject.jar</code> into <code>tutorial</code> sandbox, we should expect that file to be on <code>~/.enonic/sandboxes/tutorial/home/deploy</code>.</p>
 </div>
 <div class="admonitionblock note">
 <table>
@@ -699,7 +676,19 @@ BUILD SUCCESSFUL in 5s
 </table>
 </div>
 <div class="paragraph">
-<p>XP picks up on this automatically and starts the app for you. The <code>enonic project deploy</code> command will build your project if you have made changes since the last build or haven&#8217;t built yet. It will also ask whether you want to start the appropriate sandbox if it isn&#8217;t already running.</p>
+<p>XP picks up on this automatically and starts the app for you. The <code>enonic project dev</code> command will automatically pick up changes and deploy your project.</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+If you want to build or deploy your project manually, you can use the <code>enonic project build</code> and <code>enonic project deploy</code> commands.
+</td>
+</tr>
+</table>
 </div>
 <div class="paragraph">
 <p>To confirm that your application was started correctly, you can look at the logs in the sandbox&#8217;s terminal window. They should say something like this:</p>
@@ -788,7 +777,7 @@ If you had to deploy manually when going through this tutorial, please get in to
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2023-11-03 11:27:25 UTC
+Last updated 2023-11-03 12:57:54 UTC
 </div>
 </div>
 </body>
