@@ -483,23 +483,18 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-shell" data-lang="shell">enonic sandbox create</code></pre>
+<pre class="highlight"><code class="language-shell" data-lang="shell">enonic sandbox create tutorial</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>When prompted, give your sandbox the name: <code>tutorial</code>.</p>
-</div>
-<div class="paragraph">
-<p>Next, when asked which XP distribution you want, use the latest one.</p>
+<p>When asked which XP distribution you want, use the latest one.</p>
 </div>
 <div class="paragraph">
 <p>By the end this flow, your terminal should have something that looks like this:</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-shell" data-lang="shell">bre@bre-enonic:~$ enonic sandbox create
-? Sandbox name: tutorial
-Loading...Done
+<pre class="highlight"><code class="language-shell" data-lang="shell">bre@bre-enonic:~$ enonic sandbox create tutorial
 ? Do you want to use Enonic XP 7.13.1 (latest, stable)? Yes
 Downloading distro [=======================================================] 100.00%
 Unzipping distro...Done
@@ -530,7 +525,7 @@ If you press <kbd>enter</kbd> without entering a response, the CLI will use the 
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-shell" data-lang="shell">enonic sandbox start --dev</code></pre>
+<pre class="highlight"><code class="language-shell" data-lang="shell">enonic sandbox start tutorial --dev</code></pre>
 </div>
 </div>
 <div class="admonitionblock note">
@@ -540,13 +535,13 @@ If you press <kbd>enter</kbd> without entering a response, the CLI will use the 
 <i class="fa icon-note" title="Note"></i>
 </td>
 <td class="content">
-We ran the sandbox with the optional <code>--dev</code> flag, since this makes the sandbox automatically pick up certain changes to locally deployed applications, including most of the work we&#8217;ll be doing in the coming chapters. Read <a href="https://developer.enonic.com/docs/xp/stable/apps/build-system#development_mode">more about dev mode</a> in the reference docs.
+We ran the sandbox with the optional <code>--dev</code> flag. Read <a href="https://developer.enonic.com/docs/xp/stable/apps/build-system#development_mode">more about dev mode</a> in the reference docs.
 </td>
 </tr>
 </table>
 </div>
 <div class="paragraph">
-<p>Choose the <code>tutorial</code> sandbox and watch it boot up in your terminal. The boot output should look something like this, but with values adjusted for your system:</p>
+<p>The <code>tutorial</code> sandbox will boot up in your terminal. The boot output should look something like this, but with values adjusted for your system:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -704,6 +699,11 @@ The <code>[&#8230;&#8203;]</code> replaces most of the stack trace for legibilit
 </div>
 <div class="title">Figure 1. XP Boot page</div>
 </div>
+<div class="imageblock">
+<div class="content">
+<img src="media/xp-boot.png" alt="duck2" width="400">
+</div>
+</div>
 <div class="paragraph">
 <p>The boot page gives an overview of endpoints (as mentioned above) and any other services that may be running on this instance.</p>
 </div>
@@ -763,7 +763,7 @@ If things don&#8217;t look exactly the same, don&#8217;t worry&#8230;&#8203; on 
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2023-11-01 19:14:48 UTC
+Last updated 2023-11-03 11:27:25 UTC
 </div>
 </div>
 </body>
