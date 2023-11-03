@@ -2,17 +2,17 @@
 include::.variables.adoc[]
 :description: {description-sandbox}
 
-In this {document} we'll introduce a fundamental concept to start developing with Enonic XP: _sandboxes_  
+In this {document} we'll introduce a fundamental concept to start developing with Enonic XP: _sandboxes_
 
 By the end of the this, you'll have created and started a sandbox using the CLI, understanding what it is and what is their purpose.
 
 == What is a sandbox?
 
-A _sandbox_ is basically a local instance of Enonic XP running in a specific version. 
+A _sandbox_ is basically a local instance of Enonic XP running in a specific version.
 
 Having a local (and running) instance of XP is essential for developing apps on Enonic XP.
 
-It is possible to setup multiple sandboxes on your machine, each one of them using XP on a specific version. 
+It is possible to setup multiple sandboxes on your machine, each one of them using XP on a specific version.
 
 == Your first sandbox
 
@@ -20,26 +20,22 @@ To create a sandbox using the CLI, start by running the following command:
 
 [source,shell]
 ----
-enonic sandbox create
+enonic sandbox create tutorial
 ----
 
-When prompted, give your sandbox the name: `tutorial`. 
-
-Next, when asked which XP distribution you want, use the latest one.
+When asked which XP distribution you want, use the latest one.
 
 By the end this flow, your terminal should have something that looks like this:
 
 [source,shell]
 ----
-bre@bre-enonic:~$ enonic sandbox create
-? Sandbox name: tutorial
-Loading...Done
+bre@bre-enonic:~$ enonic sandbox create tutorial
 ? Do you want to use Enonic XP 7.13.1 (latest, stable)? Yes
 Downloading distro [=======================================================] 100.00%
 Unzipping distro...Done
 
 Sandbox 'tutorial' created with distro 'enonic-xp-linux-sdk-7.13.1'.
-bre@bre-enonic:~$ 
+bre@bre-enonic:~$
 ----
 
 NOTE: If you press kbd:[enter] without entering a response, the CLI will use the default response. The default response to a question is listed in brackets after the question.
@@ -50,12 +46,12 @@ Once the sandbox creation is completed, we can use the CLI to start the sandbox,
 
 [source,shell]
 ----
-enonic sandbox start --dev
+enonic sandbox start tutorial --dev
 ----
 
-NOTE: We ran the sandbox with the optional `--dev` flag, since this makes the sandbox automatically pick up certain changes to locally deployed applications, including most of the work we'll be doing in the coming {document}s. Read https://developer.enonic.com/docs/xp/stable/apps/build-system#development_mode[more about dev mode] in the reference docs.
+NOTE: We ran the sandbox with the optional `--dev` flag. Read https://developer.enonic.com/docs/xp/stable/apps/build-system#development_mode[more about dev mode] in the reference docs.
 
-Choose the `tutorial` sandbox and watch it boot up in your terminal. The boot output should look something like this, but with values adjusted for your system:
+The `tutorial` sandbox will boot up in your terminal. The boot output should look something like this, but with values adjusted for your system:
 
 [source,shell]
 ----
@@ -114,7 +110,7 @@ If you have problems booting the sandbox, it may be that one or more of the port
 Port 8080 is not available, stop the app using it first!
 ----
 
-. For ports where the CLI doesn't check for availability before starting, you might get an exception in the boot log. This is usually identifiable by a printed stack trace in your logs. Here's an example from what happens if port 4848 isn't available. 
+. For ports where the CLI doesn't check for availability before starting, you might get an exception in the boot log. This is usually identifiable by a printed stack trace in your logs. Here's an example from what happens if port 4848 isn't available.
 +
 [source,shell]
 ----
@@ -151,15 +147,15 @@ You should see the XP boot page:
 
 .XP Boot page
 image::xp-boot.png[The XP boot page, {image-xl}]
-
-The boot page gives an overview of endpoints (as mentioned above) and any other services that may be running on this instance. 
+image::xp-boot.png[duck2, width=400]
+The boot page gives an overview of endpoints (as mentioned above) and any other services that may be running on this instance.
 
 Click on _"Login as Guest"_ to move on. You should now see the following:
 
 .The XP admin dashboard
 image::xp-dashboard.png[The XP admin dashboard, {image-xl}]
 
-What this actually does is log you in as the XP instance's Super User. 
+What this actually does is log you in as the XP instance's Super User.
 
 Because we're working on a local development environment for now, we won't concern ourselves with users and administrators.
 
@@ -172,6 +168,6 @@ NOTE: If things don't look exactly the same, don't worry... on every new version
 
 == Summary
 
-Congrats! Now you understand what a _sandbox_ is, got more familiar with the CLI, and also visited the admin dashboard page for the first time. 
+Congrats! Now you understand what a _sandbox_ is, got more familiar with the CLI, and also visited the admin dashboard page for the first time.
 
 You're now ready to move forward with an app development.
