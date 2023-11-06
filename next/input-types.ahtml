@@ -1006,7 +1006,7 @@ Don&#8217;t worry if something did not work, we&#8217;ll show the solutions on t
 <div class="sect2">
 <h3 id="graphql_query"><a class="link" href="#graphql_query">GraphQL query</a></h3>
 <div class="paragraph">
-<p>Finally, it&#8217;s time to introduce the grapqh in GraphQL.</p>
+<p>Finally, it&#8217;s time to introduce the query in GraphQL.</p>
 </div>
 <div class="paragraph">
 <p>A ContentSelector input will store a reference to the target content item. When using the Guillotine API, you may simply follow this reference to access the target content, and access it&#8217;s fields instantly.</p>
@@ -1093,7 +1093,7 @@ Don&#8217;t worry if something did not work, we&#8217;ll show the solutions on t
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2023-11-03 12:57:54 UTC
+Last updated 2023-11-06 23:07:34 UTC
 </div>
 </div>
 </body>

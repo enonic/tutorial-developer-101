@@ -801,8 +801,15 @@ You can read more about <a href="https://enonic.com/blog/enonic-simplifies-image
 <div class="content">
 <pre class="highlight"><code class="language-GraphQL" data-lang="GraphQL">{
   guillotine {
-    query(
-      contentTypes: "media:image"
+    queryDsl(
+      query: {
+        term: {
+          field: "type",
+          value: {
+            string: "media:image"
+          }
+        }
+      }
     ) {
       displayName
       ... on media_Image { <i class="conum" data-value="1"></i><b>(1)</b>
@@ -831,7 +838,7 @@ You can read more about <a href="https://enonic.com/blog/enonic-simplifies-image
 <pre class="highlight"><code class="language-json" data-lang="json">{
   "data": {
     "guillotine": {
-      "query": [
+      "queryDsl": [
         {
           "displayName": "keyur-nandaniya-8oLnCRz7hwM-unsplash",
           "mediaUrl": "/admin/site/preview/my-first-project/draft/_/attachment/inline/21f827e0-ba57-4824-b3bc-f101ae08568b:9475135781b315daad078d91c27746bc3222d024/keyur-nandaniya-8oLnCRz7hwM-unsplash.jpg"
@@ -886,8 +893,15 @@ You can read more about <a href="https://enonic.com/blog/enonic-simplifies-image
 <div class="content">
 <pre class="highlight"><code class="language-GraphQL" data-lang="GraphQL">{
   guillotine {
-    query(
-      contentTypes: "media:image"
+    queryDsl(
+      query: {
+        term: {
+          field: "type",
+          value: {
+            string: "media:image"
+          }
+        }
+      }
     ) {
       displayName
       ... on media_Image {
@@ -930,7 +944,7 @@ You can read more about <a href="https://enonic.com/blog/enonic-simplifies-image
 <pre class="highlight"><code class="language-json" data-lang="json">{
   "data": {
     "guillotine": {
-      "query": [
+      "queryDsl": [
         {
           "displayName": "keyur-nandaniya-8oLnCRz7hwM-unsplash",
           "imageUrl": "http://localhost:8080/admin/site/preview/my-first-project/draft/_/image/21f827e0-ba57-4824-b3bc-f101ae08568b:6d89657e4bfae6eaa62de22bd6fb63b2697f091d/block-600-700/keyur-nandaniya-8oLnCRz7hwM-unsplash.jpg?filter=grayscale%28%29%3B+border%2810%2C+0x000000%29"
@@ -1166,7 +1180,7 @@ Under the hood, the <em>attachment</em> field argument <em>attachmentUrl</em> us
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2023-11-03 12:57:54 UTC
+Last updated 2023-11-06 23:07:34 UTC
 </div>
 </div>
 </body>

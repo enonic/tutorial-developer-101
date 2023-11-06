@@ -896,9 +896,30 @@ The use of the <code>mixin</code> helps us both reduce duplication and keep all 
 <div class="content">
 <pre class="highlight"><code class="language-GraphQL" data-lang="GraphQL">{
   guillotine {
-    query(
-      contentTypes:"com.example.myproject:artist",
-      query: "displayName = 'Cardi B'"
+    queryDsl(
+      query: {
+        boolean: {
+          must: [
+            {
+              term: {
+                field: "type",
+                value: {
+                  string: "com.example.myproject:artist"
+                }
+              }
+            },
+            {
+              term: {
+                field: "displayName",
+                value: {
+                  string: "Cardi B"
+                }
+              }
+            }
+          ]
+        }
+
+      }
     ) {
       displayName
       ... on com_example_myproject_Artist {
@@ -923,7 +944,7 @@ The use of the <code>mixin</code> helps us both reduce duplication and keep all 
 <pre class="highlight"><code class="language-json" data-lang="json">{
   "data": {
     "guillotine": {
-      "query": [
+      "queryDsl": [
         {
           "displayName": "Cardi B",
           "data": {
@@ -976,9 +997,30 @@ The use of the <code>mixin</code> helps us both reduce duplication and keep all 
 <div class="content">
 <pre class="highlight"><code class="language-GraphQL" data-lang="GraphQL">{
   guillotine {
-    query(
-      contentTypes:"com.example.myproject:animal",
-      query: "displayName = 'Lion'"
+    queryDsl(
+      query: {
+        boolean: {
+          must: [
+            {
+              term: {
+                field: "type",
+                value: {
+                  string: "com.example.myproject:animal"
+                }
+              }
+            },
+            {
+              term: {
+                field: "displayName",
+                value: {
+                  string: "Lion"
+                }
+              }
+            }
+          ]
+        }
+
+      }
     ) {
       displayName
       ... on com_example_myproject_Animal {
@@ -1020,7 +1062,7 @@ The use of the <code>mixin</code> helps us both reduce duplication and keep all 
 <pre class="highlight"><code class="language-json" data-lang="json">{
   "data": {
     "guillotine": {
-      "query": [
+      "queryDsl": [
         {
           "displayName": "Lion",
           "data": {
@@ -1056,7 +1098,7 @@ The use of the <code>mixin</code> helps us both reduce duplication and keep all 
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2023-11-03 12:57:54 UTC
+Last updated 2023-11-06 23:07:34 UTC
 </div>
 </div>
 </body>

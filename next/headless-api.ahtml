@@ -452,7 +452,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 </li>
 <li><a href="#advanced_queries">Advanced queries</a>
 <ul class="sectlevel2">
-<li><a href="#query">Query</a></li>
+<li><a href="#query_deprecated">Query (deprecated)</a></li>
 <li><a href="#querydsl">QueryDSL</a></li>
 <li><a href="#querydslconnection">QueryDslConnection</a></li>
 </ul>
@@ -754,10 +754,10 @@ Note that this matches the structure defined by the Artist content type, which i
 <h2 id="advanced_queries"><a class="link" href="#advanced_queries">Advanced queries</a></h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>We&#8217;ll now introduce and show examples of usaged of three different fields underneath <code>guillotine</code> field, that allos us to search the system for specific data.</p>
+<p>We&#8217;ll now introduce and show examples of usaged of three different fields underneath <code>guillotine</code> field, that allow us to search the system for specific data.</p>
 </div>
 <div class="sect2">
-<h3 id="query"><a class="link" href="#query">Query</a></h3>
+<h3 id="query_deprecated"><a class="link" href="#query_deprecated">Query (deprecated)</a></h3>
 <div class="paragraph">
 <p>There is a <code>query</code> field underneath <code>guillotine</code> which allows you to search the system for what you want. This field accepts a number of optional, named arguments to help you find exactly what you&#8217;re looking for. These arguments are:</p>
 </div>
@@ -1002,7 +1002,7 @@ To learn more about queryDSL capabilities, visit the <a href="https://developer.
 <p>Missy Elliot: 1971-07-01</p>
 </li>
 <li>
-<p>Cardi B.: 1992-10-11</p>
+<p>Cardi B: 1992-10-11</p>
 </li>
 </ul>
 </div>
@@ -1176,7 +1176,7 @@ To learn more about queryDSL capabilities, visit the <a href="https://developer.
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2023-11-03 12:57:54 UTC
+Last updated 2023-11-06 23:07:34 UTC
 </div>
 </div>
 </body>
