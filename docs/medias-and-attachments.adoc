@@ -191,8 +191,15 @@ To get the resource URL of media you have uploaded, use the `mediaUrl` property 
 ----
 {
   guillotine {
-    query(
-      contentTypes: "media:image"
+    queryDsl(
+      query: {
+        term: {
+          field: "type",
+          value: {
+            string: "media:image"
+          }
+        }
+      }
     ) {
       displayName
       ... on media_Image { // <1>
@@ -212,7 +219,7 @@ To get the resource URL of media you have uploaded, use the `mediaUrl` property 
 {
   "data": {
     "guillotine": {
-      "query": [
+      "queryDsl": [
         {
           "displayName": "keyur-nandaniya-8oLnCRz7hwM-unsplash",
           "mediaUrl": "/admin/site/preview/my-first-project/draft/_/attachment/inline/21f827e0-ba57-4824-b3bc-f101ae08568b:9475135781b315daad078d91c27746bc3222d024/keyur-nandaniya-8oLnCRz7hwM-unsplash.jpg"
@@ -242,8 +249,15 @@ For instance, we could get all the images under the `images` folder, scaled to 6
 ----
 {
   guillotine {
-    query(
-      contentTypes: "media:image"
+    queryDsl(
+      query: {
+        term: {
+          field: "type",
+          value: {
+            string: "media:image"
+          }
+        }
+      }
     ) {
       displayName
       ... on media_Image {
@@ -270,7 +284,7 @@ The above query should return a response that looks a little something like this
 {
   "data": {
     "guillotine": {
-      "query": [
+      "queryDsl": [
         {
           "displayName": "keyur-nandaniya-8oLnCRz7hwM-unsplash",
           "imageUrl": "http://localhost:8080/admin/site/preview/my-first-project/draft/_/image/21f827e0-ba57-4824-b3bc-f101ae08568b:6d89657e4bfae6eaa62de22bd6fb63b2697f091d/block-600-700/keyur-nandaniya-8oLnCRz7hwM-unsplash.jpg?filter=grayscale%28%29%3B+border%2810%2C+0x000000%29"

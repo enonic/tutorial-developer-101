@@ -295,9 +295,30 @@ Getting item sets via GraphQL is not much different than anything else we've see
 ----
 {
   guillotine {
-    query(
-      contentTypes:"{project-name-full}:{content-type-1}",
-      query: "displayName = 'Cardi B'"
+    queryDsl(
+      query: {
+        boolean: {
+          must: [
+            {
+              term: {
+                field: "type",
+                value: {
+                  string: "{project-name-full}:{content-type-1}"
+                }
+              }
+            },
+            {
+              term: {
+                field: "displayName",
+                value: {
+                  string: "Cardi B"
+                }
+              }
+            }
+          ]
+        }
+        
+      }
     ) {
       displayName
       ... on {project-name-query}_{content-type-1-capitalized} {
@@ -321,7 +342,7 @@ With some data added for Cardi B, you'd get a result like this:
 {
   "data": {
     "guillotine": {
-      "query": [
+      "queryDsl": [
         {
           "displayName": "Cardi B",
           "data": {
@@ -372,9 +393,30 @@ When fetching option set data, you can get the list of currently selected items 
 ----
 {
   guillotine {
-    query(
-      contentTypes:"{project-name-full}:{content-type-2}",
-      query: "displayName = 'Lion'"
+    queryDsl(
+      query: {
+        boolean: {
+          must: [
+            {
+              term: {
+                field: "type",
+                value: {
+                  string: "{project-name-full}:{content-type-2}"
+                }
+              }
+            },
+            {
+              term: {
+                field: "displayName",
+                value: {
+                  string: "Lion"
+                }
+              }
+            }
+          ]
+        }
+        
+      }
     ) {
       displayName
       ... on {project-name-query}_{content-type-2-capitalized} {
@@ -408,7 +450,7 @@ When fetching option set data, you can get the list of currently selected items 
 {
   "data": {
     "guillotine": {
-      "query": [
+      "queryDsl": [
         {
           "displayName": "Lion",
           "data": {

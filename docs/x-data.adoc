@@ -68,9 +68,30 @@ Use the following query to quickly access all x-data fields in your content.
 ----
 {
   guillotine {
-    query(
-      query: "displayName = 'Lynx'", 
-      contentTypes:["{project-name-full}:{content-type-2}"]
+    queryDsl(
+      query: {
+        boolean: {
+          must: [
+            {
+              term: {
+                field: "type",
+                value: {
+                  string: "{project-name-full}:{content-type-2}"
+                }
+              }
+            },
+            {
+              term: {
+                field: "displayName",
+                value: {
+                  string: "Lynx"
+                }
+              }
+            }
+          ]
+        }
+        
+      }
     ) {
       displayName
       xAsJson
@@ -87,7 +108,7 @@ If you've added any values to your Lynx's Notes X-data fields, this is what you 
 {
   "data": {
     "guillotine": {
-      "query": [
+      "queryDsl": [
         {
           "displayName": "Lynx",
           "xAsJson": {
@@ -116,9 +137,30 @@ Should you require specific fields only, or wish to drill into more details, for
 ----
 {
   guillotine {
-    query(
-      query: "displayName = 'Lynx'", 
-      contentTypes:["{project-name-full}:{content-type-2}"]
+    queryDsl(
+      query: {
+        boolean: {
+          must: [
+            {
+              term: {
+                field: "type",
+                value: {
+                  string: "{project-name-full}:{content-type-2}"
+                }
+              }
+            },
+            {
+              term: {
+                field: "displayName",
+                value: {
+                  string: "Lynx"
+                }
+              }
+            }
+          ]
+        }
+        
+      }
     ) {
       displayName
       x {

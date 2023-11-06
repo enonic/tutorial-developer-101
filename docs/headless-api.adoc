@@ -159,9 +159,9 @@ image::query-playground-artists-dataAsJson.png[Query playground query returning 
 
 == Advanced queries
 
-We'll now introduce and show examples of usaged of three different fields underneath `guillotine` field, that allos us to search the system for specific data.
+We'll now introduce and show examples of usaged of three different fields underneath `guillotine` field, that allow us to search the system for specific data.
 
-=== Query
+=== Query (deprecated)
 
 There is a `query` field underneath `guillotine` which allows you to search the system for what you want. This field accepts a number of optional, named arguments to help you find exactly what you're looking for. These arguments are:
 
@@ -323,7 +323,7 @@ To finish this {document}, we'll add a new _birthyear_ field to the artist conte
 
 - P!nk: 1979-09-08
 - Missy Elliot: 1971-07-01
-- Cardi B.: 1992-10-11
+- Cardi B: 1992-10-11
 
 . Go back to Query playground and click on the _re-fetch schema button_. This will update the Artist data schema to contain the birthday structure, which is in sync with the Artist content type structure
 

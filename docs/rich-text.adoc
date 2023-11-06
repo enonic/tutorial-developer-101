@@ -226,8 +226,16 @@ The following query returns the "Lynx" content, and the `description` field al p
 ----
 {
   guillotine {
-    query(query: "displayName = 'Lynx'")
-     {
+    queryDsl(
+      query: {
+        term: {
+          field: "displayName",
+          value: {
+            string: "Lynx"
+          }
+        }
+      }
+    ) {
       ... on {project-name-query}_{content-type-2-Capitalized} {
         data {
           description {
@@ -246,7 +254,7 @@ The following query returns the "Lynx" content, and the `description` field al p
 {
   "data": {
     "guillotine": {
-      "query": [
+      "queryDsl": [
         {
           "data": {
             "description": {
@@ -298,8 +306,16 @@ To acccess these details, you need to extend your query with the links field:
 ----
 {
   guillotine {
-    query(query: "displayName = 'Lynx'")
-     {
+    queryDsl(
+      query: {
+        term: {
+          field: "displayName",
+          value: {
+            string: "Lynx"
+          }
+        }
+      }
+    ) {
       ... on {project-name-query}_{content-type-2-Capitalized} {
         data {
           description {
@@ -359,7 +375,16 @@ If you want to optimize how fast images load on various devices, Guillotine can 
 ----
 {
   guillotine {
-    query(query: "displayName = 'Lynx'") {
+    queryDsl(
+      query: {
+        term: {
+          field: "displayName",
+          value: {
+            string: "Lynx"
+          }
+        }
+      }
+    ) {
       ... on {project-name-query}_{content-type-2-Capitalized} {
         data {
           description(processHtml: {imageWidths: [200, 500]}) {
@@ -395,7 +420,16 @@ If you prefer to handle all details related to images yourself, or optimize the 
 ----
 {
   guillotine {
-    query(query: "displayName = 'Lynx'") {
+    queryDsl(
+      query: {
+        term: {
+          field: "displayName",
+          value: {
+            string: "Lynx"
+          }
+        }
+      }
+    ) {
       ... on {project-name-query}_{content-type-2-Capitalized} {
         data {
           description {
@@ -443,8 +477,16 @@ In the processed HTML, each macro is represented by an `<editor-macro>` element 
 ----
 {
   guillotine {
-    query(query: "displayName = 'Lynx'")
-     {
+    queryDsl(
+      query: {
+        term: {
+          field: "displayName",
+          value: {
+            string: "Lynx"
+          }
+        }
+      }
+    ) {
       ... on {project-name-query}_{content-type-2-Capitalized} {
         data {
           description {
@@ -487,8 +529,16 @@ NOTE: If you used a different macro than the "Embed iframe" macro, the query mus
 ----
 {
   guillotine {
-    query(query: "displayName = 'Lynx'")
-     {
+    queryDsl(
+      query: {
+        term: {
+          field: "displayName",
+          value: {
+            string: "Lynx"
+          }
+        }
+      }
+    ) {
       ... on {project-name-query}_{content-type-2-Capitalized} {
         data {
           description {

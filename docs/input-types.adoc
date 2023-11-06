@@ -284,7 +284,7 @@ TIP: Don't worry if something did not work, we'll show the solutions on the next
 
 === GraphQL query
 
-Finally, it's time to introduce the grapqh in GraphQL. 
+Finally, it's time to introduce the query in GraphQL. 
 
 A ContentSelector input will store a reference to the target content item. When using the Guillotine API, you may simply follow this reference to access the target content, and access it's fields instantly. 
 
