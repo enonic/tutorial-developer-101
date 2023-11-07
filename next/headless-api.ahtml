@@ -452,8 +452,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 </li>
 <li><a href="#advanced_queries">Advanced queries</a>
 <ul class="sectlevel2">
-<li><a href="#query_deprecated">Query (deprecated)</a></li>
-<li><a href="#querydsl">QueryDSL</a></li>
+<li><a href="#querydsl">QueryDsl</a></li>
 <li><a href="#querydslconnection">QueryDslConnection</a></li>
 </ul>
 </li>
@@ -472,18 +471,6 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 </div>
 <div class="paragraph">
 <p>In order to do that we&#8217;ll introduce <em>Guillotine</em>, the app that&#8217;s responsible for automatically generating GraphQL APIs for your content.</p>
-</div>
-<div class="admonitionblock note">
-<table>
-<tr>
-<td class="icon">
-<i class="fa icon-note" title="Note"></i>
-</td>
-<td class="content">
-If you are not interested in using Enonic in headless mode, you can skip to the next chapter, in which the standard way of using XP will be introduced.
-</td>
-</tr>
-</table>
 </div>
 </div>
 </div>
@@ -754,53 +741,50 @@ Note that this matches the structure defined by the Artist content type, which i
 <h2 id="advanced_queries"><a class="link" href="#advanced_queries">Advanced queries</a></h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>We&#8217;ll now introduce and show examples of usaged of three different fields underneath <code>guillotine</code> field, that allow us to search the system for specific data.</p>
+<p>We&#8217;ll now introduce and show examples of usages of different fields underneath the <code>guillotine</code> field, that allow us to search the system for specific data.</p>
 </div>
 <div class="sect2">
-<h3 id="query_deprecated"><a class="link" href="#query_deprecated">Query (deprecated)</a></h3>
+<h3 id="querydsl"><a class="link" href="#querydsl">QueryDsl</a></h3>
 <div class="paragraph">
-<p>There is a <code>query</code> field underneath <code>guillotine</code> which allows you to search the system for what you want. This field accepts a number of optional, named arguments to help you find exactly what you&#8217;re looking for. These arguments are:</p>
+<p>There is a <code>queryDsl</code> field underneath <code>guillotine</code> which allows you to search the system for what you want (the "Dsl" stands for "Domain Specific Language").</p>
+</div>
+<div class="paragraph">
+<p>The syntax is based on two types of operators: <code>Expressions</code> and <code>Compound</code>.</p>
 </div>
 <div class="dlist">
 <dl>
-<dt class="hdlist1"><code>contentTypes</code></dt>
+<dt class="hdlist1"><code>Expression</code></dt>
 <dd>
-<p>The content types we&#8217;re looking for. Can either be a lone string if you&#8217;re looking for a single content type, or a list if you want to search among multiple types.</p>
+<p>Used to check particular fields for various native and analysed values.</p>
 </dd>
-<dt class="hdlist1"><code>filters</code></dt>
+<dt class="hdlist1"><code>Compound</code></dt>
 <dd>
-<p>A list of filters to apply to the results after the query has been executed. We won&#8217;t get into them here, so if you want to learn more about them, head to the <a href="https://developer.enonic.com/docs/xp/stable/storage/filters">filters documentation</a>.</p>
-</dd>
-<dt class="hdlist1"><code>first</code></dt>
-<dd>
-<p>Specify how many nodes you want at most in your result. If your query yields a list of results, you can specify that you only want the first <code>n</code> results, where <code>n</code> is a positive integer. Works well in concert with offset.</p>
-</dd>
-<dt class="hdlist1"><code>offset</code></dt>
-<dd>
-<p>Specify how many results you want to cut from the beginning of the list of results. Most commonly used for pagination.</p>
-</dd>
-<dt class="hdlist1"><code>query</code></dt>
-<dd>
-<p>A <a href="https://developer.enonic.com/docs/xp/stable/storage/noql#query">NoQL query</a> string.</p>
-</dd>
-<dt class="hdlist1"><code>sort</code></dt>
-<dd>
-<p>A <a href="https://developer.enonic.com/docs/xp/stable/storage/noql#sort">NoQL sort</a> string.</p>
+<p>Used to logically combine various expressions and compounds to fetch nodes based on complex conditions.</p>
 </dd>
 </dl>
 </div>
 <div class="paragraph">
-<p>For instance, using the data set we&#8217;ve created previously in this guide, we could run a query like this:</p>
+<p>In order to exemplify this field usage on some queries, we&#8217;ll query on the data set we&#8217;ve created so far on in this guide:</p>
 </div>
 <div class="listingblock">
 <div class="title">A Guillotine query using some of the arguments mentioned.</div>
 <div class="content">
 <pre class="highlight"><code class="language-GraphQL" data-lang="GraphQL">{
   guillotine {
-    query(
-      first: 1
-      contentTypes: "com.example.myproject:artist" <i class="conum" data-value="1"></i><b>(1)</b>
-      sort: "displayName desc"
+    queryDsl(
+      query: {
+        term: {
+          field: "type",
+          value: {
+            string: "com.example.myproject:artist"
+          }
+        }
+      },
+      first: 1,
+      sort: {
+        field: "displayName",
+        direction: DESC
+      }
     ) {
       _id
       displayName
@@ -809,33 +793,42 @@ Note that this matches the structure defined by the Artist content type, which i
 }</code></pre>
 </div>
 </div>
-<div class="colist arabic">
-<table>
-<tr>
-<td><i class="conum" data-value="1"></i><b>1</b></td>
-<td>To query for multiple types, enclose them in square brackets and separate them with commas.</td>
-</tr>
-</table>
+<div class="paragraph">
+<p>Note that this query is getting the last artist that is alphabetically sorted by name, regardless of where the content type is located in the tree structure.</p>
 </div>
 <div class="paragraph">
-<p>Note now that this query is getting the last artist that is alphabetically sorted by name, regardless of where the content type is located in the tree structure.</p>
-</div>
-<div class="paragraph">
-<p>To perform a more advanced query, you can use the <code>query</code> argument.</p>
-</div>
-<div class="paragraph">
-<p>The following GraphQL query uses the <a href="https://developer.enonic.com/docs/xp/stable/storage/noql#ngram">n-gram query functionality</a> to find all the artists that have a term (part of a text) that starts with <code>rap</code> somewhere in their data.</p>
+<p>The following GraphQL query uses the <a href="https://developer.enonic.com/docs/xp/stable/storage/dsl#ngram">n-gram functionality</a> to find all the artists that have a term (part of a text) that starts with <code>rap</code> somewhere in their data:</p>
 </div>
 <div class="listingblock">
 <div class="title">A Guillotine query using <em>nGram</em> search functionality</div>
 <div class="content">
 <pre class="highlight"><code class="language-GraphQL" data-lang="GraphQL">{
   guillotine {
-    query(
-      contentTypes: "com.example.myproject:artist"
-      query: "ngram('_allText', 'rap')"
-      sort: "displayName asc"
+    queryDsl(
+      query: {
+        boolean: {
+          must: [
+            {
+              term: {
+                field: "type",
+                value: {
+                  string: "com.example.myproject:artist"
+                }
+              },
+              ngram: {
+                fields: ["_allText"],
+                query: "rap"
+              }
+            }
+          ]
+        }
+      },
+      sort: {
+        field: "displayName",
+        direction: DESC
+      }
     ) {
+      _id
       displayName
     }
   }
@@ -850,77 +843,39 @@ Note that this matches the structure defined by the Artist content type, which i
 <div class="content">
 <pre class="highlight"><code class="language-GraphQL" data-lang="GraphQL">{
   guillotine {
-    query(
-      contentTypes: "com.example.myproject:artist"
-      query: "ngram('_allText', 'rap') AND ngram('_allText', 'sing')"
-      sort: "displayName asc"
-    ) {
-      displayName
-    }
-  }
-}</code></pre>
-</div>
-</div>
-<div class="admonitionblock tip">
-<table>
-<tr>
-<td class="icon">
-<i class="fa icon-tip" title="Tip"></i>
-</td>
-<td class="content">
-To learn more about query capabilities, visit the <a href="https://developer.enonic.com/docs/xp/stable/storage/noql">NoQl reference</a>
-</td>
-</tr>
-</table>
-</div>
-</div>
-<div class="sect2">
-<h3 id="querydsl"><a class="link" href="#querydsl">QueryDSL</a></h3>
-<div class="paragraph">
-<p>Just like there is a <code>query</code> field underneath <code>guillotine</code>, the API also provides other fields such as <code>queryConnection</code>, <code>queryDsl</code> and <code>queryDslConnection</code>.</p>
-</div>
-<div class="paragraph">
-<p>We&#8217;ll not go into much details, but basically, the fields with <em>connection</em> in their name have new parameters for aggregating data, whereas in the fields with <em>dsl</em> (doman specific language), the query argument is not a string but Guillotine own specific DSL.</p>
-</div>
-<div class="paragraph">
-<p>To make it clear, we&#8217;ll rewrite the last query that used <code>ngram</code> using the queryDsl field:</p>
-</div>
-<div class="listingblock">
-<div class="title">Querying for artists who both rap and sing, using queryDsl</div>
-<div class="content">
-<pre class="highlight"><code class="language-GraphQL" data-lang="GraphQL">{
-  guillotine {
     queryDsl(
       query: {
         boolean: {
-          must: {
-            term: {
-              field: "type"
-              value: {
-                string: "com.example.myproject:artist"
+          must: [
+            {
+              term: {
+                field: "type",
+                value: {
+                  string: "com.example.myproject:artist"
+                }
+              }
+            },
+            {
+              ngram: {
+                fields: "data.about"
+                query: "rap sing"
+                operator: AND
               }
             }
-            ngram: {
-          		fields: "data.about"
-          		query: "rap sing"
-              operator: AND
-            }
-          }
+          ]
         }
-      }
+      },
       sort: {
-        field: "displayName"
-        direction: ASC
+        field: "displayName",
+        direction: DESC
       }
     ) {
+      _id
       displayName
     }
   }
 }</code></pre>
 </div>
-</div>
-<div class="paragraph">
-<p>As expected, the results from this and the previous query must match, since we&#8217;re essentially doing the same, but with <code>queryDsl</code> it is unlikely we&#8217;ll create invalid queries, since we are using a fixed structure rather than a string.</p>
 </div>
 <div class="admonitionblock note">
 <table>
@@ -949,6 +904,12 @@ To learn more about queryDSL capabilities, visit the <a href="https://developer.
 </div>
 <div class="sect2">
 <h3 id="querydslconnection"><a class="link" href="#querydslconnection">QueryDslConnection</a></h3>
+<div class="paragraph">
+<p>Just like there is a <code>queryDsl</code> field underneath <code>guillotine</code>, the API also provides other fields such as <code>queryDslConnection</code>.</p>
+</div>
+<div class="paragraph">
+<p>We&#8217;ll not go into much details, but basically, the fields with <em>connection</em> in their name have new parameters for aggregating data.</p>
+</div>
 <div class="paragraph">
 <p>To finish this chapter, we&#8217;ll add a new <em>birthyear</em> field to the artist content type, update all artist to have data on this field, and then use <code>queryDslConnection</code> field to get aggregated data. Let&#8217;s get to work!</p>
 </div>
@@ -1176,7 +1137,7 @@ To learn more about queryDSL capabilities, visit the <a href="https://developer.
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2023-11-06 23:07:34 UTC
+Last updated 2023-11-07 20:09:58 UTC
 </div>
 </div>
 </body>
