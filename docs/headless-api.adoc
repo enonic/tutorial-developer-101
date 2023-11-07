@@ -8,8 +8,6 @@ Now that we've created some content, let's see how we can access and use it in v
 
 In order to do that we'll introduce _Guillotine_, the app that's responsible for automatically generating GraphQL APIs for your content.
 
-NOTE: If you are not interested in using Enonic in headless mode, you can skip to the next {document}, in which the standard way of using XP will be introduced.
-
 == Installing Guillotine
 
 The first thing you need to do in order to get going is installing the Guillotine application. It is available on https://market.enonic.com/vendors/enonic/guillotine[Enonic Market].
@@ -159,30 +157,38 @@ image::query-playground-artists-dataAsJson.png[Query playground query returning 
 
 == Advanced queries
 
-We'll now introduce and show examples of usaged of three different fields underneath `guillotine` field, that allow us to search the system for specific data.
+We'll now introduce and show examples of usages of different fields underneath the `guillotine` field, that allow us to search the system for specific data.
 
-=== Query (deprecated)
+=== QueryDsl
 
-There is a `query` field underneath `guillotine` which allows you to search the system for what you want. This field accepts a number of optional, named arguments to help you find exactly what you're looking for. These arguments are:
+There is a `queryDsl` field underneath `guillotine` which allows you to search the system for what you want (the "Dsl" stands for "Domain Specific Language").
 
-`contentTypes`:: The content types we're looking for. Can either be a lone string if you're looking for a single content type, or a list if you want to search among multiple types.
-`filters`:: A list of filters to apply to the results after the query has been executed. We won't get into them here, so if you want to learn more about them, head to the https://developer.enonic.com/docs/xp/stable/storage/filters[filters documentation].
-`first`:: Specify how many nodes you want at most in your result. If your query yields a list of results, you can specify that you only want the first `n` results, where `n` is a positive integer. Works well in concert with offset.
-`offset`:: Specify how many results you want to cut from the beginning of the list of results. Most commonly used for pagination.
-`query`:: A https://developer.enonic.com/docs/xp/stable/storage/noql#query[NoQL query] string.
-`sort`:: A https://developer.enonic.com/docs/xp/stable/storage/noql#sort[NoQL sort] string.
+The syntax is based on two types of operators: `Expressions` and `Compound`.
 
-For instance, using the data set we've created previously in this guide, we could run a query like this:
+`Expression`:: Used to check particular fields for various native and analysed values.
+`Compound`:: Used to logically combine various expressions and compounds to fetch nodes based on complex conditions.
+
+In order to exemplify this field usage on some queries, we'll query on the data set we've created so far on in this guide:
 
 .A Guillotine query using some of the arguments mentioned.
 [source,GraphQL,{subs}]
 ----
 {
   guillotine {
-    query(
-      first: 1
-      contentTypes: "{project-name-full}:{content-type-1}" // <1>
-      sort: "displayName desc"
+    queryDsl(
+      query: {
+        term: {
+          field: "type",
+          value: {
+            string: "{project-name-full}:{content-type-1}"
+          }
+        }
+      },
+      first: 1,
+      sort: {
+        field: "displayName",
+        direction: DESC
+      }
     ) {
       _id
       displayName
@@ -191,24 +197,40 @@ For instance, using the data set we've created previously in this guide, we coul
 }
 ----
 
-<1> To query for multiple types, enclose them in square brackets and separate them with commas.
+Note that this query is getting the last artist that is alphabetically sorted by name, regardless of where the content type is located in the tree structure.
 
-Note now that this query is getting the last artist that is alphabetically sorted by name, regardless of where the content type is located in the tree structure.
-
-To perform a more advanced query, you can use the `query` argument. 
-
-The following GraphQL query uses the https://developer.enonic.com/docs/xp/stable/storage/noql#ngram[n-gram query functionality] to find all the {content-type-1}s that have a term (part of a text) that starts with `rap` somewhere in their data.
+The following GraphQL query uses the https://developer.enonic.com/docs/xp/stable/storage/dsl#ngram[n-gram functionality] to find all the {content-type-1}s that have a term (part of a text) that starts with `rap` somewhere in their data:
 
 .A Guillotine query using _nGram_ search functionality
 [source,GraphQL,{subs}]
 ----
 {
   guillotine {
-    query(
-      contentTypes: "{project-name-full}:{content-type-1}"
-      query: "ngram('_allText', 'rap')"
-      sort: "displayName asc"
+    queryDsl(
+      query: {
+        boolean: {
+          must: [
+            {
+              term: {
+                field: "type",
+                value: {
+                  string: "{project-name-full}:{content-type-1}"
+                }
+              },
+              ngram: {
+                fields: ["_allText"],
+                query: "rap"
+              }
+            }
+          ]
+        }
+      },
+      sort: {
+        field: "displayName",
+        direction: DESC
+      }
     ) {
+      _id
       displayName
     }
   }
@@ -222,68 +244,49 @@ Naturally, you can also use the standard boolean operators to combine or negate 
 ----
 {
   guillotine {
-    query(
-      contentTypes: "{project-name-full}:{content-type-1}"
-      query: "ngram('_allText', 'rap') AND ngram('_allText', 'sing')"
-      sort: "displayName asc"
-    ) {
-      displayName
-    }
-  }
-}
-----
-
-TIP: To learn more about query capabilities, visit the https://developer.enonic.com/docs/xp/stable/storage/noql[NoQl reference]
-
-=== QueryDSL
-
-Just like there is a `query` field underneath `guillotine`, the API also provides other fields such as `queryConnection`, `queryDsl` and `queryDslConnection`.
-
-We'll not go into much details, but basically, the fields with _connection_ in their name have new parameters for aggregating data, whereas in the fields with _dsl_ (doman specific language), the query argument is not a string but Guillotine own specific DSL.
-
-To make it clear, we'll rewrite the last query that used `ngram` using the queryDsl field:
-
-.Querying for {content-type-1}s who both rap and sing, using queryDsl
-[source,GraphQL,{subs}]
-----
-{
-  guillotine {
     queryDsl(
       query: {
         boolean: {
-          must: {
-            term: {
-              field: "type"
-              value: {
-                string: "{project-name-full}:{content-type-1}"
+          must: [
+            {
+              term: {
+                field: "type",
+                value: {
+                  string: "{project-name-full}:{content-type-1}"
+                }
+              }
+            },
+            {
+              ngram: {
+                fields: "data.about"
+                query: "rap sing"
+                operator: AND
               }
             }
-            ngram: {
-          		fields: "data.about"
-          		query: "rap sing"
-              operator: AND
-            }
-          }
+          ]
         }
-      }
+      },
       sort: {
-        field: "displayName"
-        direction: ASC
+        field: "displayName",
+        direction: DESC
       }
     ) {
+      _id
       displayName
     }
   }
 }
 ----
-
-As expected, the results from this and the previous query must match, since we're essentially doing the same, but with `queryDsl` it is unlikely we'll create invalid queries, since we are using a fixed structure rather than a string.
 
 NOTE: If you've previously used Elasticsearch API to query data, you'll be quite familiar with how `queryDsl` works!
 
 TIP: To learn more about queryDSL capabilities, visit the https://developer.enonic.com/docs/xp/stable/storage/dsl[DSL reference]
 
 === QueryDslConnection
+
+Just like there is a `queryDsl` field underneath `guillotine`, the API also provides other fields such as `queryDslConnection`.
+
+We'll not go into much details, but basically, the fields with _connection_ in their name have new parameters for aggregating data.
 
 To finish this {document}, we'll add a new _birthyear_ field to the artist content type, update all artist to have data on this field, and then use `queryDslConnection` field to get aggregated data. Let's get to work!
 

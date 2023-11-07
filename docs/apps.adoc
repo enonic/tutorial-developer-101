@@ -30,15 +30,15 @@ For our first app, we'll use the "Vanilla" starter. This starter contains the ba
 
 Here's how to use the CLI to create your first app:
 
-. Make sure you are in the directory in which you want your project to be created and run `enonic project create`;
-. Use kbd:[Up] and kbd:[Down] to navigate between the options and chose the `Vanilla starter`;
-. Keep pressing kbd:[Enter] to continue with the default values for project name, destination folder and project version;
+. Make sure you are in the directory in which you want your project to be created and run `enonic create -r starter-vanilla {project-name}`;
+. The first arugment after `-r` is the starter, ir our case, `starter-vanilla`;
+. The second arugment after `-r` is the name of the folder that will be created containing the structure and the files you'll be working on;
 . Make sure to select the previously created sandbox when asked;
 . Finally, you don't need to open the starter docs for now, so type `N` and press kbd:[Enter].
 
 NOTE: Project names matter. XP does not support running two apps with the same name within a single instance.
 
-If you used the default values as specified in the steps, a directory named `{project-name}/` should have been created during the process. If you used a different project name or project directory name, your directory will have a different name.
+A directory named `{project-name}/` should have been created during the process. If you used a different project name or project directory name, your directory will have a different name.
 
 The project directory contains a fairly minimal XP application. The most relevant parts of the directory are:
 
