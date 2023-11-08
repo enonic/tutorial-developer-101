@@ -147,7 +147,6 @@ You should see the XP boot page:
 
 .XP Boot page
 image::xp-boot.png[The XP boot page, {image-xl}]
-image::xp-boot.png[duck2, width=400]
 The boot page gives an overview of endpoints (as mentioned above) and any other services that may be running on this instance.
 
 Click on _"Login as Guest"_ to move on. You should now see the following:
