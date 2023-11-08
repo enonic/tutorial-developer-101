@@ -14,9 +14,9 @@ The first thing you need to do in order to get going is installing the Guillotin
 
 Fortunately, you can install Guillotine directly from your Enonic XP instance's admin console.
 
-. From the XP menu (top right), choose `Applications`.
+. From the XP menu (top right), choose `Applications`
 . Click kbd:[Install] from the top menu
-. Search for `Guillotine`, and click kbd:[Install]`.
+. Search for `Guillotine`, and click kbd:[Install]
 +
 image::install-guillotine.png[Install Guillotine application dialog, {image-xl}]
 
