@@ -4,24 +4,11 @@ include::.variables.adoc[]
 
 Before we can start building, let's make sure we have the right tools available to start developing efficiently with XP. In general, they are:
 
-- Basic command line (a.k.a _terminal_) knowledge -> _executing commands through text_
 - Enonic CLI -> _managing your XP projects_
 - Git and Github -> _versioning your XP projects_
 - Integrated Development Environment -> _coding your ideas into XP projects_
 
 TIP: If you've already got those configured and installed, feel free to skip to the next {document}.
-
-== The command line
-
-The command line is a powerful, text-based interface for running commands on your computer. You can also use the terminal to navigate your file system, similar to macOS`' Finder or Windows`' Explorer. The program running in the terminal (that interprets your commands) is known as a _shell_.
-
-If you are insecure about basic terminal knowledge, we recommend the following introductory guides (depending on your operating system):
-
-- https://www.macworld.co.uk/how-to/mac-software/how-use-terminal-on-mac-3608274/[macOS]
-- https://www.lifewire.com/how-to-open-command-prompt-2618089[Windows]
-- https://www.howtogeek.com/140679/beginner-geek-how-to-start-using-the-linux-terminal/[Linux]
-
-When we ask you to _"run a command"_ later on in this document, you can assume that we're asking you to run it in a terminal unless otherwise specified.
 
 == The Enonic CLI
 
