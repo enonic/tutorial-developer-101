@@ -455,7 +455,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 </ul>
 </li>
 <li><a href="#attachments">Attachments</a></li>
-<li><a href="#headless_api">Headless API</a>
+<li><a href="#graphql_api">GraphQL API</a>
 <ul class="sectlevel2">
 <li><a href="#general_media_type">General media type</a></li>
 <li><a href="#image_media_type">Image media type</a></li>
@@ -781,7 +781,7 @@ You can read more about <a href="https://enonic.com/blog/enonic-simplifies-image
 </div>
 </div>
 <div class="sect1">
-<h2 id="headless_api"><a class="link" href="#headless_api">Headless API</a></h2>
+<h2 id="graphql_api"><a class="link" href="#graphql_api">GraphQL API</a></h2>
 <div class="sectionbody">
 <div class="paragraph">
 <p>Guillotine makes it easy to fetch the data that you&#8217;ve uploaded.</p>
@@ -1180,7 +1180,7 @@ Under the hood, the <em>attachment</em> field argument <em>attachmentUrl</em> us
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2023-11-07 20:15:36 UTC
+Last updated 2023-11-08 19:28:51 UTC
 </div>
 </div>
 </body>

@@ -462,7 +462,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <li><a href="#task_embed_iframe_macro">Task: Embed iframe macro</a></li>
 </ul>
 </li>
-<li><a href="#headless">Headless</a>
+<li><a href="#graphql_api">GraphQL API</a>
 <ul class="sectlevel2">
 <li><a href="#links_2">Links</a></li>
 <li><a href="#image_srcset">Image srcset</a></li>
@@ -864,10 +864,10 @@ For more information on macros, including how to create your very own, visit to 
 </div>
 </div>
 <div class="sect1">
-<h2 id="headless"><a class="link" href="#headless">Headless</a></h2>
+<h2 id="graphql_api"><a class="link" href="#graphql_api">GraphQL API</a></h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>When fetching rich text via the Guillotine API, the most commonly used output is "processed html". This is essentially unstyled, semantic HTML. It&#8217;s then up to you to style the content in your client.</p>
+<p>When fetching rich text via the API, the most commonly used output is "processed html". This is essentially unstyled, semantic HTML. It&#8217;s then up to you to style the content in your client.</p>
 </div>
 <div class="paragraph">
 <p>Links, images and macros will potentially require additional client-side processing.</p>
@@ -876,7 +876,7 @@ For more information on macros, including how to create your very own, visit to 
 <p>The following query returns the "Lynx" content, and the <code>description</code> field al processed HTML.</p>
 </div>
 <div class="listingblock">
-<div class="title">Fetching rich text via Headless API</div>
+<div class="title">Fetching rich text via GraphQL API</div>
 <div class="content">
 <pre class="highlight"><code class="language-GraphQL" data-lang="GraphQL">{
   guillotine {
@@ -1295,7 +1295,7 @@ If you used a different macro than the "Embed iframe" macro, the query must be u
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2023-11-07 20:15:36 UTC
+Last updated 2023-11-08 19:28:51 UTC
 </div>
 </div>
 </body>

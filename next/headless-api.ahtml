@@ -486,13 +486,13 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <div class="olist arabic">
 <ol class="arabic">
 <li>
-<p>From the XP menu (top right), choose <code>Applications</code>.</p>
+<p>From the XP menu (top right), choose <code>Applications</code></p>
 </li>
 <li>
 <p>Click <kbd>Install</kbd> from the top menu</p>
 </li>
 <li>
-<p>Search for <code>Guillotine</code>, and click <kbd>Install</kbd>`.</p>
+<p>Search for <code>Guillotine</code>, and click <kbd>Install</kbd></p>
 <div class="imageblock">
 <div class="content">
 <img src="media/install-guillotine.png" alt="Install Guillotine application dialog" width="1200">
@@ -908,7 +908,7 @@ To learn more about queryDSL capabilities, visit the <a href="https://developer.
 <p>Just like there is a <code>queryDsl</code> field underneath <code>guillotine</code>, the API also provides other fields such as <code>queryDslConnection</code>.</p>
 </div>
 <div class="paragraph">
-<p>We&#8217;ll not go into much details, but basically, the fields with <em>connection</em> in their name have new parameters for aggregating data.</p>
+<p>We&#8217;ll not go into much details, but basically, the fields with <em>connection</em> in their name have new parameters for aggregating and paginating data.</p>
 </div>
 <div class="paragraph">
 <p>To finish this chapter, we&#8217;ll add a new <em>birthyear</em> field to the artist content type, update all artist to have data on this field, and then use <code>queryDslConnection</code> field to get aggregated data. Let&#8217;s get to work!</p>
@@ -947,11 +947,20 @@ To learn more about queryDSL capabilities, visit the <a href="https://developer.
 &lt;/content-type&gt;</code></pre>
 </div>
 </div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+If are not running the project in dev mode (<code>enonic project dev</code> introduced in the previous $chapter), make sure to run <code>enonic project deploy</code> in the terminal on the project&#8217;s root directory
+</td>
+</tr>
+</table>
+</div>
 <div class="olist arabic">
 <ol class="arabic" start="2">
-<li>
-<p>If are not running the project in dev mode (<code>enonic project dev</code> introduced in the previous $chapter), make sure to run <code>enonic project deploy</code> in the terminal on the project&#8217;s root directory</p>
-</li>
 <li>
 <p>Update each of the previously created artists with the following dates:</p>
 <div class="ulist">
@@ -1137,7 +1146,7 @@ To learn more about queryDSL capabilities, visit the <a href="https://developer.
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2023-11-07 20:15:36 UTC
+Last updated 2023-11-08 19:28:51 UTC
 </div>
 </div>
 </body>

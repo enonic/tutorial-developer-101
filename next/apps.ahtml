@@ -533,16 +533,27 @@ The complete list of starters can be found on <a href="https://market.enonic.com
 <div class="olist arabic">
 <ol class="arabic">
 <li>
-<p>Make sure you are in the directory in which you want your project to be created and run <code>enonic create -r starter-vanilla myproject</code>;</p>
+<p>Make sure you are in the directory in which you want your project to be created and run:</p>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-shell" data-lang="shell">enonic project create --sb tutorial -r starter-vanilla -d myproject -v 1.0.0 -n com.example.myproject</code></pre>
+</div>
+</div>
 </li>
 <li>
-<p>The first arugment after <code>-r</code> is the starter, ir our case, <code>starter-vanilla</code>;</p>
+<p><code>--sb tutorial</code> links this project to the sandbox <code>tutorial</code>;</p>
 </li>
 <li>
-<p>The second arugment after <code>-r</code> is the name of the folder that will be created containing the structure and the files you&#8217;ll be working on;</p>
+<p><code>-r starter-vanilla</code> will create the project using start-vanilla starter as a base template;</p>
 </li>
 <li>
-<p>Make sure to select the previously created sandbox when asked;</p>
+<p><code>-d myproject</code> will create the project in a folder named myproject;</p>
+</li>
+<li>
+<p><code>-v 1.0.0</code> will set the project version to <code>1.0.0</code>;</p>
+</li>
+<li>
+<p><code>-n com.example.myproject</code> will set the project name to com.example.myproject;</p>
 </li>
 <li>
 <p>Finally, you don&#8217;t need to open the starter docs for now, so type <code>N</code> and press <kbd>Enter</kbd>.</p>
@@ -777,7 +788,7 @@ If you had to deploy manually when going through this tutorial, please get in to
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2023-11-07 20:15:36 UTC
+Last updated 2023-11-08 19:28:51 UTC
 </div>
 </div>
 </body>

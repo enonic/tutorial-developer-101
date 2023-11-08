@@ -441,7 +441,6 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <div id="toc" class="toc2">
 <div id="toctitle">Table of Contents</div>
 <ul class="sectlevel1">
-<li><a href="#the_command_line">The command line</a></li>
 <li><a href="#the_enonic_cli">The Enonic CLI</a>
 <ul class="sectlevel2">
 <li><a href="#installation">Installation</a></li>
@@ -468,13 +467,13 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <div id="preamble">
 <div class="sectionbody">
 <div class="paragraph">
-<p>Before we can start building, let&#8217;s make sure we have the right tools available to start developing efficiently with XP. In general, they are:</p>
+<p>The purpose of this chapter is to ensure you have the necessary tools to be able to start developing efficiently with XP, and if that&#8217;s not the case, guide you to setup your local environment for that purpose.</p>
+</div>
+<div class="paragraph">
+<p>In general, the bare minimum you&#8217;ll need are:</p>
 </div>
 <div class="ulist">
 <ul>
-<li>
-<p>Basic command line (a.k.a <em>terminal</em>) knowledge &#8594; <em>executing commands through text</em></p>
-</li>
 <li>
 <p>Enonic CLI &#8594; <em>managing your XP projects</em></p>
 </li>
@@ -482,7 +481,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <p>Git and Github &#8594; <em>versioning your XP projects</em></p>
 </li>
 <li>
-<p>Integrated Development Environment &#8594; <em>coding your ideas into XP projects</em></p>
+<p>Editor / IDE (Integrated Development Environment) &#8594; <em>coding your ideas into XP projects</em></p>
 </li>
 </ul>
 </div>
@@ -497,33 +496,6 @@ If you&#8217;ve already got those configured and installed, feel free to skip to
 </td>
 </tr>
 </table>
-</div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="the_command_line"><a class="link" href="#the_command_line">The command line</a></h2>
-<div class="sectionbody">
-<div class="paragraph">
-<p>The command line is a powerful, text-based interface for running commands on your computer. You can also use the terminal to navigate your file system, similar to macOS&#8217; Finder or Windows&#8217; Explorer. The program running in the terminal (that interprets your commands) is known as a <em>shell</em>.</p>
-</div>
-<div class="paragraph">
-<p>If you are insecure about basic terminal knowledge, we recommend the following introductory guides (depending on your operating system):</p>
-</div>
-<div class="ulist">
-<ul>
-<li>
-<p><a href="https://www.macworld.co.uk/how-to/mac-software/how-use-terminal-on-mac-3608274/">macOS</a></p>
-</li>
-<li>
-<p><a href="https://www.lifewire.com/how-to-open-command-prompt-2618089">Windows</a></p>
-</li>
-<li>
-<p><a href="https://www.howtogeek.com/140679/beginner-geek-how-to-start-using-the-linux-terminal/">Linux</a></p>
-</li>
-</ul>
-</div>
-<div class="paragraph">
-<p>When we ask you to <em>"run a command"</em> later on in this document, you can assume that we&#8217;re asking you to run it in a terminal unless otherwise specified.</p>
 </div>
 </div>
 </div>
@@ -813,7 +785,7 @@ Apple maintains its own fork of Git. If you have XCode installed, you already ha
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2023-11-07 20:15:36 UTC
+Last updated 2023-11-08 19:28:51 UTC
 </div>
 </div>
 </body>

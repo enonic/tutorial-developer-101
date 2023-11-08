@@ -699,11 +699,6 @@ The <code>[&#8230;&#8203;]</code> replaces most of the stack trace for legibilit
 </div>
 <div class="title">Figure 1. XP Boot page</div>
 </div>
-<div class="imageblock">
-<div class="content">
-<img src="media/xp-boot.png" alt="duck2" width="400">
-</div>
-</div>
 <div class="paragraph">
 <p>The boot page gives an overview of endpoints (as mentioned above) and any other services that may be running on this instance.</p>
 </div>
@@ -763,7 +758,7 @@ If things don&#8217;t look exactly the same, don&#8217;t worry&#8230;&#8203; on 
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2023-11-07 20:15:36 UTC
+Last updated 2023-11-08 19:28:51 UTC
 </div>
 </div>
 </body>
