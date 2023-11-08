@@ -286,7 +286,7 @@ TIP: To learn more about queryDSL capabilities, visit the https://developer.enon
 
 Just like there is a `queryDsl` field underneath `guillotine`, the API also provides other fields such as `queryDslConnection`.
 
-We'll not go into much details, but basically, the fields with _connection_ in their name have new parameters for aggregating data.
+We'll not go into much details, but basically, the fields with _connection_ in their name have new parameters for aggregating and paginating data.
 
 To finish this {document}, we'll add a new _birthyear_ field to the artist content type, update all artist to have data on this field, and then use `queryDslConnection` field to get aggregated data. Let's get to work!
 
@@ -319,8 +319,9 @@ To finish this {document}, we'll add a new _birthyear_ field to the artist conte
 </content-type>
 ----
 
+TIP: If are not running the project in dev mode (`enonic project dev` introduced in the previous ${document}), make sure to run `enonic project deploy` in the terminal on the project's root directory
+
 [start=2]
-. If are not running the project in dev mode (`enonic project dev` introduced in the previous ${document}), make sure to run `enonic project deploy` in the terminal on the project's root directory
 
 . Update each of the previously created artists with the following dates:
 

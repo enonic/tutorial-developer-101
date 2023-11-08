@@ -213,15 +213,15 @@ As you'll see in next section, when querying the description of an Animal conten
 
 TIP: For more information on macros, including how to create your very own, visit to https://developer.enonic.com/docs/xp/stable/cms/macros[the macro reference docs].
 
-== Headless
+== GraphQL API
 
-When fetching rich text via the Guillotine API, the most commonly used output is "processed html". This is essentially unstyled, semantic HTML. It's then up to you to style the content in your client.
+When fetching rich text via the API, the most commonly used output is "processed html". This is essentially unstyled, semantic HTML. It's then up to you to style the content in your client.
 
 Links, images and macros will potentially require additional client-side processing.
 
 The following query returns the "Lynx" content, and the `description` field al processed HTML.
 
-.Fetching rich text via Headless API
+.Fetching rich text via GraphQL API
 [source,GraphQL,{subs}]
 ----
 {

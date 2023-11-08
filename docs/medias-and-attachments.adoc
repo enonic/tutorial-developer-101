@@ -175,7 +175,7 @@ With that, we have not only enhanced the Artist content type with a new structur
 
 On the next section we'll show how we can retrieve this information through queries.
 
-== Headless API
+== GraphQL API
 
 Guillotine makes it easy to fetch the data that you've uploaded. 
 
