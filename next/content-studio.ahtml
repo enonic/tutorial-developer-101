@@ -547,7 +547,7 @@ Privileged users can manage projects via Content Studio settings.
 <p>Therefore, if we want to enable Content Studio to manage a specific type of content, we need to access content studio in a project which has an app assigned to it, and in this app, this specific content should defined via a content type.</p>
 </div>
 <div class="paragraph">
-<p>With all this in mind, let&#8217;s now assign the previously created app to your first project:</p>
+<p>With all this in mind, note that one of the last steps on the previous creation wizard was to assign your app to the project. If you followed along, you should have your app assigned to the your first project, and in case you missed it, no worries, let&#8217;s assign it to the created project:</p>
 </div>
 <div class="olist arabic">
 <ol class="arabic">
@@ -758,14 +758,17 @@ XP&#8217;s <code>input</code> elements are <em>not</em> the same as HTML <code>i
 <pre class="highlight"><code class="language-shell" data-lang="shell">  enonic project dev</code></pre>
 </div>
 </div>
-<div class="admonitionblock note">
+<div class="paragraph">
+<p>This command will watch changes under <code>myproject/</code> and redeploy as needed.</p>
+</div>
+<div class="admonitionblock tip">
 <table>
 <tr>
 <td class="icon">
-<i class="fa icon-note" title="Note"></i>
+<i class="fa icon-tip" title="Tip"></i>
 </td>
 <td class="content">
-This command will watch changes under <code>myproject/</code> and redeploy as needed. Make sure you&#8217;re already running your sandbox with the <code>--dev</code> flag in another terminal, otherwise running enonic project dev will start the sandbox in detached mode, so you&#8217;ll lose logs. More on cli&#8217;s dev command <a href="https://developer.enonic.com/docs/enonic-cli/stable/dev#dev">here</a>.
+Make sure you&#8217;re already running your sandbox with the <code>--dev</code> flag in another terminal, otherwise running enonic project dev will start the sandbox in detached mode, so you&#8217;ll lose logs. More on cli&#8217;s dev command <a href="https://developer.enonic.com/docs/enonic-cli/stable/dev#dev">here</a>.
 </td>
 </tr>
 </table>
@@ -1084,7 +1087,7 @@ You can also publish a piece of content by using the keyboard shortcut <span cla
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2023-11-08 19:28:51 UTC
+Last updated 2023-11-09 14:32:58 UTC
 </div>
 </div>
 </body>

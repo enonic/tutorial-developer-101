@@ -545,74 +545,97 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 </div>
 <div class="title">Figure 1. Results of running the suggested query</div>
 </div>
-<div class="paragraph">
-<p>Before trying to come up with complex queries, let&#8217;s make familiarize ourselves with Query Playground.</p>
-</div>
 <div class="sect2">
 <h3 id="basic_buttons"><a class="link" href="#basic_buttons">Basic buttons</a></h3>
-<div class="imageblock text-center">
-<div class="content">
-<img src="media/query-playground-buttons-1-to-4.png" alt="Query playground buttons labelled from 1 to 4 for further detailing" width="100">
-</div>
-</div>
 <div class="olist arabic">
-<ol class="arabic">
+<ol class="arabic" start="0">
+<li>
+<p>Before trying to come up with complex queries, let&#8217;s make familiarize ourselves with Query Playground.</p>
+<div class="imageblock">
+<div class="content">
+<img src="media/query-playground-button-1.png" alt="Query playground play button" width="75">
+</div>
+</div>
+</li>
 <li>
 <p><em>play button</em>, will execute your query. Shortcut is <span class="keyseq"><kbd>ctrl</kbd>+<kbd>enter</kbd></span></p>
+<div class="imageblock">
+<div class="content">
+<img src="media/query-playground-button-2.png" alt="Query playground prettify button" width="75">
+</div>
+</div>
 </li>
 <li>
 <p><em>prettify button</em>, will properly format your query, removing comments and unecessary spaces / indentation. Shortcut is <span class="keyseq"><kbd>ctl</kbd>+<kbd>shift</kbd>+<kbd>p</kbd></span></p>
+<div class="imageblock">
+<div class="content">
+<img src="media/query-playground-button-3.png" alt="Query playground merge button" width="75">
+</div>
+</div>
 </li>
 <li>
 <p><em>merge fragments button</em>, will rewrite your query based on the declared <a href="https://graphql.org/learn/queries/#fragments">fragments</a>. Shortcut is <span class="keyseq"><kbd>ctl</kbd>+<kbd>shift</kbd>+<kbd>m</kbd></span></p>
+<div class="imageblock">
+<div class="content">
+<img src="media/query-playground-button-4.png" alt="Query playground copy button" width="75">
+</div>
+</div>
 </li>
 <li>
 <p><em>copy button</em>, will copy your query to your clipboard. Shortcut is <span class="keyseq"><kbd>ctl</kbd>+<kbd>shift</kbd>+<kbd>c</kbd></span></p>
-</li>
-</ol>
-</div>
-<div class="imageblock text-center">
+<div class="imageblock">
 <div class="content">
-<img src="media/query-playground-buttons-5-and-6.png" alt="Query playground buttons labelled as 5 and 6 for further detailing" width="50">
+<img src="media/query-playground-button-5.png" alt="Query playground docs button" width="75">
 </div>
 </div>
-<div class="olist arabic">
-<ol class="arabic" start="5">
+</li>
 <li>
 <p><em>docs button</em>, will open a section showing all details about the schemas you have avaiable to use and query on</p>
+<div class="imageblock">
+<div class="content">
+<img src="media/query-playground-button-6.png" alt="Query playground history button" width="75">
+</div>
+</div>
 </li>
 <li>
 <p><em>history button</em>, will open a section showing all previously executed queries</p>
-</li>
-</ol>
-</div>
-<div class="imageblock text-center">
+<div class="imageblock">
 <div class="content">
-<img src="media/query-playground-buttons-7-and-8.png" alt="Query playground buttons labelled as 7 and 8 for further detailing" width="200">
+<img src="media/query-playground-button-7.png" alt="Query playground tab button" width="75">
 </div>
 </div>
-<div class="olist arabic">
-<ol class="arabic" start="7">
+</li>
 <li>
 <p><em>tab button</em>, will create new tabs for you to manage testing multiple queries</p>
+<div class="imageblock">
+<div class="content">
+<img src="media/query-playground-button-8.png" alt="Query playground draft and master buttons" width="200">
+</div>
+</div>
 </li>
 <li>
 <p><em>draft / master buttons</em> will switch between those two repositories for your queries to run on</p>
-</li>
-</ol>
-</div>
-<div class="imageblock text-center">
+<div class="imageblock">
 <div class="content">
-<img src="media/query-playground-buttons-9-to-11.png" alt="Query playground buttons labelled as 9 to 11 for further detailing" width="50">
+<img src="media/query-playground-button-9.png" alt="Query playground re-fetch button" width="75">
 </div>
 </div>
-<div class="olist arabic">
-<ol class="arabic" start="9">
+</li>
 <li>
 <p><em>re-fetch schema button</em>, will update your graphql schemas based on recent changes</p>
+<div class="imageblock">
+<div class="content">
+<img src="media/query-playground-button-10.png" alt="Query playground shortkeys button" width="75">
+</div>
+</div>
 </li>
 <li>
 <p><em>shortkeys button</em>, will open a dialog displaying all short keys that can be used to execute actions</p>
+<div class="imageblock">
+<div class="content">
+<img src="media/query-playground-button-11.png" alt="Query playground settings button" width="75">
+</div>
+</div>
 </li>
 <li>
 <p><em>settings button</em>, will open settings dialog</p>
@@ -1146,7 +1169,7 @@ If are not running the project in dev mode (<code>enonic project dev</code> intr
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2023-11-08 19:28:51 UTC
+Last updated 2023-11-09 14:32:58 UTC
 </div>
 </div>
 </body>
