@@ -51,34 +51,55 @@ After running, you should get something like this on the right area:
 image::query-playground-artists-minimal.png[Query playground response of running mimimal query to retrieve artists, {image-xl}]
 
 
-Before trying to come up with complex queries, let's make familiarize ourselves with Query Playground.
+
 
 === Basic buttons
 
-image::query-playground-buttons-1-to-4.png[Query playground buttons labelled from 1 to 4 for further detailing, width=100, align=center]
+[start=0]
+. Before trying to come up with complex queries, let's make familiarize ourselves with Query Playground.
 
++
+image::query-playground-button-1.png[Query playground play button, width=75]
 . _play button_, will execute your query. Shortcut is kbd:[ctrl+enter]
+
++
+image::query-playground-button-2.png[Query playground prettify button, width=75]
 . _prettify button_, will properly format your query, removing comments and unecessary spaces / indentation. Shortcut is kbd:[ctl+shift+p]
+
++
+image::query-playground-button-3.png[Query playground merge button, width=75]
 . _merge fragments button_, will rewrite your query based on the declared https://graphql.org/learn/queries/#fragments[fragments]. Shortcut is kbd:[ctl+shift+m] 
+
++
+image::query-playground-button-4.png[Query playground copy button, width=75]
 . _copy button_, will copy your query to your clipboard. Shortcut is kbd:[ctl+shift+c]
 
-image::query-playground-buttons-5-and-6.png[Query playground buttons labelled as 5 and 6 for further detailing, width=50, align=center]
-
-[start=5]
++
+image::query-playground-button-5.png[Query playground docs button, width=75]
 . _docs button_, will open a section showing all details about the schemas you have avaiable to use and query on
+
++
+image::query-playground-button-6.png[Query playground history button, width=75]
 . _history button_, will open a section showing all previously executed queries
 
-image::query-playground-buttons-7-and-8.png[Query playground buttons labelled as 7 and 8 for further detailing, width=200, align=center]
-
-[start=7]
++
+image::query-playground-button-7.png[Query playground tab button, width=75]
 . _tab button_, will create new tabs for you to manage testing multiple queries
+
++
+image::query-playground-button-8.png[Query playground draft and master buttons, width=200]
 . _draft / master buttons_ will switch between those two repositories for your queries to run on
 
-image::query-playground-buttons-9-to-11.png[Query playground buttons labelled as 9 to 11 for further detailing, width=50, align=center]
-
-[start=9]
++
+image::query-playground-button-9.png[Query playground re-fetch button, width=75]
 . _re-fetch schema button_, will update your graphql schemas based on recent changes
+
++
+image::query-playground-button-10.png[Query playground shortkeys button, width=75]
 . _shortkeys button_, will open a dialog displaying all short keys that can be used to execute actions
+
++
+image::query-playground-button-11.png[Query playground settings button, width=75]
 . _settings button_, will open settings dialog
 
 === Schemas
