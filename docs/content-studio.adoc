@@ -40,7 +40,7 @@ Content is defined through content types (a concept we'll introduce in the next 
 
 Therefore, if we want to enable Content Studio to manage a specific type of content, we need to access content studio in a project which has an app assigned to it, and in this app, this specific content should defined via a content type.
 
-With all this in mind, let's now assign the previously created app to your first project:
+With all this in mind, note that one of the last steps on the previous creation wizard was to assign your app to the project. If you followed along, you should have your app assigned to the your first project, and in case you missed it, no worries, let's assign it to the created project:
 
 . On the green widget sidebar, click on settings
 . Double click on the project you just created to edit it
@@ -138,7 +138,9 @@ NOTE: XP's `input` elements are _not_ the same as HTML `input` elements. To read
   enonic project dev
 ----
 
-NOTE: This command will watch changes under `{project-name}/` and redeploy as needed. Make sure you're already running your sandbox with the `--dev` flag in another terminal, otherwise running enonic project dev will start the sandbox in detached mode, so you'll lose logs. More on cli's dev command https://developer.enonic.com/docs/enonic-cli/stable/dev#dev[here]. 
+This command will watch changes under `{project-name}/` and redeploy as needed.
+
+TIP:  Make sure you're already running your sandbox with the `--dev` flag in another terminal, otherwise running enonic project dev will start the sandbox in detached mode, so you'll lose logs. More on cli's dev command https://developer.enonic.com/docs/enonic-cli/stable/dev#dev[here]. 
 
 If everything goes well, you should see your sandbox logs update now. And that's the basics of creating new content types. 
 
