@@ -5,8 +5,8 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="generator" content="Asciidoctor 2.0.20">
-<meta name="description" content="What is a headless CMS without an API? Learn about the Guillotine library and the powers it unlocks here!">
-<title>Headless API</title>
+<meta name="description" content="What is a headless CMS without an API? Learn about the Guillotine library and the powers it unlocks here.">
+<title>GraphQL API</title>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,300italic,400,400italic,600,600italic%7CNoto+Serif:400,400italic,700,700italic%7CDroid+Sans+Mono:400,700">
 <style>
 /*! Asciidoctor default stylesheet | MIT License | https://asciidoctor.org */
@@ -437,20 +437,26 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 </head>
 <body class="article toc2 toc-right">
 <div id="header">
-<h1>Headless API</h1>
+<h1>GraphQL API</h1>
 <div id="toc" class="toc2">
 <div id="toctitle">Table of Contents</div>
 <ul class="sectlevel1">
 <li><a href="#installing_guillotine">Installing Guillotine</a></li>
-<li><a href="#query_playground">Query playground</a></li>
-<li><a href="#guillotine_queries">Guillotine queries</a></li>
-<li><a href="#site_context">Site Context</a>
+<li><a href="#query_playground">Query playground</a>
 <ul class="sectlevel2">
-<li><a href="#artist_queries">Artist queries</a></li>
+<li><a href="#basic_buttons">Basic buttons</a></li>
+<li><a href="#schemas">Schemas</a></li>
+<li><a href="#querying_with_inline_fragments">Querying with inline fragments</a></li>
+<li><a href="#query_with_dataasjson">Query with dataAsJson</a></li>
 </ul>
 </li>
-<li><a href="#advanced_queries">Advanced queries</a></li>
-<li><a href="#learn_more">Learn more</a></li>
+<li><a href="#advanced_queries">Advanced queries</a>
+<ul class="sectlevel2">
+<li><a href="#querydsl">QueryDsl</a></li>
+<li><a href="#querydslconnection">QueryDslConnection</a></li>
+</ul>
+</li>
+<li><a href="#dive_deeper">Dive deeper</a></li>
 </ul>
 </div>
 </div>
@@ -458,31 +464,13 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <div id="preamble">
 <div class="sectionbody">
 <div class="paragraph">
-<p>Now that we&#8217;ve created some content, let&#8217;s see how we can access and use it in via API - headless style. This chapter introduces <em>Guillotine</em>, the app that&#8217;s responsible for automatically generating GraphQL APIs for your content.</p>
+<p>Enonic is a hybrid CMS. As a hybrid CMS, Enonic is both capable of managing content, and support customized delivery. In this chapter we will focus on delivery via the out-of-the-box GraphQL API.</p>
 </div>
-<div class="admonitionblock note">
-<table>
-<tr>
-<td class="icon">
-<i class="fa icon-note" title="Note"></i>
-</td>
-<td class="content">
-Enonic XP is very flexible, and provides multiple ways of exposing and using content. If you are not interested in accessing content via the standard headless API, feel free to skip this chapter and the sections mentioning "Headless" in the rest of the tutorial.
-</td>
-</tr>
-</table>
+<div class="paragraph">
+<p>Now that we&#8217;ve created some content, let&#8217;s see how we can access and use it in via API - headless style.</p>
 </div>
-<div class="admonitionblock note">
-<table>
-<tr>
-<td class="icon">
-<i class="fa icon-note" title="Note"></i>
-</td>
-<td class="content">
-You won&#8217;t be building anything new in this {chapter}, but we use the data set and everything that you&#8217;ve created over the previous chapters.
-</td>
-</tr>
-</table>
+<div class="paragraph">
+<p>In order to do that we&#8217;ll introduce <em>Guillotine</em>, the app that&#8217;s responsible for automatically generating GraphQL APIs for your content.</p>
 </div>
 </div>
 </div>
@@ -498,13 +486,13 @@ You won&#8217;t be building anything new in this {chapter}, but we use the data 
 <div class="olist arabic">
 <ol class="arabic">
 <li>
-<p>From the XP menu (top right), choose <code>Applications</code>.</p>
+<p>From the XP menu (top right), choose <code>Applications</code></p>
 </li>
 <li>
 <p>Click <kbd>Install</kbd> from the top menu</p>
 </li>
 <li>
-<p>Search for <code>Guillotine</code>, and click <kbd>Install</kbd>`.</p>
+<p>Search for <code>Guillotine</code>, and click <kbd>Install</kbd></p>
 <div class="imageblock">
 <div class="content">
 <img src="media/install-guillotine.png" alt="Install Guillotine application dialog" width="1200">
@@ -513,16 +501,13 @@ You won&#8217;t be building anything new in this {chapter}, but we use the data 
 </li>
 </ol>
 </div>
-<div class="paragraph">
-<p>That&#8217;s it! 🎉</p>
-</div>
 </div>
 </div>
 <div class="sect1">
 <h2 id="query_playground"><a class="link" href="#query_playground">Query playground</a></h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>Back in Content Studio, you should now have access to a new item called <code>Query playground</code> in the left hand menu. Open it, and you should see this:</p>
+<p>Back in Content Studio, you should now have access to a new item called <code>Query playground</code> in the left green widget sidebar. Open it, and you should see this:</p>
 </div>
 <div class="imageblock">
 <div class="content">
@@ -533,49 +518,16 @@ You won&#8217;t be building anything new in this {chapter}, but we use the data 
 <p>Query playground is an interactive GraphQL API explorer. You enter your query in the text area to your left and when you execute it, you&#8217;ll get the results of the query on the other side of the screen.</p>
 </div>
 <div class="paragraph">
-<p>The "Docs" tab on the right-hand side can be used to see all details of the underlying GraphQL schema.</p>
-</div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="guillotine_queries"><a class="link" href="#guillotine_queries">Guillotine queries</a></h2>
-<div class="sectionbody">
-<div class="paragraph">
 <p>GraphQL is a graph "query language". It allows you to create highly specific queries for exactly the content that you need (visit the <a href="https://graphql.org/learn/">official GraphQL docs to learn more</a>).</p>
 </div>
-<div class="admonitionblock tip">
-<table>
-<tr>
-<td class="icon">
-<i class="fa icon-tip" title="Tip"></i>
-</td>
-<td class="content">
-The API explorer offers autocompletion for fields. You can use this to interactively explore the API. You can also open the schema and documentation from the right-hand side menu tabs.
-</td>
-</tr>
-</table>
-</div>
 <div class="paragraph">
-<p>To get started, copy the below query into your the query playground (left hand panel) and run it by clicking the play button.</p>
-</div>
-<div class="admonitionblock tip">
-<table>
-<tr>
-<td class="icon">
-<i class="fa icon-tip" title="Tip"></i>
-</td>
-<td class="content">
-You can also run queries by using the keyboard shortcut <span class="keyseq"><kbd>ctrl</kbd>+<kbd>enter</kbd></span>/<span class="keyseq"><kbd>⌘</kbd>+<kbd>enter</kbd></span> .
-</td>
-</tr>
-</table>
+<p>As an example on how to retrieve some minimal info about your previously created artists, run the following query:</p>
 </div>
 <div class="listingblock">
-<div class="title">A GraphQL query getting data about the root items in the project</div>
 <div class="content">
-<pre class="highlight"><code class="language-xml" data-lang="xml">{
+<pre class="highlight"><code class="language-GraphQL" data-lang="GraphQL">{
   guillotine {
-    getChildren {
+    getChildren(key:"/artists") {
       displayName
       _path
       _id
@@ -585,83 +537,134 @@ You can also run queries by using the keyboard shortcut <span class="keyseq"><kb
 </div>
 </div>
 <div class="paragraph">
-<p>The response is returned as JSON. In this case, it will contain the  contain the site (My First Site), and your images folder. For each item you will also see it&#8217;s name, and location within the project structure.</p>
+<p>After running, you should get something like this on the right area:</p>
 </div>
-<div class="listingblock">
-<div class="title">The site info response</div>
+<div class="imageblock">
 <div class="content">
-<pre class="highlight"><code class="language-json" data-lang="json">{
-  "data": {
-    "guillotine": {
-      "getChildren": [
-        {
-          "displayName": "Images",
-          "_path": "/images"
-        },
-        {
-          "displayName": "My first site",
-          "_path": "/my-first-site"
-        }
-      ]
-    }
-  }
-}</code></pre>
+<img src="media/query-playground-artists-minimal.png" alt="Query playground response of running mimimal query to retrieve artists" width="1200">
 </div>
+<div class="title">Figure 1. Results of running the suggested query</div>
 </div>
-<div class="listingblock">
-<div class="title">To fetch the children of the site, try this</div>
+<div class="sect2">
+<h3 id="basic_buttons"><a class="link" href="#basic_buttons">Basic buttons</a></h3>
+<div class="olist arabic">
+<ol class="arabic" start="0">
+<li>
+<p>Before trying to come up with complex queries, let&#8217;s make familiarize ourselves with Query Playground.</p>
+<div class="imageblock">
 <div class="content">
-<pre class="highlight"><code class="language-xml" data-lang="xml">{
-  guillotine {
-    getChildren(key: "/my-first-site") {
-      displayName
-      _path
-    }
-  }
-}</code></pre>
+<img src="media/query-playground-button-1.png" alt="Query playground play button" width="75">
 </div>
+</div>
+</li>
+<li>
+<p><em>play button</em>, will execute your query. Shortcut is <span class="keyseq"><kbd>ctrl</kbd>+<kbd>enter</kbd></span></p>
+<div class="imageblock">
+<div class="content">
+<img src="media/query-playground-button-2.png" alt="Query playground prettify button" width="75">
+</div>
+</div>
+</li>
+<li>
+<p><em>prettify button</em>, will properly format your query, removing comments and unecessary spaces / indentation. Shortcut is <span class="keyseq"><kbd>ctl</kbd>+<kbd>shift</kbd>+<kbd>p</kbd></span></p>
+<div class="imageblock">
+<div class="content">
+<img src="media/query-playground-button-3.png" alt="Query playground merge button" width="75">
+</div>
+</div>
+</li>
+<li>
+<p><em>merge fragments button</em>, will rewrite your query based on the declared <a href="https://graphql.org/learn/queries/#fragments">fragments</a>. Shortcut is <span class="keyseq"><kbd>ctl</kbd>+<kbd>shift</kbd>+<kbd>m</kbd></span></p>
+<div class="imageblock">
+<div class="content">
+<img src="media/query-playground-button-4.png" alt="Query playground copy button" width="75">
+</div>
+</div>
+</li>
+<li>
+<p><em>copy button</em>, will copy your query to your clipboard. Shortcut is <span class="keyseq"><kbd>ctl</kbd>+<kbd>shift</kbd>+<kbd>c</kbd></span></p>
+<div class="imageblock">
+<div class="content">
+<img src="media/query-playground-button-5.png" alt="Query playground docs button" width="75">
+</div>
+</div>
+</li>
+<li>
+<p><em>docs button</em>, will open a section showing all details about the schemas you have avaiable to use and query on</p>
+<div class="imageblock">
+<div class="content">
+<img src="media/query-playground-button-6.png" alt="Query playground history button" width="75">
+</div>
+</div>
+</li>
+<li>
+<p><em>history button</em>, will open a section showing all previously executed queries</p>
+<div class="imageblock">
+<div class="content">
+<img src="media/query-playground-button-7.png" alt="Query playground tab button" width="75">
+</div>
+</div>
+</li>
+<li>
+<p><em>tab button</em>, will create new tabs for you to manage testing multiple queries</p>
+<div class="imageblock">
+<div class="content">
+<img src="media/query-playground-button-8.png" alt="Query playground draft and master buttons" width="200">
+</div>
+</div>
+</li>
+<li>
+<p><em>draft / master buttons</em> will switch between those two repositories for your queries to run on</p>
+<div class="imageblock">
+<div class="content">
+<img src="media/query-playground-button-9.png" alt="Query playground re-fetch button" width="75">
+</div>
+</div>
+</li>
+<li>
+<p><em>re-fetch schema button</em>, will update your graphql schemas based on recent changes</p>
+<div class="imageblock">
+<div class="content">
+<img src="media/query-playground-button-10.png" alt="Query playground shortkeys button" width="75">
+</div>
+</div>
+</li>
+<li>
+<p><em>shortkeys button</em>, will open a dialog displaying all short keys that can be used to execute actions</p>
+<div class="imageblock">
+<div class="content">
+<img src="media/query-playground-button-11.png" alt="Query playground settings button" width="75">
+</div>
+</div>
+</li>
+<li>
+<p><em>settings button</em>, will open settings dialog</p>
+</li>
+</ol>
+</div>
+</div>
+<div class="sect2">
+<h3 id="schemas"><a class="link" href="#schemas">Schemas</a></h3>
+<div class="paragraph">
+<p>Now, locate and click on the docs button. On this opened section you have detailed info about all <a href="https://graphql.org/learn/schema/">schemas</a> available on your project.</p>
 </div>
 <div class="paragraph">
-<p>The response will contain the immediate children of the site: the "artist" folder we created and the "Templates" folder that was already there.</p>
+<p>On the top search bar in the docs section, search for <code>artist</code> and locate the <code>com_example_myproject_Artist</code> schema:</p>
 </div>
-<div class="listingblock">
-<div class="title">The site info response</div>
+<div class="imageblock">
 <div class="content">
-<pre class="highlight"><code class="language-json" data-lang="json">{
-  "data": {
-    "guillotine": {
-      "getChildren": [
-        {
-          "displayName": "artists",
-          "_path": "/my-first-site/artists"
-        },
-        {
-          "displayName": "Templates",
-          "_path": "/my-first-site/templates"
-        }
-      ]
-    }
-  }
-}</code></pre>
+<img src="media/query-playground-artist-schema.png" alt="Query playground docs section showing the details of com_example_myproject_Artist schema" width="1200">
 </div>
-</div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="site_context"><a class="link" href="#site_context">Site Context</a></h2>
-<div class="sectionbody">
-<div class="paragraph">
-<p>Throughout this tutorial we will primarily be working in the context of this site - for this specific purpose, Guillotine supports a so-called site context, which will simplify your queries.</p>
+<div class="title">Figure 2. The Artist schema</div>
 </div>
 <div class="paragraph">
-<p>Open the "Request headers" section of Query playground, and paste the following configuration:</p>
+<p>Note that it&#8217;s said that the <code>Artist</code> schema <em>implements</em> the <code>Content</code> schema. This basically means that the <code>Artist</code> schema will have the structure defined by the <code>Content</code> schema, together with possibly some additional structure&#8230;&#8203; in this case, that additional structure is a <code>data</code> field, defined by <code>com_example_myproject_Artist_Data</code> schema:</p>
 </div>
-<div class="literalblock">
+<div class="imageblock">
 <div class="content">
-<pre>{
-  "X-Guillotine-SiteKey": "/my-first-site"
-}</pre>
+<img src="media/query-playground-artist-data-schema.png" alt="Query playground docs sections showing the details of com_example_myproject_Artist_Data schema" width="1200">
 </div>
+<div class="title">Figure 3. The Artist data schema</div>
 </div>
 <div class="admonitionblock note">
 <table>
@@ -670,84 +673,47 @@ You can also run queries by using the keyboard shortcut <span class="keyseq"><kb
 <i class="fa icon-note" title="Note"></i>
 </td>
 <td class="content">
-The SiteKey, may either be the site&#8217;s path, or unique identifier. Using the ID is safe as you don&#8217;t need to know the exact location of the site within your structure.
+Note that this matches the structure defined by the Artist content type, which is a natural thing to expect.
 </td>
 </tr>
 </table>
 </div>
-<div class="paragraph">
-<p>When executing queries, you now have a few new tricks available, as you will see in the examples below</p>
 </div>
 <div class="sect2">
-<h3 id="artist_queries"><a class="link" href="#artist_queries">Artist queries</a></h3>
+<h3 id="querying_with_inline_fragments"><a class="link" href="#querying_with_inline_fragments">Querying with inline fragments</a></h3>
 <div class="paragraph">
-<p>Let&#8217;s look at writing slightly more complex queries that get us information about the artists we&#8217;ve created. To start with, let&#8217;s see if we can just fetch all the artists that we created.</p>
+<p>We&#8217;ve used the Docs section to inspect the structure of the <code>Artist</code> schema. Let&#8217;s now, based on a broader understanding of this schema, we&#8217;ll query to get proper data from artists.</p>
 </div>
 <div class="paragraph">
-<p>This time, we will use the ${site} placeholder to specify the path</p>
+<p>Close the docs section, head back to the text area to edit your query and remove <code>displayName</code>, <code>_path</code> and <code>_id</code> from the query we introduced earlier.</p>
+</div>
+<div class="paragraph">
+<p>Now, with your cursor on the inner curly braces of the query, press <span class="keyseq"><kbd>ctrl</kbd>+<kbd>space</kbd></span> to get a list of suggestions about what fields you can request on your query:</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="media/query-playground-artist-query-inspection.gif" alt="Query playground query section showing suggested fields for content schema" width="1050">
+</div>
+</div>
+<div class="paragraph">
+<p>As can be seen, we do not have the artist <code>name</code> and <code>about</code> fields available, and the reason for that is because the <code>getChildren</code> field can return any content that implements the <code>Content</code> schema, but it can&#8217;t directly infer what schema that is, which in this case is the <code>com_example_myproject_Artist</code> schema:</p>
+</div>
+<div class="imageblock text-center">
+<div class="content">
+<img src="media/query-playground-getChildren-infer.png" alt="Query playground getChildren can&#8217;t directly infer what schema is implementing Content schema" width="600">
+</div>
+<div class="title">Figure 4. getChildren can&#8217;t directly infer what schema is implementing Content schema</div>
+</div>
+<div class="paragraph">
+<p>So to proceed, we use <a href="https://graphql.org/learn/queries/#inline-fragments">inline fragments</a>:</p>
 </div>
 <div class="listingblock">
-<div class="title">A GraphQL query fetching all content below the "My First Site" site</div>
 <div class="content">
 <pre class="highlight"><code class="language-GraphQL" data-lang="GraphQL">{
   guillotine {
-    getChildren(key: "${site}/artists")
-    {
-      displayName
-    }
-  }
-}</code></pre>
-</div>
-</div>
-<div class="paragraph">
-<p>The result of this query should list all the artists you created previously:</p>
-</div>
-<div class="listingblock">
-<div class="title">The result of the above query; all content nodes below "artists"</div>
-<div class="content">
-<pre class="highlight"><code class="language-JSON" data-lang="JSON">{
-  "data": {
-    "guillotine": {
-      "getChildren": [
-        {
-          "displayName": "P!nk"
-        },
-        {
-          "displayName": "Missy Elliott"
-        },
-        {
-          "displayName": "Cardi B"
-        }
-      ]
-    }
-  }
-}</code></pre>
-</div>
-</div>
-<div class="paragraph">
-<p>Neat! Next, let&#8217;s try a slightly more complicated query. In this one,  we&#8217;ll also get the data inside the content nodes and extract their names and alias fields. Because all content shares the <code>displayName</code> property, you can query for it without specifying what type it belongs to. However, to get fields that exist on the Artist type, you need to specifically tell GraphQL what type you&#8217;re looking for via <em>inline fragments</em>. Inline fragments start with <code>&#8230;&#8203; on</code> and then specify the content type you want.</p>
-</div>
-<div class="admonitionblock tip">
-<table>
-<tr>
-<td class="icon">
-<i class="fa icon-tip" title="Tip"></i>
-</td>
-<td class="content">
-Learn more about inline fragments at <a href="https://graphql.org/learn/queries/#inline-fragments">the GraphQL documentation&#8217;s <em>Inline Fragments</em> section</a>
-</td>
-</tr>
-</table>
-</div>
-<div class="listingblock">
-<div class="title">A GraphQL query that fetches all artists and their data using inline fragments</div>
-<div class="content">
-<pre class="highlight"><code class="language-GraphQL" data-lang="GraphQL">{
-  guillotine {
-    getChildren(key: "${site}/artists/")
-    {
-      displayName
-      ... on com_example_myproject_Artist { <i class="conum" data-value="1"></i><b>(1)</b>
+    getChildren(key: "/artists") {
+      ... on com_example_myproject_Artist {
+        _id
         data {
           name
           about
@@ -758,50 +724,38 @@ Learn more about inline fragments at <a href="https://graphql.org/learn/queries/
 }</code></pre>
 </div>
 </div>
-<div class="colist arabic">
-<table>
-<tr>
-<td><i class="conum" data-value="1"></i><b>1</b></td>
-<td>This inline fragment lets us extract extra data from content of the Artist type.</td>
-</tr>
-</table>
-</div>
 <div class="paragraph">
-<p>Execute this and your response should look a little something like this:</p>
+<p>With this, we basically built a query that understands that under <code>"/artists"</code> path we have content types of <code>Artist</code>, and based on this we can request general content data, such as <code>_id</code>, but also specific content data, such as the artist name and about:</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="media/query-playground-artists-data.png" alt="Query playground query returning artists content together with its name and about data" width="1200">
+</div>
+<div class="title">Figure 5. Getting specific data of artists</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="query_with_dataasjson"><a class="link" href="#query_with_dataasjson">Query with dataAsJson</a></h3>
+<div class="paragraph">
+<p>If you don&#8217;t need or care about types when creating your queries, you can ignore the previously presented inline fragment approach and use the field <code>dataAsJson</code>:</p>
 </div>
 <div class="listingblock">
-<div class="title">Artists and their aliases as returned by GraphQL</div>
 <div class="content">
-<pre class="highlight"><code class="language-JSON" data-lang="JSON">{
-  "data": {
-    "guillotine": {
-      "getChildren": [
-        {
-          "displayName": "Missy Elliott",
-          "data": {
-            "name": "Melissa Arnette Elliott",
-            "about": "Melissa Arnette Elliott (born July 1, 1971) is an American rapper, singer, songwriter, and record producer."
-          }
-        },
-        {
-          "displayName": "P!nk",
-          "data": {
-            "name": "Alecia Beth Moore",
-            "about": "Alecia Beth Moore (born September 8, 1979), known professionally as Pink (stylized as P!nk), is an American singer and songwriter."
-          }
-        },
-        {
-          "displayName": "Cardi B",
-          "data": {
-            "name": "Belcalis Marlenis Almánzar",
-            "about": "Belcalis Marlenis Almánzar (born October 11, 1992), known professionally as Cardi B, is an American rapper and songwriter."
-          }
-        }
-      ]
+<pre class="highlight"><code class="language-GraphQL" data-lang="GraphQL">{
+  guillotine {
+    getChildren(key: "/artists") {
+      _id
+      dataAsJson
     }
   }
 }</code></pre>
 </div>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="media/query-playground-artists-dataAsJson.png" alt="Query playground query returning artists content together with is name and about data" width="1200">
+</div>
+<div class="title">Figure 6. Getting all data using dataAsJson</div>
 </div>
 </div>
 </div>
@@ -810,143 +764,95 @@ Learn more about inline fragments at <a href="https://graphql.org/learn/queries/
 <h2 id="advanced_queries"><a class="link" href="#advanced_queries">Advanced queries</a></h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>The <code>query</code> field underneath <code>guillotine</code> allows you to search the system for what you want. This field accepts a number of optional, named arguments to help you hone in on exactly what you&#8217;re looking for. These arguments are:</p>
+<p>We&#8217;ll now introduce and show examples of usages of different fields underneath the <code>guillotine</code> field, that allow us to search the system for specific data.</p>
+</div>
+<div class="sect2">
+<h3 id="querydsl"><a class="link" href="#querydsl">QueryDsl</a></h3>
+<div class="paragraph">
+<p>There is a <code>queryDsl</code> field underneath <code>guillotine</code> which allows you to search the system for what you want (the "Dsl" stands for "Domain Specific Language").</p>
+</div>
+<div class="paragraph">
+<p>The syntax is based on two types of operators: <code>Expressions</code> and <code>Compound</code>.</p>
 </div>
 <div class="dlist">
 <dl>
-<dt class="hdlist1"><code>contentTypes</code></dt>
+<dt class="hdlist1"><code>Expression</code></dt>
 <dd>
-<p>The content types we&#8217;re looking for. Can either be a lone string if you&#8217;re looking for a single content type, or a list if you want to search among multiple types.</p>
+<p>Used to check particular fields for various native and analysed values.</p>
 </dd>
-<dt class="hdlist1"><code>filters</code> </dt>
+<dt class="hdlist1"><code>Compound</code></dt>
 <dd>
-<p>A list of filters to apply to the results after the query has been executed. We won&#8217;t get into them here, so if you want to learn more about them, head to the <a href="https://developer.enonic.com/docs/xp/stable/storage/filters">filters documentation</a>.</p>
-</dd>
-<dt class="hdlist1"><code>first</code></dt>
-<dd>
-<p>Specify how many nodes you want at most in your result. If your query yields a list of results, you can specify that you only want the first <code>n</code> results, where <code>n</code> is a positive integer. Works well in concert with offset.</p>
-</dd>
-<dt class="hdlist1"><code>offset</code></dt>
-<dd>
-<p>Specify how many results you want to cut from the beginning of the list of results. Most commonly used for pagination.</p>
-</dd>
-<dt class="hdlist1"><code>query</code></dt>
-<dd>
-<p>A <a href="https://developer.enonic.com/docs/xp/stable/storage/noql#query">NoQL query</a> string.</p>
-</dd>
-<dt class="hdlist1"><code>sort</code></dt>
-<dd>
-<p>A <a href="https://developer.enonic.com/docs/xp/stable/storage/noql#sort">NoQL sort</a> string.</p>
+<p>Used to logically combine various expressions and compounds to fetch nodes based on complex conditions.</p>
 </dd>
 </dl>
 </div>
 <div class="paragraph">
-<p>For instance, using the data set we&#8217;ve created previously in this guide, we could run a query like this:</p>
+<p>In order to exemplify this field usage on some queries, we&#8217;ll query on the data set we&#8217;ve created so far on in this guide:</p>
 </div>
 <div class="listingblock">
 <div class="title">A Guillotine query using some of the arguments mentioned.</div>
 <div class="content">
 <pre class="highlight"><code class="language-GraphQL" data-lang="GraphQL">{
   guillotine {
-    query(
-      first: 2,
-      offset: 0,
-      contentTypes:
-      [ "com.example.myproject:artist", <i class="conum" data-value="1"></i><b>(1)</b>
-	"com.example.myproject:animal" ],
-      sort: "displayName desc") {
-      displayName
-      contentType {
-        displayName
-      }
-    }
-  }
-}</code></pre>
-</div>
-</div>
-<div class="colist arabic">
-<table>
-<tr>
-<td><i class="conum" data-value="1"></i><b>1</b></td>
-<td>To query for multiple types, enclose them in square brackets and separate them with commas.</td>
-</tr>
-</table>
-</div>
-<div class="admonitionblock note">
-<table>
-<tr>
-<td class="icon">
-<i class="fa icon-note" title="Note"></i>
-</td>
-<td class="content">
-If a content type doesn&#8217;t exist, such as in the above query, GraphQL will process the query as normal: it just won&#8217;t find any results of that type.
-</td>
-</tr>
-</table>
-</div>
-<div class="paragraph">
-<p>This query would produce a result like the following:</p>
-</div>
-<div class="listingblock">
-<div class="title">Guillotine query result</div>
-<div class="content">
-<pre class="highlight"><code class="language-json" data-lang="json">{
-  "data": {
-    "guillotine": {
-      "query": [
-        {
-          "displayName": "P!nk",
-          "contentType": {
-            "displayName": "Artist"
-          }
-        },
-        {
-          "displayName": "Missy Elliott",
-          "contentType": {
-            "displayName": "Artist"
+    queryDsl(
+      query: {
+        term: {
+          field: "type",
+          value: {
+            string: "com.example.myproject:artist"
           }
         }
-      ]
+      },
+      first: 1,
+      sort: {
+        field: "displayName",
+        direction: DESC
+      }
+    ) {
+      _id
+      displayName
     }
   }
 }</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>To perform a more advanced query, you can use the <code>query</code> parameter. The following GraphQL query uses the <a href="https://developer.enonic.com/docs/xp/stable/storage/noql#ngram">n-gram query functionality</a> to find all the artists that have a term (part of a text) that starts with <code>rap</code> somewhere in their data.</p>
+<p>Note that this query is getting the last artist that is alphabetically sorted by name, regardless of where the content type is located in the tree structure.</p>
+</div>
+<div class="paragraph">
+<p>The following GraphQL query uses the <a href="https://developer.enonic.com/docs/xp/stable/storage/dsl#ngram">n-gram functionality</a> to find all the artists that have a term (part of a text) that starts with <code>rap</code> somewhere in their data:</p>
 </div>
 <div class="listingblock">
 <div class="title">A Guillotine query using <em>nGram</em> search functionality</div>
 <div class="content">
 <pre class="highlight"><code class="language-GraphQL" data-lang="GraphQL">{
   guillotine {
-    query(
-      contentTypes: "com.example.myproject:artist"
-      query: "ngram('_allText', 'rap')"
-      sort: "displayName asc") {
-      displayName
-    }
-  }
-}</code></pre>
-</div>
-</div>
-<div class="paragraph">
-<p>The result would look something like this:</p>
-</div>
-<div class="listingblock">
-<div class="title">Rap results</div>
-<div class="content">
-<pre class="highlight"><code class="language-json" data-lang="json">{
-  "data": {
-    "guillotine": {
-      "query": [
-        {
-          "displayName": "Cardi B"
-        },
-        {
-          "displayName": "Missy Elliott"
+    queryDsl(
+      query: {
+        boolean: {
+          must: [
+            {
+              term: {
+                field: "type",
+                value: {
+                  string: "com.example.myproject:artist"
+                }
+              },
+              ngram: {
+                fields: ["_allText"],
+                query: "rap"
+              }
+            }
+          ]
         }
-      ]
+      },
+      sort: {
+        field: "displayName",
+        direction: DESC
+      }
+    ) {
+      _id
+      displayName
     }
   }
 }</code></pre>
@@ -960,52 +866,310 @@ If a content type doesn&#8217;t exist, such as in the above query, GraphQL will 
 <div class="content">
 <pre class="highlight"><code class="language-GraphQL" data-lang="GraphQL">{
   guillotine {
-    query(
-      contentTypes: "com.example.myproject:artist"
-      query: "ngram('_allText', 'rap') AND ngram('_allText', 'sing')"
-      sort: "displayName asc") {
+    queryDsl(
+      query: {
+        boolean: {
+          must: [
+            {
+              term: {
+                field: "type",
+                value: {
+                  string: "com.example.myproject:artist"
+                }
+              }
+            },
+            {
+              ngram: {
+                fields: "data.about"
+                query: "rap sing"
+                operator: AND
+              }
+            }
+          ]
+        }
+      },
+      sort: {
+        field: "displayName",
+        direction: DESC
+      }
+    ) {
+      _id
       displayName
     }
   }
 }</code></pre>
 </div>
 </div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+If you&#8217;ve previously used Elasticsearch API to query data, you&#8217;ll be quite familiar with how <code>queryDsl</code> works!
+</td>
+</tr>
+</table>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+To learn more about queryDSL capabilities, visit the <a href="https://developer.enonic.com/docs/xp/stable/storage/dsl">DSL reference</a>
+</td>
+</tr>
+</table>
+</div>
+</div>
+<div class="sect2">
+<h3 id="querydslconnection"><a class="link" href="#querydslconnection">QueryDslConnection</a></h3>
 <div class="paragraph">
-<p>And find out that with our data set, there&#8217;s only one:</p>
+<p>Just like there is a <code>queryDsl</code> field underneath <code>guillotine</code>, the API also provides other fields such as <code>queryDslConnection</code>.</p>
+</div>
+<div class="paragraph">
+<p>We&#8217;ll not go into much details, but basically, the fields with <em>connection</em> in their name have new parameters for aggregating and paginating data.</p>
+</div>
+<div class="paragraph">
+<p>To finish this chapter, we&#8217;ll add a new <em>birthyear</em> field to the artist content type, update all artist to have data on this field, and then use <code>queryDslConnection</code> field to get aggregated data. Let&#8217;s get to work!</p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Start by updating the Artist content type to the following structure:</p>
+</li>
+</ol>
 </div>
 <div class="listingblock">
-<div class="title">Rappers and singers</div>
 <div class="content">
-<pre class="highlight"><code class="language-json" data-lang="json">{
-  "data": {
-    "guillotine": {
-      "query": [
-        {
-          "displayName": "Missy Elliott"
+<pre class="highlight"><code class="language-xml" data-lang="xml">&lt;content-type&gt;
+  &lt;display-name&gt;Artist&lt;/display-name&gt;
+  &lt;description&gt;Information about an artist&lt;/description&gt;
+  &lt;super-type&gt;base:structured&lt;/super-type&gt;
+  &lt;form&gt;
+
+    &lt;input name="name" type="TextLine"&gt;
+      &lt;label&gt;Name&lt;/label&gt;
+      &lt;help-text&gt;
+        The artist's name (if different from their professional moniker).
+      &lt;/help-text&gt;
+    &lt;/input&gt;
+
+    &lt;input type="TextArea" name="about"&gt;
+      &lt;label&gt;About the artist&lt;/label&gt;
+    &lt;/input&gt;
+
+    &lt;input type="Date" name="birthday" &gt;
+      &lt;label&gt;Birthday&lt;/label&gt;
+    &lt;/input&gt;
+
+  &lt;/form&gt;
+&lt;/content-type&gt;</code></pre>
+</div>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+If are not running the project in dev mode (<code>enonic project dev</code> introduced in the previous $chapter), make sure to run <code>enonic project deploy</code> in the terminal on the project&#8217;s root directory
+</td>
+</tr>
+</table>
+</div>
+<div class="olist arabic">
+<ol class="arabic" start="2">
+<li>
+<p>Update each of the previously created artists with the following dates:</p>
+<div class="ulist">
+<ul>
+<li>
+<p>P!nk: 1979-09-08</p>
+</li>
+<li>
+<p>Missy Elliot: 1971-07-01</p>
+</li>
+<li>
+<p>Cardi B: 1992-10-11</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Go back to Query playground and click on the <em>re-fetch schema button</em>. This will update the Artist data schema to contain the birthday structure, which is in sync with the Artist content type structure</p>
+</li>
+<li>
+<p>Run the following query on the playground:</p>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-GraphQL" data-lang="GraphQL">{
+  guillotine {
+    queryDslConnection(
+      query: {
+        boolean: {
+          must: {
+            term: {
+              field: "type"
+              value: {
+                string: "com.example.myproject:artist"
+              }
+            }
+            exists: {
+              field: "data.birthday"
+            }
+          }
         }
-      ]
+      }
+      aggregations: {
+        name: "generationsAggregation"
+        dateRange: {
+          field: "data.birthday"
+          ranges: [
+            {
+              key: "The Greatest Generation"
+              from: "1901"
+              to: "1927"
+          	}
+            {
+              key: "The Silent Generation"
+              from: "1928"
+              to: "1945"
+          	}
+            {
+              key: "The Baby Boomer Generation"
+              from: "1946"
+              to: "1964"
+          	}
+            {
+              key: "Generation X"
+              from: "1965"
+              to: "1980"
+          	}
+            {
+              key: "Millennials"
+              from: "1981"
+              to: "1996"
+          	}
+            {
+              key: "Generation Z"
+              from: "1997"
+              to: "2012"
+          	}
+            {
+              key: "Gen Alpha"
+              from: "2013"
+              to: "2025"
+          	}
+          ]
+          }
+        }
+    )
+    {
+      aggregationsAsJson
     }
   }
 }</code></pre>
 </div>
 </div>
+</li>
+</ol>
+</div>
+<div class="paragraph">
+<p>And this are the results</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-json" data-lang="json">{
+  "data": {
+    "guillotine": {
+      "queryDslConnection": {
+        "aggregationsAsJson": {
+          "generationsAggregation": {
+            "buckets": [
+              {
+                "key": "The Greatest Generation",
+                "docCount": 0,
+                "from": "1901-01-01T00:00:00Z",
+                "to": "1927-01-01T00:00:00Z"
+              },
+              {
+                "key": "The Silent Generation",
+                "docCount": 0,
+                "from": "1928-01-01T00:00:00Z",
+                "to": "1945-01-01T00:00:00Z"
+              },
+              {
+                "key": "The Baby Boomer Generation",
+                "docCount": 0,
+                "from": "1946-01-01T00:00:00Z",
+                "to": "1964-01-01T00:00:00Z"
+              },
+              {
+                "key": "Generation X",
+                "docCount": 2,
+                "from": "1965-01-01T00:00:00Z",
+                "to": "1980-01-01T00:00:00Z"
+              },
+              {
+                "key": "Millennials",
+                "docCount": 1,
+                "from": "1981-01-01T00:00:00Z",
+                "to": "1996-01-01T00:00:00Z"
+              },
+              {
+                "key": "Generation Z",
+                "docCount": 0,
+                "from": "1997-01-01T00:00:00Z",
+                "to": "2012-01-01T00:00:00Z"
+              },
+              {
+                "key": "Gen Alpha",
+                "docCount": 0,
+                "from": "2013-01-01T00:00:00Z",
+                "to": "2025-01-01T00:00:00Z"
+              }
+            ]
+          }
+        }
+      }
+    }
+  }
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Which shows that two of those artists are from Generation X, and one of them is a Millenial.</p>
+</div>
+</div>
 </div>
 </div>
 <div class="sect1">
-<h2 id="learn_more"><a class="link" href="#learn_more">Learn more</a></h2>
+<h2 id="dive_deeper"><a class="link" href="#dive_deeper">Dive deeper</a></h2>
 <div class="sectionbody">
-<div class="paragraph">
-<p>For a detailed overview of the query language and an extensive example selection, <a href="https://developer.enonic.com/docs/xp/stable/storage/noql">the NoQL reference</a> is the place to go. For more query examples and information about how to get up and running with Guillotine, you can check out <a href="https://developer.enonic.com/docs/headless-cms-intro">the headless CMS intro guide</a> or the <a href="https://developer.enonic.com/docs/guillotine">Guillotine docs</a>.</p>
-</div>
-<div class="paragraph">
-<p>If you want to learn more about GraphQL in general, the <a href="https://graphql.org/learn/"><em>Introduction to GraphQL</em> documentation</a> is a good place to start.</p>
+<div class="ulist">
+<ul>
+<li>
+<p>For more query examples and information about how to get up and running with Guillotine, you can check out <a href="https://developer.enonic.com/docs/headless-cms-intro">the headless CMS intro guide</a> or the <a href="https://developer.enonic.com/docs/guillotine">Guillotine docs</a></p>
+</li>
+<li>
+<p>If you want to understand how to extend available schemas on the GraphQL Api, you can head to <a href="https://developer.enonic.com/docs/guillotine/stable/embed/extending">Extending section on Guillotine docs</a> or check some examples on this <a href="https://developer.enonic.com/docs/build-a-custom-selector#customizing_with_guilliotine_lib_optional">guide</a></p>
+</li>
+<li>
+<p>If you want to learn more about GraphQL in general, the <a href="https://graphql.org/learn/"><em>Introduction to GraphQL</em> documentation</a> is a good place to start</p>
+</li>
+</ul>
 </div>
 </div>
 </div>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2023-11-09 14:32:44 UTC
+Last updated 2023-11-13 14:02:49 UTC
 </div>
 </div>
 </body>

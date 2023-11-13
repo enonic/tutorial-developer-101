@@ -5,8 +5,8 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="generator" content="Asciidoctor 2.0.20">
-<meta name="description" content="X-data is a way for you to add extra data to all your content types in a simple manner. This chapter covers what it is and how to use it.">
-<title>X-data</title>
+<meta name="description" content="Get familiar with Content Studio and Content types, and start creating some content.">
+<title>Content studio and content creation</title>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,300italic,400,400italic,600,600italic%7CNoto+Serif:400,400italic,700,700italic%7CDroid+Sans+Mono:400,700">
 <style>
 /*! Asciidoctor default stylesheet | MIT License | https://asciidoctor.org */
@@ -437,13 +437,30 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 </head>
 <body class="article toc2 toc-right">
 <div id="header">
-<h1>X-data</h1>
+<h1>Content studio and content creation</h1>
 <div id="toc" class="toc2">
 <div id="toctitle">Table of Contents</div>
 <ul class="sectlevel1">
-<li><a href="#your_first_x_data">Your first X-data</a></li>
-<li><a href="#headless">Headless</a></li>
-<li><a href="#bonus_seo_metafields">Bonus: SEO Metafields</a></li>
+<li><a href="#installing_content_studio">Installing Content Studio</a>
+<ul class="sectlevel2">
+<li><a href="#task_your_first_project">Task: your first project</a></li>
+<li><a href="#assiging_an_app_to_a_project">Assiging an app to a project</a></li>
+</ul>
+</li>
+<li><a href="#apps_vs_projects">Apps vs projects</a></li>
+<li><a href="#what_are_content_types">What are content types?</a>
+<ul class="sectlevel2">
+<li><a href="#task_your_first_content_type">Task: your first content type</a></li>
+<li><a href="#task_your_first_content_creation">Task: your first content creation</a></li>
+<li><a href="#content_type_validation">Content type validation</a></li>
+</ul>
+</li>
+<li><a href="#publishing_your_content">Publishing your content</a>
+<ul class="sectlevel2">
+<li><a href="#branches">Branches</a></li>
+</ul>
+</li>
+<li><a href="#data_toolbox">Data Toolbox</a></li>
 </ul>
 </div>
 </div>
@@ -451,13 +468,10 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <div id="preamble">
 <div class="sectionbody">
 <div class="paragraph">
-<p>X-data (short for <em>eXtra-data</em>) is a smart way of dynamically extending existing content types with more fields.</p>
+<p>In this chapter, we&#8217;ll give a short introduction to Content Studio, an app that serves as the main content management interface for XP, providing editors an efficient way of creating, and curating content without technical skills.</p>
 </div>
 <div class="paragraph">
-<p>The idea is to basically define new fields and decide to what content type those fields should be applied to. If no content type is selected while creating an X-data, those fields will be enabled to all content types.</p>
-</div>
-<div class="paragraph">
-<p>In Content Studio, X-data is visually displayed as a new step in the form, listed below the content type&#8217;s standard fields.</p>
+<p>For a more comprehensive overview, watch <a href="https://www.youtube.com/watch?v=tR9KHOcZOs0">this short video on Content Studio basics</a> or head to the <a href="https://developer.enonic.com/docs/content-studio/stable">Content Studio reference documentation</a>.</p>
 </div>
 <div class="admonitionblock note">
 <table>
@@ -474,66 +488,124 @@ The tasks and examples in this chapter are based on work done in previous chapte
 </div>
 </div>
 <div class="sect1">
-<h2 id="your_first_x_data"><a class="link" href="#your_first_x_data">Your first X-data</a></h2>
+<h2 id="installing_content_studio"><a class="link" href="#installing_content_studio">Installing Content Studio</a></h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>If your requirement is to add new fields to a specific content type, it doesn&#8217;t make sense to use X-data, since you can directly update that content type.</p>
+<p>Let&#8217;s start this chapter by installing Content Studio. In order to do that, access <a href="http://localhost:8080/admin/tool/com.enonic.xp.app.applications/main">Applications app</a>, click on the header item <em>"install"</em>, search for <em>"content studio"</em> and finally click on the green <em>"install"</em> button.</p>
 </div>
 <div class="paragraph">
-<p>Now, if your requirement is to add new fields to multiple content types, that is when X-data comes into place.</p>
+<p>If the app was installed successfully, you should now see it listed in <em>XP menu</em> on your <a href="http://localhost:8080/admin/tool">dashboard</a>. Click on it to visit Content Studio&#8217;s homepage.</p>
+</div>
+<div class="sect2">
+<h3 id="task_your_first_project"><a class="link" href="#task_your_first_project">Task: your first project</a></h3>
+<div class="paragraph">
+<p>After visiting Content Studio for the first time on a fresh sandbox, you&#8217;ll be welcomed with the following dialog:</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="media/content-studio-no-available-projects-found-dialog.png" alt="Content studio no available projects found dialog" width="1200">
+</div>
+<div class="title">Figure 1. No available projects found dialog</div>
 </div>
 <div class="paragraph">
-<p>The same behaviour of extending multiple content types can be achieved through mixins. You can create a mixin and add it to the content types you want to extend the fields. The difference is where the data on those fields will be stored, and also in the fact that X-data are easier to maintain when adding to a lot of content types.</p>
+<p>The reason why this dialog shows up is because Content Studio manages content, and content is organized in independent repositories, which are named as a <em>content projects</em>, or simply as <em>projects</em>.</p>
 </div>
 <div class="paragraph">
-<p>Let&#8217;s now add a "notes" X-data, which will extend both Artist and Animal content types.</p>
+<p>A project offer individual access control and permissions, as well as other settings to toggle features and language(s).</p>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+Privileged users can manage projects via Content Studio settings.
+</td>
+</tr>
+</table>
 </div>
 <div class="paragraph">
-<p>Similar to content types, X-data schemas have a specific naming and placement convention within your app: <code>src/main/resources/site/x-data/&lt;xdata-name&gt;/&lt;xdata-name&gt;.xml</code>.</p>
+<p>Now, head back to the wizard dialog to create your first project:</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="media/content-studio-my-first-project.gif" alt="Content studio project creation wizard walkthrough." width="1200">
+</div>
+<div class="title">Figure 2. Creating your first project</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="assiging_an_app_to_a_project"><a class="link" href="#assiging_an_app_to_a_project">Assiging an app to a project</a></h3>
+<div class="paragraph">
+<p>Content Studio is a powerful app with a lot of features, and one of its main goal is to provide an awesome user experience for creating and curating content.</p>
+</div>
+<div class="paragraph">
+<p>Content is defined through content types (a concept we&#8217;ll introduce in the next section), which are defined and installed via applications.</p>
+</div>
+<div class="paragraph">
+<p>Therefore, if we want to enable Content Studio to manage a specific type of content, we need to access content studio in a project which has an app assigned to it, and in this app, this specific content should defined via a content type.</p>
+</div>
+<div class="paragraph">
+<p>With all this in mind, note that one of the last steps on the previous creation wizard was to assign your app to the project. If you followed along, you should have your app assigned to the your first project, and in case you missed it, no worries, let&#8217;s assign it to the created project:</p>
 </div>
 <div class="olist arabic">
 <ol class="arabic">
 <li>
-<p>Create the "notes" X-data schema:</p>
-<div class="listingblock">
-<div class="title">site/x-data/notes/notes.xml</div>
-<div class="content">
-<pre class="highlight"><code class="language-xml" data-lang="xml">&lt;x-data&gt;
-  &lt;display-name&gt;Notes X-data&lt;/display-name&gt;
-  &lt;form&gt;
-    &lt;input name="notes" type="TextLine"&gt;
-      &lt;label&gt;Notes&lt;/label&gt;
-      &lt;occurrences minimum="0" maximum="3"/&gt;
-    &lt;/input&gt;
-  &lt;/form&gt;
-&lt;/x-data&gt;</code></pre>
-</div>
-</div>
+<p>On the green widget sidebar, click on settings</p>
 </li>
 <li>
-<p>Additionally, you need to define the injection rules for the X-data, and for that you need to edit the <code>site.xml</code> file:</p>
-<div class="listingblock">
-<div class="title">src/main/resources/site/site.xml</div>
-<div class="content">
-<pre class="highlight"><code class="language-xml" data-lang="xml">&lt;site&gt;
-  &lt;x-data name="notes" allowContentTypes="com.example.myproject:artist|com.example.myproject:animal"/&gt;
-  &lt;form/&gt;
-&lt;/site&gt;</code></pre>
-</div>
-</div>
+<p>Double click on the project you just created to edit it</p>
 </li>
 <li>
-<p>Redeploy your app and access a Artist or an Animal content. You should see the following section in the bottom of the form:</p>
-<div class="imageblock">
-<div class="content">
-<img src="media/notes-x-data.png" alt="Notes x-data fields showing in the bottom of an animal content" width="1050">
-</div>
-</div>
-</li>
-<li>
-<p>Finally, add some notes to some content.</p>
+<p>Scroll down and on the "Applications" section, select the application you&#8217;ve previously deployed to this sandbox</p>
 </li>
 </ol>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="media/content-studio-project-app-assignment.png" alt="Content studio assigning apps to projects walkthrough." width="1200">
+</div>
+<div class="title">Figure 3. Assigning your first app to your first project</div>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="apps_vs_projects"><a class="link" href="#apps_vs_projects">Apps vs projects</a></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>We&#8217;ve reached a certain point in this guide where its worth giving a section to reiterate the differences between:</p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>XP project folder and its files</p>
+</li>
+<li>
+<p>XP app</p>
+</li>
+<li>
+<p>Content Studio project</p>
+</li>
+</ol>
+</div>
+<div class="paragraph">
+<p>A "<em>XP project folder and its files</em>" is the folder containing the files needed in order to create a <em>XP app</em>. In the previous section, this was automatically generated for us when we picked the "Vanilla starter" using the command <code>enonic project create</code>.</p>
+</div>
+<div class="paragraph">
+<p>A "<em>XP app</em>" is the .jar file that is generated when you run the command <code>enonic project build</code> on the project root folder.</p>
+</div>
+<div class="paragraph">
+<p>A "<em>Content Studio project</em>", as explained in the section <a href="sandboxes.ahtml#task:_your_first_project">Task: your first project</a> above, is a repository to store content, and the content creation is enabled through the apps you assign to a project.</p>
+</div>
+<div class="paragraph">
+<p>In summary, you can have the following flow in mind:</p>
+</div>
+<div class="imageblock text-center">
+<div class="content">
+<img src="media/app-vs-projects-flow.png" alt="Simplied flow explaining the difference between an Enonic XP project folder and its files" width="300" height="and a Content Studio project">
+</div>
 </div>
 <div class="admonitionblock note">
 <table>
@@ -542,193 +614,480 @@ The tasks and examples in this chapter are based on work done in previous chapte
 <i class="fa icon-note" title="Note"></i>
 </td>
 <td class="content">
-For more details and configuration options for X-data, visit <a href="https://developer.enonic.com/docs/xp/stable/cms/x-data">the X-data documentation</a>.
+This flow is super simplified and there are a lot of details to each one of those boxes, but it should be sufficient to explain the main difference between those ideas and how they connect to eachother.
 </td>
 </tr>
 </table>
 </div>
+<div class="paragraph">
+<p>From now on, we&#8217;ll use the term "project" to refer to a "<em>XP project folder and its files</em>" and also to a"<em>Content Studio project</em>", since it can be easily distinguished by the context in which te term is used.</p>
+</div>
+<div class="paragraph">
+<p>We believe that this will help to avoid any confusion from your side. Now, back to work!</p>
+</div>
 </div>
 </div>
 <div class="sect1">
-<h2 id="headless"><a class="link" href="#headless">Headless</a></h2>
+<h2 id="what_are_content_types"><a class="link" href="#what_are_content_types">What are content types?</a></h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>As you might expect, your x-data fields are also available via the Guillotine API.</p>
+<p>Every content item created in Enonic has a specific content type. The content type defines the data fields (aka properties) that piece of content can and must have.</p>
 </div>
 <div class="paragraph">
-<p>Use the following query to quickly access all x-data fields in your content.</p>
+<p>A JavaScript analogy: If a content type is a JSON schema, then the content item is a JSON that matches the schema. Actually, this is not so far from how things actually work - as you will see later!</p>
 </div>
-<div class="listingblock">
-<div class="title">Querying for X-data</div>
+<div class="admonitionblock important">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-important" title="Important"></i>
+</td>
+<td class="content">
+As mentioned before, content types are defined and installed via applications. If you unassign an application from the project you&#8217;re currently working on, you&#8217;ll no longer be able to create or edit content of that type.
+</td>
+</tr>
+</table>
+</div>
+<div class="sect2">
+<h3 id="task_your_first_content_type"><a class="link" href="#task_your_first_content_type">Task: your first content type</a></h3>
+<div class="paragraph">
+<p>Now that we know what a content type is, let&#8217;s look at how we create them.</p>
+</div>
+<div class="paragraph">
+<p>We&#8217;ll create a content type that contains two input fields. When shown in Content Studio, it will look like this:</p>
+</div>
+<div class="imageblock">
 <div class="content">
-<pre class="highlight"><code class="language-GraphQL" data-lang="GraphQL">{
-  guillotine {
-    queryDsl(
-      query: {
-        boolean: {
-          must: [
-            {
-              term: {
-                field: "type",
-                value: {
-                  string: "com.example.myproject:animal"
-                }
-              }
-            },
-            {
-              term: {
-                field: "displayName",
-                value: {
-                  string: "Lynx"
-                }
-              }
-            }
-          ]
-        }
+<img src="media/content-type-target.png" alt="A content creation form with name and biography fields" width="1200">
+</div>
+<div class="title">Figure 4. The target for your first content type</div>
+</div>
+<div class="paragraph">
+<p>Back to your preferred editor, make sure you&#8217;re in the project folder (<code>myproject/</code>) that you created in a previous chapter. All paths will be relative to this root folder.</p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Create a directory for content types: <code>src/main/resources/site/content-types/</code>. XP is quite particular about project folder structure, so you need to put content types right where it expects to find them.</p>
+</li>
+<li>
+<p>Create a directory called <code>artist</code> in the newly created <code>content-types/</code> directory. XP expects all content types to have their own directories.</p>
+</li>
+<li>
+<p>Within the <code>artist</code> directory, create a file called <code>artist.xml</code>. The file name must match the directory name  (except for the file extension). The full path to the content type from the project root should be <code>src/main/resources/site/content-types/artist/artist.xml</code>.</p>
+</li>
+<li>
+<p>In the <code>artist.xml</code> file, place the following contents:</p>
+<div class="listingblock">
+<div class="title">The 'Artist' content type</div>
+<div class="content">
+<pre class="highlight"><code class="language-xml" data-lang="xml">&lt;content-type&gt;
+  &lt;display-name&gt;Artist&lt;/display-name&gt; <i class="conum" data-value="1"></i><b>(1)</b>
+  &lt;description&gt;Information about an artist&lt;/description&gt; <i class="conum" data-value="2"></i><b>(2)</b>
+  &lt;super-type&gt;base:structured&lt;/super-type&gt;
+  &lt;form&gt; <i class="conum" data-value="3"></i><b>(3)</b>
 
-      }
-    ) {
-      displayName
-      xAsJson
-    }
-  }
-}</code></pre>
-</div>
-</div>
-<div class="paragraph">
-<p>If you&#8217;ve added any values to your Lynx&#8217;s Notes X-data fields, this is what you might get.</p>
-</div>
-<div class="listingblock">
-<div class="title">X-data results</div>
-<div class="content">
-<pre class="highlight"><code class="language-json" data-lang="json">{
-  "data": {
-    "guillotine": {
-      "queryDsl": [
-        {
-          "displayName": "Lynx",
-          "xAsJson": {
-            "com_example_myproject": {
-              "notes": {
-                "notes": [
-                  "Lynx note 1",
-                  "Lynx note 2",
-                  "Lynx note 3"
-                ]
-              }
-            }
-          }
-        }
-      ]
-    }
-  }
-}</code></pre>
-</div>
-</div>
-<div class="paragraph">
-<p>Should you require specific fields only, or wish to drill into more details, for instance by following a reference, use the typed graphQL fields instead of xAsJson. For instance like this:</p>
-</div>
-<div class="listingblock">
-<div class="title">X-data seoTitle field query</div>
-<div class="content">
-<pre class="highlight"><code class="language-GraphQL" data-lang="GraphQL">{
-  guillotine {
-    queryDsl(
-      query: {
-        boolean: {
-          must: [
-            {
-              term: {
-                field: "type",
-                value: {
-                  string: "com.example.myproject:animal"
-                }
-              }
-            },
-            {
-              term: {
-                field: "displayName",
-                value: {
-                  string: "Lynx"
-                }
-              }
-            }
-          ]
-        }
+    &lt;input name="name" type="TextLine"&gt; <i class="conum" data-value="4"></i><b>(4)</b>
+      &lt;label&gt;Name&lt;/label&gt;
+      &lt;help-text&gt;
+        The artist's name (if different from their professional moniker).
+      &lt;/help-text&gt;
+    &lt;/input&gt;
 
-      }
-    ) {
-      displayName
-      x {
-        com_example_myproject {
-          notes { <i class="conum" data-value="1"></i><b>(1)</b>
-            notes <i class="conum" data-value="2"></i><b>(2)</b>
-          }
-        }
-      }
-    }
-  }
-}</code></pre>
+    &lt;input type="TextArea" name="about"&gt;
+      &lt;label&gt;About the artist&lt;/label&gt;
+    &lt;/input&gt;
+
+  &lt;/form&gt;
+&lt;/content-type&gt;</code></pre>
 </div>
 </div>
 <div class="colist arabic">
 <table>
 <tr>
 <td><i class="conum" data-value="1"></i><b>1</b></td>
-<td>This is the name of the X-data. In this case, "notes" because we defined it to be like so in the <code>notes.xml</code> file</td>
+<td>This is what will be displayed in Content Studio when creating new content.</td>
 </tr>
 <tr>
 <td><i class="conum" data-value="2"></i><b>2</b></td>
-<td>This is the "notes" field (TextLine input type) inside the "notes" X-data.</td>
+<td>This is an optional description, but it is still recommended to add, as it will make life easier for your editors.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="3"></i><b>3</b></td>
+<td>This is where we specify which fields (aka inputs) this content type shall have, basically the form, as seen in Content Studio.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="4"></i><b>4</b></td>
+<td>The <code>type</code> attribute specifies what kind of input input the user will see in Content Studio, and the <code>label</code> specifies how the input will be labeled.</td>
+</tr>
+</table>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+Content types also have a large number of other, optional fields that we won&#8217;t get into here. If you&#8217;d like to learn more about this, consult <a href="https://developer.enonic.com/docs/xp/stable/cms/content-types">the reference documentation</a>.
+</td>
+</tr>
+</table>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+XP&#8217;s <code>input</code> elements are <em>not</em> the same as HTML <code>input</code> elements. To read more about it, <a href="input-types.ahtml">see the chapter on input types</a>
+.
+</td>
+</tr>
+</table>
+</div>
+</li>
+<li>
+<p>Now run:</p>
+</li>
+</ol>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-shell" data-lang="shell">  enonic project dev</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>This command will watch changes under <code>myproject/</code> and redeploy as needed.</p>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+Make sure you&#8217;re already running your sandbox with the <code>--dev</code> flag in another terminal, otherwise running enonic project dev will start the sandbox in detached mode, so you&#8217;ll lose logs. More on cli&#8217;s dev command <a href="https://developer.enonic.com/docs/enonic-cli/stable/dev#dev">here</a>.
+</td>
 </tr>
 </table>
 </div>
 <div class="paragraph">
-<p>If you made it here - you are officially equipped with an essential overview of Enonic&#8217;s content fundamental content modelling capabilities. 🙌</p>
-</div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="bonus_seo_metafields"><a class="link" href="#bonus_seo_metafields">Bonus: SEO Metafields</a></h2>
-<div class="sectionbody">
-<div class="paragraph">
-<p>There&#8217;s a known app on Enonic market named <em>SEO Metafields app</em>. Its main purpose is to provide SEO capabilities to your project, and for that purpose, it adds a new X-data named <code>meta_data</code>, which is then enabled to all content types in your project.</p>
+<p>If everything goes well, you should see your sandbox logs update now. And that&#8217;s the basics of creating new content types.</p>
 </div>
 <div class="paragraph">
-<p>This is a bonus section, so you&#8217;re not missing much to skip it, but it&#8217;s worth installing it to better understand capabilities of X-data.</p>
+<p>Next, let&#8217;s go back to Content Studio and create some actual content!</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="task_your_first_content_creation"><a class="link" href="#task_your_first_content_creation">Task: your first content creation</a></h3>
+<div class="paragraph">
+<p>Go back to content studio and make sure you are on the project you&#8217;ve created on the beginning of this chapter.</p>
+</div>
+<div class="paragraph">
+<p>Press <em>"New &#8230;&#8203;"</em> to open the <em>"Create Content"</em> menu. You should see a content type "Artist".</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+This content type is only visible there because of the updates we did to the app, i.e, your app is responsible to be delivering a artist structure in which content studio can start to actually create content.
+</td>
+</tr>
+</table>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="media/content-studio-new-content.png" alt="The &quot;Create Content&quot; dialog when creating content under the created project. It contains elements, including the &quot;Artist&quot; content type that we created earlier." width="1200">
+</div>
+<div class="title">Figure 5. The "Create Content" dialog with the artist available for content creation</div>
+</div>
+<div class="paragraph">
+<p>However, before we start creating artists, let&#8217;s create a folder.</p>
+</div>
+<div class="paragraph">
+<p>Since we&#8217;ll be using this project in the coming chapters with more content types, having some hierarchy will make things easier. Create a new folder and call it "artists".</p>
+</div>
+<div class="paragraph">
+<p>Next, let&#8217;s create a few artists to get used to the workflow. We&#8217;ll start with Cardi B.</p>
 </div>
 <div class="olist arabic">
 <ol class="arabic">
 <li>
-<p>Install the <a href="https://market.enonic.com/vendors/enonic/seo-metafields">SEO Metafields app</a>.</p>
+<p>Select the artists folder (make sure it&#8217;s highlighted).</p>
+</li>
+<li>
+<p>Create a new artist.</p>
+</li>
+<li>
+<p>Give it the display name "Cardi B".</p>
+</li>
+<li>
+<p>Use these details to fill in the form:</p>
+<div class="dlist">
+<div class="title">Artist details (<a href="https://en.wikipedia.org/wiki/Cardi_B">Cardi B on Wikipedia</a>)</div>
+<dl>
+<dt class="hdlist1">Name</dt>
+<dd>
+<p>Belcalis Marlenis Almánzar</p>
+</dd>
+<dt class="hdlist1">About</dt>
+<dd>
+<p>Belcalis Marlenis Almánzar (born October 11, 1992), known professionally as Cardi B, is an American rapper and songwriter.</p>
+</dd>
+</dl>
+</div>
 <div class="imageblock">
 <div class="content">
-<img src="media/x-data-seo-app-install.png" alt="Install SEO Metafields app" width="1050">
+<img src="media/content-type-filled-out.png" alt="The form for &quot;artist&quot; fully filled out." width="1200">
 </div>
+<div class="title">Figure 6. The content form filled out for the artist "Cardi B"</div>
 </div>
 </li>
 <li>
-<p>Edit and add the app to your project.</p>
-</li>
-<li>
-<p>Immediately after adding the app to your site, the form should refresh - and add a new step "SEO Metafields":</p>
-<div class="paragraph">
-<p>So, now you have some additional fields for the site. If you check some of your other content items, like an animal. You will see the fields are there as well.</p>
+<p>Again, save and close the tab. Now repeat this process for these next two entries. Be aware that Content Studio lets you nest content, so if you try and create new content when "Cardi B" is selected in the hierarchy, it&#8217;ll nest the new content under "Cardi B". In this case, though, we want the artists to be nested directly under the current folder, so make sure "artists" folder is selected when you create new content.</p>
+<div class="dlist">
+<div class="title">Missy Elliott (<a href="https://en.wikipedia.org/wiki/Missy_Elliott">Missy Elliott on Wikipedia</a>)</div>
+<dl>
+<dt class="hdlist1">Name</dt>
+<dd>
+<p>Melissa Arnette Elliott</p>
+</dd>
+<dt class="hdlist1">About</dt>
+<dd>
+<p>Melissa Arnette Elliott (born July 1, 1971) is an American rapper, singer, songwriter, and record producer.</p>
+</dd>
+</dl>
+</div>
+<div class="dlist">
+<div class="title">P!nk (<a href="https://en.wikipedia.org/wiki/Pink_(singer)">P!nk on Wikipedia</a>)</div>
+<dl>
+<dt class="hdlist1">Name</dt>
+<dd>
+<p>Alecia Beth Moore</p>
+</dd>
+<dt class="hdlist1">About</dt>
+<dd>
+<p>Alecia Beth Moore (born September 8, 1979), known professionally as Pink (stylized as P!nk), is an American singer and songwriter.</p>
+</dd>
+</dl>
 </div>
 </li>
 </ol>
 </div>
+<div class="paragraph">
+<p>With these artists created, your content hierarchy should now list the artists folder and the three artists.</p>
+</div>
 <div class="imageblock">
 <div class="content">
-<img src="media/x-data-seo-animal.png" alt="SEO fields available for the animals content type as well." width="1200">
+<img src="media/content-studio-with-artists.png" alt="The content hierarchy showing artists folder with &quot;Cardi B&quot;, &quot;Missy Elliot&quot; and &quot;P!nk&quot; listed directly underneath it." width="1200">
 </div>
+<div class="title">Figure 7. The hierarchy as it should look after creating some content</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="content_type_validation"><a class="link" href="#content_type_validation">Content type validation</a></h3>
+<div class="paragraph">
+<p>Enonic provides XML Schema Definitions (XSDs) for text editor integration and validation of your XML schemas. To use it, add the attribute <code>xmlns</code>, <code>xmlns:xsi</code>, and <code>xsi:schemaLocation</code> to your content types as shown below:</p>
+</div>
+<div class="listingblock">
+<div class="title">Using XSDs for schema validation of a content type definition.</div>
+<div class="content">
+<pre class="highlight"><code class="language-xml" data-lang="xml">&lt;?xml version="1.0" encoding="utf-8"?&gt;
+&lt;content-type
+    xmlns="urn:enonic:xp:model:1.0"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="urn:enonic:xp:model:1.0 https://raw.githubusercontent.com/enonic/xp/master/modules/core/core-api/src/main/resources/META-INF/xsd/model.xsd"&gt;
+  &lt;display-name&gt;Content type display name&lt;/display-name&gt;
+
+  &lt;!-- rest of content elided for brevity --&gt;
+
+&lt;/content-type&gt;</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Note that in-editor schema validation depends on whether your text editor supports validating against XSD schemas or not. If your editor doesn&#8217;t support it out of the box, it may be available via a Language Server Protocol (LSP) client.</p>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="publishing_your_content"><a class="link" href="#publishing_your_content">Publishing your content</a></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>You might have noticed the yellow circles with exclamation marks displayed on all the content we&#8217;ve been working on, both in the wizard and in the content grid. This is how Content Studio indicates whether something is published or not and whether there are any errors with it. There are four states:</p>
+</div>
+<div class="dlist">
+<dl>
+<dt class="hdlist1">Error (red circle with a cross)</dt>
+<dd>
+<p>This indicates that there is something wrong with your content. Because XP uses structured content it can also validate content as it is created. If something doesn&#8217;t conform to the specified schema (for example: a required field has no value), it will fail to validate and be marked with this symbol.</p>
+</dd>
+<dt class="hdlist1">Work in progress (yellow circle with exclamation mark)</dt>
+<dd>
+<p>This symbol indicates that this piece of content has unpublished changes. That could be either because this is new content that has never been published, or it could be because there have been changes to this piece of content since it was last published.</p>
+</dd>
+<dt class="hdlist1">Ready for publishing (green circle with a check mark)</dt>
+<dd>
+<p>This piece of content is marked as ready to be published.</p>
+</dd>
+<dt class="hdlist1">Published (no icon)</dt>
+<dd>
+<p>This piece of content is published and has not been modified since.</p>
+</dd>
+</dl>
+</div>
+<div class="imageblock text-center">
+<div class="content">
+<img src="media/content-studio-content-status.png" alt="Three pieces of content displaying the three statuses that a piece of content can have" width="400">
+</div>
+</div>
+<div class="paragraph">
+<p>So what does it mean for content to be published? It doesn&#8217;t make much of a difference to us at this stage of the tutorial, but when you&#8217;re working on production systems, it&#8217;s very important. So let&#8217;s talk briefly about Content Studio&#8217;s branching and publishing system.</p>
+</div>
+<div class="sect2">
+<h3 id="branches"><a class="link" href="#branches">Branches</a></h3>
+<div class="paragraph">
+<p>Content Studio operates with two branches:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><em>draft branch</em>, where you work and edit;</p>
+</li>
+<li>
+<p><em>master branch</em>, holds the published content.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>When you work on something in Content Studio, you&#8217;re working on the <strong>draft branch</strong>.</p>
+</div>
+<div class="paragraph">
+<p>When you publish something, the <strong>master branch</strong> gets updated with the new content.</p>
+</div>
+<div class="paragraph">
+<p>When you edit that same piece of content in Content Studio again, you&#8217;re back to working on the <strong>draft</strong>, and you have to publish it to see changes to the published content.</p>
+</div>
+<div class="paragraph">
+<p>To publish a piece of content, right click it and select "Publish".</p>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+You can also publish a piece of content by using the keyboard shortcut <span class="keyseq"><kbd>Ctrl</kbd>+<kbd>Alt</kbd>+<kbd>P</kbd></span>/<span class="keyseq"><kbd>control</kbd>+<kbd>option</kbd>+<kbd>P</kbd></span>.
+</td>
+</tr>
+</table>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="data_toolbox"><a class="link" href="#data_toolbox">Data Toolbox</a></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>We&#8217;ll now install and give a brief introduction to the <em>Data Toolbox</em> app, so make sure to install it directly from the Applications app (same flow as installing Content Studio or any other app).</p>
+</div>
+<div class="paragraph">
+<p>Data Toolbox provides you with a web interface to visualize and manipulate your XP data. We&#8217;ll now see how to inspect content using Data Toolbox.</p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Open the XP menu and select Data Toolbox. You should have this app installed from when you <a href="sandboxes.ahtml#_admin_console">took the welcome tour</a>.</p>
+<div class="imageblock">
+<div class="content">
+<img src="media/data-toolbox-landing-page.png" alt="The Data Toolbox landing page: grid of icons for administrative actions and accompanying explanations. " width="1200">
+</div>
+<div class="title">Figure 8. Data Toolbox</div>
+</div>
+</li>
+<li>
+<p>Navigate to the "Data Tree" menu. In this menu, the toolbox lists repositories within your XP instance. There are four repositories listed:</p>
+<div class="dlist">
+<dl>
+<dt class="hdlist1"><code>com.enonic.cms.my-first-project</code></dt>
+<dd>
+<p>This is the current repository that holds your content.</p>
+</dd>
+<dt class="hdlist1"><code>com.enonic.cms.default</code></dt>
+<dd>
+<p>This is the default repository.</p>
+</dd>
+<dt class="hdlist1"><code>system.auditlog</code></dt>
+<dd>
+<p>This is where the <em>audit log</em> is stored. The audit log allows you to see a log of everything that&#8217;s been done in your XP instance, such as content creation, user administration, etc., and also tells you when it was done and by whom.</p>
+</dd>
+<dt class="hdlist1"><code>system-repo</code></dt>
+<dd>
+<p>This is where XP stores data about your system, such as external applications and identity data.</p>
+</dd>
+<dt class="hdlist1"><code>system.scheduler</code></dt>
+<dd>
+<p>This is a separate repository where scheduled jobs are stored (new in 7.7.0).</p>
+</dd>
+</dl>
+</div>
+</li>
+<li>
+<p>Navigate through to <code>com.enonic.cms.my-first-project</code>.</p>
+</li>
+<li>
+<p>Next up is a list of branches (as discussed above). As long as you&#8217;ve published your content, you can choose either one of these.</p>
+</li>
+<li>
+<p>Keep navigating further down the tree: <code>[root]</code> &#8594; <code>content</code>.</p>
+</li>
+<li>
+<p>When you&#8217;ve reached <code>content</code> you should see all the content of your site listed. Navigate to <code>artists</code> to find actual pieces of content.</p>
+</li>
+<li>
+<p>Choose one of your artists and check out both the info view and the JSON view, available via the buttons in the table row.</p>
+<div class="imageblock">
+<div class="content">
+<img src="media/data-toolbox-info-view.png" alt="The Data Toolbox info view. the view contains options for exporting, moving, and deleting the node, as well as for displaying permissions for the node, versions of the node, and indexing data (and much more)." width="1200">
+</div>
+<div class="title">Figure 9. The Data Toolbox node info view</div>
+</div>
+</li>
+<li>
+<p>To inspect the data associated with the artist, you can select "Display properties", which will bring up data about the node, such as its display name, its owner, when it was created, etc.</p>
+<div class="imageblock">
+<div class="content">
+<img src="media/data-toolbox-properties.png" alt="A table with columns 'name', 'index, 'value', and 'type' that describes the node. Example names are 'valid', 'type', 'displayName'." width="1200">
+</div>
+<div class="title">Figure 10. The display properties view</div>
+</div>
+</li>
+<li>
+<p>Finally, you can navigate to the <code>data</code> property, where you&#8217;ll find the data stored on the artist.</p>
+<div class="imageblock">
+<div class="content">
+<img src="media/data-toolbox-properties-data.png" alt="A table showing the data we stored about the artist previously." width="1200">
+</div>
+<div class="title">Figure 11. The properties.data view</div>
+</div>
+</li>
+</ol>
+</div>
+<div class="paragraph">
+<p>Inspecting content is only a fraction of what Data Toolbox can do: it&#8217;s a versatile and powerful administrative tool, and we&#8217;ll see more of it in a later chapter.</p>
 </div>
 </div>
 </div>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2023-11-09 14:32:58 UTC
+Last updated 2023-11-13 14:02:49 UTC
 </div>
 </div>
 </body>

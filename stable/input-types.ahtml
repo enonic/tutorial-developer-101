@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="generator" content="Asciidoctor 2.0.20">
-<meta name="description" content="Take your content types to the next level with more advanced input types. Learn how to configure input types, what kinds there are, and how to link content together!">
+<meta name="description" content="Take your content types to the next level with more advanced input types. Learn how to configure input types, what kinds there are, and how to link content together.">
 <title>Input types</title>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,300italic,400,400italic,600,600italic%7CNoto+Serif:400,400italic,700,700italic%7CDroid+Sans+Mono:400,700">
 <style>
@@ -441,20 +441,31 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <div id="toc" class="toc2">
 <div id="toctitle">Table of Contents</div>
 <ul class="sectlevel1">
-<li><a href="#configuration">Configuration</a>
+<li><a href="#general_config">General config</a></li>
+<li><a href="#the_ocurrences_config">The ocurrences config</a>
 <ul class="sectlevel2">
-<li><a href="#occurrences">Occurrences</a></li>
+<li><a href="#optional">Optional</a></li>
+<li><a href="#required">Required</a></li>
+<li><a href="#unlimited">Unlimited</a></li>
 </ul>
 </li>
 <li><a href="#common_inputs">Common inputs</a></li>
 <li><a href="#imageselector">ImageSelector</a></li>
 <li><a href="#contentselector">ContentSelector</a></li>
-<li><a href="#task_artists_and_animals">Task: artists and animals</a>
+<li><a href="#task_artist_and_animals">Task: artist and animals</a>
 <ul class="sectlevel2">
-<li><a href="#solution">Solution</a></li>
+<li><a href="#animal_constraints">Animal constraints</a></li>
+<li><a href="#artist_constraints">Artist constraints</a></li>
+<li><a href="#querying">Querying</a></li>
+<li><a href="#check_your_work">Check your work</a></li>
 </ul>
 </li>
-<li><a href="#headless_fetching_linked_content_and_images">Headless: fetching linked content and images</a></li>
+<li><a href="#task_solution">Task solution</a>
+<ul class="sectlevel2">
+<li><a href="#content_types">Content types</a></li>
+<li><a href="#graphql_query">GraphQL query</a></li>
+</ul>
+</li>
 </ul>
 </div>
 </div>
@@ -462,7 +473,13 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <div id="preamble">
 <div class="sectionbody">
 <div class="paragraph">
-<p>The content types we&#8217;ve created previously in this guide have only used two basic input types: TextLine and TextArea. However, Content Studio has a lot more up its sleeve than that! Input types dictate what kind of data the user can or must add any piece of content. This chapter introduces more new types of inputs and explains how you can configure them to your liking.</p>
+<p>The content types we&#8217;ve created previously in this guide have only used two basic input types: TextLine, TextArea, Date and AttachmentUploader.</p>
+</div>
+<div class="paragraph">
+<p>However, Content Studio has a lot more up its sleeve than that! Input types dictate what kind of data the user can or must add any piece of content.</p>
+</div>
+<div class="paragraph">
+<p>This chapter introduces more new types of inputs and explains how you can configure them to your liking.</p>
 </div>
 <div class="admonitionblock note">
 <table>
@@ -491,7 +508,7 @@ The tasks and examples in this chapter are based on work done in previous chapte
 </div>
 </div>
 <div class="sect1">
-<h2 id="configuration"><a class="link" href="#configuration">Configuration</a></h2>
+<h2 id="general_config"><a class="link" href="#general_config">General config</a></h2>
 <div class="sectionbody">
 <div class="paragraph">
 <p>All input types share a number of options that affect how they act. These options are:</p>
@@ -523,8 +540,17 @@ The tasks and examples in this chapter are based on work done in previous chapte
 </dd>
 </dl>
 </div>
-<div class="paragraph">
-<p>All of the shared configuration options (<code>label</code>, <code>occurrences</code>, etc.) are described in more detail in the <a href="https://developer.enonic.com/docs/xp/stable/cms/schemas#input_types">input types schema documentation</a>. Additionally, all input types and their respective <code>config</code> options are listed in the <a href="https://developer.enonic.com/docs/xp/stable/cms/input-types">the input types documentation</a>.</p>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+All of the shared configuration options (<code>label</code>, <code>occurrences</code>, etc.) are described in more detail in the <a href="https://developer.enonic.com/docs/xp/stable/cms/schemas#input_types">input types schema documentation</a>. Additionally, all input types and their respective <code>config</code> options are listed in the <a href="https://developer.enonic.com/docs/xp/stable/cms/input-types">the input types documentation</a>.
+</td>
+</tr>
+</table>
 </div>
 <div class="paragraph">
 <p>To show an example of the configuration options work, let&#8217;s examine some TextLine inputs with different configurations.</p>
@@ -580,34 +606,31 @@ The tasks and examples in this chapter are based on work done in previous chapte
 </table>
 </div>
 <div class="paragraph">
-<p>This set of inputs would be rendered as in the following picture. As specified in the above configuration, notice:</p>
+<p>This set of inputs would be rendered as in the following picture. As specified in the above configuration:</p>
 </div>
-<div class="ulist">
-<ul>
-<li>
-<p>The required input field has a red asterisk to signify that it must be filled out.</p>
-</li>
-<li>
-<p>The required input field already has a value provided via the <code>default</code> configuration option.</p>
-</li>
-<li>
-<p>The help texts for the required input field and for the input list are both visible</p>
-</li>
-<li>
-<p>The input list has controls to add more inputs and remove existing inputs</p>
-</li>
-</ul>
-</div>
-<div class="imageblock">
+<div class="imageblock text-center">
 <div class="content">
-<img src="media/input-type-common-configuration.png" alt="Three TextLine inputs showing all the common configuration options: labels, help text, default text, and occurrences." width="1200">
+<img src="media/input-type-common-configuration.png" alt="Three TextLine inputs showing all the common configuration options: labels, help text, default text, and occurrences." width="750">
 </div>
 <div class="title">Figure 1. TextLine inputs showing common configuration options</div>
 </div>
-<div class="sect2">
-<h3 id="occurrences"><a class="link" href="#occurrences">Occurrences</a></h3>
 <div class="paragraph">
-<p>The occurrences configuration option decides how XP treats the input value. Use occurrences to indicate whether an input is expected to be a list or a single element and whether the input is required or not. The occurrences element has two required attributes, <code>minimum</code> and <code>maximum</code>. Use these to control the number of instances the user can create.</p>
+<p>Note that:
+- The required input field has a red asterisk to signify that it must be filled out.
+- The required input field already has a value provided via the <code>default</code> configuration option.
+- The help texts for the required input field and for the input list are both visible
+- The input list has controls to add more inputs and remove existing inputs</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="the_ocurrences_config"><a class="link" href="#the_ocurrences_config">The ocurrences config</a></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>The occurrences configuration option decides how XP treats the input value. Use occurrences to indicate whether an input is expected to be a list or a single element and whether the input is required or not.</p>
+</div>
+<div class="paragraph">
+<p>The occurrences element has two required attributes, <code>minimum</code> and <code>maximum</code>. Use these to control the number of instances the user can create.</p>
 </div>
 <div class="paragraph">
 <p>The <code>minimum</code> attribute specifies that the user must fill out <em>at least</em> this many instances of the field. Usually it is set to <code>0</code> or <code>1</code>. A zero indicates that the field is optional and that the user does not need to fill it out. A one means the field is required.</p>
@@ -618,24 +641,37 @@ The tasks and examples in this chapter are based on work done in previous chapte
 <div class="paragraph">
 <p>A couple of common configuration tricks:</p>
 </div>
-<div class="ulist">
-<ul>
-<li>
-<p>If you don&#8217;t add an <code>occurrences</code> element, XP uses the default, which is <code>minimum="0"</code>, <code>maximum="1"</code>, meaning that the input is optional.</p>
-</li>
-<li>
-<p>To make the input required, set both <code>minimum</code> and <code>maximum</code> to <code>1</code>.</p>
-</li>
-<li>
-<p>To create a list of inputs, set <code>maximum</code> to <code>0</code> (if there is no limit to how many items the user can add) or to the desired maximum.</p>
-</li>
-</ul>
+<div class="sect2">
+<h3 id="optional"><a class="link" href="#optional">Optional</a></h3>
+<div class="paragraph">
+<p>If you don&#8217;t add an <code>occurrences</code> element, XP uses the default, which is <code>minimum="0"</code>, <code>maximum="1"</code>.</p>
 </div>
-<div class="admonitionblock note">
+<div class="paragraph">
+<p>That means that the input is <strong>optional</strong> and can have at most <strong>one entry</strong>.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="required"><a class="link" href="#required">Required</a></h3>
+<div class="paragraph">
+<p>To make the input required, set both <code>minimum</code> and <code>maximum</code> to <code>1</code>.</p>
+</div>
+<div class="paragraph">
+<p>That means that the input is <strong>required</strong>, and can have at most <strong>one entry</strong>.</p>
+</div>
+<div class="paragraph">
+<p>By keeping the minimum at <code>1</code> and changing the maximum to a number <code>n</code> above <code>1</code>, you&#8217;ll be able to keep the field <strong>required</strong>, but make it able to have at most <strong>n entries</strong>.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="unlimited"><a class="link" href="#unlimited">Unlimited</a></h3>
+<div class="paragraph">
+<p>By seeting <code>maximum</code> to <code>0</code>, you allow the input to have an <strong>unilimited amount of entries</strong>.</p>
+</div>
+<div class="admonitionblock tip">
 <table>
 <tr>
 <td class="icon">
-<i class="fa icon-note" title="Note"></i>
+<i class="fa icon-tip" title="Tip"></i>
 </td>
 <td class="content">
 If <code>maximum</code> is greater than <code>0</code>, make sure that <code>minimum</code> is less than or equal to <code>maximum</code>. Otherwise, the input will never be considered valid according to XP.
@@ -657,7 +693,7 @@ If <code>maximum</code> is greater than <code>0</code>, make sure that <code>min
 <dt class="hdlist1"><a href="https://developer.enonic.com/docs/xp/stable/cms/input-types#combobox">ComboBox</a></dt>
 <dd>
 <p>A dropdown menu containing predefined options for the user to select from. Allows selection of one or more options.</p>
-<div class="imageblock">
+<div class="imageblock text-center">
 <div class="content">
 <img src="media/input-type-combo-box.webp" alt="A standard select list / dropdown list / combo box input type with a few visible dummy options." width="750">
 </div>
@@ -667,7 +703,7 @@ If <code>maximum</code> is greater than <code>0</code>, make sure that <code>min
 <dt class="hdlist1"><a href="https://developer.enonic.com/docs/xp/stable/cms/input-types#date">Date</a> and <a href="https://developer.enonic.com/docs/xp/stable/cms/input-types#datetime">DateTime</a></dt>
 <dd>
 <p>Provides an interactive date picker (with a time component in DateTime&#8217;s case) to save date and times.</p>
-<div class="imageblock">
+<div class="imageblock text-center">
 <div class="content">
 <img src="media/input-type-date-time.webp" alt="A calendar showing year and month with a time indicator to the side." width="750">
 </div>
@@ -677,7 +713,7 @@ If <code>maximum</code> is greater than <code>0</code>, make sure that <code>min
 <dt class="hdlist1"><a href="https://developer.enonic.com/docs/xp/stable/cms/input-types#geopoint">GeoPoint</a></dt>
 <dd>
 <p>Stores GPS coordinates.</p>
-<div class="imageblock">
+<div class="imageblock text-center">
 <div class="content">
 <img src="media/input-type-geo-point.webp" alt="A text line input with coordinates." width="750">
 </div>
@@ -687,7 +723,7 @@ If <code>maximum</code> is greater than <code>0</code>, make sure that <code>min
 <dt class="hdlist1"><a href="https://developer.enonic.com/docs/xp/stable/cms/input-types#htmlarea">HtmlArea</a></dt>
 <dd>
 <p>Provides a rich text, multi-line input. We&#8217;ll discuss this in detail in <a href="rich-text.ahtml">the next chapter</a>.</p>
-<div class="imageblock">
+<div class="imageblock text-center">
 <div class="content">
 <img src="media/input-type-html-area.png" alt="A text area with a tools ribbon on the top. The ribbon provides rich text tools such as justification, macro insertion, text styles, etc." width="750">
 </div>
@@ -711,7 +747,10 @@ If <code>maximum</code> is greater than <code>0</code>, make sure that <code>min
 <div class="title">Figure 6. The ImageSelector input type</div>
 </div>
 <div class="paragraph">
-<p>Images are a key part of many web experiences: they add color, break up the content, and gives the reader something to rest their eyes on. XP&#8217;s image selector allows you to select an image for a piece of content and also to upload new images.</p>
+<p>Images are a key part of many web experiences: they add color, break up the content, and gives the reader something to rest their eyes on.</p>
+</div>
+<div class="paragraph">
+<p>XP&#8217;s image selector allows you to select an image for a piece of content and also to upload new images.</p>
 </div>
 <div class="listingblock">
 <div class="title">An minimal ImageSelector configuration</div>
@@ -745,7 +784,10 @@ If <code>maximum</code> is greater than <code>0</code>, make sure that <code>min
 <div class="title">Figure 8. The ContentSelector input type</div>
 </div>
 <div class="paragraph">
-<p>The image selector we just saw is actually a specialized form of the more complex ContentSelector input type. The ContentSelector input type allows you to reference other content. Let&#8217;s say you have two content types: one of type person and one of type food. If you want to be able to specify which dishes the person likes, you could use a content type to create a reference from the person to their favored dish.</p>
+<p>The image selector we just saw is actually a specialized form of the more complex ContentSelector input type.</p>
+</div>
+<div class="paragraph">
+<p>The ContentSelector input type allows you to reference other content. Let&#8217;s say you have two content types: one of type person and one of type food. If you want to be able to specify which dishes the person likes, you could use a content type to create a reference from the person to their favored dish.</p>
 </div>
 <div class="paragraph">
 <p>Because referencing other content types comes with a lot of variability, the ContentSelector type has configuration options to support this. You can choose to allow only certain content types or only content that&#8217;s available at a certain path. You can also change whether the selector should show content in a tree-style hierarchy or as a flat list of content.</p>
@@ -767,10 +809,25 @@ If <code>maximum</code> is greater than <code>0</code>, make sure that <code>min
 </div>
 </div>
 <div class="sect1">
-<h2 id="task_artists_and_animals"><a class="link" href="#task_artists_and_animals">Task: artists and animals</a></h2>
+<h2 id="task_artist_and_animals"><a class="link" href="#task_artist_and_animals">Task: artist and animals</a></h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>Time for a little recap! We&#8217;ll put together everything we&#8217;ve learned about content types and input types thus far to create a new data set. A solution is listed below, but try and see if you can solve it yourself first. If you&#8217;re wondering how to achieve some of the goals, try consulting the documentation that&#8217;s been linked to in this chapter.</p>
+<p>Time for a little recap! We&#8217;ll put together everything we&#8217;ve learned about content types and input types thus far to create a new data set.</p>
+</div>
+<div class="paragraph">
+<p>A solution is listed below, but try and see if you can solve it yourself first.</p>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+If you&#8217;re wondering how to achieve some of the goals, try consulting the documentation that&#8217;s been linked to in this chapter.
+</td>
+</tr>
+</table>
 </div>
 <div class="paragraph">
 <p>Your task is to create a new content type: <code>Animal</code> and to update the <code>Artist</code> content type with new constraints and fields. By the end of this chapter, you should have content types that look like this in Content Studio:</p>
@@ -781,9 +838,8 @@ If <code>maximum</code> is greater than <code>0</code>, make sure that <code>min
 </div>
 <div class="title">Figure 9. The target for this task: animal and artist</div>
 </div>
-<div class="paragraph">
-<p>Animal constraints:</p>
-</div>
+<div class="sect2">
+<h3 id="animal_constraints"><a class="link" href="#animal_constraints">Animal constraints</a></h3>
 <div class="ulist">
 <ul>
 <li>
@@ -800,12 +856,9 @@ If <code>maximum</code> is greater than <code>0</code>, make sure that <code>min
 </li>
 </ul>
 </div>
-<div class="paragraph">
-<p>When you&#8217;ve created the content type, create a new folder in Content Studio at next to the artists folder. Call it "animals".</p>
 </div>
-<div class="paragraph">
-<p>For the artist content type, here&#8217;s what&#8217;s going to change:</p>
-</div>
+<div class="sect2">
+<h3 id="artist_constraints"><a class="link" href="#artist_constraints">Artist constraints</a></h3>
 <div class="ulist">
 <ul>
 <li>
@@ -813,14 +866,42 @@ If <code>maximum</code> is greater than <code>0</code>, make sure that <code>min
 </li>
 </ul>
 </div>
-<div class="paragraph">
-<p>To verify that everything works, create some animals, and try creating a content link between a artist and an animal.</p>
-</div>
-<div class="paragraph">
-<p>When you&#8217;ve got that, create a GraphQL query that&#8217;ll fetch all artists and list what their favorite animals are, as well their animals' descriptions .</p>
 </div>
 <div class="sect2">
-<h3 id="solution"><a class="link" href="#solution">Solution</a></h3>
+<h3 id="querying"><a class="link" href="#querying">Querying</a></h3>
+<div class="ulist">
+<ul>
+<li>
+<p>Create a GraphQL query that&#8217;ll fetch all artists and list what their favorite animals are, as well their animals' descriptions.</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect2">
+<h3 id="check_your_work"><a class="link" href="#check_your_work">Check your work</a></h3>
+<div class="paragraph">
+<p>To verify that everything works, create some animals, create a content link between a artist and an animal and run your query to fetch some new data on this new structure.</p>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+Don&#8217;t worry if something did not work, we&#8217;ll show the solutions on the next section.
+</td>
+</tr>
+</table>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="task_solution"><a class="link" href="#task_solution">Task solution</a></h2>
+<div class="sectionbody">
+<div class="sect2">
+<h3 id="content_types"><a class="link" href="#content_types">Content types</a></h3>
 <div class="olist arabic">
 <ol class="arabic">
 <li>
@@ -905,26 +986,15 @@ If <code>maximum</code> is greater than <code>0</code>, make sure that <code>min
 </li>
 <li>
 <p>Create some animals. Either pick your favorites, or, if you&#8217;re not feeling creative, add these (content from Wikipedia), :</p>
-<div class="dlist">
-<div class="title">Lion (<a href="https://en.wikipedia.org/wiki/Lion">Wiki article for lion</a>)</div>
-<dl>
-<dt class="hdlist1">Name</dt>
-<dd>
-<p>Lion</p>
-</dd>
-<dt class="hdlist1">Description</dt>
-<dd>
-<p>The lion (Panthera leo) is a species in the family Felidae and a member of the genus Panthera. It has a muscular, deep-chested body, short, rounded head, round ears, and a hairy tuft at the end of its tail.</p>
-</dd>
-<dt class="hdlist1">Name</dt>
-<dd>
-<p>Reindeer, Caribou</p>
-</dd>
-<dt class="hdlist1">Description</dt>
-<dd>
-<p>The reindeer (Rangifer tarandus), also known as caribou in North America, is a species of deer with circumpolar distribution, native to Arctic, sub-Arctic, tundra, boreal, and mountainous regions of northern Europe, Siberia, and North America.</p>
-</dd>
-</dl>
+<div class="ulist">
+<ul>
+<li>
+<p><a href="https://en.wikipedia.org/wiki/Lion">Wiki article for lion</a></p>
+</li>
+<li>
+<p><a href="https://en.wikipedia.org/wiki/Reindeer">Wiki article for reindeer</a></p>
+</li>
+</ul>
 </div>
 </li>
 <li>
@@ -933,26 +1003,25 @@ If <code>maximum</code> is greater than <code>0</code>, make sure that <code>min
 </ol>
 </div>
 </div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="headless_fetching_linked_content_and_images"><a class="link" href="#headless_fetching_linked_content_and_images">Headless: fetching linked content and images</a></h2>
-<div class="sectionbody">
+<div class="sect2">
+<h3 id="graphql_query"><a class="link" href="#graphql_query">GraphQL query</a></h3>
 <div class="paragraph">
-<p>Finally, it&#8217;s time to introduce the grapqh in GraphQL. A ContentSelector input will store a reference to the target content item. When using the Guillotine API, you may simply follow this reference to access the target content, and access it&#8217;s fields instantly.</p>
+<p>Finally, it&#8217;s time to introduce the query in GraphQL.</p>
+</div>
+<div class="paragraph">
+<p>A ContentSelector input will store a reference to the target content item. When using the Guillotine API, you may simply follow this reference to access the target content, and access it&#8217;s fields instantly.</p>
 </div>
 <div class="listingblock">
 <div class="title">Fetch artists and their associated favorite animals</div>
 <div class="content">
 <pre class="highlight"><code class="language-GraphQL" data-lang="GraphQL">{
   guillotine {
-    getChildren(key: "${site}/artists/")
-    {
+    getChildren(key: "/artists") {
       displayName
       ... on com_example_myproject_Artist {
+        _id
         data {
-          name
-          favoriteAnimal {
+           favoriteAnimal {
             displayName
             ... on com_example_myproject_Animal{
               data {
@@ -980,21 +1049,6 @@ If <code>maximum</code> is greater than <code>0</code>, make sure that <code>min
         {
           "displayName": "Cardi B",
           "data": {
-            "name": "Belcalis Marlenis Almánzar",
-            "favoriteAnimal": {
-              "displayName": "Reindeer",
-              "data": {
-                "otherNames": [
-                  "Caribou"
-                ]
-              }
-            }
-          }
-        },
-        {
-          "displayName": "Missy Elliott",
-          "data": {
-            "name": "Melissa Arnette Elliott",
             "favoriteAnimal": {
               "displayName": "Lion",
               "data": {
@@ -1004,15 +1058,25 @@ If <code>maximum</code> is greater than <code>0</code>, make sure that <code>min
           }
         },
         {
-          "displayName": "P!nk",
+          "displayName": "Missy Elliott",
           "data": {
-            "name": "Alecia Beth Moore",
             "favoriteAnimal": {
               "displayName": "Reindeer",
               "data": {
                 "otherNames": [
                   "Caribou"
                 ]
+              }
+            }
+          }
+        },
+        {
+          "displayName": "P!nk",
+          "data": {
+            "favoriteAnimal": {
+              "displayName": "Lion",
+              "data": {
+                "otherNames": []
               }
             }
           }
@@ -1026,9 +1090,10 @@ If <code>maximum</code> is greater than <code>0</code>, make sure that <code>min
 </div>
 </div>
 </div>
+</div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2023-11-09 14:32:44 UTC
+Last updated 2023-11-13 14:02:49 UTC
 </div>
 </div>
 </body>

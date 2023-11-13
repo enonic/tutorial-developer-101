@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="generator" content="Asciidoctor 2.0.20">
-<meta name="description" content="Starting from scratch, this chapter takes you through how to install all the necessary tools to get started with XP development.">
+<meta name="description" content="Starting from scratch, this chapter takes you through how to install all the necessary tools to get started with Enonic XP development.">
 <title>Setting up your development environment</title>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,300italic,400,400italic,600,600italic%7CNoto+Serif:400,400italic,700,700italic%7CDroid+Sans+Mono:400,700">
 <style>
@@ -441,18 +441,11 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <div id="toc" class="toc2">
 <div id="toctitle">Table of Contents</div>
 <ul class="sectlevel1">
-<li><a href="#the_command_line">The command line</a></li>
-<li><a href="#package_managers">Package managers</a>
-<ul class="sectlevel2">
-<li><a href="#macos_homebrew">macOS: Homebrew</a></li>
-<li><a href="#windows_scoop">Windows: Scoop</a></li>
-<li><a href="#linux_snapcraft">Linux: Snapcraft</a></li>
-</ul>
-</li>
 <li><a href="#the_enonic_cli">The Enonic CLI</a>
 <ul class="sectlevel2">
 <li><a href="#installation">Installation</a></li>
 <li><a href="#verification">Verification</a></li>
+<li><a href="#commands">Commands</a></li>
 </ul>
 </li>
 <li><a href="#git">Git</a>
@@ -461,7 +454,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <li><a href="#verification_2">Verification</a></li>
 </ul>
 </li>
-<li><a href="#source_code_editors">Source-code editors</a>
+<li><a href="#editor">Editor</a>
 <ul class="sectlevel2">
 <li><a href="#download_visual_studio_code">Download Visual Studio Code</a></li>
 </ul>
@@ -474,216 +467,23 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <div id="preamble">
 <div class="sectionbody">
 <div class="paragraph">
-<p>Before we can start building, let&#8217;s make sure we have the right tools available to work efficiently with XP. This chapter walks you through installing the fundamental tools we will be using throughout this guide, including a text editor, a package manager for your system, Git, and the Enonic CLI.</p>
+<p>The purpose of this chapter is to ensure you have the necessary tools to be able to start developing efficiently with XP, and if that&#8217;s not the case, guide you to setup your local environment for that purpose.</p>
 </div>
 <div class="paragraph">
-<p>If you&#8217;ve already got these installed, feel free to skip to the next chapter.</p>
+<p>In general, the bare minimum you&#8217;ll need are:</p>
 </div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="the_command_line"><a class="link" href="#the_command_line">The command line</a></h2>
-<div class="sectionbody">
-<div class="paragraph">
-<p>The command line&#8201;&#8212;&#8201;aka <em>the terminal</em>&#8201;&#8212;&#8201;is a powerful, text-based interface for running commands on your computer. You can also use the terminal to navigate your file system, similar to macOS&#8217; Finder or Windows&#8217; Explorer. The program running in the terminal (that interprets your commands) is known as a <em>shell</em>.</p>
-</div>
-<div class="paragraph">
-<p>The rest of this chapter will focus primarily on working with the command line, so go ahead and open your favorite terminal. If you don&#8217;t know how to open a terminal on your system, don&#8217;t worry! Instead, check out the guide for <a href="https://www.macworld.co.uk/how-to/mac-software/how-use-terminal-on-mac-3608274/">macOS</a>, <a href="https://www.lifewire.com/how-to-open-command-prompt-2618089">Windows</a>, or <a href="https://www.howtogeek.com/140679/beginner-geek-how-to-start-using-the-linux-terminal/">Linux</a> (depending on your operating system).</p>
-</div>
-<div class="paragraph">
-<p>When we ask you to "run a command" later on in this document, you can assume that we&#8217;re asking you to run it in a terminal unless otherwise specified.</p>
-</div>
-<div class="admonitionblock note">
-<table>
-<tr>
-<td class="icon">
-<i class="fa icon-note" title="Note"></i>
-</td>
-<td class="content">
-To run a command in your terminal, type in the command and press <kbd>enter</kbd>. For instance, the command <code>cd myfolder</code> would change the shell&#8217;s working directory to the <code>myfolder</code> directory, assuming that it exists.
-</td>
-</tr>
-</table>
-</div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="package_managers"><a class="link" href="#package_managers">Package managers</a></h2>
-<div class="sectionbody">
-<div class="paragraph">
-<p>Enonic provides a command line interface (CLI) for working with XP. To make it easy to install and keep it updated, we distribute it via a number of <em>package managers</em>. Package managers are terminal-based "app stores" that focus on developer and command line tools.</p>
-</div>
-<div class="paragraph">
-<p>Find the section below for your operating system to see what package managers we support and how to install them.</p>
-</div>
-<div class="sect2">
-<h3 id="macos_homebrew"><a class="link" href="#macos_homebrew">macOS: Homebrew</a></h3>
-<div class="paragraph">
-<p>For macOS, we distribute the Enonic CLI through the popular package manager <a href="https://brew.sh/">Homebrew</a>. Homebrew lets you install, uninstall, and manage your command line tools, including updating them when new versions are made available.</p>
-</div>
-<div class="paragraph">
-<p>To install Homebrew, follow the instructions in the link above or run the following command:</p>
-</div>
-<div class="literalblock">
-<div class="content">
-<pre>/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"</pre>
-</div>
-</div>
-<div class="paragraph">
-<p>Once installed, run the following command in your terminal to verify that everything is working:</p>
-</div>
-<div class="literalblock">
-<div class="content">
-<pre>brew help</pre>
-</div>
-</div>
-</div>
-<div class="sect2">
-<h3 id="windows_scoop"><a class="link" href="#windows_scoop">Windows: Scoop</a></h3>
-<div class="paragraph">
-<p>We use the <a href="https://scoop.sh/">Scoop</a> package manager for Windows. To install Scoop, visit their website, or simply run these two commands from Powershell:</p>
-</div>
-<div class="admonitionblock note">
-<table>
-<tr>
-<td class="icon">
-<i class="fa icon-note" title="Note"></i>
-</td>
-<td class="content">
-To launch Powershell from your regular terminal, the <em>Command Prompt</em>, simply execute the command <code>powershell</code>. The prompt should then start with <code>PS</code>.
-</td>
-</tr>
-</table>
-</div>
-<div class="literalblock">
-<div class="content">
-<pre>set-executionpolicy remotesigned -scope currentuser
-iwr -useb get.scoop.sh | iex</pre>
-</div>
-</div>
-<div class="paragraph">
-<p>To verify that Scoop was installed successfully, run the following command:</p>
-</div>
-<div class="literalblock">
-<div class="content">
-<pre>scoop help</pre>
-</div>
-</div>
-</div>
-<div class="sect2">
-<h3 id="linux_snapcraft"><a class="link" href="#linux_snapcraft">Linux: Snapcraft</a></h3>
-<div class="paragraph">
-<p>We use Snapcraft to distribute packages for Linux. Snapcraft comes preinstalled on a number of popular Linux distributions, including Ubuntu and Manjaro, and is also available for most other major Linux distributions, such as Debian, elementary OS, and Pop!_OS.</p>
-</div>
-<div class="paragraph">
-<p>Specific instructions will vary according to your distribution, so be sure to consult the <a href="https://snapcraft.io/docs/installing-snapd">snapd installation instructions</a> for your particular distro.</p>
-</div>
-<div class="paragraph">
-<p>To verify that it&#8217;s installed and available, run the following command in your terminal. It should print out your version of Snap.</p>
-</div>
-<div class="literalblock">
-<div class="content">
-<pre>snap version</pre>
-</div>
-</div>
-</div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="the_enonic_cli"><a class="link" href="#the_enonic_cli">The Enonic CLI</a></h2>
-<div class="sectionbody">
-<div class="paragraph">
-<p>Now, we&#8217;ll install the Enonic CLI via the package manager we just set up. The CLI provides a number of enonic-specific commands designed to make working with XP fast, easy, and efficient.</p>
-</div>
-<div class="admonitionblock note">
-<table>
-<tr>
-<td class="icon">
-<i class="fa icon-note" title="Note"></i>
-</td>
-<td class="content">
-<div class="paragraph">
-<p>While we heavily recommend using a package manager, you can also download and install the executables manually if you prefer. To do that, visit the <a href="https://repo.enonic.com/public/com/enonic/cli/enonic/">the Enonic CLI public repo</a>, download the files that correspond to the desired CLI version and your OS, and install them as you would any other binary files on your system. There is also <a href="https://repo.enonic.com/public/com/enonic/cli/installer/cli-windows/1.0.0/cli-windows-1.0.0.exe">a Windows installer for the CLI</a> available.</p>
-</div>
-</td>
-</tr>
-</table>
-</div>
-<div class="sect2">
-<h3 id="installation"><a class="link" href="#installation">Installation</a></h3>
-<div class="paragraph">
-<p>The steps differ depending on your OS. Follow the steps below that best match your OS.</p>
-</div>
-<div class="sect3">
-<h4 id="macos"><a class="link" href="#macos">macOS</a></h4>
-<div class="paragraph">
-<p>From your terminal:</p>
-</div>
-<div class="olist arabic">
-<ol class="arabic">
+<div class="ulist">
+<ul>
 <li>
-<p>Make the <code>enonic/cli</code> repository via <a href="https://docs.brew.sh/Taps">Homebrew&#8217;s tap functionality</a></p>
-<div class="literalblock">
-<div class="content">
-<pre>brew tap enonic/cli</pre>
-</div>
-</div>
+<p>Enonic CLI &#8594; <em>managing your XP projects</em></p>
 </li>
 <li>
-<p>Install the CLI</p>
-<div class="literalblock">
-<div class="content">
-<pre>brew install enonic</pre>
-</div>
-</div>
-</li>
-</ol>
-</div>
-<div class="paragraph">
-<p>To upgrade to newer versions of enonic CLI when they become available, run the command <code>brew upgrade enonic</code></p>
-</div>
-</div>
-<div class="sect3">
-<h4 id="windows"><a class="link" href="#windows">Windows</a></h4>
-<div class="paragraph">
-<p>From a Powershell terminal:</p>
-</div>
-<div class="olist arabic">
-<ol class="arabic">
-<li>
-<p>Make the CLI <a href="https://scoop.netlify.app/concepts/#buckets">bucket</a> available to install</p>
-<div class="literalblock">
-<div class="content">
-<pre>scoop bucket add enonic https://github.com/enonic/cli-scoop</pre>
-</div>
-</div>
+<p>Git and Github &#8594; <em>versioning your XP projects</em></p>
 </li>
 <li>
-<p>Install the CLI</p>
-<div class="literalblock">
-<div class="content">
-<pre>scoop install enonic</pre>
-</div>
-</div>
+<p>Editor / IDE (Integrated Development Environment) &#8594; <em>coding your ideas into XP projects</em></p>
 </li>
-</ol>
-</div>
-<div class="paragraph">
-<p>To upgrade to newer versions of enonic CLI when they become available, run the command <code>scoop update enonic</code></p>
-</div>
-</div>
-<div class="sect3">
-<h4 id="linux"><a class="link" href="#linux">Linux</a></h4>
-<div class="paragraph">
-<p>From your terminal, run the following command:</p>
-</div>
-<div class="literalblock">
-<div class="content">
-<pre>sudo snap install enonic</pre>
-</div>
-</div>
-<div class="paragraph">
-<p>Snap automatically keeps your snaps updated. To manually force an update, run the command <code>sudo snap refresh enonic</code></p>
+</ul>
 </div>
 <div class="admonitionblock tip">
 <table>
@@ -692,29 +492,176 @@ iwr -useb get.scoop.sh | iex</pre>
 <i class="fa icon-tip" title="Tip"></i>
 </td>
 <td class="content">
-<div class="dlist">
-<dl>
-<dt class="hdlist1">No Snap? Try this instead: </dt>
-<dd>
-<p><code>wget -qO- <a href="https://repo.enonic.com/public/com/enonic/cli/installer/cli-linux/1.0.0/cli-linux-1.0.0.sh" class="bare">https://repo.enonic.com/public/com/enonic/cli/installer/cli-linux/1.0.0/cli-linux-1.0.0.sh</a> | sh</code></p>
-</dd>
-</dl>
-</div>
+If you&#8217;ve already got those configured and installed, feel free to skip to the next chapter.
 </td>
 </tr>
 </table>
 </div>
 </div>
 </div>
+<div class="sect1">
+<h2 id="the_enonic_cli"><a class="link" href="#the_enonic_cli">The Enonic CLI</a></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Enonic provides a Command Line Interface (CLI) for working with XP.</p>
+</div>
+<div class="paragraph">
+<p>If the concept of CLI is new to you, you can imagine it as an interactive terminal program that will listen for some specific inputs (usually as text), and based on them, execute specific tasks on your machine.</p>
+</div>
+<div class="paragraph">
+<p>The goal of the CLI is to improve the development workflow, and, by using it, you&#8217;ll have an easy and quick way to manage your XP apps.</p>
+</div>
+<div class="sect2">
+<h3 id="installation"><a class="link" href="#installation">Installation</a></h3>
+<div class="paragraph">
+<p>The easiest and fastest way to install the CLI is by using Node Package Manager (NPM):</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-shell" data-lang="shell">npm install -g @enonic/cli</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Note that to run the npm install command you need to make sure that you have both Node and NPM installed on your machine. You can quickly check if they are installed by running the following commands on your terminal:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-shell" data-lang="shell">node -v</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>to check the version of Node you have installed locally. Same for NPM:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-shell" data-lang="shell">npm -v</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>If they are not installed, you can head to <a href="https://nodejs.org/">nodejs.org</a> to proceed installing them.</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+<div class="paragraph">
+<p>Enonic CLI is also available on other package managers, such as <a href="https://developer.enonic.com/start#brew">brew</a> for MacOS, <a href="https://developer.enonic.com/start#scoop">scoop</a> for Windows and <a href="https://developer.enonic.com/start#curl">Snapcraft</a> on Linux.</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+</div>
 <div class="sect2">
 <h3 id="verification"><a class="link" href="#verification">Verification</a></h3>
 <div class="paragraph">
-<p>When you have installed the CLI, verify that it&#8217;s working by running</p>
+<p>After running the installation command above, you can check if the Enonic CLI was properly installed by running</p>
 </div>
-<div class="literalblock">
+<div class="listingblock">
 <div class="content">
-<pre>enonic version</pre>
+<pre class="highlight"><code class="language-shell" data-lang="shell">enonic -v</code></pre>
 </div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="commands"><a class="link" href="#commands">Commands</a></h3>
+<div class="paragraph">
+<p>Let&#8217;s first list some commands&#8230;&#8203; run the following command in your terminal:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-shell" data-lang="shell">enonic</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>It should output something that looks a bit like this:</p>
+</div>
+<div class="listingblock">
+<div class="title">Main help page</div>
+<div class="content">
+<pre class="highlight"><code class="language-shell" data-lang="shell">Enonic CLI 2.6.1
+Manage XP instances, home folders and projects
+USAGE:
+   enonic [global options] [command] [command options] [arguments...]
+
+COMMANDS:
+     create     Create a new Enonic project
+     snapshot   Create and restore snapshots
+     dump       Dump and load complete repositories
+     export     Export data from a given repository, branch and content path.
+     import     Import data from a named export.
+     app        Install, stop and start applications
+     repo       Tune and manage repositories
+     cms        CMS commands
+     system     System commands
+     auditlog   Manage audit log repository
+     latest     Check for latest version
+     upgrade    Upgrade to the latest version
+     uninstall  Uninstall Enonic CLI
+     vacuum     Removes old version history and segments from content storage
+     help, h    Shows a list of commands or help for one command
+
+CLOUD COMMANDS:
+     cloud  Manage Enonic cloud
+
+PROJECT COMMANDS:
+     sandbox  Manage Enonic instances
+     project  Manage Enonic projects
+
+GLOBAL OPTIONS:
+   --help, -h     show help
+   --version, -v  print the version</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>If you want to know more about how to use one of the subcommands, you can use the <code>help</code> subcommand. For instance, if you want to know more about the <code>sandbox</code> subcommand, you can run:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-shell" data-lang="shell">enonic sandbox help</code></pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="title">Sandbox help page</div>
+<div class="content">
+<pre class="highlight"><code class="language-shell" data-lang="shell">NAME:
+   enonic sandbox - Manage Enonic instances
+
+USAGE:
+   enonic sandbox [global options] command [command options] [arguments...]
+
+VERSION:
+   2.6.1
+
+COMMANDS:
+   list, ls         List all sandboxes
+   start            Start the sandbox.
+   stop             Stop the sandbox started in detached mode.
+   create           Create a new sandbox.
+   delete, del, rm  Delete a sandbox
+   upgrade, up      Upgrades the distribution version.
+
+GLOBAL OPTIONS:
+   --help, -h  show help</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>As can be seen, there are a lot of commands and their subcommands to help you. On this guide, we&#8217;ll only cover the necessary ones to be able to start developing on XP.</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+Consider checking the <a href="https://developer.enonic.com/docs/enonic-cli/stable">CLI documentation</a> to further investigate its capabilities.
+</td>
+</tr>
+</table>
 </div>
 </div>
 </div>
@@ -743,7 +690,7 @@ Want to learn more about Git? Check out <a href="https://guides.github.com/intro
 <p>To install Git, follow the notes for your operating system below.</p>
 </div>
 <div class="sect3">
-<h4 id="macos_2"><a class="link" href="#macos_2">macOS</a></h4>
+<h4 id="macos"><a class="link" href="#macos">macOS</a></h4>
 <div class="admonitionblock note">
 <table>
 <tr>
@@ -759,31 +706,31 @@ Apple maintains its own fork of Git. If you have XCode installed, you already ha
 <div class="paragraph">
 <p>To install Git via Homebrew, run this command:</p>
 </div>
-<div class="literalblock">
+<div class="listingblock">
 <div class="content">
-<pre>brew install git</pre>
+<pre class="highlight"><code class="language-shell" data-lang="shell">brew install git</code></pre>
 </div>
 </div>
 </div>
 <div class="sect3">
-<h4 id="windows_2"><a class="link" href="#windows_2">Windows</a></h4>
+<h4 id="windows"><a class="link" href="#windows">Windows</a></h4>
 <div class="paragraph">
 <p>To install Git using Scoop, run the following command from Powershell:</p>
 </div>
-<div class="literalblock">
+<div class="listingblock">
 <div class="content">
-<pre>scoop install git</pre>
+<pre class="highlight"><code class="language-shell" data-lang="shell">scoop install git</code></pre>
 </div>
 </div>
 </div>
 <div class="sect3">
-<h4 id="linux_2"><a class="link" href="#linux_2">Linux</a></h4>
+<h4 id="linux"><a class="link" href="#linux">Linux</a></h4>
 <div class="paragraph">
 <p>To install Git with Snapcraft, run the following command:</p>
 </div>
-<div class="literalblock">
+<div class="listingblock">
 <div class="content">
-<pre>sudo snap install git</pre>
+<pre class="highlight"><code class="language-shell" data-lang="shell">sudo snap install git</code></pre>
 </div>
 </div>
 </div>
@@ -793,16 +740,16 @@ Apple maintains its own fork of Git. If you have XCode installed, you already ha
 <div class="paragraph">
 <p>Once you have installed Git, you can verify that it&#8217;s working correctly by running the following command:</p>
 </div>
-<div class="literalblock">
+<div class="listingblock">
 <div class="content">
-<pre>git version</pre>
+<pre class="highlight"><code class="language-shell" data-lang="shell">git version</code></pre>
 </div>
 </div>
 </div>
 </div>
 </div>
 <div class="sect1">
-<h2 id="source_code_editors"><a class="link" href="#source_code_editors">Source-code editors</a></h2>
+<h2 id="editor"><a class="link" href="#editor">Editor</a></h2>
 <div class="sectionbody">
 <div class="paragraph">
 <p>Source-code editors (also known as <em>text editors</em> or just <em>editors</em> for short) are applications designed primarily for editing plain text and often specifically for working with code. They are therefore commonly used for programming.</p>
@@ -816,33 +763,10 @@ Apple maintains its own fork of Git. If you have XCode installed, you already ha
 <p><a href="https://code.visualstudio.com/">Visual Studio Code</a> (often shortened to <em>VS Code</em> or simply <em>Code</em>) is one of the most popular source-code editors around at the moment. It&#8217;s free, open source, and available on all major platforms.</p>
 </div>
 <div class="paragraph">
-<p>You can navigate to the <a href="https://code.visualstudio.com/Download">download page</a> and download and install the version matching your operating system. Alternatively, if you&#8217;re getting into this whole package manager business, it&#8217;s also available in all package managers listed above. The install instructions will vary, though, so you&#8217;ll have to figure that out on your own.</p>
-</div>
-<div class="sect3">
-<h4 id="install_prettier"><a class="link" href="#install_prettier">Install Prettier</a></h4>
-<div class="paragraph">
-<p>While not mandatory, we also recommend you install the <a href="https://marketplace.visualstudio.com/items?itemName=esbenp.prettier-vscode">"Prettier - Code formatter" plugin </a>
-to help keep your code nicely formatted. It helps to keep your code easier to read.</p>
+<p>You can navigate to their <a href="https://code.visualstudio.com/Download">download page</a> and install the version matching your operating system.</p>
 </div>
 <div class="paragraph">
-<p>Follow these steps to install the VS Code plugin:</p>
-</div>
-<div class="olist arabic">
-<ol class="arabic">
-<li>
-<p>Open the VS Code extensions panel (View &#8658; Extensions).</p>
-</li>
-<li>
-<p>Search for: “Prettier - Code formatter”.</p>
-</li>
-<li>
-<p>Click “Install”.</p>
-</li>
-</ol>
-</div>
-<div class="paragraph">
-<p>When the installation is finished, you must restart VS Code to activate the Prettier.</p>
-</div>
+<p>If you opt to move forward with VS code as your editor, its worth checking some of the <a href="https://marketplace.visualstudio.com/">powerful extensions</a> available on their marketplace.</p>
 </div>
 </div>
 </div>
@@ -851,7 +775,7 @@ to help keep your code nicely formatted. It helps to keep your code easier to re
 <h2 id="summary"><a class="link" href="#summary">Summary</a></h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>Congrats! You&#8217;ve installed a package manager, Git, the Enonic CLI and a text editor. You&#8217;re now set up to start working with Enonic XP 🚀</p>
+<p>Congrats! You&#8217;ve installed the Enonic CLI, Git, and an editor. You&#8217;re now set up to start working with Enonic XP 🚀</p>
 </div>
 <div class="paragraph">
 <p>Keep your new tools at hand; we&#8217;ll be using them heavily throughout this guide, so you&#8217;ll have lots of time to get to know them better.</p>
@@ -861,7 +785,7 @@ to help keep your code nicely formatted. It helps to keep your code easier to re
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2023-11-09 14:32:44 UTC
+Last updated 2023-11-13 14:02:49 UTC
 </div>
 </div>
 </body>

@@ -5,8 +5,8 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="generator" content="Asciidoctor 2.0.20">
-<meta name="description" content="Rich text is an incredibly powerful editing tool and an important part of the XP experience. Learn how to configure it here!">
-<title>Rich text: HtmlArea</title>
+<meta name="description" content="Rich text is an incredibly powerful editing tool and an important part of the XP experience. Learn how to configure it here.">
+<title>Rich text</title>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,300italic,400,400italic,600,600italic%7CNoto+Serif:400,400italic,700,700italic%7CDroid+Sans+Mono:400,700">
 <style>
 /*! Asciidoctor default stylesheet | MIT License | https://asciidoctor.org */
@@ -437,12 +437,12 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 </head>
 <body class="article toc2 toc-right">
 <div id="header">
-<h1>Rich text: HtmlArea</h1>
+<h1>Rich text</h1>
 <div id="toc" class="toc2">
 <div id="toctitle">Table of Contents</div>
 <ul class="sectlevel1">
 <li><a href="#overview">Overview</a></li>
-<li><a href="#configuration_of_text_tools">Configuration of text tools</a>
+<li><a href="#htmlarea_include_and_exclude">HtmlArea include and exclude</a>
 <ul class="sectlevel2">
 <li><a href="#task_animal_description">Task: Animal description</a></li>
 </ul>
@@ -459,10 +459,10 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 </li>
 <li><a href="#macros">Macros</a>
 <ul class="sectlevel2">
-<li><a href="#task_panel_macros">Task: Panel Macros</a></li>
+<li><a href="#task_embed_iframe_macro">Task: Embed iframe macro</a></li>
 </ul>
 </li>
-<li><a href="#headless">Headless</a>
+<li><a href="#graphql_api">GraphQL API</a>
 <ul class="sectlevel2">
 <li><a href="#links_2">Links</a></li>
 <li><a href="#image_srcset">Image srcset</a></li>
@@ -477,7 +477,13 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <div id="preamble">
 <div class="sectionbody">
 <div class="paragraph">
-<p>If you want to work with rich text in Content Studio, HtmlArea is your friend.  This rich text input type offers some very powerful editing capabilities and a lot of configuration options. This whole chapter is dedicated to the HtmlArea: how it works and how to use it in a headless fashion.</p>
+<p>If you want to work with rich text in Content Studio, HtmlArea is the input type to go.</p>
+</div>
+<div class="paragraph">
+<p>This input type offers some very powerful editing capabilities and a lot of configuration options.</p>
+</div>
+<div class="paragraph">
+<p>This whole chapter is dedicated to <a href="https://developer.enonic.com/docs/xp/stable/cms/input-types#htmlarea">HtmlArea input type</a> and the editor used to define its data. For a full detailed exaplanation of the Rich text editor used in content studio, please visit the <a href="https://developer.enonic.com/docs/content-studio/stable/editor/rich-text-editor">Rich text editor reference documentation</a>.</p>
 </div>
 <div class="admonitionblock note">
 <table>
@@ -496,7 +502,7 @@ The tasks and examples in this chapter are based on work done in previous chapte
 <div class="sect1">
 <h2 id="overview"><a class="link" href="#overview">Overview</a></h2>
 <div class="sectionbody">
-<div class="imageblock">
+<div class="imageblock text-center">
 <div class="content">
 <img src="media/input-type-html-area.png" alt="A text input field with a tools ribbon just above." width="750">
 </div>
@@ -514,7 +520,7 @@ The tasks and examples in this chapter are based on work done in previous chapte
 </div>
 </div>
 <div class="sect1">
-<h2 id="configuration_of_text_tools"><a class="link" href="#configuration_of_text_tools">Configuration of text tools</a></h2>
+<h2 id="htmlarea_include_and_exclude"><a class="link" href="#htmlarea_include_and_exclude">HtmlArea include and exclude</a></h2>
 <div class="sectionbody">
 <div class="paragraph">
 <p>We can use the HtmlArea&#8217;s <code>config</code> section to specify which rich text controls should be available when editing. Using a combination of the <code>include</code> and <code>exclude</code> tags, we can customize the input&#8217;s appearance.</p>
@@ -544,9 +550,9 @@ The tasks and examples in this chapter are based on work done in previous chapte
 &lt;/input&gt;</code></pre>
 </div>
 </div>
-<div class="imageblock">
+<div class="imageblock text-center">
 <div class="content">
-<img src="media/input-type-html-area-no-controls.png" alt="An HtmlArea configured to exclude all editing tools." width="750">
+<img src="media/input-type-html-area-no-controls.png" alt="An HtmlArea configured to exclude all editing tools" width="750">
 </div>
 <div class="title">Figure 2. An HtmlArea exput with <code>&lt;exclude&gt;*&lt;/exclude&gt;</code> and a selection of tools.</div>
 </div>
@@ -566,19 +572,19 @@ The tasks and examples in this chapter are based on work done in previous chapte
 &lt;/input&gt;</code></pre>
 </div>
 </div>
-<div class="imageblock">
+<div class="imageblock text-center">
 <div class="content">
-<img src="media/input-type-html-area-some-controls.png" alt="An HtmlArea configured to include a selection of editing tools." width="750">
+<img src="media/input-type-html-area-some-controls.png" alt="An HtmlArea configured to include a selection of editing tools" width="750">
 </div>
 <div class="title">Figure 3. An HtmlArea with a selection of tools and <code>&lt;exclude&gt;*&lt;/exclude&gt;</code></div>
 </div>
 <div class="paragraph">
-<p>For a full overview of the available text tools and HtmlArea configuration options, visit the <a href="https://developer.enonic.com/docs/xp/stable/cms/input-types#htmlarea">HtmlArea input type reference docs</a>. Additionally, you can find a more thorough explanation of the toolbar and its tools in <a href="https://developer.enonic.com/docs/content-studio/stable/editor/rich-text-editor">the rich text editor reference documentation</a>.</p>
+<p>As introduced in the beginning, for a full overview of the available text tools and HtmlArea configuration options, visit the <a href="https://developer.enonic.com/docs/xp/stable/cms/input-types#htmlarea">HtmlArea input type reference docs</a>.</p>
 </div>
 <div class="sect2">
 <h3 id="task_animal_description"><a class="link" href="#task_animal_description">Task: Animal description</a></h3>
 <div class="paragraph">
-<p>Let&#8217;s add a rich-text description field to our animals. The input should be optional and have at most a single occurrence. You can include any editor tools you want, but it must at least have the <code>Link</code> ,<code>Image</code> and <code>Macro</code> tools, as we&#8217;ll be using these later. Otherwise, configure it as you want.</p>
+<p>Let&#8217;s add a rich-text description field to the animal content type. The input should be optional and have at most a single occurrence. You can include any editor tools you want, but it must at least have the <code>Link</code> ,<code>Image</code> and <code>Macro</code> tools, as we&#8217;ll be using these later. Otherwise, configure it as you want.</p>
 </div>
 <div class="paragraph">
 <p>Your content type should now look something like this:</p>
@@ -593,17 +599,7 @@ The tasks and examples in this chapter are based on work done in previous chapte
   &lt;super-type&gt;base:structured&lt;/super-type&gt;
   &lt;form&gt;
 
-    &lt;input type="TextLine" name="otherNames"&gt;
-      &lt;label&gt;Other names&lt;/label&gt;
-      &lt;help-text&gt;Other names for this species.&lt;/help-text&gt;
-      &lt;occurrences minimum="0" maximum="0" /&gt;
-    &lt;/input&gt;
-
-    &lt;input name="images" type="ImageSelector"&gt;
-      &lt;label&gt;Images&lt;/label&gt;
-      &lt;help-text&gt;Images of the animal&lt;/help-text&gt;
-      &lt;occurrences minimum="0" maximum="3" /&gt;
-    &lt;/input&gt;
+    &lt;!-- other fields elided for brevity --&gt;
 
     &lt;input name="description" type="HtmlArea"&gt;
       &lt;label&gt;Description&lt;/label&gt;
@@ -621,7 +617,7 @@ The tasks and examples in this chapter are based on work done in previous chapte
 </div>
 </div>
 <div class="paragraph">
-<p>With the new content type deployed, you are ready to complete the specific tasks below.</p>
+<p>With the new content type deployed, you are ready to continue with further tasks we&#8217;ll introduce in next sections.</p>
 </div>
 </div>
 </div>
@@ -630,10 +626,23 @@ The tasks and examples in this chapter are based on work done in previous chapte
 <h2 id="links"><a class="link" href="#links">Links</a></h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>In addition to good old URLs, in the HtmlArea, you may also insert links to other content items, links to download media files, or links to e-mail.</p>
+<p>In addition to good old URLs, the Rich text editor provides a more powerful way of creating links, in which you can:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Reference other content items (possbily passing query parameters);</p>
+</li>
+<li>
+<p>If the referenced content is of type media, you can set a specific link to: open the file, directly download the file, or treat it as a regular content;</p>
+</li>
+<li>
+<p>Insert url links of type: https, http, ftp, cel or relative;</p>
+</li>
+</ul>
 </div>
 <div class="paragraph">
-<p>An important feature, is that when creating internal links (content or media links), Enonic will save a references to the target items, similar to how the ContentSelector works. This is useful when looking for usage and dependencies between content items later.</p>
+<p>An important feature, is that when creating internal links (content or media links), XP will save a references to the target items, similar to how the ContentSelector works. This is useful when looking for usage and dependencies between content items later.</p>
 </div>
 <div class="admonitionblock note">
 <table>
@@ -677,14 +686,14 @@ You can also use <span class="keyseq"><kbd>ctrl</kbd>+<kbd>K</kbd></span> to ins
 .Choose the content tab, and select the previously created "Lion" as the target item</p>
 <div class="imageblock">
 <div class="content">
-<img src="media/rich-text-insert-content-link.png" alt="Screenshot of the insert link dialog." width="1050">
+<img src="media/rich-text-insert-content-link.png" alt="Screenshot of the insert link dialog" width="1050">
 </div>
 </div>
 </li>
 </ol>
 </div>
 <div class="paragraph">
-<p>When done, save the item - but keep the tab open to complete the upcoming tasks</p>
+<p>When done, save the item - but keep the tab open to complete the upcoming tasks.</p>
 </div>
 </div>
 </div>
@@ -715,21 +724,9 @@ You can also use <span class="keyseq"><kbd>ctrl</kbd>+<kbd>K</kbd></span> to ins
 <p>Insert an image below the existing text. Use the "insert image" button in the toolbar.</p>
 <div class="imageblock">
 <div class="content">
-<img src="media/rich-text-toolbar-image-highlight.png" alt="The rich text toolbar with the image tool circled by a blue circle." width="1050">
+<img src="media/rich-text-toolbar-image-highlight.png" alt="The rich text toolbar with the image tool circled by a blue circle" width="1050">
 </div>
 <div class="title">Figure 4. The toolbar with the image tool highlighted</div>
-</div>
-<div class="admonitionblock note">
-<table>
-<tr>
-<td class="icon">
-<i class="fa icon-note" title="Note"></i>
-</td>
-<td class="content">
-You can also use <span class="keyseq"><kbd>ctrl</kbd>+<kbd>L</kbd></span> to insert an image.
-</td>
-</tr>
-</table>
 </div>
 </li>
 <li>
@@ -738,7 +735,7 @@ You can also use <span class="keyseq"><kbd>ctrl</kbd>+<kbd>L</kbd></span> to ins
 <div class="content">
 <img src="media/rich-text-insert-image.png" alt="The insert image dialog, showing the image, an image styles dropdown, caption, and alt text fields" width="1050">
 </div>
-<div class="title">Figure 5. The HtmlArea insert image dialog. Photo by <a href="https://unsplash.com/@kydroon">Kurt Cotoaga</a> 🦁</div>
+<div class="title">Figure 5. The HtmlArea insert image dialog. Photo by <a href="https://unsplash.com/@zmachacek">Zdeněk Macháček</a></div>
 </div>
 </li>
 <li>
@@ -784,12 +781,12 @@ You can also use <span class="keyseq"><kbd>ctrl</kbd>+<kbd>L</kbd></span> to ins
 </div>
 </li>
 <li>
-<p>With this style picked up by XP, you&#8217;ll have the "Grayscale" option available in the image styles dropdown. Select it to apply it to the image.</p>
+<p>With this style picked up by XP, you&#8217;ll have the "Grayscale" option available in the image styles dropdown. Select it to apply it to the image and update your image.</p>
 <div class="imageblock">
 <div class="content">
-<img src="media/rich-text-insert-image-styled.png" alt="The insert image dialog showing the results of applying the image styles to the image" width="1050">
+<img src="media/rich-text-insert-image-styled.png" alt="The description rich text showing the results of applying the image styles to the image" width="1050">
 </div>
-<div class="title">Figure 6. Example image with an the style applied</div>
+<div class="title">Figure 6. Example of description with inserted image styled</div>
 </div>
 </li>
 </ol>
@@ -801,52 +798,27 @@ You can also use <span class="keyseq"><kbd>ctrl</kbd>+<kbd>L</kbd></span> to ins
 <h2 id="macros"><a class="link" href="#macros">Macros</a></h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>Macros enable you to insert custom components within your rich text field. When the content is rendered, the macro is replaced with the actual component implementation.</p>
+<p>Macros enable you to insert custom components within your rich text field</p>
+</div>
+<div class="paragraph">
+<p>When the content is rendered, the macro is replaced with the actual component implementation.</p>
 </div>
 <div class="paragraph">
 <p>Similar to content types, macros can define forms that help editors configure them.</p>
 </div>
 <div class="sect2">
-<h3 id="task_panel_macros"><a class="link" href="#task_panel_macros">Task: Panel Macros</a></h3>
+<h3 id="task_embed_iframe_macro"><a class="link" href="#task_embed_iframe_macro">Task: Embed iframe macro</a></h3>
 <div class="paragraph">
-<p>The Panel Macros app comes with a set of pre-defined macros that may look something like this when rendered:</p>
+<p>The embed macro enable you to insert iframes. In this context, we&#8217;ll embed this <a href="https://www.youtube.com/watch?v=gr5EwZo_CHQ">Lynx youtube video</a>.</p>
+</div>
+<div class="paragraph">
+<p>Let&#8217;s add the macro to the "Lynx" content item.</p>
 </div>
 <div class="imageblock">
 <div class="content">
-<img src="media/macros-panel-macros.jpg" alt="The Panel Macros package in action, showing differently colored panels." width="900">
+<img src="media/rich-text-toolbar-macro-highlight.png" alt="The rich text toolbar with the macro button circled by a blue circle" width="1050">
 </div>
-<div class="title">Figure 7. The Panel Macros in action</div>
-</div>
-<div class="paragraph">
-<p>To use these macros, we first need to install the Panel Macros.</p>
-</div>
-<div class="olist arabic">
-<ol class="arabic">
-<li>
-<p>Navigate to the Applications page (via the XP menu).</p>
-</li>
-<li>
-<p>Press "Install"</p>
-</li>
-<li>
-<p>Search for and install the "Panel Macros" app.</p>
-</li>
-<li>
-<p>Edit your site (My First Site). In the applications dropdown, find Panel Macros, and add it.</p>
-</li>
-<li>
-<p>Save and exit.</p>
-</li>
-</ol>
-</div>
-<div class="paragraph">
-<p>Next up, let&#8217;s add a macro to the "Lynx" content item.</p>
-</div>
-<div class="imageblock">
-<div class="content">
-<img src="media/rich-text-toolbar-macro-highlight.png" alt="The rich text toolbar with the macro button circled by a blue circle." width="1050">
-</div>
-<div class="title">Figure 8. The toolbar with the macro button highlighted</div>
+<div class="title">Figure 7. The toolbar with the macro button highlighted</div>
 </div>
 <div class="olist arabic">
 <ol class="arabic">
@@ -854,38 +826,10 @@ You can also use <span class="keyseq"><kbd>ctrl</kbd>+<kbd>L</kbd></span> to ins
 <p>Click "insert macro".</p>
 </li>
 <li>
-<p>Select one of the panels. If you have no preference, try the "Info panel".</p>
+<p>Select the "Embed iframe" macro</p>
 </li>
 <li>
-<p>Add a header and some text to it. For instance:</p>
-<div class="dlist">
-<div class="title">Lynx macro content</div>
-<dl>
-<dt class="hdlist1">Header</dt>
-<dd>
-<p>Habitats</p>
-</dd>
-<dt class="hdlist1">Text</dt>
-<dd>
-<p>The lynx inhabits high altitude forests with dense cover of shrubs, reeds, and tall grass.</p>
-<div class="imageblock">
-<div class="content">
-<img src="media/macros-insert-macro.png" alt="A form with 'header' and 'description' fields. Used to set macro parameters." width="1200">
-</div>
-<div class="title">Figure 9. The insert macro form with habitat data</div>
-</div>
-</dd>
-</dl>
-</div>
-</li>
-<li>
-<p>If configured, you may also get a preview of what the macro will look like.</p>
-<div class="imageblock">
-<div class="content">
-<img src="media/macros-preview-macro.png" alt="The text we specified in the macro preview form inside a light blue box with an icon attached" width="1200">
-</div>
-<div class="title">Figure 10. The macro preview function</div>
-</div>
+<p>Add the following iframe to it: <code>&lt;iframe width="560" height="315" src="https://www.youtube.com/embed/gr5EwZo_CHQ?si=IlkTGRuGVV7BxEOs" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen&gt;&lt;/iframe&gt;</code></p>
 </li>
 </ol>
 </div>
@@ -896,22 +840,34 @@ You can also use <span class="keyseq"><kbd>ctrl</kbd>+<kbd>L</kbd></span> to ins
 <i class="fa icon-note" title="Note"></i>
 </td>
 <td class="content">
-The Macro can be previewed because the Panel Macros includes a standard preview.
+This macro can&#8217;t be previewed because the Embed iframe macro does not includes a standard preview.
 </td>
 </tr>
 </table>
 </div>
 <div class="paragraph">
-<p>For more information on macros, including how to create your very own, visit to <a href="https://developer.enonic.com/docs/xp/stable/cms/macros">the macro reference docs</a>.</p>
+<p>As you&#8217;ll see in next section, when querying the description of an Animal content, you&#8217;ll be able to properly get the iframe we passed to "Embed iframe" macro and process it as you&#8217;d like in your front-end.</p>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+For more information on macros, including how to create your very own, visit to <a href="https://developer.enonic.com/docs/xp/stable/cms/macros">the macro reference docs</a>.
+</td>
+</tr>
+</table>
 </div>
 </div>
 </div>
 </div>
 <div class="sect1">
-<h2 id="headless"><a class="link" href="#headless">Headless</a></h2>
+<h2 id="graphql_api"><a class="link" href="#graphql_api">GraphQL API</a></h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>When fetching rich text via the Guillotine API, the most commonly used output is "processed html". This is essentially unstyled, semantic HTML. It&#8217;s then up to you to style the content in your client.</p>
+<p>When fetching rich text via the API, the most commonly used output is "processed html". This is essentially unstyled, semantic HTML. It&#8217;s then up to you to style the content in your client.</p>
 </div>
 <div class="paragraph">
 <p>Links, images and macros will potentially require additional client-side processing.</p>
@@ -920,12 +876,20 @@ The Macro can be previewed because the Panel Macros includes a standard preview.
 <p>The following query returns the "Lynx" content, and the <code>description</code> field al processed HTML.</p>
 </div>
 <div class="listingblock">
-<div class="title">Fetching rich text via Headless API</div>
+<div class="title">Fetching rich text via GraphQL API</div>
 <div class="content">
 <pre class="highlight"><code class="language-GraphQL" data-lang="GraphQL">{
   guillotine {
-    query(query: "displayName = 'Lynx'")
-     {
+    queryDsl(
+      query: {
+        term: {
+          field: "displayName",
+          value: {
+            string: "Lynx"
+          }
+        }
+      }
+    ) {
       ... on com_example_myproject_Animal {
         data {
           description {
@@ -944,11 +908,11 @@ The Macro can be previewed because the Panel Macros includes a standard preview.
 <pre class="highlight"><code class="language-json" data-lang="json">{
   "data": {
     "guillotine": {
-      "query": [
+      "queryDsl": [
         {
           "data": {
             "description": {
-              "processedHtml": "&lt;p&gt;Lynx are cats, just like &lt;a href=\"/admin/site/preview/default/draft/my-first-site/animals/lion\" data-link-ref=\"b5ccb5ff-7458-4dae-8a4c-bc3f5df9fc63\" title=\"The big cat\"&gt;lions&lt;/a&gt;.&lt;/p&gt;\n\n&lt;figure class=\"captioned conteditor-style-grayscale editor-align-justify\"&gt;&lt;img alt=\"A yawning lion cub\" src=\"/admin/site/preview/default/draft/_/image/450a1e29-891b-4d5e-977c-719b5a2b9782:ad62be20ff5129561409bcf5b8aae435e980d09a/width-768/lion-cub.jpg\" data-image-ref=\"3c4d6ce4-4536-4d96-a65d-3e0b81f44f27\" style=\"width:100%\" /&gt;\n&lt;figcaption&gt;So sleepy 🤗&lt;/figcaption&gt;\n&lt;/figure&gt;\n\n&lt;p&gt;&lt;editor-macro data-macro-name=\"info\" data-macro-ref=\"1c8cbb83-f0e5-45ce-8027-ced88d165a2d\"&gt;The lynx inhabits high altitude forests with dense cover of shrubs, reeds, and tall grass.&lt;/editor-macro&gt;&lt;/p&gt;\n"
+              "processedHtml": "&lt;p&gt;Lynx are cats, just like &lt;a href=\"/admin/site/preview/my-first-project/draft/animals/lion\" data-link-ref=\"8cc82fd1-9063-4604-9f51-5f059d7a5d2e\"&gt;lions&lt;/a&gt;.&lt;/p&gt;\n\n&lt;figure class=\"captioned editor-align-justify square-grayscale\"&gt;&lt;img alt=\"lynx.jpg\" src=\"/admin/site/preview/my-first-project/draft/_/image/be6bb93a-7d99-4ed2-b424-4e435b89f392:6a1e144ef4ebab19e9071794ad753130d5bb5497/width-768/lynx.jpg\" style=\"width:100%\" data-image-ref=\"4dced964-cd1c-445d-bb9f-80387467e165\"&gt;\n\n&lt;/figure&gt;\n\n&lt;p&gt;&lt;editor-macro data-macro-name=\"embed\" data-macro-ref=\"a1490c65-3654-4b29-9b1a-eb3894b6f59f\"&gt;&amp;lt;iframe title=\"YouTube video player\" src=\"https://www.youtube.com/embed/gr5EwZo_CHQ?si=IlkTGRuGVV7BxEOs\" height=\"315\" width=\"560\"&amp;gt;&amp;lt;/iframe&amp;gt;&lt;/editor-macro&gt;&lt;/p&gt;\n"
             }
           }
         }
@@ -965,22 +929,16 @@ The Macro can be previewed because the Panel Macros includes a standard preview.
 <div class="title">Processed HTML output</div>
 <div class="content">
 <pre class="highlight"><code class="language-html" data-lang="html">&lt;p&gt;
-  Lynx are cats, just like &lt;a href="/admin/site/preview/default/draft/my-first-site/animals/lion" data-link-ref="b5ccb5ff-7458-4dae-8a4c-bc3f5df9fc63" title="The big cat"&gt;lions&lt;/a&gt;.
+  Lynx are cats, just like &lt;a href="/admin/site/preview/my-first-project/draft/animals/lion" data-link-ref="8cc82fd1-9063-4604-9f51-5f059d7a5d2e"&gt;lions&lt;/a&gt;.
 &lt;/p&gt;
 
-&lt;figure class="captioned square-grayscale editor-align-justify"&gt;
-  &lt;img
-    alt="A yawning lion cub"
-    src="/admin/site/preview/default/draft/_/image/450a1e29-891b-4d5e-977c-719b5a2b9782:ad62be20ff5129561409bcf5b8aae435e980d09a/block-768-768/lion-cub.jpg?filter=hsbcolorize%280x000000%29%3B+grayscale%28%29%3B+border%286%2C+0x000000%29"
-    data-image-ref="3c4d6ce4-4536-4d96-a65d-3e0b81f44f27"
-    style="width:100%" /&gt;
-  &lt;figcaption&gt;So sleepy 🤗&lt;/figcaption&gt;
+&lt;figure class="captioned editor-align-justify square-grayscale"&gt;
+  &lt;img alt="lynx.jpg" src="/admin/site/preview/my-first-project/draft/_/image/be6bb93a-7d99-4ed2-b424-4e435b89f392:6a1e144ef4ebab19e9071794ad753130d5bb5497/width-768/lynx.jpg" style="width:100%" data-image-ref="4dced964-cd1c-445d-bb9f-80387467e165"&gt;
 &lt;/figure&gt;
 
 &lt;p&gt;
-  &lt;editor-macro
-    data-macro-name="info"
-    data-macro-ref="1c8cbb83-f0e5-45ce-8027-ced88d165a2d"&gt;The lynx inhabits high altitude forests with dense cover of shrubs, reeds, and tall grass.
+  &lt;editor-macro data-macro-name="embed" data-macro-ref="a1490c65-3654-4b29-9b1a-eb3894b6f59f"&gt;
+    &amp;lt;iframe title=\"YouTube video player\" src=\"https://www.youtube.com/embed/gr5EwZo_CHQ?si=IlkTGRuGVV7BxEOs\" height=\"315\" width=\"560\"&amp;gt;&amp;lt;/iframe&amp;gt;
   &lt;/editor-macro&gt;
 &lt;/p&gt;</code></pre>
 </div>
@@ -1000,21 +958,32 @@ The Macro can be previewed because the Panel Macros includes a standard preview.
 <i class="fa icon-note" title="Note"></i>
 </td>
 <td class="content">
-Wondering why the href points to a location within the admin? No worries. Guillotine automatically generates contextual links. When deploying the API to production, you may customize the base url as see fit.
+Wondering why the href points to a location within the admin? No worries. Guillotine automatically generates contextual links. When deploying the API to production, you may customize the base url as needed.
 </td>
 </tr>
 </table>
 </div>
 <div class="paragraph">
-<p>This example is an internal link, you may want access more details about it, for instance to override the URL, optimize accessibility etc. To acccess these details, you need to extend your query with the links field:</p>
+<p>This example is an internal link, you may want access more details about it, for instance to override the URL, optimize accessibility etc.</p>
+</div>
+<div class="paragraph">
+<p>To acccess these details, you need to extend your query with the links field:</p>
 </div>
 <div class="listingblock">
 <div class="title">Query for link details</div>
 <div class="content">
 <pre class="highlight"><code class="language-GraphQL" data-lang="GraphQL">{
   guillotine {
-    query(query: "displayName = 'Lynx'")
-     {
+    queryDsl(
+      query: {
+        term: {
+          field: "displayName",
+          value: {
+            string: "Lynx"
+          }
+        }
+      }
+    ) {
       ... on com_example_myproject_Animal {
         data {
           description {
@@ -1045,22 +1014,20 @@ Wondering why the href points to a location within the admin? No worries. Guillo
 <pre class="highlight"><code class="language-GraphQL" data-lang="GraphQL">...
 "links": [
   {
-    "ref": "6931439f-6c4a-4f66-9838-cbd7a0726e80",
-    "uri": "content://90685b2f-041d-4114-8828-cf3b68501d3c",
+    "ref": "5c351456-b22f-4162-aad6-6d921c686544",
+    "uri": "content://89daa74e-1482-493d-9a22-8ec08acaf4f8",
     "content": {
       "displayName": "Lion",
-      "_path": "/my-first-site/animals/lion",
+      "_path": "/animals/lion",
       "type": "com.example.myproject:animal"
     }
-  }]
+  }
+]
 ...</code></pre>
 </div>
 </div>
 <div class="paragraph">
 <p>As you can see, you now have access to the full name of the referenced item, as well as it&#8217;s type. Use the ref values from the HTML link element to match it with the specific link data - as you may have more than one link.</p>
-</div>
-<div class="paragraph">
-<p>Cool, right?</p>
 </div>
 </div>
 <div class="sect2">
@@ -1070,19 +1037,31 @@ Wondering why the href points to a location within the admin? No worries. Guillo
 </div>
 <div class="literalblock">
 <div class="content">
-<pre>..../_/image/&lt;id&gt;:&lt;version&gt;/block-768-768/lion-cub.jpg?filter=hsbcolorize%280x000000%29%3B+grayscale%28%29%3B+border%286%2C+0x000000%29</pre>
+<pre>..../_/image/&lt;id&gt;:&lt;version&gt;/width-768/lynx.jpg</pre>
 </div>
 </div>
 <div class="paragraph">
-<p>But wait, there&#8217;s more! If you want to optimize how fast images load on various devices, Guillotine can also return the image in multiple different sizes (using <a href="https://developer.mozilla.org/en-US/docs/Web/API/HTMLImageElement/srcset">the <code>srcset</code> attribute (MDN)</a>). This is achieved by adding an argument to the <code>description</code> field:</p>
+<p>But wait, there&#8217;s more!</p>
+</div>
+<div class="paragraph">
+<p>If you want to optimize how fast images load on various devices, Guillotine can also return the image in multiple different sizes (using <a href="https://developer.mozilla.org/en-US/docs/Web/API/HTMLImageElement/srcset">the <code>srcset</code> attribute (MDN)</a>). This is achieved by adding an argument to the <code>description</code> field:</p>
 </div>
 <div class="listingblock">
 <div class="title">Fetching rich text with <code>srcset</code></div>
 <div class="content">
 <pre class="highlight"><code class="language-GraphQL" data-lang="GraphQL">{
   guillotine {
-    query(query: "displayName = 'Lynx'") {
-      ... on com_example_myproject_Animal {
+    queryDsl(
+      query: {
+        term: {
+          field: "displayName",
+          value: {
+            string: "Lynx"
+          }
+        }
+      }
+    ) {
+      ... on {project-name-query}_{content-type-2-Capitalized} {
         data {
           description(processHtml: {imageWidths: [200, 500]}) {
             processedHtml
@@ -1100,11 +1079,11 @@ Wondering why the href points to a location within the admin? No worries. Guillo
 <div class="listingblock">
 <div class="title">Img tag, now with srcset</div>
 <div class="content">
-<pre class="highlight"><code class="language-Html" data-lang="Html">&lt;img alt="kurt-cotoaga-huXZH43-qiw-unsplash.jpg"
-  src=".../block-768-768/lion-cub.jpg?filter=..."
-  data-image-ref="b1cf729f-2191-4f03-bdf9-95c7e9076e5a"
-  srcset=".../block-200-200/lion-cub.jpg?filter=... 200w,.../block-500-500/lion-cub.jpg?filter=... 500w"
-  style="width:100%" /&gt;</code></pre>
+<pre class="highlight"><code class="language-Html" data-lang="Html">&lt;img alt="lynx.jpg"
+  src=".../width-768/lynx.jpg"
+  style="width:100%"
+  srcset=".../width-200/lynx jpg 200w,.../width-500/lynx.jpg 500w"
+  data-image-ref="c771dac7-8158-4791-92fb-18ebd5ef2fd3" /&gt;</code></pre>
 </div>
 </div>
 <div class="admonitionblock note">
@@ -1130,7 +1109,16 @@ URLs about above were shortened for readability
 <div class="content">
 <pre class="highlight"><code class="language-GraphQL" data-lang="GraphQL">{
   guillotine {
-    query(query: "displayName = 'Lynx'") {
+    queryDsl(
+      query: {
+        term: {
+          field: "displayName",
+          value: {
+            string: "Lynx"
+          }
+        }
+      }
+    ) {
       ... on com_example_myproject_Animal {
         data {
           description {
@@ -1182,8 +1170,16 @@ URLs about above were shortened for readability
 <div class="content">
 <pre class="highlight"><code class="language-GraphQL" data-lang="GraphQL">{
   guillotine {
-    query(query: "displayName = 'Lynx'")
-     {
+    queryDsl(
+      query: {
+        term: {
+          field: "displayName",
+          value: {
+            string: "Lynx"
+          }
+        }
+      }
+    ) {
       ... on com_example_myproject_Animal {
         data {
           description {
@@ -1203,13 +1199,12 @@ URLs about above were shortened for readability
 <pre class="highlight"><code class="language-json" data-lang="json">...
 "macrosAsJson": [
   {
-    "ref": "9b983010-9bb3-4b96-8200-92d43f9c2140",
-    "name": "info",
-    "descriptor": "com.enonic.app.panelmacros:info",
+    "ref": "1f8703bc-ee13-4871-89b3-937a7299abc4",
+    "name": "embed",
+    "descriptor": "system:embed",
     "config": {
-      "info": {
-        "body": "The lynx inhabits high altitude forests with dense cover of shrubs, reeds, and tall grass.",
-        "header": "Habitats"
+      "embed": {
+        "body": "&amp;lt;iframe title=\"YouTube video player\" src=\"https://www.youtube.com/embed/gr5EwZo_CHQ?si=IlkTGRuGVV7BxEOs\" height=\"315\" width=\"560\"&amp;gt;&amp;lt;/iframe&amp;gt;"
       }
     }
   }
@@ -1227,29 +1222,37 @@ URLs about above were shortened for readability
 <i class="fa icon-note" title="Note"></i>
 </td>
 <td class="content">
-If you used a different macro than the "Info" macro, the query must be updated to match the specific macro.
+If you used a different macro than the "Embed iframe" macro, the query must be updated to match the specific macro.
 </td>
 </tr>
 </table>
 </div>
 <div class="listingblock">
-<div class="title">Query that fetches the fields for the info macro</div>
+<div class="title">Query that fetches the fields for the Embed iframe macro</div>
 <div class="content">
 <pre class="highlight"><code class="language-GraphQL" data-lang="GraphQL">{
   guillotine {
-    query(query: "displayName = 'Lynx'")
-     {
+    queryDsl(
+      query: {
+        term: {
+          field: "displayName",
+          value: {
+            string: "Lynx"
+          }
+        }
+      }
+    ) {
       ... on com_example_myproject_Animal {
         data {
           description {
             processedHtml
-            macros{
+            macros {
               ref
-              descriptor
               name
+              descriptor
               config {
-                info {
-                  header
+                embed {
+                  body
                 }
               }
             }
@@ -1270,12 +1273,12 @@ If you used a different macro than the "Info" macro, the query must be updated t
 <pre class="highlight"><code class="language-json" data-lang="json">...
 "macros": [
   {
-    "ref": "2f7601da-e586-414e-a387-b2e76731f4bb",
-    "descriptor": "com.enonic.app.panelmacros:info",
-    "name": "info",
+    "ref": "9918c7b2-c87d-4d0b-8d6c-56ab85805f3a",
+    "name": "embed",
+    "descriptor": "system:embed",
     "config": {
-      "info": {
-        "header": "Habitats",
+      "embed": {
+        "body": "&amp;lt;iframe title=\"YouTube video player\" src=\"https://www.youtube.com/embed/gr5EwZo_CHQ?si=IlkTGRuGVV7BxEOs\" height=\"315\" width=\"560\"&amp;gt;&amp;lt;/iframe&amp;gt;"
       }
     }
   }
@@ -1286,16 +1289,13 @@ If you used a different macro than the "Info" macro, the query must be updated t
 <div class="paragraph">
 <p>By accessing the macro config, you are able to down drill into every single field, accessing all the details you actually you need.</p>
 </div>
-<div class="paragraph">
-<p>That&#8217;s a wrap for rich text handling!</p>
-</div>
 </div>
 </div>
 </div>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2023-11-09 14:32:44 UTC
+Last updated 2023-11-13 14:02:49 UTC
 </div>
 </div>
 </body>

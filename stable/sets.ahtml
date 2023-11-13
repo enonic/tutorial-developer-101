@@ -442,28 +442,17 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <div id="toctitle">Table of Contents</div>
 <ul class="sectlevel1">
 <li><a href="#field_sets">Field sets</a></li>
-<li><a href="#item_sets">Item sets</a>
-<ul class="sectlevel2">
-<li><a href="#comparison_to_other_data_structures">Comparison to other data structures</a></li>
-</ul>
-</li>
-<li><a href="#task_adding_an_item_set_to_artist">Task: adding an item set to <code>Artist</code></a></li>
+<li><a href="#item_sets">Item sets</a></li>
 <li><a href="#option_sets">Option sets</a></li>
 <li><a href="#mixins">Mixins</a></li>
-<li><a href="#task_add_option_sets">Task: add option sets</a>
+<li><a href="#tasks">Tasks</a>
 <ul class="sectlevel2">
-<li><a href="#single_select_dietary_data">Single-select: dietary data</a></li>
-<li><a href="#multi_select_distribution">Multi-select: distribution</a></li>
+<li><a href="#adding_an_item_set_to_artist">Adding an item set to Artist</a></li>
+<li><a href="#adding_an_option_set_to_animal">Adding an option set to Animal</a></li>
 <li><a href="#result">Result</a></li>
 </ul>
 </li>
-<li><a href="#task_bonus_extend_album_list_for_artists">Task (bonus): extend album list for artists</a>
-<ul class="sectlevel2">
-<li><a href="#option_a_top_level_option_set">Option A: Top level option set</a></li>
-<li><a href="#option_b_top_level_item_set">Option B: top level item set</a></li>
-</ul>
-</li>
-<li><a href="#headless_fetching_item_sets_and_option_sets">Headless: fetching item sets and option sets</a>
+<li><a href="#querying_item_sets_and_option_sets">Querying item sets and option sets</a>
 <ul class="sectlevel2">
 <li><a href="#item_sets_2">Item sets</a></li>
 <li><a href="#option_sets_2">Option sets</a></li>
@@ -496,7 +485,13 @@ The tasks and examples in this chapter are based on work done in previous chapte
 <h2 id="field_sets"><a class="link" href="#field_sets">Field sets</a></h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>Field sets are the simplest form of sets XP offers. Field sets group inputs visually and have no effect on the data model. In a schema, the field set element wraps the input elements it should contain. To create a field set that contains a TextLine and a TextArea, the markup would look like this:</p>
+<p>Field sets are the simplest form of sets XP offers&#8230;&#8203; they group inputs visually and have no effect on the data model.</p>
+</div>
+<div class="paragraph">
+<p>In a schema, the field set element wraps the input elements it should contain.</p>
+</div>
+<div class="paragraph">
+<p>To create a field set that contains a TextLine and a TextArea, the markup would look like this:</p>
 </div>
 <div class="listingblock">
 <div class="title">A field set</div>
@@ -523,7 +518,7 @@ The tasks and examples in this chapter are based on work done in previous chapte
 </tr>
 </table>
 </div>
-<div class="imageblock">
+<div class="imageblock text-center">
 <div class="content">
 <img src="media/field-set.png" alt="A field set containing TextLine and TextArea inputs. The field set groups them visually and adds a shared heading." width="750">
 </div>
@@ -534,34 +529,87 @@ The tasks and examples in this chapter are based on work done in previous chapte
 <div class="sect1">
 <h2 id="item_sets"><a class="link" href="#item_sets">Item sets</a></h2>
 <div class="sectionbody">
-<div class="imageblock">
+<div class="paragraph">
+<p>Item sets also allow you to group input fields, but as opposed to field sets, item sets group values <em>both</em> visually <em>and</em> on a structural level. Item sets can be arbitrarily nested.</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>The <a href="https://developer.enonic.com/docs/xp/stable/cms/sets#item_set">item set documentation</a> does a standout job of explaining exactly how they work, so check that out for an overview.</p>
+</li>
+<li>
+<p>The <a href="https://developer.enonic.com/docs/xp/stable/cms/schemas#item_set">item set schema documentation</a> contains all the information you&#8217;d need on how to create an item set schema.</p>
+</li>
+</ul>
+</div>
+<div class="imageblock text-center">
 <div class="content">
 <img src="media/item-set-sample.png" alt="A pair of visually grouped inputs on a card element. The card has a header that says 'contact info'. There is also a button to add more contact info forms." width="750">
 </div>
 <div class="title">Figure 2. An item set containing contact info</div>
 </div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="option_sets"><a class="link" href="#option_sets">Option sets</a></h2>
+<div class="sectionbody">
 <div class="paragraph">
-<p>Item sets also allow you to group input fields, but as opposed to field sets, item sets group values <em>both</em> visually <em>and</em> on a structural level. Item sets can be arbitrarily nested.</p>
+<p>Option sets enable editors (working in Content Studio) to choose from a set of predefined options. This is similar to the ComboBox element, but option sets also allow options to carry extra data.</p>
 </div>
 <div class="paragraph">
-<p>The <a href="https://developer.enonic.com/docs/xp/stable/cms/sets#item_set">item set documentation</a> does a standout job of explaining exactly how they work, so check that out for an overview. <a href="https://developer.enonic.com/docs/xp/stable/cms/schemas#item_set">The item set schema documentation</a> contains all the information you&#8217;d need on how to create an item set schema.</p>
+<p>Option sets where users can select only one of a number of options are known as <em>single-select</em> option sets. You can also use a <em>multi-select</em> option set if the user should be able to select multiple options simultaneously. We&#8217;ll look at this too in a task.</p>
 </div>
-<div class="sect2">
-<h3 id="comparison_to_other_data_structures"><a class="link" href="#comparison_to_other_data_structures">Comparison to other data structures</a></h3>
-<div class="paragraph">
-<p>If you&#8217;re used to working with JSON data or similar data structures, you can think of item sets as JSON objects. They allow you to group a number of input types together into one unit (object). You can also nest them arbitrarily to create more complex structures.</p>
+<div class="ulist">
+<ul>
+<li>
+<p>The <a href="https://developer.enonic.com/docs/xp/stable/cms/sets#option_set">option set reference documentation</a> provides a good overview (with accompanying pictures) of how option sets work.</p>
+</li>
+<li>
+<p>The <a href="https://developer.enonic.com/docs/xp/stable/cms/schemas#option_set">option set schema overview</a> is very thorough and full of examples on how to use the various configuration options.</p>
+</li>
+</ul>
 </div>
+<div class="imageblock text-center">
+<div class="content">
+<img src="media/option-set-sample.png" alt="An input form labelled 'multi-selection'. The user has selected one out of four options. Some options contain extra data such as an image selector or other input fields." width="750">
+</div>
+<div class="title">Figure 3. A multi-select option set</div>
 </div>
 </div>
 </div>
 <div class="sect1">
-<h2 id="task_adding_an_item_set_to_artist"><a class="link" href="#task_adding_an_item_set_to_artist">Task: adding an item set to <code>Artist</code></a></h2>
+<h2 id="mixins"><a class="link" href="#mixins">Mixins</a></h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>Let&#8217;s add an item set to the <code>Artist</code>. All the people we entered back in <a href="content.ahtml#_add_some_friends">the content chapter</a> are successful musical artists, so we can create an item set for albums they have released.</p>
+<p><em>Mixins</em> facilitate a form of reuse in XP. They allow you to reuse fields across several content types.</p>
 </div>
 <div class="paragraph">
-<p>To add an item set, use it as you would any other input type: place it within the <code>form</code> element of a content type. If we add it to the <code>Artist</code> content type, it&#8217;d look something like this:</p>
+<p>They won&#8217;t look or behave any different from if you manually typed the same fields into multiple content types, but it lets you keep them in sync.</p>
+</div>
+<div class="paragraph">
+<p>Mixins go in the <code>/src/main/resources/site/mixins</code> directory, following the same naming pattern as the other schemas we&#8217;ve seen (<code>&lt;mixin-name&gt;/&lt;mixin-name&gt;.xml</code>).</p>
+</div>
+<div class="paragraph">
+<p>We&#8217;ll see them in the upcoming task, but if you want to learn more about them, consult <a href="https://developer.enonic.com/docs/xp/stable/cms/mixins">the mixins reference documentation</a>.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="tasks"><a class="link" href="#tasks">Tasks</a></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>So far we&#8217;ve theoretically presented sets. For a proper understanding of those concepts, we&#8217;ll introduce some tasks. Make sure to follow along in order to strengthen your knowledge on this subject.</p>
+</div>
+<div class="sect2">
+<h3 id="adding_an_item_set_to_artist"><a class="link" href="#adding_an_item_set_to_artist">Adding an item set to Artist</a></h3>
+<div class="paragraph">
+<p>Let&#8217;s add an item set to the <code>Artist</code>. The goal will be to add a Filmography item set, featuring where and when a specific artist was featured in a movie.</p>
+</div>
+<div class="paragraph">
+<p>To add an item set, use it as you would any other input type: place it within the <code>form</code> element of a content type.</p>
+</div>
+<div class="paragraph">
+<p>If we add it to the <code>Artist</code> content type, it&#8217;d look something like this:</p>
 </div>
 <div class="listingblock">
 <div class="title">Artist with an added Item Set</div>
@@ -574,17 +622,21 @@ The tasks and examples in this chapter are based on work done in previous chapte
 
     &lt;!-- Other fields elided for brevity --&gt;
 
-    &lt;item-set name="albums"&gt;
-      &lt;label&gt;Album&lt;/label&gt;
+    &lt;item-set name="filmography"&gt;
+      &lt;label&gt;Filmography&lt;/label&gt;
       &lt;occurrences minimum="0" maximum="0" /&gt;
       &lt;items&gt; <i class="conum" data-value="1"></i><b>(1)</b>
         &lt;input name="title" type="TextLine"&gt;
           &lt;label&gt;Title&lt;/label&gt;
           &lt;occurrences minimum="1" maximum="1" /&gt;
-          &lt;/input&gt;
-          &lt;input type="TextLine" name="releaseYear"&gt;
-            &lt;label&gt;Release year&lt;/label&gt;
-          &lt;/input&gt;
+        &lt;/input&gt;
+        &lt;input name="year" type="Double"&gt;
+            &lt;label&gt;Year&lt;/label&gt;
+            &lt;occurrences minimum="1" maximum="1" /&gt;
+            &lt;config&gt;
+              &lt;min&gt;0&lt;/min&gt;
+            &lt;/config&gt;
+        &lt;/input&gt;
       &lt;/items&gt;
     &lt;/item-set&gt;
 
@@ -604,71 +656,35 @@ The tasks and examples in this chapter are based on work done in previous chapte
 <p>Note that the remaining fields of the form have been left out in the above example.</p>
 </div>
 <div class="paragraph">
-<p>With this new item set, we can add as many albums as we want:</p>
+<p>With this new item set added to the Artist content type, make sure to add some data:</p>
 </div>
 <div class="imageblock">
 <div class="content">
-<img src="media/item-set-album.png" alt="An example of using the Album item set with two albums included." width="900">
+<img src="media/artist-filmography-item-set.png" alt="An example of using the Filmography item set." width="1050">
 </div>
-<div class="title">Figure 3. Item set for albums</div>
+<div class="title">Figure 4. Item set for filmography</div>
 </div>
 </div>
-</div>
-<div class="sect1">
-<h2 id="option_sets"><a class="link" href="#option_sets">Option sets</a></h2>
-<div class="sectionbody">
-<div class="imageblock">
-<div class="content">
-<img src="media/option-set-sample.png" alt="An input form labelled 'multi-selection'. The user has selected one out of four options. Some options contain extra data such as an image selector or other input fields." width="750">
-</div>
-<div class="title">Figure 4. A multi-select option set</div>
-</div>
+<div class="sect2">
+<h3 id="adding_an_option_set_to_animal"><a class="link" href="#adding_an_option_set_to_animal">Adding an option set to Animal</a></h3>
 <div class="paragraph">
-<p>Option sets enable editors (working in Content Studio) to choose from a set of predefined options. This is similar to the ComboBox element, but option sets also allow options to carry extra data.</p>
-</div>
-<div class="paragraph">
-<p>To illustrate this, consider the item set task we just did. We could expand this list to also include film appearances. To do that, each entry could be either an album <em>or</em> film appearance. Depending on the kind of entry, it would also have different associated data. While title and release year might be enough for an album, it might be useful to add a list of roles to film entries.</p>
-</div>
-<div class="paragraph">
-<p>Option sets where users can select only one of a number of options are known as <em>single-select</em> option sets. You can also use a <em>multi-select</em> option set if the user should be able to select multiple options simultaneously. We&#8217;ll look at this too in a task below.</p>
-</div>
-<div class="paragraph">
-<p>The <a href="https://developer.enonic.com/docs/xp/stable/cms/sets#option_set">option set reference documentation</a> provides a good overview (with accompanying pictures) of how option sets work. Additionally, <a href="https://developer.enonic.com/docs/xp/stable/cms/schemas#option_set">the option set schema overview</a> is very thorough and full of examples on how to use the various configuration options.</p>
-</div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="mixins"><a class="link" href="#mixins">Mixins</a></h2>
-<div class="sectionbody">
-<div class="paragraph">
-<p><em>Mixins</em> facilitate a form of reuse in XP. They allow you to reuse fields across several content types. They won&#8217;t look or behave any different from if you manually typed the same fields into multiple content types, but it lets you keep them in sync.  Mixins go in the <code>/src/main/resources/site/mixins</code> directory, following the same naming pattern as the other schemas we&#8217;ve seen (<code>&lt;mixin-name&gt;/&lt;mixin-name&gt;.xml</code>).</p>
-</div>
-<div class="paragraph">
-<p>We&#8217;ll see them in the upcoming task, but if you want to learn more about them, consult <a href="https://developer.enonic.com/docs/xp/stable/cms/mixins">the mixins reference documentation</a>.</p>
-</div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="task_add_option_sets"><a class="link" href="#task_add_option_sets">Task: add option sets</a></h2>
-<div class="sectionbody">
-<div class="paragraph">
-<p>In this section, we&#8217;ll use option sets to add some extra data to our <code>Animal</code> data type. Our goal is:</p>
+<p>In this section, we&#8217;ll use option sets to add some extra data to <code>Animal</code> data type. The goal is:</p>
 </div>
 <div class="ulist">
 <ul>
 <li>
-<p>Add an option for distribution across continents. The user should be able to select as many as they want from the 7 continents to indicate where the animal lives. Each option should have an associated TextArea called "notes", where the user can add more data for each option.</p>
+<p>Add an option for distribution across continents. The user should be able to select as many as they want from the 7 continents to indicate where the animal lives. Each option should have an associated <code>TextArea</code> called "notes", where the user can add more data for each option.</p>
 </li>
 <li>
-<p>Because each distribution option should have the same fields, create a mixin to reuse it.</p>
+<p>Because each distribution option should have the same fields, create a <em>mixin</em> to reuse it.</p>
 </li>
 <li>
 <p>Add an option set for feeding behavior. Intentionally simplified, this option set should indicate whether the animal is a herbivore or a carnivore, and if it is a carnivore, it should also let the user add a list of prey.</p>
 </li>
 </ul>
 </div>
-<div class="sect2">
-<h3 id="single_select_dietary_data"><a class="link" href="#single_select_dietary_data">Single-select: dietary data</a></h3>
+<div class="sect3">
+<h4 id="single_select_dietary_data"><a class="link" href="#single_select_dietary_data">Single-select: dietary data</a></h4>
 <div class="paragraph">
 <p>Open your animal content type and add a single-select option set.  As before, we use option sets as we would any other input type.</p>
 </div>
@@ -728,8 +744,8 @@ The tasks and examples in this chapter are based on work done in previous chapte
 </table>
 </div>
 </div>
-<div class="sect2">
-<h3 id="multi_select_distribution"><a class="link" href="#multi_select_distribution">Multi-select: distribution</a></h3>
+<div class="sect3">
+<h4 id="multi_select_distribution"><a class="link" href="#multi_select_distribution">Multi-select: distribution</a></h4>
 <div class="olist arabic">
 <ol class="arabic">
 <li>
@@ -751,7 +767,7 @@ The tasks and examples in this chapter are based on work done in previous chapte
 </div>
 </li>
 <li>
-<p>Moving onto our animals, add the multi-select option set.</p>
+<p>Moving onto animals, add the multi-select option set.</p>
 </li>
 </ol>
 </div>
@@ -836,8 +852,18 @@ The tasks and examples in this chapter are based on work done in previous chapte
 </tr>
 </table>
 </div>
-<div class="paragraph">
-<p>Notice that the use of the <code>mixin</code> helps us both reduce duplication and keep all options in sync. If we wanted to add more data, such as current population, we would only have to add it to the <code>mixin</code> to have it duplicate to all distributions.</p>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+The use of the <code>mixin</code> helps us both reduce duplication and keep all options in sync. If we wanted to add more data, such as current population, we would only have to add it to the <code>mixin</code> to have it duplicate to all distributions.
+</td>
+</tr>
+</table>
+</div>
 </div>
 </div>
 <div class="sect2">
@@ -855,145 +881,7 @@ The tasks and examples in this chapter are based on work done in previous chapte
 </div>
 </div>
 <div class="sect1">
-<h2 id="task_bonus_extend_album_list_for_artists"><a class="link" href="#task_bonus_extend_album_list_for_artists">Task (bonus): extend album list for artists</a></h2>
-<div class="sectionbody">
-<div class="paragraph">
-<p>We can also arbitrarily nest item sets and option sets. As mentioned above, try to extend the album list for artists to also allow for films. How you do this is up to you, but there are two main approaches:</p>
-</div>
-<div class="olist arabic">
-<ol class="arabic">
-<li>
-<p>Wrap two item sets in an option set: Create an option set at the top level and allow the user to select as many options as they want. The options could be "Filmography" and "Discography", where the former has an item set with film data as associated content, and the latter an item set with album data.</p>
-</li>
-<li>
-<p>Make each item in the item set an option set. Keep the item set as is, but make every entry be <em>either</em> an album <em>or</em> a film.</p>
-</li>
-</ol>
-</div>
-<div class="paragraph">
-<p>Which approach is best depends on your circumstances and personal preference. Solutions to both approaches are listed below.</p>
-</div>
-<div class="sect2">
-<h3 id="option_a_top_level_option_set"><a class="link" href="#option_a_top_level_option_set">Option A: Top level option set</a></h3>
-<div class="paragraph">
-<p>Create a top level option set and add two item sets (one for discography, one for filmography) to it:</p>
-</div>
-<div class="listingblock">
-<div class="title">Wrapping item sets in an option set</div>
-<div class="content">
-<pre class="highlight"><code class="language-xml" data-lang="xml">&lt;option-set name="mixedMediaA"&gt;
-      &lt;label&gt;Mixed Media A&lt;/label&gt;
-      &lt;options minimum="0" maximum="0"&gt;
-
-        &lt;option name="discography"&gt;
-          &lt;label&gt;Discography&lt;/label&gt;
-          &lt;items&gt;
-            &lt;item-set name="albums"&gt;
-              &lt;label&gt;Album&lt;/label&gt;
-              &lt;occurrences minimum="0" maximum="0" /&gt;
-              &lt;items&gt;
-                &lt;input name="title" type="TextLine"&gt;
-                  &lt;label&gt;Title&lt;/label&gt;
-                  &lt;occurrences minimum="1" maximum="1" /&gt;
-                &lt;/input&gt;
-                &lt;input type="TextLine" name="releaseYear"&gt;
-                  &lt;label&gt;Release year&lt;/label&gt;
-                &lt;/input&gt;
-              &lt;/items&gt;
-            &lt;/item-set&gt;
-          &lt;/items&gt;
-        &lt;/option&gt;
-
-        &lt;option name="filmography"&gt;
-          &lt;label&gt;Filmography&lt;/label&gt;
-          &lt;items&gt;
-            &lt;item-set name="films"&gt;
-              &lt;label&gt;Film&lt;/label&gt;
-              &lt;occurrences minimum="0" maximum="0" /&gt;
-              &lt;items&gt;
-                &lt;input name="title" type="TextLine"&gt;
-                  &lt;label&gt;Title&lt;/label&gt;
-                  &lt;occurrences minimum="1" maximum="1" /&gt;
-                &lt;/input&gt;
-                &lt;input type="TextLine" name="role"&gt;
-                  &lt;label&gt;Role&lt;/label&gt;
-                  &lt;occurrences minimum="0" maximum="0" /&gt;
-                &lt;/input&gt;
-              &lt;/items&gt;
-            &lt;/item-set&gt;
-          &lt;/items&gt;
-        &lt;/option&gt;
-
-      &lt;/options&gt;
-    &lt;/option-set&gt;</code></pre>
-</div>
-</div>
-<div class="imageblock">
-<div class="content">
-<img src="media/sets-option-set-wrapping-item-set.png" alt="An item set wrapping an option set. The option set has nested item sets within. Showing data about P!nk." width="1200">
-</div>
-<div class="title">Figure 6. Option A</div>
-</div>
-</div>
-<div class="sect2">
-<h3 id="option_b_top_level_item_set"><a class="link" href="#option_b_top_level_item_set">Option B: top level item set</a></h3>
-<div class="paragraph">
-<p>Create a top level item set and nest option sets within:</p>
-</div>
-<div class="listingblock">
-<div class="title">Each item can be either a film <em>or</em> an album</div>
-<div class="content">
-<pre class="highlight"><code class="language-xml" data-lang="xml">    &lt;item-set name="mixedMediaB"&gt;
-      &lt;label&gt;Mixed Media B&lt;/label&gt;
-      &lt;occurrences minimum="0" maximum="0" /&gt;
-      &lt;items&gt;
-        &lt;option-set name="kind"&gt;
-          &lt;label&gt;Media type&lt;/label&gt;
-          &lt;options minimum="1" maximum="1"&gt;
-
-            &lt;option name="album"&gt;
-              &lt;label&gt;Album&lt;/label&gt;
-              &lt;items&gt;
-                &lt;input name="title" type="TextLine"&gt;
-                  &lt;label&gt;Title&lt;/label&gt;
-                  &lt;occurrences minimum="1" maximum="1" /&gt;
-                &lt;/input&gt;
-                &lt;input type="TextLine" name="releaseYear"&gt;
-                  &lt;label&gt;Release year&lt;/label&gt;
-                &lt;/input&gt;
-              &lt;/items&gt;
-            &lt;/option&gt;
-
-            &lt;option name="film"&gt;
-              &lt;label&gt;Film&lt;/label&gt;
-              &lt;items&gt;
-                &lt;input type="TextLine" name="title"&gt;
-                  &lt;label&gt;Title&lt;/label&gt;
-                &lt;/input&gt;
-                &lt;input type="TextLine" name="roles"&gt;
-                  &lt;label&gt;Role&lt;/label&gt;
-                  &lt;occurrences minimum="0" maximum="0" /&gt;
-                &lt;/input&gt;
-              &lt;/items&gt;
-            &lt;/option&gt;
-
-          &lt;/options&gt;
-        &lt;/option-set&gt;
-      &lt;/items&gt;
-    &lt;/item-set&gt;</code></pre>
-</div>
-</div>
-<div class="imageblock">
-<div class="content">
-<img src="media/sets-item-set-wrapping-option-set.png" alt="An item set wrapping underlying option sets. Data about P!nk." width="1200">
-</div>
-<div class="title">Figure 7. Option B</div>
-</div>
-</div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="headless_fetching_item_sets_and_option_sets"><a class="link" href="#headless_fetching_item_sets_and_option_sets">Headless: fetching item sets and option sets</a></h2>
+<h2 id="querying_item_sets_and_option_sets"><a class="link" href="#querying_item_sets_and_option_sets">Querying item sets and option sets</a></h2>
 <div class="sectionbody">
 <div class="paragraph">
 <p>Let&#8217;s look at how option and item sets work in headless contexts.</p>
@@ -1004,17 +892,41 @@ The tasks and examples in this chapter are based on work done in previous chapte
 <p>Getting item sets via GraphQL is not much different than anything else we&#8217;ve seen:</p>
 </div>
 <div class="listingblock">
-<div class="title">Fetching albums</div>
+<div class="title">Fetching an Artist filmography</div>
 <div class="content">
 <pre class="highlight"><code class="language-GraphQL" data-lang="GraphQL">{
   guillotine {
-    query(contentTypes:"com.example.myproject:artist",
-      query: "displayName = 'P!nk'") {
+    queryDsl(
+      query: {
+        boolean: {
+          must: [
+            {
+              term: {
+                field: "type",
+                value: {
+                  string: "com.example.myproject:artist"
+                }
+              }
+            },
+            {
+              term: {
+                field: "displayName",
+                value: {
+                  string: "Cardi B"
+                }
+              }
+            }
+          ]
+        }
+
+      }
+    ) {
+      displayName
       ... on com_example_myproject_Artist {
         data {
-          albums {
+          filmography {
             title
-            releaseYear
+            year
           }
         }
       }
@@ -1024,7 +936,7 @@ The tasks and examples in this chapter are based on work done in previous chapte
 </div>
 </div>
 <div class="paragraph">
-<p>With some data added for P!nk, you&#8217;d get a result like this:</p>
+<p>With some data added for Cardi B, you&#8217;d get a result like this:</p>
 </div>
 <div class="listingblock">
 <div class="title">Album data</div>
@@ -1032,17 +944,38 @@ The tasks and examples in this chapter are based on work done in previous chapte
 <pre class="highlight"><code class="language-json" data-lang="json">{
   "data": {
     "guillotine": {
-      "query": [
+      "queryDsl": [
         {
+          "displayName": "Cardi B",
           "data": {
-            "albums": [
+            "filmography": [
               {
-                "title": "The Truth About Love",
-                "releaseYear": "2012"
+                "title": "Love &amp; Hip Hop: New York",
+                "year": 2015
               },
               {
-                "title": "Beautiful Trauma",
-                "releaseYear": "2017"
+                "title": "Being Mary Jane",
+                "year": 2017
+              },
+              {
+                "title": "Hip Hop Squares",
+                "year": 2017
+              },
+              {
+                "title": "Saturday Night Live",
+                "year": 2018
+              },
+              {
+                "title": "The Tonight Show Starring Jimmy Fallon",
+                "year": 2018
+              },
+              {
+                "title": "Untold Stories of Hip Hop",
+                "year": 2019
+              },
+              {
+                "title": "Rhythm + Flow",
+                "year": 2019
               }
             ]
           }
@@ -1064,8 +997,32 @@ The tasks and examples in this chapter are based on work done in previous chapte
 <div class="content">
 <pre class="highlight"><code class="language-GraphQL" data-lang="GraphQL">{
   guillotine {
-    query(contentTypes:"com.example.myproject:animal",
-      query: "displayName = 'Lion'") {
+    queryDsl(
+      query: {
+        boolean: {
+          must: [
+            {
+              term: {
+                field: "type",
+                value: {
+                  string: "com.example.myproject:animal"
+                }
+              }
+            },
+            {
+              term: {
+                field: "displayName",
+                value: {
+                  string: "Lion"
+                }
+              }
+            }
+          ]
+        }
+
+      }
+    ) {
+      displayName
       ... on com_example_myproject_Animal {
         data {
           feedingBehavior {
@@ -1105,8 +1062,9 @@ The tasks and examples in this chapter are based on work done in previous chapte
 <pre class="highlight"><code class="language-json" data-lang="json">{
   "data": {
     "guillotine": {
-      "query": [
+      "queryDsl": [
         {
+          "displayName": "Lion",
           "data": {
             "feedingBehavior": {
               "_selected": "carnivore",
@@ -1123,7 +1081,7 @@ The tasks and examples in this chapter are based on work done in previous chapte
                 "asia"
               ],
               "africa": {
-                "notes": "African lions live in scattered populations across Sub-Saharan Africa. The lion prefers grassy plains and savannahs, scrub bordering rivers and open woodlands with bushes. It is absent from rainforests and rarely enters closed forests."
+                "notes": "African lions live in scattered populations across Sub-Saharan Africa. The lion prefers grassy plains and savannahs, scrub bordering rivers and open woodland with bushes. It is absent from rainforests and rarely enters closed forests."
               }
             }
           }
@@ -1140,7 +1098,7 @@ The tasks and examples in this chapter are based on work done in previous chapte
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2023-11-09 14:32:44 UTC
+Last updated 2023-11-13 14:02:49 UTC
 </div>
 </div>
 </body>

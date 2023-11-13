@@ -441,9 +441,9 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <div id="toc" class="toc2">
 <div id="toctitle">Table of Contents</div>
 <ul class="sectlevel1">
-<li><a href="#task_seo_metafields">Task: SEO Metafields</a></li>
-<li><a href="#task_bring_your_own">Task: Bring your own</a></li>
+<li><a href="#your_first_x_data">Your first X-data</a></li>
 <li><a href="#headless">Headless</a></li>
+<li><a href="#bonus_seo_metafields">Bonus: SEO Metafields</a></li>
 </ul>
 </div>
 </div>
@@ -451,7 +451,10 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <div id="preamble">
 <div class="sectionbody">
 <div class="paragraph">
-<p>X-data (short for <em>eXtra-data</em>) is a smart way of dynamically extending existing content types with more fields. For instance, you may install a new app that will extend your schema with new fields.</p>
+<p>X-data (short for <em>eXtra-data</em>) is a smart way of dynamically extending existing content types with more fields.</p>
+</div>
+<div class="paragraph">
+<p>The idea is to basically define new fields and decide to what content type those fields should be applied to. If no content type is selected while creating an X-data, those fields will be enabled to all content types.</p>
 </div>
 <div class="paragraph">
 <p>In Content Studio, X-data is visually displayed as a new step in the form, listed below the content type&#8217;s standard fields.</p>
@@ -471,82 +474,66 @@ The tasks and examples in this chapter are based on work done in previous chapte
 </div>
 </div>
 <div class="sect1">
-<h2 id="task_seo_metafields"><a class="link" href="#task_seo_metafields">Task: SEO Metafields</a></h2>
+<h2 id="your_first_x_data"><a class="link" href="#your_first_x_data">Your first X-data</a></h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>The fastest way of getting to know X-data is by installing an app.</p>
-</div>
-<div class="olist arabic">
-<ol class="arabic">
-<li>
-<p>Install the <a href="https://market.enonic.com/vendors/enonic/seo-metafields">SEO Metafields app</a>.</p>
-<div class="imageblock">
-<div class="content">
-<img src="media/x-data-seo-app-install.png" alt="Install SEO Metafields app" width="1050">
-</div>
-</div>
-</li>
-<li>
-<p>Edit and add the app to your site.</p>
-</li>
-<li>
-<p>Immediately after adding the app to your site, the form should refresh - and add a new step "SEO Metafields":</p>
-<div class="imageblock">
-<div class="content">
-<img src="media/x-data-seo-fields.png" alt="SEO form step and additional fields appear." width="1200">
-</div>
-</div>
-</li>
-</ol>
+<p>If your requirement is to add new fields to a specific content type, it doesn&#8217;t make sense to use X-data, since you can directly update that content type.</p>
 </div>
 <div class="paragraph">
-<p>So, now you have some additional fields for the site. If you check some of your other content items, like an animal. You will see the fields are there as well.</p>
+<p>Now, if your requirement is to add new fields to multiple content types, that is when X-data comes into place.</p>
 </div>
-<div class="imageblock">
-<div class="content">
-<img src="media/x-data-seo-animal.png" alt="SEO fields available for the animals content type as well." width="1200">
+<div class="paragraph">
+<p>The same behaviour of extending multiple content types can be achieved through mixins. You can create a mixin and add it to the content types you want to extend the fields. The difference is where the data on those fields will be stored, and also in the fact that X-data are easier to maintain when adding to a lot of content types.</p>
 </div>
+<div class="paragraph">
+<p>Let&#8217;s now add a "notes" X-data, which will extend both Artist and Animal content types.</p>
 </div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="task_bring_your_own"><a class="link" href="#task_bring_your_own">Task: Bring your own</a></h2>
-<div class="sectionbody">
 <div class="paragraph">
 <p>Similar to content types, X-data schemas have a specific naming and placement convention within your app: <code>src/main/resources/site/x-data/&lt;xdata-name&gt;/&lt;xdata-name&gt;.xml</code>.</p>
 </div>
 <div class="olist arabic">
 <ol class="arabic">
 <li>
-<p>Create x-data schema</p>
-<div class="paragraph">
-<p>This time, we&#8217;ll give you some slack, and let you choose the name and fields of the X-data yourself. However, the form needs to be wrapped in the following schema:</p>
-</div>
+<p>Create the "notes" X-data schema:</p>
 <div class="listingblock">
-<div class="title">Basic X-data schema</div>
+<div class="title">site/x-data/notes/notes.xml</div>
 <div class="content">
 <pre class="highlight"><code class="language-xml" data-lang="xml">&lt;x-data&gt;
-  &lt;display-name&gt;My Xdata&lt;/display-name&gt;
+  &lt;display-name&gt;Notes X-data&lt;/display-name&gt;
   &lt;form&gt;
-    Your form config goes here
+    &lt;input name="notes" type="TextLine"&gt;
+      &lt;label&gt;Notes&lt;/label&gt;
+      &lt;occurrences minimum="0" maximum="3"/&gt;
+    &lt;/input&gt;
   &lt;/form&gt;
 &lt;/x-data&gt;</code></pre>
 </div>
 </div>
 </li>
 <li>
-<p>Additionally, you need to define the injection rules for the X-data</p>
-<div class="paragraph">
-<p>You do this via the site.xml.</p>
-</div>
+<p>Additionally, you need to define the injection rules for the X-data, and for that you need to edit the <code>site.xml</code> file:</p>
 <div class="listingblock">
 <div class="title">src/main/resources/site/site.xml</div>
 <div class="content">
 <pre class="highlight"><code class="language-xml" data-lang="xml">&lt;site&gt;
-  &lt;x-data name="&lt;xdata-name&gt;" allowContentTypes="animal"/&gt;
+  &lt;x-data name="notes" allowContentTypes="com.example.myproject:artist|com.example.myproject:animal"/&gt;
   &lt;form/&gt;
 &lt;/site&gt;</code></pre>
 </div>
+</div>
+</li>
+<li>
+<p>Redeploy your app and access a Artist or an Animal content. You should see the following section in the bottom of the form:</p>
+<div class="imageblock">
+<div class="content">
+<img src="media/notes-x-data.png" alt="Notes x-data fields showing in the bottom of an animal content" width="1050">
+</div>
+</div>
+</li>
+<li>
+<p>Finally, add some notes to some content.</p>
+</li>
+</ol>
 </div>
 <div class="admonitionblock note">
 <table>
@@ -559,12 +546,6 @@ For more details and configuration options for X-data, visit <a href="https://de
 </td>
 </tr>
 </table>
-</div>
-</li>
-</ol>
-</div>
-<div class="paragraph">
-<p>Once your app is redeployed, when editing the animals form, should see yet another X-data step in the form. Sweet.</p>
 </div>
 </div>
 </div>
@@ -582,7 +563,31 @@ For more details and configuration options for X-data, visit <a href="https://de
 <div class="content">
 <pre class="highlight"><code class="language-GraphQL" data-lang="GraphQL">{
   guillotine {
-    query(query: "displayName = 'Lynx'") {
+    queryDsl(
+      query: {
+        boolean: {
+          must: [
+            {
+              term: {
+                field: "type",
+                value: {
+                  string: "com.example.myproject:animal"
+                }
+              }
+            },
+            {
+              term: {
+                field: "displayName",
+                value: {
+                  string: "Lynx"
+                }
+              }
+            }
+          ]
+        }
+
+      }
+    ) {
       displayName
       xAsJson
     }
@@ -591,7 +596,7 @@ For more details and configuration options for X-data, visit <a href="https://de
 </div>
 </div>
 <div class="paragraph">
-<p>If you&#8217;ve added any values to your Lynx&#8217;s SEO fields, this is what you might get.</p>
+<p>If you&#8217;ve added any values to your Lynx&#8217;s Notes X-data fields, this is what you might get.</p>
 </div>
 <div class="listingblock">
 <div class="title">X-data results</div>
@@ -599,14 +604,17 @@ For more details and configuration options for X-data, visit <a href="https://de
 <pre class="highlight"><code class="language-json" data-lang="json">{
   "data": {
     "guillotine": {
-      "query": [
+      "queryDsl": [
         {
           "displayName": "Lynx",
           "xAsJson": {
-            "com-enonic-app-metafields": {
-              "meta-data": {
-                "seoTitle": "Meet the bobcat",
-                "blockRobots": false
+            "com_example_myproject": {
+              "notes": {
+                "notes": [
+                  "Lynx note 1",
+                  "Lynx note 2",
+                  "Lynx note 3"
+                ]
               }
             }
           }
@@ -625,12 +633,36 @@ For more details and configuration options for X-data, visit <a href="https://de
 <div class="content">
 <pre class="highlight"><code class="language-GraphQL" data-lang="GraphQL">{
   guillotine {
-    query(query: "displayName = 'Lynx'") {
+    queryDsl(
+      query: {
+        boolean: {
+          must: [
+            {
+              term: {
+                field: "type",
+                value: {
+                  string: "com.example.myproject:animal"
+                }
+              }
+            },
+            {
+              term: {
+                field: "displayName",
+                value: {
+                  string: "Lynx"
+                }
+              }
+            }
+          ]
+        }
+
+      }
+    ) {
       displayName
       x {
-        com_enonic_app_metafields {
-          meta_data {
-            seoTitle
+        com_example_myproject {
+          notes { <i class="conum" data-value="1"></i><b>(1)</b>
+            notes <i class="conum" data-value="2"></i><b>(2)</b>
           }
         }
       }
@@ -639,15 +671,64 @@ For more details and configuration options for X-data, visit <a href="https://de
 }</code></pre>
 </div>
 </div>
+<div class="colist arabic">
+<table>
+<tr>
+<td><i class="conum" data-value="1"></i><b>1</b></td>
+<td>This is the name of the X-data. In this case, "notes" because we defined it to be like so in the <code>notes.xml</code> file</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="2"></i><b>2</b></td>
+<td>This is the "notes" field (TextLine input type) inside the "notes" X-data.</td>
+</tr>
+</table>
+</div>
 <div class="paragraph">
 <p>If you made it here - you are officially equipped with an essential overview of Enonic&#8217;s content fundamental content modelling capabilities. 🙌</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="bonus_seo_metafields"><a class="link" href="#bonus_seo_metafields">Bonus: SEO Metafields</a></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>There&#8217;s a known app on Enonic market named <em>SEO Metafields app</em>. Its main purpose is to provide SEO capabilities to your project, and for that purpose, it adds a new X-data named <code>meta_data</code>, which is then enabled to all content types in your project.</p>
+</div>
+<div class="paragraph">
+<p>This is a bonus section, so you&#8217;re not missing much to skip it, but it&#8217;s worth installing it to better understand capabilities of X-data.</p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Install the <a href="https://market.enonic.com/vendors/enonic/seo-metafields">SEO Metafields app</a>.</p>
+<div class="imageblock">
+<div class="content">
+<img src="media/x-data-seo-app-install.png" alt="Install SEO Metafields app" width="1050">
+</div>
+</div>
+</li>
+<li>
+<p>Edit and add the app to your project.</p>
+</li>
+<li>
+<p>Immediately after adding the app to your site, the form should refresh - and add a new step "SEO Metafields":</p>
+<div class="paragraph">
+<p>So, now you have some additional fields for the site. If you check some of your other content items, like an animal. You will see the fields are there as well.</p>
+</div>
+</li>
+</ol>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="media/x-data-seo-animal.png" alt="SEO fields available for the animals content type as well." width="1200">
+</div>
 </div>
 </div>
 </div>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2023-11-09 14:32:44 UTC
+Last updated 2023-11-13 14:02:49 UTC
 </div>
 </div>
 </body>

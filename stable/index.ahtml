@@ -448,7 +448,13 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <div id="preamble">
 <div class="sectionbody">
 <div class="paragraph">
-<p>👋 Hi, and welcome to this in-depth tutorial to get familiar with Enonic. The guide is aimed at people new to Enonic, covering everything you need to know for a flying start.</p>
+<p>Hello, and welcome to this in-depth tutorial to get familiar with Enonic. The guide is aimed at people new to Enonic, covering the essentials of content modelling and accessing the data.</p>
+</div>
+<div class="paragraph">
+<p>If you have any questions, or just want to get in touch - visit the <a href="https://discuss.enonic.com" target="_blank" rel="noopener">Forum</a> or join the <a href="https://slack.enonic.com/" target="_blank" rel="noopener">Community Slack channel</a></p>
+</div>
+<div class="paragraph">
+<p>Good luck! 🙌</p>
 </div>
 <div class="admonitionblock note">
 <table>
@@ -462,12 +468,6 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 </tr>
 </table>
 </div>
-<div class="paragraph">
-<p>If you have any questions, or just want to get in touch - visit our <a href="https://discuss.enonic.com" target="_blank" rel="noopener">Forum</a> or join our <a href="https://slack.enonic.com/" target="_blank" rel="noopener">Community Slack channel</a></p>
-</div>
-<div class="paragraph">
-<p>Good luck! 🙌</p>
-</div>
 </div>
 </div>
 <div class="sect1">
@@ -476,6 +476,18 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <div class="paragraph">
 <p>Below is an overview of the various chapters in this guide.</p>
 </div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+When we mention "XP", we are referring to "Enonic XP", the hybrid CMS you&#8217;re starting to learn!
+</td>
+</tr>
+</table>
+</div>
 <div class="sidebarblock">
 <div class="content">
 <div class="title">Installing tools and initial setup</div>
@@ -483,15 +495,15 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <dl>
 <dt class="hdlist1"><a href="setup.ahtml">Setting up your development environment</a></dt>
 <dd>
-<p>Starting from scratch, this chapter takes you through how to install all the necessary tools to get started with XP development.</p>
+<p>Starting from scratch, this chapter takes you through how to install all the necessary tools to get started with Enonic XP development.</p>
 </dd>
-<dt class="hdlist1"><a href="sandboxes.ahtml">Sandboxes</a></dt>
+<dt class="hdlist1"><a href="sandboxes.ahtml">Sandbox</a></dt>
 <dd>
-<p>The fundamentals of Enonic XP development: sandboxes and the Enonic CLI.</p>
+<p>Introducing a fundamental concept of Enonic XP development: sandboxes.</p>
 </dd>
-<dt class="hdlist1"><a href="apps.ahtml">App development</a></dt>
+<dt class="hdlist1"><a href="apps.ahtml">My first App</a></dt>
 <dd>
-<p>Learn how to create XP projects and how to build and deploy your apps to an XP instance.</p>
+<p>Learn how to create XP projects and how to build and deploy your apps to a XP instance.</p>
 </dd>
 </dl>
 </div>
@@ -502,21 +514,21 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <div class="title">Working with content</div>
 <div class="dlist">
 <dl>
-<dt class="hdlist1"><a href="content.ahtml">Content and content types</a></dt>
+<dt class="hdlist1"><a href="content.ahtml">Content studio and content creation</a></dt>
 <dd>
-<p>Content types are one of the most essential building blocks of XP. Get familiar with what they are and how to create and use them in this chapter.</p>
+<p>Get familiar with Content Studio and Content types, and start creating some content.</p>
 </dd>
-<dt class="hdlist1"><a href="headless-api.ahtml">Headless API</a></dt>
+<dt class="hdlist1"><a href="headless-api.ahtml">GraphQL API</a></dt>
 <dd>
-<p>What is a headless CMS without an API? Learn about the Guillotine library and the powers it unlocks here!</p>
+<p>What is a headless CMS without an API? Learn about the Guillotine library and the powers it unlocks here.</p>
 </dd>
-<dt class="hdlist1"><a href="media-and-images.ahtml">Media and images</a></dt>
+<dt class="hdlist1"><a href="media-and-images.ahtml">Medias and attachments</a></dt>
 <dd>
-<p>How does XP deal with images and other media? This chapter covers XP media support, how to upload and query for media, and how to work with images.</p>
+<p>How does XP deal with images and other media? This chapter covers XP media support, how to upload and query for media, how to work with images and attachments.</p>
 </dd>
 <dt class="hdlist1"><a href="input-types.ahtml">Input types</a></dt>
 <dd>
-<p>Take your content types to the next level with more advanced input types. Learn how to configure input types, what kinds there are, and how to link content together!</p>
+<p>Take your content types to the next level with more advanced input types. Learn how to configure input types, what kinds there are, and how to link content together.</p>
 </dd>
 </dl>
 </div>
@@ -531,9 +543,9 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <dd>
 <p>XP has a number of ways to group inputs together. Learn all about them in this chapter.</p>
 </dd>
-<dt class="hdlist1"><a href="rich-text.ahtml">Rich text: HtmlArea</a></dt>
+<dt class="hdlist1"><a href="rich-text.ahtml">Rich text</a></dt>
 <dd>
-<p>Rich text is an incredibly powerful editing tool and an important part of the XP experience. Learn how to configure it here!</p>
+<p>Rich text is an incredibly powerful editing tool and an important part of the XP experience. Learn how to configure it here.</p>
 </dd>
 <dt class="hdlist1"><a href="x-data.ahtml">X-data</a></dt>
 <dd>
@@ -561,7 +573,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2023-11-09 14:32:44 UTC
+Last updated 2023-11-13 14:02:49 UTC
 </div>
 </div>
 </body>

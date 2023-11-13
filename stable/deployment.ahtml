@@ -444,15 +444,13 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <li><a href="#deploy_to_enonic_cloud">Deploy to Enonic Cloud</a>
 <ul class="sectlevel2">
 <li><a href="#task_install_application">Task: Install application</a></li>
-<li><a href="#task_import_and_publish_your_content">Task: import and publish your content</a></li>
+<li><a href="#task_import_and_publish_your_content">Task: Import and publish your content</a></li>
 <li><a href="#task_go_live">Task: Go live</a></li>
 </ul>
 </li>
-<li><a href="#deploy_elsewhere">Deploy elsewhere</a>
+<li><a href="#custom_hosting">Custom hosting</a>
 <ul class="sectlevel2">
 <li><a href="#installing_the_app">Installing the app</a></li>
-<li><a href="#task_alt_1_via_admin_console">Task: Alt 1 - via Admin Console</a></li>
-<li><a href="#alt_2_via_api">Alt 2: via API</a></li>
 <li><a href="#vhosts">Virtual hosts = pretty URLs</a></li>
 <li><a href="#task_setup_vhosts_in_your_sandbox">Task: Setup vhosts in your Sandbox</a></li>
 <li><a href="#vhost_troubleshooting">Vhost troubleshooting</a></li>
@@ -474,7 +472,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <h2 id="deploy_to_enonic_cloud"><a class="link" href="#deploy_to_enonic_cloud">Deploy to Enonic Cloud</a></h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>Enonic Cloud is our fully managed and hassle free hosting option. Sit back, relax and let Enonic take care of your infrastructure, monitoring, backups, etc.</p>
+<p>Enonic Cloud is Enonic&#8217;s fully managed and hassle free hosting option. Sit back, relax and let Enonic take care of your infrastructure, monitoring, backups, etc.</p>
 </div>
 <div class="paragraph">
 <p>Enough with the sales pitch. Follow the steps below to get deploy your app on Enonic Cloud:</p>
@@ -484,7 +482,16 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <div class="olist arabic">
 <ol class="arabic">
 <li>
-<p>Sign up for a free trial by visiting <a href="https://cloud.enonic.com" class="bare">https://cloud.enonic.com</a> (no credit card needed)</p>
+<p>Sign up by visiting <a href="https://cloud.enonic.com" class="bare">https://cloud.enonic.com</a> (no credit card needed)</p>
+</li>
+<li>
+<p>After accessing your account for the first time, make sure to choose the <code>free trial</code> plan</p>
+<div class="imageblock">
+<div class="content">
+<img src="media/enonic-cloud-free-trial.png" alt="Enonic cloud welcome page with 3 plans" width="1050" height="professional and enterprise">
+</div>
+<div class="title">Figure 1. Enonic Cloud plans</div>
+</div>
 </li>
 <li>
 <p>Create a new solution. Choose the <code>CMS essentials</code> template, and go with the default values</p>
@@ -508,44 +515,90 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <li>
 <p>From the Cloud console, verify that the app was installed to your selected environment.</p>
 </li>
+<li>
+<p>In the end, you should get something like this in your terminal:</p>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-bash" data-lang="bash">bre@bre-enonic:~/tutorial/myproject$ enonic cloud login
+
+  Your login code is &lt;code&gt;
+
+  Waiting for you to login .Go to this url to login: https://enonic.eu.auth0.com/activate?user_code=&lt;code&gt;
+
+  Waiting for you to login ... success!
+
+  Session expires at: 2023-08-31 02:18:37 +0200 CEST
+
+bre@bre-enonic:~/tutorial/myproject$ enonic cloud app install
+
+  ? Deploy '/home/bre/tutorial/myproject/build/libs/myproject.jar' to 'bre1/guide101/production/xp7'. Is this correct? Yes
+
+  Uploading jar [=======================================================================================] 100.00% 4s
+
+  Deploying jar to service 'bre1/guide101/production/xp7'
+
+  Success!</code></pre>
+</div>
+</div>
+</li>
 </ol>
+</div>
+<div class="paragraph">
+<p>To make sure it all worked, click on the red "launch" button on your Cloud console Dashboard, then access the "Applications" app, and check if your app is listed on the installed applications list.</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="task_import_and_publish_your_content"><a class="link" href="#task_import_and_publish_your_content">Task: import and publish your content</a></h3>
+<h3 id="task_import_and_publish_your_content"><a class="link" href="#task_import_and_publish_your_content">Task: Import and publish your content</a></h3>
 <div class="paragraph">
 <p>Since the cloud instance is a completely new environment, the content you created locally will not be available here.</p>
 </div>
 <div class="paragraph">
-<p>You can choose to
-a) manually create new content on the server, or
-b) export and import content from your local machine to the server.</p>
+<p>You can choose to:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>manually create new content on the server, or</p>
+</li>
+<li>
+<p>export and import content from your local machine to the server.</p>
+</li>
+</ul>
 </div>
 <div class="paragraph">
-<p>Lets try the import:</p>
+<p>Lets try the second option, i.e, to export data locally and import on enonic cloud:</p>
+</div>
+<div class="admonitionblock warning">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-warning" title="Warning"></i>
+</td>
+<td class="content">
+Before proceeding, access Content Studio on your cloud instance and make sure to create a project there assigning your app to it. This is needed because the cloud instance is a new empty environment.
+</td>
+</tr>
+</table>
 </div>
 <div class="olist arabic">
 <ol class="arabic">
 <li>
-<p>In your local sandbox - Using Content Studio, select the root item you want to export (for instance the site)</p>
+<p>Access the Data toolbox app and go to "Data tree";</p>
 </li>
 <li>
-<p>From the context panel on the right, open the <code>Data toolbox</code> widget.</p>
+<p>Navigate to <code>com.enonic.cms.myfirstproject</code> &gt; <code>draft</code> &gt; <code>[root]</code>, then select <code>content</code> and click on "Export selected node";</p>
 </li>
 <li>
-<p>Click export, select and download the export (this will place a zip file on your local device)</p>
+<p>You&#8217;ll be redirected to the "Node exports" page. Now click on the export item and then on the top right icon that says "Archive and download selected node exports". This will download a zip file locally;</p>
 </li>
 <li>
-<p>Via Cloud Console, sign into to your XP environment by clicking the login button for your environment.</p>
+<p>Go back to your cloud instance, access Data toolbox "Node exports" page, click on "Upload and unarchive node exports" and then select the zip file downloaded on the previous step;</p>
 </li>
 <li>
-<p>Launch Content Studio, and open the <code>Data toolbox</code> panel on your server instance.</p>
+<p>Vist "Data tree" page on Data toolbox and navigate to <code>com.enonic.cms.&lt;name-of-your-cloud-project&gt;</code> &gt; <code>draft</code> &gt; <code>[root]</code>, click on "Import node export" and select the one that was created on the previous step;</p>
 </li>
 <li>
-<p>Using Data toolbox, upload and then import the file that was saved on your local device. Content studio should now fill up with content items.</p>
-</li>
-<li>
-<p>Finally, select the root item, and select <code>Publish tree</code> from the top right action menu in Content studio. After publishing, validate that your content is listed as "Published".</p>
+<p>Now access Content Studio and check that your data is imported as it should. Make sure to publish everything to make it available on master branch.</p>
 </li>
 </ol>
 </div>
@@ -571,30 +624,42 @@ b) export and import content from your local machine to the server.</p>
 <p>Accept the default domain</p>
 </li>
 <li>
-<p>Use the internal path <code>/site/default/master</code> (Given that this actually matches your content project)</p>
+<p>Use the internal path <code>/site/&lt;name-of-your-cloud-project&gt;/master</code></p>
 </li>
 <li>
-<p>The public path could for instance be <code>/imadeit</code></p>
+<p>The public path could for instance be <code>/api</code></p>
 </li>
 </ul>
 </div>
 </li>
 <li>
-<p>Once the route has been created, you may click its link in the Cloud console to visit it.</p>
+<p>Congratulations, your API is now live and your content on master branch can be fetched at the <code>/api</code> route:</p>
+<div class="imageblock">
+<div class="content">
+<img src="media/graphql-altair-querying-on-exposed-route.png" alt="Altair GraphQL client querying Lion animal data on the &quot;/api&quot; route defined on cloud console" width="1200">
+</div>
+<div class="title">Figure 2. Querying Lion data on /api route using Altair GraphQL client</div>
+</div>
 </li>
 </ol>
 </div>
-<div class="paragraph">
-<p>Congratulations, your API is now live, with your content :-)</p>
-</div>
-<div class="paragraph">
-<p>For more information on Enonic Cloud, visit <a href="https://enonic.com/platform/cloud">the Enonic Cloud marketing page</a>.</p>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+For more information on Enonic Cloud, visit <a href="https://enonic.com/platform/cloud-service">the Enonic Cloud marketing page</a>.
+</td>
+</tr>
+</table>
 </div>
 </div>
 </div>
 </div>
 <div class="sect1">
-<h2 id="deploy_elsewhere"><a class="link" href="#deploy_elsewhere">Deploy elsewhere</a></h2>
+<h2 id="custom_hosting"><a class="link" href="#custom_hosting">Custom hosting</a></h2>
 <div class="sectionbody">
 <div class="paragraph">
 <p>If Enonic Cloud isn&#8217;t your thing, you need to start by getting the platform (Enonic XP) up and running, before you can actually deploy your application.</p>
@@ -606,18 +671,15 @@ b) export and import content from your local machine to the server.</p>
 <p>Setting up the entire platform is beyond the scope of this tutorial. As such, we&#8217;ll focus on the steps required for getting your app live - assuming you already have the platform running.</p>
 </div>
 <div class="paragraph">
-<p>For more details on deplying the platform, check out <a href="https://developer.enonic.com/docs/xp/stable/deployment">the <em>deployment</em> section of the XP reference docs</a>.</p>
+<p>For more details on deplying the platform, check out <a href="https://developer.enonic.com/docs/xp/stable/deployment/strategies">the Deployment section of the XP reference docs</a>.</p>
 </div>
 <div class="sect2">
 <h3 id="installing_the_app"><a class="link" href="#installing_the_app">Installing the app</a></h3>
 <div class="paragraph">
 <p>Regardless of how you deploy your XP instance, installing your app is commonly done in one of two ways:</p>
 </div>
-</div>
-<div class="sect2">
-<h3 id="task_alt_1_via_admin_console"><a class="link" href="#task_alt_1_via_admin_console">Task: Alt 1 - via Admin Console</a></h3>
 <div class="paragraph">
-<p>Follow these simple steps:</p>
+<p>First alternative is via Admin console. Follow these simple steps:</p>
 </div>
 <div class="admonitionblock note">
 <table>
@@ -645,14 +707,14 @@ Your application executable (*.jar file) can be found in <code>project-folder/bu
 <div class="content">
 <img src="media/deployment-app-upload.png" alt="The application installation menu with a blue overlay. The overlay says 'drop files to upload'" width="1200">
 </div>
-<div class="title">Figure 1. Drag and drop applications to upload them</div>
+<div class="title">Figure 3. Drag and drop applications to upload them</div>
 </div>
 </li>
 </ol>
 </div>
+<div class="paragraph">
+<p>Second alternative is via API:</p>
 </div>
-<div class="sect2">
-<h3 id="alt_2_via_api"><a class="link" href="#alt_2_via_api">Alt 2: via API</a></h3>
 <div class="paragraph">
 <p>If you have access to your server&#8217;s management API (available on port 4848), you can also deploy directly via this endpoint, or by using <a href="https://developer.enonic.com/docs/enonic-cli/master/xp#app">the CLI</a>.</p>
 </div>
@@ -669,7 +731,10 @@ Your application executable (*.jar file) can be found in <code>project-folder/bu
 <p>Setting up a vhost is only required once per application/site you want deploy.</p>
 </div>
 <div class="paragraph">
-<p>Vhosts can be defined in your sandbox&#8217;s configuration directory. This file contains mappings from public-facing URLs to internal URLs. For instance, this lets the user access <code>my-first-site.com/api</code> and while retrieving content from <code>/site/default/master/my-first-site/api</code>.</p>
+<p>Vhosts can be defined in your sandbox&#8217;s configuration directory. This file contains mappings from public-facing URLs to internal URLs.</p>
+</div>
+<div class="paragraph">
+<p>For instance, this lets the user access <code>myproject.com/api</code> and while retrieving content from <code>/site/myproject/master/</code>.</p>
 </div>
 <div class="paragraph">
 <p>An example vhosts file that achieves the mapping mentioned would look something like this:</p>
@@ -678,9 +743,9 @@ Your application executable (*.jar file) can be found in <code>project-folder/bu
 <div class="content">
 <pre>enabled = true <i class="conum" data-value="1"></i><b>(1)</b>
 
-mapping.example.host = my-first-site.com <i class="conum" data-value="2"></i><b>(2)</b>
+mapping.example.host = myproject.com/api <i class="conum" data-value="2"></i><b>(2)</b>
 mapping.example.source = / <i class="conum" data-value="3"></i><b>(3)</b>
-mapping.example.target = /site/default/master <i class="conum" data-value="4"></i><b>(4)</b></pre>
+mapping.example.target = /site/myproject/master <i class="conum" data-value="4"></i><b>(4)</b></pre>
 </div>
 </div>
 <div class="colist arabic">
@@ -691,7 +756,7 @@ mapping.example.target = /site/default/master <i class="conum" data-value="4"></
 </tr>
 <tr>
 <td><i class="conum" data-value="2"></i><b>2</b></td>
-<td>For all requests to <code>my-first-site.com</code></td>
+<td>For all requests to <code>my-first-site.com/api</code></td>
 </tr>
 <tr>
 <td><i class="conum" data-value="3"></i><b>3</b></td>
@@ -710,8 +775,7 @@ mapping.example.target = /site/default/master <i class="conum" data-value="4"></
 <div class="sect2">
 <h3 id="task_setup_vhosts_in_your_sandbox"><a class="link" href="#task_setup_vhosts_in_your_sandbox">Task: Setup vhosts in your Sandbox</a></h3>
 <div class="paragraph">
-<p>To explore how vhost mappings work, let&#8217;s configure vhosts for our local XP instance.
-Then, to test it, we&#8217;ll have override your computer&#8217;s DNS resolver by updating it&#8217;s <code>hosts</code> file.</p>
+<p>To explore how vhost mappings work, let&#8217;s configure vhosts for your local XP instance, then, to test it, we&#8217;ll have override your computer&#8217;s DNS resolver by updating it&#8217;s <code>hosts</code> file.</p>
 </div>
 <div class="olist arabic">
 <ol class="arabic">
@@ -845,7 +909,7 @@ This HTML is the content of the login page in raw form.</p>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2023-11-09 14:32:44 UTC
+Last updated 2023-11-13 14:02:49 UTC
 </div>
 </div>
 </body>

@@ -5,8 +5,8 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="generator" content="Asciidoctor 2.0.20">
-<meta name="description" content="Content types are one of the most essential building blocks of XP. Get familiar with what they are and how to create and use them in this chapter.">
-<title>Content and content types</title>
+<meta name="description" content="How does XP deal with images and other media? This chapter covers XP media support, how to upload and query for media, how to work with images and attachments.">
+<title>Medias and attachments</title>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,300italic,400,400italic,600,600italic%7CNoto+Serif:400,400italic,700,700italic%7CDroid+Sans+Mono:400,700">
 <style>
 /*! Asciidoctor default stylesheet | MIT License | https://asciidoctor.org */
@@ -437,26 +437,31 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 </head>
 <body class="article toc2 toc-right">
 <div id="header">
-<h1>Content and content types</h1>
+<h1>Medias and attachments</h1>
 <div id="toc" class="toc2">
 <div id="toctitle">Table of Contents</div>
 <ul class="sectlevel1">
-<li><a href="#what_are_content_types">What are content types?</a></li>
-<li><a href="#task_the_artist_content_type">Task: The artist content type</a></li>
-<li><a href="#content_studio">Content Studio</a></li>
-<li><a href="#sites">Sites</a>
+<li><a href="#media">Media</a>
 <ul class="sectlevel2">
-<li><a href="#task_creating_a_site">Task: Creating a site</a></li>
+<li><a href="#types">Types</a></li>
+<li><a href="#upload">Upload</a></li>
+<li><a href="#data_toolbox">Data Toolbox</a></li>
 </ul>
 </li>
-<li><a href="#task_content_creation">Task: Content creation</a></li>
-<li><a href="#content_type_validation">Content type validation</a></li>
-<li><a href="#publishing">Publishing</a>
+<li><a href="#xps_image_service">XP&#8217;s image service</a></li>
+<li><a href="#editing_images">Editing images</a>
 <ul class="sectlevel2">
-<li><a href="#task_publish_your_site">Task: publish your site!</a></li>
+<li><a href="#autofocus">Autofocus</a></li>
 </ul>
 </li>
-<li><a href="#task_data_toolbox">Task: Data Toolbox</a></li>
+<li><a href="#attachments">Attachments</a></li>
+<li><a href="#graphql_api">GraphQL API</a>
+<ul class="sectlevel2">
+<li><a href="#general_media_type">General media type</a></li>
+<li><a href="#image_media_type">Image media type</a></li>
+<li><a href="#attachments_2">Attachments</a></li>
+</ul>
+</li>
 </ul>
 </div>
 </div>
@@ -464,10 +469,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <div id="preamble">
 <div class="sectionbody">
 <div class="paragraph">
-<p>In this chapter, we&#8217;ll start working with content types in XP. We&#8217;ll look at how we create content and how it&#8217;s stored, as well as how to create and publish it. To achieve this, we&#8217;ll start working with and getting familiar with <em>Content Studio</em>, XP&#8217;s content editing suite.</p>
-</div>
-<div class="paragraph">
-<p>This chapter only gives you a brief introduction to Content Studio and how to use it. For a more comprehensive overview, watch <a href="https://www.youtube.com/watch?v=tR9KHOcZOs0">this short video on Content Studio basics</a> or head to the <a href="https://developer.enonic.com/docs/content-studio/stable">Content Studio reference documentation</a>.</p>
+<p>Naturally, XP can also store any files you would want to serve or associate with your content. This chapter explores how XP stores uploaded data and focuses on how its image tools work. At the end of the chapter we&#8217;ll walk through how to use images in a headless fashion.</p>
 </div>
 <div class="admonitionblock note">
 <table>
@@ -476,7 +478,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <i class="fa icon-note" title="Note"></i>
 </td>
 <td class="content">
-The tasks and examples in this chapter are based on work done in previous chapters (starting with <a href="sandboxes.ahtml">the sandboxes chapter</a>). If you want to follow along with the examples, make sure you&#8217;re all caught up.
+The tasks and examples in this chapter are based on work done in previous chapters (starting with <a href="sandboxes.ahtml">the sandboxes chapter</a>). If you want to follow along with the examples, make sure you&#8217;re all caught up. This chapter requires that you&#8217;ve got your site up and running.
 </td>
 </tr>
 </table>
@@ -484,66 +486,252 @@ The tasks and examples in this chapter are based on work done in previous chapte
 </div>
 </div>
 <div class="sect1">
-<h2 id="what_are_content_types"><a class="link" href="#what_are_content_types">What are content types?</a></h2>
+<h2 id="media"><a class="link" href="#media">Media</a></h2>
 <div class="sectionbody">
+<div class="sect2">
+<h3 id="types"><a class="link" href="#types">Types</a></h3>
 <div class="paragraph">
-<p>Every content item created in Enonic has a specific content type. The content type defines the data fields (aka properties) that piece of content can and must have.</p>
+<p>Media types are standard content types that ship with XP. When you upload a file to XP, XP will assign it one of a number of preexisting media types based on the file&#8217;s content. Some common media types are images, audio, video, and executables.</p>
 </div>
 <div class="paragraph">
-<p>A JavaScript analogy: If a content type is a JSON schema, the content item is a JSON that matches the schema. Actually, this is not so far from how things actually work - as you will see later 😊</p>
-</div>
-<div class="admonitionblock important">
-<table>
-<tr>
-<td class="icon">
-<i class="fa icon-important" title="Important"></i>
-</td>
-<td class="content">
-Content types are defined and installed via applications. If you stop or remove an application that contains a content type, you&#8217;ll no longer be able to create or edit content of that type.
-</td>
-</tr>
-</table>
+<p>For a full overview of all the media types baked into XP, see the <a href="https://developer.enonic.com/docs/xp/stable/cms/content-types#media">reference docs for media content types</a>.</p>
 </div>
 </div>
-</div>
-<div class="sect1">
-<h2 id="task_the_artist_content_type"><a class="link" href="#task_the_artist_content_type">Task: The artist content type</a></h2>
-<div class="sectionbody">
+<div class="sect2">
+<h3 id="upload"><a class="link" href="#upload">Upload</a></h3>
 <div class="paragraph">
-<p>Now that we know what a content type is, let&#8217;s look at how we create them and how we make XP recognize them. We&#8217;ll create a content type that contains two input fields. When shown in Content Studio, it will look like this:</p>
+<p>To upload files to Content Studio, use the "create content" dialog. You can either click the "upload" icon in the dialog or you can drag and drop the files from your file explorer.</p>
 </div>
 <div class="imageblock">
 <div class="content">
-<img src="media/content-type-target.png" alt="A content creation form with name and biography fields" width="1200">
+<img src="media/media-drag-and-drop.png" alt="The drag and drop interface. Three file icons being dragged onto a large, blue, circular drop zone." width="900">
 </div>
-<div class="title">Figure 1. The target for our first content type</div>
+<div class="title">Figure 1. Dragging and dropping files to the "create content dialog"</div>
+</div>
+<div class="paragraph">
+<p>This process is the same for whatever media type you want to upload.</p>
+</div>
+<div class="paragraph">
+<p>To get familiar with uploading media to XP, let&#8217;s start with one of the most common media types on the web: images! As mentioned above, this process will also work for any other media type.</p>
 </div>
 <div class="olist arabic">
 <ol class="arabic">
 <li>
-<p>To get started, make sure you&#8217;re in the project folder (<code>myproject/</code>) that you created in a previous chapter. All paths will be relative to this root folder.</p>
+<p>Find an image to upload. For the purposes of the tasks in this chapter, you should work with an image where the important part isn&#8217;t centered in the shot. If you have one yourself, feel free to use that. If not, how about using <a href="https://unsplash.com/photos/8oLnCRz7hwM">this picture of a lion</a> by <a href="https://unsplash.com/@keyursphotography">Keyur Nandaniya</a>?</p>
 </li>
 <li>
-<p>Create a directory for content types: <code>src/main/resources/site/content-types/</code>. XP is quite particular about project folder structure, so you need to put content types right where it expects to find them.</p>
+<p>Create a folder for your images. Call it "images". Just like the "artist" folder we created previously, you may place the folder anywhere in your project structure.</p>
 </li>
 <li>
-<p>Create a directory called <code>artist</code> in the newly created <code>content-types/</code> directory. XP expects all content types to have their own directories.</p>
+<p>Open the "create content" dialog. Press the upload button to bring up your OS&#8217;s file browsing dialog and select your image. You can also drag and drop the image from your file system browser onto the dialog.</p>
 </li>
-<li>
-<p>Within the <code>artist</code> directory, create a file called <code>artist.xml</code>. The file name must match the directory name  (except for the file extension). The full path to the content type from the project root should thus be <code>src/main/resources/site/content-types/artist/artist.xml</code>.</p>
-</li>
-<li>
-<p>In the <code>artist.xml</code> file, place the following contents:</p>
+</ol>
+</div>
+<div class="paragraph">
+<p>And that&#8217;s all it takes to upload files to Content Studio!</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="data_toolbox"><a class="link" href="#data_toolbox">Data Toolbox</a></h3>
+<div class="paragraph">
+<p>Like we saw in the chapter on content, Data Toolbox lets you view and edit your content. Images and other media are also available in Data Toolbox as content, but in addition to the same properties you saw previously, media also have a property called <code>attachment</code>. The attachment specifies the actual media file that you have uploaded.</p>
+</div>
+<div class="paragraph">
+<p>For instance, if you have a look at the image you uploaded earlier, you should see that it points to the image file you uploaded.</p>
+</div>
+<div class="paragraph">
+<p>If you added a focal point, you&#8217;ll see that specified under the <code>media</code> property too.</p>
+</div>
+<div class="paragraph">
+<p>If you view the content as JSON, some relevant parts of the structure are the <code>data</code> and <code>attachment</code> properties:</p>
+</div>
 <div class="listingblock">
-<div class="title">The 'Artist' content type</div>
+<div class="title">An extract of the JSON representation of an image</div>
+<div class="content">
+<pre class="highlight"><code class="language-json" data-lang="json">// ....
+  "data": {
+    "media": {
+      "attachment": "lion.jpg", <i class="conum" data-value="1"></i><b>(1)</b>
+      "focalPoint": { <i class="conum" data-value="2"></i><b>(2)</b>
+        "x": 0.246875,
+        "y": 0.6653906106948853
+      }
+    }
+  },
+  "attachment": { <i class="conum" data-value="3"></i><b>(3)</b>
+    "name": "lion.jpg",
+    "label": "source",
+    "binary": "lion.jpg",
+    "mimeType": "image/jpeg",
+    "size": 256018,
+    "text": ""
+  }
+// ....</code></pre>
+</div>
+</div>
+<div class="colist arabic">
+<table>
+<tr>
+<td><i class="conum" data-value="1"></i><b>1</b></td>
+<td>References the name of the attachment specified in the <code>attachment</code> property.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="2"></i><b>2</b></td>
+<td>If you have set a focal point, its position will also show up here. See the next task for how to set one.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="3"></i><b>3</b></td>
+<td>The image attachment with data about the file, such as MIME type and size.</td>
+</tr>
+</table>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="xps_image_service"><a class="link" href="#xps_image_service">XP&#8217;s image service</a></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Whenever XP serves you an image, the image is served via <a href="https://developer.enonic.com/docs/xp/stable/runtime/engines/site-engine/image-service">XP&#8217;s image service</a>.</p>
+</div>
+<div class="paragraph">
+<p>The image service takes care of scaling and applying filters to your images based on parameters you give it. For instance, it&#8217;s common to want to have all images in a section conform to the same dimensions. But because images are generally of different shapes and sizes, this might require cropping the image. The image service takes care of that for you as long as you specify what you want.</p>
+</div>
+<div class="paragraph">
+<p>The image service works in tandem with Content Studio&#8217;s image editing tools, so it respects crops, flips, and focal points that you create.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="editing_images"><a class="link" href="#editing_images">Editing images</a></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Content Studio comes with a suite of image editing tools built in. After uploading an image to Content Studio, you can find it in the content grid and edit it to bring up the image&#8217;s content form.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="media/image-content-form.png" alt="A content form showing the image with image editing tools, inputs for caption, alternative text, copyright, and tags." width="1200">
+</div>
+<div class="title">Figure 2. The image content form</div>
+</div>
+<div class="paragraph">
+<p>The content form allows you to provide an image caption, alt text, copyright and tag info.</p>
+</div>
+<div class="paragraph">
+<p>You can also add image properties such as dimensions, and where the image was taken and with what gear.</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+Changing these properties, including size, width, height, etc, does not affect the image in any way.
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>The image editing tools allow you to crop, flip, and rotate the image as well as to set what&#8217;s known as <em>autofocus</em>.</p>
+</div>
+<div class="paragraph">
+<p>The autofocus control allows you to set an image focal point that XP will always keep in view, regardless of how the image is cropped.</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+Without setting a focal point, XP will focus around the center of the image when cropping.
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>You can always reset the edits you&#8217;ve made to an image by using the 'reset filters' button.</p>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+You can read more about <a href="https://enonic.com/blog/enonic-simplifies-image-problems">how Enonic simplifies your everyday image problems</a> to get more info about how to use images in a traditional CMS model and for a quick overview of the autofocus feature.
+</td>
+</tr>
+</table>
+</div>
+<div class="sect2">
+<h3 id="autofocus"><a class="link" href="#autofocus">Autofocus</a></h3>
+<div class="paragraph">
+<p>Because we chose an image with an off-center subject, the image might get cropped such that the lion disappears from the image. For instance, a small, square crop might turn out like this:</p>
+</div>
+<div class="imageblock text-center">
+<div class="content">
+<img src="media/image-cropped-unfocused.jpg" alt="A crop of the lion in the savannah image. The image is square and the only part of the lion that is visible is part of its hind leg." width="750">
+</div>
+<div class="title">Figure 3. Cropped image without focal point</div>
+</div>
+<div class="paragraph">
+<p>To get around this, try the autofocus tool.</p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Click the autofocus tool. A red circle will show up over the image. This circle indicates where the focal point is.</p>
+</li>
+<li>
+<p>Move the circle onto the lion (or whatever your focal point is) and press "apply".</p>
+<div class="imageblock">
+<div class="content">
+<img src="media/image-editing-focal-point.png" alt="The lion image with a red circle indicating the focal point around its head." width="1200">
+</div>
+<div class="title">Figure 4. The focal point editor</div>
+</div>
+</li>
+</ol>
+</div>
+<div class="paragraph">
+<p>Now, when the image gets cropped, XP will take care of keeping the lion in focus, both in traditional CMS solutions and in headless modes:</p>
+</div>
+<div class="imageblock text-center">
+<div class="content">
+<img src="media/image-cropped-focused.jpg" alt="A crop of the lion in the savannah. In this square image, the lion is in full view square in the center." width="750">
+</div>
+<div class="title">Figure 5. The same image with the same crop, but with a focal point</div>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="attachments"><a class="link" href="#attachments">Attachments</a></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>XP has an input type named <a href="https://developer.enonic.com/docs/xp/stable/cms/input-types#attachmentuploader">AttachmentUploader</a> that enables uploading of one or more files that will be stored as attachments to the current content.</p>
+</div>
+<div class="paragraph">
+<p>This differs from the previously presented media content, which is a separate content itself that can be linked on other content types, for example, by using the <a href="https://developer.enonic.com/docs/xp/stable/cms/input-types#imageselector">ImageSelector</a> input type.</p>
+</div>
+<div class="paragraph">
+<p>To take a look on how attachments work, let&#8217;s update the Artist content type to use the input type <em>AttachmentUploader</em>.</p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>For that, update the <em>Artist.xml</em> file accordingly:</p>
+<div class="listingblock">
 <div class="content">
 <pre class="highlight"><code class="language-xml" data-lang="xml">&lt;content-type&gt;
-  &lt;display-name&gt;Artist&lt;/display-name&gt; <i class="conum" data-value="1"></i><b>(1)</b>
-  &lt;description&gt;Information about an artist&lt;/description&gt; <i class="conum" data-value="2"></i><b>(2)</b>
+  &lt;display-name&gt;Artist&lt;/display-name&gt;
+  &lt;description&gt;Information about an artist&lt;/description&gt;
   &lt;super-type&gt;base:structured&lt;/super-type&gt;
-  &lt;form&gt; <i class="conum" data-value="3"></i><b>(3)</b>
+  &lt;form&gt;
 
-    &lt;input name="name" type="TextLine"&gt; <i class="conum" data-value="4"></i><b>(4)</b>
+    &lt;input name="name" type="TextLine"&gt;
       &lt;label&gt;Name&lt;/label&gt;
       &lt;help-text&gt;
         The artist's name (if different from their professional moniker).
@@ -554,6 +742,15 @@ Content types are defined and installed via applications. If you stop or remove 
       &lt;label&gt;About the artist&lt;/label&gt;
     &lt;/input&gt;
 
+    &lt;input type="Date" name="birthday" &gt;
+      &lt;label&gt;Birthday&lt;/label&gt;
+    &lt;/input&gt;
+
+    &lt;input type="AttachmentUploader" name="attachments"&gt;
+      &lt;label&gt;Attachments&lt;/label&gt;
+      &lt;occurrences minimum="0" maximum="0"/&gt; <i class="conum" data-value="1"></i><b>(1)</b>
+    &lt;/input&gt;
+
   &lt;/form&gt;
 &lt;/content-type&gt;</code></pre>
 </div>
@@ -562,332 +759,408 @@ Content types are defined and installed via applications. If you stop or remove 
 <table>
 <tr>
 <td><i class="conum" data-value="1"></i><b>1</b></td>
-<td>This is what will be displayed in Content Studio when creating new content.</td>
+<td><em>minimum="0"</em> shows that this is not a required field, while <em>maxiumum="0"</em> shows that we can upload as many attachments as we want.</td>
+</tr>
+</table>
+</div>
+</li>
+<li>
+<p>Redeploy your app</p>
+</li>
+<li>
+<p>Add some attachments to each of the three artists. In my case I&#8217;ll add images of some of their albums.</p>
+</li>
+</ol>
+</div>
+<div class="paragraph">
+<p>With that, we have not only enhanced the Artist content type with a new structure, but also added files as attachments to all three artists.</p>
+</div>
+<div class="paragraph">
+<p>On the next section we&#8217;ll show how we can retrieve this information through queries.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="graphql_api"><a class="link" href="#graphql_api">GraphQL API</a></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Guillotine makes it easy to fetch the data that you&#8217;ve uploaded.</p>
+</div>
+<div class="paragraph">
+<p>Some functionality is shared between all media types, while other queries only work on specific media types.</p>
+</div>
+<div class="paragraph">
+<p>We&#8217;ll look at how to fetch general media and then have a closer look at what we can do with images and attachments.</p>
+</div>
+<div class="sect2">
+<h3 id="general_media_type"><a class="link" href="#general_media_type">General media type</a></h3>
+<div class="paragraph">
+<p>To get the resource URL of media you have uploaded, use the <code>mediaUrl</code> property on any media type. For instance, to get the URL of the raw image you uploaded previously, you could use a query like this:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-GraphQL" data-lang="GraphQL">{
+  guillotine {
+    queryDsl(
+      query: {
+        term: {
+          field: "type",
+          value: {
+            string: "media:image"
+          }
+        }
+      }
+    ) {
+      displayName
+      ... on media_Image { <i class="conum" data-value="1"></i><b>(1)</b>
+        mediaUrl <i class="conum" data-value="2"></i><b>(2)</b>
+      }
+    }
+  }
+}</code></pre>
+</div>
+</div>
+<div class="colist arabic">
+<table>
+<tr>
+<td><i class="conum" data-value="1"></i><b>1</b></td>
+<td>This allows us to query properties that belong to the <code>media:Image</code> GraphQL type.</td>
 </tr>
 <tr>
 <td><i class="conum" data-value="2"></i><b>2</b></td>
-<td>This is an optional description, but it is still recommended to add, as it will make life easier for your editors.</td>
+<td>The <code>mediaUrl</code> property (also available on all other media types) gives you a URL from where the raw file can be downloaded.</td>
+</tr>
+</table>
+</div>
+<div class="listingblock">
+<div class="title">The response would look something like this:</div>
+<div class="content">
+<pre class="highlight"><code class="language-json" data-lang="json">{
+  "data": {
+    "guillotine": {
+      "queryDsl": [
+        {
+          "displayName": "keyur-nandaniya-8oLnCRz7hwM-unsplash",
+          "mediaUrl": "/admin/site/preview/my-first-project/draft/_/attachment/inline/21f827e0-ba57-4824-b3bc-f101ae08568b:9475135781b315daad078d91c27746bc3222d024/keyur-nandaniya-8oLnCRz7hwM-unsplash.jpg"
+        }
+      ]
+    }
+  }
+}</code></pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="image_media_type"><a class="link" href="#image_media_type">Image media type</a></h3>
+<div class="paragraph">
+<p>XP supports a number of image manipulation functions on the fly. When querying for an image via the GraphQL API, you can use the <code>imageUrl</code> function to specify scale and filters for the result you want.</p>
+</div>
+<div class="paragraph">
+<p>The scale argument is <code>required</code> and allows you to specify how you want to crop the image. Common scaling functions include <em>block</em>, which allows you to specify width and height and <em>width</em> which scales the image proportionally to the specified width.</p>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+<a href="https://developer.enonic.com/docs/xp/stable/runtime/engines/site-engine/image-service#scaling_methods">The scaling methods reference docs</a> show off all the available scaling functions with examples of how they affect the image.
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>As the name implies, the filters argument lets you apply filters to the image. Use filters to apply coloration functions and to rotate and flip images on the fly. To combine filters, separate them with a semicolon.</p>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+<a href="https://developer.enonic.com/docs/xp/stable/runtime/engines/site-engine/image-service#filters">The filters documentation</a> has an exhaustive list of the available filters.
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>For instance, we could get all the images under the <code>images</code> folder, scaled to 600x700 pixels, in grayscale, with a query like this:</p>
+</div>
+<div class="listingblock">
+<div class="title">A GraphQL query that both scales and applies a filter to images in the <code>images</code> folder</div>
+<div class="content">
+<pre class="highlight"><code class="language-GraphQL" data-lang="GraphQL">{
+  guillotine {
+    queryDsl(
+      query: {
+        term: {
+          field: "type",
+          value: {
+            string: "media:image"
+          }
+        }
+      }
+    ) {
+      displayName
+      ... on media_Image {
+        imageUrl( <i class="conum" data-value="1"></i><b>(1)</b>
+          type: absolute, <i class="conum" data-value="2"></i><b>(2)</b>
+          scale: "block(600,700)", <i class="conum" data-value="3"></i><b>(3)</b>
+          filter: "grayscale(); border(10, 0x000000)") <i class="conum" data-value="4"></i><b>(4)</b>
+      }
+    }
+  }
+}</code></pre>
+</div>
+</div>
+<div class="colist arabic">
+<table>
+<tr>
+<td><i class="conum" data-value="1"></i><b>1</b></td>
+<td>The <code>imageUrl</code> function lets you specify how you want the images to look.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="2"></i><b>2</b></td>
+<td>The <code>type</code> argument specifies whether the URL should be absolute or relative to the server.</td>
 </tr>
 <tr>
 <td><i class="conum" data-value="3"></i><b>3</b></td>
-<td>This is where we specify which fields (aka inputs) this content type shall have, basically the form, as seen in Content Studio.</td>
+<td>The scale argument specifies the dimensions of the image.</td>
 </tr>
 <tr>
 <td><i class="conum" data-value="4"></i><b>4</b></td>
-<td>The <code>type</code> attribute specifies what kind of input input the user will see in Content Studio, and the <code>label</code> specifies how the input will be labeled.</td>
-</tr>
-</table>
-</div>
-<div class="admonitionblock note">
-<table>
-<tr>
-<td class="icon">
-<i class="fa icon-note" title="Note"></i>
-</td>
-<td class="content">
-Content types also have a large number of other, optional fields that we won&#8217;t get into here. If you&#8217;d like to learn more about this, consult <a href="https://developer.enonic.com/docs/xp/stable/cms/content-types">the reference documentation</a>.
-</td>
-</tr>
-</table>
-</div>
-<div class="admonitionblock note">
-<table>
-<tr>
-<td class="icon">
-<i class="fa icon-note" title="Note"></i>
-</td>
-<td class="content">
-XP&#8217;s <code>input</code> elements are <em>not</em> the same as HTML <code>input</code> elements. To read more about it, <a href="input-types.ahtml">see the chapter on input types</a>.
-.
-</td>
-</tr>
-</table>
-</div>
-</li>
-<li>
-<p>Now run:</p>
-<div class="literalblock">
-<div class="content">
-<pre>enonic project deploy</pre>
-</div>
-</div>
-</li>
-</ol>
-</div>
-<div class="paragraph">
-<p>If everything goes well, you should see your sandbox logs update now. And that&#8217;s the basics of creating new content types. Next, let&#8217;s turn our eyes to Content Studio and create some actual content!</p>
-</div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="content_studio"><a class="link" href="#content_studio">Content Studio</a></h2>
-<div class="sectionbody">
-<div class="paragraph">
-<p>As mentioned in the introduction, Content Studio is XP&#8217;s content management interface. Use it to navigate, create, edit, and publish content and sites. Content Studio also lets you preview pages and other content types that have a visual component.</p>
-</div>
-<div class="paragraph">
-<p>To access Content Studio from the XP home page (or anywhere in XP), use the top right XP menu and select "Content Studio".</p>
-</div>
-<div class="paragraph">
-<p>Wanna get a quick overview over Content Studio? Watch <a href="https://www.youtube.com/watch?v=tR9KHOcZOs0">this short video on Content Studio basics</a> for a quick overview of how Content Studio works and what you can do with it. If you&#8217;d rather just keep reading: we&#8217;ll introduce everything as we go along.</p>
-</div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="sites"><a class="link" href="#sites">Sites</a></h2>
-<div class="sectionbody">
-<div class="paragraph">
-<p>You&#8217;re finally ready to create some actual content! With your sandbox up and running, navigate to Content Studio. You should be met with an empty studio that tells you are "wasting this space":</p>
-</div>
-<div class="imageblock">
-<div class="content">
-<img src="media/content-studio-empty.png" alt="What Content Studio looks like when it&#8217;s completely empty." width="1200">
-</div>
-<div class="title">Figure 2. An empty content studio</div>
-</div>
-<div class="sect2">
-<h3 id="task_creating_a_site"><a class="link" href="#task_creating_a_site">Task: Creating a site</a></h3>
-<div class="paragraph">
-<p>Before you can create content, you need a <em>site</em>. Sites are a special content type that ships with Content Studio. It&#8217;s one of a very small number of content types that we can place at the very root of the content hierarchy. A site is like a root node that we can nest other content under.</p>
-</div>
-<div class="paragraph">
-<p>When we create a new site, we can also specify which applications it uses, and that&#8217;s where our application comes into play.</p>
-</div>
-<div class="olist arabic">
-<ol class="arabic">
-<li>
-<p>To get going, press the "New&#8230;&#8203;" button in the toolbar. This will bring up a "Create Content" dialog that looks something like this:</p>
-<div class="admonitionblock tip">
-<table>
-<tr>
-<td class="icon">
-<i class="fa icon-tip" title="Tip"></i>
-</td>
-<td class="content">
-You can also use the keyboard shortcut <span class="keyseq"><kbd>Alt</kbd>+<kbd>n</kbd></span> to bring up the "Create Content" dialog.
-</td>
-</tr>
-</table>
-</div>
-<div class="imageblock">
-<div class="content">
-<img src="media/content-studio-create-content.png" alt="The Content Studio create content dialog." width="1200">
-</div>
-<div class="title">Figure 3. The Content Studio create content dialog</div>
-</div>
-</li>
-<li>
-<p>Select "Site" either by clicking on it, or by navigating to it with your keyboard. You can start typing as soon as the dialog opens to filter the options too!</p>
-<div class="paragraph">
-<p>When you select it, your browser will take you to a new tab (or window, depending on your browser settings). This is the content creation form (or <em>wizard</em>).</p>
-</div>
-<div class="imageblock">
-<div class="content">
-<img src="media/content-studio-new-site.png" alt="Creating a new site in content studio. There is a form with site options on the left." width="1200">
-</div>
-<div class="title">Figure 4. Creating a new site in Content Studio.</div>
-</div>
-</li>
-<li>
-<p>Add the site name in the first field (the one with the <code>&lt;Display Name&gt;</code> placeholder). Being your first site, how about using "My First Site". Notice that when you do this, the path below the input field gets automatically updated to match what you input. You can manually override the path if you wish, but we&#8217;ll leave it as is for now.</p>
-</li>
-<li>
-<p>The <code>description</code> field is used to describe what the site is about. It&#8217;s an optional field, so you can leave it blank.</p>
-</li>
-<li>
-<p>The next field, `Applications, is important. This is where we tell Content Studio what sort of applications the site uses and thus what content types we can create within it. Now, select the "Vanilla Example" app.</p>
-</li>
-</ol>
-</div>
-<div class="paragraph">
-<p>Your site form should now look a little something like this.</p>
-</div>
-<div class="imageblock">
-<div class="content">
-<img src="media/content-studio-site-filled-out.png" alt="What the site form looks like after filling out the necessary fields." width="1200">
-</div>
-<div class="title">Figure 5. A filled out site creation form</div>
-</div>
-<div class="paragraph">
-<p>To confirm and return to the Content Studio hierarchy, press <kbd>Save</kbd> in the menu bar. Feel free to close the tab (you won&#8217;t be needing it again).</p>
-</div>
-<div class="admonitionblock tip">
-<table>
-<tr>
-<td class="icon">
-<i class="fa icon-tip" title="Tip"></i>
-</td>
-<td class="content">
-You can also use the keyboard shortcut <span class="keyseq"><kbd>ctrl</kbd>+<kbd>s</kbd></span> on Linux and Windows and <span class="keyseq"><kbd>⌘</kbd>+<kbd>s</kbd></span> on macOS to save your content. Additionally <span class="keyseq"><kbd>ctrl</kbd>+<kbd>enter</kbd></span>/<span class="keyseq"><kbd>⌘</kbd>+<kbd>enter</kbd></span> saves the content for you and then closes the tab for you.
-</td>
+<td>The filter argument lets you apply filters.</td>
 </tr>
 </table>
 </div>
 <div class="paragraph">
-<p>When you return to the Content Studio hierarchy view, you should now see your site listed. If you expand it, you&#8217;ll find that there is also a node called "Templates" underneath it. We can ignore this for now, but we&#8217;ll learn more about it later.</p>
-</div>
-</div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="task_content_creation"><a class="link" href="#task_content_creation">Task: Content creation</a></h2>
-<div class="sectionbody">
-<div class="paragraph">
-<p>With the "My First Site" site highlighted, press "New &#8230;&#8203;" to open the "Create Content" menu again. This time around, you should have some more choices than what you did previously, including our very own content type "Artist"!</p>
-</div>
-<div class="imageblock">
-<div class="content">
-<img src="media/content-studio-new-content.png" alt="The &quot;Create Content&quot; dialog when creating content under the &quot;My First Site&quot; site. It contains more elements than previously, including the &quot;Artist&quot; content type that we created earlier." width="1200">
-</div>
-<div class="title">Figure 6. The "Create Content" dialog with more content types</div>
-</div>
-<div class="paragraph">
-<p>However, before we start creating artists, let&#8217;s create a folder. Because we&#8217;ll be using this site in the coming chapters with more content types, having some hierarchy will make things easier. Choose a new folder and call it "artists".</p>
-</div>
-<div class="paragraph">
-<p>Next, let&#8217;s create a few artists to get used to the workflow. We&#8217;ll start with Cardi B.</p>
-</div>
-<div class="olist arabic">
-<ol class="arabic">
-<li>
-<p>Select the artists folder (make sure it&#8217;s highlighted).</p>
-</li>
-<li>
-<p>Create a new artist.</p>
-</li>
-<li>
-<p>Give it the display name "Cardi B".</p>
-</li>
-<li>
-<p>Use these details to fill in the form:</p>
-<div class="dlist">
-<div class="title">Artist details (<a href="https://en.wikipedia.org/wiki/Cardi_B">Cardi B on Wikipedia</a>)</div>
-<dl>
-<dt class="hdlist1">Name</dt>
-<dd>
-<p>Belcalis Marlenis Almánzar</p>
-</dd>
-<dt class="hdlist1">About</dt>
-<dd>
-<p>Belcalis Marlenis Almánzar (born October 11, 1992), known professionally as Cardi B, is an American rapper and songwriter.</p>
-</dd>
-</dl>
-</div>
-<div class="imageblock">
-<div class="content">
-<img src="media/content-type-filled-out.png" alt="The form for &quot;artist&quot; fully filled out." width="1200">
-</div>
-<div class="title">Figure 7. The content form filled out for the artist "Cardi B"</div>
-</div>
-</li>
-<li>
-<p>Again, save and close the tab. Now repeat this process for these next two entries. Be aware that Content Studio lets you nest content, so if you try and create new content when "Cardi B" is selected in the hierarchy, it&#8217;ll nest the new content under "Cardi B". In our case, though, we want the artists to be nested directly under the current folder, so make sure "artists" folder is selected when you create new content.</p>
-<div class="dlist">
-<div class="title">Missy Elliott (<a href="https://en.wikipedia.org/wiki/Missy_Elliott">Missy Elliott on Wikipedia</a>)</div>
-<dl>
-<dt class="hdlist1">Name</dt>
-<dd>
-<p>Melissa Arnette Elliott</p>
-</dd>
-<dt class="hdlist1">About</dt>
-<dd>
-<p>Melissa Arnette Elliott (born July 1, 1971) is an American rapper, singer, songwriter, and record producer.</p>
-</dd>
-</dl>
-</div>
-<div class="dlist">
-<div class="title">P!nk (<a href="https://en.wikipedia.org/wiki/Pink_(singer)">P!nk on Wikipedia</a>)</div>
-<dl>
-<dt class="hdlist1">Name</dt>
-<dd>
-<p>Alecia Beth Moore</p>
-</dd>
-<dt class="hdlist1">About</dt>
-<dd>
-<p>Alecia Beth Moore (born September 8, 1979), known professionally as Pink (stylized as P!nk), is an American singer and songwriter.</p>
-</dd>
-</dl>
-</div>
-</li>
-</ol>
-</div>
-<div class="paragraph">
-<p>With these artists created, your content hierarchy should now list the site, the artists folder, and the three artists.</p>
-</div>
-<div class="imageblock">
-<div class="content">
-<img src="media/content-studio-with-artists.png" alt="The content hierarchy showing the My First Site site with &quot;Cardi B&quot;, &quot;Missy Elliot&quot;, &quot;P!nk&quot;, and &quot;Templates&quot; listed directly underneath it." width="1200">
-</div>
-<div class="title">Figure 8. The hierarchy as it should look after creating some content</div>
-</div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="content_type_validation"><a class="link" href="#content_type_validation">Content type validation</a></h2>
-<div class="sectionbody">
-<div class="paragraph">
-<p>Enonic provides XML Schema Definitions (XSDs) for text editor integration and validation of your XML schemas. To use it, add the attribute <code>xmlns</code>, <code>xmlns:xsi</code>, and <code>xsi:schemaLocation</code> to your content types as shown below:</p>
+<p>The above query should return a response that looks a little something like this:</p>
 </div>
 <div class="listingblock">
-<div class="title">Using XSDs for schema validation of a content type definition.</div>
+<div class="title">A response with a cropped image with filters</div>
 <div class="content">
-<pre class="highlight"><code class="language-xml" data-lang="xml">&lt;?xml version="1.0" encoding="utf-8"?&gt;
-&lt;content-type
-    xmlns="urn:enonic:xp:model:1.0"
-    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-    xsi:schemaLocation="urn:enonic:xp:model:1.0 https://raw.githubusercontent.com/enonic/xp/master/modules/core/core-api/src/main/resources/META-INF/xsd/model.xsd"&gt;
-  &lt;display-name&gt;Content type display name&lt;/display-name&gt;
-
-  &lt;!-- rest of content elided for brevity --&gt;
-
-&lt;/content-type&gt;</code></pre>
+<pre class="highlight"><code class="language-json" data-lang="json">{
+  "data": {
+    "guillotine": {
+      "queryDsl": [
+        {
+          "displayName": "keyur-nandaniya-8oLnCRz7hwM-unsplash",
+          "imageUrl": "http://localhost:8080/admin/site/preview/my-first-project/draft/_/image/21f827e0-ba57-4824-b3bc-f101ae08568b:6d89657e4bfae6eaa62de22bd6fb63b2697f091d/block-600-700/keyur-nandaniya-8oLnCRz7hwM-unsplash.jpg?filter=grayscale%28%29%3B+border%2810%2C+0x000000%29"
+        }
+      ]
+    }
+  }
+}</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>Note that in-editor schema validation depends on whether your text editor supports validating against XSD schemas or not. If your editor doesn&#8217;t support it out of the box, it may be available via a Language Server Protocol (LSP) client.</p>
+<p>Which, if you have followed the steps in this chapter, should show you something like this if you try and navigate to the <code>imageUrl</code> property value:</p>
 </div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="publishing"><a class="link" href="#publishing">Publishing</a></h2>
-<div class="sectionbody">
-<div class="paragraph">
-<p>You might have noticed the yellow circles with exclamation marks displayed on all the content we&#8217;ve been working on, both in the wizard and in the content grid. This is how Content Studio indicates whether something is published or not and whether there are any errors with it. There are four states:</p>
-</div>
-<div class="dlist">
-<dl>
-<dt class="hdlist1">Error (red circle with a cross)</dt>
-<dd>
-<p>This indicates that there is something wrong with your content. Because XP uses structured content it can also validate content as it is created. If something doesn&#8217;t conform to the specified schema (for example: a required field has no value), it will fail to validate and be marked with this symbol.</p>
-</dd>
-<dt class="hdlist1">Work in progress (yellow circle with exclamation mark)</dt>
-<dd>
-<p>This symbol indicates that this piece of content has unpublished changes. That could be either because this is new content that has never been published, or it could be because there have been changes to this piece of content since it was last published.</p>
-</dd>
-<dt class="hdlist1">Ready for publishing (green circle with a check mark)</dt>
-<dd>
-<p>This piece of content is marked as ready to be published.</p>
-</dd>
-<dt class="hdlist1">Published (no icon)</dt>
-<dd>
-<p>This piece of content is published and has not been modified since.</p>
-</dd>
-</dl>
-</div>
-<div class="imageblock">
+<div class="imageblock text-center">
 <div class="content">
-<img src="media/content-studio-content-status.png" alt="Three pieces of content displaying the three statuses that a piece of content can have" width="600">
+<img src="media/image-processed.jpg" alt="The lion image, cropped, in black and white, and flipped upside down." width="750">
 </div>
-<div class="title">Figure 9. Content status symbols</div>
+<div class="title">Figure 6. The processed image</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="attachments_2"><a class="link" href="#attachments_2">Attachments</a></h3>
+<div class="paragraph">
+<p>Let&#8217;s understand how we can retrieve artists attachments through queries.</p>
 </div>
 <div class="paragraph">
-<p>So what does it mean for content to be published? It doesn&#8217;t make much of a difference to us at this stage of the tutorial, but for when you&#8217;re working on production systems, it&#8217;s very important. So let&#8217;s talk briefly about Content Studio&#8217;s branching and publishing system.</p>
+<p>First, access the GraphQL API docs on query playground and search for the <code>Content</code> schema.  Scroll down a bit and you&#8217;ll note that there is a field name <em>attachments</em>. Now look for the <code>com_example_myproject_Artist_Data</code> schema. You&#8217;ll also note that, after the changes on the Attachments section, we also have a <em>attachments</em> field there, of the same type <em>Attachment</em> of the previous one</p>
 </div>
 <div class="paragraph">
-<p>Content Studio operates with two branches: a draft branch where you work and edit, and a branch that holds the published content, known as the master branch. When you work on something in Content Studio, you&#8217;re working on the draft branch. When you publish something, the master branch gets updated with the new content. When you edit that same piece of content in Content Studio again, you&#8217;re back to working on the draft, and you have to publish it to see changes to the published content.</p>
+<p>This means that we can get the attachments for each artist in two ways:</p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>By directly querting the attachments field in the <code>Content</code> schema, without the need of inline fragments</p>
+</li>
+<li>
+<p>Using inline fragments and accessing the <code>com_example_myproject_Artist_Data</code> schema, since there is also a <em>attachments</em> field there</p>
+</li>
+</ol>
 </div>
 <div class="paragraph">
-<p>To publish a piece of content, right click it and select "Publish".</p>
+<p>Let&#8217;s access the attachments in both ways, starting with the query that access the attachments field on the <code>Content</code> schema level:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-GraphQL" data-lang="GraphQL">{
+  guillotine {
+    getChildren(key: "/artists") {
+      ... on com_example_myproject_Artist {
+        _id
+        data {
+          name
+          about
+        }
+      }
+      attachments {
+        name
+        attachmentUrl(type: absolute)
+      }
+    }
+  }
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>And if everything went fine, you should expect a response that looks like this:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-json" data-lang="json">{
+  "data": {
+    "guillotine": {
+      "getChildren": [
+        {
+          "_id": "4d6862b1-3867-46cc-9705-b0291543b807",
+          "data": {
+            "name": "Alecia Beth Moore",
+            "about": "Alecia Beth Moore (born September 8, 1979), known professionally as Pink (stylized as P!nk), is an American singer and songwriter."
+          },
+          "attachments": [
+            {
+              "name": "The_Truth_About_Love.png",
+              "attachmentUrl": "http://localhost:8080/admin/site/preview/my-first-project/draft/_/attachment/inline/4d6862b1-3867-46cc-9705-b0291543b807:9b8af457d28aeb4332d4ed4b6cc35e63ed462a64/The_Truth_About_Love.png"
+            },
+            {
+              "name": "cant-take-me-home-pink.webp",
+              "attachmentUrl": "http://localhost:8080/admin/site/preview/my-first-project/draft/_/attachment/inline/4d6862b1-3867-46cc-9705-b0291543b807:c0bb06a49c8c862c5d6a01bb64bf3ba0aa777da9/cant-take-me-home-pink.webp"
+            }
+          ]
+        },
+        {
+          "_id": "46d8e610-3b31-4ea4-85c8-a7ae1751977f",
+          "data": {
+            "name": "Melissa Arnette Elliott",
+            "about": "Melissa Arnette Elliott (born July 1, 1971) is an American rapper, singer, songwriter, and record producer."
+          },
+          "attachments": [
+            {
+              "name": "Under_Construction_Cover.jpg",
+              "attachmentUrl": "http://localhost:8080/admin/site/preview/my-first-project/draft/_/attachment/inline/46d8e610-3b31-4ea4-85c8-a7ae1751977f:dd920d59b9ba0ded890d85bbc614cf752a43899a/Under_Construction_Cover.jpg"
+            },
+            {
+              "name": "supa-dupa-fly-album-cover.jpg",
+              "attachmentUrl": "http://localhost:8080/admin/site/preview/my-first-project/draft/_/attachment/inline/46d8e610-3b31-4ea4-85c8-a7ae1751977f:9a54d122bb13f50fa6bc368b22843cb661ddebc0/supa-dupa-fly-album-cover.jpg"
+            }
+          ]
+        },
+        {
+          "_id": "79b30fd8-93b5-4f1c-b17c-36e34bc0767f",
+          "data": {
+            "name": "Belcalis Marlenis Almánzar",
+            "about": "Belcalis Marlenis Almánzar (born October 11, 1992), known professionally as Cardi B, is an American rapper and songwriter."
+          },
+          "attachments": [
+            {
+              "name": "Cardi_B_-_Invasion_of_Privacy.png",
+              "attachmentUrl": "http://localhost:8080/admin/site/preview/my-first-project/draft/_/attachment/inline/79b30fd8-93b5-4f1c-b17c-36e34bc0767f:15db0b6d84901296b64994d682fdcd904b0bdf8c/Cardi_B_-_Invasion_of_Privacy.png"
+            }
+          ]
+        }
+      ]
+    }
+  }
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Now accessing attachments field on <code>com_example_myproject_Artist_Data</code> schema level:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-GraphQL" data-lang="GraphQL">{
+  guillotine {
+    getChildren(key: "/artists") {
+      ... on com_example_myproject_Artist {
+        _id
+        data {
+          name
+          about
+          attachments {
+            name
+            attachmentUrl(type: absolute)
+          }
+        }
+      }
+
+    }
+  }
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>And if everything went fine, you should finally expect a response that looks like this:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-json" data-lang="json">{
+  "data": {
+    "guillotine": {
+      "getChildren": [
+        {
+          "_id": "4d6862b1-3867-46cc-9705-b0291543b807",
+          "data": {
+            "name": "Alecia Beth Moore",
+            "about": "Alecia Beth Moore (born September 8, 1979), known professionally as Pink (stylized as P!nk), is an American singer and songwriter.",
+            "attachments": [
+              {
+                "name": "The_Truth_About_Love.png",
+                "attachmentUrl": "http://localhost:8080/admin/site/preview/my-first-project/draft/_/attachment/inline/4d6862b1-3867-46cc-9705-b0291543b807:9b8af457d28aeb4332d4ed4b6cc35e63ed462a64/The_Truth_About_Love.png"
+              },
+              {
+                "name": "cant-take-me-home-pink.webp",
+                "attachmentUrl": "http://localhost:8080/admin/site/preview/my-first-project/draft/_/attachment/inline/4d6862b1-3867-46cc-9705-b0291543b807:c0bb06a49c8c862c5d6a01bb64bf3ba0aa777da9/cant-take-me-home-pink.webp"
+              }
+            ]
+          }
+        },
+        {
+          "_id": "46d8e610-3b31-4ea4-85c8-a7ae1751977f",
+          "data": {
+            "name": "Melissa Arnette Elliott",
+            "about": "Melissa Arnette Elliott (born July 1, 1971) is an American rapper, singer, songwriter, and record producer.",
+            "attachments": [
+              {
+                "name": "Under_Construction_Cover.jpg",
+                "attachmentUrl": "http://localhost:8080/admin/site/preview/my-first-project/draft/_/attachment/inline/46d8e610-3b31-4ea4-85c8-a7ae1751977f:dd920d59b9ba0ded890d85bbc614cf752a43899a/Under_Construction_Cover.jpg"
+              },
+              {
+                "name": "supa-dupa-fly-album-cover.jpg",
+                "attachmentUrl": "http://localhost:8080/admin/site/preview/my-first-project/draft/_/attachment/inline/46d8e610-3b31-4ea4-85c8-a7ae1751977f:9a54d122bb13f50fa6bc368b22843cb661ddebc0/supa-dupa-fly-album-cover.jpg"
+              }
+            ]
+          }
+        },
+        {
+          "_id": "79b30fd8-93b5-4f1c-b17c-36e34bc0767f",
+          "data": {
+            "name": "Belcalis Marlenis Almánzar",
+            "about": "Belcalis Marlenis Almánzar (born October 11, 1992), known professionally as Cardi B, is an American rapper and songwriter.",
+            "attachments": [
+              {
+                "name": "Cardi_B_-_Invasion_of_Privacy.png",
+                "attachmentUrl": "http://localhost:8080/admin/site/preview/my-first-project/draft/_/attachment/inline/79b30fd8-93b5-4f1c-b17c-36e34bc0767f:15db0b6d84901296b64994d682fdcd904b0bdf8c/Cardi_B_-_Invasion_of_Privacy.png"
+              }
+            ]
+          }
+        }
+      ]
+    }
+  }
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>As can be seen, both ways retrieve the same data, but since their access is different, the response structure is also slighly different.</p>
 </div>
 <div class="admonitionblock tip">
 <table>
@@ -896,137 +1169,18 @@ You can also use the keyboard shortcut <span class="keyseq"><kbd>ctrl</kbd>+<kbd
 <i class="fa icon-tip" title="Tip"></i>
 </td>
 <td class="content">
-You can also publish a piece of content by using the keyboard shortcut <span class="keyseq"><kbd>Ctrl</kbd>+<kbd>Alt</kbd>+<kbd>P</kbd></span>/<span class="keyseq"><kbd>control</kbd>+<kbd>option</kbd>+<kbd>P</kbd></span>.
+Under the hood, the <em>attachment</em> field argument <em>attachmentUrl</em> uses Enonic&#8217;s javascript lib portal <a href="https://developer.enonic.com/docs/xp/stable/api/lib-portal#attachmenturl">attachmentUrl</a> function, so you can follow the link to better understand the arguments that you pass to this field when creating queries that uses it.
 </td>
 </tr>
 </table>
 </div>
-<div class="sect2">
-<h3 id="task_publish_your_site"><a class="link" href="#task_publish_your_site">Task: publish your site!</a></h3>
-<div class="paragraph">
-<p>Let&#8217;s give this publishing thing a try! We&#8217;ll publish the whole site at once. Select your site and publish it. You&#8217;ll be greeted by the Content Studio publishing wizard.</p>
-</div>
-<div class="imageblock">
-<div class="content">
-<img src="media/content-studio-publishing-wizard.png" alt="A dialog with a list of the content to be published and button saying 'publish now'" width="1200">
-</div>
-<div class="title">Figure 10. The Content Studio publishing wizard 🪄</div>
-</div>
-<div class="paragraph">
-<p>You&#8217;ll find that the "Publish now" button isn&#8217;t available just yet. For content to be published, you must first <em>mark it as ready</em>. But before we do that, we should also make sure that we select all the content that belongs under the site too. By default, publishing a piece of content doesn&#8217;t publish items nested under it. To include nested content, press the "include child items" icon to the left of the content icon (the one that looks sort of like a fork or a three-legged octopus). Next, select the "mark as ready" option from the button dropdown. It&#8217;ll mark your content as ready to publish. Now press "publish now".</p>
-</div>
-<div class="paragraph">
-<p>In short:</p>
-</div>
-<div class="olist arabic">
-<ol class="arabic">
-<li>
-<p>Select your site. Publish.</p>
-</li>
-<li>
-<p>Include child items.</p>
-</li>
-<li>
-<p>Mark as ready.</p>
-</li>
-<li>
-<p>Publish 🚀</p>
-</li>
-</ol>
-</div>
-</div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="task_data_toolbox"><a class="link" href="#task_data_toolbox">Task: Data Toolbox</a></h2>
-<div class="sectionbody">
-<div class="paragraph">
-<p>One of the applications we installed previously is <em>Data Toolbox</em>. Data Toolbox provides you with a web interface to visualize and manipulate your XP data. We&#8217;ll now see how to inspect our content using Data Toolbox.</p>
-</div>
-<div class="olist arabic">
-<ol class="arabic">
-<li>
-<p>Open the XP admin menu and select Data Toolbox. You should have this app installed from when you <a href="sandboxes.ahtml#_admin_console">took the welcome tour</a>.</p>
-<div class="imageblock">
-<div class="content">
-<img src="media/data-toolbox-landing-page.png" alt="The Data Toolbox landing page: grid of icons for administrative actions and accompanying explanations. " width="1200">
-</div>
-<div class="title">Figure 11. Data Toolbox</div>
-</div>
-</li>
-<li>
-<p>Navigate to the "Data Tree" menu. In this menu, the toolbox lists repositories within your XP instance. There are four repositories listed:</p>
-<div class="dlist">
-<dl>
-<dt class="hdlist1"><code>com.enonic.cms.default</code></dt>
-<dd>
-<p>This is the repository that holds your content.</p>
-</dd>
-<dt class="hdlist1"><code>system.auditlog</code></dt>
-<dd>
-<p>This is where the <em>audit log</em> is stored. The audit log allows you to see a log of everything that&#8217;s been done in your XP instance, such as content creation, user administration, etc., and also tells you when it was done and by whom.</p>
-</dd>
-<dt class="hdlist1"><code>system-repo</code></dt>
-<dd>
-<p>This is where XP stores data about your system, such as external applications and identity data.</p>
-</dd>
-<dt class="hdlist1"><code>system.scheduler</code></dt>
-<dd>
-<p>This is a separate repository where scheduled jobs are stored (new in 7.7.0).</p>
-</dd>
-</dl>
-</div>
-</li>
-<li>
-<p>Navigate through to <code>com.enonic.cms.default</code>.</p>
-</li>
-<li>
-<p>Next up is a list of branches (<a href="#_branches_and_publishing">as discussed above</a>). As long as you&#8217;ve published your content, you can choose either one of these.</p>
-</li>
-<li>
-<p>Keep navigating further down the tree: <code>[root]</code> &#8594; <code>content</code> &#8594; <code>my-first-site</code>.</p>
-</li>
-<li>
-<p>When you&#8217;ve reached <code>my-first-site</code> you should see all the content of your site listed. Navigate to <code>artists</code> to find actual pieces of content.</p>
-</li>
-<li>
-<p>Choose one of your artists and check out both the info view and the JSON view, available via the buttons in the table row.</p>
-<div class="imageblock">
-<div class="content">
-<img src="media/data-toolbox-info-view.png" alt="The Data Toolbox info view. the view contains options for exporting, moving, and deleting the node, as well as for displaying permissions for the node, versions of the node, and indexing data (and much more)." width="1200">
-</div>
-<div class="title">Figure 12. The Data Toolbox node info view</div>
-</div>
-</li>
-<li>
-<p>To inspect the data associated with the artist, you can select "Display properties", which will bring up data about the node, such as its display name, its owner, when it was created, etc.</p>
-<div class="imageblock">
-<div class="content">
-<img src="media/data-toolbox-properties.png" alt="A table with columns 'name', 'index, 'value', and 'type' that describes the node. Example names are 'valid', 'type', 'displayName'." width="1200">
-</div>
-<div class="title">Figure 13. The display properties view</div>
-</div>
-</li>
-<li>
-<p>Finally, you can navigate to the <code>data</code> property, where you&#8217;ll find the data stored on the artist.</p>
-<div class="imageblock">
-<div class="content">
-<img src="media/data-toolbox-properties-data.png" alt="A table showing the data we stored about the artist previously." width="1200">
-</div>
-<div class="title">Figure 14. The properties.data view</div>
-</div>
-</li>
-</ol>
-</div>
-<div class="paragraph">
-<p>Inspecting content is only a fraction of what Data Toolbox can do: it&#8217;s a versatile and powerful administrative tool, and we&#8217;ll see more of it in a later chapter.</p>
 </div>
 </div>
 </div>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2023-11-09 14:32:44 UTC
+Last updated 2023-11-13 14:02:49 UTC
 </div>
 </div>
 </body>
