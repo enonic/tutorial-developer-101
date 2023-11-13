@@ -5,17 +5,19 @@ include::.variables.adoc[]
 :section-3: Advanced content modelling
 :section-4: Deployment and next steps
 
-👋 Hi, and welcome to this in-depth tutorial to get familiar with Enonic. The guide is aimed at people new to Enonic, covering everything you need to know for a flying start.
+Hello, and welcome to this in-depth tutorial to get familiar with Enonic. The guide is aimed at people new to Enonic, covering the essentials of content modelling and accessing the data.
 
-NOTE: *In a hurry?* If you just want to get up and running as fast as possible, check out the https://developer.enonic.com/start[quick start docs] instead 🚀
-
-If you have any questions, or just want to get in touch - visit our https://discuss.enonic.com[Forum^] or join our https://slack.enonic.com/[Community Slack channel^]
+If you have any questions, or just want to get in touch - visit the https://discuss.enonic.com[Forum^] or join the https://slack.enonic.com/[Community Slack channel^]
 
 Good luck! 🙌
+
+NOTE: *In a hurry?* If you just want to get up and running as fast as possible, check out the https://developer.enonic.com/start[quick start docs] instead 🚀
 
 == Overview
 
 Below is an overview of the various chapters in this guide.
+
+NOTE: When we mention "XP", we are referring to "Enonic XP", the hybrid CMS you're starting to learn!
 
 [sidebar]
 .{section-1}
@@ -23,8 +25,8 @@ Below is an overview of the various chapters in this guide.
 
 <<setup#, {title-setup}>>::
 {description-setup}
-<<sandboxes#, {title-sandboxes}>>::
-{description-sandboxes}
+<<sandboxes#, {title-sandbox}>>::
+{description-sandbox}
 <<apps#, {title-apps}>>::
 {description-apps}
 --
@@ -33,12 +35,12 @@ Below is an overview of the various chapters in this guide.
 .{section-2}
 --
 
-<<content#, {title-content}>>::
-{description-content}
+<<content#, {title-content-studio}>>::
+{description-content-studio}
 <<headless-api#, {title-headless-api}>>::
 {description-headless-api}
-<<media-and-images#, {title-media-and-images}>>::
-{description-media-and-images}
+<<media-and-images#, {title-medias-and-attachments}>>::
+{description-medias-and-attachments}
 <<input-types#, {title-input-types}>>::
 {description-input-types}
 --

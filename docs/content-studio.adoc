@@ -1,0 +1,284 @@
+= {title-content-studio}
+include::.variables.adoc[]
+:description: {description-content-studio}
+
+In this {document}, we'll give a short introduction to Content Studio, an app that serves as the main content management interface for XP, providing editors an efficient way of creating, and curating content without technical skills.
+
+For a more comprehensive overview, watch https://www.youtube.com/watch?v=tR9KHOcZOs0[this short video on Content Studio basics] or head to the https://developer.enonic.com/docs/content-studio/stable[Content Studio reference documentation].
+
+NOTE: {see-prev-docs}
+
+== Installing Content Studio
+
+Let's start this {document} by installing Content Studio. In order to do that, access http://localhost:8080/admin/tool/com.enonic.xp.app.applications/main[Applications app], click on the header item _"install"_, search for _"content studio"_ and finally click on the green _"install"_ button.
+
+If the app was installed successfully, you should now see it listed in _XP menu_ on your http://localhost:8080/admin/tool[dashboard]. Click on it to visit Content Studio's homepage.
+
+=== Task: your first project
+
+After visiting Content Studio for the first time on a fresh sandbox, you'll be welcomed with the following dialog:
+
+.No available projects found dialog
+image::content-studio-no-available-projects-found-dialog.png["Content studio no available projects found dialog", {image-xl}]
+
+The reason why this dialog shows up is because Content Studio manages content, and content is organized in independent repositories, which are named as a _content projects_, or simply as _projects_.
+
+A project offer individual access control and permissions, as well as other settings to toggle features and language(s).
+
+TIP: Privileged users can manage projects via Content Studio settings.
+
+Now, head back to the wizard dialog to create your first project:
+
+.Creating your first project
+image::content-studio-my-first-project.gif["Content studio project creation wizard walkthrough.", {image-xl}]
+
+=== Assiging an app to a project
+
+Content Studio is a powerful app with a lot of features, and one of its main goal is to provide an awesome user experience for creating and curating content.
+
+Content is defined through content types (a concept we'll introduce in the next section), which are defined and installed via applications.
+
+Therefore, if we want to enable Content Studio to manage a specific type of content, we need to access content studio in a project which has an app assigned to it, and in this app, this specific content should defined via a content type.
+
+With all this in mind, note that one of the last steps on the previous creation wizard was to assign your app to the project. If you followed along, you should have your app assigned to the your first project, and in case you missed it, no worries, let's assign it to the created project:
+
+. On the green widget sidebar, click on settings
+. Double click on the project you just created to edit it
+. Scroll down and on the "Applications" section, select the application you've previously deployed to this sandbox
+
+.Assigning your first app to your first project
+image::content-studio-project-app-assignment.png["Content studio assigning apps to projects walkthrough.", {image-xl}]
+
+== Apps vs projects
+
+We've reached a certain point in this guide where its worth giving a section to reiterate the differences between:
+
+. XP project folder and its files 
+. XP app
+. Content Studio project
+
+A "_XP project folder and its files_" is the folder containing the files needed in order to create a _XP app_. In the previous section, this was automatically generated for us when we picked the "Vanilla starter" using the command `enonic project create`.
+
+A "_XP app_" is the .jar file that is generated when you run the command `enonic project build` on the project root folder.
+
+A "_Content Studio project_", as explained in the section xref:sandboxes#task:_your_first_project[Task: your first project] above, is a repository to store content, and the content creation is enabled through the apps you assign to a project.
+
+In summary, you can have the following flow in mind:
+
+image::app-vs-projects-flow.png[Simplied flow explaining the difference between an Enonic XP project folder and its files, an Enonic XP app, and a Content Studio project, width=300, align=center]
+
+NOTE: This flow is super simplified and there are a lot of details to each one of those boxes, but it should be sufficient to explain the main difference between those ideas and how they connect to eachother.
+
+From now on, we'll use the term "project" to refer to a "_XP project folder and its files_" and also to a"_Content Studio project_", since it can be easily distinguished by the context in which te term is used.
+
+We believe that this will help to avoid any confusion from your side. Now, back to work!
+
+== What are content types?
+
+Every content item created in Enonic has a specific content type. The content type defines the data fields (aka properties) that piece of content can and must have.
+
+A JavaScript analogy: If a content type is a JSON schema, then the content item is a JSON that matches the schema. Actually, this is not so far from how things actually work - as you will see later!
+
+IMPORTANT: As mentioned before, content types are defined and installed via applications. If you unassign an application from the project you're currently working on, you'll no longer be able to create or edit content of that type.
+
+=== Task: your first content type
+
+Now that we know what a content type is, let's look at how we create them. 
+
+We'll create a content type that contains two input fields. When shown in Content Studio, it will look like this:
+
+.The target for your first content type
+image::content-type-target.png["A content creation form with name and biography fields", {image-xl}]
+
+Back to your preferred editor, make sure you're in the project folder (`{project-name}/`) that you created in a previous {document}. All paths will be relative to this root folder.
+
+. Create a directory for content types: `src/main/resources/site/content-types/`. XP is quite particular about project folder structure, so you need to put content types right where it expects to find them.
+. Create a directory called `{content-type-1}` in the newly created `content-types/` directory. XP expects all content types to have their own directories.
+. Within the `{content-type-1}` directory, create a file called `{content-type-1}.xml`. The file name must match the directory name  (except for the file extension). The full path to the content type from the project root should be `src/main/resources/site/content-types/{content-type-1}/{content-type-1}.xml`.
+
+. In the `{content-type-1}.xml` file, place the following contents:
++
+.The '{content-type-1-capitalized}' content type
+[source,xml,{subs}]
+----
+<content-type>
+  <display-name>{content-type-1-capitalized}</display-name> // <1>
+  <description>Information about an {content-type-1}</description> // <2>
+  <super-type>base:structured</super-type>
+  <form> // <3>
+
+    <input name="name" type="TextLine"> // <4>
+      <label>Name</label>
+      <help-text>
+        The {content-type-1}'s name (if different from their professional moniker).
+      </help-text>
+    </input>
+
+    <input type="TextArea" name="about">
+      <label>About the {content-type-1}</label>
+    </input>
+
+  </form>
+</content-type>
+----
++
+<1> This is what will be displayed in Content Studio when creating new content.
+<2> This is an optional description, but it is still recommended to add, as it will make life easier for your editors.
+<3> This is where we specify which fields (aka inputs) this content type shall have, basically the form, as seen in Content Studio.
+<4> The `type` attribute specifies what kind of input input the user will see in Content Studio, and the `label` specifies how the input will be labeled.
++
+NOTE: Content types also have a large number of other, optional fields that we won't get into here. If you'd like to learn more about this, consult https://developer.enonic.com/docs/xp/stable/cms/content-types[the reference documentation].
++
+NOTE: XP's `input` elements are _not_ the same as HTML `input` elements. To read more about it, <<input-types#, see the {document} on input types>>
+.
+. Now run:
+
+[source,shell]
+----
+  enonic project dev
+----
+
+This command will watch changes under `{project-name}/` and redeploy as needed.
+
+TIP:  Make sure you're already running your sandbox with the `--dev` flag in another terminal, otherwise running enonic project dev will start the sandbox in detached mode, so you'll lose logs. More on cli's dev command https://developer.enonic.com/docs/enonic-cli/stable/dev#dev[here]. 
+
+If everything goes well, you should see your sandbox logs update now. And that's the basics of creating new content types. 
+
+Next, let's go back to Content Studio and create some actual content!
+
+=== Task: your first content creation
+
+Go back to content studio and make sure you are on the project you've created on the beginning of this {document}.
+
+Press _"New ..."_ to open the _"Create Content"_ menu. You should see a content type "{content-type-1-capitalized}". 
+
+NOTE: This content type is only visible there because of the updates we did to the app, i.e, your app is responsible to be delivering a {content-type-1} structure in which content studio can start to actually create content.
+
+.The "Create Content" dialog with the {content-type-1} available for content creation
+image::content-studio-new-content.png["The \"Create Content\" dialog when creating content under the created project. It contains elements, including the \"{content-type-1-capitalized}\" content type that we created earlier.", {image-xl}]
+
+However, before we start creating {content-type-1}s, let's create a folder.
+
+Since we'll be using this project in the coming {document}s with more content types, having some hierarchy will make things easier. Create a new folder and call it "{content-type-1}s".
+
+Next, let's create a few {content-type-1}s to get used to the workflow. We'll start with Cardi B.
+
+. Select the {content-type-1}s folder (make sure it's highlighted).
+. Create a new {content-type-1}.
+. Give it the display name "Cardi B".
+. Use these details to fill in the form:
++
+.Artist details (https://en.wikipedia.org/wiki/Cardi_B[Cardi B on Wikipedia])
+Name:: Belcalis Marlenis Almánzar
+About:: {content-about-cardi}
+
++
+.The content form filled out for the {content-type-1} "Cardi B"
+image::content-type-filled-out.png[The form for "{content-type-1}" fully filled out., {image-xl}]
++
+
+. Again, save and close the tab. Now repeat this process for these next two entries. Be aware that Content Studio lets you nest content, so if you try and create new content when "Cardi B" is selected in the hierarchy, it'll nest the new content under "Cardi B". In this case, though, we want the {content-type-1}s to be nested directly under the current folder, so make sure "{content-type-1}s" folder is selected when you create new content.
++
+.Missy Elliott (https://en.wikipedia.org/wiki/Missy_Elliott[Missy Elliott on Wikipedia])
+Name:: Melissa Arnette Elliott
+About:: {content-about-missy}
+
++
+.P!nk (https://en.wikipedia.org/wiki/Pink_(singer)[P!nk on Wikipedia])
+Name:: Alecia Beth Moore
+About:: {content-about-pink}
+
+With these {content-type-1}s created, your content hierarchy should now list the {content-type-1}s folder and the three {content-type-1}s.
+
+.The hierarchy as it should look after creating some content
+image::content-studio-with-{content-type-1}s.png["The content hierarchy showing {content-type-1}s folder with \"Cardi B\", \"Missy Elliot\" and \"P!nk\" listed directly underneath it.", {image-xl}]
+
+=== Content type validation
+
+Enonic provides XML Schema Definitions (XSDs) for text editor integration and validation of your XML schemas. To use it, add the attribute `xmlns`, `xmlns:xsi`, and `xsi:schemaLocation` to your content types as shown below:
+
+.Using XSDs for schema validation of a content type definition.
+[source,xml]
+----
+<?xml version="1.0" encoding="utf-8"?>
+<content-type
+    xmlns="urn:enonic:xp:model:1.0"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="urn:enonic:xp:model:1.0 https://raw.githubusercontent.com/enonic/xp/master/modules/core/core-api/src/main/resources/META-INF/xsd/model.xsd">
+  <display-name>Content type display name</display-name>
+
+  <!-- rest of content elided for brevity -->
+
+</content-type>
+----
+
+Note that in-editor schema validation depends on whether your text editor supports validating against XSD schemas or not. If your editor doesn't support it out of the box, it may be available via a Language Server Protocol (LSP) client.
+
+== Publishing your content
+
+You might have noticed the yellow circles with exclamation marks displayed on all the content we've been working on, both in the wizard and in the content grid. This is how Content Studio indicates whether something is published or not and whether there are any errors with it. There are four states:
+
+Error (red circle with a cross):: This indicates that there is something wrong with your content. Because XP uses structured content it can also validate content as it is created. If something doesn't conform to the specified schema (for example: a required field has no value), it will fail to validate and be marked with this symbol.
+Work in progress (yellow circle with exclamation mark):: This symbol indicates that this piece of content has unpublished changes. That could be either because this is new content that has never been published, or it could be because there have been changes to this piece of content since it was last published.
+Ready for publishing (green circle with a check mark):: This piece of content is marked as ready to be published.
+Published (no icon):: This piece of content is published and has not been modified since.
+
+image::content-studio-content-status.png[Three pieces of content displaying the three statuses that a piece of content can have, 400, align="center"]
+
+So what does it mean for content to be published? It doesn't make much of a difference to us at this stage of the tutorial, but when you're working on production systems, it's very important. So let's talk briefly about Content Studio's branching and publishing system.
+
+=== Branches
+
+Content Studio operates with two branches: 
+
+- _draft branch_, where you work and edit;
+- _master branch_, holds the published content.
+
+When you work on something in Content Studio, you're working on the *draft branch*. 
+
+When you publish something, the *master branch* gets updated with the new content. 
+
+When you edit that same piece of content in Content Studio again, you're back to working on the *draft*, and you have to publish it to see changes to the published content.
+
+To publish a piece of content, right click it and select "Publish".
+
+TIP: You can also publish a piece of content by using the keyboard shortcut kbd:[Ctrl+Alt+P]/kbd:[control+option+P].
+
+== Data Toolbox
+
+We'll now install and give a brief introduction to the _Data Toolbox_ app, so make sure to install it directly from the Applications app (same flow as installing Content Studio or any other app).
+
+Data Toolbox provides you with a web interface to visualize and manipulate your XP data. We'll now see how to inspect content using Data Toolbox.
+
+. Open the XP menu and select Data Toolbox. You should have this app installed from when you xref:sandboxes#_admin_console[took the welcome tour].
++
+.Data Toolbox
+image::data-toolbox-landing-page.png["The Data Toolbox landing page: grid of icons for administrative actions and accompanying explanations. ",{image-xl}]
++
+. Navigate to the "Data Tree" menu. In this menu, the toolbox lists repositories within your XP instance. There are four repositories listed:
+`com.enonic.cms.my-first-project`:: This is the current repository that holds your content.
+`com.enonic.cms.default`:: This is the default repository.
+`system.auditlog`:: This is where the _audit log_ is stored. The audit log allows you to see a log of everything that's been done in your XP instance, such as content creation, user administration, etc., and also tells you when it was done and by whom.
+`system-repo`:: This is where XP stores data about your system, such as external applications and identity data.
+`system.scheduler`:: This is a separate repository where scheduled jobs are stored (new in 7.7.0).
++
+. Navigate through to `com.enonic.cms.my-first-project`.
+. Next up is a list of branches (as discussed above). As long as you've published your content, you can choose either one of these.
+. Keep navigating further down the tree: `[root]` -> `content`.
+. When you've reached `content` you should see all the content of your site listed. Navigate to `{content-type-1}s` to find actual pieces of content.
+. Choose one of your {content-type-1}s and check out both the info view and the JSON view, available via the buttons in the table row.
++
+.The Data Toolbox node info view
+image::data-toolbox-info-view.png["The Data Toolbox info view. the view contains options for exporting, moving, and deleting the node, as well as for displaying permissions for the node, versions of the node, and indexing data (and much more).",{image-xl}]
++
+. To inspect the data associated with the {content-type-1}, you can select "Display properties", which will bring up data about the node, such as its display name, its owner, when it was created, etc.
++
+.The display properties view
+image::data-toolbox-properties.png["A table with columns 'name', 'index, 'value', and 'type' that describes the node. Example names are 'valid', 'type', 'displayName'.", {image-xl}]
++
+. Finally, you can navigate to the `data` property, where you'll find the data stored on the {content-type-1}.
++
+.The properties.data view
+image::data-toolbox-properties-data.png["A table showing the data we stored about the {content-type-1} previously.", {image-xl}]
+
+Inspecting content is only a fraction of what Data Toolbox can do: it's a versatile and powerful administrative tool, and we'll see more of it in a later {document}.

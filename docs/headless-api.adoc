@@ -2,11 +2,11 @@
 include::.variables.adoc[]
 :description: {description-headless-api}
 
-Now that we've created some content, let's see how we can access and use it in via API - headless style. This {document} introduces _Guillotine_, the app that's responsible for automatically generating GraphQL APIs for your content.
+Enonic is a hybrid CMS. As a hybrid CMS, Enonic is both capable of managing content, and support customized delivery. In this {document} we will focus on delivery via the out-of-the-box GraphQL API.
 
-NOTE: Enonic XP is very flexible, and provides multiple ways of exposing and using content. If you are not interested in accessing content via the standard headless API, feel free to skip this {document} and the sections mentioning "Headless" in the rest of the tutorial.
+Now that we've created some content, let's see how we can access and use it in via API - headless style. 
 
-NOTE: You won't be building anything new in this {chapter}, but we use the data set and everything that you've created over the previous {document}s.
+In order to do that we'll introduce _Guillotine_, the app that's responsible for automatically generating GraphQL APIs for your content.
 
 == Installing Guillotine
 
@@ -14,41 +14,29 @@ The first thing you need to do in order to get going is installing the Guillotin
 
 Fortunately, you can install Guillotine directly from your Enonic XP instance's admin console.
 
-. From the XP menu (top right), choose `Applications`.
+. From the XP menu (top right), choose `Applications`
 . Click kbd:[Install] from the top menu
-. Search for `Guillotine`, and click kbd:[Install]`.
+. Search for `Guillotine`, and click kbd:[Install]
 +
 image::install-guillotine.png[Install Guillotine application dialog, {image-xl}]
 
-That's it! 🎉
-
 == Query playground
 
-Back in Content Studio, you should now have access to a new item called `Query playground` in the left hand menu. Open it, and you should see this:
+Back in Content Studio, you should now have access to a new item called `Query playground` in the left green widget sidebar. Open it, and you should see this:
 
 image::query-playground-empty.png[API browser integrated in Content Studio, {image-xl}]
 
 Query playground is an interactive GraphQL API explorer. You enter your query in the text area to your left and when you execute it, you'll get the results of the query on the other side of the screen.
 
-The "Docs" tab on the right-hand side can be used to see all details of the underlying GraphQL schema.
-
-== Guillotine queries
-
 GraphQL is a graph "query language". It allows you to create highly specific queries for exactly the content that you need (visit the https://graphql.org/learn/[official GraphQL docs to learn more]).
 
-TIP: The API explorer offers autocompletion for fields. You can use this to interactively explore the API. You can also open the schema and documentation from the right-hand side menu tabs.
+As an example on how to retrieve some minimal info about your previously created artists, run the following query:
 
-
-To get started, copy the below query into your the query playground (left hand panel) and run it by clicking the play button.
-
-TIP: You can also run queries by using the keyboard shortcut kbd:[ctrl+enter]/kbd:[⌘+enter] .
-
-.A GraphQL query getting data about the root items in the project
-[source,xml]
+[source,GraphQL]
 ----
 {
   guillotine {
-    getChildren {
+    getChildren(key:"/artists") {
       displayName
       _path
       _id
@@ -57,136 +45,103 @@ TIP: You can also run queries by using the keyboard shortcut kbd:[ctrl+enter]/kb
 }
 ----
 
-The response is returned as JSON. In this case, it will contain the  contain the site ({p1-site-name}), and your images folder. For each item you will also see it's name, and location within the project structure.
+After running, you should get something like this on the right area:
 
-.The site info response
-[source,json]
-----
-{
-  "data": {
-    "guillotine": {
-      "getChildren": [
-        {
-          "displayName": "Images",
-          "_path": "/images"
-        },
-        {
-          "displayName": "My first site",
-          "_path": "/my-first-site"
-        }
-      ]
-    }
-  }
-}
-----
-
-.To fetch the children of the site, try this
-[source,xml]
-----
-{
-  guillotine {
-    getChildren(key: "/my-first-site") {
-      displayName
-      _path
-    }
-  }
-}
-----
-
-The response will contain the immediate children of the site: the "{content-type-1}" folder we created and the "Templates" folder that was already there.
-
-.The site info response
-[source,json]
-----
-{
-  "data": {
-    "guillotine": {
-      "getChildren": [
-        {
-          "displayName": "artists",
-          "_path": "/my-first-site/artists"
-        },
-        {
-          "displayName": "Templates",
-          "_path": "/my-first-site/templates"
-        }
-      ]
-    }
-  }
-}
-----
-
-== Site Context
-
-Throughout this tutorial we will primarily be working in the context of this site - for this specific purpose, Guillotine supports a so-called site context, which will simplify your queries.
-
-Open the "Request headers" section of Query playground, and paste the following configuration:
-
-  {
-    "X-Guillotine-SiteKey": "/my-first-site"
-  }
-
-NOTE: The SiteKey, may either be the site's path, or unique identifier. Using the ID is safe as you don't need to know the exact location of the site within your structure.
-
-When executing queries, you now have a few new tricks available, as you will see in the examples below
+.Results of running the suggested query
+image::query-playground-artists-minimal.png[Query playground response of running mimimal query to retrieve artists, {image-xl}]
 
 
-=== {content-type-1-capitalized} queries
 
-Let's look at writing slightly more complex queries that get us information about the artists we've created. To start with, let's see if we can just fetch all the {content-type-1}s that we created.
 
-This time, we will use the ${site} placeholder to specify the path
+=== Basic buttons
 
-.A GraphQL query fetching all content below the "{p1-site-name}" site
-[source,GraphQL,{subs}"]
-----
-{
-  guillotine {
-    getChildren(key: "${site}/{content-type-1}s")
-    {
-      displayName
-    }
-  }
-}
-----
+[start=0]
+. Before trying to come up with complex queries, let's make familiarize ourselves with Query Playground.
 
-The result of this query should list all the {content-type-1}s you created previously:
++
+image::query-playground-button-1.png[Query playground play button, width=75]
+. _play button_, will execute your query. Shortcut is kbd:[ctrl+enter]
 
-.The result of the above query; all content nodes below "{content-type-1}s"
-[source,JSON]
-----
-{
-  "data": {
-    "guillotine": {
-      "getChildren": [
-        {
-          "displayName": "P!nk"
-        },
-        {
-          "displayName": "Missy Elliott"
-        },
-        {
-          "displayName": "Cardi B"
-        }
-      ]
-    }
-  }
-}
-----
++
+image::query-playground-button-2.png[Query playground prettify button, width=75]
+. _prettify button_, will properly format your query, removing comments and unecessary spaces / indentation. Shortcut is kbd:[ctl+shift+p]
 
-Neat! Next, let's try a slightly more complicated query. In this one,  we'll also get the data inside the content nodes and extract their names and alias fields. Because all content shares the `displayName` property, you can query for it without specifying what type it belongs to. However, to get fields that exist on the {content-type-1-capitalized} type, you need to specifically tell GraphQL what type you're looking for via _inline fragments_. Inline fragments start with `... on` and then specify the content type you want.
++
+image::query-playground-button-3.png[Query playground merge button, width=75]
+. _merge fragments button_, will rewrite your query based on the declared https://graphql.org/learn/queries/#fragments[fragments]. Shortcut is kbd:[ctl+shift+m] 
 
-TIP: Learn more about inline fragments at https://graphql.org/learn/queries/#inline-fragments[the GraphQL documentation's _Inline Fragments_ section]
++
+image::query-playground-button-4.png[Query playground copy button, width=75]
+. _copy button_, will copy your query to your clipboard. Shortcut is kbd:[ctl+shift+c]
 
-.A GraphQL query that fetches all {content-type-1}s and their data using inline fragments
-[source, GraphQL,{subs}]
++
+image::query-playground-button-5.png[Query playground docs button, width=75]
+. _docs button_, will open a section showing all details about the schemas you have avaiable to use and query on
+
++
+image::query-playground-button-6.png[Query playground history button, width=75]
+. _history button_, will open a section showing all previously executed queries
+
++
+image::query-playground-button-7.png[Query playground tab button, width=75]
+. _tab button_, will create new tabs for you to manage testing multiple queries
+
++
+image::query-playground-button-8.png[Query playground draft and master buttons, width=200]
+. _draft / master buttons_ will switch between those two repositories for your queries to run on
+
++
+image::query-playground-button-9.png[Query playground re-fetch button, width=75]
+. _re-fetch schema button_, will update your graphql schemas based on recent changes
+
++
+image::query-playground-button-10.png[Query playground shortkeys button, width=75]
+. _shortkeys button_, will open a dialog displaying all short keys that can be used to execute actions
+
++
+image::query-playground-button-11.png[Query playground settings button, width=75]
+. _settings button_, will open settings dialog
+
+=== Schemas
+
+Now, locate and click on the docs button. On this opened section you have detailed info about all https://graphql.org/learn/schema/[schemas] available on your project.
+
+On the top search bar in the docs section, search for `artist` and locate the `com_example_myproject_Artist` schema:
+
+.The Artist schema
+image::query-playground-artist-schema.png[Query playground docs section showing the details of com_example_myproject_Artist schema, {image-xl}]
+
+Note that it's said that the `Artist` schema _implements_ the `Content` schema. This basically means that the `Artist` schema will have the structure defined by the `Content` schema, together with possibly some additional structure... in this case, that additional structure is a `data` field, defined by `com_example_myproject_Artist_Data` schema:
+
+.The Artist data schema
+image::query-playground-artist-data-schema.png[Query playground docs sections showing the details of com_example_myproject_Artist_Data schema, {image-xl}]
+
+NOTE: Note that this matches the structure defined by the Artist content type, which is a natural thing to expect.  
+
+=== Querying with inline fragments
+
+We've used the Docs section to inspect the structure of the `Artist` schema. Let's now, based on a broader understanding of this schema, we'll query to get proper data from artists.
+
+Close the docs section, head back to the text area to edit your query and remove `displayName`, `_path` and `_id` from the query we introduced earlier.
+
+Now, with your cursor on the inner curly braces of the query, press kbd:[ctrl+space] to get a list of suggestions about what fields you can request on your query:
+
+image::query-playground-artist-query-inspection.gif[Query playground query section showing suggested fields for content schema, {image-l}]
+
+As can be seen, we do not have the artist `name` and `about` fields available, and the reason for that is because the `getChildren` field can return any content that implements the `Content` schema, but it can't directly infer what schema that is, which in this case is the `com_example_myproject_Artist` schema:
+
+.getChildren can't directly infer what schema is implementing Content schema
+image::query-playground-getChildren-infer.png[Query playground getChildren can't directly infer what schema is implementing Content schema, {image-xs}, align=center]
+
+So to proceed, we use https://graphql.org/learn/queries/#inline-fragments[inline fragments]:
+
+[source,GraphQL]
 ----
 {
   guillotine {
-    getChildren(key: "${site}/{content-type-1}s/")
-    {
-      displayName
-      ... on {project-name-query}_{content-type-1-capitalized} { <--.-->
+    getChildren(key: "/artists") {
+      ... on com_example_myproject_Artist {
+        _id
         data {
           name
           about
@@ -197,143 +152,107 @@ TIP: Learn more about inline fragments at https://graphql.org/learn/queries/#inl
 }
 ----
 
-<.>   This inline fragment lets us extract extra data from content of the {content-type-1-capitalized} type.
+With this, we basically built a query that understands that under `"/artists"` path we have content types of `Artist`, and based on this we can request general content data, such as `_id`, but also specific content data, such as the artist name and about:
 
-Execute this and your response should look a little something like this:
+.Getting specific data of artists
+image::query-playground-artists-data.png[Query playground query returning artists content together with its name and about data, {image-xl}]
 
-.{content-type-1-capitalized}s and their aliases as returned by GraphQL
-[source,JSON,{subs}]
+=== Query with dataAsJson
+
+If you don't need or care about types when creating your queries, you can ignore the previously presented inline fragment approach and use the field `dataAsJson`:
+
+[source,GraphQL]
 ----
 {
-  "data": {
-    "guillotine": {
-      "getChildren": [
-        {
-          "displayName": "Missy Elliott",
-          "data": {
-            "name": "Melissa Arnette Elliott",
-            "about": "{content-about-missy}"
-          }
-        },
-        {
-          "displayName": "P!nk",
-          "data": {
-            "name": "Alecia Beth Moore",
-            "about": "{content-about-pink}"
-          }
-        },
-        {
-          "displayName": "Cardi B",
-          "data": {
-            "name": "Belcalis Marlenis Almánzar",
-            "about": "{content-about-cardi}"
-          }
-        }
-      ]
+  guillotine {
+    getChildren(key: "/artists") {
+      _id
+      dataAsJson
     }
   }
 }
 ----
 
+.Getting all data using dataAsJson
+image::query-playground-artists-dataAsJson.png[Query playground query returning artists content together with is name and about data, but using dataAsJson field, {image-xl}]
 
 == Advanced queries
 
-The `query` field underneath `guillotine` allows you to search the system for what you want. This field accepts a number of optional, named arguments to help you hone in on exactly what you're looking for. These arguments are:
+We'll now introduce and show examples of usages of different fields underneath the `guillotine` field, that allow us to search the system for specific data.
 
-`contentTypes`:: The content types we're looking for. Can either be a lone string if you're looking for a single content type, or a list if you want to search among multiple types.
-`filters` :: A list of filters to apply to the results after the query has been executed. We won't get into them here, so if you want to learn more about them, head to the https://developer.enonic.com/docs/xp/stable/storage/filters[filters documentation].
-`first`:: Specify how many nodes you want at most in your result. If your query yields a list of results, you can specify that you only want the first `n` results, where `n` is a positive integer. Works well in concert with offset.
-`offset`:: Specify how many results you want to cut from the beginning of the list of results. Most commonly used for pagination.
-`query`:: A https://developer.enonic.com/docs/xp/stable/storage/noql#query[NoQL query] string.
-`sort`:: A https://developer.enonic.com/docs/xp/stable/storage/noql#sort[NoQL sort] string.
+=== QueryDsl
 
-For instance, using the data set we've created previously in this guide, we could run a query like this:
+There is a `queryDsl` field underneath `guillotine` which allows you to search the system for what you want (the "Dsl" stands for "Domain Specific Language").
+
+The syntax is based on two types of operators: `Expressions` and `Compound`.
+
+`Expression`:: Used to check particular fields for various native and analysed values.
+`Compound`:: Used to logically combine various expressions and compounds to fetch nodes based on complex conditions.
+
+In order to exemplify this field usage on some queries, we'll query on the data set we've created so far on in this guide:
 
 .A Guillotine query using some of the arguments mentioned.
 [source,GraphQL,{subs}]
 ----
 {
   guillotine {
-    query(
-      first: 2,
-      offset: 0,
-      contentTypes:
-      [ "{project-name-full}:{content-type-1}", <--.-->
-	"{project-name-full}:{content-type-2}" ],
-      sort: "displayName desc") {
-      displayName
-      contentType {
-        displayName
-      }
-    }
-  }
-}
-----
-
-<.> To query for multiple types, enclose them in square brackets and separate them with commas.
-
-NOTE: If a content type doesn't exist, such as in the above query, GraphQL will process the query as normal: it just won't find any results of that type.
-
-This query would produce a result like the following:
-
-.Guillotine query result
-[source,json]
-----
-{
-  "data": {
-    "guillotine": {
-      "query": [
-        {
-          "displayName": "P!nk",
-          "contentType": {
-            "displayName": "Artist"
-          }
-        },
-        {
-          "displayName": "Missy Elliott",
-          "contentType": {
-            "displayName": "Artist"
+    queryDsl(
+      query: {
+        term: {
+          field: "type",
+          value: {
+            string: "{project-name-full}:{content-type-1}"
           }
         }
-      ]
+      },
+      first: 1,
+      sort: {
+        field: "displayName",
+        direction: DESC
+      }
+    ) {
+      _id
+      displayName
     }
   }
 }
 ----
 
-To perform a more advanced query, you can use the `query` parameter. The following GraphQL query uses the https://developer.enonic.com/docs/xp/stable/storage/noql#ngram[n-gram query functionality] to find all the {content-type-1}s that have a term (part of a text) that starts with `rap` somewhere in their data.
+Note that this query is getting the last artist that is alphabetically sorted by name, regardless of where the content type is located in the tree structure.
+
+The following GraphQL query uses the https://developer.enonic.com/docs/xp/stable/storage/dsl#ngram[n-gram functionality] to find all the {content-type-1}s that have a term (part of a text) that starts with `rap` somewhere in their data:
 
 .A Guillotine query using _nGram_ search functionality
 [source,GraphQL,{subs}]
 ----
 {
   guillotine {
-    query(
-      contentTypes: "{project-name-full}:{content-type-1}"
-      query: "ngram('_allText', 'rap')"
-      sort: "displayName asc") {
-      displayName
-    }
-  }
-}
-----
-
-The result would look something like this:
-
-.Rap results
-[source,json]
-----
-{
-  "data": {
-    "guillotine": {
-      "query": [
-        {
-          "displayName": "Cardi B"
-        },
-        {
-          "displayName": "Missy Elliott"
+    queryDsl(
+      query: {
+        boolean: {
+          must: [
+            {
+              term: {
+                field: "type",
+                value: {
+                  string: "{project-name-full}:{content-type-1}"
+                }
+              },
+              ngram: {
+                fields: ["_allText"],
+                query: "rap"
+              }
+            }
+          ]
         }
-      ]
+      },
+      sort: {
+        field: "displayName",
+        direction: DESC
+      }
+    ) {
+      _id
+      displayName
     }
   }
 }
@@ -346,36 +265,231 @@ Naturally, you can also use the standard boolean operators to combine or negate 
 ----
 {
   guillotine {
-    query(
-      contentTypes: "{project-name-full}:{content-type-1}"
-      query: "ngram('_allText', 'rap') AND ngram('_allText', 'sing')"
-      sort: "displayName asc") {
+    queryDsl(
+      query: {
+        boolean: {
+          must: [
+            {
+              term: {
+                field: "type",
+                value: {
+                  string: "{project-name-full}:{content-type-1}"
+                }
+              }
+            },
+            {
+              ngram: {
+                fields: "data.about"
+                query: "rap sing"
+                operator: AND
+              }
+            }
+          ]
+        }
+      },
+      sort: {
+        field: "displayName",
+        direction: DESC
+      }
+    ) {
+      _id
       displayName
     }
   }
 }
 ----
 
-And find out that with our data set, there's only one:
+NOTE: If you've previously used Elasticsearch API to query data, you'll be quite familiar with how `queryDsl` works!
 
-.Rappers and singers
-[source,json]
+TIP: To learn more about queryDSL capabilities, visit the https://developer.enonic.com/docs/xp/stable/storage/dsl[DSL reference]
+
+=== QueryDslConnection
+
+Just like there is a `queryDsl` field underneath `guillotine`, the API also provides other fields such as `queryDslConnection`.
+
+We'll not go into much details, but basically, the fields with _connection_ in their name have new parameters for aggregating and paginating data.
+
+To finish this {document}, we'll add a new _birthyear_ field to the artist content type, update all artist to have data on this field, and then use `queryDslConnection` field to get aggregated data. Let's get to work!
+
+. Start by updating the Artist content type to the following structure: 
+
+[source, xml]
+----
+<content-type>
+  <display-name>Artist</display-name> 
+  <description>Information about an artist</description> 
+  <super-type>base:structured</super-type>
+  <form> 
+
+    <input name="name" type="TextLine"> 
+      <label>Name</label>
+      <help-text>
+        The artist's name (if different from their professional moniker).
+      </help-text>
+    </input>
+
+    <input type="TextArea" name="about">
+      <label>About the artist</label>
+    </input>
+
+    <input type="Date" name="birthday" >
+      <label>Birthday</label>
+    </input>
+
+  </form>
+</content-type>
+----
+
+TIP: If are not running the project in dev mode (`enonic project dev` introduced in the previous ${document}), make sure to run `enonic project deploy` in the terminal on the project's root directory
+
+[start=2]
+
+. Update each of the previously created artists with the following dates:
+
+- P!nk: 1979-09-08
+- Missy Elliot: 1971-07-01
+- Cardi B: 1992-10-11
+
+. Go back to Query playground and click on the _re-fetch schema button_. This will update the Artist data schema to contain the birthday structure, which is in sync with the Artist content type structure
+
+. Run the following query on the playground:
++
+[source,GraphQL,{subs}]
 ----
 {
-  "data": {
-    "guillotine": {
-      "query": [
-        {
-          "displayName": "Missy Elliott"
+  guillotine {
+    queryDslConnection(
+      query: {
+        boolean: {
+          must: {
+            term: {
+              field: "type"
+              value: {
+                string: "{project-name-full}:{content-type-1}"
+              }
+            }
+            exists: {
+              field: "data.birthday"
+            }
+          }
         }
-      ]
+      }
+      aggregations: {
+        name: "generationsAggregation"
+        dateRange: {
+          field: "data.birthday"
+          ranges: [
+            {
+              key: "The Greatest Generation"
+              from: "1901"
+              to: "1927"
+          	}
+            {
+              key: "The Silent Generation"
+              from: "1928"
+              to: "1945"
+          	}
+            {
+              key: "The Baby Boomer Generation"
+              from: "1946"
+              to: "1964"
+          	}
+            {
+              key: "Generation X"
+              from: "1965"
+              to: "1980"
+          	}
+            {
+              key: "Millennials"
+              from: "1981"
+              to: "1996"
+          	}
+            {
+              key: "Generation Z"
+              from: "1997"
+              to: "2012"
+          	}
+            {
+              key: "Gen Alpha"
+              from: "2013"
+              to: "2025"
+          	}
+          ]
+          }
+        }
+    )
+    {
+      aggregationsAsJson
     }
   }
 }
 ----
 
-== Learn more
+And this are the results
+[source, json]
+----
+{
+  "data": {
+    "guillotine": {
+      "queryDslConnection": {
+        "aggregationsAsJson": {
+          "generationsAggregation": {
+            "buckets": [
+              {
+                "key": "The Greatest Generation",
+                "docCount": 0,
+                "from": "1901-01-01T00:00:00Z",
+                "to": "1927-01-01T00:00:00Z"
+              },
+              {
+                "key": "The Silent Generation",
+                "docCount": 0,
+                "from": "1928-01-01T00:00:00Z",
+                "to": "1945-01-01T00:00:00Z"
+              },
+              {
+                "key": "The Baby Boomer Generation",
+                "docCount": 0,
+                "from": "1946-01-01T00:00:00Z",
+                "to": "1964-01-01T00:00:00Z"
+              },
+              {
+                "key": "Generation X",
+                "docCount": 2,
+                "from": "1965-01-01T00:00:00Z",
+                "to": "1980-01-01T00:00:00Z"
+              },
+              {
+                "key": "Millennials",
+                "docCount": 1,
+                "from": "1981-01-01T00:00:00Z",
+                "to": "1996-01-01T00:00:00Z"
+              },
+              {
+                "key": "Generation Z",
+                "docCount": 0,
+                "from": "1997-01-01T00:00:00Z",
+                "to": "2012-01-01T00:00:00Z"
+              },
+              {
+                "key": "Gen Alpha",
+                "docCount": 0,
+                "from": "2013-01-01T00:00:00Z",
+                "to": "2025-01-01T00:00:00Z"
+              }
+            ]
+          }
+        }
+      }
+    }
+  }
+}
+----
 
-For a detailed overview of the query language and an extensive example selection, https://developer.enonic.com/docs/xp/stable/storage/noql[the NoQL reference] is the place to go. For more query examples and information about how to get up and running with Guillotine, you can check out https://developer.enonic.com/docs/headless-cms-intro[the headless CMS intro guide] or the https://developer.enonic.com/docs/guillotine[Guillotine docs].
+Which shows that two of those artists are from Generation X, and one of them is a Millenial.
 
-If you want to learn more about GraphQL in general, the https://graphql.org/learn/[_Introduction to GraphQL_ documentation] is a good place to start.
+== Dive deeper
+
+- For more query examples and information about how to get up and running with Guillotine, you can check out https://developer.enonic.com/docs/headless-cms-intro[the headless CMS intro guide] or the https://developer.enonic.com/docs/guillotine[Guillotine docs]
+- If you want to understand how to extend available schemas on the GraphQL Api, you can head to https://developer.enonic.com/docs/guillotine/stable/embed/extending[Extending section on Guillotine docs] or check some examples on this https://developer.enonic.com/docs/build-a-custom-selector#customizing_with_guilliotine_lib_optional[guide]
+- If you want to learn more about GraphQL in general, the https://graphql.org/learn/[_Introduction to GraphQL_ documentation] is a good place to start

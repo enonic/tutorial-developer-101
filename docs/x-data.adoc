@@ -1,68 +1,61 @@
 = {title-x-data}
 include::.variables.adoc[]
-:x-data: notes
-:x-data-capitalized: Notes
 :description: {description-x-data}
 
-X-data (short for _eXtra-data_) is a smart way of dynamically extending existing content types with more fields. For instance, you may install a new app that will extend your schema with new fields.
+X-data (short for _eXtra-data_) is a smart way of dynamically extending existing content types with more fields. 
+
+The idea is to basically define new fields and decide to what content type those fields should be applied to. If no content type is selected while creating an X-data, those fields will be enabled to all content types.
 
 In Content Studio, X-data is visually displayed as a new step in the form, listed below the content type's standard fields.
 
 NOTE: {see-prev-docs}
 
-== Task: SEO Metafields 
-The fastest way of getting to know X-data is by installing an app.
+== Your first X-data
 
-. Install the https://market.enonic.com/vendors/enonic/seo-metafields[SEO Metafields app].
-+
-image::x-data-seo-app-install.png["Install SEO Metafields app",{image-l}]
-+
-. Edit and add the app to your site.
-+
-. Immediately after adding the app to your site, the form should refresh - and add a new step "SEO Metafields":
-+
-image::x-data-seo-fields.png["SEO form step and additional fields appear.",{image-xl}]
+If your requirement is to add new fields to a specific content type, it doesn't make sense to use X-data, since you can directly update that content type.
 
-So, now you have some additional fields for the site. If you check some of your other content items, like an {content-type-2}. You will see the fields are there as well.
+Now, if your requirement is to add new fields to multiple content types, that is when X-data comes into place.
 
-image::x-data-seo-animal.png["SEO fields available for the animals content type as well.",{image-xl}]
+The same behaviour of extending multiple content types can be achieved through mixins. You can create a mixin and add it to the content types you want to extend the fields. The difference is where the data on those fields will be stored, and also in the fact that X-data are easier to maintain when adding to a lot of content types.
 
-== Task: Bring your own
+Let's now add a "notes" X-data, which will extend both {content-type-1-capitalized} and {content-type-2-capitalized} content types.
 
 Similar to content types, X-data schemas have a specific naming and placement convention within your app: `src/main/resources/site/x-data/<xdata-name>/<xdata-name>.xml`.
 
-. Create x-data schema
+. Create the "notes" X-data schema:
 +
-This time, we'll give you some slack, and let you choose the name and fields of the X-data yourself. However, the form needs to be wrapped in the following schema:
-+
-.Basic X-data schema
+.site/x-data/notes/notes.xml
 [source,xml]
 ----
 <x-data>
-  <display-name>My Xdata</display-name>
+  <display-name>Notes X-data</display-name>
   <form>
-    Your form config goes here
+    <input name="notes" type="TextLine">
+      <label>Notes</label>
+      <occurrences minimum="0" maximum="3"/>
+    </input>
   </form>
 </x-data>
 ----
 +
-. Additionally, you need to define the injection rules for the X-data
-+
-You do this via the site.xml.
+. Additionally, you need to define the injection rules for the X-data, and for that you need to edit the `site.xml` file:
 +
 .src/main/resources/site/site.xml
 [source,xml,{subs}]
 ----
 <site>
-  <x-data name="<xdata-name>" allowContentTypes="{content-type-2}"/>
+  <x-data name="notes" allowContentTypes="{project-name-full}:{content-type-1}|{project-name-full}:{content-type-2}"/>
   <form/>
 </site>
 ----
++ 
+. Redeploy your app and access a {content-type-1-capitalized} or an {content-type-2-capitalized} content. You should see the following section in the bottom of the form:
 +
+image::notes-x-data.png["Notes x-data fields showing in the bottom of an animal content",{image-l}]
++
+. Finally, add some notes to some content.
+
 NOTE: For more details and configuration options for X-data, visit https://developer.enonic.com/docs/xp/stable/cms/x-data[the X-data documentation].
-
-
-Once your app is redeployed, when editing the animals form, should see yet another X-data step in the form. Sweet.
 
 == Headless
 
@@ -75,7 +68,31 @@ Use the following query to quickly access all x-data fields in your content.
 ----
 {
   guillotine {
-    query(query: "displayName = 'Lynx'") {
+    queryDsl(
+      query: {
+        boolean: {
+          must: [
+            {
+              term: {
+                field: "type",
+                value: {
+                  string: "{project-name-full}:{content-type-2}"
+                }
+              }
+            },
+            {
+              term: {
+                field: "displayName",
+                value: {
+                  string: "Lynx"
+                }
+              }
+            }
+          ]
+        }
+        
+      }
+    ) {
       displayName
       xAsJson
     }
@@ -83,22 +100,25 @@ Use the following query to quickly access all x-data fields in your content.
 }
 ----
 
-If you've added any values to your Lynx's SEO fields, this is what you might get.
+If you've added any values to your Lynx's Notes X-data fields, this is what you might get.
 
 .X-data results
-[source,json]
+[source,json,{subs}]
 ----
 {
   "data": {
     "guillotine": {
-      "query": [
+      "queryDsl": [
         {
           "displayName": "Lynx",
           "xAsJson": {
-            "com-enonic-app-metafields": {
-              "meta-data": {
-                "seoTitle": "Meet the bobcat",
-                "blockRobots": false
+            "{project-name-query}": {
+              "notes": {
+                "notes": [
+                  "Lynx note 1",
+                  "Lynx note 2",
+                  "Lynx note 3"
+                ]
               }
             }
           }
@@ -109,20 +129,44 @@ If you've added any values to your Lynx's SEO fields, this is what you might get
 }
 ----
 
+
 Should you require specific fields only, or wish to drill into more details, for instance by following a reference, use the typed graphQL fields instead of xAsJson. For instance like this:
 
 .X-data seoTitle field query
-[source,GraphQL]
+[source,GraphQL,{subs}]
 ----
-
 {
   guillotine {
-    query(query: "displayName = 'Lynx'") {
+    queryDsl(
+      query: {
+        boolean: {
+          must: [
+            {
+              term: {
+                field: "type",
+                value: {
+                  string: "{project-name-full}:{content-type-2}"
+                }
+              }
+            },
+            {
+              term: {
+                field: "displayName",
+                value: {
+                  string: "Lynx"
+                }
+              }
+            }
+          ]
+        }
+        
+      }
+    ) {
       displayName
       x {
-        com_enonic_app_metafields {
-          meta_data {
-            seoTitle
+        {project-name-query} {
+          notes { // <1>
+            notes // <2>
           }
         }
       }
@@ -131,4 +175,25 @@ Should you require specific fields only, or wish to drill into more details, for
 }
 ----
 
+<1> This is the name of the X-data. In this case, "notes" because we defined it to be like so in the `notes.xml` file
+<2> This is the "notes" field (TextLine input type) inside the "notes" X-data.
+
 If you made it here - you are officially equipped with an essential overview of Enonic's content fundamental content modelling capabilities. 🙌
+
+== Bonus: SEO Metafields 
+
+There's a known app on Enonic market named _SEO Metafields app_. Its main purpose is to provide SEO capabilities to your project, and for that purpose, it adds a new X-data named `meta_data`, which is then enabled to all content types in your project.
+
+This is a bonus section, so you're not missing much to skip it, but it's worth installing it to better understand capabilities of X-data.
+
+. Install the https://market.enonic.com/vendors/enonic/seo-metafields[SEO Metafields app].
++
+image::x-data-seo-app-install.png["Install SEO Metafields app",{image-l}]
++
+. Edit and add the app to your project.
++
+. Immediately after adding the app to your site, the form should refresh - and add a new step "SEO Metafields":
++
+So, now you have some additional fields for the site. If you check some of your other content items, like an {content-type-2}. You will see the fields are there as well.
+
+image::x-data-seo-animal.png["SEO fields available for the animals content type as well.",{image-xl}]

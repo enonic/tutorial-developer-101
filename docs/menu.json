@@ -6,23 +6,23 @@
     },
     {
       "title": "2 - Sandboxes",
-      "document": "sandboxes"
+      "document": "sandbox"
     },
     {
       "title": "3 - App development",
       "document": "apps"
     },
     {
-      "title": "4 - Content",
-      "document": "content"
+      "title": "4 - Content Studio",
+      "document": "content-studio"
     },
     {
-      "title": "5 - Headless API",
+      "title": "5 - GraphQL API",
       "document": "headless-api"
     },
     {
-      "title": "6 - Media and images",
-      "document": "media-and-images"
+      "title": "6 - Medias",
+      "document": "medias-and-attachments"
     },
     {
       "title": "7 - Input types",
