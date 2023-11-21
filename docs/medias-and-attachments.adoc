@@ -125,9 +125,9 @@ image::image-cropped-focused.jpg["A crop of the lion in the savannah. In this sq
 
 == Attachments
 
-XP has an input type named https://developer.enonic.com/docs/xp/stable/cms/input-types#attachmentuploader[AttachmentUploader] that enables uploading of one or more files that will be stored as attachments to the current content. 
+XP has an input type named https://developer.enonic.com/docs/xp/stable/cms/schemas/input-types/attachmentuploader[AttachmentUploader] that enables uploading of one or more files that will be stored as attachments to the current content. 
 
-This differs from the previously presented media content, which is a separate content itself that can be linked on other content types, for example, by using the https://developer.enonic.com/docs/xp/stable/cms/input-types#imageselector[ImageSelector] input type.
+This differs from the previously presented media content, which is a separate content itself that can be linked on other content types, for example, by using the https://developer.enonic.com/docs/xp/stable/cms/schemas/input-types/imageselector[ImageSelector] input type.
 
 To take a look on how attachments work, let's update the Artist content type to use the input type _AttachmentUploader_. 
 

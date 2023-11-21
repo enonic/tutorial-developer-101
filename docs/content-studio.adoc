@@ -4,7 +4,7 @@ include::.variables.adoc[]
 
 In this {document}, we'll give a short introduction to Content Studio, an app that serves as the main content management interface for XP, providing editors an efficient way of creating, and curating content without technical skills.
 
-For a more comprehensive overview, watch https://www.youtube.com/watch?v=tR9KHOcZOs0[this short video on Content Studio basics] or head to the https://developer.enonic.com/docs/content-studio/stable[Content Studio reference documentation].
+For a more comprehensive overview, watch https://www.youtube.com/watch?v=tR9KHOcZOs0[this short video on Content Studio basics] or head to the https://developer.enonic.com/docs/content-studio[Content Studio reference documentation].
 
 NOTE: {see-prev-docs}
 

@@ -142,7 +142,7 @@ GLOBAL OPTIONS:
 
 As can be seen, there are a lot of commands and their subcommands to help you. On this guide, we'll only cover the necessary ones to be able to start developing on XP.
 
-NOTE: Consider checking the https://developer.enonic.com/docs/enonic-cli/stable[CLI documentation] to further investigate its capabilities.  
+NOTE: Consider checking the https://developer.enonic.com/docs/enonic-cli[CLI documentation] to further investigate its capabilities.  
 
 == Git
 

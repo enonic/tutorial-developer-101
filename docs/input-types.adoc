@@ -24,7 +24,7 @@ All input types share a number of options that affect how they act. These option
 +
 The `config` element is for input-specific configuration. Because the input types are so different to each other, they all support different options. The `config` element allows us to use regex validation for TextLine inputs, configure formatting options for HtmlAreas, and to dictate what numeric values a Long or a Double input accepts.
 
-NOTE: All of the shared configuration options (`label`, `occurrences`, etc.) are described in more detail in the https://developer.enonic.com/docs/xp/stable/cms/schemas#input_types[input types schema documentation]. Additionally, all input types and their respective `config` options are listed in the https://developer.enonic.com/docs/xp/stable/cms/input-types[the input types documentation].
+NOTE: All of the shared configuration options (`label`, `occurrences`, etc.), and the list of available input types are described in the https://developer.enonic.com/docs/xp/stable/cms/schemas/input-types[input types documentation]. 
 
 To show an example of the configuration options work, let's examine some TextLine inputs with different configurations.
 
@@ -99,24 +99,24 @@ TIP: If `maximum` is greater than `0`, make sure that `minimum` is less than or 
 
 == Common inputs
 
-Apart from the input types we've already gotten familiar with, XP also has input types created for other kinds of data. You can always find the full list over https://developer.enonic.com/docs/xp/stable/cms/input-types[at the input types reference docs], but some useful and common ones are:
+Apart from the input types we've already gotten familiar with, XP also has input types created for other kinds of data. You can always find the full list over https://developer.enonic.com/docs/xp/stable/cms/schemas/input-types[at the input types reference docs], but some useful and common ones are:
 
-https://developer.enonic.com/docs/xp/stable/cms/input-types#combobox[ComboBox]:: A dropdown menu containing predefined options for the user to select from. Allows selection of one or more options.
+https://developer.enonic.com/docs/xp/stable/cms/schemas/input-types/combobox[ComboBox]:: A dropdown menu containing predefined options for the user to select from. Allows selection of one or more options.
 +
 .The ComboBox input type
 image::input-type-combo-box.webp["A standard select list / dropdown list / combo box input type with a few visible dummy options.", {image-s}, align=center]
 +
-https://developer.enonic.com/docs/xp/stable/cms/input-types#date[Date] and https://developer.enonic.com/docs/xp/stable/cms/input-types#datetime[DateTime]:: Provides an interactive date picker (with a time component in DateTime's case) to save date and times.
+https://developer.enonic.com/docs/xp/stable/cms/input-types#date[Date] and https://developer.enonic.com/docs/xp/stable/cms/schemas/input-types/datetime[DateTime]:: Provides an interactive date picker (with a time component in DateTime's case) to save date and times.
 +
 .The DateTime input type
 image::input-type-date-time.webp["A calendar showing year and month with a time indicator to the side.", {image-s}, align=center]
 +
-https://developer.enonic.com/docs/xp/stable/cms/input-types#geopoint[GeoPoint]:: Stores GPS coordinates.
+https://developer.enonic.com/docs/xp/stable/cms/schemas/input-types/geopoint[GeoPoint]:: Stores GPS coordinates.
 +
 .The GeoPoint input type
 image::input-type-geo-point.webp["A text line input with coordinates.", {image-s}, align=center]
 +
-https://developer.enonic.com/docs/xp/stable/cms/input-types#htmlarea[HtmlArea]:: Provides a rich text, multi-line input. We'll discuss this in detail in xref:rich-text#[the next {document}].
+https://developer.enonic.com/docs/xp/stable/cms/schemas/input-types/htmlarea[HtmlArea]:: Provides a rich text, multi-line input. We'll discuss this in detail in xref:rich-text#[the next {document}].
 +
 .The HtmlArea input type
 image::input-type-html-area.png["A text area with a tools ribbon on the top. The ribbon provides rich text tools such as justification, macro insertion, text styles, etc.", {image-s}, align=center]
@@ -140,7 +140,7 @@ XP's image selector allows you to select an image for a piece of content and als
 </input>
 ----
 
-Read more about the https://developer.enonic.com/docs/xp/stable/cms/input-types#imageselector[configuration of image selectors] in the reference docs.
+Read more about the https://developer.enonic.com/docs/xp/stable/cms/schemas/input-types/imageselector[configuration of image selectors] in the reference docs.
 
 After you've added an image (or several), you can highlight it and click the edit button. This will take you to the image editing form. This is the same form as we saw in xref:media-and-images#_editing_images[the previous {document}].
 
@@ -158,7 +158,7 @@ The ContentSelector input type allows you to reference other content. Let's say 
 
 Because referencing other content types comes with a lot of variability, the ContentSelector type has configuration options to support this. You can choose to allow only certain content types or only content that's available at a certain path. You can also change whether the selector should show content in a tree-style hierarchy or as a flat list of content.
 
-https://developer.enonic.com/docs/xp/stable/cms/input-types#contentselector[The full list of ContentSelector configuration options] is available in the reference docs, including a number of examples to explain content inclusion and exclusion. However, a simple configuration could look like this:
+https://developer.enonic.com/docs/xp/stable/cms/schemas/input-types/contentselector[The full list of ContentSelector configuration options] is available in the reference docs, including a number of examples to explain content inclusion and exclusion. However, a simple configuration could look like this:
 
 .A basic ContentSelector configuration that only allows one specific content type
 [source, xml]
