@@ -547,7 +547,7 @@ The tasks and examples in this chapter are based on work done in previous chapte
 <i class="fa icon-note" title="Note"></i>
 </td>
 <td class="content">
-All of the shared configuration options (<code>label</code>, <code>occurrences</code>, etc.) are described in more detail in the <a href="https://developer.enonic.com/docs/xp/stable/cms/schemas#input_types">input types schema documentation</a>. Additionally, all input types and their respective <code>config</code> options are listed in the <a href="https://developer.enonic.com/docs/xp/stable/cms/input-types">the input types documentation</a>.
+All of the shared configuration options (<code>label</code>, <code>occurrences</code>, etc.), and the list of available input types are described in the <a href="https://developer.enonic.com/docs/xp/stable/cms/schemas/input-types">input types documentation</a>.
 </td>
 </tr>
 </table>
@@ -686,11 +686,11 @@ If <code>maximum</code> is greater than <code>0</code>, make sure that <code>min
 <h2 id="common_inputs"><a class="link" href="#common_inputs">Common inputs</a></h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>Apart from the input types we&#8217;ve already gotten familiar with, XP also has input types created for other kinds of data. You can always find the full list over <a href="https://developer.enonic.com/docs/xp/stable/cms/input-types">at the input types reference docs</a>, but some useful and common ones are:</p>
+<p>Apart from the input types we&#8217;ve already gotten familiar with, XP also has input types created for other kinds of data. You can always find the full list over <a href="https://developer.enonic.com/docs/xp/stable/cms/schemas/input-types">at the input types reference docs</a>, but some useful and common ones are:</p>
 </div>
 <div class="dlist">
 <dl>
-<dt class="hdlist1"><a href="https://developer.enonic.com/docs/xp/stable/cms/input-types#combobox">ComboBox</a></dt>
+<dt class="hdlist1"><a href="https://developer.enonic.com/docs/xp/stable/cms/schemas/input-types/combobox">ComboBox</a></dt>
 <dd>
 <p>A dropdown menu containing predefined options for the user to select from. Allows selection of one or more options.</p>
 <div class="imageblock text-center">
@@ -700,7 +700,7 @@ If <code>maximum</code> is greater than <code>0</code>, make sure that <code>min
 <div class="title">Figure 2. The ComboBox input type</div>
 </div>
 </dd>
-<dt class="hdlist1"><a href="https://developer.enonic.com/docs/xp/stable/cms/input-types#date">Date</a> and <a href="https://developer.enonic.com/docs/xp/stable/cms/input-types#datetime">DateTime</a></dt>
+<dt class="hdlist1"><a href="https://developer.enonic.com/docs/xp/stable/cms/input-types#date">Date</a> and <a href="https://developer.enonic.com/docs/xp/stable/cms/schemas/input-types/datetime">DateTime</a></dt>
 <dd>
 <p>Provides an interactive date picker (with a time component in DateTime&#8217;s case) to save date and times.</p>
 <div class="imageblock text-center">
@@ -710,7 +710,7 @@ If <code>maximum</code> is greater than <code>0</code>, make sure that <code>min
 <div class="title">Figure 3. The DateTime input type</div>
 </div>
 </dd>
-<dt class="hdlist1"><a href="https://developer.enonic.com/docs/xp/stable/cms/input-types#geopoint">GeoPoint</a></dt>
+<dt class="hdlist1"><a href="https://developer.enonic.com/docs/xp/stable/cms/schemas/input-types/geopoint">GeoPoint</a></dt>
 <dd>
 <p>Stores GPS coordinates.</p>
 <div class="imageblock text-center">
@@ -720,7 +720,7 @@ If <code>maximum</code> is greater than <code>0</code>, make sure that <code>min
 <div class="title">Figure 4. The GeoPoint input type</div>
 </div>
 </dd>
-<dt class="hdlist1"><a href="https://developer.enonic.com/docs/xp/stable/cms/input-types#htmlarea">HtmlArea</a></dt>
+<dt class="hdlist1"><a href="https://developer.enonic.com/docs/xp/stable/cms/schemas/input-types/htmlarea">HtmlArea</a></dt>
 <dd>
 <p>Provides a rich text, multi-line input. We&#8217;ll discuss this in detail in <a href="rich-text.ahtml">the next chapter</a>.</p>
 <div class="imageblock text-center">
@@ -761,7 +761,7 @@ If <code>maximum</code> is greater than <code>0</code>, make sure that <code>min
 </div>
 </div>
 <div class="paragraph">
-<p>Read more about the <a href="https://developer.enonic.com/docs/xp/stable/cms/input-types#imageselector">configuration of image selectors</a> in the reference docs.</p>
+<p>Read more about the <a href="https://developer.enonic.com/docs/xp/stable/cms/schemas/input-types/imageselector">configuration of image selectors</a> in the reference docs.</p>
 </div>
 <div class="paragraph">
 <p>After you&#8217;ve added an image (or several), you can highlight it and click the edit button. This will take you to the image editing form. This is the same form as we saw in <a href="media-and-images.ahtml#_editing_images">the previous chapter</a>.</p>
@@ -793,7 +793,7 @@ If <code>maximum</code> is greater than <code>0</code>, make sure that <code>min
 <p>Because referencing other content types comes with a lot of variability, the ContentSelector type has configuration options to support this. You can choose to allow only certain content types or only content that&#8217;s available at a certain path. You can also change whether the selector should show content in a tree-style hierarchy or as a flat list of content.</p>
 </div>
 <div class="paragraph">
-<p><a href="https://developer.enonic.com/docs/xp/stable/cms/input-types#contentselector">The full list of ContentSelector configuration options</a> is available in the reference docs, including a number of examples to explain content inclusion and exclusion. However, a simple configuration could look like this:</p>
+<p><a href="https://developer.enonic.com/docs/xp/stable/cms/schemas/input-types/contentselector">The full list of ContentSelector configuration options</a> is available in the reference docs, including a number of examples to explain content inclusion and exclusion. However, a simple configuration could look like this:</p>
 </div>
 <div class="listingblock">
 <div class="title">A basic ContentSelector configuration that only allows one specific content type</div>
@@ -1093,7 +1093,7 @@ Don&#8217;t worry if something did not work, we&#8217;ll show the solutions on t
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2023-11-13 14:02:49 UTC
+Last updated 2023-11-21 13:17:13 UTC
 </div>
 </div>
 </body>

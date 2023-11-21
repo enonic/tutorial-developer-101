@@ -671,7 +671,7 @@ For more information on Enonic Cloud, visit <a href="https://enonic.com/platform
 <p>Setting up the entire platform is beyond the scope of this tutorial. As such, we&#8217;ll focus on the steps required for getting your app live - assuming you already have the platform running.</p>
 </div>
 <div class="paragraph">
-<p>For more details on deplying the platform, check out <a href="https://developer.enonic.com/docs/xp/stable/deployment/strategies">the Deployment section of the XP reference docs</a>.</p>
+<p>For more details on deplying the platform, check out <a href="https://developer.enonic.com/docs/xp/stable/deployment">the Deployment section of the XP reference docs</a>.</p>
 </div>
 <div class="sect2">
 <h3 id="installing_the_app"><a class="link" href="#installing_the_app">Installing the app</a></h3>
@@ -886,21 +886,17 @@ This HTML is the content of the login page in raw form.</p>
 </div>
 <div class="dlist">
 <dl>
-<dt class="hdlist1"><a href="https://developer.enonic.com/docs/headless-cms-intro">Introduction to headless CMS</a></dt>
+<dt class="hdlist1"><a href="https://developer.enonic.com/guides/my-first-site">My first site</a></dt>
 <dd>
-<p>If you&#8217;ve enjoyed the headless aspects of this introduction, why not visit this guide to further your knowledge of how to use the GraphQL API and how to customize it.</p>
+<p>Building a website with the Enonic Framework (no 3rd party framework required). This tutorial also introduces the concept of pages, and building blocks such as regions, parts, and page templates.</p>
 </dd>
 <dt class="hdlist1"><a href="https://developer.enonic.com/docs/next.xp">Building sites with Enonic and Next.js</a></dt>
 <dd>
-<p>Everything you need to start building Next.js-based sites with Enonic as your CMS. This integration allow editors to enjoy full WYSIWYG editing</p>
-</dd>
-<dt class="hdlist1"><a href="https://developer.enonic.com/guides/my-first-site">My first site</a></dt>
-<dd>
-<p>If you&#8217;re interested in building a traditional CMS-based application with server rendered pages in Enonic (no 3rd party framework required), this is the guide for you. It covers building pages and using building blocks such as regions, parts, and page templates.</p>
+<p>Everything you need to start building Next.js-based sites with Enonic as your CMS - including full WYSIWYG editing. This tutorial also introduces the concept of pages, and building blocks such as regions, parts, and page templates.</p>
 </dd>
 <dt class="hdlist1"><a href="https://developer.enonic.com/guides/my-first-webapp">My first webapp</a></dt>
 <dd>
-<p>Build webapps and APIs directly in Enonic. Focuses on JavaScript controllers, serving assets, and routing.</p>
+<p>Build and service webapps directly using the Enonic framework. Focuses on JavaScript controllers, serving assets, and basic routing.</p>
 </dd>
 </dl>
 </div>
@@ -909,7 +905,7 @@ This HTML is the content of the login page in raw form.</p>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2023-11-13 14:02:49 UTC
+Last updated 2023-11-21 13:17:13 UTC
 </div>
 </div>
 </body>

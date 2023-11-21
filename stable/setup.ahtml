@@ -658,7 +658,7 @@ GLOBAL OPTIONS:
 <i class="fa icon-note" title="Note"></i>
 </td>
 <td class="content">
-Consider checking the <a href="https://developer.enonic.com/docs/enonic-cli/stable">CLI documentation</a> to further investigate its capabilities.
+Consider checking the <a href="https://developer.enonic.com/docs/enonic-cli">CLI documentation</a> to further investigate its capabilities.
 </td>
 </tr>
 </table>
@@ -785,7 +785,7 @@ Apple maintains its own fork of Git. If you have XCode installed, you already ha
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2023-11-13 14:02:49 UTC
+Last updated 2023-11-21 13:17:13 UTC
 </div>
 </div>
 </body>

@@ -535,10 +535,7 @@ The tasks and examples in this chapter are based on work done in previous chapte
 <div class="ulist">
 <ul>
 <li>
-<p>The <a href="https://developer.enonic.com/docs/xp/stable/cms/sets#item_set">item set documentation</a> does a standout job of explaining exactly how they work, so check that out for an overview.</p>
-</li>
-<li>
-<p>The <a href="https://developer.enonic.com/docs/xp/stable/cms/schemas#item_set">item set schema documentation</a> contains all the information you&#8217;d need on how to create an item set schema.</p>
+<p>The <a href="https://developer.enonic.com/docs/xp/stable/cms/schemas/item-set">item set documentation</a> does a standout job of explaining exactly how they work, so check that out for an overview.</p>
 </li>
 </ul>
 </div>
@@ -562,10 +559,7 @@ The tasks and examples in this chapter are based on work done in previous chapte
 <div class="ulist">
 <ul>
 <li>
-<p>The <a href="https://developer.enonic.com/docs/xp/stable/cms/sets#option_set">option set reference documentation</a> provides a good overview (with accompanying pictures) of how option sets work.</p>
-</li>
-<li>
-<p>The <a href="https://developer.enonic.com/docs/xp/stable/cms/schemas#option_set">option set schema overview</a> is very thorough and full of examples on how to use the various configuration options.</p>
+<p>The <a href="https://developer.enonic.com/docs/xp/stable/cms/schemas/option-set">option set reference documentation</a> provides a good overview (with accompanying pictures) of how option sets work.</p>
 </li>
 </ul>
 </div>
@@ -590,7 +584,7 @@ The tasks and examples in this chapter are based on work done in previous chapte
 <p>Mixins go in the <code>/src/main/resources/site/mixins</code> directory, following the same naming pattern as the other schemas we&#8217;ve seen (<code>&lt;mixin-name&gt;/&lt;mixin-name&gt;.xml</code>).</p>
 </div>
 <div class="paragraph">
-<p>We&#8217;ll see them in the upcoming task, but if you want to learn more about them, consult <a href="https://developer.enonic.com/docs/xp/stable/cms/mixins">the mixins reference documentation</a>.</p>
+<p>We&#8217;ll see them in the upcoming task, but if you want to learn more about them, consult <a href="https://developer.enonic.com/docs/xp/stable/cms/schemas/mixins">the mixins reference documentation</a>.</p>
 </div>
 </div>
 </div>
@@ -1098,7 +1092,7 @@ The use of the <code>mixin</code> helps us both reduce duplication and keep all 
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2023-11-13 14:02:49 UTC
+Last updated 2023-11-21 13:17:13 UTC
 </div>
 </div>
 </body>

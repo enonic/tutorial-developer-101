@@ -1154,7 +1154,7 @@ If are not running the project in dev mode (<code>enonic project dev</code> intr
 <div class="ulist">
 <ul>
 <li>
-<p>For more query examples and information about how to get up and running with Guillotine, you can check out <a href="https://developer.enonic.com/docs/headless-cms-intro">the headless CMS intro guide</a> or the <a href="https://developer.enonic.com/docs/guillotine">Guillotine docs</a></p>
+<p>For more query examples and information about how to get up and running with Guillotine, you can check out <a href="https://developer.enonic.com/docs/intro">Quick introduction guide</a> or the <a href="https://developer.enonic.com/docs/guillotine">Guillotine docs</a></p>
 </li>
 <li>
 <p>If you want to understand how to extend available schemas on the GraphQL Api, you can head to <a href="https://developer.enonic.com/docs/guillotine/stable/embed/extending">Extending section on Guillotine docs</a> or check some examples on this <a href="https://developer.enonic.com/docs/build-a-custom-selector#customizing_with_guilliotine_lib_optional">guide</a></p>
@@ -1169,7 +1169,7 @@ If are not running the project in dev mode (<code>enonic project dev</code> intr
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2023-11-13 14:02:49 UTC
+Last updated 2023-11-21 13:17:13 UTC
 </div>
 </div>
 </body>

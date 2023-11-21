@@ -483,7 +483,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <p>This input type offers some very powerful editing capabilities and a lot of configuration options.</p>
 </div>
 <div class="paragraph">
-<p>This whole chapter is dedicated to <a href="https://developer.enonic.com/docs/xp/stable/cms/input-types#htmlarea">HtmlArea input type</a> and the editor used to define its data. For a full detailed exaplanation of the Rich text editor used in content studio, please visit the <a href="https://developer.enonic.com/docs/content-studio/stable/editor/rich-text-editor">Rich text editor reference documentation</a>.</p>
+<p>This whole chapter is dedicated to <a href="https://developer.enonic.com/docs/xp/stable/cms/schemas/input-types/htmlarea">HtmlArea input type</a> and the editor used to define its data. For a full detailed exaplanation of the Rich text editor used in content studio, please visit the <a href="https://developer.enonic.com/docs/content-studio/stable/editor/rich-text-editor">Rich text editor reference documentation</a>.</p>
 </div>
 <div class="admonitionblock note">
 <table>
@@ -579,7 +579,7 @@ The tasks and examples in this chapter are based on work done in previous chapte
 <div class="title">Figure 3. An HtmlArea with a selection of tools and <code>&lt;exclude&gt;*&lt;/exclude&gt;</code></div>
 </div>
 <div class="paragraph">
-<p>As introduced in the beginning, for a full overview of the available text tools and HtmlArea configuration options, visit the <a href="https://developer.enonic.com/docs/xp/stable/cms/input-types#htmlarea">HtmlArea input type reference docs</a>.</p>
+<p>As introduced in the beginning, for a full overview of the available text tools and HtmlArea configuration options, visit the <a href="https://developer.enonic.com/docs/xp/stable/cms/schemas/input-types/htmlarea">HtmlArea input type reference docs</a>.</p>
 </div>
 <div class="sect2">
 <h3 id="task_animal_description"><a class="link" href="#task_animal_description">Task: Animal description</a></h3>
@@ -1295,7 +1295,7 @@ If you used a different macro than the "Embed iframe" macro, the query must be u
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2023-11-13 14:02:49 UTC
+Last updated 2023-11-21 13:17:13 UTC
 </div>
 </div>
 </body>

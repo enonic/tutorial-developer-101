@@ -711,10 +711,10 @@ You can read more about <a href="https://enonic.com/blog/enonic-simplifies-image
 <h2 id="attachments"><a class="link" href="#attachments">Attachments</a></h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>XP has an input type named <a href="https://developer.enonic.com/docs/xp/stable/cms/input-types#attachmentuploader">AttachmentUploader</a> that enables uploading of one or more files that will be stored as attachments to the current content.</p>
+<p>XP has an input type named <a href="https://developer.enonic.com/docs/xp/stable/cms/schemas/input-types/attachmentuploader">AttachmentUploader</a> that enables uploading of one or more files that will be stored as attachments to the current content.</p>
 </div>
 <div class="paragraph">
-<p>This differs from the previously presented media content, which is a separate content itself that can be linked on other content types, for example, by using the <a href="https://developer.enonic.com/docs/xp/stable/cms/input-types#imageselector">ImageSelector</a> input type.</p>
+<p>This differs from the previously presented media content, which is a separate content itself that can be linked on other content types, for example, by using the <a href="https://developer.enonic.com/docs/xp/stable/cms/schemas/input-types/imageselector">ImageSelector</a> input type.</p>
 </div>
 <div class="paragraph">
 <p>To take a look on how attachments work, let&#8217;s update the Artist content type to use the input type <em>AttachmentUploader</em>.</p>
@@ -1180,7 +1180,7 @@ Under the hood, the <em>attachment</em> field argument <em>attachmentUrl</em> us
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2023-11-13 14:02:49 UTC
+Last updated 2023-11-21 13:17:13 UTC
 </div>
 </div>
 </body>

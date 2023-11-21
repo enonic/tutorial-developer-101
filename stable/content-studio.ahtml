@@ -471,7 +471,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <p>In this chapter, we&#8217;ll give a short introduction to Content Studio, an app that serves as the main content management interface for XP, providing editors an efficient way of creating, and curating content without technical skills.</p>
 </div>
 <div class="paragraph">
-<p>For a more comprehensive overview, watch <a href="https://www.youtube.com/watch?v=tR9KHOcZOs0">this short video on Content Studio basics</a> or head to the <a href="https://developer.enonic.com/docs/content-studio/stable">Content Studio reference documentation</a>.</p>
+<p>For a more comprehensive overview, watch <a href="https://www.youtube.com/watch?v=tR9KHOcZOs0">this short video on Content Studio basics</a> or head to the <a href="https://developer.enonic.com/docs/content-studio">Content Studio reference documentation</a>.</p>
 </div>
 <div class="admonitionblock note">
 <table>
@@ -1087,7 +1087,7 @@ You can also publish a piece of content by using the keyboard shortcut <span cla
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2023-11-13 14:02:49 UTC
+Last updated 2023-11-21 13:17:13 UTC
 </div>
 </div>
 </body>
