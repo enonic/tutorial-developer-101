@@ -700,7 +700,7 @@ If <code>maximum</code> is greater than <code>0</code>, make sure that <code>min
 <div class="title">Figure 2. The ComboBox input type</div>
 </div>
 </dd>
-<dt class="hdlist1"><a href="https://developer.enonic.com/docs/xp/stable/cms/input-types#date">Date</a> and <a href="https://developer.enonic.com/docs/xp/stable/cms/schemas/input-types/datetime">DateTime</a></dt>
+<dt class="hdlist1"><a href="https://developer.enonic.com/docs/xp/stable/cms/input-types/schemas/input-types/date">Date</a> and <a href="https://developer.enonic.com/docs/xp/stable/cms/schemas/input-types/datetime">DateTime</a></dt>
 <dd>
 <p>Provides an interactive date picker (with a time component in DateTime&#8217;s case) to save date and times.</p>
 <div class="imageblock text-center">
@@ -1093,7 +1093,7 @@ Don&#8217;t worry if something did not work, we&#8217;ll show the solutions on t
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2023-11-21 13:17:13 UTC
+Last updated 2023-11-21 13:32:22 UTC
 </div>
 </div>
 </body>

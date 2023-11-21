@@ -477,13 +477,16 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <div id="preamble">
 <div class="sectionbody">
 <div class="paragraph">
-<p>If you want to work with rich text in Content Studio, HtmlArea is the input type to go.</p>
+<p>If you want to work with rich text, HtmlArea is the input type to go.</p>
 </div>
 <div class="paragraph">
 <p>This input type offers some very powerful editing capabilities and a lot of configuration options.</p>
 </div>
 <div class="paragraph">
-<p>This whole chapter is dedicated to <a href="https://developer.enonic.com/docs/xp/stable/cms/schemas/input-types/htmlarea">HtmlArea input type</a> and the editor used to define its data. For a full detailed exaplanation of the Rich text editor used in content studio, please visit the <a href="https://developer.enonic.com/docs/content-studio/stable/editor/rich-text-editor">Rich text editor reference documentation</a>.</p>
+<p>This whole chapter is dedicated to the <a href="https://developer.enonic.com/docs/xp/stable/cms/schemas/input-types/htmlarea">HtmlArea input type</a> and the editor used to define its data.</p>
+</div>
+<div class="paragraph">
+<p>The user-oriented documentation of the Rich text editor can be found in the <a href="https://developer.enonic.com/docs/content-studio/stable/editor/rich-text-editor">Content Studio docs</a>.</p>
 </div>
 <div class="admonitionblock note">
 <table>
@@ -1295,7 +1298,7 @@ If you used a different macro than the "Embed iframe" macro, the query must be u
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2023-11-21 13:17:13 UTC
+Last updated 2023-11-21 13:32:22 UTC
 </div>
 </div>
 </body>
