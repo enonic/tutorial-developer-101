@@ -3,11 +3,13 @@ include::.variables.adoc[]
 :macro-app: Panel Macros
 :description: {description-rich-text}
 
-If you want to work with rich text in Content Studio, HtmlArea is the input type to go. 
+If you want to work with rich text, HtmlArea is the input type to go. 
 
 This input type offers some very powerful editing capabilities and a lot of configuration options. 
 
-This whole {document} is dedicated to https://developer.enonic.com/docs/xp/stable/cms/schemas/input-types/htmlarea[HtmlArea input type] and the editor used to define its data. For a full detailed exaplanation of the Rich text editor used in content studio, please visit the https://developer.enonic.com/docs/content-studio/stable/editor/rich-text-editor[Rich text editor reference documentation].
+This whole {document} is dedicated to the https://developer.enonic.com/docs/xp/stable/cms/schemas/input-types/htmlarea[HtmlArea input type] and the editor used to define its data. 
+
+The user-oriented documentation of the Rich text editor can be found in the https://developer.enonic.com/docs/content-studio/stable/editor/rich-text-editor[Content Studio docs].
 
 NOTE: {see-prev-docs}
 

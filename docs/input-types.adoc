@@ -106,7 +106,7 @@ https://developer.enonic.com/docs/xp/stable/cms/schemas/input-types/combobox[Com
 .The ComboBox input type
 image::input-type-combo-box.webp["A standard select list / dropdown list / combo box input type with a few visible dummy options.", {image-s}, align=center]
 +
-https://developer.enonic.com/docs/xp/stable/cms/input-types#date[Date] and https://developer.enonic.com/docs/xp/stable/cms/schemas/input-types/datetime[DateTime]:: Provides an interactive date picker (with a time component in DateTime's case) to save date and times.
+https://developer.enonic.com/docs/xp/stable/cms/input-types/schemas/input-types/date[Date] and https://developer.enonic.com/docs/xp/stable/cms/schemas/input-types/datetime[DateTime]:: Provides an interactive date picker (with a time component in DateTime's case) to save date and times.
 +
 .The DateTime input type
 image::input-type-date-time.webp["A calendar showing year and month with a time indicator to the side.", {image-s}, align=center]
