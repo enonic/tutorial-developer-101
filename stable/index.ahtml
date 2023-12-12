@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="generator" content="Asciidoctor 2.0.20">
-<title>Developer 101 - Introduction to Enonic</title>
+<title>Developer 101 - Enonic fundamentals</title>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,300italic,400,400italic,600,600italic%7CNoto+Serif:400,400italic,700,700italic%7CDroid+Sans+Mono:400,700">
 <style>
 /*! Asciidoctor default stylesheet | MIT License | https://asciidoctor.org */
@@ -436,7 +436,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 </head>
 <body class="article toc2 toc-right">
 <div id="header">
-<h1>Developer 101 - Introduction to Enonic</h1>
+<h1>Developer 101 - Enonic fundamentals</h1>
 <div id="toc" class="toc2">
 <div id="toctitle">Table of Contents</div>
 <ul class="sectlevel1">
@@ -448,7 +448,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <div id="preamble">
 <div class="sectionbody">
 <div class="paragraph">
-<p>Hello, and welcome to this in-depth tutorial to get familiar with Enonic. The guide is aimed at people new to Enonic, covering the essentials of content modelling and accessing the data.</p>
+<p>Hello, and welcome to this in-depth tutorial to get familiar with Enonic. The guide is aimed at people new to Enonic, covering the essentials of content modelling and accessing content via the GraphQL API.</p>
 </div>
 <div class="paragraph">
 <p>If you have any questions, or just want to get in touch - visit the <a href="https://discuss.enonic.com" target="_blank" rel="noopener">Forum</a> or join the <a href="https://slack.enonic.com/" target="_blank" rel="noopener">Community Slack channel</a></p>
@@ -573,7 +573,7 @@ When we mention "XP", we are referring to "Enonic XP", the hybrid CMS you&#8217;
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2023-11-21 13:32:22 UTC
+Last updated 2023-12-12 22:44:01 UTC
 </div>
 </div>
 </body>
