@@ -500,7 +500,7 @@ If you&#8217;re used to working with HTML, be aware that XP&#8217;s <code>input<
 <i class="fa icon-note" title="Note"></i>
 </td>
 <td class="content">
-The tasks and examples in this chapter are based on work done in previous chapters (starting with <a href="sandboxes.ahtml">the sandboxes chapter</a>). If you want to follow along with the examples, make sure you&#8217;re all caught up.
+The tasks and examples in this chapter are based on work done in previous chapters (starting with <a href="sandbox.ahtml">the sandboxes chapter</a>). If you want to follow along with the examples, make sure you&#8217;re all caught up.
 </td>
 </tr>
 </table>
@@ -1093,7 +1093,7 @@ Don&#8217;t worry if something did not work, we&#8217;ll show the solutions on t
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2023-12-12 22:44:01 UTC
+Last updated 2024-01-03 09:04:24 UTC
 </div>
 </div>
 </body>

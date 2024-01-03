@@ -535,7 +535,7 @@ If you press <kbd>enter</kbd> without entering a response, the CLI will use the 
 <i class="fa icon-note" title="Note"></i>
 </td>
 <td class="content">
-We ran the sandbox with the optional <code>--dev</code> flag. Read <a href="https://developer.enonic.com/docs/xp/stable/apps/build-system#development_mode">more about dev mode</a> in the reference docs.
+Here, we start the sandbox with the <code>--dev</code> flag. Read <a href="https://developer.enonic.com/docs/xp/stable/development/build#dev_mode">more about dev mode</a> in the reference docs.
 </td>
 </tr>
 </table>
@@ -758,7 +758,7 @@ If things don&#8217;t look exactly the same, don&#8217;t worry&#8230;&#8203; on 
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2023-12-12 22:44:01 UTC
+Last updated 2024-01-03 09:04:24 UTC
 </div>
 </div>
 </body>
