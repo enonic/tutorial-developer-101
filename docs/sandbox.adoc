@@ -49,7 +49,7 @@ Once the sandbox creation is completed, we can use the CLI to start the sandbox,
 enonic sandbox start tutorial --dev
 ----
 
-NOTE: We ran the sandbox with the optional `--dev` flag. Read https://developer.enonic.com/docs/xp/stable/apps/build-system#development_mode[more about dev mode] in the reference docs.
+NOTE: Here, we start the sandbox with the `--dev` flag. Read https://developer.enonic.com/docs/xp/stable/development/build#dev_mode[more about dev mode] in the reference docs.
 
 The `tutorial` sandbox will boot up in your terminal. The boot output should look something like this, but with values adjusted for your system:
 

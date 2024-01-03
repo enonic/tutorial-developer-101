@@ -19,7 +19,7 @@
 :content-about-missy: Melissa Arnette Elliott (born July 1, 1971) is an American rapper, singer, songwriter, and record producer.
 :content-about-pink: Alecia Beth Moore (born September 8, 1979), known professionally as Pink (stylized as P!nk), is an American singer and songwriter.
 :subs: subs="attributes+"
-:see-prev-docs: The tasks and examples in this {document} are based on work done in previous {document}s (starting with <<sandboxes#, the sandboxes chapter>>). If you want to follow along with the examples, make sure you're all caught up.
+:see-prev-docs: The tasks and examples in this {document} are based on work done in previous {document}s (starting with <<sandbox#, the sandboxes chapter>>). If you want to follow along with the examples, make sure you're all caught up.
 :title-setup: Setting up your development environment
 :title-sandbox: Sandbox
 :title-apps: My first App
