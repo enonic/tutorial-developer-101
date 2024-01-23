@@ -734,7 +734,7 @@ Your application executable (*.jar file) can be found in <code>project-folder/bu
 <p>Vhosts can be defined in your sandbox&#8217;s configuration directory. This file contains mappings from public-facing URLs to internal URLs.</p>
 </div>
 <div class="paragraph">
-<p>For instance, this lets the user access <code>myproject.com/api</code> and while retrieving content from <code>/site/myproject/master/</code>.</p>
+<p>For instance, this lets the user access <code>myapp.com/api</code> and while retrieving content from <code>/site/myapp/master/</code>.</p>
 </div>
 <div class="paragraph">
 <p>An example vhosts file that achieves the mapping mentioned would look something like this:</p>
@@ -743,9 +743,9 @@ Your application executable (*.jar file) can be found in <code>project-folder/bu
 <div class="content">
 <pre>enabled = true <i class="conum" data-value="1"></i><b>(1)</b>
 
-mapping.example.host = myproject.com/api <i class="conum" data-value="2"></i><b>(2)</b>
+mapping.example.host = myapp.com/api <i class="conum" data-value="2"></i><b>(2)</b>
 mapping.example.source = / <i class="conum" data-value="3"></i><b>(3)</b>
-mapping.example.target = /site/myproject/master <i class="conum" data-value="4"></i><b>(4)</b></pre>
+mapping.example.target = /site/myapp/master <i class="conum" data-value="4"></i><b>(4)</b></pre>
 </div>
 </div>
 <div class="colist arabic">
@@ -905,7 +905,7 @@ This HTML is the content of the login page in raw form.</p>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2024-01-03 09:04:24 UTC
+Last updated 2024-01-23 16:46:37 UTC
 </div>
 </div>
 </body>

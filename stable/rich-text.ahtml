@@ -893,7 +893,7 @@ For more information on macros, including how to create your very own, visit to 
         }
       }
     ) {
-      ... on com_example_myproject_Animal {
+      ... on com_example_myapp_Animal {
         data {
           description {
             processedHtml
@@ -987,7 +987,7 @@ Wondering why the href points to a location within the admin? No worries. Guillo
         }
       }
     ) {
-      ... on com_example_myproject_Animal {
+      ... on com_example_myapp_Animal {
         data {
           description {
             processedHtml
@@ -1122,7 +1122,7 @@ URLs about above were shortened for readability
         }
       }
     ) {
-      ... on com_example_myproject_Animal {
+      ... on com_example_myapp_Animal {
         data {
           description {
             images {
@@ -1183,7 +1183,7 @@ URLs about above were shortened for readability
         }
       }
     ) {
-      ... on com_example_myproject_Animal {
+      ... on com_example_myapp_Animal {
         data {
           description {
             processedHtml
@@ -1245,7 +1245,7 @@ If you used a different macro than the "Embed iframe" macro, the query must be u
         }
       }
     ) {
-      ... on com_example_myproject_Animal {
+      ... on com_example_myapp_Animal {
         data {
           description {
             processedHtml
@@ -1298,7 +1298,7 @@ If you used a different macro than the "Embed iframe" macro, the query must be u
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2024-01-03 09:04:24 UTC
+Last updated 2024-01-23 16:46:37 UTC
 </div>
 </div>
 </body>

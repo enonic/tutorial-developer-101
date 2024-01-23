@@ -6,7 +6,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="generator" content="Asciidoctor 2.0.20">
 <meta name="description" content="How does XP deal with images and other media? This chapter covers XP media support, how to upload and query for media, how to work with images and attachments.">
-<title>Medias and attachments</title>
+<title>Media and attachments</title>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,300italic,400,400italic,600,600italic%7CNoto+Serif:400,400italic,700,700italic%7CDroid+Sans+Mono:400,700">
 <style>
 /*! Asciidoctor default stylesheet | MIT License | https://asciidoctor.org */
@@ -437,7 +437,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 </head>
 <body class="article toc2 toc-right">
 <div id="header">
-<h1>Medias and attachments</h1>
+<h1>Media and attachments</h1>
 <div id="toc" class="toc2">
 <div id="toctitle">Table of Contents</div>
 <ul class="sectlevel1">
@@ -459,7 +459,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <ul class="sectlevel2">
 <li><a href="#general_media_type">General media type</a></li>
 <li><a href="#image_media_type">Image media type</a></li>
-<li><a href="#attachments_2">Attachments</a></li>
+<li><a href="#attachment_service">Attachment service</a></li>
 </ul>
 </li>
 </ul>
@@ -966,12 +966,12 @@ You can read more about <a href="https://enonic.com/blog/enonic-simplifies-image
 </div>
 </div>
 <div class="sect2">
-<h3 id="attachments_2"><a class="link" href="#attachments_2">Attachments</a></h3>
+<h3 id="attachment_service"><a class="link" href="#attachment_service">Attachment service</a></h3>
 <div class="paragraph">
 <p>Let&#8217;s understand how we can retrieve artists attachments through queries.</p>
 </div>
 <div class="paragraph">
-<p>First, access the GraphQL API docs on query playground and search for the <code>Content</code> schema.  Scroll down a bit and you&#8217;ll note that there is a field name <em>attachments</em>. Now look for the <code>com_example_myproject_Artist_Data</code> schema. You&#8217;ll also note that, after the changes on the Attachments section, we also have a <em>attachments</em> field there, of the same type <em>Attachment</em> of the previous one</p>
+<p>First, access the GraphQL API docs on query playground and search for the <code>Content</code> schema.  Scroll down a bit and you&#8217;ll note that there is a field name <em>attachments</em>. Now look for the <code>com_example_myproject_Artist_Data</code> schema. You&#8217;ll also note that, after the changes on the Attachments section, we also have an <em>attachments</em> field there, of the same type <em>Attachment</em> of the previous one</p>
 </div>
 <div class="paragraph">
 <p>This means that we can get the attachments for each artist in two ways:</p>
@@ -1180,7 +1180,7 @@ Under the hood, the <em>attachment</em> field argument <em>attachmentUrl</em> us
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2024-01-03 09:04:24 UTC
+Last updated 2024-01-23 16:46:37 UTC
 </div>
 </div>
 </body>

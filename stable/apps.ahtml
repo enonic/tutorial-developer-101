@@ -6,7 +6,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="generator" content="Asciidoctor 2.0.20">
 <meta name="description" content="Learn how to create XP projects and how to build and deploy your apps to a XP instance.">
-<title>My first App</title>
+<title>Application development</title>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,300italic,400,400italic,600,600italic%7CNoto+Serif:400,400italic,700,700italic%7CDroid+Sans+Mono:400,700">
 <style>
 /*! Asciidoctor default stylesheet | MIT License | https://asciidoctor.org */
@@ -437,18 +437,19 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 </head>
 <body class="article toc2 toc-right">
 <div id="header">
-<h1>My first App</h1>
+<h1>Application development</h1>
 <div id="toc" class="toc2">
 <div id="toctitle">Table of Contents</div>
 <ul class="sectlevel1">
 <li><a href="#starters">Starters</a></li>
 <li><a href="#deploy_your_app">Deploy your app</a>
 <ul class="sectlevel2">
-<li><a href="#changing_the_display_name_of_an_application">Changing the display name of an application</a></li>
+<li><a href="#changing_apps_display_name">Changing apps display name</a></li>
 <li><a href="#troubleshooting">Troubleshooting</a></li>
 </ul>
 </li>
 <li><a href="#manual_deployment">Manual deployment</a></li>
+<li><a href="#summary">Summary</a></li>
 </ul>
 </div>
 </div>
@@ -456,10 +457,10 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <div id="preamble">
 <div class="sectionbody">
 <div class="paragraph">
-<p>Applications is the defacto way of adding functionality Enonic XP. Almost everything you&#8217;ll be using and interacting with in Enonic is an app.</p>
+<p>An application is the defacto way of adding functionality Enonic XP. Almost everything you&#8217;ll be using and interacting with in Enonic is an app.</p>
 </div>
 <div class="paragraph">
-<p>For instance, if you&#8217;ve followed along, you already have two apps installed and accessible through <em>XP menu</em> on the dashboard.</p>
+<p>For instance, you already have several applications installed, some of them even accessible from the <code>XP menu</code>.</p>
 </div>
 <div class="admonitionblock note">
 <table>
@@ -474,23 +475,23 @@ Not all installed apps will show on XP menu, this is something that is configure
 </table>
 </div>
 <div class="paragraph">
-<p>To clarify on the previous claims, here are some examples of XP apps:</p>
+<p>To clarify on the previous claims, here are some examples of XP apps that have already been installed on your sandbox:</p>
 </div>
 <div class="ulist">
 <ul>
 <li>
-<p>If you want an interface to manage content, you can install <a href="https://market.enonic.com/vendors/enonic/content-studio">content studio app</a>.</p>
+<p>Enonic&#8217;s content authoring interface - <a href="https://market.enonic.com/vendors/enonic/content-studio">Content Studio</a> is an app</p>
 </li>
 <li>
-<p>If you want to use Enonic XP CMS in a headless way, you can install <a href="https://market.enonic.com/vendors/enonic/guillotine">guillotine app</a>, and access the created content through a GraphQL API.</p>
+<p>Enonic&#8217;s headless CMS GraphQL API - <a href="https://market.enonic.com/vendors/enonic/guillotine">Guillotine</a> is also an app.</p>
 </li>
 <li>
-<p>Your project idea will most likely be an app.</p>
+<p>Even your own project idea will most likely also be an app.</p>
 </li>
 </ul>
 </div>
 <div class="paragraph">
-<p>In the end, apps are compiled and then <em>deployed</em> to XP instances to be executed.</p>
+<p>In the end, apps are compiled and then deployed to XP instances where they run.</p>
 </div>
 </div>
 </div>
@@ -516,37 +517,27 @@ The complete list of starters can be found on <a href="https://market.enonic.com
 <p>For our first app, we&#8217;ll use the "Vanilla" starter. This starter contains the bare minimum. We&#8217;ll use this to familiarize ourselves with how an XP app is structured and how to deploy it on your sandbox.</p>
 </div>
 <div class="paragraph">
-<p>Here&#8217;s how to use the CLI to create your first app:</p>
+<p>Run this command to create your application:</p>
 </div>
-<div class="olist arabic">
-<ol class="arabic">
-<li>
-<p>Make sure you are in the directory in which you want your project to be created and run:</p>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-shell" data-lang="shell">enonic project create --sb tutorial -r starter-vanilla -d myproject -v 1.0.0 -n com.example.myproject</code></pre>
+<pre class="highlight"><code class="language-bash" data-lang="bash">enonic project create --sb tutorial -r starter-vanilla -d myapp -v 1.0.0 -n com.example.myapp</code></pre>
 </div>
 </div>
-</li>
-<li>
-<p><code>--sb tutorial</code> links this project to the sandbox <code>tutorial</code>;</p>
-</li>
-<li>
-<p><code>-r starter-vanilla</code> will create the project using start-vanilla starter as a base template;</p>
-</li>
-<li>
-<p><code>-d myproject</code> will create the project in a folder named myproject;</p>
-</li>
-<li>
-<p><code>-v 1.0.0</code> will set the project version to <code>1.0.0</code>;</p>
-</li>
-<li>
-<p><code>-n com.example.myproject</code> will set the project name to com.example.myproject;</p>
-</li>
-<li>
-<p>Finally, you don&#8217;t need to open the starter docs for now, so type <code>N</code> and press <kbd>Enter</kbd>.</p>
-</li>
-</ol>
+<div class="paragraph">
+<p>This command links the app to the <code>tutorial</code> sandbox, uses <code>starter-vanilla</code> as a template, places the code in the folder <code>myapp</code>, sets version to <code>1.0.0</code>, and finally gives the app the name <code>com.example.myapp</code>.</p>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+You don&#8217;t need to open the starter docs, so type <code>N</code> and press <kbd>Enter</kbd> if asked.
+</td>
+</tr>
+</table>
 </div>
 <div class="admonitionblock note">
 <table>
@@ -559,9 +550,6 @@ Project names matter. XP does not support running two apps with the same name wi
 </td>
 </tr>
 </table>
-</div>
-<div class="paragraph">
-<p>A directory named <code>myproject/</code> should have been created during the process. If you used a different project name or project directory name, your directory will have a different name.</p>
 </div>
 <div class="paragraph">
 <p>The project directory contains a fairly minimal XP application. The most relevant parts of the directory are:</p>
@@ -592,17 +580,6 @@ src/
 </tr>
 </table>
 </div>
-<div class="paragraph">
-<p>Each XP project is linked to one and only one sandbox. If you want to change the sandbox that a project is linked to, make sure to be in the root directory of your project and run the following command:</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="highlight"><code class="language-shell" data-lang="shell">enonic project sandbox</code></pre>
-</div>
-</div>
-<div class="paragraph">
-<p>And then select the desired sandbox.</p>
-</div>
 </div>
 </div>
 <div class="sect1">
@@ -620,7 +597,7 @@ src/
 <p>Change to the project directory:</p>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-shell" data-lang="shell">cd myproject</code></pre>
+<pre class="highlight"><code class="language-shell" data-lang="shell">cd myapp</code></pre>
 </div>
 </div>
 </li>
@@ -660,7 +637,7 @@ BUILD SUCCESSFUL in 5s
 </table>
 </div>
 <div class="paragraph">
-<p>This copies the application .jar file to your sandbox&#8217;s <code>home/deploy/</code> folder when changes are made. Since in this case we deployed <code>myproject.jar</code> into <code>tutorial</code> sandbox, we should expect that file to be on <code>~/.enonic/sandboxes/tutorial/home/deploy</code>.</p>
+<p>This copies the application .jar file to your sandbox&#8217;s <code>home/deploy/</code> folder when changes are made. Since in this case we deployed <code>myapp.jar</code> into <code>tutorial</code> sandbox, we should expect that file to be on <code>~/.enonic/sandboxes/tutorial/home/deploy</code>.</p>
 </div>
 <div class="admonitionblock note">
 <table>
@@ -694,38 +671,32 @@ If you want to build or deploy your project manually, you can use the <code>enon
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-shell" data-lang="shell">[...] - Local application [com.example.myproject] installed successfully
-[...] - Application [com.example.myproject] started successfully</code></pre>
+<pre class="highlight"><code class="language-shell" data-lang="shell">[...] - Local application [com.example.myapp] installed successfully
+[...] - Application [com.example.myapp] started successfully</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>You can also verify that the application was installed correctly from the welcome page (<a href="http://localhost:8080" class="bare">http://localhost:8080</a>), or within the XP Admin &#8594; Applications app:</p>
+<p>You can also verify that the application was installed correctly from the welcome page (<a href="http://localhost:8080" class="bare">http://localhost:8080</a>), or from the XP admin via <code>XP Menu</code> &#8594; <code>Applications</code>:</p>
 </div>
 <div class="imageblock">
 <div class="content">
-<img src="media/applications-vanilla.png" alt="The applications list with a few applications installed. Also shows application details, such as content install time, version, and required XP system version for the selected application." width="1200">
+<img src="media/applications-vanilla.png" alt="The applications list with a few applications installed. Also shows application details, such as content install time, version, and required XP system version for the selected application." width="421w">
 </div>
-<div class="title">Figure 1. The applications list with the vanilla starter installed</div>
+<div class="title">Figure 1. Your app should now be visible in the applications list</div>
 </div>
 <div class="paragraph">
 <p>You&#8217;ve now successfully built and deployed your first Enonic XP application!</p>
 </div>
 <div class="sect2">
-<h3 id="changing_the_display_name_of_an_application"><a class="link" href="#changing_the_display_name_of_an_application">Changing the display name of an application</a></h3>
+<h3 id="changing_apps_display_name"><a class="link" href="#changing_apps_display_name">Changing apps display name</a></h3>
 <div class="paragraph">
-<p>You might have noticed that the application we created was listed as "Vanilla Example" in the applications list above. What if you wanted to change that to something more descriptive? To do that, we can head to the <code>gradle.properties</code> file in the project&#8217;s root directory. Change the <code>appDisplayName</code> to whatever you want it to display.</p>
+<p>You might have noticed that the application we created is listed as "Vanilla Example". What if you wanted to change that to something more descriptive? To do that, we can head to the <code>gradle.properties</code> file in the project&#8217;s root directory. Change the <code>appDisplayName</code> to whatever you want it to display.</p>
 </div>
 <div class="paragraph">
 <p>Similarly, you can change your application&#8217;s description to something more appropriate at the file <code>src/main/resources/application.xml</code> by replacing the stock text inside of the <code>description</code> element.</p>
 </div>
 <div class="paragraph">
-<p>After those changes, redeploy your app and revisit your <a href="http://localhost:8080/admin/tool/com.enonic.xp.app.applications/main">installed applications list</a>:</p>
-</div>
-<div class="imageblock">
-<div class="content">
-<img src="media/applications-vanilla-updated.png" alt="The applications list with the recently installed vanilla started containing modifications on its display name and description." width="1200">
-</div>
-<div class="title">Figure 2. Applications list with vanilla started updated</div>
+<p>After those changes, redeploy your app and revisit your <a href="http://localhost:8080/admin/tool/com.enonic.xp.app.applications/main" target="_blank" rel="noopener">installed applications list</a>:</p>
 </div>
 </div>
 <div class="sect2">
@@ -734,15 +705,34 @@ If you want to build or deploy your project manually, you can use the <code>enon
 <p>If the application doesn&#8217;t show up under the Applications tab in XP after you&#8217;ve run <code>enonic project deploy</code>, check the logs (for the build first, and then for XP) for errors. The build might have failed or something may have gone wrong when deploying.</p>
 </div>
 <div class="paragraph">
-<p>If the build works, but nothing shows up in the Applications tab, make sure you&#8217;re running the right sandbox. The CLI deploys to the sandbox specified during the project creation, and that&#8217;s stored in the project&#8217;s <code>.enonic</code> file, which is placed in the project directory root. This has to match the name of the sandbox that&#8217;s running:</p>
+<p>If the build works, but nothing shows up in the Applications tab, make sure you&#8217;re on the right sandbox. The CLI deploys to the sandbox specified during the project creation, and that&#8217;s stored in the project&#8217;s <code>.enonic</code> file, which is placed in the project directory root. This has to match the name of the sandbox that&#8217;s running:</p>
 </div>
 <div class="imageblock">
 <div class="content">
-<img src="media/project-dot-enonic-file.png" alt=".enonic file on the project root showing to which sandbox the project should be deployed to." width="1200">
+<img src="media/project-dot-enonic-file.png" alt=".enonic file on the project root showing to which sandbox the project should be deployed to." width="380w">
+</div>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+<div class="paragraph">
+<p>You may change the applications sandbox by running the following command from your project root:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-shell" data-lang="shell">enonic project sandbox</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>If the sandbox name on that file is not the one in which you wanted to deploy the project, you can directly change the sandbox name on that file and redeploy, or you can run <code>enonic project sandbox</code> in a terminal on the project root directory, to reconfigure the sandbox in which the project should be deploted to.</p>
+<p>And then select the desired sandbox.</p>
+</div>
+</td>
+</tr>
+</table>
 </div>
 </div>
 </div>
@@ -758,7 +748,7 @@ If you want to build or deploy your project manually, you can use the <code>enon
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-shell" data-lang="shell">mv build/libs/myproject.jar ~/.enonic/sandboxes/tutorial/home/deploy/</code></pre>
+<pre class="highlight"><code class="language-shell" data-lang="shell">mv build/libs/myapp.jar ~/.enonic/sandboxes/tutorial/home/deploy/</code></pre>
 </div>
 </div>
 <div class="admonitionblock note">
@@ -775,10 +765,18 @@ If you had to deploy manually when going through this tutorial, please get in to
 </div>
 </div>
 </div>
+<div class="sect1">
+<h2 id="summary"><a class="link" href="#summary">Summary</a></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>You have now created, built and deployed an application to your sandbox. Next up you&#8217;ll <a href="content-studio.ahtml">get familiar with Content Studio and content types</a>.</p>
+</div>
+</div>
+</div>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2024-01-03 09:04:24 UTC
+Last updated 2024-01-23 16:46:37 UTC
 </div>
 </div>
 </body>

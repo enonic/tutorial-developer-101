@@ -441,7 +441,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <div id="toc" class="toc2">
 <div id="toctitle">Table of Contents</div>
 <ul class="sectlevel1">
-<li><a href="#installing_content_studio">Installing Content Studio</a>
+<li><a href="#content_studio">Content Studio</a>
 <ul class="sectlevel2">
 <li><a href="#task_your_first_project">Task: your first project</a></li>
 <li><a href="#assiging_an_app_to_a_project">Assiging an app to a project</a></li>
@@ -460,7 +460,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <li><a href="#branches">Branches</a></li>
 </ul>
 </li>
-<li><a href="#data_toolbox">Data Toolbox</a></li>
+<li><a href="#summary">Summary</a></li>
 </ul>
 </div>
 </div>
@@ -488,27 +488,36 @@ The tasks and examples in this chapter are based on work done in previous chapte
 </div>
 </div>
 <div class="sect1">
-<h2 id="installing_content_studio"><a class="link" href="#installing_content_studio">Installing Content Studio</a></h2>
+<h2 id="content_studio"><a class="link" href="#content_studio">Content Studio</a></h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>Let&#8217;s start this chapter by installing Content Studio. In order to do that, access <a href="http://localhost:8080/admin/tool/com.enonic.xp.app.applications/main">Applications app</a>, click on the header item <em>"install"</em>, search for <em>"content studio"</em> and finally click on the green <em>"install"</em> button.</p>
+<p>Content Studio should already have been installed, and can be launched from XP Admin: <code>XP menu</code> &#8594; <code>Content Studio</code>.</p>
 </div>
-<div class="paragraph">
-<p>If the app was installed successfully, you should now see it listed in <em>XP menu</em> on your <a href="http://localhost:8080/admin/tool">dashboard</a>. Click on it to visit Content Studio&#8217;s homepage.</p>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+If you wish to install or update an application, this can be done from <code>XP menu</code> &#8594; <code>Applications</code>.
+</td>
+</tr>
+</table>
 </div>
 <div class="sect2">
 <h3 id="task_your_first_project"><a class="link" href="#task_your_first_project">Task: your first project</a></h3>
 <div class="paragraph">
-<p>After visiting Content Studio for the first time on a fresh sandbox, you&#8217;ll be welcomed with the following dialog:</p>
+<p>When visiting Content Studio for the first time, you&#8217;ll be welcomed with the following dialog:</p>
 </div>
 <div class="imageblock">
 <div class="content">
-<img src="media/content-studio-no-available-projects-found-dialog.png" alt="Content studio no available projects found dialog" width="1200">
+<img src="media/content-studio-no-available-projects-found-dialog.png" alt="Content studio no available projects found dialog" width="816w">
 </div>
 <div class="title">Figure 1. No available projects found dialog</div>
 </div>
 <div class="paragraph">
-<p>The reason why this dialog shows up is because Content Studio manages content, and content is organized in independent repositories, which are named as a <em>content projects</em>, or simply as <em>projects</em>.</p>
+<p>Content Studio manages content, and content is organized in independent repositories, which are called <em>content projects</em>, or simply as <em>projects</em>.</p>
 </div>
 <div class="paragraph">
 <p>A project offer individual access control and permissions, as well as other settings to toggle features and language(s).</p>
@@ -526,11 +535,11 @@ Privileged users can manage projects via Content Studio settings.
 </table>
 </div>
 <div class="paragraph">
-<p>Now, head back to the wizard dialog to create your first project:</p>
+<p>Now, head back to the project wizard dialog to create your first project:</p>
 </div>
 <div class="imageblock">
 <div class="content">
-<img src="media/content-studio-my-first-project.gif" alt="Content studio project creation wizard walkthrough." width="1200">
+<img src="media/content-studio-my-first-project.gif" alt="Content studio project creation wizard walkthrough." width="964w">
 </div>
 <div class="title">Figure 2. Creating your first project</div>
 </div>
@@ -564,7 +573,7 @@ Privileged users can manage projects via Content Studio settings.
 </div>
 <div class="imageblock">
 <div class="content">
-<img src="media/content-studio-project-app-assignment.png" alt="Content studio assigning apps to projects walkthrough." width="1200">
+<img src="media/content-studio-project-app-assignment.png" alt="Content studio assigning apps to projects walkthrough." width="547w">
 </div>
 <div class="title">Figure 3. Assigning your first app to your first project</div>
 </div>
@@ -580,7 +589,7 @@ Privileged users can manage projects via Content Studio settings.
 <div class="olist arabic">
 <ol class="arabic">
 <li>
-<p>XP project folder and its files</p>
+<p>XP project (app folder and files)</p>
 </li>
 <li>
 <p>XP app</p>
@@ -591,13 +600,13 @@ Privileged users can manage projects via Content Studio settings.
 </ol>
 </div>
 <div class="paragraph">
-<p>A "<em>XP project folder and its files</em>" is the folder containing the files needed in order to create a <em>XP app</em>. In the previous section, this was automatically generated for us when we picked the "Vanilla starter" using the command <code>enonic project create</code>.</p>
+<p>An <code>XP project folder</code> is the folder containing the files needed in order to create an <code>XP app</code>. The folder was automatically generated from the Vanilla starter when we ran the command: <code>enonic project create</code>.</p>
 </div>
 <div class="paragraph">
-<p>A "<em>XP app</em>" is the .jar file that is generated when you run the command <code>enonic project build</code> on the project root folder.</p>
+<p>The <code>XP app</code> is the compiled file that is generated when you run the command <code>enonic project build</code> on the project root folder.</p>
 </div>
 <div class="paragraph">
-<p>A "<em>Content Studio project</em>", as explained in the section <a href="sandboxes.ahtml#task:_your_first_project">Task: your first project</a> above, is a repository to store content, and the content creation is enabled through the apps you assign to a project.</p>
+<p>A <code>Content Project</code>, as explained above, is a place you can store content. Content can be created based on the apps you assign to a project.</p>
 </div>
 <div class="paragraph">
 <p>In summary, you can have the following flow in mind:</p>
@@ -620,7 +629,7 @@ This flow is super simplified and there are a lot of details to each one of thos
 </table>
 </div>
 <div class="paragraph">
-<p>From now on, we&#8217;ll use the term "project" to refer to a "<em>XP project folder and its files</em>" and also to a"<em>Content Studio project</em>", since it can be easily distinguished by the context in which te term is used.</p>
+<p>From now on, we&#8217;ll use the term "project" to refer to both <code>XP app project</code> and <code>Content projects</code>, as they can be easily distinguished based on the context.</p>
 </div>
 <div class="paragraph">
 <p>We believe that this will help to avoid any confusion from your side. Now, back to work!</p>
@@ -663,7 +672,7 @@ As mentioned before, content types are defined and installed via applications. I
 <div class="title">Figure 4. The target for your first content type</div>
 </div>
 <div class="paragraph">
-<p>Back to your preferred editor, make sure you&#8217;re in the project folder (<code>myproject/</code>) that you created in a previous chapter. All paths will be relative to this root folder.</p>
+<p>Back to your preferred editor, make sure you&#8217;re in the project folder (<code>myapp/</code>) that you created in a previous chapter. All paths will be relative to this root folder.</p>
 </div>
 <div class="olist arabic">
 <ol class="arabic">
@@ -677,7 +686,7 @@ As mentioned before, content types are defined and installed via applications. I
 <p>Within the <code>artist</code> directory, create a file called <code>artist.xml</code>. The file name must match the directory name  (except for the file extension). The full path to the content type from the project root should be <code>src/main/resources/site/content-types/artist/artist.xml</code>.</p>
 </li>
 <li>
-<p>In the <code>artist.xml</code> file, place the following contents:</p>
+<p>In the <code>artist.xml</code> file, place the following content:</p>
 <div class="listingblock">
 <div class="title">The 'Artist' content type</div>
 <div class="content">
@@ -759,7 +768,7 @@ XP&#8217;s <code>input</code> elements are <em>not</em> the same as HTML <code>i
 </div>
 </div>
 <div class="paragraph">
-<p>This command will watch changes under <code>myproject/</code> and redeploy as needed.</p>
+<p>This command will watch for changes under <code>myapp/</code> and redeploy as needed.</p>
 </div>
 <div class="admonitionblock tip">
 <table>
@@ -768,7 +777,7 @@ XP&#8217;s <code>input</code> elements are <em>not</em> the same as HTML <code>i
 <i class="fa icon-tip" title="Tip"></i>
 </td>
 <td class="content">
-Make sure you&#8217;re already running your sandbox with the <code>--dev</code> flag in another terminal, otherwise running enonic project dev will start the sandbox in detached mode, so you&#8217;ll lose logs. More on cli&#8217;s dev command <a href="https://developer.enonic.com/docs/enonic-cli/stable/dev#dev">here</a>.
+Make sure you&#8217;re already running your sandbox with the <code>--dev</code> flag in another terminal, otherwise the sandbox will be started in detached mode, so you&#8217;ll lose logs. More on CLI&#8217;s dev command <a href="https://developer.enonic.com/docs/enonic-cli/stable/dev#dev">here</a>.
 </td>
 </tr>
 </table>
@@ -786,7 +795,7 @@ Make sure you&#8217;re already running your sandbox with the <code>--dev</code> 
 <p>Go back to content studio and make sure you are on the project you&#8217;ve created on the beginning of this chapter.</p>
 </div>
 <div class="paragraph">
-<p>Press <em>"New &#8230;&#8203;"</em> to open the <em>"Create Content"</em> menu. You should see a content type "Artist".</p>
+<p>Press <b class="button">New &#8230;&#8203;</b> to open a new dialog. You should see a content type called <code>Artist</code>.</p>
 </div>
 <div class="admonitionblock note">
 <table>
@@ -795,16 +804,16 @@ Make sure you&#8217;re already running your sandbox with the <code>--dev</code> 
 <i class="fa icon-note" title="Note"></i>
 </td>
 <td class="content">
-This content type is only visible there because of the updates we did to the app, i.e, your app is responsible to be delivering a artist structure in which content studio can start to actually create content.
+This content type is only visible there because of the update we did to the app, i.e, your app is responsible to be delivering the artist definition which content studio can use to actually create content.
 </td>
 </tr>
 </table>
 </div>
 <div class="imageblock">
 <div class="content">
-<img src="media/content-studio-new-content.png" alt="The &quot;Create Content&quot; dialog when creating content under the created project. It contains elements, including the &quot;Artist&quot; content type that we created earlier." width="1200">
+<img src="media/content-studio-new-content.png" alt="The &quot;Create Content&quot; dialog when creating content under the created project. It contains elements, including the &quot;Artist&quot; content type that we created earlier." width="819w">
 </div>
-<div class="title">Figure 5. The "Create Content" dialog with the artist available for content creation</div>
+<div class="title">Figure 5. The content creation dialog with the artist content type</div>
 </div>
 <div class="paragraph">
 <p>However, before we start creating artists, let&#8217;s create a folder.</p>
@@ -843,7 +852,7 @@ This content type is only visible there because of the updates we did to the app
 </div>
 <div class="imageblock">
 <div class="content">
-<img src="media/content-type-filled-out.png" alt="The form for &quot;artist&quot; fully filled out." width="1200">
+<img src="media/content-type-filled-out.png" alt="The form for &quot;artist&quot; fully filled out." width="936w">
 </div>
 <div class="title">Figure 6. The content form filled out for the artist "Cardi B"</div>
 </div>
@@ -884,7 +893,7 @@ This content type is only visible there because of the updates we did to the app
 </div>
 <div class="imageblock">
 <div class="content">
-<img src="media/content-studio-with-artists.png" alt="The content hierarchy showing artists folder with &quot;Cardi B&quot;, &quot;Missy Elliot&quot; and &quot;P!nk&quot; listed directly underneath it." width="1200">
+<img src="media/content-studio-with-artists.png" alt="The content hierarchy showing artists folder with &quot;Cardi B&quot;, &quot;Missy Elliot&quot; and &quot;P!nk&quot; listed directly underneath it." width="527w">
 </div>
 <div class="title">Figure 7. The hierarchy as it should look after creating some content</div>
 </div>
@@ -941,9 +950,9 @@ This content type is only visible there because of the updates we did to the app
 </dd>
 </dl>
 </div>
-<div class="imageblock text-center">
+<div class="imageblock">
 <div class="content">
-<img src="media/content-studio-content-status.png" alt="Three pieces of content displaying the three statuses that a piece of content can have" width="400">
+<img src="media/content-studio-content-status.png" alt="Three pieces of content displaying the three statuses that a piece of content can have" width="270w">
 </div>
 </div>
 <div class="paragraph">
@@ -992,102 +1001,20 @@ You can also publish a piece of content by using the keyboard shortcut <span cla
 </div>
 </div>
 <div class="sect1">
-<h2 id="data_toolbox"><a class="link" href="#data_toolbox">Data Toolbox</a></h2>
+<h2 id="summary"><a class="link" href="#summary">Summary</a></h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>We&#8217;ll now install and give a brief introduction to the <em>Data Toolbox</em> app, so make sure to install it directly from the Applications app (same flow as installing Content Studio or any other app).</p>
+<p>You&#8217;ve been introduced to Content Studio, content projects and content types, and how to create and publish content.</p>
 </div>
 <div class="paragraph">
-<p>Data Toolbox provides you with a web interface to visualize and manipulate your XP data. We&#8217;ll now see how to inspect content using Data Toolbox.</p>
-</div>
-<div class="olist arabic">
-<ol class="arabic">
-<li>
-<p>Open the XP menu and select Data Toolbox. You should have this app installed from when you <a href="sandboxes.ahtml#_admin_console">took the welcome tour</a>.</p>
-<div class="imageblock">
-<div class="content">
-<img src="media/data-toolbox-landing-page.png" alt="The Data Toolbox landing page: grid of icons for administrative actions and accompanying explanations. " width="1200">
-</div>
-<div class="title">Figure 8. Data Toolbox</div>
-</div>
-</li>
-<li>
-<p>Navigate to the "Data Tree" menu. In this menu, the toolbox lists repositories within your XP instance. There are four repositories listed:</p>
-<div class="dlist">
-<dl>
-<dt class="hdlist1"><code>com.enonic.cms.my-first-project</code></dt>
-<dd>
-<p>This is the current repository that holds your content.</p>
-</dd>
-<dt class="hdlist1"><code>com.enonic.cms.default</code></dt>
-<dd>
-<p>This is the default repository.</p>
-</dd>
-<dt class="hdlist1"><code>system.auditlog</code></dt>
-<dd>
-<p>This is where the <em>audit log</em> is stored. The audit log allows you to see a log of everything that&#8217;s been done in your XP instance, such as content creation, user administration, etc., and also tells you when it was done and by whom.</p>
-</dd>
-<dt class="hdlist1"><code>system-repo</code></dt>
-<dd>
-<p>This is where XP stores data about your system, such as external applications and identity data.</p>
-</dd>
-<dt class="hdlist1"><code>system.scheduler</code></dt>
-<dd>
-<p>This is a separate repository where scheduled jobs are stored (new in 7.7.0).</p>
-</dd>
-</dl>
-</div>
-</li>
-<li>
-<p>Navigate through to <code>com.enonic.cms.my-first-project</code>.</p>
-</li>
-<li>
-<p>Next up is a list of branches (as discussed above). As long as you&#8217;ve published your content, you can choose either one of these.</p>
-</li>
-<li>
-<p>Keep navigating further down the tree: <code>[root]</code> &#8594; <code>content</code>.</p>
-</li>
-<li>
-<p>When you&#8217;ve reached <code>content</code> you should see all the content of your site listed. Navigate to <code>artists</code> to find actual pieces of content.</p>
-</li>
-<li>
-<p>Choose one of your artists and check out both the info view and the JSON view, available via the buttons in the table row.</p>
-<div class="imageblock">
-<div class="content">
-<img src="media/data-toolbox-info-view.png" alt="The Data Toolbox info view. the view contains options for exporting, moving, and deleting the node, as well as for displaying permissions for the node, versions of the node, and indexing data (and much more)." width="1200">
-</div>
-<div class="title">Figure 9. The Data Toolbox node info view</div>
-</div>
-</li>
-<li>
-<p>To inspect the data associated with the artist, you can select "Display properties", which will bring up data about the node, such as its display name, its owner, when it was created, etc.</p>
-<div class="imageblock">
-<div class="content">
-<img src="media/data-toolbox-properties.png" alt="A table with columns 'name', 'index, 'value', and 'type' that describes the node. Example names are 'valid', 'type', 'displayName'." width="1200">
-</div>
-<div class="title">Figure 10. The display properties view</div>
-</div>
-</li>
-<li>
-<p>Finally, you can navigate to the <code>data</code> property, where you&#8217;ll find the data stored on the artist.</p>
-<div class="imageblock">
-<div class="content">
-<img src="media/data-toolbox-properties-data.png" alt="A table showing the data we stored about the artist previously." width="1200">
-</div>
-<div class="title">Figure 11. The properties.data view</div>
-</div>
-</li>
-</ol>
-</div>
-<div class="paragraph">
-<p>Inspecting content is only a fraction of what Data Toolbox can do: it&#8217;s a versatile and powerful administrative tool, and we&#8217;ll see more of it in a later chapter.</p>
+<p>Next up, we&#8217;ll have a look at <a href="data-toolbox.ahtml">what is going on under the hood</a>.</p>
 </div>
 </div>
 </div>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2024-01-03 09:04:24 UTC
+Last updated 2024-01-23 16:46:37 UTC
 </div>
 </div>
 </body>

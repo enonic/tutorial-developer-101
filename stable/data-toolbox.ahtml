@@ -5,8 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="generator" content="Asciidoctor 2.0.20">
-<meta name="description" content="X-data is a way for you to add extra data to all your content types in a simple manner. This chapter covers what it is and how to use it.">
-<title>X-data</title>
+<title>Data toolbox</title>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,300italic,400,400italic,600,600italic%7CNoto+Serif:400,400italic,700,700italic%7CDroid+Sans+Mono:400,700">
 <style>
 /*! Asciidoctor default stylesheet | MIT License | https://asciidoctor.org */
@@ -437,13 +436,13 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 </head>
 <body class="article toc2 toc-right">
 <div id="header">
-<h1>X-data</h1>
+<h1>Data toolbox</h1>
 <div id="toc" class="toc2">
 <div id="toctitle">Table of Contents</div>
 <ul class="sectlevel1">
-<li><a href="#your_first_x_data">Your first X-data</a></li>
-<li><a href="#headless">Headless</a></li>
-<li><a href="#bonus_seo_metafields">Bonus: SEO Metafields</a></li>
+<li><a href="#web_interface">Web interface</a></li>
+<li><a href="#examine_your_content">Examine your content</a></li>
+<li><a href="#summary">Summary</a></li>
 </ul>
 </div>
 </div>
@@ -451,277 +450,110 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <div id="preamble">
 <div class="sectionbody">
 <div class="paragraph">
-<p>X-data (short for <em>eXtra-data</em>) is a smart way of dynamically extending existing content types with more fields.</p>
-</div>
-<div class="paragraph">
-<p>The idea is to basically define new fields and decide to what content type those fields should be applied to. If no content type is selected while creating an X-data, those fields will be enabled to all content types.</p>
-</div>
-<div class="paragraph">
-<p>In Content Studio, X-data is visually displayed as a new step in the form, listed below the content type&#8217;s standard fields.</p>
-</div>
-<div class="admonitionblock note">
-<table>
-<tr>
-<td class="icon">
-<i class="fa icon-note" title="Note"></i>
-</td>
-<td class="content">
-The tasks and examples in this chapter are based on work done in previous chapters (starting with <a href="sandbox.ahtml">the sandboxes chapter</a>). If you want to follow along with the examples, make sure you&#8217;re all caught up.
-</td>
-</tr>
-</table>
+<p>In this chapter, we&#8217;ll give a short introduction to a popular application called Data Toolbox, the developers best friend for playing around with the low level NoSQL storage in Enonic XP.</p>
 </div>
 </div>
 </div>
 <div class="sect1">
-<h2 id="your_first_x_data"><a class="link" href="#your_first_x_data">Your first X-data</a></h2>
+<h2 id="web_interface"><a class="link" href="#web_interface">Web interface</a></h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>If your requirement is to add new fields to a specific content type, it doesn&#8217;t make sense to use X-data, since you can directly update that content type.</p>
+<p>Data Toolbox provides you with a web interface to visualize and manipulate your XP data, as well as other system related inforamtion. We&#8217;ll now see how to inspect content using Data Toolbox.</p>
 </div>
 <div class="paragraph">
-<p>Now, if your requirement is to add new fields to multiple content types, that is when X-data comes into place.</p>
+<p>Data Toolbox is <a href="https://market.enonic.com/vendors/glenn-ricaud/data-toolbox">available on Enonic Market</a>.</p>
 </div>
 <div class="paragraph">
-<p>The same behaviour of extending multiple content types can be achieved through mixins. You can create a mixin and add it to the content types you want to extend the fields. The difference is where the data on those fields will be stored, and also in the fact that X-data are easier to maintain when adding to a lot of content types.</p>
+<p>Just like Content Studio, Data toolbox should already have been installed, and can be launched from XP Admin: <code>XP menu</code> &#8594; <code>Data Toolbox</code>.</p>
 </div>
-<div class="paragraph">
-<p>Let&#8217;s now add a "notes" X-data, which will extend both Artist and Animal content types.</p>
+<div class="imageblock">
+<div class="content">
+<img src="media/data-toolbox-landing-page.png" alt="The Data Toolbox landing page: grid of icons for administrative actions and accompanying explanations. " width="639w">
 </div>
+<div class="title">Figure 1. Data Toolbox</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="examine_your_content"><a class="link" href="#examine_your_content">Examine your content</a></h2>
+<div class="sectionbody">
 <div class="paragraph">
-<p>Similar to content types, X-data schemas have a specific naming and placement convention within your app: <code>src/main/resources/site/x-data/&lt;xdata-name&gt;/&lt;xdata-name&gt;.xml</code>.</p>
+<p>Follow these steps to find and examine what your content looks like from the low level storage perspective:</p>
 </div>
 <div class="olist arabic">
 <ol class="arabic">
 <li>
-<p>Create the "notes" X-data schema:</p>
-<div class="listingblock">
-<div class="title">site/x-data/notes/notes.xml</div>
-<div class="content">
-<pre class="highlight"><code class="language-xml" data-lang="xml">&lt;x-data&gt;
-  &lt;display-name&gt;Notes X-data&lt;/display-name&gt;
-  &lt;form&gt;
-    &lt;input name="notes" type="TextLine"&gt;
-      &lt;label&gt;Notes&lt;/label&gt;
-      &lt;occurrences minimum="0" maximum="3"/&gt;
-    &lt;/input&gt;
-  &lt;/form&gt;
-&lt;/x-data&gt;</code></pre>
-</div>
-</div>
-</li>
-<li>
-<p>Additionally, you need to define the injection rules for the X-data, and for that you need to edit the <code>site.xml</code> file:</p>
-<div class="listingblock">
-<div class="title">src/main/resources/site/site.xml</div>
-<div class="content">
-<pre class="highlight"><code class="language-xml" data-lang="xml">&lt;site&gt;
-  &lt;x-data name="notes" allowContentTypes="com.example.myapp:artist|com.example.myapp:animal"/&gt;
-  &lt;form/&gt;
-&lt;/site&gt;</code></pre>
-</div>
+<p>Navigate to the <code>Data Tree</code> in the menu. Here, the toolbox lists repositories within your XP instance, you should at least have the following:</p>
+<div class="dlist">
+<dl>
+<dt class="hdlist1">com.enonic.cms.my-first-project</dt>
+<dd>
+<p>This is the current repository that holds your content.</p>
+</dd>
+<dt class="hdlist1">com.enonic.cms.default</dt>
+<dd>
+<p>This is the default repository.</p>
+</dd>
+<dt class="hdlist1">system.auditlog</dt>
+<dd>
+<p>This is where the <em>audit log</em> is stored. The audit log allows you to see a log of everything that&#8217;s been done in your XP instance, such as content creation, user administration, etc., and also tells you when it was done and by whom.</p>
+</dd>
+<dt class="hdlist1">system-repo</dt>
+<dd>
+<p>This is where XP stores core data about your system, such as installed applications and users.</p>
+</dd>
+<dt class="hdlist1">system.scheduler</dt>
+<dd>
+<p>This is a separate repository where scheduled jobs are stored.</p>
+</dd>
+</dl>
 </div>
 </li>
 <li>
-<p>Redeploy your app and access a Artist or an Animal content. You should see the following section in the bottom of the form:</p>
+<p>Move into <code>com.enonic.cms.my-first-project</code>. Here you will see two branches (as discussed above). As long as you&#8217;ve published your content, you can choose either one of these.</p>
+</li>
+<li>
+<p>Keep navigating further down the tree: <code>root</code> &#8594; <code>content</code>. Now you should see all the content of your site listed. Navigate to <code>artists</code> to find actual pieces of content.</p>
+</li>
+<li>
+<p>Choose one of your artists and check out both the info view and the JSON view, available via the buttons in the table row.</p>
 <div class="imageblock">
 <div class="content">
-<img src="media/notes-x-data.png" alt="Notes x-data fields showing in the bottom of an animal content" width="1050">
+<img src="media/data-toolbox-info-view.png" alt="The Data Toolbox info view. the view contains options for exporting, moving, and deleting the node, as well as for displaying permissions for the node, versions of the node, and indexing data (and much more)." width="500w">
 </div>
+<div class="title">Figure 2. The Data Toolbox node info view</div>
 </div>
 </li>
 <li>
-<p>Finally, add some notes to some content.</p>
-</li>
-</ol>
-</div>
-<div class="admonitionblock note">
-<table>
-<tr>
-<td class="icon">
-<i class="fa icon-note" title="Note"></i>
-</td>
-<td class="content">
-For more details and configuration options for X-data, visit <a href="https://developer.enonic.com/docs/xp/stable/cms/x-data">the X-data documentation</a>.
-</td>
-</tr>
-</table>
-</div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="headless"><a class="link" href="#headless">Headless</a></h2>
-<div class="sectionbody">
-<div class="paragraph">
-<p>As you might expect, your x-data fields are also available via the Guillotine API.</p>
-</div>
-<div class="paragraph">
-<p>Use the following query to quickly access all x-data fields in your content.</p>
-</div>
-<div class="listingblock">
-<div class="title">Querying for X-data</div>
-<div class="content">
-<pre class="highlight"><code class="language-GraphQL" data-lang="GraphQL">{
-  guillotine {
-    queryDsl(
-      query: {
-        boolean: {
-          must: [
-            {
-              term: {
-                field: "type",
-                value: {
-                  string: "com.example.myapp:animal"
-                }
-              }
-            },
-            {
-              term: {
-                field: "displayName",
-                value: {
-                  string: "Lynx"
-                }
-              }
-            }
-          ]
-        }
-
-      }
-    ) {
-      displayName
-      xAsJson
-    }
-  }
-}</code></pre>
-</div>
-</div>
-<div class="paragraph">
-<p>If you&#8217;ve added any values to your Lynx&#8217;s Notes X-data fields, this is what you might get.</p>
-</div>
-<div class="listingblock">
-<div class="title">X-data results</div>
-<div class="content">
-<pre class="highlight"><code class="language-json" data-lang="json">{
-  "data": {
-    "guillotine": {
-      "queryDsl": [
-        {
-          "displayName": "Lynx",
-          "xAsJson": {
-            "com_example_myapp": {
-              "notes": {
-                "notes": [
-                  "Lynx note 1",
-                  "Lynx note 2",
-                  "Lynx note 3"
-                ]
-              }
-            }
-          }
-        }
-      ]
-    }
-  }
-}</code></pre>
-</div>
-</div>
-<div class="paragraph">
-<p>Should you require specific fields only, or wish to drill into more details, for instance by following a reference, use the typed graphQL fields instead of xAsJson. For instance like this:</p>
-</div>
-<div class="listingblock">
-<div class="title">X-data seoTitle field query</div>
-<div class="content">
-<pre class="highlight"><code class="language-GraphQL" data-lang="GraphQL">{
-  guillotine {
-    queryDsl(
-      query: {
-        boolean: {
-          must: [
-            {
-              term: {
-                field: "type",
-                value: {
-                  string: "com.example.myapp:animal"
-                }
-              }
-            },
-            {
-              term: {
-                field: "displayName",
-                value: {
-                  string: "Lynx"
-                }
-              }
-            }
-          ]
-        }
-
-      }
-    ) {
-      displayName
-      x {
-        com_example_myapp {
-          notes { <i class="conum" data-value="1"></i><b>(1)</b>
-            notes <i class="conum" data-value="2"></i><b>(2)</b>
-          }
-        }
-      }
-    }
-  }
-}</code></pre>
-</div>
-</div>
-<div class="colist arabic">
-<table>
-<tr>
-<td><i class="conum" data-value="1"></i><b>1</b></td>
-<td>This is the name of the X-data. In this case, "notes" because we defined it to be like so in the <code>notes.xml</code> file</td>
-</tr>
-<tr>
-<td><i class="conum" data-value="2"></i><b>2</b></td>
-<td>This is the "notes" field (TextLine input type) inside the "notes" X-data.</td>
-</tr>
-</table>
-</div>
-<div class="paragraph">
-<p>If you made it here - you are officially equipped with an essential overview of Enonic&#8217;s content fundamental content modelling capabilities. 🙌</p>
-</div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="bonus_seo_metafields"><a class="link" href="#bonus_seo_metafields">Bonus: SEO Metafields</a></h2>
-<div class="sectionbody">
-<div class="paragraph">
-<p>There&#8217;s a known app on Enonic market named <em>SEO Metafields app</em>. Its main purpose is to provide SEO capabilities to your project, and for that purpose, it adds a new X-data named <code>meta_data</code>, which is then enabled to all content types in your project.</p>
-</div>
-<div class="paragraph">
-<p>This is a bonus section, so you&#8217;re not missing much to skip it, but it&#8217;s worth installing it to better understand capabilities of X-data.</p>
-</div>
-<div class="olist arabic">
-<ol class="arabic">
-<li>
-<p>Install the <a href="https://market.enonic.com/vendors/enonic/seo-metafields">SEO Metafields app</a>.</p>
+<p>To inspect the data associated with the artist, you can select "Display properties", which will bring up data about the node, such as its display name, its owner, when it was created, etc.</p>
 <div class="imageblock">
 <div class="content">
-<img src="media/x-data-seo-app-install.png" alt="Install SEO Metafields app" width="1050">
+<img src="media/data-toolbox-properties.png" alt="A table with columns 'name', 'index, 'value', and 'type' that describes the node. Example names are 'valid', 'type', 'displayName'." width="606w">
 </div>
+<div class="title">Figure 3. The display properties view</div>
 </div>
 </li>
 <li>
-<p>Edit and add the app to your project.</p>
-</li>
-<li>
-<p>Immediately after adding the app to your site, the form should refresh - and add a new step "SEO Metafields":</p>
-<div class="paragraph">
-<p>So, now you have some additional fields for the site. If you check some of your other content items, like an animal. You will see the fields are there as well.</p>
+<p>Finally, you can navigate to the <code>data</code> property, where you&#8217;ll find the data stored on the artist.</p>
+<div class="imageblock">
+<div class="content">
+<img src="media/data-toolbox-properties-data.png" alt="A table showing the data we stored about the artist previously." width="606w">
+</div>
+<div class="title">Figure 4. The properties.data view</div>
 </div>
 </li>
 </ol>
 </div>
-<div class="imageblock">
-<div class="content">
-<img src="media/x-data-seo-animal.png" alt="SEO fields available for the animals content type as well." width="1200">
 </div>
+</div>
+<div class="sect1">
+<h2 id="summary"><a class="link" href="#summary">Summary</a></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Inspecting content is only a fraction of what Data Toolbox can do: it&#8217;s a versatile and powerful administrative tool, and we&#8217;ll see more of it in a later chapter.</p>
+</div>
+<div class="paragraph">
+<p>Now, let&#8217;s have a look at the <a href="headless-api.ahtml">cutting edge headless cms API - aka Guillotine</a>.</p>
 </div>
 </div>
 </div>

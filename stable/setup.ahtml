@@ -441,7 +441,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <div id="toc" class="toc2">
 <div id="toctitle">Table of Contents</div>
 <ul class="sectlevel1">
-<li><a href="#the_enonic_cli">The Enonic CLI</a>
+<li><a href="#enonic_cli">Enonic CLI</a>
 <ul class="sectlevel2">
 <li><a href="#installation">Installation</a></li>
 <li><a href="#verification">Verification</a></li>
@@ -467,7 +467,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <div id="preamble">
 <div class="sectionbody">
 <div class="paragraph">
-<p>The purpose of this chapter is to ensure you have the necessary tools to be able to start developing efficiently with XP, and if that&#8217;s not the case, guide you to setup your local environment for that purpose.</p>
+<p>The purpose of this chapter is to ensure you have the necessary tools to start developing efficiently with XP.</p>
 </div>
 <div class="paragraph">
 <p>In general, the bare minimum you&#8217;ll need are:</p>
@@ -478,7 +478,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <p>Enonic CLI &#8594; <em>managing your XP projects</em></p>
 </li>
 <li>
-<p>Git and Github &#8594; <em>versioning your XP projects</em></p>
+<p>Git / Github &#8594; <em>versioning your XP projects</em></p>
 </li>
 <li>
 <p>Editor / IDE (Integrated Development Environment) &#8594; <em>coding your ideas into XP projects</em></p>
@@ -500,7 +500,7 @@ If you&#8217;ve already got those configured and installed, feel free to skip to
 </div>
 </div>
 <div class="sect1">
-<h2 id="the_enonic_cli"><a class="link" href="#the_enonic_cli">The Enonic CLI</a></h2>
+<h2 id="enonic_cli"><a class="link" href="#enonic_cli">Enonic CLI</a></h2>
 <div class="sectionbody">
 <div class="paragraph">
 <p>Enonic provides a Command Line Interface (CLI) for working with XP.</p>
@@ -775,17 +775,17 @@ Apple maintains its own fork of Git. If you have XCode installed, you already ha
 <h2 id="summary"><a class="link" href="#summary">Summary</a></h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>Congrats! You&#8217;ve installed the Enonic CLI, Git, and an editor. You&#8217;re now set up to start working with Enonic XP 🚀</p>
+<p>Congrats! You&#8217;ve installed the Enonic CLI, Git, and an editor. You&#8217;re now set up to start working with Enonic XP 🚀. Keep your new tools at hand; we&#8217;ll be using them heavily throughout this guide, so you&#8217;ll have lots of time to get to know them better.</p>
 </div>
 <div class="paragraph">
-<p>Keep your new tools at hand; we&#8217;ll be using them heavily throughout this guide, so you&#8217;ll have lots of time to get to know them better.</p>
+<p>Next up, you will <a href="sandbox.ahtml">get familiar with sandboxes</a>.</p>
 </div>
 </div>
 </div>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2024-01-03 09:04:24 UTC
+Last updated 2024-01-23 16:46:37 UTC
 </div>
 </div>
 </body>

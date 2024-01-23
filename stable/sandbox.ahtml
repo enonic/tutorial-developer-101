@@ -445,7 +445,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <li><a href="#your_first_sandbox">Your first sandbox</a></li>
 <li><a href="#starting_the_sandbox">Starting the sandbox</a></li>
 <li><a href="#troubleshooting">Troubleshooting</a></li>
-<li><a href="#admin_dashboard">Admin dashboard</a></li>
+<li><a href="#xp_admin">XP Admin</a></li>
 <li><a href="#summary">Summary</a></li>
 </ul>
 </div>
@@ -454,10 +454,10 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <div id="preamble">
 <div class="sectionbody">
 <div class="paragraph">
-<p>In this chapter we&#8217;ll introduce a fundamental concept to start developing with Enonic XP: <em>sandboxes</em></p>
+<p>In this chapter we&#8217;ll introduce a fundamental concept to start developing with Enonic XP - <strong>Sandboxes</strong></p>
 </div>
 <div class="paragraph">
-<p>By the end of the this, you&#8217;ll have created and started a sandbox using the CLI, understanding what it is and what is their purpose.</p>
+<p>By the end, you&#8217;ll have created and started a sandbox using the CLI, understanding what it is and what is their purpose.</p>
 </div>
 </div>
 </div>
@@ -465,7 +465,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <h2 id="what_is_a_sandbox"><a class="link" href="#what_is_a_sandbox">What is a sandbox?</a></h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>A <em>sandbox</em> is basically a local instance of Enonic XP running in a specific version.</p>
+<p>A <em>sandbox</em> is basically a local instance of Enonic XP. Each sandbox may have different versions of XP, different data and configuration.</p>
 </div>
 <div class="paragraph">
 <p>Having a local (and running) instance of XP is essential for developing apps on Enonic XP.</p>
@@ -483,24 +483,21 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-shell" data-lang="shell">enonic sandbox create tutorial</code></pre>
+<pre class="highlight"><code class="language-shell" data-lang="shell">enonic sandbox create tutorial -t essentials -f</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>When asked which XP distribution you want, use the latest one.</p>
-</div>
-<div class="paragraph">
-<p>By the end this flow, your terminal should have something that looks like this:</p>
+<p>By the end this flow, your terminal should output something that looks like this:</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-shell" data-lang="shell">bre@bre-enonic:~$ enonic sandbox create tutorial
-? Do you want to use Enonic XP 7.13.1 (latest, stable)? Yes
+<pre class="highlight"><code class="language-shell" data-lang="shell">Loading templates from Enonic Market...Done.
+Using template 'Essentials'
+Loading...Done
 Downloading distro [=======================================================] 100.00%
 Unzipping distro...Done
 
-Sandbox 'tutorial' created with distro 'enonic-xp-linux-sdk-7.13.1'.
-bre@bre-enonic:~$</code></pre>
+Sandbox 'tutorial' created with distro 'enonic-xp-mac-sdk-7.14.0'.</code></pre>
 </div>
 </div>
 <div class="admonitionblock note">
@@ -510,7 +507,7 @@ bre@bre-enonic:~$</code></pre>
 <i class="fa icon-note" title="Note"></i>
 </td>
 <td class="content">
-If you press <kbd>enter</kbd> without entering a response, the CLI will use the default response. The default response to a question is listed in brackets after the question.
+This creates a sandbox called <code>tutorial</code> using the <code>essentials</code> template and uses default vaules for all other options.
 </td>
 </tr>
 </table>
@@ -551,7 +548,7 @@ _  _ \_  __ \  __ \_  __ \_  /_  ___/   __  |/_/__  __ \
 \___//_/ /_/\____//_/ /_//_/  \___/     /_/|_| _  .___/
                                                /_/
 
-# Enonic XP 7.13.1
+# Enonic XP 7.14.0
 # Built on 2023-07-26T12:31:19Z (hash = d5bf8d725738b778e153d839f16cdaa9e4641444, branch = d5bf8d725738b778e153d839f16cdaa9e4641444)
 # OpenJDK 64-Bit Server VM 17.0.7 (GraalVM Community)
 # Linux 5.19.0-50-generic (amd64)
@@ -685,50 +682,21 @@ The <code>[&#8230;&#8203;]</code> replaces most of the stack trace for legibilit
 </div>
 </div>
 <div class="sect1">
-<h2 id="admin_dashboard"><a class="link" href="#admin_dashboard">Admin dashboard</a></h2>
+<h2 id="xp_admin"><a class="link" href="#xp_admin">XP Admin</a></h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>With your sandbox running, lets have a look at XP&#8217;s web interface. Point your browser to <a href="http://localhost:8080" target="_blank" rel="noopener">http://localhost:8080</a>.</p>
+<p>Let&#8217;s have a look at the Sandbox' web interface. Open <a href="http://localhost:8080" target="_blank" rel="noopener">http://localhost:8080</a> in your browser (or just click the link).</p>
 </div>
 <div class="paragraph">
-<p>You should see the XP boot page:</p>
+<p>You should now see the XP boot page:</p>
 </div>
 <div class="imageblock">
 <div class="content">
-<img src="media/xp-boot.png" alt="The XP boot page" width="1200">
+<img src="media/xp-boot.png" alt="The XP boot page" width="1085w">
 </div>
-<div class="title">Figure 1. XP Boot page</div>
-</div>
-<div class="paragraph">
-<p>The boot page gives an overview of endpoints (as mentioned above) and any other services that may be running on this instance.</p>
 </div>
 <div class="paragraph">
-<p>Click on <em>"Login as Guest"</em> to move on. You should now see the following:</p>
-</div>
-<div class="imageblock">
-<div class="content">
-<img src="media/xp-dashboard.png" alt="The XP admin dashboard" width="1200">
-</div>
-<div class="title">Figure 2. The XP admin dashboard</div>
-</div>
-<div class="paragraph">
-<p>What this actually does is log you in as the XP instance&#8217;s Super User.</p>
-</div>
-<div class="paragraph">
-<p>Because we&#8217;re working on a local development environment for now, we won&#8217;t concern ourselves with users and administrators.</p>
-</div>
-<div class="paragraph">
-<p>You should now be on the admin dashboard. The right menu, aka <em>"XP menu"</em>, is responsible to allow navigation through some installed apps on your XP instance. By now you should only have two apps installed:</p>
-</div>
-<div class="ulist">
-<ul>
-<li>
-<p><em>Users</em>, to manage permissions for users, user groups and roles on your local XP instance (<em>sandbox</em>)</p>
-</li>
-<li>
-<p><em>Applications</em>, to install, uninstall and update installed applications on your <em>sandbox</em></p>
-</li>
-</ul>
+<p>The boot page provides an overview of the sandbox, including installed application, as well as the <a href="https://developer.enonic.com/docs/xp/stable/deployment/config" target="_blank" rel="noopener">default configuration files</a>.</p>
 </div>
 <div class="admonitionblock note">
 <table>
@@ -737,7 +705,30 @@ The <code>[&#8230;&#8203;]</code> replaces most of the stack trace for legibilit
 <i class="fa icon-note" title="Note"></i>
 </td>
 <td class="content">
-If things don&#8217;t look exactly the same, don&#8217;t worry&#8230;&#8203; on every new version of XP the background picture gets updated. Also, admin dashboard automatically translates text based on your browsers preferred language.
+Thanks to the <code>Essentials</code> template, several useful XP apps, including Content Studio, were automatically downloaded and installed.
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>Click <b class="button">Log In as Guest</b> to open the XP admin dashboard. What this actually does is log you in as the XP instance&#8217;s Super User. After logging in you should see something like this:</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="media/xp-dashboard.png" alt="The XP admin dashboard" width="1727w">
+</div>
+</div>
+<div class="paragraph">
+<p>You are now on the Admin Dashboard. The right hand menu (aka <code>XP menu</code>) enables navigation between admin tools. More admin tools may be injected as extensions via applications.</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+If things don&#8217;t look exactly the same, don&#8217;t worry. In every new version of XP the background picture gets updated. Also, admin dashboard is automatically localized - based on your browsers preferred language.
 </td>
 </tr>
 </table>
@@ -748,17 +739,17 @@ If things don&#8217;t look exactly the same, don&#8217;t worry&#8230;&#8203; on 
 <h2 id="summary"><a class="link" href="#summary">Summary</a></h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>Congrats! Now you understand what a <em>sandbox</em> is, got more familiar with the CLI, and also visited the admin dashboard page for the first time.</p>
+<p>Congrats! Now you know what a <em>sandbox</em> is, got more familiar with the CLI, and also visited the admin dashboard page for the first time.</p>
 </div>
 <div class="paragraph">
-<p>You&#8217;re now ready to move forward with an app development.</p>
+<p>You&#8217;re now ready to move forward by <a href="apps.ahtml">creating your own app</a>.</p>
 </div>
 </div>
 </div>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2024-01-03 09:04:24 UTC
+Last updated 2024-01-23 16:46:37 UTC
 </div>
 </div>
 </body>

@@ -522,9 +522,9 @@ When we mention "XP", we are referring to "Enonic XP", the hybrid CMS you&#8217;
 <dd>
 <p>What is a headless CMS without an API? Learn about the Guillotine library and the powers it unlocks here.</p>
 </dd>
-<dt class="hdlist1"><a href="media-and-images.ahtml">Medias and attachments</a></dt>
+<dt class="hdlist1"><a href="media-and-images.ahtml">{title-medias-and-attachments}</a></dt>
 <dd>
-<p>How does XP deal with images and other media? This chapter covers XP media support, how to upload and query for media, how to work with images and attachments.</p>
+<p>{description-medias-and-attachments}</p>
 </dd>
 <dt class="hdlist1"><a href="input-types.ahtml">Input types</a></dt>
 <dd>
@@ -573,7 +573,7 @@ When we mention "XP", we are referring to "Enonic XP", the hybrid CMS you&#8217;
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2024-01-03 09:04:24 UTC
+Last updated 2024-01-23 16:46:37 UTC
 </div>
 </div>
 </body>

@@ -898,7 +898,7 @@ The use of the <code>mixin</code> helps us both reduce duplication and keep all 
               term: {
                 field: "type",
                 value: {
-                  string: "com.example.myproject:artist"
+                  string: "com.example.myapp:artist"
                 }
               }
             },
@@ -916,7 +916,7 @@ The use of the <code>mixin</code> helps us both reduce duplication and keep all 
       }
     ) {
       displayName
-      ... on com_example_myproject_Artist {
+      ... on com_example_myapp_Artist {
         data {
           filmography {
             title
@@ -999,7 +999,7 @@ The use of the <code>mixin</code> helps us both reduce duplication and keep all 
               term: {
                 field: "type",
                 value: {
-                  string: "com.example.myproject:animal"
+                  string: "com.example.myapp:animal"
                 }
               }
             },
@@ -1017,7 +1017,7 @@ The use of the <code>mixin</code> helps us both reduce duplication and keep all 
       }
     ) {
       displayName
-      ... on com_example_myproject_Animal {
+      ... on com_example_myapp_Animal {
         data {
           feedingBehavior {
             _selected <i class="conum" data-value="1"></i><b>(1)</b>
@@ -1092,7 +1092,7 @@ The use of the <code>mixin</code> helps us both reduce duplication and keep all 
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2024-01-03 09:04:24 UTC
+Last updated 2024-01-23 16:46:37 UTC
 </div>
 </div>
 </body>

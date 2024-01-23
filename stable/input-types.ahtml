@@ -1018,12 +1018,12 @@ Don&#8217;t worry if something did not work, we&#8217;ll show the solutions on t
   guillotine {
     getChildren(key: "/artists") {
       displayName
-      ... on com_example_myproject_Artist {
+      ... on com_example_myapp_Artist {
         _id
         data {
            favoriteAnimal {
             displayName
-            ... on com_example_myproject_Animal{
+            ... on com_example_myapp_Animal{
               data {
                 otherNames
               }
@@ -1093,7 +1093,7 @@ Don&#8217;t worry if something did not work, we&#8217;ll show the solutions on t
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2024-01-03 09:04:24 UTC
+Last updated 2024-01-23 16:46:37 UTC
 </div>
 </div>
 </body>

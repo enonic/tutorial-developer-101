@@ -799,7 +799,7 @@ Note that this matches the structure defined by the Artist content type, which i
         term: {
           field: "type",
           value: {
-            string: "com.example.myproject:artist"
+            string: "com.example.myapp:artist"
           }
         }
       },
@@ -835,7 +835,7 @@ Note that this matches the structure defined by the Artist content type, which i
               term: {
                 field: "type",
                 value: {
-                  string: "com.example.myproject:artist"
+                  string: "com.example.myapp:artist"
                 }
               },
               ngram: {
@@ -874,7 +874,7 @@ Note that this matches the structure defined by the Artist content type, which i
               term: {
                 field: "type",
                 value: {
-                  string: "com.example.myproject:artist"
+                  string: "com.example.myapp:artist"
                 }
               }
             },
@@ -1016,7 +1016,7 @@ If are not running the project in dev mode (<code>enonic project dev</code> intr
             term: {
               field: "type"
               value: {
-                string: "com.example.myproject:artist"
+                string: "com.example.myapp:artist"
               }
             }
             exists: {
@@ -1169,7 +1169,7 @@ If are not running the project in dev mode (<code>enonic project dev</code> intr
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2024-01-03 09:04:24 UTC
+Last updated 2024-01-23 16:46:37 UTC
 </div>
 </div>
 </body>
