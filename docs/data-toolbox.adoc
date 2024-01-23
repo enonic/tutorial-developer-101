@@ -38,7 +38,7 @@ system.scheduler:: This is a separate repository where scheduled jobs are stored
 . Choose one of your {content-type-1}s and check out both the info view and the JSON view, available via the buttons in the table row.
 +
 .The Data Toolbox node info view
-image::data-toolbox-info-view.png["The Data Toolbox info view. the view contains options for exporting, moving, and deleting the node, as well as for displaying permissions for the node, versions of the node, and indexing data (and much more).",500w]
+image::data-toolbox-info-view.png["The Data Toolbox info view. the view contains options for exporting, moving, and deleting the node, as well as for displaying permissions for the node, versions of the node, and indexing data (and much more).",750w]
 +
 . To inspect the data associated with the {content-type-1}, you can select "Display properties", which will bring up data about the node, such as its display name, its owner, when it was created, etc.
 +

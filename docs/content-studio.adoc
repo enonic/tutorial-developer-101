@@ -177,7 +177,7 @@ About:: {content-about-cardi}
 
 +
 .The content form filled out for the {content-type-1} "Cardi B"
-image::content-type-filled-out.png[The form for "{content-type-1}" fully filled out., 936w]
+image::content-type-filled-out.png[The form for "{content-type-1}" fully filled out., 748w]
 +
 
 . Again, save and close the tab. Now repeat this process for these next two entries. Be aware that Content Studio lets you nest content, so if you try and create new content when "Cardi B" is selected in the hierarchy, it'll nest the new content under "Cardi B". In this case, though, we want the {content-type-1}s to be nested directly under the current folder, so make sure "{content-type-1}s" folder is selected when you create new content.
