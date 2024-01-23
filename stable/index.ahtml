@@ -522,7 +522,7 @@ When we mention "XP", we are referring to "Enonic XP", the hybrid CMS you&#8217;
 <dd>
 <p>What is a headless CMS without an API? Learn about the Guillotine library and the powers it unlocks here.</p>
 </dd>
-<dt class="hdlist1"><a href="media-and-images.ahtml">{title-medias-and-attachments}</a></dt>
+<dt class="hdlist1"><a href="files.ahtml">{title-medias-and-attachments}</a></dt>
 <dd>
 <p>{description-medias-and-attachments}</p>
 </dd>
@@ -573,7 +573,7 @@ When we mention "XP", we are referring to "Enonic XP", the hybrid CMS you&#8217;
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2024-01-23 16:53:51 UTC
+Last updated 2024-01-23 20:12:27 UTC
 </div>
 </div>
 </body>

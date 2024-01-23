@@ -443,12 +443,12 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <ul class="sectlevel1">
 <li><a href="#media">Media</a>
 <ul class="sectlevel2">
-<li><a href="#types">Types</a></li>
+<li><a href="#media_types">Media types</a></li>
 <li><a href="#upload">Upload</a></li>
 <li><a href="#data_toolbox">Data Toolbox</a></li>
 </ul>
 </li>
-<li><a href="#xps_image_service">XP&#8217;s image service</a></li>
+<li><a href="#the_image_service">The Image service</a></li>
 <li><a href="#editing_images">Editing images</a>
 <ul class="sectlevel2">
 <li><a href="#autofocus">Autofocus</a></li>
@@ -469,7 +469,10 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <div id="preamble">
 <div class="sectionbody">
 <div class="paragraph">
-<p>Naturally, XP can also store any files you would want to serve or associate with your content. This chapter explores how XP stores uploaded data and focuses on how its image tools work. At the end of the chapter we&#8217;ll walk through how to use images in a headless fashion.</p>
+<p>Naturally, XP can also store any file you would want to serve or associate with your content. This chapter explores how XP stores uploaded data and, and dives into the image handling specifically.</p>
+</div>
+<div class="paragraph">
+<p>At the end of the chapter we&#8217;ll walk through how to use images in a headless fashion.</p>
 </div>
 <div class="admonitionblock note">
 <table>
@@ -488,10 +491,13 @@ The tasks and examples in this chapter are based on work done in previous chapte
 <div class="sect1">
 <h2 id="media"><a class="link" href="#media">Media</a></h2>
 <div class="sectionbody">
-<div class="sect2">
-<h3 id="types"><a class="link" href="#types">Types</a></h3>
 <div class="paragraph">
-<p>Media types are standard content types that ship with XP. When you upload a file to XP, XP will assign it one of a number of preexisting media types based on the file&#8217;s content. Some common media types are images, audio, video, and executables.</p>
+<p>A file may be uploaded to XP to become an individual piece of content. Similar to other content items.</p>
+</div>
+<div class="sect2">
+<h3 id="media_types"><a class="link" href="#media_types">Media types</a></h3>
+<div class="paragraph">
+<p>Media types are standard content types that ship with XP. When you upload a file to XP, XP will assign it one of these content types, also referred to as media types. The media type will be resoved from the file&#8217;s content. Some common media types are images, audio, video, and executables.</p>
 </div>
 <div class="paragraph">
 <p>For a full overview of all the media types baked into XP, see the <a href="https://developer.enonic.com/docs/xp/stable/cms/content-types#media">reference docs for media content types</a>.</p>
@@ -500,7 +506,7 @@ The tasks and examples in this chapter are based on work done in previous chapte
 <div class="sect2">
 <h3 id="upload"><a class="link" href="#upload">Upload</a></h3>
 <div class="paragraph">
-<p>To upload files to Content Studio, use the "create content" dialog. You can either click the "upload" icon in the dialog or you can drag and drop the files from your file explorer.</p>
+<p>To upload files to Content Studio, simply click <b class="button">New &#8230;&#8203;</b> to use the content creation dialog. You may either click the "upload" icon in the dialog, or drag&#8217;n drop the files from your device - or even directly from another website.</p>
 </div>
 <div class="imageblock">
 <div class="content">
@@ -534,7 +540,7 @@ The tasks and examples in this chapter are based on work done in previous chapte
 <div class="sect2">
 <h3 id="data_toolbox"><a class="link" href="#data_toolbox">Data Toolbox</a></h3>
 <div class="paragraph">
-<p>Like we saw in the chapter on content, Data Toolbox lets you view and edit your content. Images and other media are also available in Data Toolbox as content, but in addition to the same properties you saw previously, media also have a property called <code>attachment</code>. The attachment specifies the actual media file that you have uploaded.</p>
+<p>Like we saw in the chapter on content, Data Toolbox lets you view and edit your content. Images and other media are also available in Data Toolbox as content, but in addition to the same properties you saw previously, media also have a property called <code>attachment</code>. The attachment will essentially hold all the data from the file that you uploaded.</p>
 </div>
 <div class="paragraph">
 <p>For instance, if you have a look at the image you uploaded earlier, you should see that it points to the image file you uploaded.</p>
@@ -589,10 +595,10 @@ The tasks and examples in this chapter are based on work done in previous chapte
 </div>
 </div>
 <div class="sect1">
-<h2 id="xps_image_service"><a class="link" href="#xps_image_service">XP&#8217;s image service</a></h2>
+<h2 id="the_image_service"><a class="link" href="#the_image_service">The Image service</a></h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>Whenever XP serves you an image, the image is served via <a href="https://developer.enonic.com/docs/xp/stable/runtime/engines/site-engine/image-service">XP&#8217;s image service</a>.</p>
+<p>Whenever XP serves you an image, the image is delivered via <a href="https://developer.enonic.com/docs/xp/stable/runtime/engines/site-engine/image-service">XP&#8217;s image service</a>.</p>
 </div>
 <div class="paragraph">
 <p>The image service takes care of scaling and applying filters to your images based on parameters you give it. For instance, it&#8217;s common to want to have all images in a section conform to the same dimensions. But because images are generally of different shapes and sizes, this might require cropping the image. The image service takes care of that for you as long as you specify what you want.</p>
@@ -610,7 +616,7 @@ The tasks and examples in this chapter are based on work done in previous chapte
 </div>
 <div class="imageblock">
 <div class="content">
-<img src="media/image-content-form.png" alt="A content form showing the image with image editing tools, inputs for caption, alternative text, copyright, and tags." width="1200">
+<img src="media/image-content-form.png" alt="A content form showing the image with image editing tools, inputs for caption, alternative text, copyright, and tags." width="413w}">
 </div>
 <div class="title">Figure 2. The image content form</div>
 </div>
@@ -1180,7 +1186,7 @@ Under the hood, the <em>attachment</em> field argument <em>attachmentUrl</em> us
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2024-01-23 16:53:51 UTC
+Last updated 2024-01-23 20:12:27 UTC
 </div>
 </div>
 </body>
