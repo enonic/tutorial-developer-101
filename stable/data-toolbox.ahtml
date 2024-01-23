@@ -519,7 +519,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <p>Choose one of your artists and check out both the info view and the JSON view, available via the buttons in the table row.</p>
 <div class="imageblock">
 <div class="content">
-<img src="media/data-toolbox-info-view.png" alt="The Data Toolbox info view. the view contains options for exporting, moving, and deleting the node, as well as for displaying permissions for the node, versions of the node, and indexing data (and much more)." width="500w">
+<img src="media/data-toolbox-info-view.png" alt="The Data Toolbox info view. the view contains options for exporting, moving, and deleting the node, as well as for displaying permissions for the node, versions of the node, and indexing data (and much more)." width="750w">
 </div>
 <div class="title">Figure 2. The Data Toolbox node info view</div>
 </div>
@@ -560,7 +560,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2024-01-23 16:46:37 UTC
+Last updated 2024-01-23 16:53:51 UTC
 </div>
 </div>
 </body>
