@@ -3,21 +3,25 @@ include::.variables.adoc[]
 :image-folder: images
 :description: How does XP deal with images and other media? This {document} covers XP media support, how to upload and query for media, how to work with images and attachments.
 
-Naturally, XP can also store any files you would want to serve or associate with your content. This {document} explores how XP stores uploaded data and focuses on how its image tools work. At the end of the chapter we'll walk through how to use images in a headless fashion.
+Naturally, XP can also store any file you would want to serve or associate with your content. This {document} explores how XP stores uploaded data and, and dives into the image handling specifically. 
+
+At the end of the chapter we'll walk through how to use images in a headless fashion.
 
 NOTE: {see-prev-docs} This {document} requires that you've got your site up and running.
 
 == Media 
 
-=== Types
+A file may be uploaded to XP to become an individual piece of content. Similar to other content items.
 
-Media types are standard content types that ship with XP. When you upload a file to XP, XP will assign it one of a number of preexisting media types based on the file's content. Some common media types are images, audio, video, and executables.
+=== Media types
+
+Media types are standard content types that ship with XP. When you upload a file to XP, XP will assign it one of these content types, also referred to as media types. The media type will be resoved from the file's content. Some common media types are images, audio, video, and executables.
 
 For a full overview of all the media types baked into XP, see the https://developer.enonic.com/docs/xp/stable/cms/content-types#media[reference docs for media content types].
 
 === Upload
 
-To upload files to Content Studio, use the "create content" dialog. You can either click the "upload" icon in the dialog or you can drag and drop the files from your file explorer.
+To upload files to Content Studio, simply click btn:[New ...] to use the content creation dialog. You may either click the "upload" icon in the dialog, or drag'n drop the files from your device - or even directly from another website.
 
 .Dragging and dropping files to the "create content dialog"
 image::media-drag-and-drop.png["The drag and drop interface. Three file icons being dragged onto a large, blue, circular drop zone.",{image-m}]
@@ -35,7 +39,7 @@ And that's all it takes to upload files to Content Studio!
 
 === Data Toolbox
 
-Like we saw in the {document} on content, Data Toolbox lets you view and edit your content. Images and other media are also available in Data Toolbox as content, but in addition to the same properties you saw previously, media also have a property called `attachment`. The attachment specifies the actual media file that you have uploaded.
+Like we saw in the {document} on content, Data Toolbox lets you view and edit your content. Images and other media are also available in Data Toolbox as content, but in addition to the same properties you saw previously, media also have a property called `attachment`. The attachment will essentially hold all the data from the file that you uploaded.
 
 For instance, if you have a look at the image you uploaded earlier, you should see that it points to the image file you uploaded. 
 
@@ -72,9 +76,9 @@ If you view the content as JSON, some relevant parts of the structure are the `d
 <3> The image attachment with data about the file, such as MIME type and size.
 
 
-== XP's image service
+== The Image service
 
-Whenever XP serves you an image, the image is served via https://developer.enonic.com/docs/xp/stable/runtime/engines/site-engine/image-service[XP's image service].
+Whenever XP serves you an image, the image is delivered via https://developer.enonic.com/docs/xp/stable/runtime/engines/site-engine/image-service[XP's image service].
 
 The image service takes care of scaling and applying filters to your images based on parameters you give it. For instance, it's common to want to have all images in a section conform to the same dimensions. But because images are generally of different shapes and sizes, this might require cropping the image. The image service takes care of that for you as long as you specify what you want.
 
@@ -85,7 +89,7 @@ The image service works in tandem with Content Studio's image editing tools, so 
 Content Studio comes with a suite of image editing tools built in. After uploading an image to Content Studio, you can find it in the content grid and edit it to bring up the image's content form.
 
 .The image content form
-image::image-content-form.png["A content form showing the image with image editing tools, inputs for caption, alternative text, copyright, and tags.",{image-xl}]
+image::image-content-form.png["A content form showing the image with image editing tools, inputs for caption, alternative text, copyright, and tags.", 413w}]
 
 The content form allows you to provide an image caption, alt text, copyright and tag info. 
 

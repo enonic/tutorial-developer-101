@@ -39,7 +39,7 @@ NOTE: When we mention "XP", we are referring to "Enonic XP", the hybrid CMS you'
 {description-content-studio}
 <<headless-api#, {title-headless-api}>>::
 {description-headless-api}
-<<media-and-images#, {title-medias-and-attachments}>>::
+<<files#, {title-medias-and-attachments}>>::
 {description-medias-and-attachments}
 <<input-types#, {title-input-types}>>::
 {description-input-types}
