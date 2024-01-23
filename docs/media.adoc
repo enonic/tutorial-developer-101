@@ -1,7 +1,7 @@
-= {title-medias-and-attachments}
+= Media and attachments
 include::.variables.adoc[]
 :image-folder: images
-:description: {description-medias-and-attachments}
+:description: How does XP deal with images and other media? This {document} covers XP media support, how to upload and query for media, how to work with images and attachments.
 
 Naturally, XP can also store any files you would want to serve or associate with your content. This {document} explores how XP stores uploaded data and focuses on how its image tools work. At the end of the chapter we'll walk through how to use images in a headless fashion.
 
@@ -122,6 +122,8 @@ Now, when the image gets cropped, XP will take care of keeping the lion in focus
 
 .The same image with the same crop, but with a focal point
 image::image-cropped-focused.jpg["A crop of the lion in the savannah. In this square image, the lion is in full view square in the center.", {image-s}, align=center]
+
+
 
 == Attachments
 
@@ -301,11 +303,11 @@ Which, if you have followed the steps in this {document}, should show you someth
 image::image-processed.jpg["The lion image, cropped, in black and white, and flipped upside down.",{image-s}, align=center]
 
 
-=== Attachments
+=== Attachment service
 
 Let's understand how we can retrieve artists attachments through queries.
 
-First, access the GraphQL API docs on query playground and search for the `Content` schema.  Scroll down a bit and you'll note that there is a field name _attachments_. Now look for the `com_example_myproject_Artist_Data` schema. You'll also note that, after the changes on the Attachments section, we also have a _attachments_ field there, of the same type _Attachment_ of the previous one
+First, access the GraphQL API docs on query playground and search for the `Content` schema.  Scroll down a bit and you'll note that there is a field name _attachments_. Now look for the `com_example_myproject_Artist_Data` schema. You'll also note that, after the changes on the Attachments section, we also have an _attachments_ field there, of the same type _Attachment_ of the previous one
 
 This means that we can get the attachments for each artist in two ways:
 

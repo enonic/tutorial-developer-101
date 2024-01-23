@@ -5,7 +5,7 @@
 :xp-url: http://localhost:8080
 :cs-url: {xp-url}/admin/tool/com.enonic.app.contentstudio/main
 :project-name-prefix: com.example.
-:project-name: myproject
+:project-name: myapp
 :project-name-full: {project-name-prefix}{project-name}
 :project-name-query: com_example_{project-name}
 :p1-site-name: My First Site
@@ -24,7 +24,6 @@
 :title-sandbox: Sandbox
 :title-apps: My first App
 :title-content-studio: Content studio and content creation
-:title-medias-and-attachments: Medias and attachments
 :title-sets: Sets
 :title-input-types: Input types
 :title-rich-text: Rich text
@@ -42,7 +41,6 @@
 :description-apps: Learn how to create XP projects and how to build and deploy your apps to a XP instance.
 :description-content-studio: Get familiar with Content Studio and Content types, and start creating some content.
 :description-headless-api: What is a headless CMS without an API? Learn about the Guillotine library and the powers it unlocks here.
-:description-medias-and-attachments: How does XP deal with images and other media? This {document} covers XP media support, how to upload and query for media, how to work with images and attachments.
 :description-input-types: Take your content types to the next level with more advanced input types. Learn how to configure input types, what kinds there are, and how to link content together.
 :description-sets: XP has a number of ways to group inputs together. Learn all about them in this {document}.
 :description-rich-text: Rich text is an incredibly powerful editing tool and an important part of the XP experience. Learn how to configure it here.

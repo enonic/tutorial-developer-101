@@ -2,13 +2,13 @@
 include::.variables.adoc[]
 :description: {description-sandbox}
 
-In this {document} we'll introduce a fundamental concept to start developing with Enonic XP: _sandboxes_
+In this {document} we'll introduce a fundamental concept to start developing with Enonic XP - *Sandboxes*
 
-By the end of the this, you'll have created and started a sandbox using the CLI, understanding what it is and what is their purpose.
+By the end, you'll have created and started a sandbox using the CLI, understanding what it is and what is their purpose.
 
 == What is a sandbox?
 
-A _sandbox_ is basically a local instance of Enonic XP running in a specific version.
+A _sandbox_ is basically a local instance of Enonic XP. Each sandbox may have different versions of XP, different data and configuration.
 
 Having a local (and running) instance of XP is essential for developing apps on Enonic XP.
 
@@ -20,25 +20,23 @@ To create a sandbox using the CLI, start by running the following command:
 
 [source,shell]
 ----
-enonic sandbox create tutorial
+enonic sandbox create tutorial -t essentials -f
 ----
 
-When asked which XP distribution you want, use the latest one.
-
-By the end this flow, your terminal should have something that looks like this:
+By the end this flow, your terminal should output something that looks like this:
 
 [source,shell]
 ----
-bre@bre-enonic:~$ enonic sandbox create tutorial
-? Do you want to use Enonic XP 7.13.1 (latest, stable)? Yes
+Loading templates from Enonic Market...Done.
+Using template 'Essentials'
+Loading...Done
 Downloading distro [=======================================================] 100.00%
 Unzipping distro...Done
 
-Sandbox 'tutorial' created with distro 'enonic-xp-linux-sdk-7.13.1'.
-bre@bre-enonic:~$
+Sandbox 'tutorial' created with distro 'enonic-xp-mac-sdk-7.14.0'.
 ----
 
-NOTE: If you press kbd:[enter] without entering a response, the CLI will use the default response. The default response to a question is listed in brackets after the question.
+NOTE: This creates a sandbox called `tutorial` using the `essentials` template and uses default vaules for all other options.
 
 == Starting the sandbox
 
@@ -61,7 +59,7 @@ _  _ \_  __ \  __ \_  __ \_  /_  ___/   __  |/_/__  __ \
 \___//_/ /_/\____//_/ /_//_/  \___/     /_/|_| _  .___/
                                                /_/
 
-# Enonic XP 7.13.1
+# Enonic XP 7.14.0
 # Built on 2023-07-26T12:31:19Z (hash = d5bf8d725738b778e153d839f16cdaa9e4641444, branch = d5bf8d725738b778e153d839f16cdaa9e4641444)
 # OpenJDK 64-Bit Server VM 17.0.7 (GraalVM Community)
 # Linux 5.19.0-50-generic (amd64)
@@ -139,34 +137,29 @@ How you find open ports varies from operating system to operating system, but if
 - https://www.micahsmith.com/blog/2019/09/find-ports-in-use-on-macos/[macOS]
 - https://www.howtogeek.com/28609/how-can-i-tell-what-is-listening-on-a-tcpip-port-in-windows/[Windows]
 
-== Admin dashboard
 
-With your sandbox running, lets have a look at XP's web interface. Point your browser to http://localhost:8080[http://localhost:8080^].
+== XP Admin
 
-You should see the XP boot page:
+Let's have a look at the Sandbox' web interface. Open http://localhost:8080[http://localhost:8080^] in your browser (or just click the link).
 
-.XP Boot page
-image::xp-boot.png[The XP boot page, {image-xl}]
-The boot page gives an overview of endpoints (as mentioned above) and any other services that may be running on this instance.
+You should now see the XP boot page:
 
-Click on _"Login as Guest"_ to move on. You should now see the following:
+image::xp-boot.png[The XP boot page, 1085w]
 
-.The XP admin dashboard
-image::xp-dashboard.png[The XP admin dashboard, {image-xl}]
+The boot page provides an overview of the sandbox, including installed application, as well as the https://developer.enonic.com/docs/xp/stable/deployment/config[default configuration files^].
 
-What this actually does is log you in as the XP instance's Super User.
+NOTE: Thanks to the `Essentials` template, several useful XP apps, including Content Studio, were automatically downloaded and installed.
 
-Because we're working on a local development environment for now, we won't concern ourselves with users and administrators.
+Click btn:[Log In as Guest] to open the XP admin dashboard. What this actually does is log you in as the XP instance's Super User. After logging in you should see something like this:
 
-You should now be on the admin dashboard. The right menu, aka _"XP menu"_, is responsible to allow navigation through some installed apps on your XP instance. By now you should only have two apps installed:
+image::xp-dashboard.png[The XP admin dashboard, 1727w]
 
-- _Users_, to manage permissions for users, user groups and roles on your local XP instance (_sandbox_)
-- _Applications_, to install, uninstall and update installed applications on your _sandbox_
+You are now on the Admin Dashboard. The right hand menu (aka `XP menu`) enables navigation between admin tools. More admin tools may be injected as extensions via applications.
 
-NOTE: If things don't look exactly the same, don't worry... on every new version of XP the background picture gets updated. Also, admin dashboard automatically translates text based on your browsers preferred language.
+NOTE: If things don't look exactly the same, don't worry. In every new version of XP the background picture gets updated. Also, admin dashboard is automatically localized - based on your browsers preferred language.
 
 == Summary
 
-Congrats! Now you understand what a _sandbox_ is, got more familiar with the CLI, and also visited the admin dashboard page for the first time.
+Congrats! Now you know what a _sandbox_ is, got more familiar with the CLI, and also visited the admin dashboard page for the first time.
 
-You're now ready to move forward with an app development.
+You're now ready to move forward by <<apps#, creating your own app>>.

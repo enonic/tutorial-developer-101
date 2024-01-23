@@ -2,17 +2,17 @@
 include::.variables.adoc[]
 :description: {description-setup}
 
-The purpose of this {document} is to ensure you have the necessary tools to be able to start developing efficiently with XP, and if that's not the case, guide you to setup your local environment for that purpose. 
+The purpose of this {document} is to ensure you have the necessary tools to start developing efficiently with XP. 
 
 In general, the bare minimum you'll need are:
 
 - Enonic CLI -> _managing your XP projects_
-- Git and Github -> _versioning your XP projects_
+- Git / Github -> _versioning your XP projects_
 - Editor / IDE (Integrated Development Environment) -> _coding your ideas into XP projects_
 
 TIP: If you've already got those configured and installed, feel free to skip to the next {document}.
 
-== The Enonic CLI
+== Enonic CLI
 
 Enonic provides a Command Line Interface (CLI) for working with XP. 
 
@@ -207,6 +207,6 @@ If you opt to move forward with VS code as your editor, its worth checking some 
 
 == Summary
 
-Congrats! You've installed the Enonic CLI, Git, and an editor. You're now set up to start working with Enonic XP 🚀
+Congrats! You've installed the Enonic CLI, Git, and an editor. You're now set up to start working with Enonic XP 🚀. Keep your new tools at hand; we'll be using them heavily throughout this guide, so you'll have lots of time to get to know them better.
 
-Keep your new tools at hand; we'll be using them heavily throughout this guide, so you'll have lots of time to get to know them better.
+Next up, you will <<sandbox#, get familiar with sandboxes>>.
