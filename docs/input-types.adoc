@@ -171,6 +171,77 @@ https://developer.enonic.com/docs/xp/stable/cms/schemas/input-types/contentselec
 </input>
 ----
 
+
+
+== AttachmentUploader
+
+XP also has a rather special input type named https://developer.enonic.com/docs/xp/stable/cms/schemas/input-types/attachmentuploader[AttachmentUploader]. Unlike <<files#, media>> content, which creates an independent content item for each file you upload, attachmentUploader lets you store one (or more) files within the specific content content item. Under the hood, it uses the same `attachment` property structure as media when persisting the file.
+
+.The AttachmentUploader input type
+image::input-type-attachmentuploader.png[AttachmentUploader: Store any number of files within your content item, 651w]
+
+
+NOTE: Imagine creating a content type for e-mail, you would probably use an AttachmentUploader field to store the file attachments. This is because you really don't need each file to be independently referenced, published and managed - right. 
+
+.Here is what an AttachmentUploader definition looks like
+[source, xml]
+----
+<input type="AttachmentUploader" name="attachments">
+  <label>Attachments</label>
+  <occurrences minimum="0" maximum="0"/> // <1>
+</input>
+----
+
+<1> _minimum="0"_ shows that this is not a required field, while _maxiumum="0"_ shows that we can upload as many attachments as we want.
+
+
+=== attachmentUrl
+
+Remember how we used `mediaUrl` to get a link to the media's attachment. MediaUrl is only available for "media" content, for other content types using attachmentUrl we have to use a different approach: `attachmentUrl` to the rescue:
+
+[source, GraphQL]
+----
+query {
+  guillotine {
+    get(key: "/developer/media/ready-set-code.png") {
+      displayName
+      type
+      attachments{
+        name
+        attachmentUrl
+      }
+    }
+  }
+}
+----
+
+And the result should look something like this:
+
+NOTE: If you have multiple attachments in your content, they will all be listed.
+
+[source, json]
+----
+{
+  "data": {
+    "guillotine": {
+      "get": {
+        "displayName": "ready-set-code",
+        "type": "media:image",
+        "attachments": [
+          {
+            "name": "ready-set-code.png",
+            "attachmentUrl": "/site/preview/dev-portal/draft/_/attachment/inline/f7efd6e4-9eed-45d2-83b6-d088a7bdc685:8652e625afe7bbda595a190a3b8624e322dc9f1a/ready-set-code.png"
+          }
+        ]
+      }
+    }
+  }
+}
+----
+
+TIP: Under the hood, the _attachment_ field argument _attachmentUrl_ uses Enonic's javascript lib portal https://developer.enonic.com/docs/xp/stable/api/lib-portal#attachmenturl[attachmentUrl] function, so you can follow the link to better understand the arguments that you pass to this field when creating queries that uses it. 
+
+
 == Task: {content-type-1} and {content-type-2}s
 
 Time for a little recap! We'll put together everything we've learned about content types and input types thus far to create a new data set. 

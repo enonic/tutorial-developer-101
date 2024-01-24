@@ -1,9 +1,9 @@
-= Media and attachments
+= Media - files are content too
 include::.variables.adoc[]
 :image-folder: images
 :description: How does XP deal with images and other media? This {document} covers XP media support, how to upload and query for media, how to work with images and attachments.
 
-Naturally, XP can also store any file you would want to serve or associate with your content. This {document} explores how XP stores uploaded data and, and dives into the image handling specifically. 
+Naturally, XP can store any file you would want to serve or associate with your content. This {document} explores how XP handles file uploads, and dives into the image handling specifically. 
 
 At the end of the chapter we'll walk through how to use images in a headless fashion.
 
@@ -19,7 +19,7 @@ Media types are standard content types that ship with XP. When you upload a file
 
 For a full overview of all the media types baked into XP, see the https://developer.enonic.com/docs/xp/stable/cms/content-types#media[reference docs for media content types].
 
-=== Upload
+=== Uploading
 
 To upload files to Content Studio, simply click btn:[New ...] to use the content creation dialog. You may either click the "upload" icon in the dialog, or drag'n drop the files from your device - or even directly from another website.
 
@@ -76,7 +76,54 @@ If you view the content as JSON, some relevant parts of the structure are the `d
 <3> The image attachment with data about the file, such as MIME type and size.
 
 
-== The Image service
+== Attachment service
+
+Uploading a file is only half the job. XP also includes and Attachment Service that lets you download the same file (now stored as an attachment within the content) when you need it.
+
+Essentially, what you need is a URL to download the specific attachment stored within your media:
+
+=== mediaUrl
+
+To get the URL you may use the following GraphQL query. The mediaUrl field will return a link to the original file you uploaded.
+
+[source, GraphQL]
+----
+query {
+  guillotine {
+    get(key: "/developer/media/ready-set-code.png") {
+      displayName
+      type
+      ... on media_Image {
+        mediaUrl
+      }
+    }
+  }
+}
+----
+
+If everything went fine, you should expect a response that looks something like this:
+
+[source, json]
+----
+{
+  "data": {
+    "guillotine": {
+      "get": {
+        "displayName": "ready-set-code",
+        "type": "media:image",
+        "mediaUrl": "/site/preview/dev-portal/draft/_/attachment/inline/f7efd6e4-9eed-45d2-83b6-d088a7bdc685:8652e625afe7bbda595a190a3b8624e322dc9f1a/ready-set-code.png"
+      }
+    }
+  }
+}
+----
+
+
+== Images
+
+One of the standard media content types is `media:image`. Images are important in content management, and as such, XP and Content Studio provide some interesting features to help you make the most of your images.
+
+=== Image service
 
 Whenever XP serves you an image, the image is delivered via https://developer.enonic.com/docs/xp/stable/runtime/engines/site-engine/image-service[XP's image service].
 
@@ -84,7 +131,7 @@ The image service takes care of scaling and applying filters to your images base
 
 The image service works in tandem with Content Studio's image editing tools, so it respects crops, flips, and focal points that you create.
 
-== Editing images
+=== Image form
 
 Content Studio comes with a suite of image editing tools built in. After uploading an image to Content Studio, you can find it in the content grid and edit it to bring up the image's content form.
 
@@ -107,7 +154,7 @@ You can always reset the edits you've made to an image by using the 'reset filte
 
 TIP: You can read more about https://enonic.com/blog/enonic-simplifies-image-problems[how Enonic simplifies your everyday image problems] to get more info about how to use images in a traditional CMS model and for a quick overview of the autofocus feature.
 
-=== Cropping and autofocus
+=== Autofocus
 
 Because we chose an image with an off-center subject, the image might get cropped such that the lion disappears from the image. For instance, a small, square crop might turn out like this:
 
@@ -127,59 +174,6 @@ Now, when the image gets cropped, XP will take care of keeping the lion in focus
 .The same image with the same crop, but with a focal point
 image::image-cropped-focused.jpg["A crop of the lion in the savannah. In this square image, the lion is in full view square in the center.", 500w]
 
-
-
-== Attachments
-
-XP has an input type named https://developer.enonic.com/docs/xp/stable/cms/schemas/input-types/attachmentuploader[AttachmentUploader] that enables uploading of one or more files that will be stored as attachments to the current content. 
-
-This differs from the previously presented media content, which is a separate content itself that can be linked on other content types, for example, by using the https://developer.enonic.com/docs/xp/stable/cms/schemas/input-types/imageselector[ImageSelector] input type.
-
-To take a look on how attachments work, let's update the Artist content type to use the input type _AttachmentUploader_. 
-
-. For that, update the _Artist.xml_ file accordingly:
-+
-[source, xml]
-----
-<content-type>
-  <display-name>Artist</display-name> 
-  <description>Information about an artist</description> 
-  <super-type>base:structured</super-type>
-  <form> 
-
-    <input name="name" type="TextLine"> 
-      <label>Name</label>
-      <help-text>
-        The artist's name (if different from their professional moniker).
-      </help-text>
-    </input>
-
-    <input type="TextArea" name="about">
-      <label>About the artist</label>
-    </input>
-
-    <input type="Date" name="birthday" >
-      <label>Birthday</label>
-    </input>
-
-    <input type="AttachmentUploader" name="attachments">
-      <label>Attachments</label>
-      <occurrences minimum="0" maximum="0"/> // <1>
-    </input>
-
-  </form>
-</content-type>
-----
-+
-<1> _minimum="0"_ shows that this is not a required field, while _maxiumum="0"_ shows that we can upload as many attachments as we want.
-
-+
-. Redeploy your app
-. Add some attachments to each of the three artists. In my case I'll add images of some of their albums.
-
-With that, we have not only enhanced the Artist content type with a new structure, but also added files as attachments to all three artists.
-
-On the next section we'll show how we can retrieve this information through queries.
 
 == GraphQL API
 
@@ -307,186 +301,10 @@ Which, if you have followed the steps in this {document}, should show you someth
 image::image-processed.jpg["The lion image, cropped, in black and white, and flipped upside down.",600w]
 
 
-=== Attachment service
 
-Let's understand how we can retrieve artists attachments through queries.
 
-First, access the GraphQL API docs on query playground and search for the `Content` schema.  Scroll down a bit and you'll note that there is a field name _attachments_. Now look for the `com_example_myproject_Artist_Data` schema. You'll also note that, after the changes on the Attachments section, we also have an _attachments_ field there, of the same type _Attachment_ of the previous one
+== Summary
 
-This means that we can get the attachments for each artist in two ways:
+You should now have a deep understanding of how media is stored, and accessed - as well as XP's image handing and image service, including how to access it all from the GraphQL API.
 
-. By directly querting the attachments field in the `Content` schema, without the need of inline fragments
-. Using inline fragments and accessing the `com_example_myproject_Artist_Data` schema, since there is also a _attachments_ field there
-
-Let's access the attachments in both ways, starting with the query that access the attachments field on the `Content` schema level:
-
-[source, GraphQL]
-----
-{
-  guillotine {
-    getChildren(key: "/artists") {
-      ... on com_example_myproject_Artist {
-        _id
-        data {
-          name
-          about
-        }
-      }
-      attachments {
-        name
-        attachmentUrl(type: absolute)
-      }
-    }
-  }
-}
-----
-
-And if everything went fine, you should expect a response that looks like this:
-
-[source, json]
-----
-{
-  "data": {
-    "guillotine": {
-      "getChildren": [
-        {
-          "_id": "4d6862b1-3867-46cc-9705-b0291543b807",
-          "data": {
-            "name": "Alecia Beth Moore",
-            "about": "Alecia Beth Moore (born September 8, 1979), known professionally as Pink (stylized as P!nk), is an American singer and songwriter."
-          },
-          "attachments": [
-            {
-              "name": "The_Truth_About_Love.png",
-              "attachmentUrl": "http://localhost:8080/admin/site/preview/my-first-project/draft/_/attachment/inline/4d6862b1-3867-46cc-9705-b0291543b807:9b8af457d28aeb4332d4ed4b6cc35e63ed462a64/The_Truth_About_Love.png"
-            },
-            {
-              "name": "cant-take-me-home-pink.webp",
-              "attachmentUrl": "http://localhost:8080/admin/site/preview/my-first-project/draft/_/attachment/inline/4d6862b1-3867-46cc-9705-b0291543b807:c0bb06a49c8c862c5d6a01bb64bf3ba0aa777da9/cant-take-me-home-pink.webp"
-            }
-          ]
-        },
-        {
-          "_id": "46d8e610-3b31-4ea4-85c8-a7ae1751977f",
-          "data": {
-            "name": "Melissa Arnette Elliott",
-            "about": "Melissa Arnette Elliott (born July 1, 1971) is an American rapper, singer, songwriter, and record producer."
-          },
-          "attachments": [
-            {
-              "name": "Under_Construction_Cover.jpg",
-              "attachmentUrl": "http://localhost:8080/admin/site/preview/my-first-project/draft/_/attachment/inline/46d8e610-3b31-4ea4-85c8-a7ae1751977f:dd920d59b9ba0ded890d85bbc614cf752a43899a/Under_Construction_Cover.jpg"
-            },
-            {
-              "name": "supa-dupa-fly-album-cover.jpg",
-              "attachmentUrl": "http://localhost:8080/admin/site/preview/my-first-project/draft/_/attachment/inline/46d8e610-3b31-4ea4-85c8-a7ae1751977f:9a54d122bb13f50fa6bc368b22843cb661ddebc0/supa-dupa-fly-album-cover.jpg"
-            }
-          ]
-        },
-        {
-          "_id": "79b30fd8-93b5-4f1c-b17c-36e34bc0767f",
-          "data": {
-            "name": "Belcalis Marlenis Almánzar",
-            "about": "Belcalis Marlenis Almánzar (born October 11, 1992), known professionally as Cardi B, is an American rapper and songwriter."
-          },
-          "attachments": [
-            {
-              "name": "Cardi_B_-_Invasion_of_Privacy.png",
-              "attachmentUrl": "http://localhost:8080/admin/site/preview/my-first-project/draft/_/attachment/inline/79b30fd8-93b5-4f1c-b17c-36e34bc0767f:15db0b6d84901296b64994d682fdcd904b0bdf8c/Cardi_B_-_Invasion_of_Privacy.png"
-            }
-          ]
-        }
-      ]
-    }
-  }
-}
-----
-
-Now accessing attachments field on `com_example_myproject_Artist_Data` schema level:
-
-[source, GraphQL]
-----
-{
-  guillotine {
-    getChildren(key: "/artists") {
-      ... on com_example_myproject_Artist {
-        _id
-        data {
-          name
-          about
-          attachments {
-            name
-            attachmentUrl(type: absolute)
-          }
-        }
-      }
-      
-    }
-  }
-}
-----
-
-And if everything went fine, you should finally expect a response that looks like this:
-
-[source, json]
-----
-{
-  "data": {
-    "guillotine": {
-      "getChildren": [
-        {
-          "_id": "4d6862b1-3867-46cc-9705-b0291543b807",
-          "data": {
-            "name": "Alecia Beth Moore",
-            "about": "Alecia Beth Moore (born September 8, 1979), known professionally as Pink (stylized as P!nk), is an American singer and songwriter.",
-            "attachments": [
-              {
-                "name": "The_Truth_About_Love.png",
-                "attachmentUrl": "http://localhost:8080/admin/site/preview/my-first-project/draft/_/attachment/inline/4d6862b1-3867-46cc-9705-b0291543b807:9b8af457d28aeb4332d4ed4b6cc35e63ed462a64/The_Truth_About_Love.png"
-              },
-              {
-                "name": "cant-take-me-home-pink.webp",
-                "attachmentUrl": "http://localhost:8080/admin/site/preview/my-first-project/draft/_/attachment/inline/4d6862b1-3867-46cc-9705-b0291543b807:c0bb06a49c8c862c5d6a01bb64bf3ba0aa777da9/cant-take-me-home-pink.webp"
-              }
-            ]
-          }
-        },
-        {
-          "_id": "46d8e610-3b31-4ea4-85c8-a7ae1751977f",
-          "data": {
-            "name": "Melissa Arnette Elliott",
-            "about": "Melissa Arnette Elliott (born July 1, 1971) is an American rapper, singer, songwriter, and record producer.",
-            "attachments": [
-              {
-                "name": "Under_Construction_Cover.jpg",
-                "attachmentUrl": "http://localhost:8080/admin/site/preview/my-first-project/draft/_/attachment/inline/46d8e610-3b31-4ea4-85c8-a7ae1751977f:dd920d59b9ba0ded890d85bbc614cf752a43899a/Under_Construction_Cover.jpg"
-              },
-              {
-                "name": "supa-dupa-fly-album-cover.jpg",
-                "attachmentUrl": "http://localhost:8080/admin/site/preview/my-first-project/draft/_/attachment/inline/46d8e610-3b31-4ea4-85c8-a7ae1751977f:9a54d122bb13f50fa6bc368b22843cb661ddebc0/supa-dupa-fly-album-cover.jpg"
-              }
-            ]
-          }
-        },
-        {
-          "_id": "79b30fd8-93b5-4f1c-b17c-36e34bc0767f",
-          "data": {
-            "name": "Belcalis Marlenis Almánzar",
-            "about": "Belcalis Marlenis Almánzar (born October 11, 1992), known professionally as Cardi B, is an American rapper and songwriter.",
-            "attachments": [
-              {
-                "name": "Cardi_B_-_Invasion_of_Privacy.png",
-                "attachmentUrl": "http://localhost:8080/admin/site/preview/my-first-project/draft/_/attachment/inline/79b30fd8-93b5-4f1c-b17c-36e34bc0767f:15db0b6d84901296b64994d682fdcd904b0bdf8c/Cardi_B_-_Invasion_of_Privacy.png"
-              }
-            ]
-          }
-        }
-      ]
-    }
-  }
-}
-----
-
-As can be seen, both ways retrieve the same data, but since their access is different, the response structure is also slighly different.
-
-TIP: Under the hood, the _attachment_ field argument _attachmentUrl_ uses Enonic's javascript lib portal https://developer.enonic.com/docs/xp/stable/api/lib-portal#attachmenturl[attachmentUrl] function, so you can follow the link to better understand the arguments that you pass to this field when creating queries that uses it. 
+Pushing forward, it's time to <<input-types#, have a closer look at the basic building blocks of the content forms; input types>>.
