@@ -24,7 +24,7 @@ For a full overview of all the media types baked into XP, see the https://develo
 To upload files to Content Studio, simply click btn:[New ...] to use the content creation dialog. You may either click the "upload" icon in the dialog, or drag'n drop the files from your device - or even directly from another website.
 
 .Dragging and dropping files to the "create content dialog"
-image::media-drag-and-drop.png["The drag and drop interface. Three file icons being dragged onto a large, blue, circular drop zone.",{image-m}]
+image::media-drag-and-drop.png["The drag and drop interface. Three file icons being dragged onto a large, blue, circular drop zone.",960w]
 
 This process is the same for whatever media type you want to upload.
 
@@ -89,7 +89,7 @@ The image service works in tandem with Content Studio's image editing tools, so 
 Content Studio comes with a suite of image editing tools built in. After uploading an image to Content Studio, you can find it in the content grid and edit it to bring up the image's content form.
 
 .The image content form
-image::image-content-form.png["A content form showing the image with image editing tools, inputs for caption, alternative text, copyright, and tags.", 413w}]
+image::image-content-form.png["A content form showing the image with image editing tools, inputs for caption, alternative text, copyright, and tags.", 621w}]
 
 The content form allows you to provide an image caption, alt text, copyright and tag info. 
 
@@ -107,12 +107,12 @@ You can always reset the edits you've made to an image by using the 'reset filte
 
 TIP: You can read more about https://enonic.com/blog/enonic-simplifies-image-problems[how Enonic simplifies your everyday image problems] to get more info about how to use images in a traditional CMS model and for a quick overview of the autofocus feature.
 
-=== Autofocus
+=== Cropping and autofocus
 
 Because we chose an image with an off-center subject, the image might get cropped such that the lion disappears from the image. For instance, a small, square crop might turn out like this:
 
 .Cropped image without focal point
-image::image-cropped-unfocused.jpg["A crop of the lion in the savannah image. The image is square and the only part of the lion that is visible is part of its hind leg.",{image-s}, align=center]
+image::image-cropped-unfocused.jpg["A crop of the lion in the savannah image. The image is square and the only part of the lion that is visible is part of its hind leg.",500w]
 
 To get around this, try the autofocus tool.
 
@@ -120,12 +120,12 @@ To get around this, try the autofocus tool.
 . Move the circle onto the lion (or whatever your focal point is) and press "apply".
 +
 .The focal point editor
-image::image-editing-focal-point.png["The lion image with a red circle indicating the focal point around its head.",{image-xl}]
+image::image-editing-focal-point.png["The lion image with a red circle indicating the focal point around its head.",626w]
 
 Now, when the image gets cropped, XP will take care of keeping the lion in focus, both in traditional CMS solutions and in headless modes:
 
 .The same image with the same crop, but with a focal point
-image::image-cropped-focused.jpg["A crop of the lion in the savannah. In this square image, the lion is in full view square in the center.", {image-s}, align=center]
+image::image-cropped-focused.jpg["A crop of the lion in the savannah. In this square image, the lion is in full view square in the center.", 500w]
 
 
 
@@ -304,7 +304,7 @@ The above query should return a response that looks a little something like this
 Which, if you have followed the steps in this {document}, should show you something like this if you try and navigate to the `imageUrl` property value:
 
 .The processed image
-image::image-processed.jpg["The lion image, cropped, in black and white, and flipped upside down.",{image-s}, align=center]
+image::image-processed.jpg["The lion image, cropped, in black and white, and flipped upside down.",600w]
 
 
 === Attachment service
