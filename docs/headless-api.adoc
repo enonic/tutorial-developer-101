@@ -42,10 +42,7 @@ After running, you should get something like this on the right area:
 .Results of running the suggested query
 image::query-playground-artists-minimal.png[Query playground response of running mimimal query to retrieve artists, 1073w]
 
-
-
-
-=== Basic buttons
+=== Buttons
 
 Before trying to come up with complex queries, let's make familiarize ourselves with Query Playground.
 
@@ -107,12 +104,12 @@ Now, locate and click on the docs button. On this opened section you have detail
 On the top search bar in the docs section, search for `artist` and locate the `com_example_myproject_Artist` schema:
 
 .The Artist schema
-image::query-playground-artist-schema.png[Query playground docs section showing the details of com_example_myproject_Artist schema, 666w]
+image::query-playground-artist-schema.png[Query playground docs section showing the details of com_example_myproject_Artist schema, 777w]
 
 Note that it's said that the `Artist` schema _implements_ the `Content` schema. This basically means that the `Artist` schema will have the structure defined by the `Content` schema, together with possibly some additional structure... in this case, that additional structure is a `data` field, defined by `com_example_myproject_Artist_Data` schema:
 
 .The Artist data schema
-image::query-playground-artist-data-schema.png[Query playground docs sections showing the details of com_example_myproject_Artist_Data schema, 666w]
+image::query-playground-artist-data-schema.png[Query playground docs sections showing the details of com_example_myproject_Artist_Data schema, 777w]
 
 NOTE: Note that this matches the structure defined by the Artist content type, which is a natural thing to expect.  
 
@@ -124,12 +121,12 @@ Close the docs section, head back to the text area to edit your query and remove
 
 Now, with your cursor on the inner curly braces of the query, press kbd:[ctrl+space] to get a list of suggestions about what fields you can request on your query:
 
-image::query-playground-artist-query-inspection.gif[Query playground query section showing suggested fields for content schema, 545w]
+image::query-playground-artist-query-inspection.gif[Query playground query section showing suggested fields for content schema, 654w]
 
 As can be seen, we do not have the artist `name` and `about` fields available, and the reason for that is because the `getChildren` field can return any content that implements the `Content` schema, but it can't directly infer what schema that is, which in this case is the `com_example_myproject_Artist` schema:
 
 .getChildren can't directly infer what schema is implementing Content schema
-image::query-playground-getChildren-infer.png[Query playground getChildren can't directly infer what schema is implementing Content schema, 276w]
+image::query-playground-getChildren-infer.png[Query playground getChildren can't directly infer what schema is implementing Content schema, 331w]
 
 So to proceed, we use https://graphql.org/learn/queries/#inline-fragments[inline fragments]:
 
