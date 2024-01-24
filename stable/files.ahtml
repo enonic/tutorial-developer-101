@@ -451,7 +451,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <li><a href="#the_image_service">The Image service</a></li>
 <li><a href="#editing_images">Editing images</a>
 <ul class="sectlevel2">
-<li><a href="#autofocus">Autofocus</a></li>
+<li><a href="#cropping_and_autofocus">Cropping and autofocus</a></li>
 </ul>
 </li>
 <li><a href="#attachments">Attachments</a></li>
@@ -510,7 +510,7 @@ The tasks and examples in this chapter are based on work done in previous chapte
 </div>
 <div class="imageblock">
 <div class="content">
-<img src="media/media-drag-and-drop.png" alt="The drag and drop interface. Three file icons being dragged onto a large, blue, circular drop zone." width="900">
+<img src="media/media-drag-and-drop.png" alt="The drag and drop interface. Three file icons being dragged onto a large, blue, circular drop zone." width="960w">
 </div>
 <div class="title">Figure 1. Dragging and dropping files to the "create content dialog"</div>
 </div>
@@ -616,7 +616,7 @@ The tasks and examples in this chapter are based on work done in previous chapte
 </div>
 <div class="imageblock">
 <div class="content">
-<img src="media/image-content-form.png" alt="A content form showing the image with image editing tools, inputs for caption, alternative text, copyright, and tags." width="413w}">
+<img src="media/image-content-form.png" alt="A content form showing the image with image editing tools, inputs for caption, alternative text, copyright, and tags." width="621w}">
 </div>
 <div class="title">Figure 2. The image content form</div>
 </div>
@@ -672,13 +672,13 @@ You can read more about <a href="https://enonic.com/blog/enonic-simplifies-image
 </table>
 </div>
 <div class="sect2">
-<h3 id="autofocus"><a class="link" href="#autofocus">Autofocus</a></h3>
+<h3 id="cropping_and_autofocus"><a class="link" href="#cropping_and_autofocus">Cropping and autofocus</a></h3>
 <div class="paragraph">
 <p>Because we chose an image with an off-center subject, the image might get cropped such that the lion disappears from the image. For instance, a small, square crop might turn out like this:</p>
 </div>
-<div class="imageblock text-center">
+<div class="imageblock">
 <div class="content">
-<img src="media/image-cropped-unfocused.jpg" alt="A crop of the lion in the savannah image. The image is square and the only part of the lion that is visible is part of its hind leg." width="750">
+<img src="media/image-cropped-unfocused.jpg" alt="A crop of the lion in the savannah image. The image is square and the only part of the lion that is visible is part of its hind leg." width="500w">
 </div>
 <div class="title">Figure 3. Cropped image without focal point</div>
 </div>
@@ -694,7 +694,7 @@ You can read more about <a href="https://enonic.com/blog/enonic-simplifies-image
 <p>Move the circle onto the lion (or whatever your focal point is) and press "apply".</p>
 <div class="imageblock">
 <div class="content">
-<img src="media/image-editing-focal-point.png" alt="The lion image with a red circle indicating the focal point around its head." width="1200">
+<img src="media/image-editing-focal-point.png" alt="The lion image with a red circle indicating the focal point around its head." width="626w">
 </div>
 <div class="title">Figure 4. The focal point editor</div>
 </div>
@@ -704,9 +704,9 @@ You can read more about <a href="https://enonic.com/blog/enonic-simplifies-image
 <div class="paragraph">
 <p>Now, when the image gets cropped, XP will take care of keeping the lion in focus, both in traditional CMS solutions and in headless modes:</p>
 </div>
-<div class="imageblock text-center">
+<div class="imageblock">
 <div class="content">
-<img src="media/image-cropped-focused.jpg" alt="A crop of the lion in the savannah. In this square image, the lion is in full view square in the center." width="750">
+<img src="media/image-cropped-focused.jpg" alt="A crop of the lion in the savannah. In this square image, the lion is in full view square in the center." width="500w">
 </div>
 <div class="title">Figure 5. The same image with the same crop, but with a focal point</div>
 </div>
@@ -964,9 +964,9 @@ You can read more about <a href="https://enonic.com/blog/enonic-simplifies-image
 <div class="paragraph">
 <p>Which, if you have followed the steps in this chapter, should show you something like this if you try and navigate to the <code>imageUrl</code> property value:</p>
 </div>
-<div class="imageblock text-center">
+<div class="imageblock">
 <div class="content">
-<img src="media/image-processed.jpg" alt="The lion image, cropped, in black and white, and flipped upside down." width="750">
+<img src="media/image-processed.jpg" alt="The lion image, cropped, in black and white, and flipped upside down." width="600w">
 </div>
 <div class="title">Figure 6. The processed image</div>
 </div>
@@ -1186,7 +1186,7 @@ Under the hood, the <em>attachment</em> field argument <em>attachmentUrl</em> us
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2024-01-24 09:03:02 UTC
+Last updated 2024-01-24 14:53:49 UTC
 </div>
 </div>
 </body>
