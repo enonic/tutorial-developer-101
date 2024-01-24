@@ -441,7 +441,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <div id="toc" class="toc2">
 <div id="toctitle">Table of Contents</div>
 <ul class="sectlevel1">
-<li><a href="#installing_guillotine">Installing Guillotine</a></li>
+<li><a href="#guillotine">Guillotine</a></li>
 <li><a href="#query_playground">Query playground</a>
 <ul class="sectlevel2">
 <li><a href="#basic_buttons">Basic buttons</a></li>
@@ -457,6 +457,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 </ul>
 </li>
 <li><a href="#dive_deeper">Dive deeper</a></li>
+<li><a href="#summary">Summary</a></li>
 </ul>
 </div>
 </div>
@@ -464,42 +465,21 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <div id="preamble">
 <div class="sectionbody">
 <div class="paragraph">
-<p>Enonic is a hybrid CMS. As a hybrid CMS, Enonic is both capable of managing content, and support customized delivery. In this chapter we will focus on delivery via the out-of-the-box GraphQL API.</p>
+<p>Enonic is a highly flexible CMS, capable of delivering content in many ways. In this chapter we will focus on delivery via the out-of-the-box GraphQL API.</p>
 </div>
 <div class="paragraph">
 <p>Now that we&#8217;ve created some content, let&#8217;s see how we can access and use it in via API - headless style.</p>
 </div>
-<div class="paragraph">
-<p>In order to do that we&#8217;ll introduce <em>Guillotine</em>, the app that&#8217;s responsible for automatically generating GraphQL APIs for your content.</p>
-</div>
 </div>
 </div>
 <div class="sect1">
-<h2 id="installing_guillotine"><a class="link" href="#installing_guillotine">Installing Guillotine</a></h2>
+<h2 id="guillotine"><a class="link" href="#guillotine">Guillotine</a></h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>The first thing you need to do in order to get going is installing the Guillotine application. It is available on <a href="https://market.enonic.com/vendors/enonic/guillotine">Enonic Market</a>.</p>
+<p>Introducing <em>Guillotine</em>, the app that&#8217;s responsible for automatically generating a GraphQL APIs for your content.</p>
 </div>
 <div class="paragraph">
-<p>Fortunately, you can install Guillotine directly from your Enonic XP instance&#8217;s admin console.</p>
-</div>
-<div class="olist arabic">
-<ol class="arabic">
-<li>
-<p>From the XP menu (top right), choose <code>Applications</code></p>
-</li>
-<li>
-<p>Click <kbd>Install</kbd> from the top menu</p>
-</li>
-<li>
-<p>Search for <code>Guillotine</code>, and click <kbd>Install</kbd></p>
-<div class="imageblock">
-<div class="content">
-<img src="media/install-guillotine.png" alt="Install Guillotine application dialog" width="1200">
-</div>
-</div>
-</li>
-</ol>
+<p>Guillotine should be pre-installed based on the <code>Essentials</code> template you used when setting up your sandbox. It is available on <a href="https://market.enonic.com/vendors/enonic/guillotine">Enonic Market</a>, and may also be installed manually.</p>
 </div>
 </div>
 </div>
@@ -507,11 +487,11 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <h2 id="query_playground"><a class="link" href="#query_playground">Query playground</a></h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>Back in Content Studio, you should now have access to a new item called <code>Query playground</code> in the left green widget sidebar. Open it, and you should see this:</p>
+<p>Back in Content Studio, you should now have access to a new item called <code>Query Playground</code> in the left green widget sidebar. Open it, and you should see this:</p>
 </div>
 <div class="imageblock">
 <div class="content">
-<img src="media/query-playground-empty.png" alt="API browser integrated in Content Studio" width="1200">
+<img src="media/query-playground-empty.png" alt="API browser integrated in Content Studio" width="602w">
 </div>
 </div>
 <div class="paragraph">
@@ -541,107 +521,130 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 </div>
 <div class="imageblock">
 <div class="content">
-<img src="media/query-playground-artists-minimal.png" alt="Query playground response of running mimimal query to retrieve artists" width="1200">
+<img src="media/query-playground-artists-minimal.png" alt="Query playground response of running mimimal query to retrieve artists" width="1073w">
 </div>
 <div class="title">Figure 1. Results of running the suggested query</div>
 </div>
 <div class="sect2">
 <h3 id="basic_buttons"><a class="link" href="#basic_buttons">Basic buttons</a></h3>
-<div class="olist arabic">
-<ol class="arabic" start="0">
-<li>
+<div class="paragraph">
 <p>Before trying to come up with complex queries, let&#8217;s make familiarize ourselves with Query Playground.</p>
-<div class="imageblock">
+</div>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 16.6666%;">
+<col style="width: 58.3333%;">
+<col style="width: 25.0001%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Icon</th>
+<th class="tableblock halign-left valign-top">Description</th>
+<th class="tableblock halign-left valign-top">Shortcuts</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="imageblock">
 <div class="content">
-<img src="media/query-playground-button-1.png" alt="Query playground play button" width="75">
+<img src="media/query-playground-button-1.png" alt="Query playground play button" width="50w">
 </div>
-</div>
-</li>
-<li>
-<p><em>play button</em>, will execute your query. Shortcut is <span class="keyseq"><kbd>ctrl</kbd>+<kbd>enter</kbd></span></p>
-<div class="imageblock">
+</div></div></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>Play</em> - Execute your query</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><span class="keyseq"><kbd>ctrl</kbd>+<kbd>enter</kbd></span></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="imageblock">
 <div class="content">
-<img src="media/query-playground-button-2.png" alt="Query playground prettify button" width="75">
+<img src="media/query-playground-button-2.png" alt="Query playground prettify button" width="50">
 </div>
-</div>
-</li>
-<li>
-<p><em>prettify button</em>, will properly format your query, removing comments and unecessary spaces / indentation. Shortcut is <span class="keyseq"><kbd>ctl</kbd>+<kbd>shift</kbd>+<kbd>p</kbd></span></p>
-<div class="imageblock">
+</div></div></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>Prettify</em> - Format your query, removing comments and unecessary spaces / indentation</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><span class="keyseq"><kbd>ctl</kbd>+<kbd>shift</kbd>+<kbd>p</kbd></span></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="imageblock">
 <div class="content">
-<img src="media/query-playground-button-3.png" alt="Query playground merge button" width="75">
+<img src="media/query-playground-button-3.png" alt="Query playground merge button" width="50">
 </div>
-</div>
-</li>
-<li>
-<p><em>merge fragments button</em>, will rewrite your query based on the declared <a href="https://graphql.org/learn/queries/#fragments">fragments</a>. Shortcut is <span class="keyseq"><kbd>ctl</kbd>+<kbd>shift</kbd>+<kbd>m</kbd></span></p>
-<div class="imageblock">
+</div></div></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>Merge fragments</em> - Rewrites your query based on the declared <a href="https://graphql.org/learn/queries/#fragments">fragments</a></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><span class="keyseq"><kbd>ctl</kbd>+<kbd>shift</kbd>+<kbd>m</kbd></span></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="imageblock">
 <div class="content">
-<img src="media/query-playground-button-4.png" alt="Query playground copy button" width="75">
+<img src="media/query-playground-button-4.png" alt="Query playground copy button" width="50">
 </div>
-</div>
-</li>
-<li>
-<p><em>copy button</em>, will copy your query to your clipboard. Shortcut is <span class="keyseq"><kbd>ctl</kbd>+<kbd>shift</kbd>+<kbd>c</kbd></span></p>
-<div class="imageblock">
+</div></div></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>Copy</em> - Copy your query to your clipboard.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><span class="keyseq"><kbd>ctl</kbd>+<kbd>shift</kbd>+<kbd>c</kbd></span></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="imageblock">
 <div class="content">
-<img src="media/query-playground-button-5.png" alt="Query playground docs button" width="75">
+<img src="media/query-playground-button-5.png" alt="Query playground docs button" width="50">
 </div>
-</div>
-</li>
-<li>
-<p><em>docs button</em>, will open a section showing all details about the schemas you have avaiable to use and query on</p>
-<div class="imageblock">
+</div></div></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>Docs</em> - Show the API documentation</p></td>
+<td class="tableblock halign-left valign-top"></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="imageblock">
 <div class="content">
-<img src="media/query-playground-button-6.png" alt="Query playground history button" width="75">
+<img src="media/query-playground-button-6.png" alt="Query playground history button" width="50">
 </div>
-</div>
-</li>
-<li>
-<p><em>history button</em>, will open a section showing all previously executed queries</p>
-<div class="imageblock">
+</div></div></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>History</em> - Shows all previously executed queries</p></td>
+<td class="tableblock halign-left valign-top"></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="imageblock">
 <div class="content">
-<img src="media/query-playground-button-7.png" alt="Query playground tab button" width="75">
+<img src="media/query-playground-button-7.png" alt="Query playground tab button" width="50">
 </div>
-</div>
-</li>
-<li>
-<p><em>tab button</em>, will create new tabs for you to manage testing multiple queries</p>
-<div class="imageblock">
+</div></div></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>Tab</em> - Creates new tabs for you to manage testing multiple queries</p></td>
+<td class="tableblock halign-left valign-top"></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="imageblock">
 <div class="content">
-<img src="media/query-playground-button-8.png" alt="Query playground draft and master buttons" width="200">
+<img src="media/query-playground-button-9.png" alt="Query playground re-fetch button" width="50">
 </div>
-</div>
-</li>
-<li>
-<p><em>draft / master buttons</em> will switch between those two repositories for your queries to run on</p>
-<div class="imageblock">
+</div></div></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>Re-fetch schema</em> - Reloads your GraphQL schemas based on recent changes</p></td>
+<td class="tableblock halign-left valign-top"></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="imageblock">
 <div class="content">
-<img src="media/query-playground-button-9.png" alt="Query playground re-fetch button" width="75">
+<img src="media/query-playground-button-10.png" alt="Query playground shortkeys button" width="50">
 </div>
-</div>
-</li>
-<li>
-<p><em>re-fetch schema button</em>, will update your graphql schemas based on recent changes</p>
-<div class="imageblock">
+</div></div></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>Shortkeys</em> - Displays all short keys that can be used in Query Playground</p></td>
+<td class="tableblock halign-left valign-top"></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="imageblock">
 <div class="content">
-<img src="media/query-playground-button-10.png" alt="Query playground shortkeys button" width="75">
+<img src="media/query-playground-button-11.png" alt="Query playground settings button" width="50">
 </div>
-</div>
-</li>
-<li>
-<p><em>shortkeys button</em>, will open a dialog displaying all short keys that can be used to execute actions</p>
-<div class="imageblock">
+</div></div></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>Settings</em> -  Opens settings dialog</p></td>
+<td class="tableblock halign-left valign-top"></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="imageblock">
 <div class="content">
-<img src="media/query-playground-button-11.png" alt="Query playground settings button" width="75">
+<img src="media/query-playground-button-8.png" alt="Query playground draft and master buttons" width="100">
 </div>
-</div>
-</li>
-<li>
-<p><em>settings button</em>, will open settings dialog</p>
-</li>
-</ol>
-</div>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Draft / master toggle_ - Switch between querying draft or master branch (published items)</p></td>
+<td class="tableblock halign-left valign-top"></td>
+</tr>
+</tbody>
+</table>
 </div>
 <div class="sect2">
 <h3 id="schemas"><a class="link" href="#schemas">Schemas</a></h3>
@@ -653,7 +656,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 </div>
 <div class="imageblock">
 <div class="content">
-<img src="media/query-playground-artist-schema.png" alt="Query playground docs section showing the details of com_example_myproject_Artist schema" width="1200">
+<img src="media/query-playground-artist-schema.png" alt="Query playground docs section showing the details of com_example_myproject_Artist schema" width="666w">
 </div>
 <div class="title">Figure 2. The Artist schema</div>
 </div>
@@ -662,7 +665,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 </div>
 <div class="imageblock">
 <div class="content">
-<img src="media/query-playground-artist-data-schema.png" alt="Query playground docs sections showing the details of com_example_myproject_Artist_Data schema" width="1200">
+<img src="media/query-playground-artist-data-schema.png" alt="Query playground docs sections showing the details of com_example_myproject_Artist_Data schema" width="666w">
 </div>
 <div class="title">Figure 3. The Artist data schema</div>
 </div>
@@ -692,15 +695,15 @@ Note that this matches the structure defined by the Artist content type, which i
 </div>
 <div class="imageblock">
 <div class="content">
-<img src="media/query-playground-artist-query-inspection.gif" alt="Query playground query section showing suggested fields for content schema" width="1050">
+<img src="media/query-playground-artist-query-inspection.gif" alt="Query playground query section showing suggested fields for content schema" width="545w">
 </div>
 </div>
 <div class="paragraph">
 <p>As can be seen, we do not have the artist <code>name</code> and <code>about</code> fields available, and the reason for that is because the <code>getChildren</code> field can return any content that implements the <code>Content</code> schema, but it can&#8217;t directly infer what schema that is, which in this case is the <code>com_example_myproject_Artist</code> schema:</p>
 </div>
-<div class="imageblock text-center">
+<div class="imageblock">
 <div class="content">
-<img src="media/query-playground-getChildren-infer.png" alt="Query playground getChildren can&#8217;t directly infer what schema is implementing Content schema" width="600">
+<img src="media/query-playground-getChildren-infer.png" alt="Query playground getChildren can&#8217;t directly infer what schema is implementing Content schema" width="276w">
 </div>
 <div class="title">Figure 4. getChildren can&#8217;t directly infer what schema is implementing Content schema</div>
 </div>
@@ -729,7 +732,7 @@ Note that this matches the structure defined by the Artist content type, which i
 </div>
 <div class="imageblock">
 <div class="content">
-<img src="media/query-playground-artists-data.png" alt="Query playground query returning artists content together with its name and about data" width="1200">
+<img src="media/query-playground-artists-data.png" alt="Query playground query returning artists content together with its name and about data" width="945w">
 </div>
 <div class="title">Figure 5. Getting specific data of artists</div>
 </div>
@@ -753,7 +756,7 @@ Note that this matches the structure defined by the Artist content type, which i
 </div>
 <div class="imageblock">
 <div class="content">
-<img src="media/query-playground-artists-dataAsJson.png" alt="Query playground query returning artists content together with is name and about data" width="1200">
+<img src="media/query-playground-artists-dataAsJson.png" alt="Query playground query returning artists content together with is name and about data" width="but using dataAsJson field" height="945w">
 </div>
 <div class="title">Figure 6. Getting all data using dataAsJson</div>
 </div>
@@ -1166,10 +1169,18 @@ If are not running the project in dev mode (<code>enonic project dev</code> intr
 </div>
 </div>
 </div>
+<div class="sect1">
+<h2 id="summary"><a class="link" href="#summary">Summary</a></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>In this chapter you&#8217;ve learned about the Guillotine app and its API. Next up let&#8217;s have a look at <a href="files.ahtml">how XP deals with files (aka media)</a>.</p>
+</div>
+</div>
+</div>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2024-01-23 20:12:27 UTC
+Last updated 2024-01-24 08:42:10 UTC
 </div>
 </div>
 </body>
