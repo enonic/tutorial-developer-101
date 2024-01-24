@@ -444,7 +444,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <li><a href="#guillotine">Guillotine</a></li>
 <li><a href="#query_playground">Query playground</a>
 <ul class="sectlevel2">
-<li><a href="#basic_buttons">Basic buttons</a></li>
+<li><a href="#buttons">Buttons</a></li>
 <li><a href="#schemas">Schemas</a></li>
 <li><a href="#querying_with_inline_fragments">Querying with inline fragments</a></li>
 <li><a href="#query_with_dataasjson">Query with dataAsJson</a></li>
@@ -526,7 +526,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <div class="title">Figure 1. Results of running the suggested query</div>
 </div>
 <div class="sect2">
-<h3 id="basic_buttons"><a class="link" href="#basic_buttons">Basic buttons</a></h3>
+<h3 id="buttons"><a class="link" href="#buttons">Buttons</a></h3>
 <div class="paragraph">
 <p>Before trying to come up with complex queries, let&#8217;s make familiarize ourselves with Query Playground.</p>
 </div>
@@ -656,7 +656,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 </div>
 <div class="imageblock">
 <div class="content">
-<img src="media/query-playground-artist-schema.png" alt="Query playground docs section showing the details of com_example_myproject_Artist schema" width="666w">
+<img src="media/query-playground-artist-schema.png" alt="Query playground docs section showing the details of com_example_myproject_Artist schema" width="777w">
 </div>
 <div class="title">Figure 2. The Artist schema</div>
 </div>
@@ -665,7 +665,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 </div>
 <div class="imageblock">
 <div class="content">
-<img src="media/query-playground-artist-data-schema.png" alt="Query playground docs sections showing the details of com_example_myproject_Artist_Data schema" width="666w">
+<img src="media/query-playground-artist-data-schema.png" alt="Query playground docs sections showing the details of com_example_myproject_Artist_Data schema" width="777w">
 </div>
 <div class="title">Figure 3. The Artist data schema</div>
 </div>
@@ -695,7 +695,7 @@ Note that this matches the structure defined by the Artist content type, which i
 </div>
 <div class="imageblock">
 <div class="content">
-<img src="media/query-playground-artist-query-inspection.gif" alt="Query playground query section showing suggested fields for content schema" width="545w">
+<img src="media/query-playground-artist-query-inspection.gif" alt="Query playground query section showing suggested fields for content schema" width="654w">
 </div>
 </div>
 <div class="paragraph">
@@ -703,7 +703,7 @@ Note that this matches the structure defined by the Artist content type, which i
 </div>
 <div class="imageblock">
 <div class="content">
-<img src="media/query-playground-getChildren-infer.png" alt="Query playground getChildren can&#8217;t directly infer what schema is implementing Content schema" width="276w">
+<img src="media/query-playground-getChildren-infer.png" alt="Query playground getChildren can&#8217;t directly infer what schema is implementing Content schema" width="331w">
 </div>
 <div class="title">Figure 4. getChildren can&#8217;t directly infer what schema is implementing Content schema</div>
 </div>
@@ -1180,7 +1180,7 @@ If are not running the project in dev mode (<code>enonic project dev</code> intr
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2024-01-24 08:42:10 UTC
+Last updated 2024-01-24 09:00:59 UTC
 </div>
 </div>
 </body>
