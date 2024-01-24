@@ -169,7 +169,7 @@ If you don't need or care about types when creating your queries, you can ignore
 ----
 
 .Getting all data using dataAsJson
-image::query-playground-artists-dataAsJson.png[Query playground query returning artists content together with is name and about data, but using dataAsJson field, 945w]
+image::query-playground-artists-dataAsJson.png[Query playground query returning artists content together with is name and about data - using dataAsJson field, 945w]
 
 == Advanced queries
 
