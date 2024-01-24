@@ -756,7 +756,7 @@ Note that this matches the structure defined by the Artist content type, which i
 </div>
 <div class="imageblock">
 <div class="content">
-<img src="media/query-playground-artists-dataAsJson.png" alt="Query playground query returning artists content together with is name and about data" width="but using dataAsJson field" height="945w">
+<img src="media/query-playground-artists-dataAsJson.png" alt="Query playground query returning artists content together with is name and about data - using dataAsJson field" width="945w">
 </div>
 <div class="title">Figure 6. Getting all data using dataAsJson</div>
 </div>
@@ -1180,7 +1180,7 @@ If are not running the project in dev mode (<code>enonic project dev</code> intr
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2024-01-24 09:00:59 UTC
+Last updated 2024-01-24 09:03:02 UTC
 </div>
 </div>
 </body>
