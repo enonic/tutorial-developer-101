@@ -6,7 +6,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="generator" content="Asciidoctor 2.0.20">
 <meta name="description" content="How does XP deal with images and other media? This chapter covers XP media support, how to upload and query for media, how to work with images and attachments.">
-<title>Media and attachments</title>
+<title>Media - files are content too</title>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,300italic,400,400italic,600,600italic%7CNoto+Serif:400,400italic,700,700italic%7CDroid+Sans+Mono:400,700">
 <style>
 /*! Asciidoctor default stylesheet | MIT License | https://asciidoctor.org */
@@ -437,31 +437,36 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 </head>
 <body class="article toc2 toc-right">
 <div id="header">
-<h1>Media and attachments</h1>
+<h1>Media - files are content too</h1>
 <div id="toc" class="toc2">
 <div id="toctitle">Table of Contents</div>
 <ul class="sectlevel1">
 <li><a href="#media">Media</a>
 <ul class="sectlevel2">
 <li><a href="#media_types">Media types</a></li>
-<li><a href="#upload">Upload</a></li>
+<li><a href="#uploading">Uploading</a></li>
 <li><a href="#data_toolbox">Data Toolbox</a></li>
 </ul>
 </li>
-<li><a href="#the_image_service">The Image service</a></li>
-<li><a href="#editing_images">Editing images</a>
+<li><a href="#attachment_service">Attachment service</a>
 <ul class="sectlevel2">
-<li><a href="#cropping_and_autofocus">Cropping and autofocus</a></li>
+<li><a href="#mediaurl">mediaUrl</a></li>
 </ul>
 </li>
-<li><a href="#attachments">Attachments</a></li>
+<li><a href="#images">Images</a>
+<ul class="sectlevel2">
+<li><a href="#image_service">Image service</a></li>
+<li><a href="#image_form">Image form</a></li>
+<li><a href="#autofocus">Autofocus</a></li>
+</ul>
+</li>
 <li><a href="#graphql_api">GraphQL API</a>
 <ul class="sectlevel2">
 <li><a href="#general_media_type">General media type</a></li>
 <li><a href="#image_media_type">Image media type</a></li>
-<li><a href="#attachment_service">Attachment service</a></li>
 </ul>
 </li>
+<li><a href="#summary">Summary</a></li>
 </ul>
 </div>
 </div>
@@ -469,7 +474,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <div id="preamble">
 <div class="sectionbody">
 <div class="paragraph">
-<p>Naturally, XP can also store any file you would want to serve or associate with your content. This chapter explores how XP stores uploaded data and, and dives into the image handling specifically.</p>
+<p>Naturally, XP can store any file you would want to serve or associate with your content. This chapter explores how XP handles file uploads, and dives into the image handling specifically.</p>
 </div>
 <div class="paragraph">
 <p>At the end of the chapter we&#8217;ll walk through how to use images in a headless fashion.</p>
@@ -504,7 +509,7 @@ The tasks and examples in this chapter are based on work done in previous chapte
 </div>
 </div>
 <div class="sect2">
-<h3 id="upload"><a class="link" href="#upload">Upload</a></h3>
+<h3 id="uploading"><a class="link" href="#uploading">Uploading</a></h3>
 <div class="paragraph">
 <p>To upload files to Content Studio, simply click <b class="button">New &#8230;&#8203;</b> to use the content creation dialog. You may either click the "upload" icon in the dialog, or drag&#8217;n drop the files from your device - or even directly from another website.</p>
 </div>
@@ -595,8 +600,63 @@ The tasks and examples in this chapter are based on work done in previous chapte
 </div>
 </div>
 <div class="sect1">
-<h2 id="the_image_service"><a class="link" href="#the_image_service">The Image service</a></h2>
+<h2 id="attachment_service"><a class="link" href="#attachment_service">Attachment service</a></h2>
 <div class="sectionbody">
+<div class="paragraph">
+<p>Uploading a file is only half the job. XP also includes and Attachment Service that lets you download the same file (now stored as an attachment within the content) when you need it.</p>
+</div>
+<div class="paragraph">
+<p>Essentially, what you need is a URL to download the specific attachment stored within your media:</p>
+</div>
+<div class="sect2">
+<h3 id="mediaurl"><a class="link" href="#mediaurl">mediaUrl</a></h3>
+<div class="paragraph">
+<p>To get the URL you may use the following GraphQL query. The mediaUrl field will return a link to the original file you uploaded.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-GraphQL" data-lang="GraphQL">query {
+  guillotine {
+    get(key: "/developer/media/ready-set-code.png") {
+      displayName
+      type
+      ... on media_Image {
+        mediaUrl
+      }
+    }
+  }
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>If everything went fine, you should expect a response that looks something like this:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-json" data-lang="json">{
+  "data": {
+    "guillotine": {
+      "get": {
+        "displayName": "ready-set-code",
+        "type": "media:image",
+        "mediaUrl": "/site/preview/dev-portal/draft/_/attachment/inline/f7efd6e4-9eed-45d2-83b6-d088a7bdc685:8652e625afe7bbda595a190a3b8624e322dc9f1a/ready-set-code.png"
+      }
+    }
+  }
+}</code></pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="images"><a class="link" href="#images">Images</a></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>One of the standard media content types is <code>media:image</code>. Images are important in content management, and as such, XP and Content Studio provide some interesting features to help you make the most of your images.</p>
+</div>
+<div class="sect2">
+<h3 id="image_service"><a class="link" href="#image_service">Image service</a></h3>
 <div class="paragraph">
 <p>Whenever XP serves you an image, the image is delivered via <a href="https://developer.enonic.com/docs/xp/stable/runtime/engines/site-engine/image-service">XP&#8217;s image service</a>.</p>
 </div>
@@ -607,10 +667,8 @@ The tasks and examples in this chapter are based on work done in previous chapte
 <p>The image service works in tandem with Content Studio&#8217;s image editing tools, so it respects crops, flips, and focal points that you create.</p>
 </div>
 </div>
-</div>
-<div class="sect1">
-<h2 id="editing_images"><a class="link" href="#editing_images">Editing images</a></h2>
-<div class="sectionbody">
+<div class="sect2">
+<h3 id="image_form"><a class="link" href="#image_form">Image form</a></h3>
 <div class="paragraph">
 <p>Content Studio comes with a suite of image editing tools built in. After uploading an image to Content Studio, you can find it in the content grid and edit it to bring up the image&#8217;s content form.</p>
 </div>
@@ -671,8 +729,9 @@ You can read more about <a href="https://enonic.com/blog/enonic-simplifies-image
 </tr>
 </table>
 </div>
+</div>
 <div class="sect2">
-<h3 id="cropping_and_autofocus"><a class="link" href="#cropping_and_autofocus">Cropping and autofocus</a></h3>
+<h3 id="autofocus"><a class="link" href="#autofocus">Autofocus</a></h3>
 <div class="paragraph">
 <p>Because we chose an image with an off-center subject, the image might get cropped such that the lion disappears from the image. For instance, a small, square crop might turn out like this:</p>
 </div>
@@ -710,79 +769,6 @@ You can read more about <a href="https://enonic.com/blog/enonic-simplifies-image
 </div>
 <div class="title">Figure 5. The same image with the same crop, but with a focal point</div>
 </div>
-</div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="attachments"><a class="link" href="#attachments">Attachments</a></h2>
-<div class="sectionbody">
-<div class="paragraph">
-<p>XP has an input type named <a href="https://developer.enonic.com/docs/xp/stable/cms/schemas/input-types/attachmentuploader">AttachmentUploader</a> that enables uploading of one or more files that will be stored as attachments to the current content.</p>
-</div>
-<div class="paragraph">
-<p>This differs from the previously presented media content, which is a separate content itself that can be linked on other content types, for example, by using the <a href="https://developer.enonic.com/docs/xp/stable/cms/schemas/input-types/imageselector">ImageSelector</a> input type.</p>
-</div>
-<div class="paragraph">
-<p>To take a look on how attachments work, let&#8217;s update the Artist content type to use the input type <em>AttachmentUploader</em>.</p>
-</div>
-<div class="olist arabic">
-<ol class="arabic">
-<li>
-<p>For that, update the <em>Artist.xml</em> file accordingly:</p>
-<div class="listingblock">
-<div class="content">
-<pre class="highlight"><code class="language-xml" data-lang="xml">&lt;content-type&gt;
-  &lt;display-name&gt;Artist&lt;/display-name&gt;
-  &lt;description&gt;Information about an artist&lt;/description&gt;
-  &lt;super-type&gt;base:structured&lt;/super-type&gt;
-  &lt;form&gt;
-
-    &lt;input name="name" type="TextLine"&gt;
-      &lt;label&gt;Name&lt;/label&gt;
-      &lt;help-text&gt;
-        The artist's name (if different from their professional moniker).
-      &lt;/help-text&gt;
-    &lt;/input&gt;
-
-    &lt;input type="TextArea" name="about"&gt;
-      &lt;label&gt;About the artist&lt;/label&gt;
-    &lt;/input&gt;
-
-    &lt;input type="Date" name="birthday" &gt;
-      &lt;label&gt;Birthday&lt;/label&gt;
-    &lt;/input&gt;
-
-    &lt;input type="AttachmentUploader" name="attachments"&gt;
-      &lt;label&gt;Attachments&lt;/label&gt;
-      &lt;occurrences minimum="0" maximum="0"/&gt; <i class="conum" data-value="1"></i><b>(1)</b>
-    &lt;/input&gt;
-
-  &lt;/form&gt;
-&lt;/content-type&gt;</code></pre>
-</div>
-</div>
-<div class="colist arabic">
-<table>
-<tr>
-<td><i class="conum" data-value="1"></i><b>1</b></td>
-<td><em>minimum="0"</em> shows that this is not a required field, while <em>maxiumum="0"</em> shows that we can upload as many attachments as we want.</td>
-</tr>
-</table>
-</div>
-</li>
-<li>
-<p>Redeploy your app</p>
-</li>
-<li>
-<p>Add some attachments to each of the three artists. In my case I&#8217;ll add images of some of their albums.</p>
-</li>
-</ol>
-</div>
-<div class="paragraph">
-<p>With that, we have not only enhanced the Artist content type with a new structure, but also added files as attachments to all three artists.</p>
-</div>
-<div class="paragraph">
-<p>On the next section we&#8217;ll show how we can retrieve this information through queries.</p>
 </div>
 </div>
 </div>
@@ -971,222 +957,23 @@ You can read more about <a href="https://enonic.com/blog/enonic-simplifies-image
 <div class="title">Figure 6. The processed image</div>
 </div>
 </div>
-<div class="sect2">
-<h3 id="attachment_service"><a class="link" href="#attachment_service">Attachment service</a></h3>
-<div class="paragraph">
-<p>Let&#8217;s understand how we can retrieve artists attachments through queries.</p>
 </div>
-<div class="paragraph">
-<p>First, access the GraphQL API docs on query playground and search for the <code>Content</code> schema.  Scroll down a bit and you&#8217;ll note that there is a field name <em>attachments</em>. Now look for the <code>com_example_myproject_Artist_Data</code> schema. You&#8217;ll also note that, after the changes on the Attachments section, we also have an <em>attachments</em> field there, of the same type <em>Attachment</em> of the previous one</p>
 </div>
+<div class="sect1">
+<h2 id="summary"><a class="link" href="#summary">Summary</a></h2>
+<div class="sectionbody">
 <div class="paragraph">
-<p>This means that we can get the attachments for each artist in two ways:</p>
-</div>
-<div class="olist arabic">
-<ol class="arabic">
-<li>
-<p>By directly querting the attachments field in the <code>Content</code> schema, without the need of inline fragments</p>
-</li>
-<li>
-<p>Using inline fragments and accessing the <code>com_example_myproject_Artist_Data</code> schema, since there is also a <em>attachments</em> field there</p>
-</li>
-</ol>
+<p>You should now have a deep understanding of how media is stored, and accessed - as well as XP&#8217;s image handing and image service, including how to access it all from the GraphQL API.</p>
 </div>
 <div class="paragraph">
-<p>Let&#8217;s access the attachments in both ways, starting with the query that access the attachments field on the <code>Content</code> schema level:</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="highlight"><code class="language-GraphQL" data-lang="GraphQL">{
-  guillotine {
-    getChildren(key: "/artists") {
-      ... on com_example_myproject_Artist {
-        _id
-        data {
-          name
-          about
-        }
-      }
-      attachments {
-        name
-        attachmentUrl(type: absolute)
-      }
-    }
-  }
-}</code></pre>
-</div>
-</div>
-<div class="paragraph">
-<p>And if everything went fine, you should expect a response that looks like this:</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="highlight"><code class="language-json" data-lang="json">{
-  "data": {
-    "guillotine": {
-      "getChildren": [
-        {
-          "_id": "4d6862b1-3867-46cc-9705-b0291543b807",
-          "data": {
-            "name": "Alecia Beth Moore",
-            "about": "Alecia Beth Moore (born September 8, 1979), known professionally as Pink (stylized as P!nk), is an American singer and songwriter."
-          },
-          "attachments": [
-            {
-              "name": "The_Truth_About_Love.png",
-              "attachmentUrl": "http://localhost:8080/admin/site/preview/my-first-project/draft/_/attachment/inline/4d6862b1-3867-46cc-9705-b0291543b807:9b8af457d28aeb4332d4ed4b6cc35e63ed462a64/The_Truth_About_Love.png"
-            },
-            {
-              "name": "cant-take-me-home-pink.webp",
-              "attachmentUrl": "http://localhost:8080/admin/site/preview/my-first-project/draft/_/attachment/inline/4d6862b1-3867-46cc-9705-b0291543b807:c0bb06a49c8c862c5d6a01bb64bf3ba0aa777da9/cant-take-me-home-pink.webp"
-            }
-          ]
-        },
-        {
-          "_id": "46d8e610-3b31-4ea4-85c8-a7ae1751977f",
-          "data": {
-            "name": "Melissa Arnette Elliott",
-            "about": "Melissa Arnette Elliott (born July 1, 1971) is an American rapper, singer, songwriter, and record producer."
-          },
-          "attachments": [
-            {
-              "name": "Under_Construction_Cover.jpg",
-              "attachmentUrl": "http://localhost:8080/admin/site/preview/my-first-project/draft/_/attachment/inline/46d8e610-3b31-4ea4-85c8-a7ae1751977f:dd920d59b9ba0ded890d85bbc614cf752a43899a/Under_Construction_Cover.jpg"
-            },
-            {
-              "name": "supa-dupa-fly-album-cover.jpg",
-              "attachmentUrl": "http://localhost:8080/admin/site/preview/my-first-project/draft/_/attachment/inline/46d8e610-3b31-4ea4-85c8-a7ae1751977f:9a54d122bb13f50fa6bc368b22843cb661ddebc0/supa-dupa-fly-album-cover.jpg"
-            }
-          ]
-        },
-        {
-          "_id": "79b30fd8-93b5-4f1c-b17c-36e34bc0767f",
-          "data": {
-            "name": "Belcalis Marlenis Almánzar",
-            "about": "Belcalis Marlenis Almánzar (born October 11, 1992), known professionally as Cardi B, is an American rapper and songwriter."
-          },
-          "attachments": [
-            {
-              "name": "Cardi_B_-_Invasion_of_Privacy.png",
-              "attachmentUrl": "http://localhost:8080/admin/site/preview/my-first-project/draft/_/attachment/inline/79b30fd8-93b5-4f1c-b17c-36e34bc0767f:15db0b6d84901296b64994d682fdcd904b0bdf8c/Cardi_B_-_Invasion_of_Privacy.png"
-            }
-          ]
-        }
-      ]
-    }
-  }
-}</code></pre>
-</div>
-</div>
-<div class="paragraph">
-<p>Now accessing attachments field on <code>com_example_myproject_Artist_Data</code> schema level:</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="highlight"><code class="language-GraphQL" data-lang="GraphQL">{
-  guillotine {
-    getChildren(key: "/artists") {
-      ... on com_example_myproject_Artist {
-        _id
-        data {
-          name
-          about
-          attachments {
-            name
-            attachmentUrl(type: absolute)
-          }
-        }
-      }
-
-    }
-  }
-}</code></pre>
-</div>
-</div>
-<div class="paragraph">
-<p>And if everything went fine, you should finally expect a response that looks like this:</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="highlight"><code class="language-json" data-lang="json">{
-  "data": {
-    "guillotine": {
-      "getChildren": [
-        {
-          "_id": "4d6862b1-3867-46cc-9705-b0291543b807",
-          "data": {
-            "name": "Alecia Beth Moore",
-            "about": "Alecia Beth Moore (born September 8, 1979), known professionally as Pink (stylized as P!nk), is an American singer and songwriter.",
-            "attachments": [
-              {
-                "name": "The_Truth_About_Love.png",
-                "attachmentUrl": "http://localhost:8080/admin/site/preview/my-first-project/draft/_/attachment/inline/4d6862b1-3867-46cc-9705-b0291543b807:9b8af457d28aeb4332d4ed4b6cc35e63ed462a64/The_Truth_About_Love.png"
-              },
-              {
-                "name": "cant-take-me-home-pink.webp",
-                "attachmentUrl": "http://localhost:8080/admin/site/preview/my-first-project/draft/_/attachment/inline/4d6862b1-3867-46cc-9705-b0291543b807:c0bb06a49c8c862c5d6a01bb64bf3ba0aa777da9/cant-take-me-home-pink.webp"
-              }
-            ]
-          }
-        },
-        {
-          "_id": "46d8e610-3b31-4ea4-85c8-a7ae1751977f",
-          "data": {
-            "name": "Melissa Arnette Elliott",
-            "about": "Melissa Arnette Elliott (born July 1, 1971) is an American rapper, singer, songwriter, and record producer.",
-            "attachments": [
-              {
-                "name": "Under_Construction_Cover.jpg",
-                "attachmentUrl": "http://localhost:8080/admin/site/preview/my-first-project/draft/_/attachment/inline/46d8e610-3b31-4ea4-85c8-a7ae1751977f:dd920d59b9ba0ded890d85bbc614cf752a43899a/Under_Construction_Cover.jpg"
-              },
-              {
-                "name": "supa-dupa-fly-album-cover.jpg",
-                "attachmentUrl": "http://localhost:8080/admin/site/preview/my-first-project/draft/_/attachment/inline/46d8e610-3b31-4ea4-85c8-a7ae1751977f:9a54d122bb13f50fa6bc368b22843cb661ddebc0/supa-dupa-fly-album-cover.jpg"
-              }
-            ]
-          }
-        },
-        {
-          "_id": "79b30fd8-93b5-4f1c-b17c-36e34bc0767f",
-          "data": {
-            "name": "Belcalis Marlenis Almánzar",
-            "about": "Belcalis Marlenis Almánzar (born October 11, 1992), known professionally as Cardi B, is an American rapper and songwriter.",
-            "attachments": [
-              {
-                "name": "Cardi_B_-_Invasion_of_Privacy.png",
-                "attachmentUrl": "http://localhost:8080/admin/site/preview/my-first-project/draft/_/attachment/inline/79b30fd8-93b5-4f1c-b17c-36e34bc0767f:15db0b6d84901296b64994d682fdcd904b0bdf8c/Cardi_B_-_Invasion_of_Privacy.png"
-              }
-            ]
-          }
-        }
-      ]
-    }
-  }
-}</code></pre>
-</div>
-</div>
-<div class="paragraph">
-<p>As can be seen, both ways retrieve the same data, but since their access is different, the response structure is also slighly different.</p>
-</div>
-<div class="admonitionblock tip">
-<table>
-<tr>
-<td class="icon">
-<i class="fa icon-tip" title="Tip"></i>
-</td>
-<td class="content">
-Under the hood, the <em>attachment</em> field argument <em>attachmentUrl</em> uses Enonic&#8217;s javascript lib portal <a href="https://developer.enonic.com/docs/xp/stable/api/lib-portal#attachmenturl">attachmentUrl</a> function, so you can follow the link to better understand the arguments that you pass to this field when creating queries that uses it.
-</td>
-</tr>
-</table>
-</div>
+<p>Pushing forward, it&#8217;s time to <a href="input-types.ahtml">have a closer look at the basic building blocks of the content forms; input types</a>.</p>
 </div>
 </div>
 </div>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2024-01-24 14:53:49 UTC
+Last updated 2024-01-24 16:19:07 UTC
 </div>
 </div>
 </body>
