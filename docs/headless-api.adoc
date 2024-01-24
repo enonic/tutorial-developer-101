@@ -2,29 +2,21 @@
 include::.variables.adoc[]
 :description: {description-headless-api}
 
-Enonic is a hybrid CMS. As a hybrid CMS, Enonic is both capable of managing content, and support customized delivery. In this {document} we will focus on delivery via the out-of-the-box GraphQL API.
+Enonic is a highly flexible CMS, capable of delivering content in many ways. In this {document} we will focus on delivery via the out-of-the-box GraphQL API.
 
 Now that we've created some content, let's see how we can access and use it in via API - headless style. 
 
-In order to do that we'll introduce _Guillotine_, the app that's responsible for automatically generating GraphQL APIs for your content.
+== Guillotine
 
-== Installing Guillotine
+Introducing _Guillotine_, the app that's responsible for automatically generating a GraphQL APIs for your content.
 
-The first thing you need to do in order to get going is installing the Guillotine application. It is available on https://market.enonic.com/vendors/enonic/guillotine[Enonic Market].
-
-Fortunately, you can install Guillotine directly from your Enonic XP instance's admin console.
-
-. From the XP menu (top right), choose `Applications`
-. Click kbd:[Install] from the top menu
-. Search for `Guillotine`, and click kbd:[Install]
-+
-image::install-guillotine.png[Install Guillotine application dialog, {image-xl}]
+Guillotine should be pre-installed based on the `Essentials` template you used when setting up your sandbox. It is available on https://market.enonic.com/vendors/enonic/guillotine[Enonic Market], and may also be installed manually.
 
 == Query playground
 
-Back in Content Studio, you should now have access to a new item called `Query playground` in the left green widget sidebar. Open it, and you should see this:
+Back in Content Studio, you should now have access to a new item called `Query Playground` in the left green widget sidebar. Open it, and you should see this:
 
-image::query-playground-empty.png[API browser integrated in Content Studio, {image-xl}]
+image::query-playground-empty.png[API browser integrated in Content Studio, 602w]
 
 Query playground is an interactive GraphQL API explorer. You enter your query in the text area to your left and when you execute it, you'll get the results of the query on the other side of the screen.
 
@@ -48,59 +40,65 @@ As an example on how to retrieve some minimal info about your previously created
 After running, you should get something like this on the right area:
 
 .Results of running the suggested query
-image::query-playground-artists-minimal.png[Query playground response of running mimimal query to retrieve artists, {image-xl}]
+image::query-playground-artists-minimal.png[Query playground response of running mimimal query to retrieve artists, 1073w]
 
 
 
 
 === Basic buttons
 
-[start=0]
-. Before trying to come up with complex queries, let's make familiarize ourselves with Query Playground.
+Before trying to come up with complex queries, let's make familiarize ourselves with Query Playground.
 
-+
-image::query-playground-button-1.png[Query playground play button, width=75]
-. _play button_, will execute your query. Shortcut is kbd:[ctrl+enter]
+[cols="2a,7,3"]
+|===
+|Icon | Description | Shortcuts
 
-+
-image::query-playground-button-2.png[Query playground prettify button, width=75]
-. _prettify button_, will properly format your query, removing comments and unecessary spaces / indentation. Shortcut is kbd:[ctl+shift+p]
+| image::query-playground-button-1.png[Query playground play button, 50w]
+| _Play_ - Execute your query 
+| kbd:[ctrl+enter]
 
-+
-image::query-playground-button-3.png[Query playground merge button, width=75]
-. _merge fragments button_, will rewrite your query based on the declared https://graphql.org/learn/queries/#fragments[fragments]. Shortcut is kbd:[ctl+shift+m] 
+| image::query-playground-button-2.png[Query playground prettify button, width=50]
+| _Prettify_ - Format your query, removing comments and unecessary spaces / indentation
+| kbd:[ctl+shift+p]
 
-+
-image::query-playground-button-4.png[Query playground copy button, width=75]
-. _copy button_, will copy your query to your clipboard. Shortcut is kbd:[ctl+shift+c]
+| image::query-playground-button-3.png[Query playground merge button, width=50]
+| _Merge fragments_ - Rewrites your query based on the declared https://graphql.org/learn/queries/#fragments[fragments]
+| kbd:[ctl+shift+m]
 
-+
-image::query-playground-button-5.png[Query playground docs button, width=75]
-. _docs button_, will open a section showing all details about the schemas you have avaiable to use and query on
+|image::query-playground-button-4.png[Query playground copy button, width=50]
+| _Copy_ - Copy your query to your clipboard. 
+| kbd:[ctl+shift+c]
 
-+
-image::query-playground-button-6.png[Query playground history button, width=75]
-. _history button_, will open a section showing all previously executed queries
+| image::query-playground-button-5.png[Query playground docs button, width=50]
+| _Docs_ - Show the API documentation
+|
 
-+
-image::query-playground-button-7.png[Query playground tab button, width=75]
-. _tab button_, will create new tabs for you to manage testing multiple queries
+| image::query-playground-button-6.png[Query playground history button, width=50]
+| _History_ - Shows all previously executed queries
+|
 
-+
-image::query-playground-button-8.png[Query playground draft and master buttons, width=200]
-. _draft / master buttons_ will switch between those two repositories for your queries to run on
+| image::query-playground-button-7.png[Query playground tab button, width=50]
+| _Tab_ - Creates new tabs for you to manage testing multiple queries
+|
 
-+
-image::query-playground-button-9.png[Query playground re-fetch button, width=75]
-. _re-fetch schema button_, will update your graphql schemas based on recent changes
+| image::query-playground-button-9.png[Query playground re-fetch button, width=50]
+| _Re-fetch schema_ - Reloads your GraphQL schemas based on recent changes
+|
 
-+
-image::query-playground-button-10.png[Query playground shortkeys button, width=75]
-. _shortkeys button_, will open a dialog displaying all short keys that can be used to execute actions
+| image::query-playground-button-10.png[Query playground shortkeys button, width=50]
+| _Shortkeys_ - Displays all short keys that can be used in Query Playground
+| 
 
-+
-image::query-playground-button-11.png[Query playground settings button, width=75]
-. _settings button_, will open settings dialog
+| image::query-playground-button-11.png[Query playground settings button, width=50]
+| _Settings_ -  Opens settings dialog
+|
+
+| image::query-playground-button-8.png[Query playground draft and master buttons, width=100]
+| Draft / master toggle_ - Switch between querying draft or master branch (published items)
+|
+
+|===
+
 
 === Schemas
 
@@ -109,12 +107,12 @@ Now, locate and click on the docs button. On this opened section you have detail
 On the top search bar in the docs section, search for `artist` and locate the `com_example_myproject_Artist` schema:
 
 .The Artist schema
-image::query-playground-artist-schema.png[Query playground docs section showing the details of com_example_myproject_Artist schema, {image-xl}]
+image::query-playground-artist-schema.png[Query playground docs section showing the details of com_example_myproject_Artist schema, 666w]
 
 Note that it's said that the `Artist` schema _implements_ the `Content` schema. This basically means that the `Artist` schema will have the structure defined by the `Content` schema, together with possibly some additional structure... in this case, that additional structure is a `data` field, defined by `com_example_myproject_Artist_Data` schema:
 
 .The Artist data schema
-image::query-playground-artist-data-schema.png[Query playground docs sections showing the details of com_example_myproject_Artist_Data schema, {image-xl}]
+image::query-playground-artist-data-schema.png[Query playground docs sections showing the details of com_example_myproject_Artist_Data schema, 666w]
 
 NOTE: Note that this matches the structure defined by the Artist content type, which is a natural thing to expect.  
 
@@ -126,12 +124,12 @@ Close the docs section, head back to the text area to edit your query and remove
 
 Now, with your cursor on the inner curly braces of the query, press kbd:[ctrl+space] to get a list of suggestions about what fields you can request on your query:
 
-image::query-playground-artist-query-inspection.gif[Query playground query section showing suggested fields for content schema, {image-l}]
+image::query-playground-artist-query-inspection.gif[Query playground query section showing suggested fields for content schema, 545w]
 
 As can be seen, we do not have the artist `name` and `about` fields available, and the reason for that is because the `getChildren` field can return any content that implements the `Content` schema, but it can't directly infer what schema that is, which in this case is the `com_example_myproject_Artist` schema:
 
 .getChildren can't directly infer what schema is implementing Content schema
-image::query-playground-getChildren-infer.png[Query playground getChildren can't directly infer what schema is implementing Content schema, {image-xs}, align=center]
+image::query-playground-getChildren-infer.png[Query playground getChildren can't directly infer what schema is implementing Content schema, 276w]
 
 So to proceed, we use https://graphql.org/learn/queries/#inline-fragments[inline fragments]:
 
@@ -155,7 +153,7 @@ So to proceed, we use https://graphql.org/learn/queries/#inline-fragments[inline
 With this, we basically built a query that understands that under `"/artists"` path we have content types of `Artist`, and based on this we can request general content data, such as `_id`, but also specific content data, such as the artist name and about:
 
 .Getting specific data of artists
-image::query-playground-artists-data.png[Query playground query returning artists content together with its name and about data, {image-xl}]
+image::query-playground-artists-data.png[Query playground query returning artists content together with its name and about data, 945w]
 
 === Query with dataAsJson
 
@@ -174,7 +172,7 @@ If you don't need or care about types when creating your queries, you can ignore
 ----
 
 .Getting all data using dataAsJson
-image::query-playground-artists-dataAsJson.png[Query playground query returning artists content together with is name and about data, but using dataAsJson field, {image-xl}]
+image::query-playground-artists-dataAsJson.png[Query playground query returning artists content together with is name and about data, but using dataAsJson field, 945w]
 
 == Advanced queries
 
@@ -464,7 +462,7 @@ And this are the results
                 "docCount": 1,
                 "from": "1981-01-01T00:00:00Z",
                 "to": "1996-01-01T00:00:00Z"
-              },
+              },  
               {
                 "key": "Generation Z",
                 "docCount": 0,
@@ -493,3 +491,8 @@ Which shows that two of those artists are from Generation X, and one of them is 
 - For more query examples and information about how to get up and running with Guillotine, you can check out https://developer.enonic.com/docs/intro[Quick introduction guide] or the https://developer.enonic.com/docs/guillotine[Guillotine docs]
 - If you want to understand how to extend available schemas on the GraphQL Api, you can head to https://developer.enonic.com/docs/guillotine/stable/embed/extending[Extending section on Guillotine docs] or check some examples on this https://developer.enonic.com/docs/build-a-custom-selector#customizing_with_guilliotine_lib_optional[guide]
 - If you want to learn more about GraphQL in general, the https://graphql.org/learn/[_Introduction to GraphQL_ documentation] is a good place to start
+
+
+== Summary
+
+In this {document} you've learned about the Guillotine app and its API. Next up let's have a look at <<files#, how XP deals with files (aka media)>>.
