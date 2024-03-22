@@ -106,7 +106,7 @@ https://developer.enonic.com/docs/xp/stable/cms/schemas/input-types/combobox[Com
 .The ComboBox input type
 image::input-type-combo-box.webp["A standard select list / dropdown list / combo box input type with a few visible dummy options.", {image-s}, align=center]
 +
-https://developer.enonic.com/docs/xp/stable/cms/input-types/schemas/input-types/date[Date] and https://developer.enonic.com/docs/xp/stable/cms/schemas/input-types/datetime[DateTime]:: Provides an interactive date picker (with a time component in DateTime's case) to save date and times.
+https://developer.enonic.com/docs/xp/stable/cms/schemas/input-types/date[Date] and https://developer.enonic.com/docs/xp/stable/cms/schemas/input-types/datetime[DateTime]:: Provides an interactive date picker (with a time component in DateTime's case) to save date and times.
 +
 .The DateTime input type
 image::input-type-date-time.webp["A calendar showing year and month with a time indicator to the side.", {image-s}, align=center]
@@ -116,7 +116,7 @@ https://developer.enonic.com/docs/xp/stable/cms/schemas/input-types/geopoint[Geo
 .The GeoPoint input type
 image::input-type-geo-point.webp["A text line input with coordinates.", {image-s}, align=center]
 +
-https://developer.enonic.com/docs/xp/stable/cms/schemas/input-types/htmlarea[HtmlArea]:: Provides a rich text, multi-line input. We'll discuss this in detail in xref:rich-text#[the next {document}].
+https://developer.enonic.com/docs/xp/stable/cms/schemas/input-types/htmlarea[HtmlArea]:: Provides a rich text, multi-line input. We'll discuss this in detail in <<rich-text#,the next {document}>>.
 +
 .The HtmlArea input type
 image::input-type-html-area.png["A text area with a tools ribbon on the top. The ribbon provides rich text tools such as justification, macro insertion, text styles, etc.", {image-s}, align=center]
@@ -142,7 +142,7 @@ XP's image selector allows you to select an image for a piece of content and als
 
 Read more about the https://developer.enonic.com/docs/xp/stable/cms/schemas/input-types/imageselector[configuration of image selectors] in the reference docs.
 
-After you've added an image (or several), you can highlight it and click the edit button. This will take you to the image editing form. This is the same form as we saw in xref:media-and-images#_editing_images[the previous {document}].
+After you've added an image (or several), you can highlight it and click the edit button. This will take you to the image editing form. This is the same form as we saw in <<files#_editing_images, the previous {document}>>.
 
 .The image selector with uploaded and selected images
 image::input-type-image-selector-highlighted-image.png["The image selector input field with two images of lions -- one male, one female - - below. Under the images, there's a set of buttons saying 'edit' and 'remove'.", {image-xl}]

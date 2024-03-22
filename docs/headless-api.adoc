@@ -486,7 +486,7 @@ Which shows that two of those artists are from Generation X, and one of them is 
 == Dive deeper
 
 - For more query examples and information about how to get up and running with Guillotine, you can check out https://developer.enonic.com/docs/intro[Quick introduction guide] or the https://developer.enonic.com/docs/guillotine[Guillotine docs]
-- If you want to understand how to extend available schemas on the GraphQL Api, you can head to https://developer.enonic.com/docs/guillotine/stable/embed/extending[Extending section on Guillotine docs] or check some examples on this https://developer.enonic.com/docs/build-a-custom-selector#customizing_with_guilliotine_lib_optional[guide]
+- If you want to understand how to extend available schemas on the GraphQL Api, you can head to https://developer.enonic.com/docs/guillotine/stable/extending[Extending section on Guillotine docs] or check some examples on this https://developer.enonic.com/docs/build-a-custom-selector#customizing_with_guilliotine_lib_optional[guide]
 - If you want to learn more about GraphQL in general, the https://graphql.org/learn/[_Introduction to GraphQL_ documentation] is a good place to start
 
 

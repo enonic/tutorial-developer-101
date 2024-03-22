@@ -129,7 +129,7 @@ image::deployment-app-upload.png["The application installation menu with a blue 
 
 Second alternative is via API:
 
-If you have access to your server's management API (available on port 4848), you can also deploy directly via this endpoint, or by using https://developer.enonic.com/docs/enonic-cli/master/xp#app[the CLI].
+If you have access to your server's management API (available on port 4848), you can also deploy directly via this endpoint, or by using https://developer.enonic.com/docs/enonic-cli/stable/xp#app[the CLI].
 
 This approach is most commonly used in a https://developer.enonic.com/guides/ci-cd-for-xp-apps[Continuous Integration/Delivery] setup, where your build server automatically checks out, builds and installs the application.
 
