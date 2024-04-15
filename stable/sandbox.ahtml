@@ -445,8 +445,8 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <li><a href="#what_is_a_sandbox">What is a sandbox?</a></li>
 <li><a href="#your_first_sandbox">Your first sandbox</a></li>
 <li><a href="#stopping_and_starting">Stopping and starting</a></li>
-<li><a href="#troubleshooting">Troubleshooting</a></li>
 <li><a href="#xp_admin">XP Admin</a></li>
+<li><a href="#troubleshooting">Troubleshooting</a></li>
 <li><a href="#summary">Summary</a></li>
 </ul>
 </div>
@@ -561,9 +561,6 @@ _  _ \_  __ \  __ \_  __ \_  /_  ___/   __  |/_/__  __ \
 </li>
 </ul>
 </div>
-<div class="paragraph">
-<p>Finally, the sandbox will proceed to download and install the <code>essentials</code> applications, where each application will produce a set of logs, like this:</p>
-</div>
 <div class="listingblock">
 <div class="title">Installing and starting applications</div>
 <div class="content">
@@ -571,6 +568,21 @@ _  _ \_  __ \  __ \_  __ \_  /_  ___/   __  |/_/__  __ \
 [...] - Registering application com.enonic.app.contentstudio bundle 101
 [...] - Global Application [com.enonic.app.contentstudio] installed successfully</code></pre>
 </div>
+</div>
+<div class="paragraph">
+<p>The sandbox will download and install the applications from the <code>essentials</code> template, producing logs like you see above. Applications may also produces logs when it is started.</p>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+If you experience problems starting the sandbox, check the Troubleshooting section at the end of this chapter.
+</td>
+</tr>
+</table>
 </div>
 </div>
 </div>
@@ -596,6 +608,60 @@ _  _ \_  __ \  __ \_  __ \_  /_  ___/   __  |/_/__  __ \
 </td>
 <td class="content">
 The sandbox starts in development (aka dev) mode by default. To run the sandbox in production mode simply add <code>--prod</code> to the start command
+</td>
+</tr>
+</table>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="xp_admin"><a class="link" href="#xp_admin">XP Admin</a></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Let&#8217;s have a look at the Sandbox' web interface. Open <a href="http://localhost:8080" target="_blank" rel="noopener">http://localhost:8080</a> in your browser (or just click this link).</p>
+</div>
+<div class="paragraph">
+<p>You should now see the XP boot page:</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="media/xp-boot.png" alt="The XP boot page" width="1085w">
+</div>
+</div>
+<div class="paragraph">
+<p>The boot page provides an overview of the sandbox, including installed application, as well as the <a href="https://developer.enonic.com/docs/xp/stable/deployment/config" target="_blank" rel="noopener">default configuration files</a>.</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+Thanks to the <code>Essentials</code> template, several useful XP apps, including Content Studio, were automatically downloaded and installed.
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>Click <b class="button">Log In as Guest</b> to open the XP admin dashboard. What this actually does is log you in as the XP instance&#8217;s Super User. After logging in you should see something like this:</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="media/xp-dashboard.png" alt="The XP admin dashboard" width="1727w">
+</div>
+</div>
+<div class="paragraph">
+<p>You are now on the Admin Dashboard. The right hand menu (aka <code>XP menu</code>) enables navigation between admin tools. More admin tools may be injected as extensions via applications.</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+If things don&#8217;t look exactly the same, don&#8217;t worry. In every new version of XP the background picture gets updated. Also, admin dashboard is automatically localized - based on your browsers preferred language.
 </td>
 </tr>
 </table>
@@ -674,60 +740,6 @@ The <code>[&#8230;&#8203;]</code> replaces most of the stack trace for legibilit
 </div>
 </div>
 <div class="sect1">
-<h2 id="xp_admin"><a class="link" href="#xp_admin">XP Admin</a></h2>
-<div class="sectionbody">
-<div class="paragraph">
-<p>Let&#8217;s have a look at the Sandbox' web interface. Open <a href="http://localhost:8080" target="_blank" rel="noopener">http://localhost:8080</a> in your browser (or just click the link).</p>
-</div>
-<div class="paragraph">
-<p>You should now see the XP boot page:</p>
-</div>
-<div class="imageblock">
-<div class="content">
-<img src="media/xp-boot.png" alt="The XP boot page" width="1085w">
-</div>
-</div>
-<div class="paragraph">
-<p>The boot page provides an overview of the sandbox, including installed application, as well as the <a href="https://developer.enonic.com/docs/xp/stable/deployment/config" target="_blank" rel="noopener">default configuration files</a>.</p>
-</div>
-<div class="admonitionblock note">
-<table>
-<tr>
-<td class="icon">
-<i class="fa icon-note" title="Note"></i>
-</td>
-<td class="content">
-Thanks to the <code>Essentials</code> template, several useful XP apps, including Content Studio, were automatically downloaded and installed.
-</td>
-</tr>
-</table>
-</div>
-<div class="paragraph">
-<p>Click <b class="button">Log In as Guest</b> to open the XP admin dashboard. What this actually does is log you in as the XP instance&#8217;s Super User. After logging in you should see something like this:</p>
-</div>
-<div class="imageblock">
-<div class="content">
-<img src="media/xp-dashboard.png" alt="The XP admin dashboard" width="1727w">
-</div>
-</div>
-<div class="paragraph">
-<p>You are now on the Admin Dashboard. The right hand menu (aka <code>XP menu</code>) enables navigation between admin tools. More admin tools may be injected as extensions via applications.</p>
-</div>
-<div class="admonitionblock note">
-<table>
-<tr>
-<td class="icon">
-<i class="fa icon-note" title="Note"></i>
-</td>
-<td class="content">
-If things don&#8217;t look exactly the same, don&#8217;t worry. In every new version of XP the background picture gets updated. Also, admin dashboard is automatically localized - based on your browsers preferred language.
-</td>
-</tr>
-</table>
-</div>
-</div>
-</div>
-<div class="sect1">
 <h2 id="summary"><a class="link" href="#summary">Summary</a></h2>
 <div class="sectionbody">
 <div class="paragraph">
@@ -741,7 +753,7 @@ If things don&#8217;t look exactly the same, don&#8217;t worry. In every new ver
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2024-04-15 15:26:34 UTC
+Last updated 2024-04-15 15:35:30 UTC
 </div>
 </div>
 </body>
