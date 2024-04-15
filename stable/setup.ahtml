@@ -471,7 +471,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <p>The purpose of this chapter is to ensure you have the necessary tools to start developing efficiently with XP.</p>
 </div>
 <div class="paragraph">
-<p>In general, the bare minimum you&#8217;ll need are:</p>
+<p>In general, the bare minimum you&#8217;ll need is:</p>
 </div>
 <div class="ulist">
 <ul>
@@ -493,7 +493,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <i class="fa icon-tip" title="Tip"></i>
 </td>
 <td class="content">
-If you&#8217;ve already got those configured and installed, feel free to skip to the next chapter.
+If you&#8217;ve already got this configured and installed, feel free to skip to the next chapter.
 </td>
 </tr>
 </table>
@@ -786,7 +786,7 @@ Apple maintains its own fork of Git. If you have XCode installed, you already ha
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2024-03-27 13:49:07 UTC
+Last updated 2024-04-15 15:26:34 UTC
 </div>
 </div>
 </body>

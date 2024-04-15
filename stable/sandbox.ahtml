@@ -444,7 +444,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <ul class="sectlevel1">
 <li><a href="#what_is_a_sandbox">What is a sandbox?</a></li>
 <li><a href="#your_first_sandbox">Your first sandbox</a></li>
-<li><a href="#starting_the_sandbox">Starting the sandbox</a></li>
+<li><a href="#stopping_and_starting">Stopping and starting</a></li>
 <li><a href="#troubleshooting">Troubleshooting</a></li>
 <li><a href="#xp_admin">XP Admin</a></li>
 <li><a href="#summary">Summary</a></li>
@@ -466,7 +466,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <h2 id="what_is_a_sandbox"><a class="link" href="#what_is_a_sandbox">What is a sandbox?</a></h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>A <em>sandbox</em> is basically a local instance of Enonic XP. Each sandbox may have different versions of XP, different data and configuration.</p>
+<p>A <em>sandbox</em> is basically a local developer instance of Enonic XP. Each sandbox may have different versions of XP, different data and configuration.</p>
 </div>
 <div class="paragraph">
 <p>Having a local (and running) instance of XP is essential for developing apps on Enonic XP.</p>
@@ -488,9 +488,13 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 </div>
 </div>
 <div class="paragraph">
-<p>By the end this flow, your terminal should output something that looks like this:</p>
+<p>This creates a sandbox called <code>tutorial</code> based on the <code>essentials</code> templat (a set of applications on Enonic Market), and starts it. The <code>-f</code> forces the use of default vaules for all other options.</p>
+</div>
+<div class="paragraph">
+<p>You will now see a fair amount of output in your terminal, here are the most notable parts:</p>
 </div>
 <div class="listingblock">
+<div class="title">Creating the sandbox</div>
 <div class="content">
 <pre class="highlight"><code class="language-shell" data-lang="shell">Loading templates from Enonic Market...Done.
 Using template 'Essentials'
@@ -501,47 +505,8 @@ Unzipping distro...Done
 Sandbox 'tutorial' created with distro 'enonic-xp-mac-sdk-7.14.0'.</code></pre>
 </div>
 </div>
-<div class="admonitionblock note">
-<table>
-<tr>
-<td class="icon">
-<i class="fa icon-note" title="Note"></i>
-</td>
-<td class="content">
-This creates a sandbox called <code>tutorial</code> using the <code>essentials</code> template and uses default vaules for all other options.
-</td>
-</tr>
-</table>
-</div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="starting_the_sandbox"><a class="link" href="#starting_the_sandbox">Starting the sandbox</a></h2>
-<div class="sectionbody">
-<div class="paragraph">
-<p>Once the sandbox creation is completed, we can use the CLI to start the sandbox, i.e, run a local instance of latest XP:</p>
-</div>
 <div class="listingblock">
-<div class="content">
-<pre class="highlight"><code class="language-shell" data-lang="shell">enonic sandbox start tutorial --dev</code></pre>
-</div>
-</div>
-<div class="admonitionblock note">
-<table>
-<tr>
-<td class="icon">
-<i class="fa icon-note" title="Note"></i>
-</td>
-<td class="content">
-Here, we start the sandbox with the <code>--dev</code> flag. Read <a href="https://developer.enonic.com/docs/xp/stable/development/build#dev_mode">more about dev mode</a> in the reference docs.
-</td>
-</tr>
-</table>
-</div>
-<div class="paragraph">
-<p>The <code>tutorial</code> sandbox will boot up in your terminal. The boot output should look something like this, but with values adjusted for your system:</p>
-</div>
-<div class="listingblock">
+<div class="title">Starting the sandbox</div>
 <div class="content">
 <pre class="highlight"><code class="language-shell" data-lang="shell">____________________________(_)______   ____  _________
 _  _ \_  __ \  __ \_  __ \_  /_  ___/   __  |/_/__  __ \
@@ -549,12 +514,12 @@ _  _ \_  __ \  __ \_  __ \_  /_  ___/   __  |/_/__  __ \
 \___//_/ /_/\____//_/ /_//_/  \___/     /_/|_| _  .___/
                                                /_/
 
-# Enonic XP 7.14.0
+# Enonic XP 7.14.1
 # Built on 2023-07-26T12:31:19Z (hash = d5bf8d725738b778e153d839f16cdaa9e4641444, branch = d5bf8d725738b778e153d839f16cdaa9e4641444)
 # OpenJDK 64-Bit Server VM 17.0.7 (GraalVM Community)
 # Linux 5.19.0-50-generic (amd64)
-# Install directory is /home/bre/.enonic/distributions/enonic-xp-linux-sdk-7.13.1
-# Home directory is /home/bre/.enonic/sandboxes/tutorial/home
+# Install directory is /home/username/.enonic/distributions/enonic-xp-linux-sdk-7.14.1
+# Home directory is /home/username/.enonic/sandboxes/tutorial/home
 
 *
 * DEV mode is ON. This will slow down the system and should NOT BE used in production.
@@ -563,12 +528,10 @@ _  _ \_  __ \  __ \_  __ \_  /_  ___/   __  |/_/__  __ \
 </div>
 </div>
 <div class="paragraph">
-<p>The initial output gives you a lot of information about this sandbox, including its home and install directories. We won&#8217;t be needing them in this chapter, but knowing where you can find these details might be useful at a later time.</p>
-</div>
-<div class="paragraph">
-<p>After the sandbox has started, you should see something like the following output in your terminal:</p>
+<p>This gives you some useful information about this sandbox, including its XP version, and the Home directory.</p>
 </div>
 <div class="listingblock">
+<div class="title">Reserved ports</div>
 <div class="content">
 <pre class="highlight"><code class="language-shell" data-lang="shell">[...] - Started xp@523d2774{HTTP/1.1,[http/1.1]}{0.0.0.0:8080}
 [...] - Started api@22bce39c{HTTP/1.1,[http/1.1]}{0.0.0.0:4848}
@@ -578,7 +541,8 @@ _  _ \_  __ \  __ \_  __ \_  /_  ___/   __  |/_/__  __ \
 [...] - Listening on ports [8080](xp), [4848](management) and [2609](monitoring)
 [...] - Searching for installed applications
 [...] - Found [0] installed applications
-[...] - Started Enonic XP in 11207 ms</code></pre>
+[...] - Started Enonic XP in 11207 ms
+[...]</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -597,6 +561,33 @@ _  _ \_  __ \  __ \_  __ \_  /_  ___/   __  |/_/__  __ \
 </li>
 </ul>
 </div>
+<div class="paragraph">
+<p>Finally, the sandbox will proceed to download and install the <code>essentials</code> applications, where each application will produce a set of logs, like this:</p>
+</div>
+<div class="listingblock">
+<div class="title">Installing and starting applications</div>
+<div class="content">
+<pre class="highlight"><code class="language-shell" data-lang="shell">[...] - Installed application com.enonic.app.contentstudio bundle 101
+[...] - Registering application com.enonic.app.contentstudio bundle 101
+[...] - Global Application [com.enonic.app.contentstudio] installed successfully</code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="stopping_and_starting"><a class="link" href="#stopping_and_starting">Stopping and starting</a></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>To stop your sandbox, press <kbd>ctrl-c</kbd> in the terminal hosting the process. You can also run <code>enonic sandbox stop</code> in a different terminal instance.</p>
+</div>
+<div class="paragraph">
+<p>To start your sandbox, use the following command:</p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>enonic sandbox start tutorial</pre>
+</div>
+</div>
 <div class="admonitionblock note">
 <table>
 <tr>
@@ -604,7 +595,7 @@ _  _ \_  __ \  __ \_  __ \_  /_  ___/   __  |/_/__  __ \
 <i class="fa icon-note" title="Note"></i>
 </td>
 <td class="content">
-To stop your sandbox, press <kbd>ctrl-c</kbd> in the terminal hosting the process. You can also run <code>enonic sandbox stop</code> in a different terminal instance.
+The sandbox starts in development (aka dev) mode by default. To run the sandbox in production mode simply add <code>--prod</code> to the start command
 </td>
 </tr>
 </table>
@@ -750,7 +741,7 @@ If things don&#8217;t look exactly the same, don&#8217;t worry. In every new ver
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2024-03-27 13:49:07 UTC
+Last updated 2024-04-15 15:26:34 UTC
 </div>
 </div>
 </body>

@@ -1,11 +1,11 @@
 {
   "menuItems": [
     {
-      "title": "1 - Developer setup",
+      "title": "1 - Setup",
       "document": "setup"
     },
     {
-      "title": "2 - Sandboxes",
+      "title": "2 - Sandbox",
       "document": "sandbox"
     },
     {
