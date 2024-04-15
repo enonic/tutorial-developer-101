@@ -39,7 +39,6 @@ Unzipping distro...Done
 Sandbox 'tutorial' created with distro 'enonic-xp-mac-sdk-7.14.0'.
 ----
 
-
 .Starting the sandbox
 [source,shell]
 ----
@@ -85,8 +84,6 @@ This means that your local XP instance is up and running and ready to serve requ
 * *4848*: Management API (Used by the CLI when running commands against this XP instance)
 * *2609*: Monitoring API (Used for metrics and instance info)
 
-Finally, the sandbox will proceed to download and install the `essentials` applications, where each application will produce a set of logs, like this:
-
 .Installing and starting applications
 [source,shell]
 ----
@@ -94,6 +91,10 @@ Finally, the sandbox will proceed to download and install the `essentials` appli
 [...] - Registering application com.enonic.app.contentstudio bundle 101
 [...] - Global Application [com.enonic.app.contentstudio] installed successfully
 ----
+
+The sandbox will download and install the applications from the `essentials` template, producing logs like you see above. Applications may also produces logs when it is started.
+
+TIP: If you experience problems starting the sandbox, check the Troubleshooting section at the end of this {document}.
 
 == Stopping and starting
 
@@ -103,8 +104,29 @@ To start your sandbox, use the following command:
 
 	enonic sandbox start tutorial
 
-
 NOTE: The sandbox starts in development (aka dev) mode by default. To run the sandbox in production mode simply add `--prod` to the start command
+
+
+== XP Admin
+
+Let's have a look at the Sandbox' web interface. Open http://localhost:8080[http://localhost:8080^] in your browser (or just click this link).
+
+You should now see the XP boot page:
+
+image::xp-boot.png[The XP boot page, 1085w]
+
+The boot page provides an overview of the sandbox, including installed application, as well as the https://developer.enonic.com/docs/xp/stable/deployment/config[default configuration files^].
+
+NOTE: Thanks to the `Essentials` template, several useful XP apps, including Content Studio, were automatically downloaded and installed.
+
+Click btn:[Log In as Guest] to open the XP admin dashboard. What this actually does is log you in as the XP instance's Super User. After logging in you should see something like this:
+
+image::xp-dashboard.png[The XP admin dashboard, 1727w]
+
+You are now on the Admin Dashboard. The right hand menu (aka `XP menu`) enables navigation between admin tools. More admin tools may be injected as extensions via applications.
+
+NOTE: If things don't look exactly the same, don't worry. In every new version of XP the background picture gets updated. Also, admin dashboard is automatically localized - based on your browsers preferred language.
+
 
 == Troubleshooting
 
@@ -146,26 +168,6 @@ How you find open ports varies from operating system to operating system, but if
 - https://www.micahsmith.com/blog/2019/09/find-ports-in-use-on-macos/[macOS]
 - https://www.howtogeek.com/28609/how-can-i-tell-what-is-listening-on-a-tcpip-port-in-windows/[Windows]
 
-
-== XP Admin
-
-Let's have a look at the Sandbox' web interface. Open http://localhost:8080[http://localhost:8080^] in your browser (or just click the link).
-
-You should now see the XP boot page:
-
-image::xp-boot.png[The XP boot page, 1085w]
-
-The boot page provides an overview of the sandbox, including installed application, as well as the https://developer.enonic.com/docs/xp/stable/deployment/config[default configuration files^].
-
-NOTE: Thanks to the `Essentials` template, several useful XP apps, including Content Studio, were automatically downloaded and installed.
-
-Click btn:[Log In as Guest] to open the XP admin dashboard. What this actually does is log you in as the XP instance's Super User. After logging in you should see something like this:
-
-image::xp-dashboard.png[The XP admin dashboard, 1727w]
-
-You are now on the Admin Dashboard. The right hand menu (aka `XP menu`) enables navigation between admin tools. More admin tools may be injected as extensions via applications.
-
-NOTE: If things don't look exactly the same, don't worry. In every new version of XP the background picture gets updated. Also, admin dashboard is automatically localized - based on your browsers preferred language.
 
 == Summary
 
