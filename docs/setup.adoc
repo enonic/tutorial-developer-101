@@ -4,13 +4,13 @@ include::.variables.adoc[]
 
 The purpose of this {document} is to ensure you have the necessary tools to start developing efficiently with XP. 
 
-In general, the bare minimum you'll need are:
+In general, the bare minimum you'll need is:
 
 - Enonic CLI -> _managing your XP projects_
 - Git / Github -> _versioning your XP projects_
 - Editor / IDE (Integrated Development Environment) -> _coding your ideas into XP projects_
 
-TIP: If you've already got those configured and installed, feel free to skip to the next {document}.
+TIP: If you've already got this configured and installed, feel free to skip to the next {document}.
 
 == Enonic CLI
 
