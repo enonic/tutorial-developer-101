@@ -5,7 +5,7 @@ In this {document}, we'll give a short introduction to a popular application cal
 
 == Web interface
 
-Data Toolbox provides you with a web interface to visualize and manipulate your XP data, as well as other system related inforamtion. We'll now see how to inspect content using Data Toolbox.
+Data Toolbox provides you with a web interface to visualize and manipulate your XP data, as well as other system related information. We'll now see how to inspect content using Data Toolbox.
 
 Data Toolbox is https://market.enonic.com/vendors/glenn-ricaud/data-toolbox[available on Enonic Market].
 
