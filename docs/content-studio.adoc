@@ -171,7 +171,7 @@ Next, let's create a few {content-type-1}s to get used to the workflow. We'll st
 . Give it the display name "Cardi B".
 . Use these details to fill in the form:
 +
-.Artist details (https://en.wikipedia.org/wiki/Cardi_B[Cardi B on Wikipedia])
+.*Artist details (https://en.wikipedia.org/wiki/Cardi_B[Cardi B on Wikipedia])*
 Name:: Belcalis Marlenis Almánzar
 About:: {content-about-cardi}
 
@@ -181,13 +181,14 @@ image::content-type-filled-out.png[The form for "{content-type-1}" fully filled 
 +
 
 . Again, save and close the tab. Now repeat this process for these next two entries. Be aware that Content Studio lets you nest content, so if you try and create new content when "Cardi B" is selected in the hierarchy, it'll nest the new content under "Cardi B". In this case, though, we want the {content-type-1}s to be nested directly under the current folder, so make sure "{content-type-1}s" folder is selected when you create new content.
+
 +
-.Missy Elliott (https://en.wikipedia.org/wiki/Missy_Elliott[Missy Elliott on Wikipedia])
+.*Missy Elliott (https://en.wikipedia.org/wiki/Missy_Elliott[Missy Elliott on Wikipedia])*
 Name:: Melissa Arnette Elliott
 About:: {content-about-missy}
 
 +
-.P!nk (https://en.wikipedia.org/wiki/Pink_(singer)[P!nk on Wikipedia])
+.*P!nk (https://en.wikipedia.org/wiki/Pink_(singer)[P!nk on Wikipedia])*
 Name:: Alecia Beth Moore
 About:: {content-about-pink}
 
