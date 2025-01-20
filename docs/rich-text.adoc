@@ -117,7 +117,7 @@ In addition to good old URLs, the Rich text editor provides a more powerful way 
 - If the referenced content is of type media, you can set a specific link to: open the file, directly download the file, or treat it as a regular content;
 - Insert url links of type: https, http, ftp, cel or relative;
 
-An important feature, is that when creating internal links (content or media links), XP will save a references to the target items, similar to how the ContentSelector works. This is useful when looking for usage and dependencies between content items later.
+An important feature, is that when creating internal links (content or media links), XP will save references to the target items, similar to how the ContentSelector works. This is useful when looking for usage and dependencies between content items later.
 
 NOTE: Because links are created using the item's unique id. It is perfectly safe to move items around in the tree structure, or change it's path name. The links will not break.
 
