@@ -646,7 +646,7 @@ The tasks and examples in this chapter are based on work done in previous chapte
 </ul>
 </div>
 <div class="paragraph">
-<p>An important feature, is that when creating internal links (content or media links), XP will save a references to the target items, similar to how the ContentSelector works. This is useful when looking for usage and dependencies between content items later.</p>
+<p>An important feature, is that when creating internal links (content or media links), XP will save references to the target items, similar to how the ContentSelector works. This is useful when looking for usage and dependencies between content items later.</p>
 </div>
 <div class="admonitionblock note">
 <table>
@@ -1299,7 +1299,7 @@ If you used a different macro than the "Embed iframe" macro, the query must be u
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2025-01-15 18:30:07 UTC
+Last updated 2025-01-20 12:41:23 UTC
 </div>
 </div>
 </body>
