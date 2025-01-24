@@ -195,7 +195,7 @@ Open your {content-type-2} content type and add a single-select option set.  As 
 ----
 
 . Moving onto {content-type-2}s, add the multi-select option set.
-
++
 .The `{content-type-2-capitalized}` content type with distribution data
 [source,xml]
 ----
