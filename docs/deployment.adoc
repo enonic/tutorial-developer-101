@@ -100,7 +100,7 @@ To make your content accessible publicly, the final step is to create a Route. F
 image::graphql-altair-querying-on-exposed-route.png[Altair GraphQL client querying Lion animal data on the "/api" route defined on cloud console,{image-xl}]
 
 
-TIP: For more information on Enonic Cloud, visit https://enonic.com/platform/cloud-service[the Enonic Cloud marketing page].
+TIP: For more information on Enonic Cloud, visit https://enonic.com/pricing[the Enonic Cloud marketing page^].
 
 == Custom hosting
 
