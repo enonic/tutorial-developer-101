@@ -651,7 +651,7 @@ Before proceeding, access Content Studio on your cloud instance and make sure to
 <i class="fa icon-tip" title="Tip"></i>
 </td>
 <td class="content">
-For more information on Enonic Cloud, visit <a href="https://enonic.com/platform/cloud-service">the Enonic Cloud marketing page</a>.
+For more information on Enonic Cloud, visit <a href="https://enonic.com/pricing" target="_blank" rel="noopener">the Enonic Cloud marketing page</a>.
 </td>
 </tr>
 </table>
@@ -906,7 +906,7 @@ This HTML is the content of the login page in raw form.</p>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2025-01-24 11:53:54 UTC
+Last updated 2025-01-24 13:18:18 UTC
 </div>
 </div>
 </body>
