@@ -124,9 +124,9 @@ image::artist-filmography-item-set.png["An example of using the Filmography item
 
 In this section, we'll use option sets to add some extra data to `{content-type-2-capitalized}` data type. The goal is:
 
+- Add an option set for feeding behavior. Intentionally simplified, this option set should indicate whether the animal is an herbivore or a carnivore. If it is a carnivore, it should also let the user add a list of prey.
+- Create a mixin for distribution options. Because each distribution option should have the same fields, create a _mixin_ to reuse it.
 - Add an option for distribution across continents. The user should be able to select as many as they want from the 7 continents to indicate where the animal lives. Each option should have an associated `TextArea` called "notes", where the user can add more data for each option.
-- Because each distribution option should have the same fields, create a _mixin_ to reuse it.
-- Add an option set for feeding behavior. Intentionally simplified, this option set should indicate whether the animal is a herbivore or a carnivore, and if it is a carnivore, it should also let the user add a list of prey.
 
 ==== Single-select: dietary data
 
