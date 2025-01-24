@@ -763,9 +763,6 @@ The tasks and examples in this chapter are based on work done in previous chapte
 </li>
 <li>
 <p>Moving onto animals, add the multi-select option set.</p>
-</li>
-</ol>
-</div>
 <div class="listingblock">
 <div class="title">The <code>Animal</code> content type with distribution data</div>
 <div class="content">
@@ -838,6 +835,9 @@ The tasks and examples in this chapter are based on work done in previous chapte
   &lt;/form&gt;
 &lt;/content-type&gt;</code></pre>
 </div>
+</div>
+</li>
+</ol>
 </div>
 <div class="colist arabic">
 <table>
@@ -1093,7 +1093,7 @@ The use of the <code>mixin</code> helps us both reduce duplication and keep all 
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2025-01-24 09:49:48 UTC
+Last updated 2025-01-24 10:00:50 UTC
 </div>
 </div>
 </body>
