@@ -668,13 +668,13 @@ The tasks and examples in this chapter are based on work done in previous chapte
 <div class="ulist">
 <ul>
 <li>
+<p>Add an option set for feeding behavior. Intentionally simplified, this option set should indicate whether the animal is an herbivore or a carnivore. If it is a carnivore, it should also let the user add a list of prey.</p>
+</li>
+<li>
+<p>Create a mixin for distribution options. Because each distribution option should have the same fields, create a <em>mixin</em> to reuse it.</p>
+</li>
+<li>
 <p>Add an option for distribution across continents. The user should be able to select as many as they want from the 7 continents to indicate where the animal lives. Each option should have an associated <code>TextArea</code> called "notes", where the user can add more data for each option.</p>
-</li>
-<li>
-<p>Because each distribution option should have the same fields, create a <em>mixin</em> to reuse it.</p>
-</li>
-<li>
-<p>Add an option set for feeding behavior. Intentionally simplified, this option set should indicate whether the animal is a herbivore or a carnivore, and if it is a carnivore, it should also let the user add a list of prey.</p>
 </li>
 </ul>
 </div>
@@ -1093,7 +1093,7 @@ The use of the <code>mixin</code> helps us both reduce duplication and keep all 
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2025-01-24 10:00:50 UTC
+Last updated 2025-01-24 11:53:54 UTC
 </div>
 </div>
 </body>
