@@ -10,8 +10,8 @@ NOTE: Not all installed apps will show on XP menu, this is something that is con
 
 To clarify on the previous claims, here are some examples of XP apps that have already been installed on your sandbox:
 
-- Enonic's content authoring interface - https://market.enonic.com/vendors/enonic/content-studio[Content Studio] is an app
-- Enonic's headless CMS GraphQL API - https://market.enonic.com/vendors/enonic/guillotine[Guillotine] is also an app.
+- Enonic's content authoring interface - https://market.enonic.com/vendors/enonic/content-studio[Content Studio^] is an app
+- Enonic's headless CMS GraphQL API - https://market.enonic.com/vendors/enonic/guillotine[Guillotine^] is also an app.
 - Even your own project idea will most likely also be an app.
 
 In the end, apps are compiled and then deployed to XP instances where they run.
@@ -20,7 +20,7 @@ In the end, apps are compiled and then deployed to XP instances where they run.
 
 Creating a project from scratch can be a daunting task for any system you're not familiar with. To make things easier for you, Enonic provides a range of different templates (known as _starters_).
 
-NOTE: The complete list of starters can be found on https://market.enonic.com/starters[the Enonic Market].
+NOTE: The complete list of starters can be found on https://market.enonic.com/starters[the Enonic Market^].
 
 For our first app, we'll use the "Vanilla" starter. This starter contains the bare minimum. We'll use this to familiarize ourselves with how an XP app is structured and how to deploy it on your sandbox.
 
@@ -107,7 +107,7 @@ To confirm that your application was started correctly, you can look at the logs
 [...] - Application [{project-name-full}] started successfully
 ----
 
-You can also verify that the application was installed correctly from the welcome page ({xp-url}), or from the XP admin via `XP Menu` -> `Applications`:
+You can also verify that the application was installed correctly from the welcome page http://localhost:8080[http://localhost:8080^], or from the XP admin via `XP Menu` -> `Applications`:
 
 .Your app should now be visible in the applications list
 image::applications-vanilla.png["The applications list with a few applications installed. Also shows application details, such as content install time, version, and required XP system version for the selected application.", 421w]
@@ -155,7 +155,7 @@ The project build result is available in the `build/libs` directory of the proje
 mv build/libs/{project-name}.jar ~/.enonic/sandboxes/tutorial/home/deploy/
 ----
 
-NOTE: If you had to deploy manually when going through this tutorial, please get in touch on https://slack.enonic.com[the community slack] so we can improve the documentation and the process.
+NOTE: If you had to deploy manually when going through this tutorial, please get in touch on https://slack.enonic.com[the community slack^] so we can improve the documentation and the process.
 
 
 == Summary
