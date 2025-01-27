@@ -164,9 +164,9 @@ If some ports are unavailable, you'll have to find out what programs are using t
 
 How you find open ports varies from operating system to operating system, but if you're unsure about how to do it on your OS, check out the appropriate guide for:
 
-- https://www.cyberciti.biz/faq/unix-linux-check-if-port-is-in-use-command/[Linux]
-- https://www.micahsmith.com/blog/2019/09/find-ports-in-use-on-macos/[macOS]
-- https://www.howtogeek.com/28609/how-can-i-tell-what-is-listening-on-a-tcpip-port-in-windows/[Windows]
+- https://www.cyberciti.biz/faq/unix-linux-check-if-port-is-in-use-command/[Linux^]
+- https://www.micahsmith.com/blog/2019/09/find-ports-in-use-on-macos/[macOS^]
+- https://www.howtogeek.com/28609/how-can-i-tell-what-is-listening-on-a-tcpip-port-in-windows/[Windows^]
 
 
 == Summary
