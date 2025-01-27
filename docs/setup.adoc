@@ -43,11 +43,11 @@ to check the version of Node you have installed locally. Same for NPM:
 npm -v
 ----
 
-If they are not installed, you can head to https://nodejs.org/[nodejs.org] to proceed installing them.
+If they are not installed, you can head to https://nodejs.org/[nodejs.org^] to proceed installing them.
 
 [NOTE]
 ====
-Enonic CLI is also available on other package managers, such as https://developer.enonic.com/start#brew[brew] for MacOS, https://developer.enonic.com/start#scoop[scoop] for Windows and https://developer.enonic.com/start#curl[Snapcraft] on Linux.
+Enonic CLI is also available on other package managers, such as https://developer.enonic.com/start#brew[brew^] for MacOS, https://developer.enonic.com/start#scoop[scoop^] for Windows and https://developer.enonic.com/start#curl[Snapcraft^] on Linux.
 ====
 
 === Verification
@@ -142,13 +142,13 @@ GLOBAL OPTIONS:
 
 As can be seen, there are a lot of commands and their subcommands to help you. On this guide, we'll only cover the necessary ones to be able to start developing on XP.
 
-NOTE: Consider checking the https://developer.enonic.com/docs/enonic-cli[CLI documentation] to further investigate its capabilities.  
+NOTE: Consider checking the https://developer.enonic.com/docs/enonic-cli[CLI documentation^] to further investigate its capabilities.  
 
 == Git
 
 Git is a free and open source _distributed version control system_. Later on in this tutorial, we will create new Enonic development projects using _starters_. The Enonic CLI uses Git to download these starters and to prepare the files for your project locally.
 
-TIP: Want to learn more about Git? Check out https://guides.github.com/introduction/git-handbook/[this useful Git handbook by Github].
+TIP: Want to learn more about Git? Check out https://guides.github.com/introduction/git-handbook/[this useful Git handbook by Github^].
 
 === Installation
 
@@ -199,11 +199,11 @@ If you do not yet have an editor you like, follow the steps below to get started
 
 === Download Visual Studio Code
 
-https://code.visualstudio.com/[Visual Studio Code] (often shortened to _VS Code_ or simply _Code_) is one of the most popular source-code editors around at the moment. It's free, open source, and available on all major platforms.
+https://code.visualstudio.com/[Visual Studio Code^] (often shortened to _VS Code_ or simply _Code_) is one of the most popular source-code editors around at the moment. It's free, open source, and available on all major platforms.
 
-You can navigate to their https://code.visualstudio.com/Download[download page] and install the version matching your operating system. 
+You can navigate to their https://code.visualstudio.com/Download[download page^] and install the version matching your operating system. 
 
-If you opt to move forward with VS code as your editor, its worth checking some of the https://marketplace.visualstudio.com/[powerful extensions] available on their marketplace.
+If you opt to move forward with VS code as your editor, its worth checking some of the https://marketplace.visualstudio.com/[powerful extensions^] available on their marketplace.
 
 == Summary
 
