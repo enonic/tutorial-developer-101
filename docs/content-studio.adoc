@@ -4,7 +4,7 @@ include::.variables.adoc[]
 
 In this {document}, we'll give a short introduction to Content Studio, an app that serves as the main content management interface for XP, providing editors an efficient way of creating, and curating content without technical skills.
 
-For a more comprehensive overview, watch https://www.youtube.com/watch?v=tR9KHOcZOs0[this short video on Content Studio basics] or head to the https://developer.enonic.com/docs/content-studio[Content Studio reference documentation].
+For a more comprehensive overview, watch https://www.youtube.com/watch?v=tR9KHOcZOs0[this short video on Content Studio basics^] or head to the https://developer.enonic.com/docs/content-studio[Content Studio reference documentation^].
 
 NOTE: {see-prev-docs}
 
@@ -130,7 +130,7 @@ Back to your preferred editor, make sure you're in the project folder (`{project
 <3> This is where we specify which fields (aka inputs) this content type shall have, basically the form, as seen in Content Studio.
 <4> The `type` attribute specifies what kind of input input the user will see in Content Studio, and the `label` specifies how the input will be labeled.
 +
-NOTE: Content types also have a large number of other, optional fields that we won't get into here. If you'd like to learn more about this, consult https://developer.enonic.com/docs/xp/stable/cms/content-types[the reference documentation].
+NOTE: Content types also have a large number of other, optional fields that we won't get into here. If you'd like to learn more about this, consult https://developer.enonic.com/docs/xp/stable/cms/content-types[the reference documentation^].
 +
 NOTE: XP's `input` elements are _not_ the same as HTML `input` elements. To read more about it, <<input-types#, see the {document} on input types>>
 .
@@ -143,7 +143,7 @@ NOTE: XP's `input` elements are _not_ the same as HTML `input` elements. To read
 
 This command will watch for changes under `{project-name}/` and redeploy as needed.
 
-TIP:  Make sure you're already running your sandbox with the `--dev` flag in another terminal, otherwise the sandbox will be started in detached mode, so you'll lose logs. More on CLI's dev command https://developer.enonic.com/docs/enonic-cli/stable/dev#dev[here]. 
+TIP:  Make sure you're already running your sandbox with the `--dev` flag in another terminal, otherwise the sandbox will be started in detached mode, so you'll lose logs. More on CLI's dev command https://developer.enonic.com/docs/enonic-cli/stable/dev#dev[here^]. 
 
 If everything goes well, you should see your sandbox logs update now. And that's the basics of creating new content types. 
 
@@ -171,7 +171,7 @@ Next, let's create a few {content-type-1}s to get used to the workflow. We'll st
 . Give it the display name "Cardi B".
 . Use these details to fill in the form:
 +
-.Artist details (https://en.wikipedia.org/wiki/Cardi_B[Cardi B on Wikipedia])
+.Artist details (https://en.wikipedia.org/wiki/Cardi_B[Cardi B on Wikipedia^])
 Name:: Belcalis Marlenis Almánzar
 About:: {content-about-cardi}
 
@@ -182,12 +182,12 @@ image::content-type-filled-out.png[The form for "{content-type-1}" fully filled 
 
 . Again, save and close the tab. Now repeat this process for these next two entries. Be aware that Content Studio lets you nest content, so if you try and create new content when "Cardi B" is selected in the hierarchy, it'll nest the new content under "Cardi B". In this case, though, we want the {content-type-1}s to be nested directly under the current folder, so make sure "{content-type-1}s" folder is selected when you create new content.
 +
-.Missy Elliott (https://en.wikipedia.org/wiki/Missy_Elliott[Missy Elliott on Wikipedia])
+.Missy Elliott (https://en.wikipedia.org/wiki/Missy_Elliott[Missy Elliott on Wikipedia^])
 Name:: Melissa Arnette Elliott
 About:: {content-about-missy}
 
 +
-.P!nk (https://en.wikipedia.org/wiki/Pink_(singer)[P!nk on Wikipedia])
+.P!nk (https://en.wikipedia.org/wiki/Pink_(singer)[P!nk on Wikipedia^])
 Name:: Alecia Beth Moore
 About:: {content-about-pink}
 
