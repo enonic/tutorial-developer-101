@@ -10,7 +10,7 @@ Now that we've created some content, let's see how we can access and use it in v
 
 Introducing _Guillotine_, the app that's responsible for automatically generating a GraphQL APIs for your content.
 
-Guillotine should be pre-installed based on the `Essentials` template you used when setting up your sandbox. It is available on https://market.enonic.com/vendors/enonic/guillotine[Enonic Market], and may also be installed manually.
+Guillotine should be pre-installed based on the `Essentials` template you used when setting up your sandbox. It is available on https://market.enonic.com/vendors/enonic/guillotine[Enonic Market^], and may also be installed manually.
 
 == Query playground
 
@@ -20,7 +20,7 @@ image::query-playground-empty.png[API browser integrated in Content Studio, 602w
 
 Query playground is an interactive GraphQL API explorer. You enter your query in the text area to your left and when you execute it, you'll get the results of the query on the other side of the screen.
 
-GraphQL is a graph "query language". It allows you to create highly specific queries for exactly the content that you need (visit the https://graphql.org/learn/[official GraphQL docs to learn more]).
+GraphQL is a graph "query language". It allows you to create highly specific queries for exactly the content that you need (visit the https://graphql.org/learn/[official GraphQL docs to learn more^]).
 
 As an example on how to retrieve some minimal info about your previously created artists, run the following query:
 
@@ -99,7 +99,7 @@ Before trying to come up with complex queries, let's make familiarize ourselves 
 
 === Schemas
 
-Now, locate and click on the docs button. On this opened section you have detailed info about all https://graphql.org/learn/schema/[schemas] available on your project.
+Now, locate and click on the docs button. On this opened section you have detailed info about all https://graphql.org/learn/schema/[schemas^] available on your project.
 
 On the top search bar in the docs section, search for `artist` and locate the `com_example_myproject_Artist` schema:
 
@@ -128,7 +128,7 @@ As can be seen, we do not have the artist `name` and `about` fields available, a
 .getChildren can't directly infer what schema is implementing Content schema
 image::query-playground-getChildren-infer.png[Query playground getChildren can't directly infer what schema is implementing Content schema, 331w]
 
-So to proceed, we use https://graphql.org/learn/queries/#inline-fragments[inline fragments]:
+So to proceed, we use https://graphql.org/learn/queries/#inline-fragments[inline fragments^]:
 
 [source,GraphQL]
 ----
@@ -215,7 +215,7 @@ In order to exemplify this field usage on some queries, we'll query on the data 
 
 Note that this query is getting the last artist that is alphabetically sorted by name, regardless of where the content type is located in the tree structure.
 
-The following GraphQL query uses the https://developer.enonic.com/docs/xp/stable/storage/dsl#ngram[n-gram functionality] to find all the {content-type-1}s that have a term (part of a text) that starts with `rap` somewhere in their data:
+The following GraphQL query uses the https://developer.enonic.com/docs/xp/stable/storage/dsl#ngram[n-gram functionality^] to find all the {content-type-1}s that have a term (part of a text) that starts with `rap` somewhere in their data:
 
 .A Guillotine query using _nGram_ search functionality
 [source,GraphQL,{subs}]
@@ -296,7 +296,7 @@ Naturally, you can also use the standard boolean operators to combine or negate 
 
 NOTE: If you've previously used Elasticsearch API to query data, you'll be quite familiar with how `queryDsl` works!
 
-TIP: To learn more about queryDSL capabilities, visit the https://developer.enonic.com/docs/xp/stable/storage/dsl[DSL reference]
+TIP: To learn more about queryDSL capabilities, visit the https://developer.enonic.com/docs/xp/stable/storage/dsl[DSL reference^]
 
 === QueryDslConnection
 
@@ -485,9 +485,9 @@ Which shows that two of those artists are from Generation X, and one of them is 
 
 == Dive deeper
 
-- For more query examples and information about how to get up and running with Guillotine, you can check out https://developer.enonic.com/docs/intro[Quick introduction guide] or the https://developer.enonic.com/docs/guillotine[Guillotine docs]
-- If you want to understand how to extend available schemas on the GraphQL Api, you can head to https://developer.enonic.com/docs/guillotine/stable/extending[Extending section on Guillotine docs] or check some examples on this https://developer.enonic.com/docs/build-a-custom-selector#customizing_with_guilliotine_lib_optional[guide]
-- If you want to learn more about GraphQL in general, the https://graphql.org/learn/[_Introduction to GraphQL_ documentation] is a good place to start
+- For more query examples and information about how to get up and running with Guillotine, you can check out https://developer.enonic.com/docs/intro[Quick introduction guide^] or the https://developer.enonic.com/docs/guillotine[Guillotine docs^]
+- If you want to understand how to extend available schemas on the GraphQL Api, you can head to https://developer.enonic.com/docs/guillotine/stable/extending[Extending section on Guillotine docs^] or check some examples on this https://developer.enonic.com/docs/build-a-custom-selector#customizing_with_guilliotine_lib_optional[guide^]
+- If you want to learn more about GraphQL in general, the https://graphql.org/learn/[_Introduction to GraphQL_ documentation^] is a good place to start
 
 
 == Summary
