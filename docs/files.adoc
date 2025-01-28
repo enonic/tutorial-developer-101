@@ -17,7 +17,7 @@ A file may be uploaded to XP to become an individual piece of content. Similar t
 
 Media types are standard content types that ship with XP. When you upload a file to XP, XP will assign it one of these content types, also referred to as media types. The media type will be resoved from the file's content. Some common media types are images, audio, video, and executables.
 
-For a full overview of all the media types baked into XP, see the https://developer.enonic.com/docs/xp/stable/cms/content-types#media[reference docs for media content types].
+For a full overview of all the media types baked into XP, see the https://developer.enonic.com/docs/xp/stable/cms/content-types#media[reference docs for media content types^].
 
 === Uploading
 
@@ -30,7 +30,7 @@ This process is the same for whatever media type you want to upload.
 
 To get familiar with uploading media to XP, let's start with one of the most common media types on the web: images! As mentioned above, this process will also work for any other media type.
 
-. Find an image to upload. For the purposes of the tasks in this {document}, you should work with an image where the important part isn't centered in the shot. If you have one yourself, feel free to use that. If not, how about using https://unsplash.com/photos/8oLnCRz7hwM[this picture of a lion] by https://unsplash.com/@keyursphotography[Keyur Nandaniya]?
+. Find an image to upload. For the purposes of the tasks in this {document}, you should work with an image where the important part isn't centered in the shot. If you have one yourself, feel free to use that. If not, how about using https://unsplash.com/photos/8oLnCRz7hwM[this picture of a lion^] by https://unsplash.com/@keyursphotography[Keyur Nandaniya^]?
 
 . Create a folder for your images. Call it "{image-folder}". Just like the "{content-type-1}" folder we created previously, you may place the folder anywhere in your project structure.
 . Open the "create content" dialog. Press the upload button to bring up your OS's file browsing dialog and select your image. You can also drag and drop the image from your file system browser onto the dialog.
@@ -125,7 +125,7 @@ One of the standard media content types is `media:image`. Images are important i
 
 === Image service
 
-Whenever XP serves you an image, the image is delivered via https://developer.enonic.com/docs/xp/stable/runtime/engines/site-engine/image-service[XP's image service].
+Whenever XP serves you an image, the image is delivered via https://developer.enonic.com/docs/xp/stable/runtime/engines/site-engine/image-service[XP's image service^].
 
 The image service takes care of scaling and applying filters to your images based on parameters you give it. For instance, it's common to want to have all images in a section conform to the same dimensions. But because images are generally of different shapes and sizes, this might require cropping the image. The image service takes care of that for you as long as you specify what you want.
 
@@ -152,7 +152,7 @@ NOTE: Without setting a focal point, XP will focus around the center of the imag
 
 You can always reset the edits you've made to an image by using the 'reset filters' button.
 
-TIP: You can read more about https://enonic.com/blog/enonic-simplifies-image-problems[how Enonic simplifies your everyday image problems] to get more info about how to use images in a traditional CMS model and for a quick overview of the autofocus feature.
+TIP: You can read more about https://enonic.com/blog/enonic-simplifies-image-problems[how Enonic simplifies your everyday image problems^] to get more info about how to use images in a traditional CMS model and for a quick overview of the autofocus feature.
 
 === Autofocus
 
@@ -236,11 +236,11 @@ XP supports a number of image manipulation functions on the fly. When querying f
 
 The scale argument is `required` and allows you to specify how you want to crop the image. Common scaling functions include _block_, which allows you to specify width and height and _width_ which scales the image proportionally to the specified width. 
 
-TIP: https://developer.enonic.com/docs/xp/stable/runtime/engines/site-engine/image-service#scaling_methods[The scaling methods reference docs] show off all the available scaling functions with examples of how they affect the image.
+TIP: https://developer.enonic.com/docs/xp/stable/runtime/engines/site-engine/image-service#scaling_methods[The scaling methods reference docs^] show off all the available scaling functions with examples of how they affect the image.
 
 As the name implies, the filters argument lets you apply filters to the image. Use filters to apply coloration functions and to rotate and flip images on the fly. To combine filters, separate them with a semicolon.
 
-TIP: https://developer.enonic.com/docs/xp/stable/runtime/engines/site-engine/image-service#filters[The filters documentation] has an exhaustive list of the available filters.
+TIP: https://developer.enonic.com/docs/xp/stable/runtime/engines/site-engine/image-service#filters[The filters documentation^] has an exhaustive list of the available filters.
 
 For instance, we could get all the images under the `images` folder, scaled to 600x700 pixels, in grayscale, with a query like this:
 
