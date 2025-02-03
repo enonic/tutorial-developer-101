@@ -506,7 +506,7 @@ The tasks and examples in this chapter are based on work done in previous chapte
 <p>Media types are standard content types that ship with XP. When you upload a file to XP, XP will assign it one of these content types, also referred to as media types. The media type will be resoved from the file&#8217;s content. Some common media types are images, audio, video, and executables.</p>
 </div>
 <div class="paragraph">
-<p>For a full overview of all the media types baked into XP, see the <a href="https://developer.enonic.com/docs/xp/stable/cms/content-types#media">reference docs for media content types</a>.</p>
+<p>For a full overview of all the media types baked into XP, see the <a href="https://developer.enonic.com/docs/xp/stable/cms/content-types#media" target="_blank" rel="noopener">reference docs for media content types</a>.</p>
 </div>
 </div>
 <div class="sect2">
@@ -529,7 +529,7 @@ The tasks and examples in this chapter are based on work done in previous chapte
 <div class="olist arabic">
 <ol class="arabic">
 <li>
-<p>Find an image to upload. For the purposes of the tasks in this chapter, you should work with an image where the important part isn&#8217;t centered in the shot. If you have one yourself, feel free to use that. If not, how about using <a href="https://unsplash.com/photos/8oLnCRz7hwM">this picture of a lion</a> by <a href="https://unsplash.com/@keyursphotography">Keyur Nandaniya</a>?</p>
+<p>Find an image to upload. For the purposes of the tasks in this chapter, you should work with an image where the important part isn&#8217;t centered in the shot. If you have one yourself, feel free to use that. If not, how about using <a href="https://unsplash.com/photos/8oLnCRz7hwM" target="_blank" rel="noopener">this picture of a lion</a> by <a href="https://unsplash.com/@keyursphotography" target="_blank" rel="noopener">Keyur Nandaniya</a>?</p>
 </li>
 <li>
 <p>Create a folder for your images. Call it "images". Just like the "artist" folder we created previously, you may place the folder anywhere in your project structure.</p>
@@ -659,7 +659,7 @@ The tasks and examples in this chapter are based on work done in previous chapte
 <div class="sect2">
 <h3 id="image_service"><a class="link" href="#image_service">Image service</a></h3>
 <div class="paragraph">
-<p>Whenever XP serves you an image, the image is delivered via <a href="https://developer.enonic.com/docs/xp/stable/runtime/engines/site-engine/image-service">XP&#8217;s image service</a>.</p>
+<p>Whenever XP serves you an image, the image is delivered via <a href="https://developer.enonic.com/docs/xp/stable/runtime/engines/site-engine/image-service" target="_blank" rel="noopener">XP&#8217;s image service</a>.</p>
 </div>
 <div class="paragraph">
 <p>The image service takes care of scaling and applying filters to your images based on parameters you give it. For instance, it&#8217;s common to want to have all images in a section conform to the same dimensions. But because images are generally of different shapes and sizes, this might require cropping the image. The image service takes care of that for you as long as you specify what you want.</p>
@@ -725,7 +725,7 @@ Without setting a focal point, XP will focus around the center of the image when
 <i class="fa icon-tip" title="Tip"></i>
 </td>
 <td class="content">
-You can read more about <a href="https://enonic.com/blog/enonic-simplifies-image-problems">how Enonic simplifies your everyday image problems</a> to get more info about how to use images in a traditional CMS model and for a quick overview of the autofocus feature.
+You can read more about <a href="https://enonic.com/blog/enonic-simplifies-image-problems" target="_blank" rel="noopener">how Enonic simplifies your everyday image problems</a> to get more info about how to use images in a traditional CMS model and for a quick overview of the autofocus feature.
 </td>
 </tr>
 </table>
@@ -858,7 +858,7 @@ You can read more about <a href="https://enonic.com/blog/enonic-simplifies-image
 <i class="fa icon-tip" title="Tip"></i>
 </td>
 <td class="content">
-<a href="https://developer.enonic.com/docs/xp/stable/runtime/engines/site-engine/image-service#scaling_methods">The scaling methods reference docs</a> show off all the available scaling functions with examples of how they affect the image.
+<a href="https://developer.enonic.com/docs/xp/stable/runtime/engines/site-engine/image-service#scaling_methods" target="_blank" rel="noopener">The scaling methods reference docs</a> show off all the available scaling functions with examples of how they affect the image.
 </td>
 </tr>
 </table>
@@ -873,7 +873,7 @@ You can read more about <a href="https://enonic.com/blog/enonic-simplifies-image
 <i class="fa icon-tip" title="Tip"></i>
 </td>
 <td class="content">
-<a href="https://developer.enonic.com/docs/xp/stable/runtime/engines/site-engine/image-service#filters">The filters documentation</a> has an exhaustive list of the available filters.
+<a href="https://developer.enonic.com/docs/xp/stable/runtime/engines/site-engine/image-service#filters" target="_blank" rel="noopener">The filters documentation</a> has an exhaustive list of the available filters.
 </td>
 </tr>
 </table>
@@ -974,7 +974,7 @@ You can read more about <a href="https://enonic.com/blog/enonic-simplifies-image
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2025-01-24 13:18:18 UTC
+Last updated 2025-02-03 20:32:40 UTC
 </div>
 </div>
 </body>

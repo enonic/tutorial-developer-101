@@ -727,13 +727,13 @@ The <code>[&#8230;&#8203;]</code> replaces most of the stack trace for legibilit
 <div class="ulist">
 <ul>
 <li>
-<p><a href="https://www.cyberciti.biz/faq/unix-linux-check-if-port-is-in-use-command/">Linux</a></p>
+<p><a href="https://www.cyberciti.biz/faq/unix-linux-check-if-port-is-in-use-command/" target="_blank" rel="noopener">Linux</a></p>
 </li>
 <li>
-<p><a href="https://www.micahsmith.com/blog/2019/09/find-ports-in-use-on-macos/">macOS</a></p>
+<p><a href="https://www.micahsmith.com/blog/2019/09/find-ports-in-use-on-macos/" target="_blank" rel="noopener">macOS</a></p>
 </li>
 <li>
-<p><a href="https://www.howtogeek.com/28609/how-can-i-tell-what-is-listening-on-a-tcpip-port-in-windows/">Windows</a></p>
+<p><a href="https://www.howtogeek.com/28609/how-can-i-tell-what-is-listening-on-a-tcpip-port-in-windows/" target="_blank" rel="noopener">Windows</a></p>
 </li>
 </ul>
 </div>
@@ -753,7 +753,7 @@ The <code>[&#8230;&#8203;]</code> replaces most of the stack trace for legibilit
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2025-01-24 13:18:18 UTC
+Last updated 2025-02-03 20:32:40 UTC
 </div>
 </div>
 </body>

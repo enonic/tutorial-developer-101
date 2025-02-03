@@ -539,7 +539,7 @@ If you&#8217;ve already got this configured and installed, feel free to skip to 
 </div>
 </div>
 <div class="paragraph">
-<p>If they are not installed, you can head to <a href="https://nodejs.org/">nodejs.org</a> to proceed installing them.</p>
+<p>If they are not installed, you can head to <a href="https://nodejs.org/" target="_blank" rel="noopener">nodejs.org</a> to proceed installing them.</p>
 </div>
 <div class="admonitionblock note">
 <table>
@@ -549,7 +549,7 @@ If you&#8217;ve already got this configured and installed, feel free to skip to 
 </td>
 <td class="content">
 <div class="paragraph">
-<p>Enonic CLI is also available on other package managers, such as <a href="https://developer.enonic.com/start#brew">brew</a> for MacOS, <a href="https://developer.enonic.com/start#scoop">scoop</a> for Windows and <a href="https://developer.enonic.com/start#curl">Snapcraft</a> on Linux.</p>
+<p>Enonic CLI is also available on other package managers, such as <a href="https://developer.enonic.com/start#brew" target="_blank" rel="noopener">brew</a> for MacOS, <a href="https://developer.enonic.com/start#scoop" target="_blank" rel="noopener">scoop</a> for Windows and <a href="https://developer.enonic.com/start#curl" target="_blank" rel="noopener">Snapcraft</a> on Linux.</p>
 </div>
 </td>
 </tr>
@@ -659,7 +659,7 @@ GLOBAL OPTIONS:
 <i class="fa icon-note" title="Note"></i>
 </td>
 <td class="content">
-Consider checking the <a href="https://developer.enonic.com/docs/enonic-cli">CLI documentation</a> to further investigate its capabilities.
+Consider checking the <a href="https://developer.enonic.com/docs/enonic-cli" target="_blank" rel="noopener">CLI documentation</a> to further investigate its capabilities.
 </td>
 </tr>
 </table>
@@ -680,7 +680,7 @@ Consider checking the <a href="https://developer.enonic.com/docs/enonic-cli">CLI
 <i class="fa icon-tip" title="Tip"></i>
 </td>
 <td class="content">
-Want to learn more about Git? Check out <a href="https://guides.github.com/introduction/git-handbook/">this useful Git handbook by Github</a>.
+Want to learn more about Git? Check out <a href="https://guides.github.com/introduction/git-handbook/" target="_blank" rel="noopener">this useful Git handbook by Github</a>.
 </td>
 </tr>
 </table>
@@ -761,13 +761,13 @@ Apple maintains its own fork of Git. If you have XCode installed, you already ha
 <div class="sect2">
 <h3 id="download_visual_studio_code"><a class="link" href="#download_visual_studio_code">Download Visual Studio Code</a></h3>
 <div class="paragraph">
-<p><a href="https://code.visualstudio.com/">Visual Studio Code</a> (often shortened to <em>VS Code</em> or simply <em>Code</em>) is one of the most popular source-code editors around at the moment. It&#8217;s free, open source, and available on all major platforms.</p>
+<p><a href="https://code.visualstudio.com/" target="_blank" rel="noopener">Visual Studio Code</a> (often shortened to <em>VS Code</em> or simply <em>Code</em>) is one of the most popular source-code editors around at the moment. It&#8217;s free, open source, and available on all major platforms.</p>
 </div>
 <div class="paragraph">
-<p>You can navigate to their <a href="https://code.visualstudio.com/Download">download page</a> and install the version matching your operating system.</p>
+<p>You can navigate to their <a href="https://code.visualstudio.com/Download" target="_blank" rel="noopener">download page</a> and install the version matching your operating system.</p>
 </div>
 <div class="paragraph">
-<p>If you opt to move forward with VS code as your editor, its worth checking some of the <a href="https://marketplace.visualstudio.com/">powerful extensions</a> available on their marketplace.</p>
+<p>If you opt to move forward with VS code as your editor, its worth checking some of the <a href="https://marketplace.visualstudio.com/" target="_blank" rel="noopener">powerful extensions</a> available on their marketplace.</p>
 </div>
 </div>
 </div>
@@ -786,7 +786,7 @@ Apple maintains its own fork of Git. If you have XCode installed, you already ha
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2025-01-24 13:18:18 UTC
+Last updated 2025-02-03 20:32:40 UTC
 </div>
 </div>
 </body>

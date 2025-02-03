@@ -480,7 +480,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <p>Introducing <em>Guillotine</em>, the app that&#8217;s responsible for automatically generating a GraphQL APIs for your content.</p>
 </div>
 <div class="paragraph">
-<p>Guillotine should be pre-installed based on the <code>Essentials</code> template you used when setting up your sandbox. It is available on <a href="https://market.enonic.com/vendors/enonic/guillotine">Enonic Market</a>, and may also be installed manually.</p>
+<p>Guillotine should be pre-installed based on the <code>Essentials</code> template you used when setting up your sandbox. It is available on <a href="https://market.enonic.com/vendors/enonic/guillotine" target="_blank" rel="noopener">Enonic Market</a>, and may also be installed manually.</p>
 </div>
 </div>
 </div>
@@ -499,7 +499,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <p>Query playground is an interactive GraphQL API explorer. You enter your query in the text area to your left and when you execute it, you&#8217;ll get the results of the query on the other side of the screen.</p>
 </div>
 <div class="paragraph">
-<p>GraphQL is a graph "query language". It allows you to create highly specific queries for exactly the content that you need (visit the <a href="https://graphql.org/learn/">official GraphQL docs to learn more</a>).</p>
+<p>GraphQL is a graph "query language". It allows you to create highly specific queries for exactly the content that you need (visit the <a href="https://graphql.org/learn/" target="_blank" rel="noopener">official GraphQL docs to learn more</a>).</p>
 </div>
 <div class="paragraph">
 <p>As an example on how to retrieve some minimal info about your previously created artists, run the following query:</p>
@@ -650,7 +650,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <div class="sect2">
 <h3 id="schemas"><a class="link" href="#schemas">Schemas</a></h3>
 <div class="paragraph">
-<p>Now, locate and click on the docs button. On this opened section you have detailed info about all <a href="https://graphql.org/learn/schema/">schemas</a> available on your project.</p>
+<p>Now, locate and click on the docs button. On this opened section you have detailed info about all <a href="https://graphql.org/learn/schema/" target="_blank" rel="noopener">schemas</a> available on your project.</p>
 </div>
 <div class="paragraph">
 <p>On the top search bar in the docs section, search for <code>artist</code> and locate the <code>com_example_myproject_Artist</code> schema:</p>
@@ -709,7 +709,7 @@ Note that this matches the structure defined by the Artist content type, which i
 <div class="title">Figure 4. getChildren can&#8217;t directly infer what schema is implementing Content schema</div>
 </div>
 <div class="paragraph">
-<p>So to proceed, we use <a href="https://graphql.org/learn/queries/#inline-fragments">inline fragments</a>:</p>
+<p>So to proceed, we use <a href="https://graphql.org/learn/queries/#inline-fragments" target="_blank" rel="noopener">inline fragments</a>:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -824,7 +824,7 @@ Note that this matches the structure defined by the Artist content type, which i
 <p>Note that this query is getting the last artist that is alphabetically sorted by name, regardless of where the content type is located in the tree structure.</p>
 </div>
 <div class="paragraph">
-<p>The following GraphQL query uses the <a href="https://developer.enonic.com/docs/xp/stable/storage/dsl#ngram">n-gram functionality</a> to find all the artists that have a term (part of a text) that starts with <code>rap</code> somewhere in their data:</p>
+<p>The following GraphQL query uses the <a href="https://developer.enonic.com/docs/xp/stable/storage/dsl#ngram" target="_blank" rel="noopener">n-gram functionality</a> to find all the artists that have a term (part of a text) that starts with <code>rap</code> somewhere in their data:</p>
 </div>
 <div class="listingblock">
 <div class="title">A Guillotine query using <em>nGram</em> search functionality</div>
@@ -923,7 +923,7 @@ If you&#8217;ve previously used Elasticsearch API to query data, you&#8217;ll be
 <i class="fa icon-tip" title="Tip"></i>
 </td>
 <td class="content">
-To learn more about queryDSL capabilities, visit the <a href="https://developer.enonic.com/docs/xp/stable/storage/dsl">DSL reference</a>
+To learn more about queryDSL capabilities, visit the <a href="https://developer.enonic.com/docs/xp/stable/storage/dsl" target="_blank" rel="noopener">DSL reference</a>
 </td>
 </tr>
 </table>
@@ -1158,13 +1158,13 @@ If are not running the project in dev mode (<code>enonic project dev</code> intr
 <div class="ulist">
 <ul>
 <li>
-<p>For more query examples and information about how to get up and running with Guillotine, you can check out <a href="https://developer.enonic.com/docs/intro">Quick introduction guide</a> or the <a href="https://developer.enonic.com/docs/guillotine">Guillotine docs</a></p>
+<p>For more query examples and information about how to get up and running with Guillotine, you can check out <a href="https://developer.enonic.com/docs/intro" target="_blank" rel="noopener">Quick introduction guide</a> or the <a href="https://developer.enonic.com/docs/guillotine" target="_blank" rel="noopener">Guillotine docs</a></p>
 </li>
 <li>
-<p>If you want to understand how to extend available schemas on the GraphQL Api, you can head to <a href="https://developer.enonic.com/docs/guillotine/stable/extending">Extending section on Guillotine docs</a> or check some examples on this <a href="https://developer.enonic.com/docs/build-a-custom-selector#customizing_with_guilliotine_lib_optional">guide</a></p>
+<p>If you want to understand how to extend available schemas on the GraphQL Api, you can head to <a href="https://developer.enonic.com/docs/guillotine/stable/extending" target="_blank" rel="noopener">Extending section on Guillotine docs</a> or check some examples on this <a href="https://developer.enonic.com/docs/build-a-custom-selector#customizing_with_guilliotine_lib_optional" target="_blank" rel="noopener">guide</a></p>
 </li>
 <li>
-<p>If you want to learn more about GraphQL in general, the <a href="https://graphql.org/learn/"><em>Introduction to GraphQL</em> documentation</a> is a good place to start</p>
+<p>If you want to learn more about GraphQL in general, the <a href="https://graphql.org/learn/" target="_blank" rel="noopener"><em>Introduction to GraphQL</em> documentation</a> is a good place to start</p>
 </li>
 </ul>
 </div>
@@ -1181,7 +1181,7 @@ If are not running the project in dev mode (<code>enonic project dev</code> intr
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2025-01-24 13:18:18 UTC
+Last updated 2025-02-03 20:32:40 UTC
 </div>
 </div>
 </body>

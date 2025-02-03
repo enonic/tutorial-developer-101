@@ -462,7 +462,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <p>Data Toolbox provides you with a web interface to visualize and manipulate your XP data, as well as other system related information. We&#8217;ll now see how to inspect content using Data Toolbox.</p>
 </div>
 <div class="paragraph">
-<p>Data Toolbox is <a href="https://market.enonic.com/vendors/glenn-ricaud/data-toolbox">available on Enonic Market</a>.</p>
+<p>Data Toolbox is <a href="https://market.enonic.com/vendors/glenn-ricaud/data-toolbox" target="_blank" rel="noopener">available on Enonic Market</a>.</p>
 </div>
 <div class="paragraph">
 <p>Just like Content Studio, Data toolbox should already have been installed, and can be launched from XP Admin: <code>XP menu</code> &#8594; <code>Data Toolbox</code>.</p>
@@ -561,7 +561,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2025-01-24 13:18:18 UTC
+Last updated 2025-02-03 20:32:40 UTC
 </div>
 </div>
 </body>
