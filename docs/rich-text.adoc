@@ -7,9 +7,9 @@ If you want to work with rich text, HtmlArea is the input type to go.
 
 This input type offers some very powerful editing capabilities and a lot of configuration options. 
 
-This whole {document} is dedicated to the https://developer.enonic.com/docs/xp/stable/cms/schemas/input-types/htmlarea[HtmlArea input type] and the editor used to define its data. 
+This whole {document} is dedicated to the https://developer.enonic.com/docs/xp/stable/cms/schemas/input-types/htmlarea[HtmlArea input type^] and the editor used to define its data. 
 
-The user-oriented documentation of the Rich text editor can be found in the https://developer.enonic.com/docs/content-studio/stable/editor/rich-text-editor[Content Studio docs].
+The user-oriented documentation of the Rich text editor can be found in the https://developer.enonic.com/docs/content-studio/stable/editor/rich-text-editor[Content Studio docs^].
 
 NOTE: {see-prev-docs}
 
@@ -72,7 +72,7 @@ Finally, if you want to exclude most tools, but not all, you can exclude all and
 .An HtmlArea with a selection of tools and `<exclude>*</exclude>`
 image::input-type-html-area-some-controls.png[An HtmlArea configured to include a selection of editing tools, {image-s}, align=center]
 
-As introduced in the beginning, for a full overview of the available text tools and HtmlArea configuration options, visit the https://developer.enonic.com/docs/xp/stable/cms/schemas/input-types/htmlarea[HtmlArea input type reference docs].
+As introduced in the beginning, for a full overview of the available text tools and HtmlArea configuration options, visit the https://developer.enonic.com/docs/xp/stable/cms/schemas/input-types/htmlarea[HtmlArea input type reference docs^].
 
 === Task: {content-type-2-capitalized} description
 
@@ -148,7 +148,7 @@ The following options are available: Caption, alt text, change the image's justi
 
 Try out the image controls that Content Studio give you by uploading a picture and seeing what you can do with it. 
 
-We looked at xref:input-types#_working_with_images[editing images in the previous {document}], but when inserting images in the HtmlArea, you also have something called "image styles", which we'll have a look at now.
+We looked at xref:input-types#_working_with_images[editing images in the input types {document}], but when inserting images in the HtmlArea, you also have something called "image styles", which we'll have a look at now.
 
 Continue editing the "Lynx" content created in the previous task.
 
@@ -159,7 +159,7 @@ image::rich-text-toolbar-image-highlight.png[The rich text toolbar with the imag
 +
 . You'll be greeted by the "insert image" dialog:
 +
-.The HtmlArea insert image dialog. Photo by https://unsplash.com/@zmachacek[Zdeněk Macháček]
+.The HtmlArea insert image dialog. Photo by https://unsplash.com/@zmachacek[Zdeněk Macháček^]
 image::rich-text-insert-image.png["The insert image dialog, showing the image, an image styles dropdown, caption, and alt text fields", {image-l}]
 +
 . When accessing the "image styles" dropdown, you'll find that it's only got two options and neither of them seem to do much. To make this more exciting, let's also create a custom image style.
@@ -181,7 +181,7 @@ In your app, add a new file:
 <1> The aspect ratio controls how the image is displayed. 1:1 makes the image square.
 <2> The filters add a grayscale effect and then a border
 +
-NOTE: https://developer.enonic.com/docs/xp/stable/cms/styles[The styles reference doc] has more information on how you can style your images, so go check it out for a deeper dive.
+NOTE: https://developer.enonic.com/docs/xp/stable/cms/styles[The styles reference doc^] has more information on how you can style your images, so go check it out for a deeper dive.
 +
 . With this style picked up by XP, you'll have the "Grayscale" option available in the image styles dropdown. Select it to apply it to the image and update your image.
 +
@@ -198,7 +198,7 @@ Similar to content types, macros can define forms that help editors configure th
 
 === Task: Embed iframe macro
 
-The embed macro enable you to insert iframes. In this context, we'll embed this https://www.youtube.com/watch?v=gr5EwZo_CHQ[Lynx youtube video].
+The embed macro enable you to insert iframes. In this context, we'll embed this https://www.youtube.com/watch?v=gr5EwZo_CHQ[Lynx youtube video^].
 
 Let's add the macro to the "Lynx" content item.
 
@@ -213,7 +213,7 @@ NOTE: This macro can't be previewed because the Embed iframe macro does not incl
 
 As you'll see in next section, when querying the description of an Animal content, you'll be able to properly get the iframe we passed to "Embed iframe" macro and process it as you'd like in your front-end.
 
-TIP: For more information on macros, including how to create your very own, visit to https://developer.enonic.com/docs/xp/stable/cms/macros[the macro reference docs].
+TIP: For more information on macros, including how to create your very own, visit to https://developer.enonic.com/docs/xp/stable/cms/macros[the macro reference docs^].
 
 == GraphQL API
 
@@ -370,7 +370,7 @@ In the processed HTML, you can see the `<img>` element with style attributes. Ad
 
 But wait, there's more! 
 
-If you want to optimize how fast images load on various devices, Guillotine can also return the image in multiple different sizes (using https://developer.mozilla.org/en-US/docs/Web/API/HTMLImageElement/srcset[the `srcset` attribute (MDN)]). This is achieved by adding an argument to the `description` field:
+If you want to optimize how fast images load on various devices, Guillotine can also return the image in multiple different sizes (using https://developer.mozilla.org/en-US/docs/Web/API/HTMLImageElement/srcset[the `srcset` attribute (MDN)^]). This is achieved by adding an argument to the `description` field:
 
 .Fetching rich text with `srcset`
 [source,GraphQL,]

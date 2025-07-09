@@ -40,7 +40,7 @@ image::field-set.png["A field set containing TextLine and TextArea inputs. The f
 
 Item sets also allow you to group input fields, but as opposed to field sets, item sets group values _both_ visually _and_ on a structural level. Item sets can be arbitrarily nested.
 
-- The https://developer.enonic.com/docs/xp/stable/cms/schemas/item-set[item set documentation] does a standout job of explaining exactly how they work, so check that out for an overview.
+- The https://developer.enonic.com/docs/xp/stable/cms/schemas/item-set[item set documentation^] does a standout job of explaining exactly how they work, so check that out for an overview.
 
 .An item set containing contact info
 image::item-set-sample.png["A pair of visually grouped inputs on a card element. The card has a header that says 'contact info'. There is also a button to add more contact info forms.", {image-s}, align=center]
@@ -51,7 +51,7 @@ Option sets enable editors (working in Content Studio) to choose from a set of p
 
 Option sets where users can select only one of a number of options are known as _single-select_ option sets. You can also use a _multi-select_ option set if the user should be able to select multiple options simultaneously. We'll look at this too in a task.
 
-- The https://developer.enonic.com/docs/xp/stable/cms/schemas/option-set[option set reference documentation] provides a good overview (with accompanying pictures) of how option sets work.
+- The https://developer.enonic.com/docs/xp/stable/cms/schemas/option-set[option set reference documentation^] provides a good overview (with accompanying pictures) of how option sets work.
 
 .A multi-select option set
 image::option-set-sample.png["An input form labelled 'multi-selection'. The user has selected one out of four options. Some options contain extra data such as an image selector or other input fields.", {image-s}, align=center]

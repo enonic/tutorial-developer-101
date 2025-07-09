@@ -12,7 +12,7 @@ Enonic Cloud is Enonic's fully managed and hassle free hosting option. Sit back,
 Enough with the sales pitch. Follow the steps below to get deploy your app on Enonic Cloud:
 
 === Task: Install application
-. Sign up by visiting https://cloud.enonic.com (no credit card needed)
+. Sign up by visiting https://cloud.enonic.com[https://cloud.enonic.com^] (no credit card needed)
 . After accessing your account for the first time, make sure to choose the `free trial` plan
 +
 .Enonic Cloud plans
@@ -110,7 +110,7 @@ Enonic XP is compatibile with just about any public cloud out there. There's a n
 
 Setting up the entire platform is beyond the scope of this tutorial. As such, we'll focus on the steps required for getting your app live - assuming you already have the platform running. 
 
-For more details on deplying the platform, check out https://developer.enonic.com/docs/xp/stable/deployment[the Deployment section of the XP reference docs].
+For more details on deplying the platform, check out https://developer.enonic.com/docs/xp/stable/deployment[the Deployment section of the XP reference docs^].
 
 === Installing the app
 
@@ -129,9 +129,9 @@ image::deployment-app-upload.png["The application installation menu with a blue 
 
 Second alternative is via API:
 
-If you have access to your server's management API (available on port 4848), you can also deploy directly via this endpoint, or by using https://developer.enonic.com/docs/enonic-cli/stable/xp#app[the CLI].
+If you have access to your server's management API (available on port 4848), you can also deploy directly via this endpoint, or by using https://developer.enonic.com/docs/enonic-cli/stable/xp#app[the CLI^].
 
-This approach is most commonly used in a https://developer.enonic.com/guides/ci-cd-for-xp-apps[Continuous Integration/Delivery] setup, where your build server automatically checks out, builds and installs the application.
+This approach is most commonly used in a https://developer.enonic.com/guides/ci-cd-for-xp-apps[Continuous Integration/Delivery^] setup, where your build server automatically checks out, builds and installs the application.
 
 [#vhosts]
 === Virtual hosts = pretty URLs
@@ -194,7 +194,7 @@ mapping.localhost.idProvider.system = default
 +
 This means that XP has updated the mappings and is ready to go.
 
-. To test this out, update your local hosts file (https://en.wikipedia.org/wiki/Hosts_%28file%29[_hosts file_ on Wikipedia]) to point `{vhost-host}` to `127.0.0.1` by adding the following line to the file:
+. To test this out, update your local hosts file (https://en.wikipedia.org/wiki/Hosts_%28file%29[_hosts file_ on Wikipedia^]) to point `{vhost-host}` to `127.0.0.1` by adding the following line to the file:
 +
 [source,conf,{subs}]
 ----
@@ -203,11 +203,11 @@ This means that XP has updated the mappings and is ready to go.
 +
 TIP: On Linux and macOS you'll find the hosts file at `/etc/hosts`. On Windows, it's located at  `c:\Windows\System32\Drivers\etc\hosts`
 
-. Now access `http://{vhost-host}:8080` in your browser. If all has gone well, you should see the familiar XP login screen.
+. Now access `http://{vhost-host}:8080[http://{vhost-host}:8080^]` in your browser. If all has gone well, you should see the familiar XP login screen.
 
 === Vhost troubleshooting
 
-If you're not seeing anything when you direct your browser to `http://{vhost-host}:8080` or aren't able to access the resources, that may be due to a browser setting. Try using a different browser and see if that makes a difference. Alternatively, you can try running
+If you're not seeing anything when you direct your browser to `http://{vhost-host}:8080[http://{vhost-host}:8080^]` or aren't able to access the resources, that may be due to a browser setting. Try using a different browser and see if that makes a difference. Alternatively, you can try running
 
 [source,bash,{subs}]
 ----

@@ -55,7 +55,7 @@ image::notes-x-data.png["Notes x-data fields showing in the bottom of an animal 
 +
 . Finally, add some notes to some content.
 
-NOTE: For more details and configuration options for X-data, visit https://developer.enonic.com/docs/xp/stable/cms/x-data[the X-data documentation].
+NOTE: For more details and configuration options for X-data, visit https://developer.enonic.com/docs/xp/stable/cms/x-data[the X-data documentation^].
 
 == Headless
 
@@ -186,7 +186,7 @@ There's a known app on Enonic market named _SEO Metafields app_. Its main purpos
 
 This is a bonus section, so you're not missing much to skip it, but it's worth installing it to better understand capabilities of X-data.
 
-. Install the https://market.enonic.com/vendors/enonic/seo-metafields[SEO Metafields app].
+. Install the https://market.enonic.com/vendors/enonic/seo-metafields[SEO Metafields app^].
 +
 image::x-data-seo-app-install.png["Install SEO Metafields app",{image-l}]
 +
