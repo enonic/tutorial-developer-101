@@ -543,7 +543,7 @@ The tasks and examples in this chapter are based on work done in previous chapte
 <i class="fa icon-note" title="Note"></i>
 </td>
 <td class="content">
-For more details and configuration options for X-data, visit <a href="https://developer.enonic.com/docs/xp/stable/cms/x-data">the X-data documentation</a>.
+For more details and configuration options for X-data, visit <a href="https://developer.enonic.com/docs/xp/stable/cms/x-data" target="_blank" rel="noopener">the X-data documentation</a>.
 </td>
 </tr>
 </table>
@@ -701,7 +701,7 @@ For more details and configuration options for X-data, visit <a href="https://de
 <div class="olist arabic">
 <ol class="arabic">
 <li>
-<p>Install the <a href="https://market.enonic.com/vendors/enonic/seo-metafields">SEO Metafields app</a>.</p>
+<p>Install the <a href="https://market.enonic.com/vendors/enonic/seo-metafields" target="_blank" rel="noopener">SEO Metafields app</a>.</p>
 <div class="imageblock">
 <div class="content">
 <img src="media/x-data-seo-app-install.png" alt="Install SEO Metafields app" width="1050">
@@ -729,7 +729,7 @@ For more details and configuration options for X-data, visit <a href="https://de
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2025-07-09 07:36:26 UTC
+Last updated 2025-07-09 10:30:45 UTC
 </div>
 </div>
 </body>

@@ -484,10 +484,10 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <p>This input type offers some very powerful editing capabilities and a lot of configuration options.</p>
 </div>
 <div class="paragraph">
-<p>This whole chapter is dedicated to the <a href="https://developer.enonic.com/docs/xp/stable/cms/schemas/input-types/htmlarea">HtmlArea input type</a> and the editor used to define its data.</p>
+<p>This whole chapter is dedicated to the <a href="https://developer.enonic.com/docs/xp/stable/cms/schemas/input-types/htmlarea" target="_blank" rel="noopener">HtmlArea input type</a> and the editor used to define its data.</p>
 </div>
 <div class="paragraph">
-<p>The user-oriented documentation of the Rich text editor can be found in the <a href="https://developer.enonic.com/docs/content-studio/stable/editor/rich-text-editor">Content Studio docs</a>.</p>
+<p>The user-oriented documentation of the Rich text editor can be found in the <a href="https://developer.enonic.com/docs/content-studio/stable/editor/rich-text-editor" target="_blank" rel="noopener">Content Studio docs</a>.</p>
 </div>
 <div class="admonitionblock note">
 <table>
@@ -583,7 +583,7 @@ The tasks and examples in this chapter are based on work done in previous chapte
 <div class="title">Figure 3. An HtmlArea with a selection of tools and <code>&lt;exclude&gt;*&lt;/exclude&gt;</code></div>
 </div>
 <div class="paragraph">
-<p>As introduced in the beginning, for a full overview of the available text tools and HtmlArea configuration options, visit the <a href="https://developer.enonic.com/docs/xp/stable/cms/schemas/input-types/htmlarea">HtmlArea input type reference docs</a>.</p>
+<p>As introduced in the beginning, for a full overview of the available text tools and HtmlArea configuration options, visit the <a href="https://developer.enonic.com/docs/xp/stable/cms/schemas/input-types/htmlarea" target="_blank" rel="noopener">HtmlArea input type reference docs</a>.</p>
 </div>
 <div class="sect2">
 <h3 id="task_animal_description"><a class="link" href="#task_animal_description">Task: Animal description</a></h3>
@@ -717,7 +717,7 @@ You can also use <span class="keyseq"><kbd>ctrl</kbd>+<kbd>K</kbd></span> to ins
 <p>Try out the image controls that Content Studio give you by uploading a picture and seeing what you can do with it.</p>
 </div>
 <div class="paragraph">
-<p>We looked at <a href="input-types.ahtml#_working_with_images">editing images in the previous chapter</a>, but when inserting images in the HtmlArea, you also have something called "image styles", which we&#8217;ll have a look at now.</p>
+<p>We looked at <a href="input-types.ahtml#_working_with_images">editing images in the input types chapter</a>, but when inserting images in the HtmlArea, you also have something called "image styles", which we&#8217;ll have a look at now.</p>
 </div>
 <div class="paragraph">
 <p>Continue editing the "Lynx" content created in the previous task.</p>
@@ -739,7 +739,7 @@ You can also use <span class="keyseq"><kbd>ctrl</kbd>+<kbd>K</kbd></span> to ins
 <div class="content">
 <img src="media/rich-text-insert-image.png" alt="The insert image dialog, showing the image, an image styles dropdown, caption, and alt text fields" width="1050">
 </div>
-<div class="title">Figure 5. The HtmlArea insert image dialog. Photo by <a href="https://unsplash.com/@zmachacek">Zdeněk Macháček</a></div>
+<div class="title">Figure 5. The HtmlArea insert image dialog. Photo by <a href="https://unsplash.com/@zmachacek" target="_blank" rel="noopener">Zdeněk Macháček</a></div>
 </div>
 </li>
 <li>
@@ -775,7 +775,7 @@ You can also use <span class="keyseq"><kbd>ctrl</kbd>+<kbd>K</kbd></span> to ins
 <i class="fa icon-note" title="Note"></i>
 </td>
 <td class="content">
-<a href="https://developer.enonic.com/docs/xp/stable/cms/styles">The styles reference doc</a> has more information on how you can style your images, so go check it out for a deeper dive.
+<a href="https://developer.enonic.com/docs/xp/stable/cms/styles" target="_blank" rel="noopener">The styles reference doc</a> has more information on how you can style your images, so go check it out for a deeper dive.
 </td>
 </tr>
 </table>
@@ -813,7 +813,7 @@ You can also use <span class="keyseq"><kbd>ctrl</kbd>+<kbd>K</kbd></span> to ins
 <div class="sect2">
 <h3 id="task_embed_iframe_macro"><a class="link" href="#task_embed_iframe_macro">Task: Embed iframe macro</a></h3>
 <div class="paragraph">
-<p>The embed macro enable you to insert iframes. In this context, we&#8217;ll embed this <a href="https://www.youtube.com/watch?v=gr5EwZo_CHQ">Lynx youtube video</a>.</p>
+<p>The embed macro enable you to insert iframes. In this context, we&#8217;ll embed this <a href="https://www.youtube.com/watch?v=gr5EwZo_CHQ" target="_blank" rel="noopener">Lynx youtube video</a>.</p>
 </div>
 <div class="paragraph">
 <p>Let&#8217;s add the macro to the "Lynx" content item.</p>
@@ -859,7 +859,7 @@ This macro can&#8217;t be previewed because the Embed iframe macro does not incl
 <i class="fa icon-tip" title="Tip"></i>
 </td>
 <td class="content">
-For more information on macros, including how to create your very own, visit to <a href="https://developer.enonic.com/docs/xp/stable/cms/macros">the macro reference docs</a>.
+For more information on macros, including how to create your very own, visit to <a href="https://developer.enonic.com/docs/xp/stable/cms/macros" target="_blank" rel="noopener">the macro reference docs</a>.
 </td>
 </tr>
 </table>
@@ -1048,7 +1048,7 @@ Wondering why the href points to a location within the admin? No worries. Guillo
 <p>But wait, there&#8217;s more!</p>
 </div>
 <div class="paragraph">
-<p>If you want to optimize how fast images load on various devices, Guillotine can also return the image in multiple different sizes (using <a href="https://developer.mozilla.org/en-US/docs/Web/API/HTMLImageElement/srcset">the <code>srcset</code> attribute (MDN)</a>). This is achieved by adding an argument to the <code>description</code> field:</p>
+<p>If you want to optimize how fast images load on various devices, Guillotine can also return the image in multiple different sizes (using <a href="https://developer.mozilla.org/en-US/docs/Web/API/HTMLImageElement/srcset" target="_blank" rel="noopener">the <code>srcset</code> attribute (MDN)</a>). This is achieved by adding an argument to the <code>description</code> field:</p>
 </div>
 <div class="listingblock">
 <div class="title">Fetching rich text with <code>srcset</code></div>
@@ -1299,7 +1299,7 @@ If you used a different macro than the "Embed iframe" macro, the query must be u
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2025-07-09 07:36:26 UTC
+Last updated 2025-07-09 10:30:45 UTC
 </div>
 </div>
 </body>

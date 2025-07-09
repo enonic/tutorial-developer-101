@@ -483,7 +483,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <div class="olist arabic">
 <ol class="arabic">
 <li>
-<p>Sign up by visiting <a href="https://cloud.enonic.com" class="bare">https://cloud.enonic.com</a> (no credit card needed)</p>
+<p>Sign up by visiting <a href="https://cloud.enonic.com" target="_blank" rel="noopener">https://cloud.enonic.com</a> (no credit card needed)</p>
 </li>
 <li>
 <p>After accessing your account for the first time, make sure to choose the <code>free trial</code> plan</p>
@@ -672,7 +672,7 @@ For more information on Enonic Cloud, visit <a href="https://enonic.com/pricing"
 <p>Setting up the entire platform is beyond the scope of this tutorial. As such, we&#8217;ll focus on the steps required for getting your app live - assuming you already have the platform running.</p>
 </div>
 <div class="paragraph">
-<p>For more details on deplying the platform, check out <a href="https://developer.enonic.com/docs/xp/stable/deployment">the Deployment section of the XP reference docs</a>.</p>
+<p>For more details on deplying the platform, check out <a href="https://developer.enonic.com/docs/xp/stable/deployment" target="_blank" rel="noopener">the Deployment section of the XP reference docs</a>.</p>
 </div>
 <div class="sect2">
 <h3 id="installing_the_app"><a class="link" href="#installing_the_app">Installing the app</a></h3>
@@ -717,10 +717,10 @@ Your application executable (*.jar file) can be found in <code>project-folder/bu
 <p>Second alternative is via API:</p>
 </div>
 <div class="paragraph">
-<p>If you have access to your server&#8217;s management API (available on port 4848), you can also deploy directly via this endpoint, or by using <a href="https://developer.enonic.com/docs/enonic-cli/stable/xp#app">the CLI</a>.</p>
+<p>If you have access to your server&#8217;s management API (available on port 4848), you can also deploy directly via this endpoint, or by using <a href="https://developer.enonic.com/docs/enonic-cli/stable/xp#app" target="_blank" rel="noopener">the CLI</a>.</p>
 </div>
 <div class="paragraph">
-<p>This approach is most commonly used in a <a href="https://developer.enonic.com/guides/ci-cd-for-xp-apps">Continuous Integration/Delivery</a> setup, where your build server automatically checks out, builds and installs the application.</p>
+<p>This approach is most commonly used in a <a href="https://developer.enonic.com/guides/ci-cd-for-xp-apps" target="_blank" rel="noopener">Continuous Integration/Delivery</a> setup, where your build server automatically checks out, builds and installs the application.</p>
 </div>
 </div>
 <div class="sect2">
@@ -826,7 +826,7 @@ mapping.localhost.idProvider.system = default</code></pre>
 </div>
 </li>
 <li>
-<p>To test this out, update your local hosts file (<a href="https://en.wikipedia.org/wiki/Hosts_%28file%29"><em>hosts file</em> on Wikipedia</a>) to point <code>xp-admin.com</code> to <code>127.0.0.1</code> by adding the following line to the file:</p>
+<p>To test this out, update your local hosts file (<a href="https://en.wikipedia.org/wiki/Hosts_%28file%29" target="_blank" rel="noopener"><em>hosts file</em> on Wikipedia</a>) to point <code>xp-admin.com</code> to <code>127.0.0.1</code> by adding the following line to the file:</p>
 <div class="listingblock">
 <div class="content">
 <pre class="highlight"><code class="language-conf" data-lang="conf">127.0.0.1 xp-admin.com</code></pre>
@@ -846,7 +846,7 @@ On Linux and macOS you&#8217;ll find the hosts file at <code>/etc/hosts</code>. 
 </div>
 </li>
 <li>
-<p>Now access <code><a href="http://xp-admin.com:8080" class="bare">http://xp-admin.com:8080</a></code> in your browser. If all has gone well, you should see the familiar XP login screen.</p>
+<p>Now access <code><a href="http://xp-admin.com:8080" target="_blank" rel="noopener">http://xp-admin.com:8080</a></code> in your browser. If all has gone well, you should see the familiar XP login screen.</p>
 </li>
 </ol>
 </div>
@@ -854,7 +854,7 @@ On Linux and macOS you&#8217;ll find the hosts file at <code>/etc/hosts</code>. 
 <div class="sect2">
 <h3 id="vhost_troubleshooting"><a class="link" href="#vhost_troubleshooting">Vhost troubleshooting</a></h3>
 <div class="paragraph">
-<p>If you&#8217;re not seeing anything when you direct your browser to <code><a href="http://xp-admin.com:8080" class="bare">http://xp-admin.com:8080</a></code> or aren&#8217;t able to access the resources, that may be due to a browser setting. Try using a different browser and see if that makes a difference. Alternatively, you can try running</p>
+<p>If you&#8217;re not seeing anything when you direct your browser to <code><a href="http://xp-admin.com:8080" target="_blank" rel="noopener">http://xp-admin.com:8080</a></code> or aren&#8217;t able to access the resources, that may be due to a browser setting. Try using a different browser and see if that makes a difference. Alternatively, you can try running</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -906,7 +906,7 @@ This HTML is the content of the login page in raw form.</p>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2025-07-09 07:36:26 UTC
+Last updated 2025-07-09 10:30:45 UTC
 </div>
 </div>
 </body>

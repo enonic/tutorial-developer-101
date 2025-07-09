@@ -536,7 +536,7 @@ The tasks and examples in this chapter are based on work done in previous chapte
 <div class="ulist">
 <ul>
 <li>
-<p>The <a href="https://developer.enonic.com/docs/xp/stable/cms/schemas/item-set">item set documentation</a> does a standout job of explaining exactly how they work, so check that out for an overview.</p>
+<p>The <a href="https://developer.enonic.com/docs/xp/stable/cms/schemas/item-set" target="_blank" rel="noopener">item set documentation</a> does a standout job of explaining exactly how they work, so check that out for an overview.</p>
 </li>
 </ul>
 </div>
@@ -560,7 +560,7 @@ The tasks and examples in this chapter are based on work done in previous chapte
 <div class="ulist">
 <ul>
 <li>
-<p>The <a href="https://developer.enonic.com/docs/xp/stable/cms/schemas/option-set">option set reference documentation</a> provides a good overview (with accompanying pictures) of how option sets work.</p>
+<p>The <a href="https://developer.enonic.com/docs/xp/stable/cms/schemas/option-set" target="_blank" rel="noopener">option set reference documentation</a> provides a good overview (with accompanying pictures) of how option sets work.</p>
 </li>
 </ul>
 </div>
@@ -1093,7 +1093,7 @@ The use of the <code>mixin</code> helps us both reduce duplication and keep all 
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2025-07-09 07:36:26 UTC
+Last updated 2025-07-09 10:30:45 UTC
 </div>
 </div>
 </body>
