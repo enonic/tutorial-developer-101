@@ -553,7 +553,7 @@ The tasks and examples in this chapter are based on work done in previous chapte
 <i class="fa icon-note" title="Note"></i>
 </td>
 <td class="content">
-All of the shared configuration options (<code>label</code>, <code>occurrences</code>, etc.), and the list of available input types are described in the <a href="https://developer.enonic.com/docs/xp/stable/cms/schemas/input-types">input types documentation</a>.
+All of the shared configuration options (<code>label</code>, <code>occurrences</code>, etc.), and the list of available input types are described in the <a href="https://developer.enonic.com/docs/xp/stable/cms/schemas/input-types" target="_blank" rel="noopener">input types documentation</a>.
 </td>
 </tr>
 </table>
@@ -692,7 +692,7 @@ If <code>maximum</code> is greater than <code>0</code>, make sure that <code>min
 <h2 id="common_inputs"><a class="link" href="#common_inputs">Common inputs</a></h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>Apart from the input types we&#8217;ve already gotten familiar with, XP also has input types created for other kinds of data. You can always find the full list over <a href="https://developer.enonic.com/docs/xp/stable/cms/schemas/input-types">at the input types reference docs</a>, but some useful and common ones are:</p>
+<p>Apart from the input types we&#8217;ve already gotten familiar with, XP also has input types created for other kinds of data. You can always find the full list over <a href="https://developer.enonic.com/docs/xp/stable/cms/schemas/input-types" target="_blank" rel="noopener">at the input types reference docs</a>, but some useful and common ones are:</p>
 </div>
 <div class="dlist">
 <dl>
@@ -767,7 +767,7 @@ If <code>maximum</code> is greater than <code>0</code>, make sure that <code>min
 </div>
 </div>
 <div class="paragraph">
-<p>Read more about the <a href="https://developer.enonic.com/docs/xp/stable/cms/schemas/input-types/imageselector">configuration of image selectors</a> in the reference docs.</p>
+<p>Read more about the <a href="https://developer.enonic.com/docs/xp/stable/cms/schemas/input-types/imageselector" target="_blank" rel="noopener">configuration of image selectors</a> in the reference docs.</p>
 </div>
 <div class="paragraph">
 <p>After you&#8217;ve added an image (or several), you can highlight it and click the edit button. This will take you to the image editing form. This is the same form as we saw in <a href="files.ahtml#_editing_images">the previous chapter</a>.</p>
@@ -799,7 +799,7 @@ If <code>maximum</code> is greater than <code>0</code>, make sure that <code>min
 <p>Because referencing other content types comes with a lot of variability, the ContentSelector type has configuration options to support this. You can choose to allow only certain content types or only content that&#8217;s available at a certain path. You can also change whether the selector should show content in a tree-style hierarchy or as a flat list of content.</p>
 </div>
 <div class="paragraph">
-<p><a href="https://developer.enonic.com/docs/xp/stable/cms/schemas/input-types/contentselector">The full list of ContentSelector configuration options</a> is available in the reference docs, including a number of examples to explain content inclusion and exclusion. However, a simple configuration could look like this:</p>
+<p><a href="https://developer.enonic.com/docs/xp/stable/cms/schemas/input-types/contentselector" target="_blank" rel="noopener">The full list of ContentSelector configuration options</a> is available in the reference docs, including a number of examples to explain content inclusion and exclusion. However, a simple configuration could look like this:</p>
 </div>
 <div class="listingblock">
 <div class="title">A basic ContentSelector configuration that only allows one specific content type</div>
@@ -818,7 +818,7 @@ If <code>maximum</code> is greater than <code>0</code>, make sure that <code>min
 <h2 id="attachmentuploader"><a class="link" href="#attachmentuploader">AttachmentUploader</a></h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>XP also has a rather special input type named <a href="https://developer.enonic.com/docs/xp/stable/cms/schemas/input-types/attachmentuploader">AttachmentUploader</a>. Unlike <a href="files.ahtml">media</a> content, which creates an independent content item for each file you upload, attachmentUploader lets you store one (or more) files within the specific content content item. Under the hood, it uses the same <code>attachment</code> property structure as media when persisting the file.</p>
+<p>XP also has a rather special input type named <a href="https://developer.enonic.com/docs/xp/stable/cms/schemas/input-types/attachmentuploader" target="_blank" rel="noopener">AttachmentUploader</a>. Unlike <a href="files.ahtml">media</a> content, which creates an independent content item for each file you upload, attachmentUploader lets you store one (or more) files within the specific content content item. Under the hood, it uses the same <code>attachment</code> property structure as media when persisting the file.</p>
 </div>
 <div class="imageblock">
 <div class="content">
@@ -961,7 +961,7 @@ If you&#8217;re wondering how to achieve some of the goals, try consulting the d
 <div class="ulist">
 <ul>
 <li>
-<p>Make the display name use "species" as its label. <em>Hint: check out <a href="https://developer.enonic.com/docs/xp/stable/cms/content-types#form_definition">the content type form definition</a> and look for something that allows you to do this.</em></p>
+<p>Make the display name use "species" as its label. <em>Hint: check out <a href="https://developer.enonic.com/docs/xp/stable/cms/content-types#form_definition" target="_blank" rel="noopener">the content type form definition</a> and look for something that allows you to do this.</em></p>
 </li>
 <li>
 <p>An animal can also have alternative names for its species (for instance, the reindeer is also known as <em>caribou</em>). Allow the user to add as many alternative names as they want.</p>
@@ -1107,7 +1107,7 @@ Don&#8217;t worry if something did not work, we&#8217;ll show the solutions on t
 <div class="ulist">
 <ul>
 <li>
-<p><a href="https://en.wikipedia.org/wiki/Lion">Wiki article for lion</a></p>
+<p><a href="https://en.wikipedia.org/wiki/Lion" target="_blank" rel="noopener">Wiki article for lion</a></p>
 </li>
 <li>
 <p><a href="https://en.wikipedia.org/wiki/Reindeer">Wiki article for reindeer</a></p>
@@ -1211,7 +1211,7 @@ Don&#8217;t worry if something did not work, we&#8217;ll show the solutions on t
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2025-02-03 20:32:40 UTC
+Last updated 2025-07-09 07:29:53 UTC
 </div>
 </div>
 </body>
