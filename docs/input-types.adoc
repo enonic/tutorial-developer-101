@@ -24,7 +24,7 @@ All input types share a number of options that affect how they act. These option
 +
 The `config` element is for input-specific configuration. Because the input types are so different to each other, they all support different options. The `config` element allows us to use regex validation for TextLine inputs, configure formatting options for HtmlAreas, and to dictate what numeric values a Long or a Double input accepts.
 
-NOTE: All of the shared configuration options (`label`, `occurrences`, etc.), and the list of available input types are described in the https://developer.enonic.com/docs/xp/stable/cms/schemas/input-types[input types documentation]. 
+NOTE: All of the shared configuration options (`label`, `occurrences`, etc.), and the list of available input types are described in the https://developer.enonic.com/docs/xp/stable/cms/schemas/input-types[input types documentation^]. 
 
 To show an example of the configuration options work, let's examine some TextLine inputs with different configurations.
 
@@ -99,7 +99,7 @@ TIP: If `maximum` is greater than `0`, make sure that `minimum` is less than or 
 
 == Common inputs
 
-Apart from the input types we've already gotten familiar with, XP also has input types created for other kinds of data. You can always find the full list over https://developer.enonic.com/docs/xp/stable/cms/schemas/input-types[at the input types reference docs], but some useful and common ones are:
+Apart from the input types we've already gotten familiar with, XP also has input types created for other kinds of data. You can always find the full list over https://developer.enonic.com/docs/xp/stable/cms/schemas/input-types[at the input types reference docs^], but some useful and common ones are:
 
 https://developer.enonic.com/docs/xp/stable/cms/schemas/input-types/combobox[ComboBox]:: A dropdown menu containing predefined options for the user to select from. Allows selection of one or more options.
 +
@@ -140,7 +140,7 @@ XP's image selector allows you to select an image for a piece of content and als
 </input>
 ----
 
-Read more about the https://developer.enonic.com/docs/xp/stable/cms/schemas/input-types/imageselector[configuration of image selectors] in the reference docs.
+Read more about the https://developer.enonic.com/docs/xp/stable/cms/schemas/input-types/imageselector[configuration of image selectors^] in the reference docs.
 
 After you've added an image (or several), you can highlight it and click the edit button. This will take you to the image editing form. This is the same form as we saw in <<files#_editing_images, the previous {document}>>.
 
@@ -158,7 +158,7 @@ The ContentSelector input type allows you to reference other content. Let's say 
 
 Because referencing other content types comes with a lot of variability, the ContentSelector type has configuration options to support this. You can choose to allow only certain content types or only content that's available at a certain path. You can also change whether the selector should show content in a tree-style hierarchy or as a flat list of content.
 
-https://developer.enonic.com/docs/xp/stable/cms/schemas/input-types/contentselector[The full list of ContentSelector configuration options] is available in the reference docs, including a number of examples to explain content inclusion and exclusion. However, a simple configuration could look like this:
+https://developer.enonic.com/docs/xp/stable/cms/schemas/input-types/contentselector[The full list of ContentSelector configuration options^] is available in the reference docs, including a number of examples to explain content inclusion and exclusion. However, a simple configuration could look like this:
 
 .A basic ContentSelector configuration that only allows one specific content type
 [source, xml]
@@ -175,7 +175,7 @@ https://developer.enonic.com/docs/xp/stable/cms/schemas/input-types/contentselec
 
 == AttachmentUploader
 
-XP also has a rather special input type named https://developer.enonic.com/docs/xp/stable/cms/schemas/input-types/attachmentuploader[AttachmentUploader]. Unlike <<files#, media>> content, which creates an independent content item for each file you upload, attachmentUploader lets you store one (or more) files within the specific content content item. Under the hood, it uses the same `attachment` property structure as media when persisting the file.
+XP also has a rather special input type named https://developer.enonic.com/docs/xp/stable/cms/schemas/input-types/attachmentuploader[AttachmentUploader^]. Unlike <<files#, media>> content, which creates an independent content item for each file you upload, attachmentUploader lets you store one (or more) files within the specific content content item. Under the hood, it uses the same `attachment` property structure as media when persisting the file.
 
 .The AttachmentUploader input type
 image::input-type-attachmentuploader.png[AttachmentUploader: Store any number of files within your content item, 651w]
@@ -257,7 +257,7 @@ image::{content-type-2}-and-{content-type-1}-target.png["An {content-type-2} con
 
 === {content-type-2-capitalized} constraints
 
-* Make the display name use "species" as its label. _Hint: check out https://developer.enonic.com/docs/xp/stable/cms/content-types#form_definition[the content type form definition] and look for something that allows you to do this._
+* Make the display name use "species" as its label. _Hint: check out https://developer.enonic.com/docs/xp/stable/cms/content-types#form_definition[the content type form definition^] and look for something that allows you to do this._
 * An {content-type-2} can also have alternative names for its species (for instance, the reindeer is also known as _caribou_). Allow the user to add as many alternative names as they want.
 * An image selector that accepts between 0 and 3 images.
 * Help text where you think it would be helpful.
@@ -347,7 +347,7 @@ TIP: Don't worry if something did not work, we'll show the solutions on the next
 <1> This ContentSelector uses the `config` section to narrow the possible types of content to only be `{content-type-2-capitalized}`
 +
 . Create some {content-type-2}s. Either pick your favorites, or, if you're not feeling creative, add these (content from Wikipedia), :
-- https://en.wikipedia.org/wiki/Lion[Wiki article for lion]
+- https://en.wikipedia.org/wiki/Lion[Wiki article for lion^]
 - https://en.wikipedia.org/wiki/Reindeer[Wiki article for reindeer]
 
 
