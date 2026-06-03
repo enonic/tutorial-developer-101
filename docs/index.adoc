@@ -1,4 +1,4 @@
-= Developer 101 - Enonic fundamentals
+= XP7 - Developer 101 - CMS fundamentals
 include::.variables.adoc[]
 :section-1: Installing tools and initial setup
 :section-2: Working with content
