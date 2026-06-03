@@ -522,11 +522,11 @@ The complete list of starters can be found on <a href="https://market.enonic.com
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-bash" data-lang="bash">enonic project create --sb tutorial -r starter-vanilla -d myapp -v 1.0.0 -n com.example.myapp</code></pre>
+<pre class="highlight"><code class="language-bash" data-lang="bash">enonic project create --sb tutorial -r starter-vanilla  -b 7.x -d tutorial101 -v 1.0.0 -n com.example.tutorial101</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>This command links the app to the <code>tutorial</code> sandbox, uses <code>starter-vanilla</code> as a template, places the code in the folder <code>myapp</code>, sets version to <code>1.0.0</code>, and finally gives the app the name <code>com.example.myapp</code>.</p>
+<p>This command links the app to the <code>tutorial</code> sandbox, uses <code>starter-vanilla</code> as a template, places the code in the folder <code>tutorial101</code>, sets version to <code>1.0.0</code>, and finally gives the app the name <code>com.example.tutorial101</code>. -b 7.x means that it will use the XP7 compatible version of the starter.</p>
 </div>
 <div class="admonitionblock tip">
 <table>
@@ -638,7 +638,7 @@ BUILD SUCCESSFUL in 5s
 </table>
 </div>
 <div class="paragraph">
-<p>This copies the application .jar file to your sandbox&#8217;s <code>home/deploy/</code> folder when changes are made. Since in this case we deployed <code>myapp.jar</code> into <code>tutorial</code> sandbox, we should expect that file to be on <code>~/.enonic/sandboxes/tutorial/home/deploy</code>.</p>
+<p>This copies the application .jar file to your sandbox&#8217;s <code>home/deploy/</code> folder when changes are made. Since in this case we deployed <code>tutorial101.jar</code> into <code>tutorial</code> sandbox, we should expect that file to be on <code>~/.enonic/sandboxes/tutorial/home/deploy</code>.</p>
 </div>
 <div class="admonitionblock note">
 <table>
@@ -672,8 +672,8 @@ If you want to build or deploy your project manually, you can use the <code>enon
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-shell" data-lang="shell">[...] - Local application [com.example.myapp] installed successfully
-[...] - Application [com.example.myapp] started successfully</code></pre>
+<pre class="highlight"><code class="language-shell" data-lang="shell">[...] - Local application [com.example.tutorial101] installed successfully
+[...] - Application [com.example.tutorial101] started successfully</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -749,7 +749,7 @@ If you want to build or deploy your project manually, you can use the <code>enon
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-shell" data-lang="shell">mv build/libs/myapp.jar ~/.enonic/sandboxes/tutorial/home/deploy/</code></pre>
+<pre class="highlight"><code class="language-shell" data-lang="shell">mv build/libs/tutorial101.jar ~/.enonic/sandboxes/tutorial/home/deploy/</code></pre>
 </div>
 </div>
 <div class="admonitionblock note">
@@ -777,7 +777,7 @@ If you had to deploy manually when going through this tutorial, please get in to
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2026-06-03 16:35:49 UTC
+Last updated 2026-06-03 16:55:47 UTC
 </div>
 </div>
 </body>
