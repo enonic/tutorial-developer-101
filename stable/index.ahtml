@@ -449,7 +449,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <div id="preamble">
 <div class="sectionbody">
 <div class="paragraph">
-<p>Hello, and welcome to this in-depth tutorial to get familiar with Enonic. The guide is aimed at people new to Enonic, covering the essentials of content modelling and accessing content via the GraphQL API.</p>
+<p>Welcome to this in-depth tutorial to get familiar with Enonic. The guide is aimed at people new to Enonic, covering the essentials of content modelling and accessing content via the GraphQL API.</p>
 </div>
 <div class="paragraph">
 <p>If you have any questions, or just want to get in touch - visit the <a href="https://discuss.enonic.com" target="_blank" rel="noopener">Forum</a> or join the <a href="https://slack.enonic.com/" target="_blank" rel="noopener">Community Slack channel</a></p>
@@ -574,7 +574,7 @@ When we mention "XP", we are referring to "Enonic XP", the hybrid CMS you&#8217;
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2026-06-03 16:55:47 UTC
+Last updated 2026-06-03 19:01:43 UTC
 </div>
 </div>
 </body>
