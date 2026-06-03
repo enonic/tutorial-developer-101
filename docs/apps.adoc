@@ -29,10 +29,10 @@ Run this command to create your application:
 [subs="attributes"]
 [source,bash]
 ----
-enonic project create --sb tutorial -r starter-vanilla -d {project-name} -v 1.0.0 -n com.example.{project-name}
+enonic project create --sb tutorial -r starter-vanilla  -b 7.x -d tutorial101 -v 1.0.0 -n com.example.tutorial101
 ----
 
-This command links the app to the `tutorial` sandbox, uses `starter-vanilla` as a template, places the code in the folder `{project-name}`, sets version to `1.0.0`, and finally gives the app the name `com.example.{project-name}`.
+This command links the app to the `tutorial` sandbox, uses `starter-vanilla` as a template, places the code in the folder `tutorial101`, sets version to `1.0.0`, and finally gives the app the name `com.example.tutorial101`. -b 7.x means that it will use the XP7 compatible version of the starter.
 
 TIP: You don't need to open the starter docs, so type `N` and press kbd:[Enter] if asked.
 
@@ -90,7 +90,7 @@ BUILD SUCCESSFUL in 5s
 
 TIP: *Gradle got you worried?* Enonic uses Gradle to support other programming languages and tools beyond JavaScript. Just stay calm and continue the journey!
 
-This copies the application .jar file to your sandbox's `home/deploy/` folder when changes are made. Since in this case we deployed `{project-name}.jar` into `tutorial` sandbox, we should expect that file to be on `~/.enonic/sandboxes/tutorial/home/deploy`.
+This copies the application .jar file to your sandbox's `home/deploy/` folder when changes are made. Since in this case we deployed `tutorial101.jar` into `tutorial` sandbox, we should expect that file to be on `~/.enonic/sandboxes/tutorial/home/deploy`.
 
 NOTE: .enonic is the folder used by CLI to manage your sandboxes and Enonic XP distributions.
 
@@ -103,8 +103,8 @@ To confirm that your application was started correctly, you can look at the logs
 [subs="attributes"]
 [source,shell]
 ----
-[...] - Local application [{project-name-full}] installed successfully
-[...] - Application [{project-name-full}] started successfully
+[...] - Local application [com.example.tutorial101] installed successfully
+[...] - Application [com.example.tutorial101] started successfully
 ----
 
 You can also verify that the application was installed correctly from the welcome page http://localhost:8080[http://localhost:8080^], or from the XP admin via `XP Menu` -> `Applications`:
@@ -152,7 +152,7 @@ The project build result is available in the `build/libs` directory of the proje
 
 [source,shell,{subs}]
 ----
-mv build/libs/{project-name}.jar ~/.enonic/sandboxes/tutorial/home/deploy/
+mv build/libs/tutorial101.jar ~/.enonic/sandboxes/tutorial/home/deploy/
 ----
 
 NOTE: If you had to deploy manually when going through this tutorial, please get in touch on https://slack.enonic.com[the community slack^] so we can improve the documentation and the process.
