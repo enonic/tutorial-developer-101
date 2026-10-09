@@ -760,7 +760,7 @@ Content types also have a number of other, optional settings that we won&#8217;t
 <i class="fa icon-note" title="Note"></i>
 </td>
 <td class="content">
-XP&#8217;s inputs are <em>not</em> the same as HTML <code>input</code> elements. To read more about them, <a href="input-types.ahtml">see the chapter on input types</a>.
+XP&#8217;s inputs are <em>not</em> the same as HTML <code>input</code> elements. To read more about them, <a href="form-items.ahtml">see the chapter on form items</a>.
 </td>
 </tr>
 </table>
@@ -1023,7 +1023,7 @@ You can also publish a piece of content by using the keyboard shortcut <span cla
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2026-10-09 13:25:37 UTC
+Last updated 2026-10-09 13:46:57 UTC
 </div>
 </div>
 </body>

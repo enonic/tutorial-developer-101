@@ -974,14 +974,14 @@ Asking for scaled and filtered images is allowed when you query Guillotine&#8217
 <p>You should now have a deep understanding of how media is stored and accessed - as well as XP&#8217;s image handling and image API, including how to access it all from the GraphQL API.</p>
 </div>
 <div class="paragraph">
-<p>Pushing forward, it&#8217;s time to <a href="input-types.ahtml">have a closer look at the basic building blocks of the content forms; input types</a>.</p>
+<p>Pushing forward, it&#8217;s time to <a href="form-items.ahtml">have a closer look at the building blocks of content forms; form items</a>.</p>
 </div>
 </div>
 </div>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2026-10-09 13:25:37 UTC
+Last updated 2026-10-09 13:46:57 UTC
 </div>
 </div>
 </body>

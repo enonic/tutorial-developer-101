@@ -478,7 +478,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <p>upload <a href="files.ahtml">images and other media</a>, and serve them scaled and cropped</p>
 </li>
 <li>
-<p>model richer content with <a href="input-types.ahtml">input types</a>, <a href="sets.ahtml">sets and form fragments</a>, <a href="rich-text.ahtml">rich text</a> and <a href="mixins.ahtml">mixins</a></p>
+<p>model richer content with <a href="form-items.ahtml">form items</a>, <a href="sets.ahtml">sets and form fragments</a>, <a href="rich-text.ahtml">rich text</a> and <a href="mixins.ahtml">mixins</a></p>
 </li>
 <li>
 <p>fetch it all from a <a href="frontend.ahtml">front-end</a>, with routing, paging and URLs</p>
@@ -489,7 +489,20 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 </ul>
 </div>
 <div class="paragraph">
-<p>It does not cover building pages with the Enonic framework. For that, see the <a href="https://developer.enonic.com/docs/intro">Introduction to Enonic</a> and the <a href="https://developer.enonic.com/docs/next.xp">Next.js tutorial</a>. The <a href="https://developer.enonic.com/docs/cms">CMS reference documentation</a> covers every topic in this tutorial in depth, and is the place to go once you know what you are looking for.</p>
+<p>Two things to know before you start:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>No coding.</strong> You will not write application code. The schemas are YAML files, the queries are GraphQL, and the only JavaScript is a handful of <code>fetch</code> examples in the front-end chapter, which you can run as they are. There is nothing to compile or debug.</p>
+</li>
+<li>
+<p><strong>No pages.</strong> Sites, pages, layouts and parts - the whole page domain of Enonic - are left out entirely, whether rendered by Enonic or by a front-end of your own. This tutorial is about the content itself and how you get it out through the API. For pages, see the <a href="https://developer.enonic.com/docs/intro">Introduction to Enonic</a> and the <a href="https://developer.enonic.com/docs/next.xp">Next.js tutorial</a>.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>The <a href="https://developer.enonic.com/docs/cms">CMS reference documentation</a> covers every topic in this tutorial in depth, and is the place to go once you know what you are looking for.</p>
 </div>
 <div class="admonitionblock note">
 <table>
@@ -514,7 +527,7 @@ When we mention "XP", we are referring to "Enonic XP", the platform behind Enoni
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2026-10-09 13:25:37 UTC
+Last updated 2026-10-09 13:46:57 UTC
 </div>
 </div>
 </body>

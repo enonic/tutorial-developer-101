@@ -479,13 +479,13 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <div id="preamble">
 <div class="sectionbody">
 <div class="paragraph">
-<p>If you want to work with rich text, HtmlArea is the input type to go for.</p>
+<p>If you want to work with rich text, HtmlArea is the form item to go for.</p>
 </div>
 <div class="paragraph">
-<p>This input type offers some very powerful editing capabilities and a lot of configuration options.</p>
+<p>This form item offers some very powerful editing capabilities and a lot of configuration options.</p>
 </div>
 <div class="paragraph">
-<p>This whole chapter is dedicated to the <a href="https://developer.enonic.com/docs/cms/stable/schemas/form-items/htmlarea">HtmlArea input type</a> and the editor used to define its data.</p>
+<p>This whole chapter is dedicated to the <a href="https://developer.enonic.com/docs/cms/stable/schemas/form-items/htmlarea">HtmlArea form item</a> and the editor used to define its data.</p>
 </div>
 <div class="paragraph">
 <p>The user-oriented documentation of the Rich text editor can be found in the <a href="https://developer.enonic.com/docs/content-studio/stable/editor/rich-text-editor">Content Studio docs</a>.</p>
@@ -511,10 +511,10 @@ The tasks and examples in this chapter are based on work done in previous chapte
 <div class="content">
 <img src="media/input-type-html-area.png" alt="A text input field with a tools ribbon just above." width="750">
 </div>
-<div class="title">Figure 1. The HtmlArea input type with the default tools selection</div>
+<div class="title">Figure 1. The HtmlArea form item with the default tools selection</div>
 </div>
 <div class="paragraph">
-<p>The HtmlArea input type gives you a multi-line input field with rich formatting options, much like what you&#8217;re used to from your favorite word processor. It supports text formatting and justification, lists, links, and even lets you insert images.</p>
+<p>The HtmlArea form item gives you a multi-line input field with rich formatting options, much like what you&#8217;re used to from your favorite word processor. It supports text formatting and justification, lists, links, and even lets you insert images.</p>
 </div>
 <div class="paragraph">
 <p>You can configure the HtmlArea to be exactly what you want by dictating what formatting tools to include or exclude (the <code>include</code> and <code>exclude</code> settings, respectively), by what heading levels are allowed (<code>allowHeadings</code>), and by giving it a default value (<code>default</code>).</p>
@@ -590,7 +590,7 @@ The tasks and examples in this chapter are based on work done in previous chapte
 <p>Your content type should now look something like this:</p>
 </div>
 <div class="listingblock">
-<div class="title">Animal with an HtmlArea input type</div>
+<div class="title">Animal with an HtmlArea form item</div>
 <div class="content">
 <pre class="highlight"><code class="language-yaml" data-lang="yaml">kind: "ContentType"
 title: "Animal"
@@ -1337,7 +1337,7 @@ If you used a different macro than the "Embed iframe" macro, the query must be u
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2026-10-09 13:25:37 UTC
+Last updated 2026-10-09 13:46:57 UTC
 </div>
 </div>
 </body>

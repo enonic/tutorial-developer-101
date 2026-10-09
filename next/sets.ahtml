@@ -468,7 +468,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <div id="preamble">
 <div class="sectionbody">
 <div class="paragraph">
-<p>XP also offers ways for you to group inputs, both visually and structurally. Collectively, these are known as sets. XP can also reuse a group of inputs across several schemas, through form fragments. This chapter explains what they are and how to use them.</p>
+<p>Some form items exist to group other form items, both visually and structurally. Collectively, these are known as sets. XP can also reuse a group of inputs across several schemas, through form fragments. This chapter explains what they are and how to use them.</p>
 </div>
 <div class="admonitionblock note">
 <table>
@@ -613,7 +613,7 @@ If you have read XP 7 material, be aware that form fragments were called <em>mix
 <p>Let&#8217;s add an item set to the <code>Artist</code>. The goal will be to add a Filmography item set, featuring where and when a specific artist was featured in a movie.</p>
 </div>
 <div class="paragraph">
-<p>To add an item set, use it as you would any other input type: place it within the <code>form</code> of a content type.</p>
+<p>To add an item set, use it as you would any other form item: place it within the <code>form</code> of a content type.</p>
 </div>
 <div class="paragraph">
 <p>If we add it to the <code>Artist</code> content type, it&#8217;d look something like this:</p>
@@ -697,7 +697,7 @@ form:
 <div class="sect3">
 <h4 id="single_select_dietary_data"><a class="link" href="#single_select_dietary_data">Single-select: dietary data</a></h4>
 <div class="paragraph">
-<p>Open your animal content type and add a single-select option set.  As before, we use option sets as we would any other input type.</p>
+<p>Open your animal content type and add a single-select option set.  As before, we use option sets as we would any other form item.</p>
 </div>
 <div class="listingblock">
 <div class="title">The <code>Animal</code> content type with feeding behavior</div>
@@ -1090,7 +1090,7 @@ The use of the form fragment helps us both reduce duplication and keep all optio
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2026-10-09 13:25:37 UTC
+Last updated 2026-10-09 13:46:57 UTC
 </div>
 </div>
 </body>

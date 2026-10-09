@@ -702,7 +702,7 @@ For more details and configuration options for mixins, visit <a href="https://de
 </tr>
 <tr>
 <td><i class="conum" data-value="3"></i><b>3</b></td>
-<td>This is the "notes" field (TextLine input type) inside the "notes" mixin.</td>
+<td>This is the "notes" field (TextLine form item) inside the "notes" mixin.</td>
 </tr>
 </table>
 </div>
@@ -762,7 +762,7 @@ For more details and configuration options for mixins, visit <a href="https://de
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2026-10-09 13:25:37 UTC
+Last updated 2026-10-09 13:46:57 UTC
 </div>
 </div>
 </body>
