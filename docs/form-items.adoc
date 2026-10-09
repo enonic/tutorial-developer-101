@@ -27,6 +27,12 @@ Because the form items are so different from each other, they also support type-
 
 IMPORTANT: Use `camelCase` for names, such as `otherNames`. Names are used as they are for field names in the GraphQL API, where camelCase is the convention and matches built-in fields such as `displayName`. One caveat: property paths are lowercased in the index, so never give two form items on the same level names that differ only by case.
 
+[TIP]
+.When to use it
+====
+Names are part of your API, so choose them to last. Renaming a form item does not rename the data already stored under the old name: existing items keep their values under a property the form no longer shows, and every query that selected the old field breaks. Labels, on the other hand, can change whenever you like.
+====
+
 NOTE: All of the shared settings (`label`, `occurrences`, etc.), and the list of available form items are described in the https://developer.enonic.com/docs/cms/stable/schemas/form-items[form items documentation].
 
 To show how the settings work, let's examine some TextLine inputs with different configurations.
@@ -106,6 +112,12 @@ By setting `max` to `0`, you allow the field to have an *unlimited amount of ent
 
 TIP: If `max` is greater than `0`, make sure that `min` is less than or equal to `max`. Otherwise, the field will never be considered valid according to XP.
 
+[TIP]
+.When to use it
+====
+Make a field required only when your front-end cannot render the item without it. A required field blocks editors from saving work in progress, and an invalid item cannot be published. Most fields are better optional, with the front-end handling an empty value.
+====
+
 == Common form items
 
 Apart from the form items we've already gotten familiar with, XP also has form items created for other kinds of data. You can always find the full list over https://developer.enonic.com/docs/cms/stable/schemas/form-items[at the form items reference docs], grouped by the kind of value they produce, but some useful and common ones are:
@@ -181,6 +193,12 @@ https://developer.enonic.com/docs/cms/stable/schemas/form-items/contentselector[
 
 
 
+[TIP]
+.When to use it
+====
+Reference another content item when the thing has a life of its own: it is published, moved, reused from several places or edited by someone else. An artist's favorite animal is an animal that exists regardless of the artist, so it is a reference. When the data only makes sense inside the parent, such as an artist's filmography entries, embed it instead with the sets you will meet in the <<sets#, next {document}>>.
+====
+
 == AttachmentUploader
 
 XP also has a rather special form item named https://developer.enonic.com/docs/cms/stable/schemas/form-items/attachmentuploader[AttachmentUploader]. Unlike <<files#, media>> content, which creates an independent content item for each file you upload, AttachmentUploader lets you store one (or more) files within the specific content item. Under the hood, it uses the same `attachment` property structure as media when persisting the file.
@@ -189,7 +207,11 @@ XP also has a rather special form item named https://developer.enonic.com/docs/c
 image::input-type-attachmentuploader.png[AttachmentUploader: Store any number of files within your content item, 651w]
 
 
-NOTE: Imagine creating a content type for e-mail, you would probably use an AttachmentUploader field to store the file attachments. This is because you really don't need each file to be independently referenced, published and managed - right.
+[TIP]
+.When to use it
+====
+Upload a file as media when it is an asset in its own right: an image used on several pages, a brochure linked from many places, anything editors should find, reuse and publish independently. Use an AttachmentUploader when the file belongs to exactly one item and should live and die with it, such as the attachments of an e-mail or the PDF version of a report. Media can be referenced from an ImageSelector or ContentSelector; attachments cannot.
+====
 
 .Here is what an AttachmentUploader definition looks like
 [source,yaml]

@@ -124,6 +124,12 @@ form: # <4>
 <4> This is where we specify which fields (aka inputs) this content type shall have, basically the form, as seen in Content Studio.
 <5> The `type` specifies what kind of input the user will see in Content Studio, and the `label` specifies how the input will be labeled.
 +
+[TIP]
+.When to use it
+====
+Every content type has a built-in display name, so don't add a `title` or `name` field that stores the same thing: editors get two fields to fill in, and your front-end gets two places to look. Here the display name is the artist's stage name and `name` is their legal name, which is why both earn their place. Add a field only when it carries different information from the item's name.
+====
++
 NOTE: Content types also have a number of other, optional settings that we won't get into here. If you'd like to learn more about this, consult https://developer.enonic.com/docs/cms/stable/content/content-types[the reference documentation].
 +
 NOTE: XP's inputs are _not_ the same as HTML `input` elements. To read more about them, <<form-items#, see the {document} on form items>>.
@@ -166,6 +172,12 @@ image::content-studio-new-content.png["The \"Create Content\" dialog when creati
 However, before we start creating {content-type-1}s, let's create a folder.
 
 Since we'll be using this content project in the coming {document}s with more content types, having some hierarchy will make things easier. Create a new folder and call it "{content-type-1}s".
+
+[TIP]
+.When to use it
+====
+The content path, such as `/{content-type-1}s/cardi-b`, is what a front-end will use to find an item and often to build its URL. Group content by type in folders from the start, and name the folders as you want them to appear in those paths. Moving content later does not break references, but it does change paths.
+====
 
 Next, let's create a few {content-type-1}s to get used to the workflow. We'll start with Cardi B.
 

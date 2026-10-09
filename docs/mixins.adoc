@@ -20,6 +20,12 @@ Now, if your requirement is to add new fields to multiple content types, that is
 
 The same behaviour of extending multiple content types can be achieved through form fragments. You can create a form fragment and include it in the content types you want to extend. The difference is where the data in those fields is stored, and in the fact that mixins are easier to maintain when adding to a lot of content types - or to content types you don't own, such as the built-in folders and media types.
 
+[TIP]
+.When to use it
+====
+Use a mixin when the fields cut across content types rather than belong to one: SEO settings, editorial notes, tracking data. Mixins reach types you do not own, such as folders and media, can be made optional so editors switch them on per item, and keep their data apart from the type's own fields under `x`. Use a form fragment when the fields are part of what the type _is_; they then land in `data` like any other field.
+====
+
 Let's now add a "notes" mixin, which will extend both the {content-type-1-capitalized} and {content-type-2-capitalized} content types.
 
 Similar to content types, mixin schemas have a specific naming and placement convention within your app: `{app-root}/cms/mixins/<mixin-name>/<mixin-name>.yaml`.
@@ -187,6 +193,75 @@ Should you require specific fields only, or wish to drill into more details, for
 <3> This is the "notes" field (TextLine form item) inside the "notes" mixin.
 
 If you made it here - you are officially equipped with an essential overview of Enonic's fundamental content modelling capabilities. 🙌
+
+== Choosing the right tool
+
+Your content model is complete, so here is everything you have used, side by side. Come back to this table when you model something new.
+
+[%header,cols="1,2,2,2"]
+|===
+|Tool |Use it for |Where the data ends up |Sign you picked the wrong one
+
+|Content type
+|A kind of item editors create, find and publish on its own
+|An item with its own path, status and permissions
+|Items that are only ever edited together with one other item
+
+|Display name
+|The item's own title
+|`displayName` on every item
+|A `title` field that always repeats it
+
+|Folder
+|Grouping items so paths stay meaningful
+|The path of every item beneath it
+|Paths nobody can predict
+
+|Reference (ContentSelector, ImageSelector)
+|Pointing at an item that exists on its own
+|The target's ID; the item is reachable through the reference
+|Copying the same text or image into many items
+
+|Media
+|Files that are assets in their own right
+|A content item of a media type, with an attachment
+|Uploading the same file over and over
+
+|AttachmentUploader
+|Files that belong to one item
+|An attachment on that item
+|Wanting to link to the file from elsewhere
+
+|FieldSet
+|A tidier form
+|Nothing; the fields inside are stored as usual
+|Expecting it in the API
+
+|ItemSet
+|Repeating structured data the item owns
+|An object, or a list of objects, under `data`
+|Needing to publish or reuse the entries separately
+
+|OptionSet
+|A choice between variants with different fields
+|An object with `+_selected+` and one key per option
+|Every option is empty; use a ComboBox
+
+|Form fragment
+|The same fields in several schemas of your app
+|Exactly as if the fields were typed in place
+|Needing the fields on types you do not own
+
+|HtmlArea
+|Free-form prose
+|One HTML string, with links, images and macros resolved by the API
+|Parsing the HTML to find structure
+
+|Mixin
+|Fields that cut across content types, including built-in ones
+|Under `x`, grouped by app and mixin
+|The fields belong to one type only
+|===
 
 == Bonus: SEO Metafields
 

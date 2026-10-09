@@ -96,6 +96,12 @@ form:
 
 With the new content type deployed, you are ready to continue with the further tasks we'll introduce in the next sections.
 
+[TIP]
+.When to use it
+====
+Use an HtmlArea where editors need free-form prose: a description, an article body, a biography. When your front-end needs to render parts differently, such as a quote, a gallery and a call to action, model them as an OptionSet of blocks instead, so each part arrives as structured data rather than HTML to parse. And keep the toolbar small: every tool you allow is HTML your front-end has to style.
+====
+
 == Links
 
 In addition to good old URLs, the Rich text editor provides a more powerful way of creating links, in which you can:
