@@ -463,18 +463,6 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <div class="paragraph">
 <p>In Content Studio, a mixin is visually displayed as a separate section of the form, listed below the content type&#8217;s standard fields.</p>
 </div>
-<div class="admonitionblock warning">
-<table>
-<tr>
-<td class="icon">
-<i class="fa icon-warning" title="Warning"></i>
-</td>
-<td class="content">
-If you have read XP 7 material, be aware that the word <strong>mixin</strong> changed meaning in XP 8. What XP 7 called <em>x-data</em> is what this chapter calls a mixin. What XP 7 called a <em>mixin</em> is now a <a href="sets.ahtml#_form_fragments">form fragment</a>.
-</td>
-</tr>
-</table>
-</div>
 <div class="admonitionblock note">
 <table>
 <tr>
@@ -876,7 +864,7 @@ For more details and configuration options for mixins, visit <a href="https://de
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2026-10-09 14:00:08 UTC
+Last updated 2026-10-09 14:22:36 UTC
 </div>
 </div>
 </body>

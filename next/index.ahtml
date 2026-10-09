@@ -472,7 +472,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <p>create content types and content in <a href="content-studio.ahtml">Content Studio</a></p>
 </li>
 <li>
-<p>query your content through the <a href="headless-api.ahtml">GraphQL API</a></p>
+<p>query your content through the <a href="headless-api.ahtml">Headless API</a></p>
 </li>
 <li>
 <p>upload <a href="files.ahtml">images and other media</a>, and serve them scaled and cropped</p>
@@ -527,7 +527,7 @@ When we mention "XP", we are referring to "Enonic XP", the platform behind Enoni
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2026-10-09 14:00:08 UTC
+Last updated 2026-10-09 14:22:36 UTC
 </div>
 </div>
 </body>

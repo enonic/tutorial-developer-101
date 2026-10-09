@@ -7,7 +7,7 @@
 <meta name="generator" content="Asciidoctor 2.0.26">
 <meta name="application-name" content="tutorial101">
 <meta name="description" content="What is a headless CMS without an API? Learn about the Guillotine app and the powers it unlocks here.">
-<title>GraphQL API</title>
+<title>Headless API</title>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,300italic,400,400italic,600,600italic%7CNoto+Serif:400,400italic,700,700italic%7CDroid+Sans+Mono:400,700">
 <style>
 /*! Asciidoctor default stylesheet | MIT License | https://asciidoctor.org */
@@ -439,7 +439,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 </head>
 <body class="article toc2 toc-right">
 <div id="header">
-<h1>GraphQL API</h1>
+<h1>Headless API</h1>
 <div id="toc" class="toc2">
 <div id="toctitle">Table of Contents</div>
 <ul class="sectlevel1">
@@ -517,10 +517,41 @@ This tutorial is written for Guillotine 9, which requires XP 8.1 or newer. Check
 <p>Guillotine exposes a single API endpoint for all your projects. On your sandbox, it is <code><a href="http://localhost:8080/api/com.enonic.app.guillotine:graphql" class="bare">http://localhost:8080/api/com.enonic.app.guillotine:graphql</a></code>.</p>
 </div>
 <div class="paragraph">
-<p>Look at that address for a moment, because the pattern comes back throughout this tutorial. In XP 8, every web API is a <em>Universal API</em>: it has a name of the form <code>&lt;app&gt;:&lt;name&gt;</code>, and it is mounted under the instance&#8217;s single <code>/api</code> endpoint. Guillotine&#8217;s API is <code>com.enonic.app.guillotine:graphql</code>. The images you upload later are served by <code>media:image</code>, and other files by <code>media:attachment</code>, from the very same place. An app of your own can add more.</p>
+<p>Look at that address for a moment, because the pattern comes back throughout this tutorial. In XP 8, every web API is a <em>Universal API</em>: it has a name of the form <code>&lt;app&gt;:&lt;name&gt;</code>, and it is mounted under the instance&#8217;s single <code>/api</code> endpoint. The ones you will meet in this tutorial are:</p>
+</div>
+<div class="dlist">
+<dl>
+<dt class="hdlist1"><code>com.enonic.app.guillotine:graphql</code></dt>
+<dd>
+<p>Guillotine&#8217;s GraphQL API, the one you are about to use.</p>
+</dd>
+<dt class="hdlist1"><code>media:image</code></dt>
+<dd>
+<p>Serves the images you upload later, scaled and cropped on request.</p>
+</dd>
+<dt class="hdlist1"><code>media:attachment</code></dt>
+<dd>
+<p>Serves any other uploaded file, as it was uploaded.</p>
+</dd>
+</dl>
+</div>
+<div class="paragraph">
+<p>By default, all three live at the very same place, and an app of your own can add more.</p>
 </div>
 <div class="paragraph">
 <p>This is why one base URL is enough. Everything you will ask XP for - queries, images, downloads - lives under <code><a href="http://localhost:8080/api" class="bare">http://localhost:8080/api</a></code> on your sandbox. On a live server it lives under that server&#8217;s address instead, and that is the only difference: the same APIs, the same names, the same paths. Your front-end is the one that knows which base to use. You will build media URLs on top of this base in the <a href="files.ahtml">media chapter</a>, and call it from code in the <a href="frontend.ahtml">front-end chapter</a>.</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+The single endpoint is the default, not a limit. In production, each API can be given its own address, for instance serving the media APIs from a CDN at <code>cdn.example.com</code> while GraphQL stays at <code>api.example.com</code>. Because Guillotine returns URL paths rather than finished addresses, your front-end simply uses a different base for media than for queries. The <a href="https://developer.enonic.com/docs/platform/stable/config/vhosts">virtual host configuration</a> in the platform docs covers how.
+</td>
+</tr>
+</table>
 </div>
 <div class="paragraph">
 <p>For now, Content Studio offers a much more comfortable way to explore the API than calling the endpoint yourself.</p>
@@ -1131,7 +1162,7 @@ If you are not running the app in dev mode (<code>enonic dev</code>, introduced 
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2026-10-09 14:00:08 UTC
+Last updated 2026-10-09 14:22:36 UTC
 </div>
 </div>
 </body>

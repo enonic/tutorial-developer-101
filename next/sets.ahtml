@@ -584,18 +584,6 @@ The tasks and examples in this chapter are based on work done in previous chapte
 <div class="paragraph">
 <p>Form fragments go in the <code>src/main/resources/cms/form-fragments</code> directory, following the same naming pattern as the other schemas we&#8217;ve seen (<code>&lt;fragment-name&gt;/&lt;fragment-name&gt;.yaml</code>).</p>
 </div>
-<div class="admonitionblock warning">
-<table>
-<tr>
-<td class="icon">
-<i class="fa icon-warning" title="Warning"></i>
-</td>
-<td class="content">
-If you have read XP 7 material, be aware that form fragments were called <em>mixins</em> there. In XP 8, the word mixin means something else, which you will meet in <a href="mixins.ahtml">a later chapter</a>.
-</td>
-</tr>
-</table>
-</div>
 <div class="paragraph">
 <p>We&#8217;ll see them in the upcoming task, but if you want to learn more about them, consult <a href="https://developer.enonic.com/docs/cms/stable/schemas/form-fragments">the form fragments reference documentation</a>.</p>
 </div>
@@ -1118,7 +1106,7 @@ The use of the form fragment helps us both reduce duplication and keep all optio
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2026-10-09 14:00:08 UTC
+Last updated 2026-10-09 14:22:36 UTC
 </div>
 </div>
 </body>

@@ -494,7 +494,7 @@ The tasks and examples in this chapter are based on work done in previous chapte
 <h2 id="the_request"><a class="link" href="#the_request">The request</a></h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>The endpoint is <code><a href="http://localhost:8080/api/com.enonic.app.guillotine:graphql" class="bare">http://localhost:8080/api/com.enonic.app.guillotine:graphql</a></code>, as you saw in the <a href="headless-api.ahtml#_one_endpoint_for_every_api">GraphQL chapter</a>. It takes an HTTP POST with <code>Content-Type: application/json</code> and a JSON body with two properties:</p>
+<p>The endpoint is <code><a href="http://localhost:8080/api/com.enonic.app.guillotine:graphql" class="bare">http://localhost:8080/api/com.enonic.app.guillotine:graphql</a></code>, as you saw in the <a href="headless-api.ahtml#_one_endpoint_for_every_api">Headless API chapter</a>. It takes an HTTP POST with <code>Content-Type: application/json</code> and a JSON body with two properties:</p>
 </div>
 <table class="tableblock frame-all grid-all stretch">
 <colgroup>
@@ -806,7 +806,7 @@ for (const image of description.images) {
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2026-10-09 14:00:08 UTC
+Last updated 2026-10-09 14:22:36 UTC
 </div>
 </div>
 </body>
