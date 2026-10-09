@@ -443,7 +443,11 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <div id="toc" class="toc2">
 <div id="toctitle">Table of Contents</div>
 <ul class="sectlevel1">
-<li><a href="#guillotine">Guillotine</a></li>
+<li><a href="#guillotine">Guillotine</a>
+<ul class="sectlevel2">
+<li><a href="#one_endpoint_for_every_api">One endpoint for every API</a></li>
+</ul>
+</li>
 <li><a href="#query_playground">Query Playground</a>
 <ul class="sectlevel2">
 <li><a href="#getting_around">Getting around</a></li>
@@ -507,8 +511,20 @@ This tutorial is written for Guillotine 9, which requires XP 8.1 or newer. Check
 </tr>
 </table>
 </div>
+<div class="sect2">
+<h3 id="one_endpoint_for_every_api"><a class="link" href="#one_endpoint_for_every_api">One endpoint for every API</a></h3>
 <div class="paragraph">
-<p>Guillotine exposes a single API endpoint for all your projects. On your sandbox, it is <code><a href="http://localhost:8080/api/com.enonic.app.guillotine:graphql" class="bare">http://localhost:8080/api/com.enonic.app.guillotine:graphql</a></code>. We&#8217;ll use it directly in the <a href="deployment.ahtml">deployment chapter</a>. For now, Content Studio offers a much more comfortable way to explore it.</p>
+<p>Guillotine exposes a single API endpoint for all your projects. On your sandbox, it is <code><a href="http://localhost:8080/api/com.enonic.app.guillotine:graphql" class="bare">http://localhost:8080/api/com.enonic.app.guillotine:graphql</a></code>.</p>
+</div>
+<div class="paragraph">
+<p>Look at that address for a moment, because the pattern comes back throughout this tutorial. In XP 8, every web API is a <em>Universal API</em>: it has a name of the form <code>&lt;app&gt;:&lt;name&gt;</code>, and it is mounted under the instance&#8217;s single <code>/api</code> endpoint. Guillotine&#8217;s API is <code>com.enonic.app.guillotine:graphql</code>. The images you upload later are served by <code>media:image</code>, and other files by <code>media:attachment</code>, from the very same place. An app of your own can add more.</p>
+</div>
+<div class="paragraph">
+<p>This is why one base URL is enough. Everything you will ask XP for - queries, images, downloads - lives under <code><a href="http://localhost:8080/api" class="bare">http://localhost:8080/api</a></code> on your sandbox. On a live server it lives under that server&#8217;s address instead, and that is the only difference: the same APIs, the same names, the same paths. Your front-end is the one that knows which base to use. You will build media URLs on top of this base in the <a href="files.ahtml">media chapter</a>, and call it from code in the <a href="frontend.ahtml">front-end chapter</a>.</p>
+</div>
+<div class="paragraph">
+<p>For now, Content Studio offers a much more comfortable way to explore the API than calling the endpoint yourself.</p>
+</div>
 </div>
 </div>
 </div>
@@ -1115,7 +1131,7 @@ If you are not running the app in dev mode (<code>enonic dev</code>, introduced 
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2026-10-09 12:57:26 UTC
+Last updated 2026-10-09 13:25:37 UTC
 </div>
 </div>
 </body>

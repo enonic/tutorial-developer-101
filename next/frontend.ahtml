@@ -6,8 +6,8 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="generator" content="Asciidoctor 2.0.26">
 <meta name="application-name" content="tutorial101">
-<meta name="description" content="How do you actually deploy Enonic XP and use it for more than local development? And where do you go from here to learn more?">
-<title>Deployment and next steps</title>
+<meta name="description" content="Call the API from cURL, Node and a browser. Publish content, configure CORS, resolve a route, page a list and build page and media URLs from their parts.">
+<title>Fetching content from a front-end</title>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,300italic,400,400italic,600,600italic%7CNoto+Serif:400,400italic,700,700italic%7CDroid+Sans+Mono:400,700">
 <style>
 /*! Asciidoctor default stylesheet | MIT License | https://asciidoctor.org */
@@ -439,26 +439,23 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 </head>
 <body class="article toc2 toc-right">
 <div id="header">
-<h1>Deployment and next steps</h1>
+<h1>Fetching content from a front-end</h1>
 <div id="toc" class="toc2">
 <div id="toctitle">Table of Contents</div>
 <ul class="sectlevel1">
-<li><a href="#deploy_to_enonic_cloud">Deploy to Enonic Cloud</a>
+<li><a href="#publish_first">Publish first</a></li>
+<li><a href="#the_request">The request</a></li>
+<li><a href="#from_javascript">From JavaScript</a></li>
+<li><a href="#from_a_browser">From a browser</a>
 <ul class="sectlevel2">
-<li><a href="#task_install_application">Task: Install application</a></li>
-<li><a href="#task_import_and_publish_your_content">Task: Import and publish your content</a></li>
-<li><a href="#task_go_live">Task: Go live</a></li>
+<li><a href="#draft_content">Draft content</a></li>
 </ul>
 </li>
-<li><a href="#custom_hosting">Custom hosting</a>
-<ul class="sectlevel2">
-<li><a href="#installing_the_app">Installing the app</a></li>
-<li><a href="#vhosts">Virtual hosts = pretty URLs</a></li>
-<li><a href="#task_setup_vhosts_in_your_sandbox">Task: Setup vhosts in your Sandbox</a></li>
-<li><a href="#vhost_troubleshooting">Vhost troubleshooting</a></li>
-</ul>
-</li>
-<li><a href="#whats_next">What&#8217;s next?</a></li>
+<li><a href="#resolving_a_route">Resolving a route</a></li>
+<li><a href="#paging_a_list">Paging a list</a></li>
+<li><a href="#building_urls">Building URLs</a></li>
+<li><a href="#going_live">Going live</a></li>
+<li><a href="#summary">Summary</a></li>
 </ul>
 </div>
 </div>
@@ -466,191 +463,222 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <div id="preamble">
 <div class="sectionbody">
 <div class="paragraph">
-<p>In this final chapter, we&#8217;ll look into how you can deploy your application for real-life usage. There are essentially two options - Enonic Cloud, and everything else.</p>
+<p>So far you have run every query from Query Playground, which quietly supplied the project, the branch and your login. A front-end has none of that. In this chapter you&#8217;ll send the same queries over HTTP, from the command line, from Node and from a browser, and handle the four things every front-end on Enonic needs: the request format, published versus draft content, URLs for pages and media, and lists that page.</p>
 </div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="deploy_to_enonic_cloud"><a class="link" href="#deploy_to_enonic_cloud">Deploy to Enonic Cloud</a></h2>
-<div class="sectionbody">
-<div class="paragraph">
-<p>Enonic Cloud is Enonic&#8217;s fully managed and hassle free hosting option. Sit back, relax and let Enonic take care of your infrastructure, monitoring, backups, etc.</p>
-</div>
-<div class="paragraph">
-<p>Enough with the sales pitch. Follow the steps below to deploy your app on Enonic Cloud:</p>
-</div>
-<div class="sect2">
-<h3 id="task_install_application"><a class="link" href="#task_install_application">Task: Install application</a></h3>
-<div class="olist arabic">
-<ol class="arabic">
-<li>
-<p>Sign up by visiting <a href="https://cloud.enonic.com">https://cloud.enonic.com</a> (no credit card needed)</p>
-</li>
-<li>
-<p>After accessing your account for the first time, make sure to choose the <code>free trial</code> plan</p>
-<div class="imageblock">
-<div class="content">
-<img src="media/enonic-cloud-free-trial.png" alt="Enonic cloud welcome page with 3 plans" width="1050" height="professional and enterprise">
-</div>
-<div class="title">Figure 1. Enonic Cloud plans</div>
-</div>
-</li>
-<li>
-<p>Create a new solution. Choose the <code>CMS essentials</code> template, and go with the default values</p>
-</li>
-<li>
-<p>Connect the CLI to the cloud by running this command, and follow the instructions:</p>
-<div class="listingblock">
-<div class="content">
-<pre class="highlight"><code class="language-bash" data-lang="bash">enonic cloud login</code></pre>
-</div>
-</div>
-</li>
-<li>
-<p>From your app folder, install the app by running this command:</p>
-<div class="listingblock">
-<div class="content">
-<pre class="highlight"><code class="language-bash" data-lang="bash">enonic cloud app install</code></pre>
-</div>
-</div>
-</li>
-<li>
-<p>From the Cloud console, verify that the app was installed to your selected environment.</p>
-</li>
-<li>
-<p>In the end, you should get something like this in your terminal:</p>
-</li>
-</ol>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre>~/tutorial/{app-name}$ enonic cloud login
-
-  Your login code is &lt;code&gt;
-
-  Waiting for you to login .Go to this url to login: https://enonic.eu.auth0.com/activate?user_code=&lt;code&gt;
-
-  Waiting for you to login ... success!
-
-  Session expires at: 2026-10-31 02:18:37 +0200 CEST
-
-~/tutorial/{app-name}$ enonic cloud app install
-
-  ? Deploy '/home/you/tutorial/{app-name}/build/libs/{app-name}.jar' to 'myorg/guide101/production/xp'. Is this correct? Yes
-
-  Uploading jar [=======================================================================================] 100.00% 4s
-
-  Deploying jar to service 'myorg/guide101/production/xp'
-
-  Success!</pre>
-</div>
-</div>
-<div class="paragraph">
-<p>To make sure it all worked, click on the "launch" button on your Cloud console Dashboard, then open the "Applications" tool, and check if your app is listed on the installed applications list.</p>
-</div>
-</div>
-<div class="sect2">
-<h3 id="task_import_and_publish_your_content"><a class="link" href="#task_import_and_publish_your_content">Task: Import and publish your content</a></h3>
-<div class="paragraph">
-<p>Since the cloud instance is a completely new environment, the content you created locally will not be available here.</p>
-</div>
-<div class="paragraph">
-<p>You can choose to:</p>
-</div>
-<div class="ulist">
-<ul>
-<li>
-<p>manually create new content on the server, or</p>
-</li>
-<li>
-<p>export and import content from your local machine to the server.</p>
-</li>
-</ul>
-</div>
-<div class="paragraph">
-<p>Let&#8217;s try the second option, i.e, to export data locally and import on Enonic Cloud:</p>
-</div>
-<div class="admonitionblock warning">
+<div class="admonitionblock note">
 <table>
 <tr>
 <td class="icon">
-<i class="fa icon-warning" title="Warning"></i>
+<i class="fa icon-note" title="Note"></i>
 </td>
 <td class="content">
-Before proceeding, access Content Studio on your cloud instance and make sure to create a project there assigning your app to it. This is needed because the cloud instance is a new empty environment.
+The tasks and examples in this chapter are based on work done in previous chapters (starting with <a href="setup.ahtml">the setup chapter</a>). If you want to follow along with the examples, make sure you&#8217;re all caught up.
 </td>
 </tr>
 </table>
 </div>
-<div class="olist arabic">
-<ol class="arabic">
-<li>
-<p>Access the Data Toolbox app and go to "Data tree";</p>
-</li>
-<li>
-<p>Navigate to <code>com.enonic.cms.my-first-project</code> &gt; <code>draft</code> &gt; <code>[root]</code>, then select <code>content</code> and click on "Export selected node";</p>
-</li>
-<li>
-<p>You&#8217;ll be redirected to the "Node exports" page. Download the export, which is a zip file;</p>
-</li>
-<li>
-<p>Go back to your cloud instance, access the Data Toolbox "Node exports" page, upload the zip file downloaded in the previous step;</p>
-</li>
-<li>
-<p>Visit the "Data tree" page in Data Toolbox and navigate to <code>com.enonic.cms.&lt;name-of-your-cloud-project&gt;</code> &gt; <code>draft</code> &gt; <code>[root]</code>, click on "Import node export" and select the one that was uploaded in the previous step;</p>
-</li>
-<li>
-<p>Now access Content Studio and check that your data is imported as it should. Make sure to publish everything to make it available on the master branch.</p>
-</li>
-</ol>
+</div>
+</div>
+<div class="sect1">
+<h2 id="publish_first"><a class="link" href="#publish_first">Publish first</a></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Everything you have created so far lives in the draft branch. Draft content is only readable by logged-in users with a role in the content project, which a front-end does not have. The master branch, on the other hand, is readable by anyone in a public project like yours.</p>
 </div>
 <div class="paragraph">
-<p>With the app installed, and fresh content available - we are ready for the final step.</p>
+<p>So before anything else, publish your content: in Content Studio, select the "artists", "animals" and "images" folders, choose <b class="button">Publish</b>, and make sure the dialog includes their children. From now on, use the <code>master</code> branch in your queries.</p>
 </div>
 </div>
-<div class="sect2">
-<h3 id="task_go_live"><a class="link" href="#task_go_live">Task: Go live</a></h3>
+</div>
+<div class="sect1">
+<h2 id="the_request"><a class="link" href="#the_request">The request</a></h2>
+<div class="sectionbody">
 <div class="paragraph">
-<p>To make your content accessible publicly, the final step is to create a Route. Follow these steps to complete the task:</p>
+<p>The endpoint is <code><a href="http://localhost:8080/api/com.enonic.app.guillotine:graphql" class="bare">http://localhost:8080/api/com.enonic.app.guillotine:graphql</a></code>, as you saw in the <a href="headless-api.ahtml#_one_endpoint_for_every_api">GraphQL chapter</a>. It takes an HTTP POST with <code>Content-Type: application/json</code> and a JSON body with two properties:</p>
 </div>
-<div class="olist arabic">
-<ol class="arabic">
-<li>
-<p>From the Cloud console, go to <code>Routes</code> and click create. Choose the following options:</p>
-<div class="ulist">
-<ul>
-<li>
-<p>Choose target environment (if there are more than one)</p>
-</li>
-<li>
-<p>Accept the default domain</p>
-</li>
-<li>
-<p>Use the internal path <code>/api</code></p>
-</li>
-<li>
-<p>Use the public path <code>/api</code> as well</p>
-</li>
-</ul>
-</div>
-</li>
-<li>
-<p>Congratulations, your API is now live. The route exposes every API mounted on XP&#8217;s API endpoint: Guillotine at <code>/api/com.enonic.app.guillotine:graphql</code>, and the media APIs you met earlier, so that image and attachment paths work with the same base URL.</p>
-</li>
-</ol>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 16.6666%;">
+<col style="width: 16.6666%;">
+<col style="width: 66.6668%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Property</th>
+<th class="tableblock halign-left valign-top">Type</th>
+<th class="tableblock halign-left valign-top">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">query</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">String</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The GraphQL query to execute.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">variables</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Object</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Optional. Values for variables declared by the query.</p></td>
+</tr>
+</tbody>
+</table>
+<div class="paragraph">
+<p>Outside Content Studio there is no selected project, so the query names the project and the branch as arguments on the <code>guillotine</code> field. Passing them as variables keeps the query reusable between environments.</p>
 </div>
 <div class="paragraph">
-<p>To try it out, use a GraphQL client such as <a href="https://altairgraphql.dev/">Altair</a>. Point it at your domain followed by <code>/api/com.enonic.app.guillotine:graphql</code>, use HTTP POST, and run a query. Outside Content Studio there is no selected project, so the query has to name the project and the branch:</p>
+<p>Save this as <code>request.json</code>:</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-GraphQL" data-lang="GraphQL">{
-  guillotine(project: "&lt;name-of-your-cloud-project&gt;", branch: "master") {
-    getChildren(key: "/animals") {
+<pre class="highlight"><code class="language-json" data-lang="json">{
+  "query": "query Artists($project: String!, $branch: String!) { guillotine(project: $project, branch: $branch) { getChildren(key: \"/artists\", first: 10) { _id displayName } } }",
+  "variables": {
+    "project": "my-first-project",
+    "branch": "master"
+  }
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>And send it with cURL:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-shell" data-lang="shell">curl "http://localhost:8080/api/com.enonic.app.guillotine:graphql" \
+  -H 'Content-Type: application/json' \
+  --data-binary @request.json</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>You should get the three artists back as JSON, the same shape you saw in the playground&#8217;s response panel. If the list is empty, the content is not published, or you spelled the project name differently when you created it.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="from_javascript"><a class="link" href="#from_javascript">From JavaScript</a></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>The same request with <code>fetch()</code>. Save it as <code>artists.mjs</code> and run it with <code>node artists.mjs</code>. Node 18 or newer has <code>fetch</code> built in.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-javascript" data-lang="javascript">const apiBaseUrl = 'http://localhost:8080/api';
+
+const query = `
+  query Artists($project: String!, $branch: String!) {
+    guillotine(project: $project, branch: $branch) {
+      getChildren(key: "/artists", first: 10) {
+        _id
+        displayName
+        ... on com_example_tutorial101_Artist {
+          data {
+            name
+            birthday
+          }
+        }
+      }
+    }
+  }
+`;
+
+async function getArtists() {
+  const response = await fetch(apiBaseUrl + '/com.enonic.app.guillotine:graphql', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({
+      query,
+      variables: { project: 'my-first-project', branch: 'master' }
+    })
+  });
+
+  if (!response.ok) {
+    throw new Error(`HTTP ${response.status}`);
+  }
+
+  const result = await response.json();
+  if (result.errors?.length) {
+    throw new Error(result.errors.map((error) =&gt; error.message).join('\n'));
+  }
+
+  return result.data.guillotine.getChildren;
+}
+
+getArtists().then(console.log).catch(console.error);</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Two details worth copying into any client you write:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>A GraphQL response can be HTTP 200 and still carry errors, in the <code>errors</code> array next to <code>data</code>. Check both.</p>
+</li>
+<li>
+<p>The API base URL is the only thing that changes between your sandbox and production. Keep it in one place, as here, so that going live is a configuration change.</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="from_a_browser"><a class="link" href="#from_a_browser">From a browser</a></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Running the same code in a web page served from another origin, say a dev server on <code><a href="http://localhost:3000" class="bare">http://localhost:3000</a></code>, fails until XP is told to allow that origin. This is browser cross-origin protection, CORS, and Guillotine has a configuration file for it.</p>
+</div>
+<div class="paragraph">
+<p>Create the file <code>com.enonic.app.guillotine.cfg</code> in your sandbox&#8217;s config directory, <code>~/.enonic/sandboxes/tutorial/home/config/</code>:</p>
+</div>
+<div class="listingblock">
+<div class="title">com.enonic.app.guillotine.cfg</div>
+<div class="content">
+<pre class="highlight"><code class="language-properties" data-lang="properties">cors.origin=http://localhost:3000
+cors.methods=POST, OPTIONS
+cors.allowedHeaders=Content-Type</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>XP picks the file up without a restart. <code>cors.origin</code> takes a comma-separated list of origins, including scheme and port. The <a href="https://developer.enonic.com/docs/guillotine/stable/configuration">Guillotine configuration docs</a> cover the remaining options.</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+CORS only controls which origins a browser lets read the response. It does not grant access to content: a public project&#8217;s published content is readable by anyone, and draft content still needs a login.
+</td>
+</tr>
+</table>
+</div>
+<div class="sect2">
+<h3 id="draft_content"><a class="link" href="#draft_content">Draft content</a></h3>
+<div class="paragraph">
+<p>A front-end that previews unpublished work, for instance a staging site for editors, queries the <code>draft</code> branch and must send the editor&#8217;s login with every request. With cookie-based login across origins that means <code>cors.credentials=true</code> in the file above, an explicit origin rather than <code>*</code>, and <code>credentials: 'include'</code> in the <code>fetch()</code> call. For a public front-end, stay on <code>master</code> and skip all of this.</p>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="resolving_a_route"><a class="link" href="#resolving_a_route">Resolving a route</a></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>A front-end usually goes the other way from the queries so far: the visitor arrives at a URL, and the page needs the content behind it. The content path is the natural route. <code>get</code> accepts a path as its <code>key</code>, and returns <code>null</code> when nothing is there, which is your 404:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-GraphQL" data-lang="GraphQL">query AnimalPage($project: String!, $branch: String!, $path: ID!) {
+  guillotine(project: $project, branch: $branch) {
+    get(key: $path) {
       displayName
       ... on com_example_tutorial101_Animal {
         data {
           otherNames
+          description {
+            processedHtml
+          }
         }
       }
     }
@@ -658,295 +686,127 @@ Before proceeding, access Content Studio on your cloud instance and make sure to
 }</code></pre>
 </div>
 </div>
-<div class="imageblock">
-<div class="content">
-<img src="media/graphql-altair-querying-on-exposed-route.png" alt="Altair GraphQL client querying Lion animal data on the &quot;/api&quot; route defined on cloud console" width="1200">
-</div>
-<div class="title">Figure 2. Querying animal data on the /api route using the Altair GraphQL client</div>
-</div>
-<div class="admonitionblock note">
-<table>
-<tr>
-<td class="icon">
-<i class="fa icon-note" title="Note"></i>
-</td>
-<td class="content">
-Only published content is readable without logging in, which is why the query asks for the <code>master</code> branch. Reading <code>draft</code> requires an authenticated user with a role in the project.
-</td>
-</tr>
-</table>
-</div>
-<div class="admonitionblock tip">
-<table>
-<tr>
-<td class="icon">
-<i class="fa icon-tip" title="Tip"></i>
-</td>
-<td class="content">
-For more information on Enonic Cloud, visit <a href="https://enonic.com/pricing">the Enonic Cloud marketing page</a>.
-</td>
-</tr>
-</table>
-</div>
+<div class="paragraph">
+<p>With <code>path</code> set to <code>/animals/lion</code>, this is everything the lion&#8217;s page needs. The route in your front-end can be the content path itself, or any mapping you prefer, as long as the front-end knows how to turn it back into a path.</p>
 </div>
 </div>
 </div>
 <div class="sect1">
-<h2 id="custom_hosting"><a class="link" href="#custom_hosting">Custom hosting</a></h2>
+<h2 id="paging_a_list"><a class="link" href="#paging_a_list">Paging a list</a></h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>If Enonic Cloud isn&#8217;t your thing, you need to start by getting the platform (Enonic XP) up and running, before you can actually deploy your application.</p>
-</div>
-<div class="paragraph">
-<p>Enonic XP is compatible with just about any public cloud out there. There&#8217;s a number of different deployment strategies and subscription options to choose from, based on what suits your particular situation best.</p>
-</div>
-<div class="paragraph">
-<p>Setting up the entire platform is beyond the scope of this tutorial. As such, we&#8217;ll focus on the steps required for getting your app live - assuming you already have the platform running.</p>
-</div>
-<div class="paragraph">
-<p>For more details on deploying the platform, check out <a href="https://developer.enonic.com/docs/platform/stable/deployment">the Deployment section of the XP platform docs</a>.</p>
-</div>
-<div class="sect2">
-<h3 id="installing_the_app"><a class="link" href="#installing_the_app">Installing the app</a></h3>
-<div class="paragraph">
-<p>Regardless of how you deploy your XP instance, installing your app is commonly done in one of two ways:</p>
-</div>
-<div class="paragraph">
-<p>The first alternative is via the admin console. Follow these simple steps:</p>
-</div>
-<div class="admonitionblock note">
-<table>
-<tr>
-<td class="icon">
-<i class="fa icon-note" title="Note"></i>
-</td>
-<td class="content">
-Your application executable (*.jar file) can be found in <code>project-folder/build/libs/</code>
-</td>
-</tr>
-</table>
-</div>
-<div class="olist arabic">
-<ol class="arabic">
-<li>
-<p>Log into the XP admin console (user must have Administrator privileges)</p>
-</li>
-<li>
-<p>From the XP menu, open the Applications tool.</p>
-</li>
-<li>
-<p>Choose install from the toolbar, and upload your application <code>.jar</code> file. You can drag and drop your application or navigate the file hierarchy via the upload button.</p>
-<div class="imageblock">
-<div class="content">
-<img src="media/deployment-app-upload.png" alt="The application installation menu with a blue overlay. The overlay says 'drop files to upload'" width="1200">
-</div>
-<div class="title">Figure 3. Drag and drop applications to upload them</div>
-</div>
-</li>
-</ol>
-</div>
-<div class="paragraph">
-<p>The second alternative is via API:</p>
-</div>
-<div class="paragraph">
-<p>If you have access to your server&#8217;s management API (available on port 4848), you can also deploy directly via this endpoint, or by using <a href="https://developer.enonic.com/docs/enonic-cli/stable/xp#app">the CLI</a>.</p>
-</div>
-<div class="paragraph">
-<p>This approach is most commonly used in a Continuous Integration/Delivery setup, where your build server automatically checks out, builds and installs the application.</p>
-</div>
-</div>
-<div class="sect2">
-<h3 id="vhosts"><a class="link" href="#vhosts">Virtual hosts = pretty URLs</a></h3>
-<div class="paragraph">
-<p>In a production setting you want short, memorable URLs on your own domain. Virtual host (<em>vhosts</em>) configuration lets you do just that.</p>
-</div>
-<div class="paragraph">
-<p>Vhosts are defined in a configuration file in your XP instance&#8217;s <code>config</code> directory. This file contains mappings from public-facing URLs to internal URLs.</p>
-</div>
-<div class="paragraph">
-<p>For instance, this lets a client access <code>tutorial101.com/api</code> while XP serves the request from its internal <code>/api</code> endpoint, exactly like the Cloud route you created above.</p>
-</div>
-<div class="paragraph">
-<p>An example vhosts file that achieves the mapping mentioned would look something like this:</p>
+<p><code>getChildren</code> and <code>queryDsl</code> take <code>first</code> and <code>offset</code>, which is enough for a short list. For a list of unknown length, use the connection variant, which returns a cursor for the next page and the total count:</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-properties" data-lang="properties">enabled = true <i class="conum" data-value="1"></i><b>(1)</b>
-
-mapping.api.host = tutorial101.com <i class="conum" data-value="2"></i><b>(2)</b>
-mapping.api.source = /api <i class="conum" data-value="3"></i><b>(3)</b>
-mapping.api.target = /api <i class="conum" data-value="4"></i><b>(4)</b></code></pre>
+<pre class="highlight"><code class="language-GraphQL" data-lang="GraphQL">query AnimalsPage($project: String!, $branch: String!, $after: String) {
+  guillotine(project: $project, branch: $branch) {
+    getChildrenConnection(key: "/animals", first: 2, after: $after, sort: "displayName ASC") {
+      totalCount
+      edges {
+        node {
+          _id
+          displayName
+        }
+      }
+      pageInfo {
+        endCursor
+        hasNext
+      }
+    }
+  }
+}</code></pre>
 </div>
-</div>
-<div class="colist arabic">
-<table>
-<tr>
-<td><i class="conum" data-value="1"></i><b>1</b></td>
-<td>Enable vhosts configuration</td>
-</tr>
-<tr>
-<td><i class="conum" data-value="2"></i><b>2</b></td>
-<td>For all requests to <code>tutorial101.com</code></td>
-</tr>
-<tr>
-<td><i class="conum" data-value="3"></i><b>3</b></td>
-<td>Map any request that starts with this path &#8230;&#8203;</td>
-</tr>
-<tr>
-<td><i class="conum" data-value="4"></i><b>4</b></td>
-<td>&#8230;&#8203; to the internal URL.</td>
-</tr>
-</table>
-</div>
-<div class="admonitionblock note">
-<table>
-<tr>
-<td class="icon">
-<i class="fa icon-note" title="Note"></i>
-</td>
-<td class="content">
-Guillotine serves every project from this one endpoint, and the query names the project and branch. If you want a mapping dedicated to a single project, or you want to serve the API from a site, head to <a href="https://developer.enonic.com/docs/guillotine/stable/setup">the Guillotine setup docs</a>, which also explains how to allow image scaling on such mappings.
-</td>
-</tr>
-</table>
 </div>
 <div class="paragraph">
-<p>For more details on virtual hosts, head to the <a href="https://developer.enonic.com/docs/platform/stable/config/vhosts"><em>Vhosts</em> section of the platform documentation</a>.</p>
-</div>
-</div>
-<div class="sect2">
-<h3 id="task_setup_vhosts_in_your_sandbox"><a class="link" href="#task_setup_vhosts_in_your_sandbox">Task: Setup vhosts in your Sandbox</a></h3>
-<div class="paragraph">
-<p>To explore how vhost mappings work, let&#8217;s configure vhosts for your local XP instance, then, to test it, we&#8217;ll override your computer&#8217;s DNS resolver by updating its <code>hosts</code> file.</p>
-</div>
-<div class="olist arabic">
-<ol class="arabic">
-<li>
-<p>Find and open your sandbox&#8217;s vhosts file. From your user&#8217;s home directory, the path will be <code>.enonic/sandboxes/&lt;sandbox-name&gt;/home/config/com.enonic.xp.web.vhost.cfg</code>, where <code>&lt;sandbox-name&gt;</code> varies depending on which sandbox you want to configure. For the sandbox created in this tutorial, it is <code>tutorial</code>.</p>
-</li>
-<li>
-<p>Update the vhosts file.</p>
-</li>
-</ol>
+<p>Send it with <code>after</code> set to <code>null</code> for the first page. The items are in <code>edges</code>, one <code>node</code> each. If <code>pageInfo.hasNext</code> is <code>true</code>, send the same query again with <code>after</code> set to <code>pageInfo.endCursor</code>, and repeat until <code>hasNext</code> is <code>false</code>:</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre>enabled = true
-
-mapping.admin.host = {vhost-host} <i class="conum" data-value="1"></i><b>(1)</b>
-mapping.admin.source = /
-mapping.admin.target = /admin
-mapping.admin.idProvider.system = default
-
-mapping.localhost.host = localhost <i class="conum" data-value="2"></i><b>(2)</b>
-mapping.localhost.source = /
-mapping.localhost.target = /
-mapping.localhost.idProvider.system = default</pre>
+<pre class="highlight"><code class="language-javascript" data-lang="javascript">async function allAnimals() {
+  const animals = [];
+  let after = null;
+  do {
+    const page = await send(query, { project, branch, after });
+    const connection = page.guillotine.getChildrenConnection;
+    animals.push(...connection.edges.map((edge) =&gt; edge.node));
+    after = connection.pageInfo.hasNext ? connection.pageInfo.endCursor : null;
+  } while (after);
+  return animals;
+}</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>+
-&lt;1&gt; If requests go to <code>xp-admin.com:8080</code>, send them to <code>:8080/admin</code>
-&lt;2&gt; This block allows the localhost mappings to keep working. Without this, <code>localhost:8080</code> wouldn&#8217;t work anymore.</p>
-</div>
-<div class="paragraph">
-<p>+
-. If you&#8217;re watching your XP process, you should see a message like this:</p>
-</div>
-<div class="literalblock">
-<div class="content">
-<pre>[...] INFO  c.e.x.s.i.config.ConfigInstallerImpl - Loaded config for [com.enonic.xp.web.vhost]
-[...] INFO  c.e.x.w.v.i.c.VirtualHostServiceImpl - Virtual host is enabled and mappings updated.</pre>
-</div>
-</div>
-<div class="paragraph">
-<p>+
-This means that XP has updated the mappings and is ready to go.</p>
-</div>
-<div class="olist arabic">
-<ol class="arabic">
-<li>
-<p>To test this out, update your local hosts file (<a href="https://en.wikipedia.org/wiki/Hosts_%28file%29"><em>hosts file</em> on Wikipedia</a>) to point <code>xp-admin.com</code> to <code>127.0.0.1</code> by adding the following line to the file:</p>
-<div class="listingblock">
-<div class="content">
-<pre class="highlight"><code class="language-conf" data-lang="conf">127.0.0.1 xp-admin.com</code></pre>
-</div>
-</div>
-<div class="admonitionblock tip">
-<table>
-<tr>
-<td class="icon">
-<i class="fa icon-tip" title="Tip"></i>
-</td>
-<td class="content">
-On Linux and macOS you&#8217;ll find the hosts file at <code>/etc/hosts</code>. On Windows, it&#8217;s located at  <code>c:\Windows\System32\Drivers\etc\hosts</code>
-</td>
-</tr>
-</table>
-</div>
-</li>
-<li>
-<p>Now access <code><a href="http://xp-admin.com:8080" class="bare">http://xp-admin.com:8080</a></code> in your browser. If all has gone well, you should see the familiar XP login screen.</p>
-</li>
-</ol>
-</div>
-</div>
-<div class="sect2">
-<h3 id="vhost_troubleshooting"><a class="link" href="#vhost_troubleshooting">Vhost troubleshooting</a></h3>
-<div class="paragraph">
-<p>If you&#8217;re not seeing anything when you direct your browser to <code><a href="http://xp-admin.com:8080" class="bare">http://xp-admin.com:8080</a></code> or aren&#8217;t able to access the resources, that may be due to a browser setting. Try using a different browser and see if that makes a difference. Alternatively, you can try running</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="highlight"><code class="language-bash" data-lang="bash">curl -v xp-admin.com:8080/</code></pre>
-</div>
-</div>
-<div class="paragraph">
-<p>If the connection is successful, one of the lines in the output should say something to the effect of</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre>* Connected to xp-admin.com (127.0.0.1) port 8080</pre>
-</div>
-</div>
-<div class="paragraph">
-<p>and you should get a block of HTML printed to the terminal.
-This HTML is the content of the login page in raw form.</p>
-</div>
-<div class="paragraph">
-<p>You might not be able to do much with that output, but it means the mapping has worked successfully, which is the important part for this task.</p>
-</div>
+<p>Treat the cursor as an opaque value, and keep the key and sorting the same while paging. With two animals per page and three animals, you get two requests.</p>
 </div>
 </div>
 </div>
 <div class="sect1">
-<h2 id="whats_next"><a class="link" href="#whats_next">What&#8217;s next?</a></h2>
+<h2 id="building_urls"><a class="link" href="#building_urls">Building URLs</a></h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>Congrats! You&#8217;ve reached the end of this introduction. If you&#8217;d like to go further now, try one of the following guides which introduce additional aspects of the Enonic experience:</p>
+<p>Guillotine returns the parts of every URL, never a finished address, as you saw with media and rich text. Your front-end owns the base, so building the address is one line:</p>
 </div>
-<div class="dlist">
-<dl>
-<dt class="hdlist1"><a href="https://developer.enonic.com/docs/intro">Introduction to Enonic</a></dt>
-<dd>
-<p>Building a website with the Enonic Framework (no 3rd party framework required). This tutorial also introduces the concept of pages, and building blocks such as regions, parts, and page templates.</p>
-</dd>
-<dt class="hdlist1"><a href="https://developer.enonic.com/docs/next.xp">Building sites with Enonic and Next.js</a></dt>
-<dd>
-<p>Everything you need to start building Next.js-based sites with Enonic as your CMS - including full WYSIWYG editing.</p>
-</dd>
-<dt class="hdlist1"><a href="https://developer.enonic.com/docs/graphql-tutorial">Building a custom GraphQL API</a></dt>
-<dd>
-<p>Go beyond Guillotine and build your own GraphQL API on Enonic XP, with mutations and subscriptions.</p>
-</dd>
-</dl>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-javascript" data-lang="javascript">const mediaBaseUrl = 'http://localhost:8080/api';
+const url = (parts) =&gt; mediaBaseUrl + parts.path + parts.queryString;
+
+// imageUrl(scale: "width(800)") { path queryString }
+img.src = url(animal.data.images[0].imageUrl);</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>For rich text, the same function rewrites the defaults in <code>processedHtml</code>. Match each element on its reference attribute and set the attribute from the structured data:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-javascript" data-lang="javascript">for (const link of description.links) {
+  const a = container.querySelector(`[data-link-ref="${link.ref}"]`);
+  if (a &amp;&amp; link.pageUrl) {
+    a.href = (link.pageUrl.baseUrl ?? frontendBaseUrl) + link.pageUrl.path + link.pageUrl.queryString + link.fragment;
+  }
+}
+
+for (const image of description.images) {
+  const img = container.querySelector(`[data-image-ref="${image.ref}"]`);
+  if (img &amp;&amp; image.src) {
+    img.src = url(image.src);
+    if (image.srcset.length) {
+      img.srcset = image.srcset.map((source) =&gt; `${url(source.imageUrl)} ${source.width}w`).join(', ');
+    }
+  }
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Here <code>frontendBaseUrl</code> is wherever your front-end serves its pages. A link whose target does not resolve has a <code>null</code> <code>pageUrl</code>, so the guard leaves its text in place without a broken link.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="going_live"><a class="link" href="#going_live">Going live</a></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Everything in this chapter ran against your sandbox, but there is no difference between the sandbox and a live Enonic server except the URL. The same request format, the same API names, the same paths in every response, the same CORS configuration file. When your app and content are on a server, point <code>apiBaseUrl</code> at that server&#8217;s <code>/api</code> and the front-end is live. Keep that base in one place, as the examples do, and going live is a configuration change rather than a code change.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="summary"><a class="link" href="#summary">Summary</a></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>You have called the API from cURL, Node and a browser, published content so a front-end can read it, resolved a route to a content item, paged a list, and built page and media URLs from their parts. That is the whole contract between Enonic and a front-end; everything else is your framework&#8217;s business.</p>
+</div>
+<div class="paragraph">
+<p>Next up, let&#8217;s look <a href="data-toolbox.ahtml">under the hood</a> at how XP actually stores all of this.</p>
 </div>
 </div>
 </div>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2026-10-09 12:57:26 UTC
+Last updated 2026-10-09 13:25:37 UTC
 </div>
 </div>
 </body>

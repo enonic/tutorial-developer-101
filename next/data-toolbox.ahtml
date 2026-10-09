@@ -6,8 +6,8 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="generator" content="Asciidoctor 2.0.26">
 <meta name="application-name" content="tutorial101">
-<meta name="description" content="Peek under the hood with Data Toolbox and see how your content is stored.">
-<title>Data Toolbox</title>
+<meta name="description" content="Now that your content model is complete, peek under the hood with Data Toolbox and see how XP stores all of it.">
+<title>Under the hood with Data Toolbox</title>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,300italic,400,400italic,600,600italic%7CNoto+Serif:400,400italic,700,700italic%7CDroid+Sans+Mono:400,700">
 <style>
 /*! Asciidoctor default stylesheet | MIT License | https://asciidoctor.org */
@@ -439,19 +439,23 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 </head>
 <body class="article toc2 toc-right">
 <div id="header">
-<h1>Data Toolbox</h1>
+<h1>Under the hood with Data Toolbox</h1>
 <div id="toc" class="toc2">
 <div id="toctitle">Table of Contents</div>
 <ul class="sectlevel1">
 <li><a href="#web_interface">Web interface</a></li>
 <li><a href="#examine_your_content">Examine your content</a></li>
 <li><a href="#summary">Summary</a></li>
+<li><a href="#whats_next">What&#8217;s next?</a></li>
 </ul>
 </div>
 </div>
 <div id="content">
 <div id="preamble">
 <div class="sectionbody">
+<div class="paragraph">
+<p>You have now built a complete little content model and fetched it from a front-end: content types with sets, option sets, references and rich text, media with focal points, and a mixin on top. Before we deploy it, let&#8217;s look at how all of that is actually saved.</p>
+</div>
 <div class="paragraph">
 <p>In this chapter, we&#8217;ll give a short introduction to a popular application called Data Toolbox, the developer&#8217;s best friend for playing around with the low level NoSQL storage in Enonic XP.</p>
 </div>
@@ -521,13 +525,13 @@ The tasks and examples in this chapter are based on work done in previous chapte
 </div>
 </li>
 <li>
-<p>Move into <code>com.enonic.cms.my-first-project</code>. Here you will see the two branches discussed in the previous chapter. As long as you&#8217;ve published your content, you can choose either one of these.</p>
+<p>Move into <code>com.enonic.cms.my-first-project</code>. Here you will see the two branches you met in the <a href="content-studio.ahtml#_branches">Content Studio chapter</a>: <code>draft</code> and <code>master</code>. Everything you have published exists in both.</p>
 </li>
 <li>
-<p>Keep navigating further down the tree: <code>root</code> &#8594; <code>content</code>. Now you should see all the content of your project listed. Navigate to <code>artists</code> to find actual pieces of content.</p>
+<p>Keep navigating further down the tree: <code>root</code> &#8594; <code>content</code>. Now you should see all the content of your project listed, as a tree of <em>nodes</em> that mirrors the hierarchy in Content Studio. Navigate to <code>animals</code> to find your animals.</p>
 </li>
 <li>
-<p>Choose one of your artists and check out both the info view and the JSON view, available via the buttons in the table row.</p>
+<p>Choose "Lion" and check out both the info view and the JSON view, available via the buttons in the table row.</p>
 <div class="imageblock">
 <div class="content">
 <img src="media/data-toolbox-info-view.png" alt="The Data Toolbox info view. the view contains options for exporting, moving, and deleting the node, as well as for displaying permissions for the node, versions of the node, and indexing data (and much more)." width="750w">
@@ -536,7 +540,7 @@ The tasks and examples in this chapter are based on work done in previous chapte
 </div>
 </li>
 <li>
-<p>To inspect the data associated with the artist, you can select "Display properties", which will bring up data about the node, such as its display name, its owner, when it was created, etc.</p>
+<p>To inspect the data associated with the animal, you can select "Display properties", which will bring up data about the node, such as its display name, its owner, when it was created, etc.</p>
 <div class="imageblock">
 <div class="content">
 <img src="media/data-toolbox-properties.png" alt="A table with columns 'name', 'index, 'value', and 'type' that describes the node. Example names are 'valid', 'type', 'displayName'." width="606w">
@@ -545,15 +549,24 @@ The tasks and examples in this chapter are based on work done in previous chapte
 </div>
 </li>
 <li>
-<p>Finally, you can navigate to the <code>data</code> property, where you&#8217;ll find the data stored on the artist.</p>
+<p>Navigate into the <code>data</code> property, where you&#8217;ll find the data stored for the animal. Compare it with the content type you wrote: every input you declared is a property with the same name, the option sets carry a <code>_selected</code> property next to the options, and the rich text description is stored as one HTML string.</p>
 <div class="imageblock">
 <div class="content">
-<img src="media/data-toolbox-properties-data.png" alt="A table showing the data we stored about the artist previously." width="606w">
+<img src="media/data-toolbox-properties-data.png" alt="A table showing the data stored about the animal." width="606w">
 </div>
 <div class="title">Figure 4. The properties.data view</div>
 </div>
 </li>
+<li>
+<p>Go back up one level and look at the <code>x</code> property. This is where the notes from your mixin live, grouped by the app that provides the mixin - exactly the structure you queried through <code>xAsJson</code>.</p>
+</li>
+<li>
+<p>Finally, find one of your artists and look at its <code>favoriteAnimal</code> property. A reference is stored as the ID of the target content, not its path, which is why you can move and rename content without breaking links.</p>
+</li>
 </ol>
+</div>
+<div class="paragraph">
+<p>What you see here is the same data the GraphQL API returns. Guillotine reads these nodes, applies the content type to give them a typed schema, and resolves references and media URLs on the way out. When a query returns something you did not expect, this is the place to check what is actually stored.</p>
 </div>
 </div>
 </div>
@@ -561,17 +574,38 @@ The tasks and examples in this chapter are based on work done in previous chapte
 <h2 id="summary"><a class="link" href="#summary">Summary</a></h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>Inspecting content is only a fraction of what Data Toolbox can do: it&#8217;s a versatile and powerful administrative tool, and we&#8217;ll see more of it in a later chapter.</p>
+<p>Inspecting content is only a fraction of what Data Toolbox can do: it&#8217;s a versatile and powerful administrative tool. Among other things, it can export your content and import it on another instance, which is handy the day you move from your sandbox to a live server.</p>
 </div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="whats_next"><a class="link" href="#whats_next">What&#8217;s next?</a></h2>
+<div class="sectionbody">
 <div class="paragraph">
-<p>Now, let&#8217;s have a look at the <a href="headless-api.ahtml">cutting edge headless CMS API - aka Guillotine</a>.</p>
+<p>Congrats! You&#8217;ve reached the end of this tutorial. You can model content, read it through the API and fetch it from a front-end. If you&#8217;d like to go further, try one of the following guides, which introduce additional aspects of the Enonic experience:</p>
+</div>
+<div class="dlist">
+<dl>
+<dt class="hdlist1"><a href="https://developer.enonic.com/docs/intro">Introduction to Enonic</a></dt>
+<dd>
+<p>Building a website with the Enonic framework, no third-party framework required. This tutorial also introduces the concept of pages, and building blocks such as regions, parts, and page templates.</p>
+</dd>
+<dt class="hdlist1"><a href="https://developer.enonic.com/docs/next.xp">Building sites with Enonic and Next.js</a></dt>
+<dd>
+<p>Everything you need to start building Next.js-based sites with Enonic as your CMS, including full visual editing.</p>
+</dd>
+<dt class="hdlist1"><a href="https://developer.enonic.com/docs/graphql-tutorial">Building a custom GraphQL API</a></dt>
+<dd>
+<p>Go beyond Guillotine and build your own GraphQL API on Enonic XP, with mutations and subscriptions.</p>
+</dd>
+</dl>
 </div>
 </div>
 </div>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2026-10-09 12:57:26 UTC
+Last updated 2026-10-09 13:25:37 UTC
 </div>
 </div>
 </body>

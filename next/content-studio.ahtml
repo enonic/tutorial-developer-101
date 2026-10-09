@@ -1016,14 +1016,14 @@ You can also publish a piece of content by using the keyboard shortcut <span cla
 <p>You&#8217;ve been introduced to Content Studio, content projects and content types, and how to create and publish content.</p>
 </div>
 <div class="paragraph">
-<p>Next up, we&#8217;ll have a look at <a href="data-toolbox.ahtml">what is going on under the hood</a>.</p>
+<p>Next up, we&#8217;ll read that content back through the <a href="headless-api.ahtml">GraphQL API</a>.</p>
 </div>
 </div>
 </div>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2026-10-09 12:57:26 UTC
+Last updated 2026-10-09 13:25:37 UTC
 </div>
 </div>
 </body>

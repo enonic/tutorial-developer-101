@@ -460,6 +460,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <li><a href="#option_sets_2">Option sets</a></li>
 </ul>
 </li>
+<li><a href="#summary">Summary</a></li>
 </ul>
 </div>
 </div>
@@ -1075,10 +1076,21 @@ The use of the form fragment helps us both reduce duplication and keep all optio
 </div>
 </div>
 </div>
+<div class="sect1">
+<h2 id="summary"><a class="link" href="#summary">Summary</a></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>You have grouped inputs visually with a field set, structurally with an item set, let editors choose between options with option sets, and reused a form with a fragment.</p>
+</div>
+<div class="paragraph">
+<p>Next up, <a href="rich-text.ahtml">rich text</a> gives your editors a proper text editor, with links, images and macros.</p>
+</div>
+</div>
+</div>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2026-10-09 12:57:26 UTC
+Last updated 2026-10-09 13:25:37 UTC
 </div>
 </div>
 </body>

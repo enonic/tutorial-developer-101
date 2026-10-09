@@ -472,9 +472,6 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <p>create content types and content in <a href="content-studio.ahtml">Content Studio</a></p>
 </li>
 <li>
-<p>see how content is stored, with <a href="data-toolbox.ahtml">Data Toolbox</a></p>
-</li>
-<li>
 <p>query your content through the <a href="headless-api.ahtml">GraphQL API</a></p>
 </li>
 <li>
@@ -484,7 +481,10 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <p>model richer content with <a href="input-types.ahtml">input types</a>, <a href="sets.ahtml">sets and form fragments</a>, <a href="rich-text.ahtml">rich text</a> and <a href="mixins.ahtml">mixins</a></p>
 </li>
 <li>
-<p><a href="deployment.ahtml">deploy</a> your app and expose the API on Enonic Cloud</p>
+<p>fetch it all from a <a href="frontend.ahtml">front-end</a>, with routing, paging and URLs</p>
+</li>
+<li>
+<p>look <a href="data-toolbox.ahtml">under the hood</a> at how it is all stored</p>
 </li>
 </ul>
 </div>
@@ -514,7 +514,7 @@ When we mention "XP", we are referring to "Enonic XP", the platform behind Enoni
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2026-10-09 12:57:26 UTC
+Last updated 2026-10-09 13:25:37 UTC
 </div>
 </div>
 </body>

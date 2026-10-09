@@ -473,6 +473,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <li><a href="#graphql_query">GraphQL query</a></li>
 </ul>
 </li>
+<li><a href="#summary">Summary</a></li>
 </ul>
 </div>
 </div>
@@ -1225,10 +1226,21 @@ form:
 </div>
 </div>
 </div>
+<div class="sect1">
+<h2 id="summary"><a class="link" href="#summary">Summary</a></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>You have configured inputs with occurrences, defaults and help text, linked content with selectors, and followed a reference through the API.</p>
+</div>
+<div class="paragraph">
+<p>Next up, <a href="sets.ahtml">sets and form fragments</a> let you group and reuse inputs.</p>
+</div>
+</div>
+</div>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2026-10-09 12:57:26 UTC
+Last updated 2026-10-09 13:25:37 UTC
 </div>
 </div>
 </body>

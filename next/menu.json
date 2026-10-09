@@ -13,36 +13,36 @@
       "document": "content-studio"
     },
     {
-      "title": "3 - Data Toolbox",
-      "document": "data-toolbox"
-    },
-    {
-      "title": "4 - GraphQL API",
+      "title": "3 - GraphQL API",
       "document": "headless-api"
     },
     {
-      "title": "5 - Media",
+      "title": "4 - Media",
       "document": "files"
     },
     {
-      "title": "6 - Input types",
+      "title": "5 - Input types",
       "document": "input-types"
     },
     {
-      "title": "7 - Sets and fragments",
+      "title": "6 - Sets and fragments",
       "document": "sets"
     },
     {
-      "title": "8 - Rich text",
+      "title": "7 - Rich text",
       "document": "rich-text"
     },
     {
-      "title": "9 - Mixins",
+      "title": "8 - Mixins",
       "document": "mixins"
     },
     {
-      "title": "10 - Deployment",
-      "document": "deployment"
+      "title": "9 - Front-end",
+      "document": "frontend"
+    },
+    {
+      "title": "10 - Under the hood",
+      "document": "data-toolbox"
     }
   ]
 }

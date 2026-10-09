@@ -447,7 +447,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <ul class="sectlevel2">
 <li><a href="#media_types">Media types</a></li>
 <li><a href="#uploading">Uploading</a></li>
-<li><a href="#data_toolbox">Data Toolbox</a></li>
+<li><a href="#how_media_is_stored">How media is stored</a></li>
 </ul>
 </li>
 <li><a href="#media_apis">Media APIs</a>
@@ -544,9 +544,9 @@ The tasks and examples in this chapter are based on work done in previous chapte
 </div>
 </div>
 <div class="sect2">
-<h3 id="data_toolbox"><a class="link" href="#data_toolbox">Data Toolbox</a></h3>
+<h3 id="how_media_is_stored"><a class="link" href="#how_media_is_stored">How media is stored</a></h3>
 <div class="paragraph">
-<p>Like we saw in the chapter on Data Toolbox, it lets you view and edit your content. Images and other media are also available in Data Toolbox as content, but in addition to the same properties you saw previously, media also have a property called <code>attachment</code>. The attachment will essentially hold all the data from the file that you uploaded.</p>
+<p>Under the hood, an image is a content item like any other: a JSON document with the usual properties, plus one more called <code>attachment</code>. The attachment will essentially hold all the data from the file that you uploaded. You will learn how to inspect this storage yourself in <a href="data-toolbox.ahtml">a later chapter</a>; for now, here is what it looks like.</p>
 </div>
 <div class="paragraph">
 <p>For instance, if you have a look at the image you uploaded earlier, you should see that it points to the image file you uploaded.</p>
@@ -604,10 +604,10 @@ The tasks and examples in this chapter are based on work done in previous chapte
 <h2 id="media_apis"><a class="link" href="#media_apis">Media APIs</a></h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>Uploading a file is only half the job. XP also includes APIs that let you download the same file (now stored as an attachment within the content) when you need it: the <em>attachment API</em> serves any file as it was uploaded, and the <em>image API</em> serves images, with scaling and filters applied on the fly.</p>
+<p>Uploading a file is only half the job. XP also includes APIs that let you download the same file (now stored as an attachment within the content) when you need it: the <em>attachment API</em>, <code>media:attachment</code>, serves any file as it was uploaded, and the <em>image API</em>, <code>media:image</code>, serves images, with scaling and filters applied on the fly.</p>
 </div>
 <div class="paragraph">
-<p>Both are served from your instance&#8217;s API base URL, which on your sandbox is <code><a href="http://localhost:8080/api" class="bare">http://localhost:8080/api</a></code>. We&#8217;ll see what the URLs look like in a moment.</p>
+<p>Both are Universal APIs, just like Guillotine, so they are served from the same API base URL you met in the <a href="headless-api.ahtml#_one_endpoint_for_every_api">GraphQL chapter</a>: <code><a href="http://localhost:8080/api" class="bare">http://localhost:8080/api</a></code> on your sandbox. We&#8217;ll see what the URLs look like in a moment.</p>
 </div>
 <div class="sect2">
 <h3 id="mediaurl"><a class="link" href="#mediaurl">mediaUrl</a></h3>
@@ -981,7 +981,7 @@ Asking for scaled and filtered images is allowed when you query Guillotine&#8217
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2026-10-09 12:57:26 UTC
+Last updated 2026-10-09 13:25:37 UTC
 </div>
 </div>
 </body>

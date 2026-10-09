@@ -446,6 +446,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <li><a href="#your_first_mixin">Your first mixin</a></li>
 <li><a href="#headless">Headless</a></li>
 <li><a href="#bonus_seo_metafields">Bonus: SEO Metafields</a></li>
+<li><a href="#summary">Summary</a></li>
 </ul>
 </div>
 </div>
@@ -722,7 +723,7 @@ For more details and configuration options for mixins, visit <a href="https://de
 <div class="olist arabic">
 <ol class="arabic">
 <li>
-<p>Install the <a href="https://market.enonic.com/vendors/enonic/seo-metafields">SEO Metafields app</a>.</p>
+<p>Install the <a href="https://market.enonic.com/vendors/enonic/seo-metafields">SEO Metafields app</a> from <code>XP menu</code> &#8594; <code>Applications</code>.</p>
 <div class="imageblock">
 <div class="content">
 <img src="media/x-data-seo-app-install.png" alt="Install SEO Metafields app" width="1050">
@@ -747,10 +748,21 @@ For more details and configuration options for mixins, visit <a href="https://de
 </div>
 </div>
 </div>
+<div class="sect1">
+<h2 id="summary"><a class="link" href="#summary">Summary</a></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Your content model is complete: content types, sets, references, rich text, media and mixins, all readable through the API.</p>
+</div>
+<div class="paragraph">
+<p>Next up, let&#8217;s fetch it all <a href="frontend.ahtml">from a front-end</a>.</p>
+</div>
+</div>
+</div>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2026-10-09 12:57:26 UTC
+Last updated 2026-10-09 13:25:37 UTC
 </div>
 </div>
 </body>
