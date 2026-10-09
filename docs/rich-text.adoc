@@ -2,11 +2,11 @@
 include::.variables.adoc[]
 :description: {description-rich-text}
 
-If you want to work with rich text, HtmlArea is the input type to go for.
+If you want to work with rich text, HtmlArea is the form item to go for.
 
-This input type offers some very powerful editing capabilities and a lot of configuration options.
+This form item offers some very powerful editing capabilities and a lot of configuration options.
 
-This whole {document} is dedicated to the https://developer.enonic.com/docs/cms/stable/schemas/form-items/htmlarea[HtmlArea input type] and the editor used to define its data.
+This whole {document} is dedicated to the https://developer.enonic.com/docs/cms/stable/schemas/form-items/htmlarea[HtmlArea form item] and the editor used to define its data.
 
 The user-oriented documentation of the Rich text editor can be found in the https://developer.enonic.com/docs/content-studio/stable/editor/rich-text-editor[Content Studio docs].
 
@@ -14,10 +14,10 @@ NOTE: {see-prev-docs}
 
 == Overview
 
-.The HtmlArea input type with the default tools selection
+.The HtmlArea form item with the default tools selection
 image::input-type-html-area.png["A text input field with a tools ribbon just above.", {image-s}, align=center]
 
-The HtmlArea input type gives you a multi-line input field with rich formatting options, much like what you're used to from your favorite word processor. It supports text formatting and justification, lists, links, and even lets you insert images.
+The HtmlArea form item gives you a multi-line input field with rich formatting options, much like what you're used to from your favorite word processor. It supports text formatting and justification, lists, links, and even lets you insert images.
 
 You can configure the HtmlArea to be exactly what you want by dictating what formatting tools to include or exclude (the `include` and `exclude` settings, respectively), by what heading levels are allowed (`allowHeadings`), and by giving it a default value (`default`).
 
@@ -75,7 +75,7 @@ Let's add a rich-text description field to the {content-type-2} content type. Th
 
 Your content type should now look something like this:
 
-.{content-type-2-capitalized} with an HtmlArea input type
+.{content-type-2-capitalized} with an HtmlArea form item
 [source,yaml,{subs}]
 ----
 kind: "ContentType"

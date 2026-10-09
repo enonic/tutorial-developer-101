@@ -299,4 +299,4 @@ NOTE: Asking for scaled and filtered images is allowed when you query Guillotine
 
 You should now have a deep understanding of how media is stored and accessed - as well as XP's image handling and image API, including how to access it all from the GraphQL API.
 
-Pushing forward, it's time to <<input-types#, have a closer look at the basic building blocks of the content forms; input types>>.
+Pushing forward, it's time to <<form-items#, have a closer look at the building blocks of content forms; form items>>.

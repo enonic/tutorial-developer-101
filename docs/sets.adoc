@@ -2,7 +2,7 @@
 include::.variables.adoc[]
 :description: {description-sets}
 
-XP also offers ways for you to group inputs, both visually and structurally. Collectively, these are known as sets. XP can also reuse a group of inputs across several schemas, through form fragments. This {document} explains what they are and how to use them.
+Some form items exist to group other form items, both visually and structurally. Collectively, these are known as sets. XP can also reuse a group of inputs across several schemas, through form fragments. This {document} explains what they are and how to use them.
 
 NOTE: {see-prev-docs}
 
@@ -75,7 +75,7 @@ So far we've theoretically presented sets. For a proper understanding of those c
 
 Let's add an item set to the `{content-type-1-capitalized}`. The goal will be to add a Filmography item set, featuring where and when a specific artist was featured in a movie.
 
-To add an item set, use it as you would any other input type: place it within the `form` of a content type.
+To add an item set, use it as you would any other form item: place it within the `form` of a content type.
 
 If we add it to the `{content-type-1-capitalized}` content type, it'd look something like this:
 
@@ -133,7 +133,7 @@ In this section, we'll use option sets to add some extra data to the `{content-t
 
 ==== Single-select: dietary data
 
-Open your {content-type-2} content type and add a single-select option set.  As before, we use option sets as we would any other input type.
+Open your {content-type-2} content type and add a single-select option set.  As before, we use option sets as we would any other form item.
 
 .The `{content-type-2-capitalized}` content type with feeding behavior
 [source,yaml]

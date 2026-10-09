@@ -126,7 +126,7 @@ form: # <4>
 +
 NOTE: Content types also have a number of other, optional settings that we won't get into here. If you'd like to learn more about this, consult https://developer.enonic.com/docs/cms/stable/content/content-types[the reference documentation].
 +
-NOTE: XP's inputs are _not_ the same as HTML `input` elements. To read more about them, <<input-types#, see the {document} on input types>>.
+NOTE: XP's inputs are _not_ the same as HTML `input` elements. To read more about them, <<form-items#, see the {document} on form items>>.
 
 === Names and namespaces
 

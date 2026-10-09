@@ -1,31 +1,33 @@
-= {title-input-types}
+= {title-form-items}
 include::.variables.adoc[]
-:description: {description-input-types}
+:description: {description-form-items}
 
-The content types we've created previously in this guide have only used a few basic input types: TextLine, TextArea and Date.
+The content types we've created previously in this guide have only used a few basic form items: TextLine, TextArea and Date.
 
-However, Content Studio has a lot more up its sleeve than that! Input types dictate what kind of data the user can or must add to any piece of content.
+However, Content Studio has a lot more up its sleeve than that! _Form items_ are the building blocks of forms. They dictate what kind of data the user can or must add to any piece of content, and how it is edited.
 
-This {document} introduces more new types of inputs and explains how you can configure them to your liking.
+This {document} introduces more kinds of form items and explains how you can configure them to your liking.
 
-NOTE: If you're used to working with HTML, be aware that XP's inputs are _not_ the same as HTML `input` elements.
+NOTE: If you're used to working with HTML, be aware that XP's form items are _not_ the same as HTML `input` elements.
 
 NOTE: {see-prev-docs}
 
-== General config
+== Common settings
 
-All input types share a number of settings that affect how they act. These settings are:
+All form items share a number of settings that affect how they act. These settings are:
 
-`type` (required):: Which kind of input this is, such as `TextLine` or `ImageSelector`.
+`type` (required):: Which kind of form item this is, such as `TextLine` or `ImageSelector`.
 `name` (required):: The property name the value is stored under.
-`label` (required):: What the input should be labeled as in the content form.
+`label` (required):: What the form item should be labeled as in the content form.
 `occurrences` (optional):: Specifies the minimum and maximum instances of this field. Defaults to "one optional".
-`default` (optional):: Gives a default value to the input.
-`helpText` (optional):: Lets you specify a description of the input field to show to the user.
+`default` (optional):: Gives a default value to the form item.
+`helpText` (optional):: Lets you specify a description of the field to show to the user.
 
-Because the input types are so different from each other, they also support different type-specific settings. These are placed directly on the input, next to the shared ones. That is how we use regex validation for TextLine inputs, configure formatting options for HtmlAreas, and dictate what numeric values a Long or a Double input accepts.
+Because the form items are so different from each other, they also support type-specific settings. These are placed directly on the form item, next to the shared ones. That is how we use regex validation for TextLine inputs, configure formatting options for HtmlAreas, and dictate what numeric values a Long or a Double accepts.
 
-NOTE: All of the shared settings (`label`, `occurrences`, etc.), and the list of available input types are described in the https://developer.enonic.com/docs/cms/stable/schemas/form-items[form items documentation].
+IMPORTANT: Use `camelCase` for names, such as `otherNames`. Names are used as they are for field names in the GraphQL API, where camelCase is the convention and matches built-in fields such as `displayName`. One caveat: property paths are lowercased in the index, so never give two form items on the same level names that differ only by case.
+
+NOTE: All of the shared settings (`label`, `occurrences`, etc.), and the list of available form items are described in the https://developer.enonic.com/docs/cms/stable/schemas/form-items[form items documentation].
 
 To show how the settings work, let's examine some TextLine inputs with different configurations.
 
@@ -77,62 +79,62 @@ Note that:
 
 == The occurrences setting
 
-The occurrences setting decides how XP treats the input value. Use occurrences to indicate whether an input is expected to be a list or a single element and whether the input is required or not.
+The occurrences setting decides how XP treats the value. Use occurrences to indicate whether a form item is expected to be a list or a single element and whether it is required or not.
 
 The setting has two required keys, `min` and `max`. Use these to control the number of instances the user can create.
 
 `min` specifies that the user must fill out _at least_ this many instances of the field. Usually it is set to `0` or `1`. A zero indicates that the field is optional and that the user does not need to fill it out. A one means the field is required.
 
-`max` tells XP how many instances the input field can have _at most_. `0` is a special value here, indicating that the user can have _as many as they want_ (in other words: there is no maximum).
+`max` tells XP how many instances the field can have _at most_. `0` is a special value here, indicating that the user can have _as many as they want_ (in other words: there is no maximum).
 
 A couple of common configuration tricks:
 
 === Optional
 If you don't add an `occurrences` setting, XP uses the default, which is `min: 0`, `max: 1`.
 
-That means that the input is *optional* and can have at most *one entry*.
+That means that the field is *optional* and can have at most *one entry*.
 
 === Required
-To make the input required, set both `min` and `max` to `1`.
+To make the field required, set both `min` and `max` to `1`.
 
-That means that the input is *required*, and can have at most *one entry*.
+That means that the field is *required*, and can have at most *one entry*.
 
 By keeping `min` at `1` and changing `max` to a number `n` above `1`, you'll be able to keep the field *required*, but make it able to have at most *n entries*.
 
 === Unlimited
-By setting `max` to `0`, you allow the input to have an *unlimited amount of entries*.
+By setting `max` to `0`, you allow the field to have an *unlimited amount of entries*.
 
-TIP: If `max` is greater than `0`, make sure that `min` is less than or equal to `max`. Otherwise, the input will never be considered valid according to XP.
+TIP: If `max` is greater than `0`, make sure that `min` is less than or equal to `max`. Otherwise, the field will never be considered valid according to XP.
 
-== Common inputs
+== Common form items
 
-Apart from the input types we've already gotten familiar with, XP also has input types created for other kinds of data. You can always find the full list over https://developer.enonic.com/docs/cms/stable/schemas/form-items[at the form items reference docs], but some useful and common ones are:
+Apart from the form items we've already gotten familiar with, XP also has form items created for other kinds of data. You can always find the full list over https://developer.enonic.com/docs/cms/stable/schemas/form-items[at the form items reference docs], grouped by the kind of value they produce, but some useful and common ones are:
 
 https://developer.enonic.com/docs/cms/stable/schemas/form-items/combobox[ComboBox]:: A dropdown menu containing predefined options for the user to select from. Allows selection of one or more options.
 +
-.The ComboBox input type
-image::input-type-combo-box.webp["A standard select list / dropdown list / combo box input type with a few visible dummy options.", {image-s}, align=center]
+.The ComboBox form item
+image::input-type-combo-box.webp["A standard select list / dropdown list / combo box with a few visible dummy options.", {image-s}, align=center]
 +
-https://developer.enonic.com/docs/cms/stable/schemas/form-items/date[Date], https://developer.enonic.com/docs/cms/stable/schemas/form-items/datetime[DateTime] and https://developer.enonic.com/docs/cms/stable/schemas/form-items/instant[Instant]:: Provide an interactive date picker (with a time component for DateTime and Instant) to save dates and times. DateTime stores a local date and time, while Instant stores an exact point in time with its time zone.
+https://developer.enonic.com/docs/cms/stable/schemas/form-items/date[Date], https://developer.enonic.com/docs/cms/stable/schemas/form-items/datetime[DateTime] and https://developer.enonic.com/docs/cms/stable/schemas/form-items/instant[Instant]:: Provide an interactive date picker (with a time component for DateTime and Instant) to save dates and times. The reference explains which of the two to pick for a date with a time.
 +
-.The DateTime input type
+.The DateTime form item
 image::input-type-date-time.webp["A calendar showing year and month with a time indicator to the side.", {image-s}, align=center]
 +
 https://developer.enonic.com/docs/cms/stable/schemas/form-items/geopoint[GeoPoint]:: Stores GPS coordinates.
 +
-.The GeoPoint input type
+.The GeoPoint form item
 image::input-type-geo-point.webp["A text line input with coordinates.", {image-s}, align=center]
 +
 https://developer.enonic.com/docs/cms/stable/schemas/form-items/htmlarea[HtmlArea]:: Provides a rich text, multi-line input. We'll discuss this in detail in <<rich-text#,the rich-text {document}>>.
 +
-.The HtmlArea input type
+.The HtmlArea form item
 image::input-type-html-area.png["A text area with a tools ribbon on the top. The ribbon provides rich text tools such as justification, macro insertion, text styles, etc.", {image-s}, align=center]
 
-Additionally, XP has more complex input types, which we'll look at next.
+Additionally, XP has form items that group other form items, called sets, which get <<sets#, a {document} of their own>>. First, let's look at the form items that reference other content.
 
 == ImageSelector
 
-.The ImageSelector input type
+.The ImageSelector form item
 image::input-type-image-selector.png[ImageSelector: An interactive image selection tool., {image-xl}]
 
 Images are a key part of many web experiences: they add color, break up the content, and give the reader something to rest their eyes on.
@@ -143,7 +145,7 @@ XP's image selector allows you to select an image for a piece of content and als
 [source,yaml]
 ----
 - type: "ImageSelector"
-  name: "myimage"
+  name: "myImage"
   label: "My Image"
 ----
 
@@ -156,14 +158,14 @@ image::input-type-image-selector-highlighted-image.png["The image selector input
 
 == ContentSelector
 
-.The ContentSelector input type
+.The ContentSelector form item
 image::input-type-content-selector.png[ContentSelector: An interactive content selection tool., {image-xl}]
 
-The image selector we just saw is actually a specialized form of the more complex ContentSelector input type.
+The image selector we just saw is actually a specialized form of the more general ContentSelector.
 
-The ContentSelector input type allows you to reference other content. Let's say you have two content types: one of type person and one of type food. If you want to be able to specify which dishes the person likes, you could use a content selector to create a reference from the person to their favored dish.
+The ContentSelector allows you to reference other content. Let's say you have two content types: one of type person and one of type food. If you want to be able to specify which dishes the person likes, you could use a content selector to create a reference from the person to their favored dish.
 
-Because referencing other content types comes with a lot of variability, the ContentSelector type has settings to support this. You can choose to allow only certain content types or only content that's available at a certain path. You can also change whether the selector should show content in a tree-style hierarchy or as a flat list of content.
+Because referencing other content types comes with a lot of variability, the ContentSelector has settings to support this. You can choose to allow only certain content types or only content that's available at a certain path. You can also change whether the selector should show content in a tree-style hierarchy or as a flat list of content.
 
 https://developer.enonic.com/docs/cms/stable/schemas/form-items/contentselector[The full list of ContentSelector settings] is available in the reference docs, including a number of examples to explain content inclusion and exclusion. However, a simple configuration could look like this:
 
@@ -171,7 +173,7 @@ https://developer.enonic.com/docs/cms/stable/schemas/form-items/contentselector[
 [source,yaml]
 ----
 - type: "ContentSelector"
-  name: "mycontentselector"
+  name: "myContentSelector"
   label: "My ContentSelector"
   allowContentType:
     - "citation"
@@ -181,9 +183,9 @@ https://developer.enonic.com/docs/cms/stable/schemas/form-items/contentselector[
 
 == AttachmentUploader
 
-XP also has a rather special input type named https://developer.enonic.com/docs/cms/stable/schemas/form-items/attachmentuploader[AttachmentUploader]. Unlike <<files#, media>> content, which creates an independent content item for each file you upload, AttachmentUploader lets you store one (or more) files within the specific content item. Under the hood, it uses the same `attachment` property structure as media when persisting the file.
+XP also has a rather special form item named https://developer.enonic.com/docs/cms/stable/schemas/form-items/attachmentuploader[AttachmentUploader]. Unlike <<files#, media>> content, which creates an independent content item for each file you upload, AttachmentUploader lets you store one (or more) files within the specific content item. Under the hood, it uses the same `attachment` property structure as media when persisting the file.
 
-.The AttachmentUploader input type
+.The AttachmentUploader form item
 image::input-type-attachmentuploader.png[AttachmentUploader: Store any number of files within your content item, 651w]
 
 
@@ -272,7 +274,7 @@ TIP: Under the hood, `attachmentUrl` uses the same logic as Enonic's portal libr
 
 == Task: {content-type-1} and {content-type-2}s
 
-Time for a little recap! We'll put together everything we've learned about content types and input types thus far to create a new data set.
+Time for a little recap! We'll put together everything we've learned about content types and form items thus far to create a new data set.
 
 A solution is listed below, but try and see if you can solve it yourself first.
 
@@ -294,7 +296,7 @@ image::{content-type-2}-and-{content-type-1}-target.png["An {content-type-2} con
 
 === {content-type-1-capitalized} constraints
 
-* Add a ContentSelector input that allows only content of the "{content-type-2-capitalized}" type and that must be nested under the "{content-type-2}s" folder. Call it `favorite{content-type-2-capitalized}`.
+* Add a ContentSelector that allows only content of the "{content-type-2-capitalized}" type and that must be nested under the "{content-type-2}s" folder. Call it `favorite{content-type-2-capitalized}`.
 
 === Querying
 
@@ -381,7 +383,7 @@ form:
 
 Finally, it's time to introduce the query in GraphQL.
 
-A ContentSelector input will store a reference to the target content item. When using the Guillotine API, you may simply follow this reference to access the target content, and access its fields instantly.
+A ContentSelector will store a reference to the target content item. When using the Guillotine API, you may simply follow this reference to access the target content, and access its fields instantly.
 
 .Fetch {content-type-1}s and their associated favorite animals
 [source,GraphQL,{subs}]
@@ -460,6 +462,6 @@ Depending on the links (and {content-type-2}s) you created, your result might lo
 
 == Summary
 
-You have configured inputs with occurrences, defaults and help text, linked content with selectors, and followed a reference through the API.
+You have configured form items with occurrences, defaults and help text, linked content with selectors, and followed a reference through the API.
 
-Next up, <<sets#, sets and form fragments>> let you group and reuse inputs.
+Next up, <<sets#, sets and form fragments>> let you group and reuse form items.

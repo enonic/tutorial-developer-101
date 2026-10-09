@@ -4,11 +4,11 @@ This repository contains "Developer 101 - Content Modelling and the GraphQL API"
 
 ## Scope and Audience
 
-The tutorial is for developers who define content types and build front-ends against Enonic's GraphQL API. It walks a newcomer from installing the Enonic CLI to fetching content from a front-end: a sandbox and an app from a starter, Content Studio, content types, the Guillotine GraphQL API, media, input types, sets and form fragments, rich text, mixins, calling the API from code, and a look at the underlying storage. It should remain approachable for people who are not primarily back-end developers.
+The tutorial is for developers who define content types and build front-ends against Enonic's GraphQL API. It walks a newcomer from installing the Enonic CLI to fetching content from a front-end: a sandbox and an app from a starter, Content Studio, content types, the Guillotine GraphQL API, media, form items, sets and form fragments, rich text, mixins, calling the API from code, and a look at the underlying storage. It should remain approachable for people who are not primarily back-end developers.
 
-The scope is content modelling, schema management and the Guillotine API. The tutorial does not build sites or pages with the Enonic framework, and does not teach any particular front-end framework. Point readers to the Introduction to Enonic and the Next.js tutorial for those.
+The scope is content modelling, schema management and the Guillotine API. Two boundaries are stated on the front page and must hold throughout: there is no coding, meaning no application code, build steps or debugging beyond YAML schemas, GraphQL queries and the ready-to-run `fetch` examples in the front-end chapter; and the page domain is left out entirely, meaning sites, pages, layouts, parts and page templates, whether rendered by Enonic or by an external front-end. Point readers to the Introduction to Enonic and the Next.js tutorial for pages.
 
-This is a tutorial, not reference documentation. The CMS reference documentation covers every topic here in depth; this tutorial's value is the hands-on, incremental path through them. Explain enough to complete each task, then link to the reference documentation on developer.enonic.com for the full picture. Do not restate reference material such as the complete list of input types or the Guillotine schema.
+This is a tutorial, not reference documentation. The CMS reference documentation covers every topic here in depth; this tutorial's value is the hands-on, incremental path through them. Explain enough to complete each task, then link to the reference documentation on developer.enonic.com for the full picture. Do not restate reference material such as the complete list of form items or the Guillotine schema.
 
 ## Content Guidelines
 
@@ -32,7 +32,7 @@ This documentation should be useful to both people and LLMs learning Enonic deve
 
 * **No empty stubs.** Every page in `docs/menu.json` must contain substantive, accurate content. If a page is not ready, keep it out of navigation rather than publishing placeholder text. A dot-prefixed file such as `docs/.iam.adoc` is ignored by the build and is the way to park a draft chapter.
 * **Self-contained pages.** Briefly explain a concept locally before linking to deeper reference material. Avoid links that substitute for the explanation the reader needs to continue the tutorial.
-* **Consistent terminology.** Use Enonic terms such as sandbox, app, starter, project, content type, content project, site, input type, form item, field set, item set, option set, form fragment, mixin, Guillotine, and Content Studio consistently. Apps running on Enonic XP are "Enonic applications" or simply "apps", never "XP apps". Mind the XP 8 double rename: what XP 7 called a mixin is a form fragment, and what XP 7 called x-data is a mixin. The chapter lives in `docs/mixins.adoc`; the XP 7 edition on the `xp7` branch has it as `x-data.adoc`.
+* **Consistent terminology.** Use Enonic terms such as sandbox, app, starter, project, content type, content project, site, form item, field set, item set, option set, form fragment, mixin, Guillotine, and Content Studio consistently. "Form item" is the umbrella for everything that goes in a form; the simple ones such as TextLine may be called inputs, but never "input types" as a category. Field names in schemas are `camelCase`, matching the GraphQL convention and the built-in fields, as the CMS form items docs say; never two names on one level differing only by case. Apps running on Enonic XP are "Enonic applications" or simply "apps", never "XP apps". Mind the XP 8 double rename: what XP 7 called a mixin is a form fragment, and what XP 7 called x-data is a mixin. The chapter lives in `docs/mixins.adoc`; the XP 7 edition on the `xp7` branch has it as `x-data.adoc`.
 * **Runnable examples.** Commands and snippets should be complete enough to follow. Use placeholders only when the reader is explicitly expected to replace them, and explain what the replacement represents.
 * **Tutorial continuity.** Do not assume functionality from a later chapter. Each step must build on what the reader has created up to that point. Chapters that depend on earlier work open with the `{see-prev-docs}` note.
 
@@ -40,7 +40,7 @@ This documentation should be useful to both people and LLMs learning Enonic deve
 
 When referring to separately documented products, give enough local context to explain why they matter, then link to the authoritative documentation.
 
-* **Enonic XP:** Link to the XP documentation for content types, input types, schemas, the image service, deployment, and other platform concerns.
+* **Enonic XP:** Link to the CMS documentation for content types, form items and schemas, and to the platform documentation for lower-level concerns.
 * **Content Studio:** Link to the Content Studio documentation for the editorial interface beyond what a task needs.
 * **Guillotine:** Enonic's headless GraphQL API for CMS content. Link to its documentation for schema details and query features; this tutorial teaches only the basics of querying content.
 * **Enonic CLI:** Link to its documentation for sandbox, project, build, and deployment commands.

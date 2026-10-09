@@ -184,7 +184,7 @@ Should you require specific fields only, or wish to drill into more details, for
 
 <1> The app providing the mixin. Dots in the app name become underscores in GraphQL field names.
 <2> This is the name of the mixin. In this case, "notes" because we defined it to be like so in the `notes.yaml` file
-<3> This is the "notes" field (TextLine input type) inside the "notes" mixin.
+<3> This is the "notes" field (TextLine form item) inside the "notes" mixin.
 
 If you made it here - you are officially equipped with an essential overview of Enonic's fundamental content modelling capabilities. 🙌
 
