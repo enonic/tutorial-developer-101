@@ -2,7 +2,7 @@
 include::.variables.adoc[]
 :description: {description-sets}
 
-XP also offers ways for you to group inputs, both visually and structurally. Collectively, these are known as sets. This {document} explains what they are and how to use them.
+XP also offers ways for you to group inputs, both visually and structurally. Collectively, these are known as sets. XP can also reuse a group of inputs across several schemas, through form fragments. This {document} explains what they are and how to use them.
 
 NOTE: {see-prev-docs}
 
@@ -10,29 +10,28 @@ NOTE: {see-prev-docs}
 
 Field sets are the simplest form of sets XP offers... they group inputs visually and have no effect on the data model.
 
-In a schema, the field set element wraps the input elements it should contain. 
+In a schema, the field set wraps the inputs it should contain.
 
-To create a field set that contains a TextLine and a TextArea, the markup would look like this:
+To create a field set that contains a TextLine and a TextArea, the definition would look like this:
 
 .A field set
-[source, xml]
+[source,yaml]
 ----
-<field-set>
-  <label>FieldSet</label>
-  <items> // <1>
-    <input type="TextLine" name="fieldSetTextLine">
-      <label>Heading</label>
-    </input>
-    <input type="TextArea" name="fieldSetTextArea">
-      <label>Text</label>
-      <help-text>Write something? 🖊️</help-text>
-    </input>
-  </items>
-</field-set>
+- type: "FieldSet"
+  label: "FieldSet"
+  items: # <1>
+    - type: "TextLine"
+      name: "fieldSetTextLine"
+      label: "Heading"
+    - type: "TextArea"
+      name: "fieldSetTextArea"
+      label: "Text"
+      helpText: "Write something? 🖊️"
 ----
 
-<1> Use the `items` element place other inputs inside the field set.
+<1> Use `items` to place other inputs inside the field set. A field set has no `name` of its own, since it never produces data.
 
+// TODO(xp8-verify): recapture from Content Studio 6.1
 .A field set grouping
 image::field-set.png["A field set containing TextLine and TextArea inputs. The field set groups them visually and adds a shared heading.", {image-s}, align=center]
 
@@ -40,31 +39,33 @@ image::field-set.png["A field set containing TextLine and TextArea inputs. The f
 
 Item sets also allow you to group input fields, but as opposed to field sets, item sets group values _both_ visually _and_ on a structural level. Item sets can be arbitrarily nested.
 
-- The https://developer.enonic.com/docs/xp/stable/cms/schemas/item-set[item set documentation^] does a standout job of explaining exactly how they work, so check that out for an overview.
+- The https://developer.enonic.com/docs/cms/stable/schemas/form-items/item-set[item set documentation] does a standout job of explaining exactly how they work, so check that out for an overview.
 
 .An item set containing contact info
 image::item-set-sample.png["A pair of visually grouped inputs on a card element. The card has a header that says 'contact info'. There is also a button to add more contact info forms.", {image-s}, align=center]
 
 == Option sets
 
-Option sets enable editors (working in Content Studio) to choose from a set of predefined options. This is similar to the ComboBox element, but option sets also allow options to carry extra data.
+Option sets enable editors (working in Content Studio) to choose from a set of predefined options. This is similar to the ComboBox input, but option sets also allow options to carry extra data.
 
 Option sets where users can select only one of a number of options are known as _single-select_ option sets. You can also use a _multi-select_ option set if the user should be able to select multiple options simultaneously. We'll look at this too in a task.
 
-- The https://developer.enonic.com/docs/xp/stable/cms/schemas/option-set[option set reference documentation^] provides a good overview (with accompanying pictures) of how option sets work.
+- The https://developer.enonic.com/docs/cms/stable/schemas/form-items/option-set[option set reference documentation] provides a good overview (with accompanying pictures) of how option sets work.
 
 .A multi-select option set
 image::option-set-sample.png["An input form labelled 'multi-selection'. The user has selected one out of four options. Some options contain extra data such as an image selector or other input fields.", {image-s}, align=center]
 
-== Mixins
+== Form fragments
 
-_Mixins_ facilitate a form of reuse in XP. They allow you to reuse fields across several content types. 
+_Form fragments_ facilitate a form of reuse in XP. They allow you to reuse fields across several content types, or several places within one content type.
 
-They won't look or behave any different from if you manually typed the same fields into multiple content types, but it lets you keep them in sync.  
+They won't look or behave any different from if you manually typed the same fields into multiple places, but they let you keep them in sync.
 
-Mixins go in the `/src/main/resources/site/mixins` directory, following the same naming pattern as the other schemas we've seen (`<mixin-name>/<mixin-name>.xml`).
+Form fragments go in the `{app-root}/cms/form-fragments` directory, following the same naming pattern as the other schemas we've seen (`<fragment-name>/<fragment-name>.yaml`).
 
-We'll see them in the upcoming task, but if you want to learn more about them, consult https://developer.enonic.com/docs/xp/stable/cms/schemas/mixins[the mixins reference documentation].
+WARNING: If you have read XP 7 material, be aware that form fragments were called _mixins_ there. In XP 8, the word mixin means something else, which you will meet in <<mixins#, a later {document}>>.
+
+We'll see them in the upcoming task, but if you want to learn more about them, consult https://developer.enonic.com/docs/cms/stable/schemas/form-fragments[the form fragments reference documentation].
 
 == Tasks
 
@@ -74,58 +75,60 @@ So far we've theoretically presented sets. For a proper understanding of those c
 
 Let's add an item set to the `{content-type-1-capitalized}`. The goal will be to add a Filmography item set, featuring where and when a specific artist was featured in a movie.
 
-To add an item set, use it as you would any other input type: place it within the `form` element of a content type. 
+To add an item set, use it as you would any other input type: place it within the `form` of a content type.
 
 If we add it to the `{content-type-1-capitalized}` content type, it'd look something like this:
 
 .{content-type-1-capitalized} with an added Item Set
-[source,xml,{subs}]
+[source,yaml,{subs}]
 ----
-<content-type>
-  <display-name>{content-type-1-capitalized}</display-name>
-  <description>A description of an {content-type-1}</description>
-  <super-type>base:structured</super-type>
-  <form>
+kind: "ContentType"
+title: "{content-type-1-capitalized}"
+description: "Information about an {content-type-1}"
+superType: "base:structured"
+form:
 
-    <!-- Other fields elided for brevity -->
+  # Other fields elided for brevity
 
-    <item-set name="filmography">
-      <label>Filmography</label>
-      <occurrences minimum="0" maximum="0" />
-      <items> // <1>
-        <input name="title" type="TextLine">
-          <label>Title</label>
-          <occurrences minimum="1" maximum="1" />
-        </input>
-        <input name="year" type="Double">
-            <label>Year</label>
-            <occurrences minimum="1" maximum="1" />
-            <config>
-              <min>0</min>
-            </config>
-        </input>
-      </items>
-    </item-set>
-
-  </form>
-</content-type>
+  - type: "ItemSet"
+    name: "filmography"
+    label: "Filmography"
+    occurrences:
+      min: 0
+      max: 0
+    items: # <1>
+      - type: "TextLine"
+        name: "title"
+        label: "Title"
+        occurrences:
+          min: 1
+          max: 1
+      - type: "Double"
+        name: "year"
+        label: "Year"
+        occurrences:
+          min: 1
+          max: 1
+        min: 0 # <2>
 ----
 
-<1> Much like with field sets, use the `items` element to nest inputs within the item set.
+<1> Much like with field sets, use `items` to nest inputs within the item set.
+<2> Type-specific settings, like the lowest value a Double accepts, go directly on the input.
 
 Note that the remaining fields of the form have been left out in the above example.
 
 With this new item set added to the {content-type-1-capitalized} content type, make sure to add some data:
 
+// TODO(xp8-verify): recapture from Content Studio 6.1
 .Item set for filmography
 image::artist-filmography-item-set.png["An example of using the Filmography item set.", {image-l}]
 
 === Adding an option set to {content-type-2-capitalized}
 
-In this section, we'll use option sets to add some extra data to `{content-type-2-capitalized}` data type. The goal is:
+In this section, we'll use option sets to add some extra data to the `{content-type-2-capitalized}` content type. The goal is:
 
-- Add an option set for feeding behavior. Intentionally simplified, this option set should indicate whether the animal is an herbivore or a carnivore. If it is a carnivore, it should also let the user add a list of prey.
-- Create a mixin for distribution options. Because each distribution option should have the same fields, create a _mixin_ to reuse it.
+- Add an option set for feeding behavior. Intentionally simplified, this option set should indicate whether the animal is a herbivore or a carnivore. If it is a carnivore, it should also let the user add a list of prey.
+- Create a form fragment for distribution options. Because each distribution option should have the same fields, create a _form fragment_ to reuse it.
 - Add an option for distribution across continents. The user should be able to select as many as they want from the 7 continents to indicate where the animal lives. Each option should have an associated `TextArea` called "notes", where the user can add more data for each option.
 
 ==== Single-select: dietary data
@@ -133,150 +136,118 @@ In this section, we'll use option sets to add some extra data to `{content-type-
 Open your {content-type-2} content type and add a single-select option set.  As before, we use option sets as we would any other input type.
 
 .The `{content-type-2-capitalized}` content type with feeding behavior
-[source,xml]
+[source,yaml]
 ----
-<?xml version="1.0" encoding="utf-8"?>
-<content-type>
-  <display-name>Animal</display-name>
-  <description>An animal that lives on planet Earth</description>
-  <super-type>base:structured</super-type>
-  <form>
+kind: "ContentType"
+title: "Animal"
+description: "An animal that lives on planet Earth"
+superType: "base:structured"
+form:
 
-    <!-- other fields elided for brevity -->
+  # other fields elided for brevity
 
-    <option-set name="feedingBehavior">
-      <label>Feeding behavior</label>
-      <options minimum="1" maximum="1"> // <1>
-
-        <option name="herbivore"> // <2>
-          <help-text>Subsists primarily on plant material.</help-text>
-          <label>Herbivore</label>
-        </option>
-
-        <option name="carnivore"> // <3>
-          <label>Carnivore</label>
-          <help-text>Subsists primarily on animal tissue and meat.</help-text>
-          <items>
-            <input name="prey" type="TextLine">
-              <label>Prey</label>
-              <occurrences minimum="0" maximum="0" />
-            </input>
-          </items>
-        </option>
-
-      </options>
-    </option-set>
-
-  </form>
-</content-type>
+  - type: "OptionSet"
+    name: "feedingBehavior"
+    label: "Feeding behavior"
+    selection: # <1>
+      min: 1
+      max: 1
+    options:
+      - name: "herbivore" # <2>
+        label: "Herbivore"
+        helpText: "Subsists primarily on plant material."
+      - name: "carnivore" # <3>
+        label: "Carnivore"
+        helpText: "Subsists primarily on animal tissue and meat."
+        items:
+          - type: "TextLine"
+            name: "prey"
+            label: "Prey"
+            occurrences:
+              min: 0
+              max: 0
 ----
 
 <1> This specifies that if you add feeding behavior, you must select one of the options, and you can not select more than one.
-<2> The herbivore option has no associated data, so it consists solely of a label.
+<2> The herbivore option has no associated data, so it consists solely of a label and a help text.
 <3> The carnivore option allows you to optionally specify prey for the animal.
 
 ==== Multi-select: distribution
 
-. Start by creating the mixin. Call it `distributionData` and place it in `src/main/resources/site/mixins/distributionData/distributionData.xml`. It only contains a text area:
+. Start by creating the form fragment. Call it `distributionData` and place it in `{app-root}/cms/form-fragments/distributionData/distributionData.yaml`. It only contains a text area:
 +
-.The `distributionData` mixin
-[source,xml,{subs}]
+.The `distributionData` form fragment
+[source,yaml]
 ----
-<mixin>
-  <display-name>Distribution data</display-name>
-  <form>
-
-    <input type="TextArea" name="notes">
-      <label>Notes</label>
-    </input>
-
-  </form>
-</mixin>
+kind: "FormFragment"
+title: "Distribution data"
+form:
+  - type: "TextArea"
+    name: "notes"
+    label: "Notes"
 ----
 
-. Moving onto {content-type-2}s, add the multi-select option set.
+. Moving on to {content-type-2}s, add the multi-select option set.
 +
 .The `{content-type-2-capitalized}` content type with distribution data
-[source,xml]
+[source,yaml]
 ----
-<?xml version="1.0" encoding="utf-8"?>
-<content-type>
-  <display-name>Animal</display-name>
-  <description>An animal that lives on planet Earth</description>
-  <super-type>base:structured</super-type>
-  <form>
+kind: "ContentType"
+title: "Animal"
+description: "An animal that lives on planet Earth"
+superType: "base:structured"
+form:
 
-    <!-- other fields elided for brevity -->
+  # other fields elided for brevity
 
-    <option-set name="distribution">
-      <label>Distribution across continents</label>
-      <help-text>Continents where the animal can be found in the wild</help-text>
-      <options minimum="0" maximum="0"> // <1>
-
-        <option name="africa">
-          <label>Africa</label>
-          <items>
-            <mixin name="distributionData" />
-          </items>
-        </option>
-
-        <option name="antarctica">
-          <label>Antarctica</label>
-          <items>
-            <mixin name="distributionData" />
-          </items>
-        </option>
-
-        <option name="asia">
-          <label>Asia</label>
-          <items>
-            <mixin name="distributionData" />
-          </items>
-        </option>
-
-        <option name="australia">
-          <label>Australia</label>
-          <items>
-            <mixin name="distributionData" />
-          </items>
-        </option>
-
-        <option name="europe">
-          <label>Europe</label>
-          <items>
-            <mixin name="distributionData" />
-          </items>
-        </option>
-
-        <option name="northAmerica">
-          <label>North America</label>
-          <items>
-            <mixin name="distributionData" />
-          </items>
-        </option>
-
-        <option name="southAmerica">
-          <label>South America</label>
-          <items>
-            <mixin name="distributionData" />
-          </items>
-        </option>
-
-      </options>
-    </option-set>
-
-  </form>
-</content-type>
+  - type: "OptionSet"
+    name: "distribution"
+    label: "Distribution across continents"
+    helpText: "Continents where the animal can be found in the wild"
+    selection: # <1>
+      min: 0
+      max: 7
+    options:
+      - name: "africa"
+        label: "Africa"
+        items:
+          - include: "distributionData" # <2>
+      - name: "antarctica"
+        label: "Antarctica"
+        items:
+          - include: "distributionData"
+      - name: "asia"
+        label: "Asia"
+        items:
+          - include: "distributionData"
+      - name: "australia"
+        label: "Australia"
+        items:
+          - include: "distributionData"
+      - name: "europe"
+        label: "Europe"
+        items:
+          - include: "distributionData"
+      - name: "northAmerica"
+        label: "North America"
+        items:
+          - include: "distributionData"
+      - name: "southAmerica"
+        label: "South America"
+        items:
+          - include: "distributionData"
 ----
 
-<1> This specifies that you can add as many distributions as you want.
+<1> This specifies that you can select as many of the seven continents as you want. A `max` above `1` is what turns the option set into a multi-select.
+<2> `include` pulls the fields of the form fragment into this option.
 
-NOTE: The use of the `mixin` helps us both reduce duplication and keep all options in sync. If we wanted to add more data, such as current population, we would only have to add it to the `mixin` to have it duplicate to all distributions.
+NOTE: The use of the form fragment helps us both reduce duplication and keep all options in sync. If we wanted to add more data, such as current population, we would only have to add it to the fragment to have it duplicated to all distributions.
 
 === Result
 
-With the new option sets and added, the Lion entry could look something like this:
+With the new option sets added, the Lion entry could look something like this:
 
+// TODO(xp8-verify): recapture from Content Studio 6.1
 .Distribution and feeding behavior for Lion
 image::option-sets.png["Diet and distribution data filled out for lion. The feeding behaviour selected is 'Carnivore' and the list of prey includes zebras and giraffes. For the distribution data, Africa and Asia is selected, with a short text about how Lions live in these areas today.", {image-xl}]
 
@@ -315,7 +286,7 @@ Getting item sets via GraphQL is not much different than anything else we've see
             }
           ]
         }
-        
+
       }
     ) {
       displayName
@@ -334,7 +305,7 @@ Getting item sets via GraphQL is not much different than anything else we've see
 
 With some data added for Cardi B, you'd get a result like this:
 
-.Album data
+.Filmography data
 [source,json]
 ----
 {
@@ -384,7 +355,7 @@ With some data added for Cardi B, you'd get a result like this:
 
 === Option sets
 
-When fetching option set data, you can get the list of currently selected items and each item separately.
+When fetching option set data, you can get the list of currently selected options and each option separately.
 
 .Querying for feeding behavior and distribution
 [source,GraphQL,{subs}]
@@ -413,15 +384,15 @@ When fetching option set data, you can get the list of currently selected items 
             }
           ]
         }
-        
+
       }
     ) {
       displayName
       ... on {project-name-query}_{content-type-2-capitalized} {
         data {
           feedingBehavior {
-            _selected // <1>
-            carnivore { // <2>
+            _selected # <1>
+            carnivore { # <2>
               prey
             }
           }
@@ -439,7 +410,7 @@ When fetching option set data, you can get the list of currently selected items 
 
 ----
 
-<1> This provides data about what the {content-type-2}s selected feeding behavior is.
+<1> This provides data about what the {content-type-2}'s selected feeding behavior is.
 <2> This gives more data about a particular option
 
 .Query result

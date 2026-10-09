@@ -1,6 +1,6 @@
-# Introduction to Enonic
+# Developer 101 - Content Modelling and the GraphQL API
 
-An introductory guide to the Enonic universe.
+A hands-on tutorial covering content modelling, schema management and the Guillotine GraphQL API on Enonic XP.
 
 These docs are written in asciidoc.
 

@@ -1,16 +1,20 @@
-= Data toolbox
+= {title-data-toolbox}
 include::.variables.adoc[]
+:description: {description-data-toolbox}
 
-In this {document}, we'll give a short introduction to a popular application called Data Toolbox, the developers best friend for playing around with the low level NoSQL storage in Enonic XP.
+In this {document}, we'll give a short introduction to a popular application called Data Toolbox, the developer's best friend for playing around with the low level NoSQL storage in Enonic XP.
+
+NOTE: {see-prev-docs}
 
 == Web interface
 
 Data Toolbox provides you with a web interface to visualize and manipulate your XP data, as well as other system related information. We'll now see how to inspect content using Data Toolbox.
 
-Data Toolbox is https://market.enonic.com/vendors/glenn-ricaud/data-toolbox[available on Enonic Market^].
+Data Toolbox is https://market.enonic.com/vendors/glenn-ricaud/data-toolbox[available on Enonic Market].
 
-Just like Content Studio, Data toolbox should already have been installed, and can be launched from XP Admin: `XP menu` -> `Data Toolbox`.
+Just like Content Studio, Data Toolbox should already have been installed, and can be launched from XP Admin: `XP menu` -> `Data Toolbox`.
 
+// TODO(xp8-verify): recapture all Data Toolbox screenshots from the XP 8 version of the app
 .Data Toolbox
 image::data-toolbox-landing-page.png["The Data Toolbox landing page: grid of icons for administrative actions and accompanying explanations. ",639w]
 
@@ -21,9 +25,7 @@ Follow these steps to find and examine what your content looks like from the low
 
 . Navigate to the `Data Tree` in the menu. Here, the toolbox lists repositories within your XP instance, you should at least have the following:
 +
-com.enonic.cms.my-first-project:: This is the current repository that holds your content.
-
-com.enonic.cms.default:: This is the default repository.
+com.enonic.cms.{cms-project}:: This is the repository that holds the content of your project. Every content project gets a repository of its own.
 
 system.auditlog:: This is where the _audit log_ is stored. The audit log allows you to see a log of everything that's been done in your XP instance, such as content creation, user administration, etc., and also tells you when it was done and by whom.
 
@@ -31,9 +33,9 @@ system-repo:: This is where XP stores core data about your system, such as insta
 
 system.scheduler:: This is a separate repository where scheduled jobs are stored.
 
-. Move into `com.enonic.cms.my-first-project`. Here you will see two branches (as discussed above). As long as you've published your content, you can choose either one of these.
+. Move into `com.enonic.cms.{cms-project}`. Here you will see the two branches discussed in the previous {document}. As long as you've published your content, you can choose either one of these.
 
-. Keep navigating further down the tree: `root` -> `content`. Now you should see all the content of your site listed. Navigate to `{content-type-1}s` to find actual pieces of content.
+. Keep navigating further down the tree: `root` -> `content`. Now you should see all the content of your project listed. Navigate to `{content-type-1}s` to find actual pieces of content.
 
 . Choose one of your {content-type-1}s and check out both the info view and the JSON view, available via the buttons in the table row.
 +
@@ -55,5 +57,4 @@ image::data-toolbox-properties-data.png["A table showing the data we stored abou
 
 Inspecting content is only a fraction of what Data Toolbox can do: it's a versatile and powerful administrative tool, and we'll see more of it in a later {document}.
 
-Now, let's have a look at the <<headless-api#, cutting edge headless cms API - aka Guillotine>>.
-
+Now, let's have a look at the <<headless-api#, cutting edge headless CMS API - aka Guillotine>>.

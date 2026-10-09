@@ -1,51 +1,47 @@
 {
   "menuItems": [
     {
+      "title": "Introduction",
+      "document": "index"
+    },
+    {
       "title": "1 - Setup",
       "document": "setup"
     },
     {
-      "title": "2 - Sandbox",
-      "document": "sandbox"
-    },
-    {
-      "title": "3 - Applications",
-      "document": "apps"
-    },
-    {
-      "title": "4 - Content Studio",
+      "title": "2 - Content Studio",
       "document": "content-studio"
     },
     {
-      "title": "5 - Data toolbox",
+      "title": "3 - Data Toolbox",
       "document": "data-toolbox"
     },
     {
-      "title": "6 - GraphQL API",
+      "title": "4 - GraphQL API",
       "document": "headless-api"
     },
     {
-      "title": "7 - Media",
+      "title": "5 - Media",
       "document": "files"
     },
     {
-      "title": "8 - Input types",
+      "title": "6 - Input types",
       "document": "input-types"
     },
     {
-      "title": "9 - Sets",
+      "title": "7 - Sets and fragments",
       "document": "sets"
     },
     {
-      "title": "10 - Rich text",
+      "title": "8 - Rich text",
       "document": "rich-text"
     },
     {
-      "title": "11 - X-data",
-      "document": "x-data"
+      "title": "9 - Mixins",
+      "document": "mixins"
     },
     {
-      "title": "12 - Deployment",
+      "title": "10 - Deployment",
       "document": "deployment"
     }
   ]

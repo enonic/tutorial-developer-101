@@ -1,28 +1,29 @@
-= Media - files are content too
+= {title-files}
 include::.variables.adoc[]
 :image-folder: images
-:description: How does XP deal with images and other media? This {document} covers XP media support, how to upload and query for media, how to work with images and attachments.
+:description: {description-files}
 
-Naturally, XP can store any file you would want to serve or associate with your content. This {document} explores how XP handles file uploads, and dives into the image handling specifically. 
+Naturally, XP can store any file you would want to serve or associate with your content. This {document} explores how XP handles file uploads, and dives into the image handling specifically.
 
 At the end of the chapter we'll walk through how to use images in a headless fashion.
 
-NOTE: {see-prev-docs} This {document} requires that you've got your site up and running.
+NOTE: {see-prev-docs}
 
-== Media 
+== Media
 
 A file may be uploaded to XP to become an individual piece of content. Similar to other content items.
 
 === Media types
 
-Media types are standard content types that ship with XP. When you upload a file to XP, XP will assign it one of these content types, also referred to as media types. The media type will be resoved from the file's content. Some common media types are images, audio, video, and executables.
+Media types are standard content types that ship with XP. When you upload a file to XP, XP will assign it one of these content types, also referred to as media types. The media type will be resolved from the file's content. Some common media types are images, audio, video, and executables.
 
-For a full overview of all the media types baked into XP, see the https://developer.enonic.com/docs/xp/stable/cms/content-types#media[reference docs for media content types^].
+For a full overview of all the media types baked into XP, see the https://developer.enonic.com/docs/cms/stable/media[reference docs for media].
 
 === Uploading
 
 To upload files to Content Studio, simply click btn:[New ...] to use the content creation dialog. You may either click the "upload" icon in the dialog, or drag'n drop the files from your device - or even directly from another website.
 
+// TODO(xp8-verify): recapture from Content Studio 6.1
 .Dragging and dropping files to the "create content dialog"
 image::media-drag-and-drop.png["The drag and drop interface. Three file icons being dragged onto a large, blue, circular drop zone.",960w]
 
@@ -30,20 +31,20 @@ This process is the same for whatever media type you want to upload.
 
 To get familiar with uploading media to XP, let's start with one of the most common media types on the web: images! As mentioned above, this process will also work for any other media type.
 
-. Find an image to upload. For the purposes of the tasks in this {document}, you should work with an image where the important part isn't centered in the shot. If you have one yourself, feel free to use that. If not, how about using https://unsplash.com/photos/8oLnCRz7hwM[this picture of a lion^] by https://unsplash.com/@keyursphotography[Keyur Nandaniya^]?
+. Find an image to upload. For the purposes of the tasks in this {document}, you should work with an image where the important part isn't centered in the shot. If you have one yourself, feel free to use that. If not, how about using https://unsplash.com/photos/8oLnCRz7hwM[this picture of a lion] by https://unsplash.com/@keyursphotography[Keyur Nandaniya]?
 
-. Create a folder for your images. Call it "{image-folder}". Just like the "{content-type-1}" folder we created previously, you may place the folder anywhere in your project structure.
+. Create a folder for your images. Call it "{image-folder}". Just like the "{content-type-1}s" folder we created previously, you may place the folder anywhere in your project structure.
 . Open the "create content" dialog. Press the upload button to bring up your OS's file browsing dialog and select your image. You can also drag and drop the image from your file system browser onto the dialog.
 
 And that's all it takes to upload files to Content Studio!
 
 === Data Toolbox
 
-Like we saw in the {document} on content, Data Toolbox lets you view and edit your content. Images and other media are also available in Data Toolbox as content, but in addition to the same properties you saw previously, media also have a property called `attachment`. The attachment will essentially hold all the data from the file that you uploaded.
+Like we saw in the {document} on Data Toolbox, it lets you view and edit your content. Images and other media are also available in Data Toolbox as content, but in addition to the same properties you saw previously, media also have a property called `attachment`. The attachment will essentially hold all the data from the file that you uploaded.
 
-For instance, if you have a look at the image you uploaded earlier, you should see that it points to the image file you uploaded. 
+For instance, if you have a look at the image you uploaded earlier, you should see that it points to the image file you uploaded.
 
-If you added a focal point, you'll see that specified under the `media` property too. 
+If you added a focal point, you'll see that specified under the `media` property too.
 
 If you view the content as JSON, some relevant parts of the structure are the `data` and `attachment` properties:
 
@@ -76,118 +77,17 @@ If you view the content as JSON, some relevant parts of the structure are the `d
 <3> The image attachment with data about the file, such as MIME type and size.
 
 
-== Attachment service
+== Media APIs
 
-Uploading a file is only half the job. XP also includes and Attachment Service that lets you download the same file (now stored as an attachment within the content) when you need it.
+Uploading a file is only half the job. XP also includes APIs that let you download the same file (now stored as an attachment within the content) when you need it: the _attachment API_ serves any file as it was uploaded, and the _image API_ serves images, with scaling and filters applied on the fly.
 
-Essentially, what you need is a URL to download the specific attachment stored within your media:
+Both are served from your instance's API base URL, which on your sandbox is `{api-base-url}`. We'll see what the URLs look like in a moment.
 
 === mediaUrl
 
-To get the URL you may use the following GraphQL query. The mediaUrl field will return a link to the original file you uploaded.
+To get the URL of a media item's file, use the `mediaUrl` field in GraphQL. It returns the _components_ of the URL rather than a finished address, so that your front-end can decide which host to serve media from:
 
-[source, GraphQL]
-----
-query {
-  guillotine {
-    get(key: "/developer/media/ready-set-code.png") {
-      displayName
-      type
-      ... on media_Image {
-        mediaUrl
-      }
-    }
-  }
-}
-----
-
-If everything went fine, you should expect a response that looks something like this:
-
-[source, json]
-----
-{
-  "data": {
-    "guillotine": {
-      "get": {
-        "displayName": "ready-set-code",
-        "type": "media:image",
-        "mediaUrl": "/site/preview/dev-portal/draft/_/attachment/inline/f7efd6e4-9eed-45d2-83b6-d088a7bdc685:8652e625afe7bbda595a190a3b8624e322dc9f1a/ready-set-code.png"
-      }
-    }
-  }
-}
-----
-
-
-== Images
-
-One of the standard media content types is `media:image`. Images are important in content management, and as such, XP and Content Studio provide some interesting features to help you make the most of your images.
-
-=== Image service
-
-Whenever XP serves you an image, the image is delivered via https://developer.enonic.com/docs/xp/stable/runtime/engines/site-engine/image-service[XP's image service^].
-
-The image service takes care of scaling and applying filters to your images based on parameters you give it. For instance, it's common to want to have all images in a section conform to the same dimensions. But because images are generally of different shapes and sizes, this might require cropping the image. The image service takes care of that for you as long as you specify what you want.
-
-The image service works in tandem with Content Studio's image editing tools, so it respects crops, flips, and focal points that you create.
-
-=== Image form
-
-Content Studio comes with a suite of image editing tools built in. After uploading an image to Content Studio, you can find it in the content grid and edit it to bring up the image's content form.
-
-.The image content form
-image::image-content-form.png["A content form showing the image with image editing tools, inputs for caption, alternative text, copyright, and tags.", 621w}]
-
-The content form allows you to provide an image caption, alt text, copyright and tag info. 
-
-You can also add image properties such as dimensions, and where the image was taken and with what gear. 
-
-NOTE: Changing these properties, including size, width, height, etc, does not affect the image in any way.
-
-The image editing tools allow you to crop, flip, and rotate the image as well as to set what's known as _autofocus_. 
-
-The autofocus control allows you to set an image focal point that XP will always keep in view, regardless of how the image is cropped.
-
-NOTE: Without setting a focal point, XP will focus around the center of the image when cropping.
-
-You can always reset the edits you've made to an image by using the 'reset filters' button.
-
-TIP: You can read more about https://enonic.com/blog/enonic-simplifies-image-problems[how Enonic simplifies your everyday image problems^] to get more info about how to use images in a traditional CMS model and for a quick overview of the autofocus feature.
-
-=== Autofocus
-
-Because we chose an image with an off-center subject, the image might get cropped such that the lion disappears from the image. For instance, a small, square crop might turn out like this:
-
-.Cropped image without focal point
-image::image-cropped-unfocused.jpg["A crop of the lion in the savannah image. The image is square and the only part of the lion that is visible is part of its hind leg.",500w]
-
-To get around this, try the autofocus tool.
-
-. Click the autofocus tool. A red circle will show up over the image. This circle indicates where the focal point is.
-. Move the circle onto the lion (or whatever your focal point is) and press "apply".
-+
-.The focal point editor
-image::image-editing-focal-point.png["The lion image with a red circle indicating the focal point around its head.",626w]
-
-Now, when the image gets cropped, XP will take care of keeping the lion in focus, both in traditional CMS solutions and in headless modes:
-
-.The same image with the same crop, but with a focal point
-image::image-cropped-focused.jpg["A crop of the lion in the savannah. In this square image, the lion is in full view square in the center.", 500w]
-
-
-== GraphQL API
-
-Guillotine makes it easy to fetch the data that you've uploaded. 
-
-Some functionality is shared between all media types, while other queries only work on specific media types. 
-
-We'll look at how to fetch general media and then have a closer look at what we can do with images and attachments.
-
-=== General media type
-
-To get the resource URL of media you have uploaded, use the `mediaUrl` property on any media type. For instance, to get the URL of the raw image you uploaded previously, you could use a query like this:
-
-[source, GraphQL]
+[source,GraphQL]
 ----
 {
   guillotine {
@@ -202,27 +102,37 @@ To get the resource URL of media you have uploaded, use the `mediaUrl` property 
       }
     ) {
       displayName
+      type
       ... on media_Image { // <1>
-        mediaUrl // <2>
+        mediaUrl { // <2>
+          path
+          queryString
+        }
       }
     }
   }
 }
 ----
 
-<1> This allows us to query properties that belong to the `media:Image` GraphQL type.
-<2> The `mediaUrl` property (also available on all other media types) gives you a URL from where the raw file can be downloaded.
+<1> This allows us to query fields that belong to the `media_Image` GraphQL type.
+<2> The `mediaUrl` field (also available on all other media types) gives you the path from where the raw file can be downloaded.
 
-.The response would look something like this:
-[source,json]
+If everything went fine, you should expect a response that looks something like this:
+
+// TODO(xp8-verify): recapture the response from Guillotine 9
+[source,json,{subs}]
 ----
 {
   "data": {
     "guillotine": {
       "queryDsl": [
         {
-          "displayName": "keyur-nandaniya-8oLnCRz7hwM-unsplash",
-          "mediaUrl": "/admin/site/preview/my-first-project/draft/_/attachment/inline/21f827e0-ba57-4824-b3bc-f101ae08568b:9475135781b315daad078d91c27746bc3222d024/keyur-nandaniya-8oLnCRz7hwM-unsplash.jpg"
+          "displayName": "lion",
+          "type": "media:image",
+          "mediaUrl": {
+            "path": "/media:attachment/{cms-project}:draft/21f827e0-ba57-4824-b3bc-f101ae08568b:9475135781b315daad078d91c27746bc3222d024/lion.jpg",
+            "queryString": ""
+          }
         }
       ]
     }
@@ -230,22 +140,99 @@ To get the resource URL of media you have uploaded, use the `mediaUrl` property 
 }
 ----
 
+Put the API base URL in front of `path`, append `queryString`, and you have the address of your file. For the response above, that is:
+
+[{subs}]
+----
+{api-base-url}/media:attachment/{cms-project}:draft/21f827e0-ba57-4824-b3bc-f101ae08568b:9475135781b315daad078d91c27746bc3222d024/lion.jpg
+----
+
+Open it in your browser to see the original image you uploaded.
+
+NOTE: The path tells you which project and branch the file comes from. Because Query Playground was querying the draft branch, the context segment is `{cms-project}:draft`. For published content on master it is just `{cms-project}`. The long identifier is the content ID followed by a fingerprint that changes whenever the file does, which makes the URL safe to cache forever.
+
+
+== Images
+
+One of the standard media content types is `media:image`. Images are important in content management, and as such, XP and Content Studio provide some interesting features to help you make the most of your images.
+
+=== Image API
+
+Whenever XP serves you an image, the image is delivered via https://developer.enonic.com/docs/cms/stable/apis/image[XP's image API].
+
+The image API takes care of scaling and applying filters to your images based on parameters you give it. For instance, it's common to want to have all images in a section conform to the same dimensions. But because images are generally of different shapes and sizes, this might require cropping the image. The image API takes care of that for you as long as you specify what you want.
+
+The image API works in tandem with Content Studio's image editing tools, so it respects crops, flips, and focal points that you create.
+
+=== Image form
+
+Content Studio comes with a suite of image editing tools built in. After uploading an image to Content Studio, you can find it in the content grid and edit it to bring up the image's content form.
+
+// TODO(xp8-verify): recapture from Content Studio 6.1, where the image editor is part of the preview
+.The image content form
+image::image-content-form.png["A content form showing the image with image editing tools, inputs for caption, alternative text, copyright, and tags.", 621w]
+
+The content form allows you to provide an image caption, alt text, copyright and tag info.
+
+You can also add image properties such as dimensions, and where the image was taken and with what gear.
+
+NOTE: Changing these properties, including size, width, height, etc, does not affect the image in any way.
+
+The image editing tools allow you to crop, flip, and rotate the image as well as to set what's known as _autofocus_.
+
+The autofocus control allows you to set an image focal point that XP will always keep in view, regardless of how the image is cropped.
+
+NOTE: Without setting a focal point, XP will focus around the center of the image when cropping.
+
+You can always reset the edits you've made to an image by using the 'reset filters' button.
+
+TIP: You can read more about https://enonic.com/blog/enonic-simplifies-image-problems[how Enonic simplifies your everyday image problems] to get more info about how to use images in a traditional CMS model and for a quick overview of the autofocus feature.
+
+=== Autofocus
+
+Because we chose an image with an off-center subject, the image might get cropped such that the lion disappears from the image. For instance, a small, square crop might turn out like this:
+
+.Cropped image without focal point
+image::image-cropped-unfocused.jpg["A crop of the lion in the savannah image. The image is square and the only part of the lion that is visible is part of its hind leg.",500w]
+
+To get around this, try the autofocus tool.
+
+. Click the autofocus tool. A circle will show up over the image. This circle indicates where the focal point is.
+. Move the circle onto the lion (or whatever your focal point is) and press "apply".
++
+.The focal point editor
+image::image-editing-focal-point.png["The lion image with a circle indicating the focal point around its head.",626w]
+
+Now, when the image gets cropped, XP will take care of keeping the lion in focus, both in traditional CMS solutions and in headless modes:
+
+.The same image with the same crop, but with a focal point
+image::image-cropped-focused.jpg["A crop of the lion in the savannah. In this square image, the lion is in full view square in the center.", 500w]
+
+
+== GraphQL API
+
+Guillotine makes it easy to fetch the data that you've uploaded.
+
+Some functionality is shared between all media types, while other queries only work on specific media types.
+
+We saw `mediaUrl` above, which works on any media type. Let's have a closer look at what we can do with images.
+
 === Image media type
 
-XP supports a number of image manipulation functions on the fly. When querying for an image via the GraphQL API, you can use the `imageUrl` function to specify scale and filters for the result you want.
+XP supports a number of image manipulation functions on the fly. When querying for an image via the GraphQL API, you can use the `imageUrl` field to specify scale and filters for the result you want.
 
-The scale argument is `required` and allows you to specify how you want to crop the image. Common scaling functions include _block_, which allows you to specify width and height and _width_ which scales the image proportionally to the specified width. 
+The `scale` argument allows you to specify how you want to crop the image. Common scaling functions include _block_, which allows you to specify width and height, and _width_, which scales the image proportionally to the specified width. Leave it out, and you get the image as it was uploaded.
 
-TIP: https://developer.enonic.com/docs/xp/stable/runtime/engines/site-engine/image-service#scaling_methods[The scaling methods reference docs^] show off all the available scaling functions with examples of how they affect the image.
+TIP: https://developer.enonic.com/docs/cms/stable/apis/image[The image API reference docs] show off all the available scaling functions with examples of how they affect the image.
 
-As the name implies, the filters argument lets you apply filters to the image. Use filters to apply coloration functions and to rotate and flip images on the fly. To combine filters, separate them with a semicolon.
+As the name implies, the `filter` argument lets you apply filters to the image. Use filters to apply coloration functions and to rotate and flip images on the fly. To combine filters, separate them with a semicolon.
 
-TIP: https://developer.enonic.com/docs/xp/stable/runtime/engines/site-engine/image-service#filters[The filters documentation^] has an exhaustive list of the available filters.
+TIP: The same page has an exhaustive list of the available filters.
 
 For instance, we could get all the images under the `images` folder, scaled to 600x700 pixels, in grayscale, with a query like this:
 
 .A GraphQL query that both scales and applies a filter to images in the `images` folder
-[source, GraphQL]
+[source,GraphQL]
 ----
 {
   guillotine {
@@ -262,32 +249,37 @@ For instance, we could get all the images under the `images` folder, scaled to 6
       displayName
       ... on media_Image {
         imageUrl( // <1>
-          type: absolute, // <2>
-          scale: "block(600,700)", // <3>
-          filter: "grayscale(); border(10, 0x000000)") // <4>
+          scale: "block(600,700)", // <2>
+          filter: "grayscale(); border(10, 0x000000)") { // <3>
+          path
+          queryString
+        }
       }
     }
   }
 }
 ----
 
-<1> The `imageUrl` function lets you specify how you want the images to look.
-<2> The `type` argument specifies whether the URL should be absolute or relative to the server.
-<3> The scale argument specifies the dimensions of the image.
-<4> The filter argument lets you apply filters.
+<1> The `imageUrl` field lets you specify how you want the images to look.
+<2> The scale argument specifies the dimensions of the image.
+<3> The filter argument lets you apply filters.
 
 The above query should return a response that looks a little something like this:
 
+// TODO(xp8-verify): recapture the response from Guillotine 9
 .A response with a cropped image with filters
-[source,json]
+[source,json,{subs}]
 ----
 {
   "data": {
     "guillotine": {
       "queryDsl": [
         {
-          "displayName": "keyur-nandaniya-8oLnCRz7hwM-unsplash",
-          "imageUrl": "http://localhost:8080/admin/site/preview/my-first-project/draft/_/image/21f827e0-ba57-4824-b3bc-f101ae08568b:6d89657e4bfae6eaa62de22bd6fb63b2697f091d/block-600-700/keyur-nandaniya-8oLnCRz7hwM-unsplash.jpg?filter=grayscale%28%29%3B+border%2810%2C+0x000000%29"
+          "displayName": "lion",
+          "imageUrl": {
+            "path": "/media:image/{cms-project}:draft/21f827e0-ba57-4824-b3bc-f101ae08568b:6d89657e4bfae6eaa62de22bd6fb63b2697f091d/block-600-700/lion.jpg",
+            "queryString": "?filter=grayscale%28%29%3B+border%2810%2C+0x000000%29"
+          }
         }
       ]
     }
@@ -295,16 +287,16 @@ The above query should return a response that looks a little something like this
 }
 ----
 
-Which, if you have followed the steps in this {document}, should show you something like this if you try and navigate to the `imageUrl` property value:
+As with `mediaUrl`, prefix the path with `{api-base-url}` and append the query string. If you have followed the steps in this {document}, the resulting address should show you something like this:
 
 .The processed image
-image::image-processed.jpg["The lion image, cropped, in black and white, and flipped upside down.",600w]
+image::image-processed.jpg["The lion image, cropped, in black and white, with a black border.",600w]
 
-
+NOTE: Asking for scaled and filtered images is allowed when you query Guillotine's own API endpoint, which is what Query Playground does. When Guillotine is mounted on a site instead, image transformations are turned off by default, so that visitors cannot generate endless variants of your images.
 
 
 == Summary
 
-You should now have a deep understanding of how media is stored, and accessed - as well as XP's image handing and image service, including how to access it all from the GraphQL API.
+You should now have a deep understanding of how media is stored and accessed - as well as XP's image handling and image API, including how to access it all from the GraphQL API.
 
 Pushing forward, it's time to <<input-types#, have a closer look at the basic building blocks of the content forms; input types>>.

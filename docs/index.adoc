@@ -1,13 +1,19 @@
-= XP7 - Developer 101 - CMS fundamentals
+= Developer 101 - Content Modelling and the GraphQL API
 include::.variables.adoc[]
-:section-1: Installing tools and initial setup
+:section-1: Getting started
 :section-2: Working with content
 :section-3: Advanced content modelling
 :section-4: Deployment and next steps
 
-Welcome to this in-depth tutorial to get familiar with Enonic. The guide is aimed at people new to Enonic, covering the essentials of content modelling and accessing content via the GraphQL API.
+Welcome to this hands-on tutorial to get familiar with Enonic. The guide is aimed at people new to Enonic, and takes you step by step through content modelling and accessing content via the GraphQL API.
 
-If you have any questions, or just want to get in touch - visit the https://discuss.enonic.com[Forum^] or join the https://slack.enonic.com/[Community Slack channel^]
+== Who this tutorial is for
+
+This tutorial is for developers who define content types and build front-ends against Enonic's GraphQL API. It covers content modelling, schema management and the Guillotine API, using the Enonic CLI, Content Studio and a local sandbox. Every chapter builds on the previous one, so you gain understanding incrementally while building a small content model of your own.
+
+It does not cover building pages with the Enonic framework. For that, see the https://developer.enonic.com/docs/intro[Introduction to Enonic] and the https://developer.enonic.com/docs/next.xp[Next.js tutorial]. The https://developer.enonic.com/docs/cms[CMS reference documentation] covers every topic in this tutorial in depth, and is the place to go once you know what you are looking for.
+
+If you have any questions, or just want to get in touch - visit the https://discuss.enonic.com[Forum] or join the https://slack.enonic.com/[Community Slack channel]
 
 Good luck! 🙌
 
@@ -25,10 +31,6 @@ NOTE: When we mention "XP", we are referring to "Enonic XP", the hybrid CMS you'
 
 <<setup#, {title-setup}>>::
 {description-setup}
-<<sandbox#, {title-sandbox}>>::
-{description-sandbox}
-<<apps#, {title-apps}>>::
-{description-apps}
 --
 
 [sidebar]
@@ -37,24 +39,26 @@ NOTE: When we mention "XP", we are referring to "Enonic XP", the hybrid CMS you'
 
 <<content-studio#, {title-content-studio}>>::
 {description-content-studio}
+<<data-toolbox#, {title-data-toolbox}>>::
+{description-data-toolbox}
 <<headless-api#, {title-headless-api}>>::
 {description-headless-api}
-<<files#, {title-medias-and-attachments}>>::
-{description-medias-and-attachments}
-<<input-types#, {title-input-types}>>::
-{description-input-types}
+<<files#, {title-files}>>::
+{description-files}
 --
 
 [sidebar]
 .{section-3}
 --
 
+<<input-types#, {title-input-types}>>::
+{description-input-types}
 <<sets#, {title-sets}>>::
 {description-sets}
 <<rich-text#, {title-rich-text}>>::
 {description-rich-text}
-<<x-data#, {title-x-data}>>::
-{description-x-data}
+<<mixins#, {title-mixins}>>::
+{description-mixins}
 --
 
 [sidebar]

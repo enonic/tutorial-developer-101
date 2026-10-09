@@ -1,19 +1,23 @@
 # Agent Instructions for the Developer 101 tutorial
 
-This repository contains "Developer 101 - CMS fundamentals", the hands-on Enonic tutorial for developers who are new to Enonic XP.
+This repository contains "Developer 101 - Content Modelling and the GraphQL API", the hands-on Enonic tutorial for developers who are new to Enonic XP.
 
 ## Scope and Audience
 
-The tutorial walks a newcomer from installing the Enonic CLI to deploying an app: sandboxes, creating an app from a starter, Content Studio, content types, the Guillotine GraphQL API, media, input types, sets and mixins, rich text, x-data, and deployment. It is aimed at developers with no prior Enonic experience, and should remain approachable for people who are not primarily back-end developers.
+The tutorial is for developers who define content types and build front-ends against Enonic's GraphQL API. It walks a newcomer from installing the Enonic CLI to deploying an app: sandboxes, creating an app from a starter, Content Studio, content types, the Guillotine GraphQL API, media, input types, sets and form fragments, rich text, mixins, and deployment. It should remain approachable for people who are not primarily back-end developers.
 
-This is a tutorial, not reference documentation. Explain enough to complete each task, then link to the reference documentation on developer.enonic.com for the full picture. Do not restate reference material such as the complete list of input types or the Guillotine schema.
+The scope is content modelling, schema management and the Guillotine API. The tutorial does not build sites or pages with the Enonic framework, and does not teach any particular front-end framework. Point readers to the Introduction to Enonic and the Next.js tutorial for those.
+
+This is a tutorial, not reference documentation. The CMS reference documentation covers every topic here in depth; this tutorial's value is the hands-on, incremental path through them. Explain enough to complete each task, then link to the reference documentation on developer.enonic.com for the full picture. Do not restate reference material such as the complete list of input types or the Guillotine schema.
 
 ## Content Guidelines
 
 This repository is documentation only:
 
 * `docs/` contains the AsciiDoc tutorial published on Enonic's developer portal.
-* The reader builds their own app from the `starter-vanilla` starter. That app is **not** checked in here, so every path such as `src/main/resources/site/content-types/` refers to the reader's project, not to this repository.
+* The reader builds their own app from the `starter-vanilla` starter. That app is **not** checked in here, so every path such as `{app-root}/cms/content-types/` refers to the reader's project, not to this repository. The resource root is the `app-root` attribute in `docs/.variables.adoc`, currently `src/main/resources`, so the planned XP 8.2 lightweight app layout with `cms/` at the project root is a one-line change. Never write the root out literally in prose or block titles.
+* The `master` branch targets Enonic XP 8.1, Guillotine 9 and Content Studio 6.1, and is published as the `next` version. The `xp7` branch holds the XP 7 edition and is published as `stable` until the XP 8 edition is complete. All schemas are YAML, Guillotine URL fields return `path` and `queryString` components, and the API endpoint is `/api/com.enonic.app.guillotine:graphql`.
+* Statements that still need checking against a running sandbox are marked with an AsciiDoc comment starting with `// TODO(xp8-verify):` directly above the affected block. Comments are not rendered. Remove the comment once the content has been verified or the screenshot recaptured.
 * `src/` holds unrelated scaffolding from the initial commit. No chapter references it. Do not treat it as the tutorial's sample application.
 
 The tutorial is a sequential story. Navigation is defined by `docs/menu.json`, and `docs/index.adoc` groups the same chapters into themed sections. Keep both in the same order.
@@ -26,7 +30,7 @@ This documentation should be useful to both people and LLMs learning Enonic deve
 
 * **No empty stubs.** Every page in `docs/menu.json` must contain substantive, accurate content. If a page is not ready, keep it out of navigation rather than publishing placeholder text. A dot-prefixed file such as `docs/.iam.adoc` is ignored by the build and is the way to park a draft chapter.
 * **Self-contained pages.** Briefly explain a concept locally before linking to deeper reference material. Avoid links that substitute for the explanation the reader needs to continue the tutorial.
-* **Consistent terminology.** Use Enonic terms such as sandbox, app, starter, project, content type, content project, site, input type, mixin, option set, item set, x-data, Guillotine, and Content Studio consistently. Apps running on Enonic XP are "Enonic applications" or simply "apps", never "XP apps".
+* **Consistent terminology.** Use Enonic terms such as sandbox, app, starter, project, content type, content project, site, input type, form item, field set, item set, option set, form fragment, mixin, Guillotine, and Content Studio consistently. Apps running on Enonic XP are "Enonic applications" or simply "apps", never "XP apps". Mind the XP 8 double rename: what XP 7 called a mixin is a form fragment, and what XP 7 called x-data is a mixin. The chapter lives in `docs/mixins.adoc`; the XP 7 edition on the `xp7` branch has it as `x-data.adoc`.
 * **Runnable examples.** Commands and snippets should be complete enough to follow. Use placeholders only when the reader is explicitly expected to replace them, and explain what the replacement represents.
 * **Tutorial continuity.** Do not assume functionality from a later chapter. Each step must build on what the reader has created up to that point. Chapters that depend on earlier work open with the `{see-prev-docs}` note.
 
@@ -68,7 +72,7 @@ Every chapter starts with its title, then `include::.variables.adoc[]`, then its
 ## AsciiDoc Conventions
 
 * Use `image::filename.ext[alt text, {image-m}]` for block images stored in `docs/media/`, choosing one of the `{image-xs}` to `{image-xl}` width attributes from `docs/.variables.adoc` for consistency. Capture screenshots at the size a reader would see them.
-* Use relative cross-document links such as `<<sandbox#, the sandboxes chapter>>` so links remain version-aware on the developer portal.
+* Use relative cross-document links such as `<<setup#, the setup chapter>>` so links remain version-aware on the developer portal.
 * Use source blocks with the correct language (`xml`, `graphql`, `json`, `shell` or `bash`, `html`) and callouts when individual lines need explanation. Add `[{subs}]` when a block uses attributes.
 * Use `kbd:[]` for keystrokes and `menu:` or the existing backtick `XP menu` -> `Applications` style for navigation paths. Follow the surrounding chapter.
 * Mark hands-on sections with a `=== Task:` heading so readers can tell instructions from explanation.

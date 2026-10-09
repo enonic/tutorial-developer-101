@@ -3,14 +3,15 @@
 :experimental:
 :document: chapter
 :xp-url: http://localhost:8080
-:cs-url: {xp-url}/admin/tool/com.enonic.app.contentstudio/main
-:project-name-prefix: com.example.
-:project-name: myapp
-:project-name-full: {project-name-prefix}{project-name}
+:api-base-url: {xp-url}/api
+:graphql-url: {api-base-url}/com.enonic.app.guillotine:graphql
+:sandbox-name: tutorial
+:app-root: src/main/resources
+:project-name: tutorial101
+:project-name-full: com.example.{project-name}
 :project-name-query: com_example_{project-name}
-:p1-site-name: My First Site
-:p1-site-slug: my-first-site
-:p1-api-url: {xp-url}/site/default/draft/{p1-site-slug}/api
+:cms-project-name: My First Project
+:cms-project: my-first-project
 :content-type-1: artist
 :content-type-1-capitalized: Artist
 :content-type-2: animal
@@ -19,16 +20,16 @@
 :content-about-missy: Melissa Arnette Elliott (born July 1, 1971) is an American rapper, singer, songwriter, and record producer.
 :content-about-pink: Alecia Beth Moore (born September 8, 1979), known professionally as Pink (stylized as P!nk), is an American singer and songwriter.
 :subs: subs="attributes+"
-:see-prev-docs: The tasks and examples in this {document} are based on work done in previous {document}s (starting with <<sandbox#, the sandboxes chapter>>). If you want to follow along with the examples, make sure you're all caught up.
-:title-setup: Setting up your development environment
-:title-sandbox: Sandbox
-:title-apps: My first App
-:title-content-studio: Content studio and content creation
-:title-sets: Sets
-:title-input-types: Input types
-:title-rich-text: Rich text
-:title-x-data: X-data
+:see-prev-docs: The tasks and examples in this {document} are based on work done in previous {document}s (starting with <<setup#, the setup chapter>>). If you want to follow along with the examples, make sure you're all caught up.
+:title-setup: Setup
+:title-content-studio: Content Studio and content creation
+:title-data-toolbox: Data Toolbox
 :title-headless-api: GraphQL API
+:title-files: Media - files are content too
+:title-input-types: Input types
+:title-sets: Sets and form fragments
+:title-rich-text: Rich text
+:title-mixins: Mixins
 :title-deployment: Deployment and next steps
 :title-iam: IAM: identities and providers
 :image-xs: width=600
@@ -36,14 +37,14 @@
 :image-m: width=900
 :image-l: width=1050
 :image-xl: width=1200
-:description-setup: Starting from scratch, this {document} takes you through how to install all the necessary tools to get started with Enonic XP development.
-:description-sandbox: Introducing a fundamental concept of Enonic XP development: sandboxes.
-:description-apps: Learn how to create XP projects and how to build and deploy your apps to a XP instance.
-:description-content-studio: Get familiar with Content Studio and Content types, and start creating some content.
-:description-headless-api: What is a headless CMS without an API? Learn about the Guillotine library and the powers it unlocks here.
+:description-setup: Install the Enonic CLI, start a local XP sandbox and create the app that will hold your content types. Three commands and you are ready.
+:description-content-studio: Get familiar with Content Studio and content types, and start creating some content.
+:description-data-toolbox: Peek under the hood with Data Toolbox and see how your content is stored.
+:description-headless-api: What is a headless CMS without an API? Learn about the Guillotine app and the powers it unlocks here.
+:description-files: How does XP deal with images and other media? This {document} covers XP media support, how to upload and query for media, how to work with images and attachments.
 :description-input-types: Take your content types to the next level with more advanced input types. Learn how to configure input types, what kinds there are, and how to link content together.
-:description-sets: XP has a number of ways to group inputs together. Learn all about them in this {document}.
+:description-sets: XP has a number of ways to group inputs together, and to reuse groups across schemas. Learn all about them in this {document}.
 :description-rich-text: Rich text is an incredibly powerful editing tool and an important part of the XP experience. Learn how to configure it here.
-:description-x-data: X-data is a way for you to add extra data to all your content types in a simple manner. This {document} covers what it is and how to use it.
+:description-mixins: Mixins are a way for you to add extra fields to all your content types in a simple manner. This {document} covers what they are and how to use them.
 :description-deployment: How do you actually deploy Enonic XP and use it for more than local development? And where do you go from here to learn more?
 :description-iam: How do you restrict access to your sites? What kinds of access control exist for XP? This {document} explores users, roles, groups, and identity providers.

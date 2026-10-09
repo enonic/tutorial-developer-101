@@ -4,25 +4,32 @@ include::.variables.adoc[]
 
 Enonic is a highly flexible CMS, capable of delivering content in many ways. In this {document} we will focus on delivery via the out-of-the-box GraphQL API.
 
-Now that we've created some content, let's see how we can access and use it in via API - headless style. 
+Now that we've created some content, let's see how we can access and use it via an API - headless style.
+
+NOTE: {see-prev-docs}
 
 == Guillotine
 
-Introducing _Guillotine_, the app that's responsible for automatically generating a GraphQL APIs for your content.
+Introducing _Guillotine_, the app that's responsible for automatically generating a GraphQL API for your content.
 
-Guillotine should be pre-installed based on the `Essentials` template you used when setting up your sandbox. It is available on https://market.enonic.com/vendors/enonic/guillotine[Enonic Market^], and may also be installed manually.
+Guillotine should be pre-installed based on the `Essentials` template you used when setting up your sandbox. It is available on https://market.enonic.com/vendors/enonic/guillotine[Enonic Market], and may also be installed manually.
 
-== Query playground
+NOTE: This tutorial is written for Guillotine 9, which requires XP 8.1 or newer. Check the version in `XP menu` -> `Applications` if your queries do not behave as described.
 
-Back in Content Studio, you should now have access to a new item called `Query Playground` in the left green widget sidebar. Open it, and you should see this:
+Guillotine exposes a single API endpoint for all your projects. On your sandbox, it is `{graphql-url}`. We'll use it directly in the <<deployment#, deployment {document}>>. For now, Content Studio offers a much more comfortable way to explore it.
 
-image::query-playground-empty.png[API browser integrated in Content Studio, 602w]
+== Query Playground
 
-Query playground is an interactive GraphQL API explorer. You enter your query in the text area to your left and when you execute it, you'll get the results of the query on the other side of the screen.
+Back in Content Studio, you should now have access to a new item called `Query Playground` in the menu bar on the left. Open it, and you should see this:
 
-GraphQL is a graph "query language". It allows you to create highly specific queries for exactly the content that you need (visit the https://graphql.org/learn/[official GraphQL docs to learn more^]).
+// TODO(xp8-verify): confirm the menu label and recapture all Query Playground screenshots from Content Studio 6.1 with Guillotine 9
+image::query-playground-empty.png[Query Playground integrated in Content Studio, 602w]
 
-As an example on how to retrieve some minimal info about your previously created artists, run the following query:
+Query Playground is an interactive GraphQL API explorer. You enter your query in the editor in the middle and when you execute it, you'll get the results of the query in the panel on the right.
+
+GraphQL is a graph "query language". It allows you to create highly specific queries for exactly the content that you need (visit the https://graphql.org/learn/[official GraphQL docs to learn more]).
+
+As an example of how to retrieve some minimal info about your previously created artists, run the following query:
 
 [source,GraphQL]
 ----
@@ -37,105 +44,62 @@ As an example on how to retrieve some minimal info about your previously created
 }
 ----
 
-After running, you should get something like this on the right area:
+After running, you should get something like this in the response panel:
 
 .Results of running the suggested query
-image::query-playground-artists-minimal.png[Query playground response of running mimimal query to retrieve artists, 1073w]
+image::query-playground-artists-minimal.png[Query playground response of running minimal query to retrieve artists, 1073w]
 
-=== Buttons
+=== Getting around
 
-Before trying to come up with complex queries, let's make familiarize ourselves with Query Playground.
+Before trying to come up with complex queries, let's familiarize ourselves with Query Playground. It consists of a few panels:
 
-[cols="2a,7,3"]
-|===
-|Icon | Description | Shortcuts
+Docs:: Opens on the left, and lets you browse every type and field in the API. We'll use it in a moment.
+Query:: The editor in the middle, where you write your query. Press the play button, or kbd:[ctrl+enter], to run it.
+Response:: The panel on the right, showing the result of the query, or any errors.
+Variables:: Expands below the query editor, and lets you supply query variables as a JSON object.
+Draft / Master:: The buttons above the response panel select which branch to query. Draft is your work in progress, Master is what has been published.
 
-| image::query-playground-button-1.png[Query playground play button, 50w]
-| _Play_ - Execute your query 
-| kbd:[ctrl+enter]
-
-| image::query-playground-button-2.png[Query playground prettify button, width=50]
-| _Prettify_ - Format your query, removing comments and unecessary spaces / indentation
-| kbd:[ctl+shift+p]
-
-| image::query-playground-button-3.png[Query playground merge button, width=50]
-| _Merge fragments_ - Rewrites your query based on the declared https://graphql.org/learn/queries/#fragments[fragments]
-| kbd:[ctl+shift+m]
-
-|image::query-playground-button-4.png[Query playground copy button, width=50]
-| _Copy_ - Copy your query to your clipboard. 
-| kbd:[ctl+shift+c]
-
-| image::query-playground-button-5.png[Query playground docs button, width=50]
-| _Docs_ - Show the API documentation
-|
-
-| image::query-playground-button-6.png[Query playground history button, width=50]
-| _History_ - Shows all previously executed queries
-|
-
-| image::query-playground-button-7.png[Query playground tab button, width=50]
-| _Tab_ - Creates new tabs for you to manage testing multiple queries
-|
-
-| image::query-playground-button-9.png[Query playground re-fetch button, width=50]
-| _Re-fetch schema_ - Reloads your GraphQL schemas based on recent changes
-|
-
-| image::query-playground-button-10.png[Query playground shortkeys button, width=50]
-| _Shortkeys_ - Displays all short keys that can be used in Query Playground
-| 
-
-| image::query-playground-button-11.png[Query playground settings button, width=50]
-| _Settings_ -  Opens settings dialog
-|
-
-| image::query-playground-button-8.png[Query playground draft and master buttons, width=100]
-| Draft / master toggle_ - Switch between querying draft or master branch (published items)
-|
-
-|===
-
+Queries run in the project currently selected in Content Studio's top bar, so you never have to tell Query Playground which project to use.
 
 === Schemas
 
-Now, locate and click on the docs button. On this opened section you have detailed info about all https://graphql.org/learn/schema/[schemas^] available on your project.
+Now, locate and open the Docs panel. Here you have detailed info about all https://graphql.org/learn/schema/[schemas] available in your project.
 
-On the top search bar in the docs section, search for `artist` and locate the `com_example_myproject_Artist` schema:
+In the search field of the Docs panel, search for `artist` and locate the `{project-name-query}_{content-type-1-capitalized}` schema:
 
 .The Artist schema
-image::query-playground-artist-schema.png[Query playground docs section showing the details of com_example_myproject_Artist schema, 777w]
+image::query-playground-artist-schema.png[Query playground docs section showing the details of the Artist schema, 777w]
 
-Note that it's said that the `Artist` schema _implements_ the `Content` schema. This basically means that the `Artist` schema will have the structure defined by the `Content` schema, together with possibly some additional structure... in this case, that additional structure is a `data` field, defined by `com_example_myproject_Artist_Data` schema:
+Note that it says that the `{content-type-1-capitalized}` schema _implements_ the `Content` schema. This basically means that the `{content-type-1-capitalized}` schema will have the structure defined by the `Content` schema, together with possibly some additional structure... in this case, that additional structure is a `data` field, defined by the `{project-name-query}_{content-type-1-capitalized}_Data` schema:
 
 .The Artist data schema
-image::query-playground-artist-data-schema.png[Query playground docs sections showing the details of com_example_myproject_Artist_Data schema, 777w]
+image::query-playground-artist-data-schema.png[Query playground docs section showing the details of the Artist data schema, 777w]
 
-NOTE: Note that this matches the structure defined by the Artist content type, which is a natural thing to expect.  
+NOTE: Note that this matches the structure defined by the Artist content type, which is a natural thing to expect. The name of the schema is derived from your app name and the content type name, with dots replaced by underscores.
 
 === Querying with inline fragments
 
-We've used the Docs section to inspect the structure of the `Artist` schema. Let's now, based on a broader understanding of this schema, we'll query to get proper data from artists.
+We've used the Docs panel to inspect the structure of the `{content-type-1-capitalized}` schema. Now, based on a broader understanding of this schema, we'll query to get proper data from artists.
 
-Close the docs section, head back to the text area to edit your query and remove `displayName`, `_path` and `_id` from the query we introduced earlier.
+Close the Docs panel, head back to the editor and remove `displayName`, `_path` and `_id` from the query we introduced earlier.
 
-Now, with your cursor on the inner curly braces of the query, press kbd:[ctrl+space] to get a list of suggestions about what fields you can request on your query:
+Now, with your cursor on the inner curly braces of the query, press kbd:[ctrl+space] to get a list of suggestions about what fields you can request in your query:
 
 image::query-playground-artist-query-inspection.gif[Query playground query section showing suggested fields for content schema, 654w]
 
-As can be seen, we do not have the artist `name` and `about` fields available, and the reason for that is because the `getChildren` field can return any content that implements the `Content` schema, but it can't directly infer what schema that is, which in this case is the `com_example_myproject_Artist` schema:
+As can be seen, we do not have the artist `name` and `about` fields available, and the reason for that is because the `getChildren` field can return any content that implements the `Content` schema, but it can't directly infer what schema that is, which in this case is the `{project-name-query}_{content-type-1-capitalized}` schema:
 
-.getChildren can't directly infer what schema is implementing Content schema
+.getChildren can't directly infer what schema is implementing the Content schema
 image::query-playground-getChildren-infer.png[Query playground getChildren can't directly infer what schema is implementing Content schema, 331w]
 
-So to proceed, we use https://graphql.org/learn/queries/#inline-fragments[inline fragments^]:
+So to proceed, we use https://graphql.org/learn/queries/#inline-fragments[inline fragments]:
 
-[source,GraphQL]
+[source,GraphQL,{subs}]
 ----
 {
   guillotine {
-    getChildren(key: "/artists") {
-      ... on com_example_myproject_Artist {
+    getChildren(key: "/{content-type-1}s") {
+      ... on {project-name-query}_{content-type-1-capitalized} {
         _id
         data {
           name
@@ -147,7 +111,7 @@ So to proceed, we use https://graphql.org/learn/queries/#inline-fragments[inline
 }
 ----
 
-With this, we basically built a query that understands that under `"/artists"` path we have content types of `Artist`, and based on this we can request general content data, such as `_id`, but also specific content data, such as the artist name and about:
+With this, we basically built a query that understands that under the `"/{content-type-1}s"` path we have content of type `{content-type-1-capitalized}`, and based on this we can request general content data, such as `_id`, but also specific content data, such as the artist's name and about:
 
 .Getting specific data of artists
 image::query-playground-artists-data.png[Query playground query returning artists content together with its name and about data, 945w]
@@ -156,11 +120,11 @@ image::query-playground-artists-data.png[Query playground query returning artist
 
 If you don't need or care about types when creating your queries, you can ignore the previously presented inline fragment approach and use the field `dataAsJson`:
 
-[source,GraphQL]
+[source,GraphQL,{subs}]
 ----
 {
   guillotine {
-    getChildren(key: "/artists") {
+    getChildren(key: "/{content-type-1}s") {
       _id
       dataAsJson
     }
@@ -169,11 +133,11 @@ If you don't need or care about types when creating your queries, you can ignore
 ----
 
 .Getting all data using dataAsJson
-image::query-playground-artists-dataAsJson.png[Query playground query returning artists content together with is name and about data - using dataAsJson field, 945w]
+image::query-playground-artists-dataAsJson.png[Query playground query returning artists content together with its name and about data - using dataAsJson field, 945w]
 
 == Advanced queries
 
-We'll now introduce and show examples of usages of different fields underneath the `guillotine` field, that allow us to search the system for specific data.
+We'll now introduce and show examples of usage of different fields underneath the `guillotine` field, that allow us to search the system for specific data.
 
 === QueryDsl
 
@@ -184,7 +148,7 @@ The syntax is based on two types of operators: `Expressions` and `Compound`.
 `Expression`:: Used to check particular fields for various native and analysed values.
 `Compound`:: Used to logically combine various expressions and compounds to fetch nodes based on complex conditions.
 
-In order to exemplify this field usage on some queries, we'll query on the data set we've created so far on in this guide:
+In order to exemplify this field's usage, we'll query the data set we've created so far in this guide:
 
 .A Guillotine query using some of the arguments mentioned.
 [source,GraphQL,{subs}]
@@ -201,10 +165,10 @@ In order to exemplify this field usage on some queries, we'll query on the data 
         }
       },
       first: 1,
-      sort: {
+      sort: [{
         field: "displayName",
         direction: DESC
-      }
+      }]
     ) {
       _id
       displayName
@@ -213,9 +177,10 @@ In order to exemplify this field usage on some queries, we'll query on the data 
 }
 ----
 
-Note that this query is getting the last artist that is alphabetically sorted by name, regardless of where the content type is located in the tree structure.
+Note that this query is getting the last artist when sorted alphabetically by name, regardless of where the content is located in the tree structure.
 
-The following GraphQL query uses the https://developer.enonic.com/docs/xp/stable/storage/dsl#ngram[n-gram functionality^] to find all the {content-type-1}s that have a term (part of a text) that starts with `rap` somewhere in their data:
+// TODO(xp8-verify): confirm the _allText field name and the ngram results against XP 8.1
+The following GraphQL query uses the https://developer.enonic.com/docs/code/stable/storage/dsl#ngram[n-gram functionality] to find all the {content-type-1}s that have a term (part of a text) that starts with `rap` somewhere in their data:
 
 .A Guillotine query using _nGram_ search functionality
 [source,GraphQL,{subs}]
@@ -232,7 +197,9 @@ The following GraphQL query uses the https://developer.enonic.com/docs/xp/stable
                 value: {
                   string: "{project-name-full}:{content-type-1}"
                 }
-              },
+              }
+            },
+            {
               ngram: {
                 fields: ["_allText"],
                 query: "rap"
@@ -241,10 +208,10 @@ The following GraphQL query uses the https://developer.enonic.com/docs/xp/stable
           ]
         }
       },
-      sort: {
+      sort: [{
         field: "displayName",
         direction: DESC
-      }
+      }]
     ) {
       _id
       displayName
@@ -274,7 +241,7 @@ Naturally, you can also use the standard boolean operators to combine or negate 
             },
             {
               ngram: {
-                fields: "data.about"
+                fields: ["data.about"]
                 query: "rap sing"
                 operator: AND
               }
@@ -282,10 +249,10 @@ Naturally, you can also use the standard boolean operators to combine or negate 
           ]
         }
       },
-      sort: {
+      sort: [{
         field: "displayName",
         direction: DESC
-      }
+      }]
     ) {
       _id
       displayName
@@ -294,60 +261,50 @@ Naturally, you can also use the standard boolean operators to combine or negate 
 }
 ----
 
-NOTE: If you've previously used Elasticsearch API to query data, you'll be quite familiar with how `queryDsl` works!
+NOTE: If you've previously used the Elasticsearch API to query data, you'll be quite familiar with how `queryDsl` works!
 
-TIP: To learn more about queryDSL capabilities, visit the https://developer.enonic.com/docs/xp/stable/storage/dsl[DSL reference^]
+TIP: To learn more about queryDSL capabilities, visit the https://developer.enonic.com/docs/code/stable/storage/dsl[DSL reference]
 
 === QueryDslConnection
 
 Just like there is a `queryDsl` field underneath `guillotine`, the API also provides other fields such as `queryDslConnection`.
 
-We'll not go into much details, but basically, the fields with _connection_ in their name have new parameters for aggregating and paginating data.
+We'll not go into much detail, but basically, the fields with _connection_ in their name have extra parameters for aggregating and paginating data.
 
-To finish this {document}, we'll add a new _birthyear_ field to the artist content type, update all artist to have data on this field, and then use `queryDslConnection` field to get aggregated data. Let's get to work!
+To finish this {document}, we'll add a new _birthday_ field to the artist content type, update all artists to have data in this field, and then use the `queryDslConnection` field to get aggregated data. Let's get to work!
 
-. Start by updating the Artist content type to the following structure: 
-
-[source, xml]
+. Start by updating the Artist content type to the following structure:
++
+[source,yaml,{subs}]
 ----
-<content-type>
-  <display-name>Artist</display-name> 
-  <description>Information about an artist</description> 
-  <super-type>base:structured</super-type>
-  <form> 
-
-    <input name="name" type="TextLine"> 
-      <label>Name</label>
-      <help-text>
-        The artist's name (if different from their professional moniker).
-      </help-text>
-    </input>
-
-    <input type="TextArea" name="about">
-      <label>About the artist</label>
-    </input>
-
-    <input type="Date" name="birthday" >
-      <label>Birthday</label>
-    </input>
-
-  </form>
-</content-type>
+kind: "ContentType"
+title: "{content-type-1-capitalized}"
+description: "Information about an {content-type-1}"
+superType: "base:structured"
+form:
+  - type: "TextLine"
+    name: "name"
+    label: "Name"
+    helpText: "The {content-type-1}'s name (if different from their professional moniker)."
+  - type: "TextArea"
+    name: "about"
+    label: "About the {content-type-1}"
+  - type: "Date"
+    name: "birthday"
+    label: "Birthday"
 ----
-
-TIP: If are not running the project in dev mode (`enonic project dev` introduced in the previous ${document}), make sure to run `enonic project deploy` in the terminal on the project's root directory
-
-[start=2]
++
+TIP: If you are not running the project in dev mode (`enonic dev`, introduced in an earlier {document}), make sure to run `enonic project deploy` in the terminal in the project's root directory
 
 . Update each of the previously created artists with the following dates:
-
++
 - P!nk: 1979-09-08
-- Missy Elliot: 1971-07-01
+- Missy Elliott: 1971-07-01
 - Cardi B: 1992-10-11
 
-. Go back to Query playground and click on the _re-fetch schema button_. This will update the Artist data schema to contain the birthday structure, which is in sync with the Artist content type structure
+. Go back to Query Playground and reopen it, so that it reloads the schema. The Artist data schema now contains the birthday field, in sync with the Artist content type structure.
 
-. Run the following query on the playground:
+. Run the following query in the playground:
 +
 [source,GraphQL,{subs}]
 ----
@@ -356,20 +313,24 @@ TIP: If are not running the project in dev mode (`enonic project dev` introduced
     queryDslConnection(
       query: {
         boolean: {
-          must: {
-            term: {
-              field: "type"
-              value: {
-                string: "{project-name-full}:{content-type-1}"
+          must: [
+            {
+              term: {
+                field: "type"
+                value: {
+                  string: "{project-name-full}:{content-type-1}"
+                }
+              }
+            },
+            {
+              exists: {
+                field: "data.birthday"
               }
             }
-            exists: {
-              field: "data.birthday"
-            }
-          }
+          ]
         }
       }
-      aggregations: {
+      aggregations: [{
         name: "generationsAggregation"
         dateRange: {
           field: "data.birthday"
@@ -378,40 +339,40 @@ TIP: If are not running the project in dev mode (`enonic project dev` introduced
               key: "The Greatest Generation"
               from: "1901"
               to: "1927"
-          	}
+            }
             {
               key: "The Silent Generation"
               from: "1928"
               to: "1945"
-          	}
+            }
             {
               key: "The Baby Boomer Generation"
               from: "1946"
               to: "1964"
-          	}
+            }
             {
               key: "Generation X"
               from: "1965"
               to: "1980"
-          	}
+            }
             {
               key: "Millennials"
               from: "1981"
               to: "1996"
-          	}
+            }
             {
               key: "Generation Z"
               from: "1997"
               to: "2012"
-          	}
+            }
             {
               key: "Gen Alpha"
               from: "2013"
               to: "2025"
-          	}
+            }
           ]
-          }
         }
+      }]
     )
     {
       aggregationsAsJson
@@ -420,8 +381,8 @@ TIP: If are not running the project in dev mode (`enonic project dev` introduced
 }
 ----
 
-And this are the results
-[source, json]
+And these are the results:
+[source,json]
 ----
 {
   "data": {
@@ -459,7 +420,7 @@ And this are the results
                 "docCount": 1,
                 "from": "1981-01-01T00:00:00Z",
                 "to": "1996-01-01T00:00:00Z"
-              },  
+              },
               {
                 "key": "Generation Z",
                 "docCount": 0,
@@ -481,13 +442,13 @@ And this are the results
 }
 ----
 
-Which shows that two of those artists are from Generation X, and one of them is a Millenial.
+Which shows that two of those artists are from Generation X, and one of them is a Millennial.
 
 == Dive deeper
 
-- For more query examples and information about how to get up and running with Guillotine, you can check out https://developer.enonic.com/docs/intro[Quick introduction guide^] or the https://developer.enonic.com/docs/guillotine[Guillotine docs^]
-- If you want to understand how to extend available schemas on the GraphQL Api, you can head to https://developer.enonic.com/docs/guillotine/stable/extending[Extending section on Guillotine docs^] or check some examples on this https://developer.enonic.com/docs/build-a-custom-selector#customizing_with_guilliotine_lib_optional[guide^]
-- If you want to learn more about GraphQL in general, the https://graphql.org/learn/[_Introduction to GraphQL_ documentation^] is a good place to start
+- For more query examples and information about how to get up and running with Guillotine, check out the https://developer.enonic.com/docs/guillotine[Guillotine docs]
+- If you want to understand how to extend the available schemas in the GraphQL API, head to the https://developer.enonic.com/docs/guillotine/stable/extending[Extending section of the Guillotine docs]
+- If you want to learn more about GraphQL in general, the https://graphql.org/learn/[_Introduction to GraphQL_ documentation] is a good place to start
 
 
 == Summary

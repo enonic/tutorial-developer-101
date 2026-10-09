@@ -4,7 +4,7 @@ include::.variables.adoc[]
 
 In this {document}, we'll give a short introduction to Content Studio, an app that serves as the main content management interface for XP, providing editors an efficient way of creating, and curating content without technical skills.
 
-For a more comprehensive overview, watch https://www.youtube.com/watch?v=tR9KHOcZOs0[this short video on Content Studio basics^] or head to the https://developer.enonic.com/docs/content-studio[Content Studio reference documentation^].
+For a more comprehensive overview, head to the https://developer.enonic.com/docs/content-studio[Content Studio reference documentation].
 
 NOTE: {see-prev-docs}
 
@@ -14,61 +14,75 @@ Content Studio should already have been installed, and can be launched from XP A
 
 TIP: If you wish to install or update an application, this can be done from `XP menu` -> `Applications`.
 
+Content Studio has three parts: a project bar across the top, a menu bar on the left, and a main panel that fills the rest. The menu bar holds the content navigator, items contributed by installed apps, and *Settings* at the very bottom. We will visit all of them during this tutorial.
 
 === Task: your first project
 
 When visiting Content Studio for the first time, you'll be welcomed with the following dialog:
 
-.No available projects found dialog
-image::content-studio-no-available-projects-found-dialog.png["Content studio no available projects found dialog", 816w]
+// TODO(xp8-verify): recapture from Content Studio 6.1
+.No projects found dialog
+image::content-studio-no-available-projects-found-dialog.png["Content Studio dialog offering to start the project wizard", 816w]
 
 Content Studio manages content, and content is organized in independent repositories, which are called _content projects_, or simply as _projects_.
 
-A project offer individual access control and permissions, as well as other settings to toggle features and language(s).
+A project offers individual access control and permissions, as well as other settings to toggle features and language(s).
 
 TIP: Privileged users can manage projects via Content Studio settings.
 
-Now, head back to the project wizard dialog to create your first project:
+Click btn:[Start Project wizard] and follow the steps to create your first project:
 
+. Keep the default parent project and pick a default language, for instance `English`.
+. Choose the `Public` access mode. This lets anyone read published content, which is what we want for an API that is going to be open.
+. Keep the default roles. You are the super user, so you already have access.
+. In the "Applications" step, select the app you deployed in the previous {document}.
+. Give the project the display name "{cms-project-name}". The identifier is derived from it, and becomes `{cms-project}`.
+
+// TODO(xp8-verify): recapture the wizard walkthrough from Content Studio 6.1
 .Creating your first project
-image::content-studio-my-first-project.gif["Content studio project creation wizard walkthrough.", 964w]
+image::content-studio-my-first-project.gif["Content Studio project creation wizard walkthrough.", 964w]
 
-=== Assiging an app to a project
+NOTE: The identifier cannot be changed later. Several later {document}s refer to the project as `{cms-project}`, so stick with that name if you want to copy their examples verbatim.
 
-Content Studio is a powerful app with a lot of features, and one of its main goal is to provide an awesome user experience for creating and curating content.
+=== Assigning an app to a project
+
+Content Studio is a powerful app with a lot of features, and one of its main goals is to provide an awesome user experience for creating and curating content.
 
 Content is defined through content types (a concept we'll introduce in the next section), which are defined and installed via applications.
 
-Therefore, if we want to enable Content Studio to manage a specific type of content, we need to access content studio in a project which has an app assigned to it, and in this app, this specific content should defined via a content type.
+Therefore, if we want to enable Content Studio to manage a specific type of content, we need to access Content Studio in a project which has an app assigned to it, and in this app, this specific content should be defined via a content type.
 
-With all this in mind, note that one of the last steps on the previous creation wizard was to assign your app to the project. If you followed along, you should have your app assigned to the your first project, and in case you missed it, no worries, let's assign it to the created project:
+With all this in mind, note that one of the steps in the wizard was to assign your app to the project. If you followed along, you should have your app assigned to your first project, and in case you missed it, no worries, let's assign it to the created project:
 
-. On the green widget sidebar, click on settings
+. Click *Settings* at the bottom of the menu bar on the left
 . Double click on the project you just created to edit it
-. Scroll down and on the "Applications" section, select the application you've previously deployed to this sandbox
+. Scroll down and in the "Applications" section, select the application you've previously deployed to this sandbox
 
+// TODO(xp8-verify): recapture from Content Studio 6.1
 .Assigning your first app to your first project
-image::content-studio-project-app-assignment.png["Content studio assigning apps to projects walkthrough.", 547w]
+image::content-studio-project-app-assignment.png["Content Studio assigning apps to projects walkthrough.", 547w]
+
+NOTE: Only applications with a CMS descriptor (the `cms/cms.yaml` file you saw in the previous {document}) can be assigned to a project. The vanilla starter ships one, which is why your app shows up in the list.
 
 == Apps vs projects
 
-We've reached a certain point in this guide where its worth giving a section to reiterate the differences between:
+We've reached a certain point in this guide where it's worth giving a section to reiterate the differences between:
 
-. XP project (app folder and files) 
+. XP project (app folder and files)
 . XP app
 . Content Studio project
 
-An `XP project folder` is the folder containing the files needed in order to create an `XP app`. The folder was automatically generated from the Vanilla starter when we ran the command: `enonic project create`.
+An `XP project folder` is the folder containing the files needed in order to create an `XP app`. The folder was automatically generated from the Vanilla starter when we ran the command: `enonic create`.
 
-The `XP app` is the compiled file that is generated when you run the command `enonic project build` on the project root folder.
+The `XP app` is the compiled file that is generated when you run the command `enonic project build` (or `enonic dev`) in the project root folder.
 
-A `Content Project`, as explained above, is a place you can store content. Content can be created based on the apps you assign to a project.
+A `Content project`, as explained above, is a place you can store content. Content can be created based on the apps you assign to a project.
 
 In summary, you can have the following flow in mind:
 
-image::app-vs-projects-flow.png[Simplied flow explaining the difference between an Enonic XP project folder and its files, an Enonic XP app, and a Content Studio project, width=300, align=center]
+image::app-vs-projects-flow.png[Simplified flow explaining the difference between an Enonic XP project folder and its files, an Enonic XP app, and a Content Studio project, width=300, align=center]
 
-NOTE: This flow is super simplified and there are a lot of details to each one of those boxes, but it should be sufficient to explain the main difference between those ideas and how they connect to eachother.
+NOTE: This flow is super simplified and there are a lot of details to each one of those boxes, but it should be sufficient to explain the main difference between those ideas and how they connect to each other.
 
 From now on, we'll use the term "project" to refer to both `XP app project` and `Content projects`, as they can be easily distinguished based on the context.
 
@@ -84,79 +98,73 @@ IMPORTANT: As mentioned before, content types are defined and installed via appl
 
 === Task: your first content type
 
-Now that we know what a content type is, let's look at how we create them. 
+Now that we know what a content type is, let's look at how we create them.
 
 We'll create a content type that contains two input fields. When shown in Content Studio, it will look like this:
 
+// TODO(xp8-verify): recapture from Content Studio 6.1
 .The target for your first content type
 image::content-type-target.png["A content creation form with name and biography fields", {image-xl}]
 
 Back to your preferred editor, make sure you're in the project folder (`{project-name}/`) that you created in a previous {document}. All paths will be relative to this root folder.
 
-. Create a directory for content types: `src/main/resources/site/content-types/`. XP is quite particular about project folder structure, so you need to put content types right where it expects to find them.
+. Content types live in `{app-root}/cms/content-types/`. The starter created this directory for you. XP is quite particular about project folder structure, so you need to put content types right where it expects to find them.
 
-. Create a directory called `{content-type-1}` in the newly created `content-types/` directory. XP expects all content types to have their own directories.
+. Create a directory called `{content-type-1}` in the `content-types/` directory. XP expects all content types to have their own directories.
 
-. Within the `{content-type-1}` directory, create a file called `{content-type-1}.xml`. The file name must match the directory name  (except for the file extension). The full path to the content type from the project root should be `src/main/resources/site/content-types/{content-type-1}/{content-type-1}.xml`.
+. Within the `{content-type-1}` directory, create a file called `{content-type-1}.yaml`. The file name must match the directory name (except for the file extension). The full path to the content type from the project root should be `{app-root}/cms/content-types/{content-type-1}/{content-type-1}.yaml`.
 
-. In the `{content-type-1}.xml` file, place the following content:
+. In the `{content-type-1}.yaml` file, place the following content:
 +
 .The '{content-type-1-capitalized}' content type
-[source,xml,{subs}]
+[source,yaml,{subs}]
 ----
-<content-type>
-  <display-name>{content-type-1-capitalized}</display-name> // <1>
-  <description>Information about an {content-type-1}</description> // <2>
-  <super-type>base:structured</super-type>
-  <form> // <3>
-
-    <input name="name" type="TextLine"> // <4>
-      <label>Name</label>
-      <help-text>
-        The {content-type-1}'s name (if different from their professional moniker).
-      </help-text>
-    </input>
-
-    <input type="TextArea" name="about">
-      <label>About the {content-type-1}</label>
-    </input>
-
-  </form>
-</content-type>
+kind: "ContentType" # <1>
+title: "{content-type-1-capitalized}" # <2>
+description: "Information about an {content-type-1}" # <3>
+superType: "base:structured"
+form: # <4>
+  - type: "TextLine" # <5>
+    name: "name"
+    label: "Name"
+    helpText: "The {content-type-1}'s name (if different from their professional moniker)."
+  - type: "TextArea"
+    name: "about"
+    label: "About the {content-type-1}"
 ----
 +
-<1> This is what will be displayed in Content Studio when creating new content.
-<2> This is an optional description, but it is still recommended to add, as it will make life easier for your editors.
-<3> This is where we specify which fields (aka inputs) this content type shall have, basically the form, as seen in Content Studio.
-<4> The `type` attribute specifies what kind of input input the user will see in Content Studio, and the `label` specifies how the input will be labeled.
+<1> Every schema file starts by declaring what kind of schema it is.
+<2> This is what will be displayed in Content Studio when creating new content.
+<3> This is an optional description, but it is still recommended to add, as it will make life easier for your editors.
+<4> This is where we specify which fields (aka inputs) this content type shall have, basically the form, as seen in Content Studio.
+<5> The `type` specifies what kind of input the user will see in Content Studio, and the `label` specifies how the input will be labeled.
 +
-NOTE: Content types also have a large number of other, optional fields that we won't get into here. If you'd like to learn more about this, consult https://developer.enonic.com/docs/xp/stable/cms/content-types[the reference documentation^].
+NOTE: Content types also have a number of other, optional settings that we won't get into here. If you'd like to learn more about this, consult https://developer.enonic.com/docs/cms/stable/content/content-types[the reference documentation].
 +
-NOTE: XP's `input` elements are _not_ the same as HTML `input` elements. To read more about it, <<input-types#, see the {document} on input types>>
-.
-. Now run:
+NOTE: XP's inputs are _not_ the same as HTML `input` elements. To read more about them, <<input-types#, see the {document} on input types>>.
+
+If `enonic dev` is still running from the previous {document}, it picks up the new file and redeploys your app. If not, start it again from the project folder:
 
 [source,shell]
 ----
-  enonic project dev
+enonic dev
 ----
 
-This command will watch for changes under `{project-name}/` and redeploy as needed.
+If everything goes well, you should see your sandbox logs update now. And that's the basics of creating new content types.
 
-TIP:  Make sure you're already running your sandbox with the `--dev` flag in another terminal, otherwise the sandbox will be started in detached mode, so you'll lose logs. More on CLI's dev command https://developer.enonic.com/docs/enonic-cli/stable/dev#dev[here^]. 
-
-If everything goes well, you should see your sandbox logs update now. And that's the basics of creating new content types. 
+TIP: XP validates every schema when the app is deployed. A typo in a key, such as `helptext` instead of `helpText`, is rejected and reported in the sandbox log, so keep an eye on it whenever you change a schema.
 
 Next, let's go back to Content Studio and create some actual content!
 
 === Task: your first content creation
 
-Go back to content studio and make sure you are on the project you've created on the beginning of this {document}.
+Go back to Content Studio and make sure you are on the project you've created at the beginning of this {document}.
 
-Press btn:[New ...] to open a new dialog. You should see a content type called `{content-type-1-capitalized}`. 
+Press btn:[New ...] to open a new dialog. You should see a content type called `{content-type-1-capitalized}`.
 
-NOTE: This content type is only visible there because of the update we did to the app, i.e, your app is responsible to be delivering the {content-type-1} definition which content studio can use to actually create content.
+NOTE: This content type is only visible there because of the update we did to the app, i.e, your app is responsible for delivering the {content-type-1} definition which Content Studio can use to actually create content.
 
+// TODO(xp8-verify): recapture from Content Studio 6.1
 .The content creation dialog with the {content-type-1} content type
 image::content-studio-new-content.png["The \"Create Content\" dialog when creating content under the created project. It contains elements, including the \"{content-type-1-capitalized}\" content type that we created earlier.", 819w]
 
@@ -171,80 +179,63 @@ Next, let's create a few {content-type-1}s to get used to the workflow. We'll st
 . Give it the display name "Cardi B".
 . Use these details to fill in the form:
 +
-.Artist details (https://en.wikipedia.org/wiki/Cardi_B[Cardi B on Wikipedia^])
+.Artist details (https://en.wikipedia.org/wiki/Cardi_B[Cardi B on Wikipedia])
 Name:: Belcalis Marlenis Almánzar
 About:: {content-about-cardi}
 
 +
+// TODO(xp8-verify): recapture from Content Studio 6.1
 .The content form filled out for the {content-type-1} "Cardi B"
 image::content-type-filled-out.png[The form for "{content-type-1}" fully filled out., 748w]
 +
 
-. Again, save and close the tab. Now repeat this process for these next two entries. Be aware that Content Studio lets you nest content, so if you try and create new content when "Cardi B" is selected in the hierarchy, it'll nest the new content under "Cardi B". In this case, though, we want the {content-type-1}s to be nested directly under the current folder, so make sure "{content-type-1}s" folder is selected when you create new content.
+. Again, save and close the tab. Now repeat this process for these next two entries. Be aware that Content Studio lets you nest content, so if you try and create new content when "Cardi B" is selected in the hierarchy, it'll nest the new content under "Cardi B". In this case, though, we want the {content-type-1}s to be nested directly under the current folder, so make sure the "{content-type-1}s" folder is selected when you create new content.
 +
-.Missy Elliott (https://en.wikipedia.org/wiki/Missy_Elliott[Missy Elliott on Wikipedia^])
+.Missy Elliott (https://en.wikipedia.org/wiki/Missy_Elliott[Missy Elliott on Wikipedia])
 Name:: Melissa Arnette Elliott
 About:: {content-about-missy}
 
 +
-.P!nk (https://en.wikipedia.org/wiki/Pink_(singer)[P!nk on Wikipedia^])
+.P!nk (https://en.wikipedia.org/wiki/Pink_(singer)[P!nk on Wikipedia])
 Name:: Alecia Beth Moore
 About:: {content-about-pink}
 
 With these {content-type-1}s created, your content hierarchy should now list the {content-type-1}s folder and the three {content-type-1}s.
 
+// TODO(xp8-verify): recapture from Content Studio 6.1
 .The hierarchy as it should look after creating some content
 image::content-studio-with-{content-type-1}s.png["The content hierarchy showing {content-type-1}s folder with \"Cardi B\", \"Missy Elliot\" and \"P!nk\" listed directly underneath it.", 527w]
 
-=== Content type validation
-
-Enonic provides XML Schema Definitions (XSDs) for text editor integration and validation of your XML schemas. To use it, add the attribute `xmlns`, `xmlns:xsi`, and `xsi:schemaLocation` to your content types as shown below:
-
-.Using XSDs for schema validation of a content type definition.
-[source,xml]
-----
-<?xml version="1.0" encoding="utf-8"?>
-<content-type
-    xmlns="urn:enonic:xp:model:1.0"
-    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-    xsi:schemaLocation="urn:enonic:xp:model:1.0 https://raw.githubusercontent.com/enonic/xp/master/modules/core/core-api/src/main/resources/META-INF/xsd/model.xsd">
-  <display-name>Content type display name</display-name>
-
-  <!-- rest of content elided for brevity -->
-
-</content-type>
-----
-
-Note that in-editor schema validation depends on whether your text editor supports validating against XSD schemas or not. If your editor doesn't support it out of the box, it may be available via a Language Server Protocol (LSP) client.
-
 == Publishing your content
 
-You might have noticed the yellow circles with exclamation marks displayed on all the content we've been working on, both in the wizard and in the content grid. This is how Content Studio indicates whether something is published or not and whether there are any errors with it. There are four states:
+You might have noticed the status indicators displayed on all the content we've been working on, both in the wizard and in the content grid. This is how Content Studio indicates whether something is published or not and whether there are any errors with it.
 
-Error (red circle with a cross):: This indicates that there is something wrong with your content. Because XP uses structured content it can also validate content as it is created. If something doesn't conform to the specified schema (for example: a required field has no value), it will fail to validate and be marked with this symbol.
-Work in progress (yellow circle with exclamation mark):: This symbol indicates that this piece of content has unpublished changes. That could be either because this is new content that has never been published, or it could be because there have been changes to this piece of content since it was last published.
-Ready for publishing (green circle with a check mark):: This piece of content is marked as ready to be published.
-Published (no icon):: This piece of content is published and has not been modified since.
+// TODO(xp8-verify): check the status names and icons against Content Studio 6.1 and recapture the screenshot
+Error:: This indicates that there is something wrong with your content. Because XP uses structured content it can also validate content as it is created. If something doesn't conform to the specified schema (for example: a required field has no value), it will fail to validate and be marked as invalid.
+Work in progress:: This piece of content has unpublished changes. That could be either because this is new content that has never been published, or it could be because there have been changes to this piece of content since it was last published.
+Ready for publishing:: This piece of content is marked as ready to be published.
+Published:: This piece of content is published and has not been modified since.
 
-image::content-studio-content-status.png[Three pieces of content displaying the three statuses that a piece of content can have, 270w]
+image::content-studio-content-status.png[Three pieces of content displaying different statuses, 270w]
 
 So what does it mean for content to be published? It doesn't make much of a difference to us at this stage of the tutorial, but when you're working on production systems, it's very important. So let's talk briefly about Content Studio's branching and publishing system.
 
 === Branches
 
-Content Studio operates with two branches: 
+Every content project has two branches:
 
 - _draft branch_, where you work and edit;
 - _master branch_, holds the published content.
 
-When you work on something in Content Studio, you're working on the *draft branch*. 
+When you work on something in Content Studio, you're working on the *draft branch*.
 
-When you publish something, the *master branch* gets updated with the new content. 
+When you publish something, the *master branch* gets updated with the new content.
 
 When you edit that same piece of content in Content Studio again, you're back to working on the *draft*, and you have to publish it to see changes to the published content.
 
 To publish a piece of content, right click it and select "Publish".
 
+// TODO(xp8-verify): confirm the publish shortcut in Content Studio 6.1
 TIP: You can also publish a piece of content by using the keyboard shortcut kbd:[Ctrl+Alt+P]/kbd:[control+option+P].
 
 

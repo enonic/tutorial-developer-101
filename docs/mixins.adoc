@@ -1,0 +1,208 @@
+= {title-mixins}
+include::.variables.adoc[]
+:description: {description-mixins}
+
+Mixins are a smart way of dynamically extending existing content types with more fields.
+
+The idea is to basically define new fields and decide what content types those fields should be applied to. If no content type is selected while registering a mixin, those fields will be enabled for all content types.
+
+In Content Studio, a mixin is visually displayed as a separate section of the form, listed below the content type's standard fields.
+
+WARNING: If you have read XP 7 material, be aware that the word *mixin* changed meaning in XP 8. What XP 7 called _x-data_ is what this {document} calls a mixin. What XP 7 called a _mixin_ is now a <<sets#_form_fragments, form fragment>>.
+
+NOTE: {see-prev-docs}
+
+== Your first mixin
+
+If your requirement is to add new fields to a specific content type, it doesn't make sense to use a mixin, since you can directly update that content type.
+
+Now, if your requirement is to add new fields to multiple content types, that is when mixins come into place.
+
+The same behaviour of extending multiple content types can be achieved through form fragments. You can create a form fragment and include it in the content types you want to extend. The difference is where the data in those fields is stored, and in the fact that mixins are easier to maintain when adding to a lot of content types - or to content types you don't own, such as the built-in folders and media types.
+
+Let's now add a "notes" mixin, which will extend both the {content-type-1-capitalized} and {content-type-2-capitalized} content types.
+
+Similar to content types, mixin schemas have a specific naming and placement convention within your app: `{app-root}/cms/mixins/<mixin-name>/<mixin-name>.yaml`.
+
+. Create the "notes" mixin schema:
++
+.{app-root}/cms/mixins/notes/notes.yaml
+[source,yaml]
+----
+kind: "Mixin"
+title: "Notes"
+form:
+  - type: "TextLine"
+    name: "notes"
+    label: "Notes"
+    occurrences:
+      min: 0
+      max: 3
+----
++
+. A mixin schema on its own is dormant. You also need to register it, and define which content types it applies to. This is done in your app's CMS descriptor, `cms.yaml`, which the starter created as an empty file:
++
+// TODO(xp8-verify): confirm that the unqualified mixin name resolves to the app's own mixin
+.{app-root}/cms/cms.yaml
+[source,yaml,{subs}]
+----
+kind: "CMS"
+mixins:
+  - name: "notes"
+    allowContentTypes: "{project-name-full}:{content-type-1}|{project-name-full}:{content-type-2}" # <1>
+----
++
+<1> A regular expression matched against the full content type name. Leave it out to apply the mixin to every content type in the project.
++
+. Your app is redeployed, so open a {content-type-1-capitalized} or an {content-type-2-capitalized} content item. You should see the following section at the bottom of the form:
++
+// TODO(xp8-verify): recapture from Content Studio 6.1
+image::notes-x-data.png["Notes mixin fields showing at the bottom of an animal content item",{image-l}]
++
+. Finally, add some notes to some content.
+
+NOTE: For more details and configuration options for mixins, visit https://developer.enonic.com/docs/cms/stable/content/mixins[the mixins documentation] and the https://developer.enonic.com/docs/cms/stable/schemas/cms-descriptor[CMS descriptor documentation].
+
+== Headless
+
+As you might expect, your mixin fields are also available via the Guillotine API.
+
+Mixin data is stored separately from the content type's own fields, under the key `x`, grouped by the app that provides the mixin. Use the following query to quickly access all mixin fields in your content.
+
+.Querying for mixins
+[source,GraphQL,{subs}]
+----
+{
+  guillotine {
+    queryDsl(
+      query: {
+        boolean: {
+          must: [
+            {
+              term: {
+                field: "type",
+                value: {
+                  string: "{project-name-full}:{content-type-2}"
+                }
+              }
+            },
+            {
+              term: {
+                field: "displayName",
+                value: {
+                  string: "Lynx"
+                }
+              }
+            }
+          ]
+        }
+
+      }
+    ) {
+      displayName
+      xAsJson
+    }
+  }
+}
+----
+
+If you've added any values to your Lynx's Notes fields, this is what you might get.
+
+// TODO(xp8-verify): confirm the application key format inside xAsJson against a running Guillotine 9
+.Mixin results
+[source,json,{subs}]
+----
+{
+  "data": {
+    "guillotine": {
+      "queryDsl": [
+        {
+          "displayName": "Lynx",
+          "xAsJson": {
+            "{project-name-query}": {
+              "notes": {
+                "notes": [
+                  "Lynx note 1",
+                  "Lynx note 2",
+                  "Lynx note 3"
+                ]
+              }
+            }
+          }
+        }
+      ]
+    }
+  }
+}
+----
+
+
+Should you require specific fields only, or wish to drill into more details, for instance by following a reference, use the typed GraphQL fields instead of `xAsJson`. For instance like this:
+
+.Typed mixin query
+[source,GraphQL,{subs}]
+----
+{
+  guillotine {
+    queryDsl(
+      query: {
+        boolean: {
+          must: [
+            {
+              term: {
+                field: "type",
+                value: {
+                  string: "{project-name-full}:{content-type-2}"
+                }
+              }
+            },
+            {
+              term: {
+                field: "displayName",
+                value: {
+                  string: "Lynx"
+                }
+              }
+            }
+          ]
+        }
+
+      }
+    ) {
+      displayName
+      x {
+        {project-name-query} { // <1>
+          notes { // <2>
+            notes // <3>
+          }
+        }
+      }
+    }
+  }
+}
+----
+
+<1> The app providing the mixin. Dots in the app name become underscores in GraphQL field names.
+<2> This is the name of the mixin. In this case, "notes" because we defined it to be like so in the `notes.yaml` file
+<3> This is the "notes" field (TextLine input type) inside the "notes" mixin.
+
+If you made it here - you are officially equipped with an essential overview of Enonic's fundamental content modelling capabilities. 🙌
+
+== Bonus: SEO Metafields
+
+There's a well-known app on Enonic Market named _SEO Metafields_. Its main purpose is to provide SEO capabilities to your project, and for that purpose, it adds a mixin, which is then enabled for all content types in your project.
+
+This is a bonus section, so you're not missing much if you skip it, but it's worth installing it to better understand the capabilities of mixins.
+
+// TODO(xp8-verify): confirm an XP 8 compatible release of SEO Metafields is on Market before publishing this section
+. Install the https://market.enonic.com/vendors/enonic/seo-metafields[SEO Metafields app].
++
+image::x-data-seo-app-install.png["Install SEO Metafields app",{image-l}]
++
+. Edit your project in Settings and add the app to it.
++
+. Immediately after adding the app, the form of every content item gets a new section with the SEO fields.
++
+So, now you have some additional fields on all your content. If you check some of your content items, like an {content-type-2}, you will see the fields are there as well.
+
+image::x-data-seo-animal.png["SEO fields available for the animals content type as well.",{image-xl}]

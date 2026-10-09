@@ -2,211 +2,147 @@
 include::.variables.adoc[]
 :description: {description-setup}
 
-The purpose of this {document} is to ensure you have the necessary tools to start developing efficiently with XP. 
+Before we can model any content, we need somewhere to put it. This {document} gets you there in three steps: install the Enonic CLI, start a local instance of XP, and create the app that will hold your content types.
 
-In general, the bare minimum you'll need is:
+The whole thing takes a few minutes. Everything you install here is used again in every following {document}.
 
-- Enonic CLI -> _managing your XP projects_
-- Git / Github -> _versioning your XP projects_
-- Editor / IDE (Integrated Development Environment) -> _coding your ideas into XP projects_
+== Install the CLI
 
-TIP: If you've already got this configured and installed, feel free to skip to the next {document}.
+Enonic provides a Command Line Interface (CLI) for working with XP. It manages local XP instances, creates projects from starters, and builds and deploys your apps.
 
-== Enonic CLI
-
-Enonic provides a Command Line Interface (CLI) for working with XP. 
-
-If the concept of CLI is new to you, you can imagine it as an interactive terminal program that will listen for some specific inputs (usually as text), and based on them, execute specific tasks on your machine.
-
-The goal of the CLI is to improve the development workflow, and, by using it, you'll have an easy and quick way to manage your XP apps.
-
-=== Installation
-
-The easiest and fastest way to install the CLI is by using Node Package Manager (NPM):
+If you have `npm` on your machine, install the CLI with:
 
 [source,shell]
 ----
-npm install -g @enonic/cli 
+npm install -g @enonic/cli
 ----
 
-Note that to run the npm install command you need to make sure that you have both Node and NPM installed on your machine. You can quickly check if they are installed by running the following commands on your terminal:
+If not, there are https://developer.enonic.com/start[alternative ways to install the Enonic CLI].
+
+Verify the installation by running `enonic -v`. This should print the version of the CLI. This tutorial expects version 4 or newer.
+
+NOTE: You do not need to install Java or Gradle. The sandbox you create next bundles the Java runtime, and the CLI uses it when building your app.
+
+== Create a sandbox
+
+A _sandbox_ is a local developer instance of Enonic XP, with its own data and configuration. You can have several, each on its own XP version.
+
+Create and start a sandbox called `{sandbox-name}` by running this command in your terminal:
+
+[source,shell,{subs}]
+----
+enonic sandbox create {sandbox-name} -t essentials -f
+----
+
+The `essentials` template installs a set of applications from Enonic Market, including Content Studio and Guillotine, which you will meet in the coming {document}s. The `-f` flag accepts the default answer to every prompt, which selects the most recent release of Enonic XP, and starts the sandbox.
+
+NOTE: This tutorial is written for Enonic XP 8.1 and the versions of Content Studio and Guillotine that go with it. If the CLI offers you an older version, pick 8.1 or newer.
+
+The sandbox prints a fair amount of output while it downloads XP, installs the applications and starts up. Once you see a line saying that Enonic XP has started, open http://localhost:8080[http://localhost:8080] in your browser. You should see the XP boot page, listing the sandbox's installed applications.
+
+Click btn:[Log In as Guest] to open the XP admin as the instance's super user. You should see something like this:
+
+// TODO(xp8-verify): recapture screenshot from XP 8.1
+image::xp-dashboard.png[The XP menu and dashboard, 1727w]
+
+The `XP menu` lists the admin tools your user has access to. Dashboard, Applications and Users come with the platform, and applications such as Content Studio add their own. Once inside a tool, the XP menu stays available in the top right corner so you can switch between tools.
+
+TIP: To stop the sandbox, press kbd:[ctrl-c] in its terminal. To start it again, run `enonic sandbox start {sandbox-name}`.
+
+== Create an app
+
+Almost everything in Enonic is an application: Content Studio is an app, Guillotine is an app, and the content types you are about to define live in an app of your own.
+
+Creating a project from scratch can be daunting for any system you're not familiar with. To make things easier, Enonic provides https://market.enonic.com/starters[starters]. We'll use the "Vanilla" starter, which contains the bare minimum.
+
+*Open a new terminal window*, leaving the sandbox running in the first one, and run this command:
+
+[source,shell,{subs}]
+----
+enonic create {project-name-full} -r starter-vanilla -s {sandbox-name}
+----
+
+This uses `starter-vanilla` as a template, gives the app the name `{project-name-full}`, places the code in the folder `{project-name}`, and links the app to the `{sandbox-name}` sandbox.
+
+TIP: You don't need to open the starter docs, so type `N` and press kbd:[Enter] if asked.
+
+NOTE: App names matter. XP does not run two apps with the same name in a single instance, and the name becomes part of the GraphQL type names you will see later in this tutorial. If you choose a different name, substitute it wherever `{project-name-full}` appears.
+
+The project folder contains a minimal XP application. The parts you will touch in this tutorial are:
+
+.Essential project structure
+[source,files]
+----
+src/
+  main/
+    resources/
+      enonic.yaml // <1>
+      cms/ // <2>
+----
+
+<1> The application descriptor, holding the app's title, description and vendor information.
+<2> Where the content schemas you will create go.
+
+NOTE: The other files in the folder, such as `build.gradle` and `gradle.properties`, belong to the build. You will not need to edit them in this tutorial.
+
+== Build and deploy
+
+Change to the project folder and start the app in development mode:
+
+[source,shell,{subs}]
+----
+cd {project-name}
+enonic dev
+----
+
+This builds the app, deploys it to the `{sandbox-name}` sandbox, and then keeps watching your project. Every time you save a file, the app is rebuilt and redeployed. Keep this command running in its own terminal while you follow the tutorial.
+
+// TODO(xp8-verify): recapture from a vanilla starter build on XP 8.1
+The first build downloads a few things, so give it a moment. Look for lines like these to confirm it has completed:
+
+[source,shell,{subs}]
+----
+Deploying '{project-name}.jar' to '/Users/you/.enonic/sandboxes/{sandbox-name}/home/deploy'
+BUILD SUCCESSFUL
+Waiting for changes to input files...
+----
+
+To confirm the app is running, open `XP menu` -> `Applications` in the XP admin. Your app is listed as "Vanilla Example":
+
+// TODO(xp8-verify): recapture screenshot from the XP 8.1 Applications tool
+image::applications-vanilla.png["The applications list with a few applications installed, and the vanilla app selected.", 421w]
+
+=== Change the app's title
+
+Let's make a first change to the app, to see the development loop in action. Open the application descriptor, `{app-root}/enonic.yaml`, in your editor:
+
+.{app-root}/enonic.yaml
+[source,yaml]
+----
+kind: "Application"
+title: "Vanilla Example"
+description: "Edit app description at src/main/resources/enonic.yaml"
+vendorName: "Acme Inc"
+vendorUrl: "https://example.com"
+----
+
+Change the `title` to something more descriptive, and replace the stock `description` while you're at it. Save the file, and watch the `enonic dev` terminal rebuild and redeploy. Revisit the Applications tool and you should see your new title.
+
+=== Troubleshooting
+
+If the app doesn't show up in the Applications tool, check the terminal running `enonic dev` for build errors first, then the sandbox terminal for errors from XP.
+
+If the build works but nothing shows up, make sure the app is linked to the sandbox that is running. Run this command from the project folder and select `{sandbox-name}`:
 
 [source,shell]
 ----
-node -v
+enonic project sandbox
 ----
 
-to check the version of Node you have installed locally. Same for NPM:
-
-[source,shell]
-----
-npm -v
-----
-
-If they are not installed, you can head to https://nodejs.org/[nodejs.org^] to proceed installing them.
-
-[NOTE]
-====
-Enonic CLI is also available on other package managers, such as https://developer.enonic.com/start#brew[brew^] for MacOS, https://developer.enonic.com/start#scoop[scoop^] for Windows and https://developer.enonic.com/start#curl[Snapcraft^] on Linux.
-====
-
-=== Verification
-
-After running the installation command above, you can check if the Enonic CLI was properly installed by running
-
-[source,shell]
-----
-enonic -v
-----
-
-=== Commands
-
-Let's first list some commands... run the following command in your terminal:
-
-[source,shell]
-----
-enonic
-----
-
-It should output something that looks a bit like this:
-
-.Main help page
-
-[source,shell]
-----
-Enonic CLI 2.6.1
-Manage XP instances, home folders and projects
-USAGE:
-   enonic [global options] [command] [command options] [arguments...]
-
-COMMANDS:
-     create     Create a new Enonic project
-     snapshot   Create and restore snapshots
-     dump       Dump and load complete repositories
-     export     Export data from a given repository, branch and content path.
-     import     Import data from a named export.
-     app        Install, stop and start applications
-     repo       Tune and manage repositories
-     cms        CMS commands
-     system     System commands
-     auditlog   Manage audit log repository
-     latest     Check for latest version
-     upgrade    Upgrade to the latest version
-     uninstall  Uninstall Enonic CLI
-     vacuum     Removes old version history and segments from content storage
-     help, h    Shows a list of commands or help for one command
-   
-CLOUD COMMANDS:
-     cloud  Manage Enonic cloud
-   
-PROJECT COMMANDS:
-     sandbox  Manage Enonic instances
-     project  Manage Enonic projects
-
-GLOBAL OPTIONS:
-   --help, -h     show help
-   --version, -v  print the version
-----
-
-If you want to know more about how to use one of the subcommands, you can use the `help` subcommand. For instance, if you want to know more about the `sandbox` subcommand, you can run:
-
-[source,shell]
-----
-enonic sandbox help
-----
-
-.Sandbox help page
-
-[source,shell]
-----
-NAME:
-   enonic sandbox - Manage Enonic instances
-
-USAGE:
-   enonic sandbox [global options] command [command options] [arguments...]
-
-VERSION:
-   2.6.1
-
-COMMANDS:
-   list, ls         List all sandboxes
-   start            Start the sandbox.
-   stop             Stop the sandbox started in detached mode.
-   create           Create a new sandbox.
-   delete, del, rm  Delete a sandbox
-   upgrade, up      Upgrades the distribution version.
-
-GLOBAL OPTIONS:
-   --help, -h  show help
-----
-
-As can be seen, there are a lot of commands and their subcommands to help you. On this guide, we'll only cover the necessary ones to be able to start developing on XP.
-
-NOTE: Consider checking the https://developer.enonic.com/docs/enonic-cli[CLI documentation^] to further investigate its capabilities.  
-
-== Git
-
-Git is a free and open source _distributed version control system_. Later on in this tutorial, we will create new Enonic development projects using _starters_. The Enonic CLI uses Git to download these starters and to prepare the files for your project locally.
-
-TIP: Want to learn more about Git? Check out https://guides.github.com/introduction/git-handbook/[this useful Git handbook by Github^].
-
-=== Installation
-
-To install Git, follow the notes for your operating system below.
-
-==== macOS
-
-NOTE: Apple maintains its own fork of Git. If you have XCode installed, you already have Git installed too.
-
-To install Git via Homebrew, run this command:
-
-[source,shell]
-----
-brew install git
-----
-
-==== Windows
-
-To install Git using Scoop, run the following command from Powershell:
-
-[source,shell]
-----
-scoop install git
-----
-
-==== Linux
-
-To install Git with Snapcraft, run the following command:
-
-[source,shell]
-----
-sudo snap install git
-----
-
-=== Verification
-
-Once you have installed Git, you can verify that it's working correctly by running the following command:
-[source,shell]
-----
-git version
-----
-
-== Editor
-
-Source-code editors (also known as _text editors_ or just _editors_ for short) are applications designed primarily for editing plain text and often specifically for working with code. They are therefore commonly used for programming.
-
-If you do not yet have an editor you like, follow the steps below to get started with one.
-
-=== Download Visual Studio Code
-
-https://code.visualstudio.com/[Visual Studio Code^] (often shortened to _VS Code_ or simply _Code_) is one of the most popular source-code editors around at the moment. It's free, open source, and available on all major platforms.
-
-You can navigate to their https://code.visualstudio.com/Download[download page^] and install the version matching your operating system. 
-
-If you opt to move forward with VS code as your editor, its worth checking some of the https://marketplace.visualstudio.com/[powerful extensions^] available on their marketplace.
+For anything else, the https://developer.enonic.com/docs/enonic-cli[CLI documentation] covers every command and option, and the https://developer.enonic.com/docs/platform[platform documentation] covers the sandbox's configuration and ports.
 
 == Summary
 
-Congrats! You've installed the Enonic CLI, Git, and an editor. You're now set up to start working with Enonic XP 🚀. Keep your new tools at hand; we'll be using them heavily throughout this guide, so you'll have lots of time to get to know them better.
+You now have the CLI, a running sandbox with Content Studio and Guillotine installed, and your own app deployed to it. That is all the infrastructure this tutorial needs.
 
-Next up, you will <<sandbox#, get familiar with sandboxes>>.
+Next up, you'll <<content-studio#, get familiar with Content Studio and create your first content type>>.
