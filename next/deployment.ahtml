@@ -5,6 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="generator" content="Asciidoctor 2.0.26">
+<meta name="application-name" content="tutorial101">
 <meta name="description" content="How do you actually deploy Enonic XP and use it for more than local development? And where do you go from here to learn more?">
 <title>Deployment and next steps</title>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,300italic,400,400italic,600,600italic%7CNoto+Serif:400,400italic,700,700italic%7CDroid+Sans+Mono:400,700">
@@ -506,7 +507,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 </div>
 </li>
 <li>
-<p>From your project folder, install the app by running this command:</p>
+<p>From your app folder, install the app by running this command:</p>
 <div class="listingblock">
 <div class="content">
 <pre class="highlight"><code class="language-bash" data-lang="bash">enonic cloud app install</code></pre>
@@ -523,7 +524,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 </div>
 <div class="listingblock">
 <div class="content">
-<pre>~/tutorial/{project-name}$ enonic cloud login
+<pre>~/tutorial/{app-name}$ enonic cloud login
 
   Your login code is &lt;code&gt;
 
@@ -533,9 +534,9 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 
   Session expires at: 2026-10-31 02:18:37 +0200 CEST
 
-~/tutorial/{project-name}$ enonic cloud app install
+~/tutorial/{app-name}$ enonic cloud app install
 
-  ? Deploy '/home/you/tutorial/{project-name}/build/libs/{project-name}.jar' to 'myorg/guide101/production/xp'. Is this correct? Yes
+  ? Deploy '/home/you/tutorial/{app-name}/build/libs/{app-name}.jar' to 'myorg/guide101/production/xp'. Is this correct? Yes
 
   Uploading jar [=======================================================================================] 100.00% 4s
 
@@ -945,7 +946,7 @@ This HTML is the content of the login page in raw form.</p>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2026-10-09 12:40:35 UTC
+Last updated 2026-10-09 12:57:26 UTC
 </div>
 </div>
 </body>

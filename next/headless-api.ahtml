@@ -5,6 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="generator" content="Asciidoctor 2.0.26">
+<meta name="application-name" content="tutorial101">
 <meta name="description" content="What is a headless CMS without an API? Learn about the Guillotine app and the powers it unlocks here.">
 <title>GraphQL API</title>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,300italic,400,400italic,600,600italic%7CNoto+Serif:400,400italic,700,700italic%7CDroid+Sans+Mono:400,700">
@@ -616,7 +617,7 @@ This tutorial is written for Guillotine 9, which requires XP 8.1 or newer. Check
 <i class="fa icon-note" title="Note"></i>
 </td>
 <td class="content">
-Note that this matches the structure defined by the Artist content type, which is a natural thing to expect. The name of the schema is derived from your app name and the content type name, with dots replaced by underscores.
+Note that this matches the structure defined by the Artist content type, which is a natural thing to expect. The name of the schema is the content type&#8217;s qualified name, <code>com.example.tutorial101:artist</code>, with dots and the colon replaced by underscores. The app namespace you met when creating the content type carries straight over to the API, which is how Guillotine keeps the types of different apps apart.
 </td>
 </tr>
 </table>
@@ -911,7 +912,7 @@ form:
 <i class="fa icon-tip" title="Tip"></i>
 </td>
 <td class="content">
-If you are not running the project in dev mode (<code>enonic dev</code>, introduced in an earlier chapter), make sure to run <code>enonic project deploy</code> in the terminal in the project&#8217;s root directory
+If you are not running the app in dev mode (<code>enonic dev</code>, introduced in an earlier chapter), make sure to run <code>enonic project deploy</code> in the terminal in the app folder
 </td>
 </tr>
 </table>
@@ -1114,7 +1115,7 @@ If you are not running the project in dev mode (<code>enonic dev</code>, introdu
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2026-10-09 12:40:35 UTC
+Last updated 2026-10-09 12:57:26 UTC
 </div>
 </div>
 </body>

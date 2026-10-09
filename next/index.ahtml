@@ -5,6 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="generator" content="Asciidoctor 2.0.26">
+<meta name="application-name" content="tutorial101">
 <title>Developer 101 - Content Modelling and the GraphQL API</title>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,300italic,400,400italic,600,600italic%7CNoto+Serif:400,400italic,700,700italic%7CDroid+Sans+Mono:400,700">
 <style>
@@ -441,8 +442,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <div id="toc" class="toc2">
 <div id="toctitle">Table of Contents</div>
 <ul class="sectlevel1">
-<li><a href="#who_this_tutorial_is_for">Who this tutorial is for</a></li>
-<li><a href="#overview">Overview</a></li>
+<li><a href="#introduction">Introduction</a></li>
 </ul>
 </div>
 </div>
@@ -450,25 +450,47 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <div id="preamble">
 <div class="sectionbody">
 <div class="paragraph">
-<p>Welcome to this hands-on tutorial to get familiar with Enonic. The guide is aimed at people new to Enonic, and takes you step by step through content modelling and accessing content via the GraphQL API.</p>
+<p>Hands-on introduction to modelling content in Enonic and reading it through the Guillotine GraphQL API.</p>
 </div>
 </div>
 </div>
 <div class="sect1">
-<h2 id="who_this_tutorial_is_for"><a class="link" href="#who_this_tutorial_is_for">Who this tutorial is for</a></h2>
+<h2 id="introduction"><a class="link" href="#introduction">Introduction</a></h2>
 <div class="sectionbody">
 <div class="paragraph">
 <p>This tutorial is for developers who define content types and build front-ends against Enonic&#8217;s GraphQL API. It covers content modelling, schema management and the Guillotine API, using the Enonic CLI, Content Studio and a local sandbox. Every chapter builds on the previous one, so you gain understanding incrementally while building a small content model of your own.</p>
 </div>
 <div class="paragraph">
+<p>Along the way you will:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><a href="setup.ahtml">set up</a> the CLI, a local sandbox and your own app</p>
+</li>
+<li>
+<p>create content types and content in <a href="content-studio.ahtml">Content Studio</a></p>
+</li>
+<li>
+<p>see how content is stored, with <a href="data-toolbox.ahtml">Data Toolbox</a></p>
+</li>
+<li>
+<p>query your content through the <a href="headless-api.ahtml">GraphQL API</a></p>
+</li>
+<li>
+<p>upload <a href="files.ahtml">images and other media</a>, and serve them scaled and cropped</p>
+</li>
+<li>
+<p>model richer content with <a href="input-types.ahtml">input types</a>, <a href="sets.ahtml">sets and form fragments</a>, <a href="rich-text.ahtml">rich text</a> and <a href="mixins.ahtml">mixins</a></p>
+</li>
+<li>
+<p><a href="deployment.ahtml">deploy</a> your app and expose the API on Enonic Cloud</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
 <p>It does not cover building pages with the Enonic framework. For that, see the <a href="https://developer.enonic.com/docs/intro">Introduction to Enonic</a> and the <a href="https://developer.enonic.com/docs/next.xp">Next.js tutorial</a>. The <a href="https://developer.enonic.com/docs/cms">CMS reference documentation</a> covers every topic in this tutorial in depth, and is the place to go once you know what you are looking for.</p>
 </div>
-<div class="paragraph">
-<p>If you have any questions, or just want to get in touch - visit the <a href="https://discuss.enonic.com">Forum</a> or join the <a href="https://slack.enonic.com/">Community Slack channel</a></p>
-</div>
-<div class="paragraph">
-<p>Good luck! 🙌</p>
-</div>
 <div class="admonitionblock note">
 <table>
 <tr>
@@ -476,113 +498,23 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <i class="fa icon-note" title="Note"></i>
 </td>
 <td class="content">
-<strong>In a hurry?</strong> If you just want to get up and running as fast as possible, check out the <a href="https://developer.enonic.com/start">quick start docs</a> instead 🚀
+When we mention "XP", we are referring to "Enonic XP", the platform behind Enonic.
 </td>
 </tr>
 </table>
 </div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="overview"><a class="link" href="#overview">Overview</a></h2>
-<div class="sectionbody">
 <div class="paragraph">
-<p>Below is an overview of the various chapters in this guide.</p>
+<p>If you have any questions, or just want to get in touch, visit the <a href="https://discuss.enonic.com">Forum</a> or join the <a href="https://slack.enonic.com/">Community Slack channel</a>.</p>
 </div>
-<div class="admonitionblock note">
-<table>
-<tr>
-<td class="icon">
-<i class="fa icon-note" title="Note"></i>
-</td>
-<td class="content">
-When we mention "XP", we are referring to "Enonic XP", the hybrid CMS you&#8217;re starting to learn!
-</td>
-</tr>
-</table>
-</div>
-<div class="sidebarblock">
-<div class="content">
-<div class="title">Getting started</div>
-<div class="dlist">
-<dl>
-<dt class="hdlist1"><a href="setup.ahtml">Setup</a></dt>
-<dd>
-<p>Install the Enonic CLI, start a local XP sandbox and create the app that will hold your content types. Three commands and you are ready.</p>
-</dd>
-</dl>
-</div>
-</div>
-</div>
-<div class="sidebarblock">
-<div class="content">
-<div class="title">Working with content</div>
-<div class="dlist">
-<dl>
-<dt class="hdlist1"><a href="content-studio.ahtml">Content Studio and content creation</a></dt>
-<dd>
-<p>Get familiar with Content Studio and content types, and start creating some content.</p>
-</dd>
-<dt class="hdlist1"><a href="data-toolbox.ahtml">Data Toolbox</a></dt>
-<dd>
-<p>Peek under the hood with Data Toolbox and see how your content is stored.</p>
-</dd>
-<dt class="hdlist1"><a href="headless-api.ahtml">GraphQL API</a></dt>
-<dd>
-<p>What is a headless CMS without an API? Learn about the Guillotine app and the powers it unlocks here.</p>
-</dd>
-<dt class="hdlist1"><a href="files.ahtml">Media - files are content too</a></dt>
-<dd>
-<p>How does XP deal with images and other media? This chapter covers XP media support, how to upload and query for media, how to work with images and attachments.</p>
-</dd>
-</dl>
-</div>
-</div>
-</div>
-<div class="sidebarblock">
-<div class="content">
-<div class="title">Advanced content modelling</div>
-<div class="dlist">
-<dl>
-<dt class="hdlist1"><a href="input-types.ahtml">Input types</a></dt>
-<dd>
-<p>Take your content types to the next level with more advanced input types. Learn how to configure input types, what kinds there are, and how to link content together.</p>
-</dd>
-<dt class="hdlist1"><a href="sets.ahtml">Sets and form fragments</a></dt>
-<dd>
-<p>XP has a number of ways to group inputs together, and to reuse groups across schemas. Learn all about them in this chapter.</p>
-</dd>
-<dt class="hdlist1"><a href="rich-text.ahtml">Rich text</a></dt>
-<dd>
-<p>Rich text is an incredibly powerful editing tool and an important part of the XP experience. Learn how to configure it here.</p>
-</dd>
-<dt class="hdlist1"><a href="mixins.ahtml">Mixins</a></dt>
-<dd>
-<p>Mixins are a way for you to add extra fields to all your content types in a simple manner. This chapter covers what they are and how to use them.</p>
-</dd>
-</dl>
-</div>
-</div>
-</div>
-<div class="sidebarblock">
-<div class="content">
-<div class="title">Deployment and next steps</div>
-<div class="dlist">
-<dl>
-<dt class="hdlist1"><a href="deployment.ahtml">Deployment and next steps</a></dt>
-<dd>
-<p>How do you actually deploy Enonic XP and use it for more than local development? And where do you go from here to learn more?</p>
-</dd>
-</dl>
-</div>
-</div>
+<div class="paragraph">
+<p>The first step is to <a href="setup.ahtml">get your tools in place</a>. Good luck! 🙌</p>
 </div>
 </div>
 </div>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2026-10-09 12:40:35 UTC
+Last updated 2026-10-09 12:57:26 UTC
 </div>
 </div>
 </body>

@@ -5,6 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="generator" content="Asciidoctor 2.0.26">
+<meta name="application-name" content="tutorial101">
 <meta name="description" content="Install the Enonic CLI, start a local XP sandbox and create the app that will hold your content types. Three commands and you are ready.">
 <title>Setup</title>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,300italic,400,400italic,600,600italic%7CNoto+Serif:400,400italic,700,700italic%7CDroid+Sans+Mono:400,700">
@@ -564,7 +565,7 @@ To stop the sandbox, press <kbd>ctrl-c</kbd> in its terminal. To start it again,
 <p>Almost everything in Enonic is an application: Content Studio is an app, Guillotine is an app, and the content types you are about to define live in an app of your own.</p>
 </div>
 <div class="paragraph">
-<p>Creating a project from scratch can be daunting for any system you&#8217;re not familiar with. To make things easier, Enonic provides <a href="https://market.enonic.com/starters">starters</a>. We&#8217;ll use the "Vanilla" starter, which contains the bare minimum.</p>
+<p>Creating an app from scratch can be daunting for any system you&#8217;re not familiar with. To make things easier, Enonic provides <a href="https://market.enonic.com/starters">starters</a>. We&#8217;ll use the "Vanilla" starter, which contains the bare minimum.</p>
 </div>
 <div class="paragraph">
 <p><strong>Open a new terminal window</strong>, leaving the sandbox running in the first one, and run this command:</p>
@@ -596,16 +597,16 @@ You don&#8217;t need to open the starter docs, so type <code>N</code> and press 
 <i class="fa icon-note" title="Note"></i>
 </td>
 <td class="content">
-App names matter. XP does not run two apps with the same name in a single instance, and the name becomes part of the GraphQL type names you will see later in this tutorial. If you choose a different name, substitute it wherever <code>com.example.tutorial101</code> appears.
+App names matter. XP does not run two apps with the same name in a single instance, and the name acts as a namespace for everything the app defines, so it becomes part of the content type and GraphQL type names you will see later in this tutorial. If you choose a different name, substitute it wherever <code>com.example.tutorial101</code> appears.
 </td>
 </tr>
 </table>
 </div>
 <div class="paragraph">
-<p>The project folder contains a minimal XP application. The parts you will touch in this tutorial are:</p>
+<p>The app folder contains a minimal Enonic application. The parts you will touch in this tutorial are:</p>
 </div>
 <div class="listingblock">
-<div class="title">Essential project structure</div>
+<div class="title">Essential app structure</div>
 <div class="content">
 <pre class="highlight"><code class="language-files" data-lang="files">src/
   main/
@@ -644,7 +645,7 @@ The other files in the folder, such as <code>build.gradle</code> and <code>gradl
 <h2 id="build_and_deploy"><a class="link" href="#build_and_deploy">Build and deploy</a></h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>Change to the project folder and start the app in development mode:</p>
+<p>Change to the app folder and start it in development mode:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -653,7 +654,7 @@ enonic dev</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>This builds the app, deploys it to the <code>tutorial</code> sandbox, and then keeps watching your project. Every time you save a file, the app is rebuilt and redeployed. Keep this command running in its own terminal while you follow the tutorial.</p>
+<p>This builds the app, deploys it to the <code>tutorial</code> sandbox, and then keeps watching the folder. Every time you save a file, the app is rebuilt and redeployed. Keep this command running in its own terminal while you follow the tutorial.</p>
 </div>
 <div class="paragraph">
 <p>The first build downloads a few things, so give it a moment. Look for lines like these to confirm it has completed:</p>
@@ -698,7 +699,7 @@ vendorUrl: "https://example.com"</code></pre>
 <p>If the app doesn&#8217;t show up in the Applications tool, check the terminal running <code>enonic dev</code> for build errors first, then the sandbox terminal for errors from XP.</p>
 </div>
 <div class="paragraph">
-<p>If the build works but nothing shows up, make sure the app is linked to the sandbox that is running. Run this command from the project folder and select <code>tutorial</code>:</p>
+<p>If the build works but nothing shows up, make sure the app is linked to the sandbox that is running. Run this command from the app folder and select <code>tutorial</code>:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -725,7 +726,7 @@ vendorUrl: "https://example.com"</code></pre>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2026-10-09 12:40:35 UTC
+Last updated 2026-10-09 12:57:26 UTC
 </div>
 </div>
 </body>

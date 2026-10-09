@@ -5,6 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="generator" content="Asciidoctor 2.0.26">
+<meta name="application-name" content="tutorial101">
 <meta name="description" content="How does XP deal with images and other media? This chapter covers XP media support, how to upload and query for media, how to work with images and attachments.">
 <title>Media - files are content too</title>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,300italic,400,400italic,600,600italic%7CNoto+Serif:400,400italic,700,700italic%7CDroid+Sans+Mono:400,700">
@@ -531,7 +532,7 @@ The tasks and examples in this chapter are based on work done in previous chapte
 <p>Find an image to upload. For the purposes of the tasks in this chapter, you should work with an image where the important part isn&#8217;t centered in the shot. If you have one yourself, feel free to use that. If not, how about using <a href="https://unsplash.com/photos/8oLnCRz7hwM">this picture of a lion</a> by <a href="https://unsplash.com/@keyursphotography">Keyur Nandaniya</a>?</p>
 </li>
 <li>
-<p>Create a folder for your images. Call it "images". Just like the "artists" folder we created previously, you may place the folder anywhere in your project structure.</p>
+<p>Create a folder for your images. Call it "images". Just like the "artists" folder we created previously, you may place the folder anywhere in your content structure.</p>
 </li>
 <li>
 <p>Open the "create content" dialog. Press the upload button to bring up your OS&#8217;s file browsing dialog and select your image. You can also drag and drop the image from your file system browser onto the dialog.</p>
@@ -980,7 +981,7 @@ Asking for scaled and filtered images is allowed when you query Guillotine&#8217
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2026-10-09 12:40:35 UTC
+Last updated 2026-10-09 12:57:26 UTC
 </div>
 </div>
 </body>

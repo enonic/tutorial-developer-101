@@ -5,6 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="generator" content="Asciidoctor 2.0.26">
+<meta name="application-name" content="tutorial101">
 <meta name="description" content="Get familiar with Content Studio and content types, and start creating some content.">
 <title>Content Studio and content creation</title>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,300italic,400,400italic,600,600italic%7CNoto+Serif:400,400italic,700,700italic%7CDroid+Sans+Mono:400,700">
@@ -448,10 +449,12 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <li><a href="#assigning_an_app_to_a_project">Assigning an app to a project</a></li>
 </ul>
 </li>
-<li><a href="#apps_vs_projects">Apps vs projects</a></li>
+<li><a href="#apps_vs_content_projects">Apps vs content projects</a></li>
 <li><a href="#what_are_content_types">What are content types?</a>
 <ul class="sectlevel2">
 <li><a href="#task_your_first_content_type">Task: your first content type</a></li>
+<li><a href="#names_and_namespaces">Names and namespaces</a></li>
+<li><a href="#deploying_the_content_type">Deploying the content type</a></li>
 <li><a href="#task_your_first_content_creation">Task: your first content creation</a></li>
 </ul>
 </li>
@@ -627,58 +630,25 @@ Only applications with a CMS descriptor (the <code>cms/cms.yaml</code> file you 
 </div>
 </div>
 <div class="sect1">
-<h2 id="apps_vs_projects"><a class="link" href="#apps_vs_projects">Apps vs projects</a></h2>
+<h2 id="apps_vs_content_projects"><a class="link" href="#apps_vs_content_projects">Apps vs content projects</a></h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>We&#8217;ve reached a certain point in this guide where it&#8217;s worth giving a section to reiterate the differences between:</p>
+<p>We&#8217;ve reached a point in this guide where it&#8217;s worth pausing to separate two things that both get called "project" elsewhere:</p>
 </div>
-<div class="olist arabic">
-<ol class="arabic">
-<li>
-<p>XP project (app folder and files)</p>
-</li>
-<li>
-<p>XP app</p>
-</li>
-<li>
-<p>Content Studio project</p>
-</li>
-</ol>
-</div>
-<div class="paragraph">
-<p>An <code>XP project folder</code> is the folder containing the files needed in order to create an <code>XP app</code>. The folder was automatically generated from the Vanilla starter when we ran the command: <code>enonic create</code>.</p>
+<div class="dlist">
+<dl>
+<dt class="hdlist1">Your app</dt>
+<dd>
+<p>The folder the Vanilla starter created for you, with its schemas and descriptor. When you run <code>enonic dev</code>, it is built and deployed to XP, where it runs as an application. Throughout this tutorial, "app" means both the folder you edit and the thing running in XP, because they are one and the same.</p>
+</dd>
+<dt class="hdlist1">A content project</dt>
+<dd>
+<p>A place in XP where content is stored, as explained above. Content can be created based on the apps you assign to the content project.</p>
+</dd>
+</dl>
 </div>
 <div class="paragraph">
-<p>The <code>XP app</code> is the compiled file that is generated when you run the command <code>enonic project build</code> (or <code>enonic dev</code>) in the project root folder.</p>
-</div>
-<div class="paragraph">
-<p>A <code>Content project</code>, as explained above, is a place you can store content. Content can be created based on the apps you assign to a project.</p>
-</div>
-<div class="paragraph">
-<p>In summary, you can have the following flow in mind:</p>
-</div>
-<div class="imageblock text-center">
-<div class="content">
-<img src="media/app-vs-projects-flow.png" alt="Simplified flow explaining the difference between an Enonic XP project folder and its files" width="300" height="and a Content Studio project">
-</div>
-</div>
-<div class="admonitionblock note">
-<table>
-<tr>
-<td class="icon">
-<i class="fa icon-note" title="Note"></i>
-</td>
-<td class="content">
-This flow is super simplified and there are a lot of details to each one of those boxes, but it should be sufficient to explain the main difference between those ideas and how they connect to each other.
-</td>
-</tr>
-</table>
-</div>
-<div class="paragraph">
-<p>From now on, we&#8217;ll use the term "project" to refer to both <code>XP app project</code> and <code>Content projects</code>, as they can be easily distinguished based on the context.</p>
-</div>
-<div class="paragraph">
-<p>We believe that this will help to avoid any confusion from your side. Now, back to work!</p>
+<p>Apps define content types. Content projects hold content. Assigning an app to a content project is what connects the two. Now, back to work!</p>
 </div>
 </div>
 </div>
@@ -718,18 +688,18 @@ As mentioned before, content types are defined and installed via applications. I
 <div class="title">Figure 4. The target for your first content type</div>
 </div>
 <div class="paragraph">
-<p>Back to your preferred editor, make sure you&#8217;re in the project folder (<code>tutorial101/</code>) that you created in a previous chapter. All paths will be relative to this root folder.</p>
+<p>Back to your preferred editor, make sure you&#8217;re in the app folder (<code>tutorial101/</code>) that you created in a previous chapter. All paths will be relative to this root folder.</p>
 </div>
 <div class="olist arabic">
 <ol class="arabic">
 <li>
-<p>Content types live in <code>src/main/resources/cms/content-types/</code>. The starter created this directory for you. XP is quite particular about project folder structure, so you need to put content types right where it expects to find them.</p>
+<p>Content types live in <code>src/main/resources/cms/content-types/</code>. The starter created this directory for you. XP is quite particular about the app&#8217;s folder structure, so you need to put content types right where it expects to find them.</p>
 </li>
 <li>
 <p>Create a directory called <code>artist</code> in the <code>content-types/</code> directory. XP expects all content types to have their own directories.</p>
 </li>
 <li>
-<p>Within the <code>artist</code> directory, create a file called <code>artist.yaml</code>. The file name must match the directory name (except for the file extension). The full path to the content type from the project root should be <code>src/main/resources/cms/content-types/artist/artist.yaml</code>.</p>
+<p>Within the <code>artist</code> directory, create a file called <code>artist.yaml</code>. The file name must match the directory name (except for the file extension). The full path to the content type from the app&#8217;s root folder should be <code>src/main/resources/cms/content-types/artist/artist.yaml</code>.</p>
 </li>
 <li>
 <p>In the <code>artist.yaml</code> file, place the following content:</p>
@@ -801,8 +771,32 @@ XP&#8217;s inputs are <em>not</em> the same as HTML <code>input</code> elements.
 </li>
 </ol>
 </div>
+</div>
+<div class="sect2">
+<h3 id="names_and_namespaces"><a class="link" href="#names_and_namespaces">Names and namespaces</a></h3>
 <div class="paragraph">
-<p>If <code>enonic dev</code> is still running from the previous chapter, it picks up the new file and redeploys your app. If not, start it again from the project folder:</p>
+<p>XP identifies the content type you just created as <code>com.example.tutorial101:artist</code> - the app name, a colon, and the file name. The app name acts as a <em>namespace</em>: everything an app ships, from content types to mixins and APIs, is prefixed with it. This isolates the schemas and functionality of one app from every other app on the same instance, so two apps never conflict, even if both define a content type called <code>artist</code>.</p>
+</div>
+<div class="paragraph">
+<p>The types XP ships with use reserved namespaces, such as <code>base:folder</code> and <code>media:image</code>. You will meet these qualified names again when querying the API.</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+Read more about <a href="https://developer.enonic.com/docs/cms/stable/schemas/namespaces">namespaces</a> in the CMS reference docs.
+</td>
+</tr>
+</table>
+</div>
+</div>
+<div class="sect2">
+<h3 id="deploying_the_content_type"><a class="link" href="#deploying_the_content_type">Deploying the content type</a></h3>
+<div class="paragraph">
+<p>If <code>enonic dev</code> is still running from the previous chapter, it picks up the new file and redeploys your app. If not, start it again from the app folder:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -858,7 +852,7 @@ This content type is only visible there because of the update we did to the app,
 <p>However, before we start creating artists, let&#8217;s create a folder.</p>
 </div>
 <div class="paragraph">
-<p>Since we&#8217;ll be using this project in the coming chapters with more content types, having some hierarchy will make things easier. Create a new folder and call it "artists".</p>
+<p>Since we&#8217;ll be using this content project in the coming chapters with more content types, having some hierarchy will make things easier. Create a new folder and call it "artists".</p>
 </div>
 <div class="paragraph">
 <p>Next, let&#8217;s create a few artists to get used to the workflow. We&#8217;ll start with Cardi B.</p>
@@ -1029,7 +1023,7 @@ You can also publish a piece of content by using the keyboard shortcut <span cla
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2026-10-09 12:40:35 UTC
+Last updated 2026-10-09 12:57:26 UTC
 </div>
 </div>
 </body>
