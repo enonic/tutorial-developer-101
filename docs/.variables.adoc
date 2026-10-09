@@ -32,7 +32,6 @@
 :title-mixins: Mixins
 :title-frontend: Fetching content from a front-end
 :title-deployment: Deployment and next steps
-:title-iam: IAM: identities and providers
 :image-xs: width=600
 :image-s: width=750
 :image-m: width=900
@@ -49,4 +48,3 @@
 :description-mixins: Mixins are a way for you to add extra fields to all your content types in a simple manner. This {document} covers what they are and how to use them.
 :description-frontend: Call the API from cURL, Node and a browser. Publish content, configure CORS, resolve a route, page a list and build page and media URLs from their parts.
 :description-deployment: How do you actually deploy Enonic XP and use it for more than local development? And where do you go from here to learn more?
-:description-iam: How do you restrict access to your sites? What kinds of access control exist for XP? This {document} explores users, roles, groups, and identity providers.
