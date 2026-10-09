@@ -390,12 +390,12 @@ A ContentSelector input will store a reference to the target content item. When 
   guillotine {
     getChildren(key: "/{content-type-1}s") {
       displayName
-      ... on {project-name-query}_{content-type-1-capitalized} {
+      ... on {app-name-query}_{content-type-1-capitalized} {
         _id
         data {
            favorite{content-type-2-capitalized} {
             displayName
-            ... on {project-name-query}_{content-type-2-capitalized}{
+            ... on {app-name-query}_{content-type-2-capitalized}{
               data {
                 otherNames
               }

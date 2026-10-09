@@ -7,9 +7,9 @@
 :graphql-url: {api-base-url}/com.enonic.app.guillotine:graphql
 :sandbox-name: tutorial
 :app-root: src/main/resources
-:project-name: tutorial101
-:project-name-full: com.example.{project-name}
-:project-name-query: com_example_{project-name}
+:app-name: tutorial101
+:app-name-full: com.example.{app-name}
+:app-name-query: com_example_{app-name}
 :cms-project-name: My First Project
 :cms-project: my-first-project
 :content-type-1: artist

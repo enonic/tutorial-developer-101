@@ -33,7 +33,7 @@ To get familiar with uploading media to XP, let's start with one of the most com
 
 . Find an image to upload. For the purposes of the tasks in this {document}, you should work with an image where the important part isn't centered in the shot. If you have one yourself, feel free to use that. If not, how about using https://unsplash.com/photos/8oLnCRz7hwM[this picture of a lion] by https://unsplash.com/@keyursphotography[Keyur Nandaniya]?
 
-. Create a folder for your images. Call it "{image-folder}". Just like the "{content-type-1}s" folder we created previously, you may place the folder anywhere in your project structure.
+. Create a folder for your images. Call it "{image-folder}". Just like the "{content-type-1}s" folder we created previously, you may place the folder anywhere in your content structure.
 . Open the "create content" dialog. Press the upload button to bring up your OS's file browsing dialog and select your image. You can also drag and drop the image from your file system browser onto the dialog.
 
 And that's all it takes to upload files to Content Studio!

@@ -27,7 +27,7 @@ image::enonic-cloud-free-trial.png[Enonic cloud welcome page with 3 plans, hobby
 enonic cloud login
 ----
 +
-. From your project folder, install the app by running this command:
+. From your app folder, install the app by running this command:
 +
 [source,bash,{subs}]
 ----
@@ -41,7 +41,7 @@ enonic cloud app install
 // TODO(xp8-verify): recapture against a current XP 8 Cloud solution
 [source,bash,{subs}]
 ----
-~/tutorial/{project-name}$ enonic cloud login
+~/tutorial/{app-name}$ enonic cloud login
 
   Your login code is <code>
 
@@ -51,9 +51,9 @@ enonic cloud app install
 
   Session expires at: 2026-10-31 02:18:37 +0200 CEST
 
-~/tutorial/{project-name}$ enonic cloud app install
+~/tutorial/{app-name}$ enonic cloud app install
 
-  ? Deploy '/home/you/tutorial/{project-name}/build/libs/{project-name}.jar' to 'myorg/guide101/production/xp'. Is this correct? Yes
+  ? Deploy '/home/you/tutorial/{app-name}/build/libs/{app-name}.jar' to 'myorg/guide101/production/xp'. Is this correct? Yes
 
   Uploading jar [=======================================================================================] 100.00% 4s
 
@@ -107,7 +107,7 @@ To try it out, use a GraphQL client such as https://altairgraphql.dev/[Altair]. 
   guillotine(project: "<name-of-your-cloud-project>", branch: "master") {
     getChildren(key: "/{content-type-2}s") {
       displayName
-      ... on {project-name-query}_{content-type-2-capitalized} {
+      ... on {app-name-query}_{content-type-2-capitalized} {
         data {
           otherNames
         }
@@ -164,7 +164,7 @@ In a production setting you want short, memorable URLs on your own domain. Virtu
 
 Vhosts are defined in a configuration file in your XP instance's `config` directory. This file contains mappings from public-facing URLs to internal URLs.
 
-For instance, this lets a client access `{project-name}.com/api` while XP serves the request from its internal `/api` endpoint, exactly like the Cloud route you created above.
+For instance, this lets a client access `{app-name}.com/api` while XP serves the request from its internal `/api` endpoint, exactly like the Cloud route you created above.
 
 An example vhosts file that achieves the mapping mentioned would look something like this:
 
@@ -172,12 +172,12 @@ An example vhosts file that achieves the mapping mentioned would look something 
 ----
 enabled = true # <1>
 
-mapping.api.host = {project-name}.com # <2>
+mapping.api.host = {app-name}.com # <2>
 mapping.api.source = /api # <3>
 mapping.api.target = /api # <4>
 ----
 <1> Enable vhosts configuration
-<2> For all requests to `{project-name}.com`
+<2> For all requests to `{app-name}.com`
 <3> Map any request that starts with this path ...
 <4> ... to the internal URL.
 

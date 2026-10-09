@@ -272,7 +272,7 @@ Getting item sets via GraphQL is not much different than anything else we've see
               term: {
                 field: "type",
                 value: {
-                  string: "{project-name-full}:{content-type-1}"
+                  string: "{app-name-full}:{content-type-1}"
                 }
               }
             },
@@ -290,7 +290,7 @@ Getting item sets via GraphQL is not much different than anything else we've see
       }
     ) {
       displayName
-      ... on {project-name-query}_{content-type-1-capitalized} {
+      ... on {app-name-query}_{content-type-1-capitalized} {
         data {
           filmography {
             title
@@ -370,7 +370,7 @@ When fetching option set data, you can get the list of currently selected option
               term: {
                 field: "type",
                 value: {
-                  string: "{project-name-full}:{content-type-2}"
+                  string: "{app-name-full}:{content-type-2}"
                 }
               }
             },
@@ -388,7 +388,7 @@ When fetching option set data, you can get the list of currently selected option
       }
     ) {
       displayName
-      ... on {project-name-query}_{content-type-2-capitalized} {
+      ... on {app-name-query}_{content-type-2-capitalized} {
         data {
           feedingBehavior {
             _selected # <1>

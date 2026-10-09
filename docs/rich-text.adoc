@@ -227,7 +227,7 @@ The following query returns the "Lynx" content, and the `description` field as p
         }
       }
     ) {
-      ... on {project-name-query}_{content-type-2-capitalized} {
+      ... on {app-name-query}_{content-type-2-capitalized} {
         data {
           description {
             processedHtml
@@ -304,7 +304,7 @@ This example is an internal link. To build the final URL, and to access more det
         }
       }
     ) {
-      ... on {project-name-query}_{content-type-2-capitalized} {
+      ... on {app-name-query}_{content-type-2-capitalized} {
         data {
           description {
             processedHtml
@@ -349,7 +349,7 @@ By executing this query, you will get some more data. Specifically:
     "content": {
       "displayName": "Lion",
       "_path": "/{content-type-2}s/lion",
-      "type": "{project-name-full}:{content-type-2}"
+      "type": "{app-name-full}:{content-type-2}"
     },
     "pageUrl": {
       "baseUrl": null,
@@ -385,7 +385,7 @@ If you want to optimize how fast images load on various devices, Guillotine can 
         }
       }
     ) {
-      ... on {project-name-query}_{content-type-2-capitalized} {
+      ... on {app-name-query}_{content-type-2-capitalized} {
         data {
           description(processHtml: {imageWidths: [200, 500]}) {
             processedHtml
@@ -453,7 +453,7 @@ This time, you should find that the `<img>` element in the processed HTML includ
       }
     ],
     "style": {
-      "application": "{project-name-full}",
+      "application": "{app-name-full}",
       "name": "square-grayscale",
       "aspectRatio": "1:1",
       "filter": "hsbcolorize(0x000000); grayscale(); border(6, 0x000000)"
@@ -490,7 +490,7 @@ In the processed HTML, each macro is represented by an `<editor-macro>` element 
         }
       }
     ) {
-      ... on {project-name-query}_{content-type-2-capitalized} {
+      ... on {app-name-query}_{content-type-2-capitalized} {
         data {
           description {
             processedHtml
@@ -542,7 +542,7 @@ NOTE: If you used a different macro than the "Embed iframe" macro, the query mus
         }
       }
     ) {
-      ... on {project-name-query}_{content-type-2-capitalized} {
+      ... on {app-name-query}_{content-type-2-capitalized} {
         data {
           description {
             processedHtml

@@ -1,70 +1,26 @@
 = Developer 101 - Content Modelling and the GraphQL API
 include::.variables.adoc[]
-:section-1: Getting started
-:section-2: Working with content
-:section-3: Advanced content modelling
-:section-4: Deployment and next steps
 
-Welcome to this hands-on tutorial to get familiar with Enonic. The guide is aimed at people new to Enonic, and takes you step by step through content modelling and accessing content via the GraphQL API.
+Hands-on introduction to modelling content in Enonic and reading it through the Guillotine GraphQL API.
 
-== Who this tutorial is for
+== Introduction
 
 This tutorial is for developers who define content types and build front-ends against Enonic's GraphQL API. It covers content modelling, schema management and the Guillotine API, using the Enonic CLI, Content Studio and a local sandbox. Every chapter builds on the previous one, so you gain understanding incrementally while building a small content model of your own.
 
+Along the way you will:
+
+* <<setup#, set up>> the CLI, a local sandbox and your own app
+* create content types and content in <<content-studio#, Content Studio>>
+* see how content is stored, with <<data-toolbox#, Data Toolbox>>
+* query your content through the <<headless-api#, GraphQL API>>
+* upload <<files#, images and other media>>, and serve them scaled and cropped
+* model richer content with <<input-types#, input types>>, <<sets#, sets and form fragments>>, <<rich-text#, rich text>> and <<mixins#, mixins>>
+* <<deployment#, deploy>> your app and expose the API on Enonic Cloud
+
 It does not cover building pages with the Enonic framework. For that, see the https://developer.enonic.com/docs/intro[Introduction to Enonic] and the https://developer.enonic.com/docs/next.xp[Next.js tutorial]. The https://developer.enonic.com/docs/cms[CMS reference documentation] covers every topic in this tutorial in depth, and is the place to go once you know what you are looking for.
 
-If you have any questions, or just want to get in touch - visit the https://discuss.enonic.com[Forum] or join the https://slack.enonic.com/[Community Slack channel]
+NOTE: When we mention "XP", we are referring to "Enonic XP", the platform behind Enonic.
 
-Good luck! 🙌
+If you have any questions, or just want to get in touch, visit the https://discuss.enonic.com[Forum] or join the https://slack.enonic.com/[Community Slack channel].
 
-NOTE: *In a hurry?* If you just want to get up and running as fast as possible, check out the https://developer.enonic.com/start[quick start docs] instead 🚀
-
-== Overview
-
-Below is an overview of the various chapters in this guide.
-
-NOTE: When we mention "XP", we are referring to "Enonic XP", the hybrid CMS you're starting to learn!
-
-[sidebar]
-.{section-1}
---
-
-<<setup#, {title-setup}>>::
-{description-setup}
---
-
-[sidebar]
-.{section-2}
---
-
-<<content-studio#, {title-content-studio}>>::
-{description-content-studio}
-<<data-toolbox#, {title-data-toolbox}>>::
-{description-data-toolbox}
-<<headless-api#, {title-headless-api}>>::
-{description-headless-api}
-<<files#, {title-files}>>::
-{description-files}
---
-
-[sidebar]
-.{section-3}
---
-
-<<input-types#, {title-input-types}>>::
-{description-input-types}
-<<sets#, {title-sets}>>::
-{description-sets}
-<<rich-text#, {title-rich-text}>>::
-{description-rich-text}
-<<mixins#, {title-mixins}>>::
-{description-mixins}
---
-
-[sidebar]
-.{section-4}
---
-
-<<deployment#, {title-deployment}>>::
-{description-deployment}
---
+The first step is to <<setup#, get your tools in place>>. Good luck! 🙌
