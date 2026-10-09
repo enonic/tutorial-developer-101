@@ -1,0 +1,52 @@
+{
+  "menuItems": [
+    {
+      "title": "1 - Setup",
+      "document": "setup"
+    },
+    {
+      "title": "2 - Sandbox",
+      "document": "sandbox"
+    },
+    {
+      "title": "3 - Applications",
+      "document": "apps"
+    },
+    {
+      "title": "4 - Content Studio",
+      "document": "content-studio"
+    },
+    {
+      "title": "5 - Data toolbox",
+      "document": "data-toolbox"
+    },
+    {
+      "title": "6 - GraphQL API",
+      "document": "headless-api"
+    },
+    {
+      "title": "7 - Media",
+      "document": "files"
+    },
+    {
+      "title": "8 - Input types",
+      "document": "input-types"
+    },
+    {
+      "title": "9 - Sets",
+      "document": "sets"
+    },
+    {
+      "title": "10 - Rich text",
+      "document": "rich-text"
+    },
+    {
+      "title": "11 - X-data",
+      "document": "x-data"
+    },
+    {
+      "title": "12 - Deployment",
+      "document": "deployment"
+    }
+  ]
+}
