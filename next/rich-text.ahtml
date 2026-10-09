@@ -611,6 +611,21 @@ form:
 <div class="paragraph">
 <p>With the new content type deployed, you are ready to continue with the further tasks we&#8217;ll introduce in the next sections.</p>
 </div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+<div class="title">When to use it</div>
+<div class="paragraph">
+<p>Use an HtmlArea where editors need free-form prose: a description, an article body, a biography. When your front-end needs to render parts differently, such as a quote, a gallery and a call to action, model them as an OptionSet of blocks instead, so each part arrives as structured data rather than HTML to parse. And keep the toolbar small: every tool you allow is HTML your front-end has to style.</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
 </div>
 </div>
 </div>
@@ -1337,7 +1352,7 @@ If you used a different macro than the "Embed iframe" macro, the query must be u
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2026-10-09 13:46:57 UTC
+Last updated 2026-10-09 13:58:44 UTC
 </div>
 </div>
 </body>

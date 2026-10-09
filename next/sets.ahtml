@@ -599,6 +599,34 @@ If you have read XP 7 material, be aware that form fragments were called <em>mix
 <div class="paragraph">
 <p>We&#8217;ll see them in the upcoming task, but if you want to learn more about them, consult <a href="https://developer.enonic.com/docs/cms/stable/schemas/form-fragments">the form fragments reference documentation</a>.</p>
 </div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+<div class="title">When to use it</div>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>FieldSet</strong> when the only goal is a tidier form. It changes nothing in the data.</p>
+</li>
+<li>
+<p><strong>ItemSet</strong> for repeating, structured data the item owns, such as filmography entries. Each occurrence becomes an object in the data.</p>
+</li>
+<li>
+<p><strong>OptionSet</strong> when editors choose between variants that carry different fields, such as a feeding behavior that may or may not list prey. If the choice carries no data, a <strong>ComboBox</strong> is enough.</p>
+</li>
+<li>
+<p><strong>Form fragment</strong> when the same group of form items appears in several places in your app. It is pure reuse at schema level; the data looks as if you had typed the fields in each place.</p>
+</li>
+</ul>
+</div>
+</td>
+</tr>
+</table>
+</div>
 </div>
 </div>
 <div class="sect1">
@@ -1090,7 +1118,7 @@ The use of the form fragment helps us both reduce duplication and keep all optio
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2026-10-09 13:46:57 UTC
+Last updated 2026-10-09 13:58:44 UTC
 </div>
 </div>
 </body>

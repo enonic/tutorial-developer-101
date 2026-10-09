@@ -741,6 +741,21 @@ form: <i class="conum" data-value="4"></i><b>(4)</b>
 <tr>
 <td><i class="conum" data-value="5"></i><b>5</b></td>
 <td>The <code>type</code> specifies what kind of input the user will see in Content Studio, and the <code>label</code> specifies how the input will be labeled.
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+<div class="title">When to use it</div>
+<div class="paragraph">
+<p>Every content type has a built-in display name, so don&#8217;t add a <code>title</code> or <code>name</code> field that stores the same thing: editors get two fields to fill in, and your front-end gets two places to look. Here the display name is the artist&#8217;s stage name and <code>name</code> is their legal name, which is why both earn their place. Add a field only when it carries different information from the item&#8217;s name.</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
 <div class="admonitionblock note">
 <table>
 <tr>
@@ -853,6 +868,21 @@ This content type is only visible there because of the update we did to the app,
 </div>
 <div class="paragraph">
 <p>Since we&#8217;ll be using this content project in the coming chapters with more content types, having some hierarchy will make things easier. Create a new folder and call it "artists".</p>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+<div class="title">When to use it</div>
+<div class="paragraph">
+<p>The content path, such as <code>/artists/cardi-b</code>, is what a front-end will use to find an item and often to build its URL. Group content by type in folders from the start, and name the folders as you want them to appear in those paths. Moving content later does not break references, but it does change paths.</p>
+</div>
+</td>
+</tr>
+</table>
 </div>
 <div class="paragraph">
 <p>Next, let&#8217;s create a few artists to get used to the workflow. We&#8217;ll start with Cardi B.</p>
@@ -1023,7 +1053,7 @@ You can also publish a piece of content by using the keyboard shortcut <span cla
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2026-10-09 13:46:57 UTC
+Last updated 2026-10-09 13:58:44 UTC
 </div>
 </div>
 </body>

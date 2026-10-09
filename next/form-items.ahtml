@@ -564,6 +564,21 @@ Use <code>camelCase</code> for names, such as <code>otherNames</code>. Names are
 </tr>
 </table>
 </div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+<div class="title">When to use it</div>
+<div class="paragraph">
+<p>Names are part of your API, so choose them to last. Renaming a form item does not rename the data already stored under the old name: existing items keep their values under a property the form no longer shows, and every query that selected the old field breaks. Labels, on the other hand, can change whenever you like.</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
 <div class="admonitionblock note">
 <table>
 <tr>
@@ -708,6 +723,21 @@ If <code>max</code> is greater than <code>0</code>, make sure that <code>min</co
 </tr>
 </table>
 </div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+<div class="title">When to use it</div>
+<div class="paragraph">
+<p>Make a field required only when your front-end cannot render the item without it. A required field blocks editors from saving work in progress, and an invalid item cannot be published. Most fields are better optional, with the front-end handling an empty value.</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
 </div>
 </div>
 </div>
@@ -834,6 +864,21 @@ If <code>max</code> is greater than <code>0</code>, make sure that <code>min</co
     - "citation"</code></pre>
 </div>
 </div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+<div class="title">When to use it</div>
+<div class="paragraph">
+<p>Reference another content item when the thing has a life of its own: it is published, moved, reused from several places or edited by someone else. An artist&#8217;s favorite animal is an animal that exists regardless of the artist, so it is a reference. When the data only makes sense inside the parent, such as an artist&#8217;s filmography entries, embed it instead with the sets you will meet in the <a href="sets.ahtml">next chapter</a>.</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
 </div>
 </div>
 <div class="sect1">
@@ -848,14 +893,17 @@ If <code>max</code> is greater than <code>0</code>, make sure that <code>min</co
 </div>
 <div class="title">Figure 9. The AttachmentUploader form item</div>
 </div>
-<div class="admonitionblock note">
+<div class="admonitionblock tip">
 <table>
 <tr>
 <td class="icon">
-<i class="fa icon-note" title="Note"></i>
+<i class="fa icon-tip" title="Tip"></i>
 </td>
 <td class="content">
-Imagine creating a content type for e-mail, you would probably use an AttachmentUploader field to store the file attachments. This is because you really don&#8217;t need each file to be independently referenced, published and managed - right.
+<div class="title">When to use it</div>
+<div class="paragraph">
+<p>Upload a file as media when it is an asset in its own right: an image used on several pages, a brochure linked from many places, anything editors should find, reuse and publish independently. Use an AttachmentUploader when the file belongs to exactly one item and should live and die with it, such as the attachments of an e-mail or the PDF version of a report. Media can be referenced from an ImageSelector or ContentSelector; attachments cannot.</p>
+</div>
 </td>
 </tr>
 </table>
@@ -1252,7 +1300,7 @@ form:
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2026-10-09 13:46:57 UTC
+Last updated 2026-10-09 13:58:44 UTC
 </div>
 </div>
 </body>
