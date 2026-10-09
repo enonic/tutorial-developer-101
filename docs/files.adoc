@@ -38,9 +38,9 @@ To get familiar with uploading media to XP, let's start with one of the most com
 
 And that's all it takes to upload files to Content Studio!
 
-=== Data Toolbox
+=== How media is stored
 
-Like we saw in the {document} on Data Toolbox, it lets you view and edit your content. Images and other media are also available in Data Toolbox as content, but in addition to the same properties you saw previously, media also have a property called `attachment`. The attachment will essentially hold all the data from the file that you uploaded.
+Under the hood, an image is a content item like any other: a JSON document with the usual properties, plus one more called `attachment`. The attachment will essentially hold all the data from the file that you uploaded. You will learn how to inspect this storage yourself in <<data-toolbox#, a later {document}>>; for now, here is what it looks like.
 
 For instance, if you have a look at the image you uploaded earlier, you should see that it points to the image file you uploaded.
 
@@ -79,9 +79,9 @@ If you view the content as JSON, some relevant parts of the structure are the `d
 
 == Media APIs
 
-Uploading a file is only half the job. XP also includes APIs that let you download the same file (now stored as an attachment within the content) when you need it: the _attachment API_ serves any file as it was uploaded, and the _image API_ serves images, with scaling and filters applied on the fly.
+Uploading a file is only half the job. XP also includes APIs that let you download the same file (now stored as an attachment within the content) when you need it: the _attachment API_, `media:attachment`, serves any file as it was uploaded, and the _image API_, `media:image`, serves images, with scaling and filters applied on the fly.
 
-Both are served from your instance's API base URL, which on your sandbox is `{api-base-url}`. We'll see what the URLs look like in a moment.
+Both are Universal APIs, just like Guillotine, so they are served from the same API base URL you met in the <<headless-api#_one_endpoint_for_every_api, GraphQL {document}>>: `{api-base-url}` on your sandbox. We'll see what the URLs look like in a moment.
 
 === mediaUrl
 

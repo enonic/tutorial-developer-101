@@ -448,3 +448,9 @@ When fetching option set data, you can get the list of currently selected option
   }
 }
 ----
+
+== Summary
+
+You have grouped inputs visually with a field set, structurally with an item set, let editors choose between options with option sets, and reused a form with a fragment.
+
+Next up, <<rich-text#, rich text>> gives your editors a proper text editor, with links, images and macros.

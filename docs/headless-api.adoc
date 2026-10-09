@@ -16,7 +16,15 @@ Guillotine should be pre-installed based on the `Essentials` template you used w
 
 NOTE: This tutorial is written for Guillotine 9, which requires XP 8.1 or newer. Check the version in `XP menu` -> `Applications` if your queries do not behave as described.
 
-Guillotine exposes a single API endpoint for all your projects. On your sandbox, it is `{graphql-url}`. We'll use it directly in the <<deployment#, deployment {document}>>. For now, Content Studio offers a much more comfortable way to explore it.
+=== One endpoint for every API
+
+Guillotine exposes a single API endpoint for all your projects. On your sandbox, it is `{graphql-url}`.
+
+Look at that address for a moment, because the pattern comes back throughout this tutorial. In XP 8, every web API is a _Universal API_: it has a name of the form `<app>:<name>`, and it is mounted under the instance's single `/api` endpoint. Guillotine's API is `com.enonic.app.guillotine:graphql`. The images you upload later are served by `media:image`, and other files by `media:attachment`, from the very same place. An app of your own can add more.
+
+This is why one base URL is enough. Everything you will ask XP for - queries, images, downloads - lives under `{api-base-url}` on your sandbox. On a live server it lives under that server's address instead, and that is the only difference: the same APIs, the same names, the same paths. Your front-end is the one that knows which base to use. You will build media URLs on top of this base in the <<files#, media {document}>>, and call it from code in the <<frontend#, front-end {document}>>.
+
+For now, Content Studio offers a much more comfortable way to explore the API than calling the endpoint yourself.
 
 == Query Playground
 

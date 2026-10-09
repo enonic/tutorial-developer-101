@@ -1,0 +1,243 @@
+= {title-frontend}
+include::.variables.adoc[]
+:description: {description-frontend}
+
+So far you have run every query from Query Playground, which quietly supplied the project, the branch and your login. A front-end has none of that. In this {document} you'll send the same queries over HTTP, from the command line, from Node and from a browser, and handle the four things every front-end on Enonic needs: the request format, published versus draft content, URLs for pages and media, and lists that page.
+
+NOTE: {see-prev-docs}
+
+== Publish first
+
+Everything you have created so far lives in the draft branch. Draft content is only readable by logged-in users with a role in the content project, which a front-end does not have. The master branch, on the other hand, is readable by anyone in a public project like yours.
+
+So before anything else, publish your content: in Content Studio, select the "{content-type-1}s", "{content-type-2}s" and "images" folders, choose btn:[Publish], and make sure the dialog includes their children. From now on, use the `master` branch in your queries.
+
+== The request
+
+The endpoint is `{graphql-url}`, as you saw in the <<headless-api#_one_endpoint_for_every_api, GraphQL {document}>>. It takes an HTTP POST with `Content-Type: application/json` and a JSON body with two properties:
+
+[%header,cols="1,1,4"]
+|===
+|Property |Type |Description
+|query |String |The GraphQL query to execute.
+|variables |Object |Optional. Values for variables declared by the query.
+|===
+
+Outside Content Studio there is no selected project, so the query names the project and the branch as arguments on the `guillotine` field. Passing them as variables keeps the query reusable between environments.
+
+Save this as `request.json`:
+
+[source,json,{subs}]
+----
+{
+  "query": "query Artists($project: String!, $branch: String!) { guillotine(project: $project, branch: $branch) { getChildren(key: \"/{content-type-1}s\", first: 10) { _id displayName } } }",
+  "variables": {
+    "project": "{cms-project}",
+    "branch": "master"
+  }
+}
+----
+
+And send it with cURL:
+
+[source,shell,{subs}]
+----
+curl "{graphql-url}" \
+  -H 'Content-Type: application/json' \
+  --data-binary @request.json
+----
+
+You should get the three {content-type-1}s back as JSON, the same shape you saw in the playground's response panel. If the list is empty, the content is not published, or you spelled the project name differently when you created it.
+
+== From JavaScript
+
+The same request with `fetch()`. Save it as `artists.mjs` and run it with `node artists.mjs`. Node 18 or newer has `fetch` built in.
+
+[source,javascript,{subs}]
+----
+const apiBaseUrl = '{api-base-url}';
+
+const query = `
+  query Artists($project: String!, $branch: String!) {
+    guillotine(project: $project, branch: $branch) {
+      getChildren(key: "/{content-type-1}s", first: 10) {
+        _id
+        displayName
+        ... on {app-name-query}_{content-type-1-capitalized} {
+          data {
+            name
+            birthday
+          }
+        }
+      }
+    }
+  }
+`;
+
+async function getArtists() {
+  const response = await fetch(apiBaseUrl + '/com.enonic.app.guillotine:graphql', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({
+      query,
+      variables: { project: '{cms-project}', branch: 'master' }
+    })
+  });
+
+  if (!response.ok) {
+    throw new Error(`HTTP ${response.status}`);
+  }
+
+  const result = await response.json();
+  if (result.errors?.length) {
+    throw new Error(result.errors.map((error) => error.message).join('\n'));
+  }
+
+  return result.data.guillotine.getChildren;
+}
+
+getArtists().then(console.log).catch(console.error);
+----
+
+Two details worth copying into any client you write:
+
+* A GraphQL response can be HTTP 200 and still carry errors, in the `errors` array next to `data`. Check both.
+* The API base URL is the only thing that changes between your sandbox and production. Keep it in one place, as here, so that going live is a configuration change.
+
+== From a browser
+
+Running the same code in a web page served from another origin, say a dev server on `http://localhost:3000`, fails until XP is told to allow that origin. This is browser cross-origin protection, CORS, and Guillotine has a configuration file for it.
+
+Create the file `com.enonic.app.guillotine.cfg` in your sandbox's config directory, `~/.enonic/sandboxes/{sandbox-name}/home/config/`:
+
+.com.enonic.app.guillotine.cfg
+[source,properties]
+----
+cors.origin=http://localhost:3000
+cors.methods=POST, OPTIONS
+cors.allowedHeaders=Content-Type
+----
+
+XP picks the file up without a restart. `cors.origin` takes a comma-separated list of origins, including scheme and port. The https://developer.enonic.com/docs/guillotine/stable/configuration[Guillotine configuration docs] cover the remaining options.
+
+NOTE: CORS only controls which origins a browser lets read the response. It does not grant access to content: a public project's published content is readable by anyone, and draft content still needs a login.
+
+=== Draft content
+
+A front-end that previews unpublished work, for instance a staging site for editors, queries the `draft` branch and must send the editor's login with every request. With cookie-based login across origins that means `cors.credentials=true` in the file above, an explicit origin rather than `*`, and `credentials: 'include'` in the `fetch()` call. For a public front-end, stay on `master` and skip all of this.
+
+== Resolving a route
+
+A front-end usually goes the other way from the queries so far: the visitor arrives at a URL, and the page needs the content behind it. The content path is the natural route. `get` accepts a path as its `key`, and returns `null` when nothing is there, which is your 404:
+
+[source,GraphQL,{subs}]
+----
+query AnimalPage($project: String!, $branch: String!, $path: ID!) {
+  guillotine(project: $project, branch: $branch) {
+    get(key: $path) {
+      displayName
+      ... on {app-name-query}_{content-type-2-capitalized} {
+        data {
+          otherNames
+          description {
+            processedHtml
+          }
+        }
+      }
+    }
+  }
+}
+----
+
+With `path` set to `/{content-type-2}s/lion`, this is everything the lion's page needs. The route in your front-end can be the content path itself, or any mapping you prefer, as long as the front-end knows how to turn it back into a path.
+
+== Paging a list
+
+`getChildren` and `queryDsl` take `first` and `offset`, which is enough for a short list. For a list of unknown length, use the connection variant, which returns a cursor for the next page and the total count:
+
+[source,GraphQL,{subs}]
+----
+query AnimalsPage($project: String!, $branch: String!, $after: String) {
+  guillotine(project: $project, branch: $branch) {
+    getChildrenConnection(key: "/{content-type-2}s", first: 2, after: $after, sort: "displayName ASC") {
+      totalCount
+      edges {
+        node {
+          _id
+          displayName
+        }
+      }
+      pageInfo {
+        endCursor
+        hasNext
+      }
+    }
+  }
+}
+----
+
+Send it with `after` set to `null` for the first page. The items are in `edges`, one `node` each. If `pageInfo.hasNext` is `true`, send the same query again with `after` set to `pageInfo.endCursor`, and repeat until `hasNext` is `false`:
+
+[source,javascript]
+----
+async function allAnimals() {
+  const animals = [];
+  let after = null;
+  do {
+    const page = await send(query, { project, branch, after });
+    const connection = page.guillotine.getChildrenConnection;
+    animals.push(...connection.edges.map((edge) => edge.node));
+    after = connection.pageInfo.hasNext ? connection.pageInfo.endCursor : null;
+  } while (after);
+  return animals;
+}
+----
+
+Treat the cursor as an opaque value, and keep the key and sorting the same while paging. With two animals per page and three animals, you get two requests.
+
+== Building URLs
+
+Guillotine returns the parts of every URL, never a finished address, as you saw with media and rich text. Your front-end owns the base, so building the address is one line:
+
+[source,javascript,{subs}]
+----
+const mediaBaseUrl = '{api-base-url}';
+const url = (parts) => mediaBaseUrl + parts.path + parts.queryString;
+
+// imageUrl(scale: "width(800)") { path queryString }
+img.src = url(animal.data.images[0].imageUrl);
+----
+
+For rich text, the same function rewrites the defaults in `processedHtml`. Match each element on its reference attribute and set the attribute from the structured data:
+
+[source,javascript]
+----
+for (const link of description.links) {
+  const a = container.querySelector(`[data-link-ref="${link.ref}"]`);
+  if (a && link.pageUrl) {
+    a.href = (link.pageUrl.baseUrl ?? frontendBaseUrl) + link.pageUrl.path + link.pageUrl.queryString + link.fragment;
+  }
+}
+
+for (const image of description.images) {
+  const img = container.querySelector(`[data-image-ref="${image.ref}"]`);
+  if (img && image.src) {
+    img.src = url(image.src);
+    if (image.srcset.length) {
+      img.srcset = image.srcset.map((source) => `${url(source.imageUrl)} ${source.width}w`).join(', ');
+    }
+  }
+}
+----
+
+Here `frontendBaseUrl` is wherever your front-end serves its pages. A link whose target does not resolve has a `null` `pageUrl`, so the guard leaves its text in place without a broken link.
+
+== Going live
+
+Everything in this {document} ran against your sandbox, but there is no difference between the sandbox and a live Enonic server except the URL. The same request format, the same API names, the same paths in every response, the same CORS configuration file. When your app and content are on a server, point `apiBaseUrl` at that server's `/api` and the front-end is live. Keep that base in one place, as the examples do, and going live is a configuration change rather than a code change.
+
+== Summary
+
+You have called the API from cURL, Node and a browser, published content so a front-end can read it, resolved a route to a content item, paged a list, and built page and media URLs from their parts. That is the whole contract between Enonic and a front-end; everything else is your framework's business.
+
+Next up, let's look <<data-toolbox#, under the hood>> at how XP actually stores all of this.

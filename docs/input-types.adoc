@@ -457,3 +457,9 @@ Depending on the links (and {content-type-2}s) you created, your result might lo
   }
 }
 ----
+
+== Summary
+
+You have configured inputs with occurrences, defaults and help text, linked content with selectors, and followed a reference through the API.
+
+Next up, <<sets#, sets and form fragments>> let you group and reuse inputs.

@@ -194,8 +194,7 @@ There's a well-known app on Enonic Market named _SEO Metafields_. Its main purpo
 
 This is a bonus section, so you're not missing much if you skip it, but it's worth installing it to better understand the capabilities of mixins.
 
-// TODO(xp8-verify): confirm an XP 8 compatible release of SEO Metafields is on Market before publishing this section
-. Install the https://market.enonic.com/vendors/enonic/seo-metafields[SEO Metafields app].
+. Install the https://market.enonic.com/vendors/enonic/seo-metafields[SEO Metafields app] from `XP menu` -> `Applications`.
 +
 image::x-data-seo-app-install.png["Install SEO Metafields app",{image-l}]
 +
@@ -206,3 +205,9 @@ image::x-data-seo-app-install.png["Install SEO Metafields app",{image-l}]
 So, now you have some additional fields on all your content. If you check some of your content items, like an {content-type-2}, you will see the fields are there as well.
 
 image::x-data-seo-animal.png["SEO fields available for the animals content type as well.",{image-xl}]
+
+== Summary
+
+Your content model is complete: content types, sets, references, rich text, media and mixins, all readable through the API.
+
+Next up, let's fetch it all <<frontend#, from a front-end>>.

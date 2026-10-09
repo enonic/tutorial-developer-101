@@ -4,7 +4,7 @@ This repository contains "Developer 101 - Content Modelling and the GraphQL API"
 
 ## Scope and Audience
 
-The tutorial is for developers who define content types and build front-ends against Enonic's GraphQL API. It walks a newcomer from installing the Enonic CLI to deploying an app: sandboxes, creating an app from a starter, Content Studio, content types, the Guillotine GraphQL API, media, input types, sets and form fragments, rich text, mixins, and deployment. It should remain approachable for people who are not primarily back-end developers.
+The tutorial is for developers who define content types and build front-ends against Enonic's GraphQL API. It walks a newcomer from installing the Enonic CLI to fetching content from a front-end: a sandbox and an app from a starter, Content Studio, content types, the Guillotine GraphQL API, media, input types, sets and form fragments, rich text, mixins, calling the API from code, and a look at the underlying storage. It should remain approachable for people who are not primarily back-end developers.
 
 The scope is content modelling, schema management and the Guillotine API. The tutorial does not build sites or pages with the Enonic framework, and does not teach any particular front-end framework. Point readers to the Introduction to Enonic and the Next.js tutorial for those.
 
@@ -15,6 +15,7 @@ This is a tutorial, not reference documentation. The CMS reference documentation
 This repository is documentation only:
 
 * `docs/` contains the AsciiDoc tutorial published on Enonic's developer portal.
+* `drafts/` holds pages parked outside the build, currently the deployment chapter, which waits for the self-service cloud for XP 8. Do not mention Enonic Cloud or deployment flows in `docs/` until it is back; the tutorial says only that a live server differs from the sandbox by its URL.
 * The reader builds their own app from the `starter-vanilla` starter. That app is **not** checked in here, so every path such as `{app-root}/cms/content-types/` refers to the reader's app, not to this repository. The resource root is the `app-root` attribute in `docs/.variables.adoc`, currently `src/main/resources`, so the planned XP 8.2 lightweight app layout with `cms/` at the app root is a one-line change. Never write the root out literally in prose or block titles.
 * Say "app" for the folder the reader edits and for the application running in XP. Do not call the folder a project; the only projects in this tutorial are content projects.
 * The `master` branch targets Enonic XP 8.1, Guillotine 9 and Content Studio 6.1, and is published as the `next` version. The `xp7` branch holds the XP 7 edition and is published as `stable` until the XP 8 edition is complete. All schemas are YAML, Guillotine URL fields return `path` and `queryString` components, and the API endpoint is `/api/com.enonic.app.guillotine:graphql`.

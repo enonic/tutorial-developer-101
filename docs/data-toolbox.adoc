@@ -2,6 +2,8 @@
 include::.variables.adoc[]
 :description: {description-data-toolbox}
 
+You have now built a complete little content model and fetched it from a front-end: content types with sets, option sets, references and rich text, media with focal points, and a mixin on top. Before we deploy it, let's look at how all of that is actually saved.
+
 In this {document}, we'll give a short introduction to a popular application called Data Toolbox, the developer's best friend for playing around with the low level NoSQL storage in Enonic XP.
 
 NOTE: {see-prev-docs}
@@ -33,28 +35,41 @@ system-repo:: This is where XP stores core data about your system, such as insta
 
 system.scheduler:: This is a separate repository where scheduled jobs are stored.
 
-. Move into `com.enonic.cms.{cms-project}`. Here you will see the two branches discussed in the previous {document}. As long as you've published your content, you can choose either one of these.
+. Move into `com.enonic.cms.{cms-project}`. Here you will see the two branches you met in the <<content-studio#_branches, Content Studio {document}>>: `draft` and `master`. Everything you have published exists in both.
 
-. Keep navigating further down the tree: `root` -> `content`. Now you should see all the content of your project listed. Navigate to `{content-type-1}s` to find actual pieces of content.
+. Keep navigating further down the tree: `root` -> `content`. Now you should see all the content of your project listed, as a tree of _nodes_ that mirrors the hierarchy in Content Studio. Navigate to `{content-type-2}s` to find your {content-type-2}s.
 
-. Choose one of your {content-type-1}s and check out both the info view and the JSON view, available via the buttons in the table row.
+. Choose "Lion" and check out both the info view and the JSON view, available via the buttons in the table row.
 +
 .The Data Toolbox node info view
 image::data-toolbox-info-view.png["The Data Toolbox info view. the view contains options for exporting, moving, and deleting the node, as well as for displaying permissions for the node, versions of the node, and indexing data (and much more).",750w]
 +
-. To inspect the data associated with the {content-type-1}, you can select "Display properties", which will bring up data about the node, such as its display name, its owner, when it was created, etc.
+. To inspect the data associated with the {content-type-2}, you can select "Display properties", which will bring up data about the node, such as its display name, its owner, when it was created, etc.
 +
 .The display properties view
 image::data-toolbox-properties.png["A table with columns 'name', 'index, 'value', and 'type' that describes the node. Example names are 'valid', 'type', 'displayName'.", 606w]
 +
-. Finally, you can navigate to the `data` property, where you'll find the data stored on the {content-type-1}.
+. Navigate into the `data` property, where you'll find the data stored for the {content-type-2}. Compare it with the content type you wrote: every input you declared is a property with the same name, the option sets carry a `+_selected+` property next to the options, and the rich text description is stored as one HTML string.
 +
 .The properties.data view
-image::data-toolbox-properties-data.png["A table showing the data we stored about the {content-type-1} previously.", 606w]
+image::data-toolbox-properties-data.png["A table showing the data stored about the {content-type-2}.", 606w]
++
+. Go back up one level and look at the `x` property. This is where the notes from your mixin live, grouped by the app that provides the mixin - exactly the structure you queried through `xAsJson`.
 
+. Finally, find one of your {content-type-1}s and look at its `favorite{content-type-2-capitalized}` property. A reference is stored as the ID of the target content, not its path, which is why you can move and rename content without breaking links.
+
+What you see here is the same data the GraphQL API returns. Guillotine reads these nodes, applies the content type to give them a typed schema, and resolves references and media URLs on the way out. When a query returns something you did not expect, this is the place to check what is actually stored.
 
 == Summary
 
-Inspecting content is only a fraction of what Data Toolbox can do: it's a versatile and powerful administrative tool, and we'll see more of it in a later {document}.
+Inspecting content is only a fraction of what Data Toolbox can do: it's a versatile and powerful administrative tool. Among other things, it can export your content and import it on another instance, which is handy the day you move from your sandbox to a live server.
 
-Now, let's have a look at the <<headless-api#, cutting edge headless CMS API - aka Guillotine>>.
+== What's next?
+
+Congrats! You've reached the end of this tutorial. You can model content, read it through the API and fetch it from a front-end. If you'd like to go further, try one of the following guides, which introduce additional aspects of the Enonic experience:
+
+https://developer.enonic.com/docs/intro[Introduction to Enonic]:: Building a website with the Enonic framework, no third-party framework required. This tutorial also introduces the concept of pages, and building blocks such as regions, parts, and page templates.
+
+https://developer.enonic.com/docs/next.xp[Building sites with Enonic and Next.js]:: Everything you need to start building Next.js-based sites with Enonic as your CMS, including full visual editing.
+
+https://developer.enonic.com/docs/graphql-tutorial[Building a custom GraphQL API]:: Go beyond Guillotine and build your own GraphQL API on Enonic XP, with mutations and subscriptions.

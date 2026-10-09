@@ -97,9 +97,9 @@ To make your content accessible publicly, the final step is to create a Route. F
 * Use the internal path `/api`
 * Use the public path `/api` as well
 +
-. Congratulations, your API is now live. The route exposes every API mounted on XP's API endpoint: Guillotine at `/api/com.enonic.app.guillotine:graphql`, and the media APIs you met earlier, so that image and attachment paths work with the same base URL.
+. Congratulations, your API is now live. Because every Universal API is mounted under `/api`, this one route exposes all of them: Guillotine at `/api/com.enonic.app.guillotine:graphql`, and the `media:image` and `media:attachment` APIs you met earlier, so the media paths your queries return work with your domain followed by `/api` as the base URL.
 
-To try it out, use a GraphQL client such as https://altairgraphql.dev/[Altair]. Point it at your domain followed by `/api/com.enonic.app.guillotine:graphql`, use HTTP POST, and run a query. Outside Content Studio there is no selected project, so the query has to name the project and the branch:
+To try it out, send the requests from the <<frontend#, front-end {document}>> with your domain followed by `/api` as the API base URL, or use a GraphQL client such as https://altairgraphql.dev/[Altair]: point it at your domain followed by `/api/com.enonic.app.guillotine:graphql`, use HTTP POST, and run a query that names the project and the branch:
 
 [source,GraphQL,{subs}]
 ----

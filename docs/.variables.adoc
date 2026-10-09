@@ -23,13 +23,14 @@
 :see-prev-docs: The tasks and examples in this {document} are based on work done in previous {document}s (starting with <<setup#, the setup chapter>>). If you want to follow along with the examples, make sure you're all caught up.
 :title-setup: Setup
 :title-content-studio: Content Studio and content creation
-:title-data-toolbox: Data Toolbox
+:title-data-toolbox: Under the hood with Data Toolbox
 :title-headless-api: GraphQL API
 :title-files: Media - files are content too
 :title-input-types: Input types
 :title-sets: Sets and form fragments
 :title-rich-text: Rich text
 :title-mixins: Mixins
+:title-frontend: Fetching content from a front-end
 :title-deployment: Deployment and next steps
 :title-iam: IAM: identities and providers
 :image-xs: width=600
@@ -39,12 +40,13 @@
 :image-xl: width=1200
 :description-setup: Install the Enonic CLI, start a local XP sandbox and create the app that will hold your content types. Three commands and you are ready.
 :description-content-studio: Get familiar with Content Studio and content types, and start creating some content.
-:description-data-toolbox: Peek under the hood with Data Toolbox and see how your content is stored.
+:description-data-toolbox: Now that your content model is complete, peek under the hood with Data Toolbox and see how XP stores all of it.
 :description-headless-api: What is a headless CMS without an API? Learn about the Guillotine app and the powers it unlocks here.
 :description-files: How does XP deal with images and other media? This {document} covers XP media support, how to upload and query for media, how to work with images and attachments.
 :description-input-types: Take your content types to the next level with more advanced input types. Learn how to configure input types, what kinds there are, and how to link content together.
 :description-sets: XP has a number of ways to group inputs together, and to reuse groups across schemas. Learn all about them in this {document}.
 :description-rich-text: Rich text is an incredibly powerful editing tool and an important part of the XP experience. Learn how to configure it here.
 :description-mixins: Mixins are a way for you to add extra fields to all your content types in a simple manner. This {document} covers what they are and how to use them.
+:description-frontend: Call the API from cURL, Node and a browser. Publish content, configure CORS, resolve a route, page a list and build page and media URLs from their parts.
 :description-deployment: How do you actually deploy Enonic XP and use it for more than local development? And where do you go from here to learn more?
 :description-iam: How do you restrict access to your sites? What kinds of access control exist for XP? This {document} explores users, roles, groups, and identity providers.
