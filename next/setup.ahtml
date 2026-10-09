@@ -5,8 +5,8 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="generator" content="Asciidoctor 2.0.26">
-<meta name="description" content="Starting from scratch, this chapter takes you through how to install all the necessary tools to get started with Enonic XP development.">
-<title>Setting up your development environment</title>
+<meta name="description" content="Install the Enonic CLI, start a local XP sandbox and create the app that will hold your content types. Three commands and you are ready.">
+<title>Setup</title>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,300italic,400,400italic,600,600italic%7CNoto+Serif:400,400italic,700,700italic%7CDroid+Sans+Mono:400,700">
 <style>
 /*! Asciidoctor default stylesheet | MIT License | https://asciidoctor.org */
@@ -438,26 +438,17 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 </head>
 <body class="article toc2 toc-right">
 <div id="header">
-<h1>Setting up your development environment</h1>
+<h1>Setup</h1>
 <div id="toc" class="toc2">
 <div id="toctitle">Table of Contents</div>
 <ul class="sectlevel1">
-<li><a href="#enonic_cli">Enonic CLI</a>
+<li><a href="#install_the_cli">Install the CLI</a></li>
+<li><a href="#create_a_sandbox">Create a sandbox</a></li>
+<li><a href="#create_an_app">Create an app</a></li>
+<li><a href="#build_and_deploy">Build and deploy</a>
 <ul class="sectlevel2">
-<li><a href="#installation">Installation</a></li>
-<li><a href="#verification">Verification</a></li>
-<li><a href="#commands">Commands</a></li>
-</ul>
-</li>
-<li><a href="#git">Git</a>
-<ul class="sectlevel2">
-<li><a href="#installation_2">Installation</a></li>
-<li><a href="#verification_2">Verification</a></li>
-</ul>
-</li>
-<li><a href="#editor">Editor</a>
-<ul class="sectlevel2">
-<li><a href="#download_visual_studio_code">Download Visual Studio Code</a></li>
+<li><a href="#change_the_apps_title">Change the app&#8217;s title</a></li>
+<li><a href="#troubleshooting">Troubleshooting</a></li>
 </ul>
 </li>
 <li><a href="#summary">Summary</a></li>
@@ -468,54 +459,21 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <div id="preamble">
 <div class="sectionbody">
 <div class="paragraph">
-<p>The purpose of this chapter is to ensure you have the necessary tools to start developing efficiently with XP.</p>
+<p>Before we can model any content, we need somewhere to put it. This chapter gets you there in three steps: install the Enonic CLI, start a local instance of XP, and create the app that will hold your content types.</p>
 </div>
 <div class="paragraph">
-<p>In general, the bare minimum you&#8217;ll need is:</p>
-</div>
-<div class="ulist">
-<ul>
-<li>
-<p>Enonic CLI &#8594; <em>managing your XP projects</em></p>
-</li>
-<li>
-<p>Git / Github &#8594; <em>versioning your XP projects</em></p>
-</li>
-<li>
-<p>Editor / IDE (Integrated Development Environment) &#8594; <em>coding your ideas into XP projects</em></p>
-</li>
-</ul>
-</div>
-<div class="admonitionblock tip">
-<table>
-<tr>
-<td class="icon">
-<i class="fa icon-tip" title="Tip"></i>
-</td>
-<td class="content">
-If you&#8217;ve already got this configured and installed, feel free to skip to the next chapter.
-</td>
-</tr>
-</table>
+<p>The whole thing takes a few minutes. Everything you install here is used again in every following chapter.</p>
 </div>
 </div>
 </div>
 <div class="sect1">
-<h2 id="enonic_cli"><a class="link" href="#enonic_cli">Enonic CLI</a></h2>
+<h2 id="install_the_cli"><a class="link" href="#install_the_cli">Install the CLI</a></h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>Enonic provides a Command Line Interface (CLI) for working with XP.</p>
+<p>Enonic provides a Command Line Interface (CLI) for working with XP. It manages local XP instances, creates projects from starters, and builds and deploys your apps.</p>
 </div>
 <div class="paragraph">
-<p>If the concept of CLI is new to you, you can imagine it as an interactive terminal program that will listen for some specific inputs (usually as text), and based on them, execute specific tasks on your machine.</p>
-</div>
-<div class="paragraph">
-<p>The goal of the CLI is to improve the development workflow, and, by using it, you&#8217;ll have an easy and quick way to manage your XP apps.</p>
-</div>
-<div class="sect2">
-<h3 id="installation"><a class="link" href="#installation">Installation</a></h3>
-<div class="paragraph">
-<p>The easiest and fastest way to install the CLI is by using Node Package Manager (NPM):</p>
+<p>If you have <code>npm</code> on your machine, install the CLI with:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -523,23 +481,10 @@ If you&#8217;ve already got this configured and installed, feel free to skip to 
 </div>
 </div>
 <div class="paragraph">
-<p>Note that to run the npm install command you need to make sure that you have both Node and NPM installed on your machine. You can quickly check if they are installed by running the following commands on your terminal:</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="highlight"><code class="language-shell" data-lang="shell">node -v</code></pre>
-</div>
+<p>If not, there are <a href="https://developer.enonic.com/start">alternative ways to install the Enonic CLI</a>.</p>
 </div>
 <div class="paragraph">
-<p>to check the version of Node you have installed locally. Same for NPM:</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="highlight"><code class="language-shell" data-lang="shell">npm -v</code></pre>
-</div>
-</div>
-<div class="paragraph">
-<p>If they are not installed, you can head to <a href="https://nodejs.org/" target="_blank" rel="noopener">nodejs.org</a> to proceed installing them.</p>
+<p>Verify the installation by running <code>enonic -v</code>. This should print the version of the CLI. This tutorial expects version 4 or newer.</p>
 </div>
 <div class="admonitionblock note">
 <table>
@@ -548,130 +493,55 @@ If you&#8217;ve already got this configured and installed, feel free to skip to 
 <i class="fa icon-note" title="Note"></i>
 </td>
 <td class="content">
-<div class="paragraph">
-<p>Enonic CLI is also available on other package managers, such as <a href="https://developer.enonic.com/start#brew" target="_blank" rel="noopener">brew</a> for MacOS, <a href="https://developer.enonic.com/start#scoop" target="_blank" rel="noopener">scoop</a> for Windows and <a href="https://developer.enonic.com/start#curl" target="_blank" rel="noopener">Snapcraft</a> on Linux.</p>
-</div>
+You do not need to install Java or Gradle. The sandbox you create next bundles the Java runtime, and the CLI uses it when building your app.
 </td>
 </tr>
 </table>
-</div>
-</div>
-<div class="sect2">
-<h3 id="verification"><a class="link" href="#verification">Verification</a></h3>
-<div class="paragraph">
-<p>After running the installation command above, you can check if the Enonic CLI was properly installed by running</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="highlight"><code class="language-shell" data-lang="shell">enonic -v</code></pre>
-</div>
-</div>
-</div>
-<div class="sect2">
-<h3 id="commands"><a class="link" href="#commands">Commands</a></h3>
-<div class="paragraph">
-<p>Let&#8217;s first list some commands&#8230;&#8203; run the following command in your terminal:</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="highlight"><code class="language-shell" data-lang="shell">enonic</code></pre>
-</div>
-</div>
-<div class="paragraph">
-<p>It should output something that looks a bit like this:</p>
-</div>
-<div class="listingblock">
-<div class="title">Main help page</div>
-<div class="content">
-<pre class="highlight"><code class="language-shell" data-lang="shell">Enonic CLI 2.6.1
-Manage XP instances, home folders and projects
-USAGE:
-   enonic [global options] [command] [command options] [arguments...]
-
-COMMANDS:
-     create     Create a new Enonic project
-     snapshot   Create and restore snapshots
-     dump       Dump and load complete repositories
-     export     Export data from a given repository, branch and content path.
-     import     Import data from a named export.
-     app        Install, stop and start applications
-     repo       Tune and manage repositories
-     cms        CMS commands
-     system     System commands
-     auditlog   Manage audit log repository
-     latest     Check for latest version
-     upgrade    Upgrade to the latest version
-     uninstall  Uninstall Enonic CLI
-     vacuum     Removes old version history and segments from content storage
-     help, h    Shows a list of commands or help for one command
-
-CLOUD COMMANDS:
-     cloud  Manage Enonic cloud
-
-PROJECT COMMANDS:
-     sandbox  Manage Enonic instances
-     project  Manage Enonic projects
-
-GLOBAL OPTIONS:
-   --help, -h     show help
-   --version, -v  print the version</code></pre>
-</div>
-</div>
-<div class="paragraph">
-<p>If you want to know more about how to use one of the subcommands, you can use the <code>help</code> subcommand. For instance, if you want to know more about the <code>sandbox</code> subcommand, you can run:</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="highlight"><code class="language-shell" data-lang="shell">enonic sandbox help</code></pre>
-</div>
-</div>
-<div class="listingblock">
-<div class="title">Sandbox help page</div>
-<div class="content">
-<pre class="highlight"><code class="language-shell" data-lang="shell">NAME:
-   enonic sandbox - Manage Enonic instances
-
-USAGE:
-   enonic sandbox [global options] command [command options] [arguments...]
-
-VERSION:
-   2.6.1
-
-COMMANDS:
-   list, ls         List all sandboxes
-   start            Start the sandbox.
-   stop             Stop the sandbox started in detached mode.
-   create           Create a new sandbox.
-   delete, del, rm  Delete a sandbox
-   upgrade, up      Upgrades the distribution version.
-
-GLOBAL OPTIONS:
-   --help, -h  show help</code></pre>
-</div>
-</div>
-<div class="paragraph">
-<p>As can be seen, there are a lot of commands and their subcommands to help you. On this guide, we&#8217;ll only cover the necessary ones to be able to start developing on XP.</p>
-</div>
-<div class="admonitionblock note">
-<table>
-<tr>
-<td class="icon">
-<i class="fa icon-note" title="Note"></i>
-</td>
-<td class="content">
-Consider checking the <a href="https://developer.enonic.com/docs/enonic-cli" target="_blank" rel="noopener">CLI documentation</a> to further investigate its capabilities.
-</td>
-</tr>
-</table>
-</div>
 </div>
 </div>
 </div>
 <div class="sect1">
-<h2 id="git"><a class="link" href="#git">Git</a></h2>
+<h2 id="create_a_sandbox"><a class="link" href="#create_a_sandbox">Create a sandbox</a></h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>Git is a free and open source <em>distributed version control system</em>. Later on in this tutorial, we will create new Enonic development projects using <em>starters</em>. The Enonic CLI uses Git to download these starters and to prepare the files for your project locally.</p>
+<p>A <em>sandbox</em> is a local developer instance of Enonic XP, with its own data and configuration. You can have several, each on its own XP version.</p>
+</div>
+<div class="paragraph">
+<p>Create and start a sandbox called <code>tutorial</code> by running this command in your terminal:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-shell" data-lang="shell">enonic sandbox create tutorial -t essentials -f</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The <code>essentials</code> template installs a set of applications from Enonic Market, including Content Studio and Guillotine, which you will meet in the coming chapters. The <code>-f</code> flag accepts the default answer to every prompt, which selects the most recent release of Enonic XP, and starts the sandbox.</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+This tutorial is written for Enonic XP 8.1 and the versions of Content Studio and Guillotine that go with it. If the CLI offers you an older version, pick 8.1 or newer.
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>The sandbox prints a fair amount of output while it downloads XP, installs the applications and starts up. Once you see a line saying that Enonic XP has started, open <a href="http://localhost:8080">http://localhost:8080</a> in your browser. You should see the XP boot page, listing the sandbox&#8217;s installed applications.</p>
+</div>
+<div class="paragraph">
+<p>Click <b class="button">Log In as Guest</b> to open the XP admin as the instance&#8217;s super user. You should see something like this:</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="media/xp-dashboard.png" alt="The XP menu and dashboard" width="1727w">
+</div>
+</div>
+<div class="paragraph">
+<p>The <code>XP menu</code> lists the admin tools your user has access to. Dashboard, Applications and Users come with the platform, and applications such as Content Studio add their own. Once inside a tool, the XP menu stays available in the top right corner so you can switch between tools.</p>
 </div>
 <div class="admonitionblock tip">
 <table>
@@ -680,18 +550,45 @@ Consider checking the <a href="https://developer.enonic.com/docs/enonic-cli" tar
 <i class="fa icon-tip" title="Tip"></i>
 </td>
 <td class="content">
-Want to learn more about Git? Check out <a href="https://guides.github.com/introduction/git-handbook/" target="_blank" rel="noopener">this useful Git handbook by Github</a>.
+To stop the sandbox, press <kbd>ctrl-c</kbd> in its terminal. To start it again, run <code>enonic sandbox start tutorial</code>.
 </td>
 </tr>
 </table>
 </div>
-<div class="sect2">
-<h3 id="installation_2"><a class="link" href="#installation_2">Installation</a></h3>
-<div class="paragraph">
-<p>To install Git, follow the notes for your operating system below.</p>
 </div>
-<div class="sect3">
-<h4 id="macos"><a class="link" href="#macos">macOS</a></h4>
+</div>
+<div class="sect1">
+<h2 id="create_an_app"><a class="link" href="#create_an_app">Create an app</a></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Almost everything in Enonic is an application: Content Studio is an app, Guillotine is an app, and the content types you are about to define live in an app of your own.</p>
+</div>
+<div class="paragraph">
+<p>Creating a project from scratch can be daunting for any system you&#8217;re not familiar with. To make things easier, Enonic provides <a href="https://market.enonic.com/starters">starters</a>. We&#8217;ll use the "Vanilla" starter, which contains the bare minimum.</p>
+</div>
+<div class="paragraph">
+<p><strong>Open a new terminal window</strong>, leaving the sandbox running in the first one, and run this command:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-shell" data-lang="shell">enonic create com.example.tutorial101 -r starter-vanilla -s tutorial</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>This uses <code>starter-vanilla</code> as a template, gives the app the name <code>com.example.tutorial101</code>, places the code in the folder <code>tutorial101</code>, and links the app to the <code>tutorial</code> sandbox.</p>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+You don&#8217;t need to open the starter docs, so type <code>N</code> and press <kbd>Enter</kbd> if asked.
+</td>
+</tr>
+</table>
+</div>
 <div class="admonitionblock note">
 <table>
 <tr>
@@ -699,75 +596,117 @@ Want to learn more about Git? Check out <a href="https://guides.github.com/intro
 <i class="fa icon-note" title="Note"></i>
 </td>
 <td class="content">
-Apple maintains its own fork of Git. If you have XCode installed, you already have Git installed too.
+App names matter. XP does not run two apps with the same name in a single instance, and the name becomes part of the GraphQL type names you will see later in this tutorial. If you choose a different name, substitute it wherever <code>com.example.tutorial101</code> appears.
 </td>
 </tr>
 </table>
 </div>
 <div class="paragraph">
-<p>To install Git via Homebrew, run this command:</p>
+<p>The project folder contains a minimal XP application. The parts you will touch in this tutorial are:</p>
 </div>
 <div class="listingblock">
+<div class="title">Essential project structure</div>
 <div class="content">
-<pre class="highlight"><code class="language-shell" data-lang="shell">brew install git</code></pre>
+<pre class="highlight"><code class="language-files" data-lang="files">src/
+  main/
+    resources/
+      enonic.yaml <i class="conum" data-value="1"></i><b>(1)</b>
+      cms/ <i class="conum" data-value="2"></i><b>(2)</b></code></pre>
 </div>
 </div>
+<div class="colist arabic">
+<table>
+<tr>
+<td><i class="conum" data-value="1"></i><b>1</b></td>
+<td>The application descriptor, holding the app&#8217;s title, description and vendor information.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="2"></i><b>2</b></td>
+<td>Where the content schemas you will create go.</td>
+</tr>
+</table>
 </div>
-<div class="sect3">
-<h4 id="windows"><a class="link" href="#windows">Windows</a></h4>
-<div class="paragraph">
-<p>To install Git using Scoop, run the following command from Powershell:</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="highlight"><code class="language-shell" data-lang="shell">scoop install git</code></pre>
-</div>
-</div>
-</div>
-<div class="sect3">
-<h4 id="linux"><a class="link" href="#linux">Linux</a></h4>
-<div class="paragraph">
-<p>To install Git with Snapcraft, run the following command:</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="highlight"><code class="language-shell" data-lang="shell">sudo snap install git</code></pre>
-</div>
-</div>
-</div>
-</div>
-<div class="sect2">
-<h3 id="verification_2"><a class="link" href="#verification_2">Verification</a></h3>
-<div class="paragraph">
-<p>Once you have installed Git, you can verify that it&#8217;s working correctly by running the following command:</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="highlight"><code class="language-shell" data-lang="shell">git version</code></pre>
-</div>
-</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+The other files in the folder, such as <code>build.gradle</code> and <code>gradle.properties</code>, belong to the build. You will not need to edit them in this tutorial.
+</td>
+</tr>
+</table>
 </div>
 </div>
 </div>
 <div class="sect1">
-<h2 id="editor"><a class="link" href="#editor">Editor</a></h2>
+<h2 id="build_and_deploy"><a class="link" href="#build_and_deploy">Build and deploy</a></h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>Source-code editors (also known as <em>text editors</em> or just <em>editors</em> for short) are applications designed primarily for editing plain text and often specifically for working with code. They are therefore commonly used for programming.</p>
+<p>Change to the project folder and start the app in development mode:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-shell" data-lang="shell">cd tutorial101
+enonic dev</code></pre>
+</div>
 </div>
 <div class="paragraph">
-<p>If you do not yet have an editor you like, follow the steps below to get started with one.</p>
+<p>This builds the app, deploys it to the <code>tutorial</code> sandbox, and then keeps watching your project. Every time you save a file, the app is rebuilt and redeployed. Keep this command running in its own terminal while you follow the tutorial.</p>
+</div>
+<div class="paragraph">
+<p>The first build downloads a few things, so give it a moment. Look for lines like these to confirm it has completed:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-shell" data-lang="shell">Deploying 'tutorial101.jar' to '/Users/you/.enonic/sandboxes/tutorial/home/deploy'
+BUILD SUCCESSFUL
+Waiting for changes to input files...</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>To confirm the app is running, open <code>XP menu</code> &#8594; <code>Applications</code> in the XP admin. Your app is listed as "Vanilla Example":</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="media/applications-vanilla.png" alt="The applications list with a few applications installed, and the vanilla app selected." width="421w">
+</div>
 </div>
 <div class="sect2">
-<h3 id="download_visual_studio_code"><a class="link" href="#download_visual_studio_code">Download Visual Studio Code</a></h3>
+<h3 id="change_the_apps_title"><a class="link" href="#change_the_apps_title">Change the app&#8217;s title</a></h3>
 <div class="paragraph">
-<p><a href="https://code.visualstudio.com/" target="_blank" rel="noopener">Visual Studio Code</a> (often shortened to <em>VS Code</em> or simply <em>Code</em>) is one of the most popular source-code editors around at the moment. It&#8217;s free, open source, and available on all major platforms.</p>
+<p>Let&#8217;s make a first change to the app, to see the development loop in action. Open the application descriptor, <code>src/main/resources/enonic.yaml</code>, in your editor:</p>
+</div>
+<div class="listingblock">
+<div class="title">src/main/resources/enonic.yaml</div>
+<div class="content">
+<pre class="highlight"><code class="language-yaml" data-lang="yaml">kind: "Application"
+title: "Vanilla Example"
+description: "Edit app description at src/main/resources/enonic.yaml"
+vendorName: "Acme Inc"
+vendorUrl: "https://example.com"</code></pre>
+</div>
 </div>
 <div class="paragraph">
-<p>You can navigate to their <a href="https://code.visualstudio.com/Download" target="_blank" rel="noopener">download page</a> and install the version matching your operating system.</p>
+<p>Change the <code>title</code> to something more descriptive, and replace the stock <code>description</code> while you&#8217;re at it. Save the file, and watch the <code>enonic dev</code> terminal rebuild and redeploy. Revisit the Applications tool and you should see your new title.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="troubleshooting"><a class="link" href="#troubleshooting">Troubleshooting</a></h3>
+<div class="paragraph">
+<p>If the app doesn&#8217;t show up in the Applications tool, check the terminal running <code>enonic dev</code> for build errors first, then the sandbox terminal for errors from XP.</p>
 </div>
 <div class="paragraph">
-<p>If you opt to move forward with VS code as your editor, its worth checking some of the <a href="https://marketplace.visualstudio.com/" target="_blank" rel="noopener">powerful extensions</a> available on their marketplace.</p>
+<p>If the build works but nothing shows up, make sure the app is linked to the sandbox that is running. Run this command from the project folder and select <code>tutorial</code>:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-shell" data-lang="shell">enonic project sandbox</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>For anything else, the <a href="https://developer.enonic.com/docs/enonic-cli">CLI documentation</a> covers every command and option, and the <a href="https://developer.enonic.com/docs/platform">platform documentation</a> covers the sandbox&#8217;s configuration and ports.</p>
 </div>
 </div>
 </div>
@@ -776,17 +715,17 @@ Apple maintains its own fork of Git. If you have XCode installed, you already ha
 <h2 id="summary"><a class="link" href="#summary">Summary</a></h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>Congrats! You&#8217;ve installed the Enonic CLI, Git, and an editor. You&#8217;re now set up to start working with Enonic XP 🚀. Keep your new tools at hand; we&#8217;ll be using them heavily throughout this guide, so you&#8217;ll have lots of time to get to know them better.</p>
+<p>You now have the CLI, a running sandbox with Content Studio and Guillotine installed, and your own app deployed to it. That is all the infrastructure this tutorial needs.</p>
 </div>
 <div class="paragraph">
-<p>Next up, you will <a href="sandbox.ahtml">get familiar with sandboxes</a>.</p>
+<p>Next up, you&#8217;ll <a href="content-studio.ahtml">get familiar with Content Studio and create your first content type</a>.</p>
 </div>
 </div>
 </div>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2026-10-09 10:32:21 UTC
+Last updated 2026-10-09 12:40:35 UTC
 </div>
 </div>
 </body>

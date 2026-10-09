@@ -443,7 +443,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <div id="toctitle">Table of Contents</div>
 <ul class="sectlevel1">
 <li><a href="#general_config">General config</a></li>
-<li><a href="#the_ocurrences_config">The ocurrences config</a>
+<li><a href="#the_occurrences_setting">The occurrences setting</a>
 <ul class="sectlevel2">
 <li><a href="#optional">Optional</a></li>
 <li><a href="#required">Required</a></li>
@@ -479,10 +479,10 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <div id="preamble">
 <div class="sectionbody">
 <div class="paragraph">
-<p>The content types we&#8217;ve created previously in this guide have only used two basic input types: TextLine, TextArea, Date and AttachmentUploader.</p>
+<p>The content types we&#8217;ve created previously in this guide have only used a few basic input types: TextLine, TextArea and Date.</p>
 </div>
 <div class="paragraph">
-<p>However, Content Studio has a lot more up its sleeve than that! Input types dictate what kind of data the user can or must add any piece of content.</p>
+<p>However, Content Studio has a lot more up its sleeve than that! Input types dictate what kind of data the user can or must add to any piece of content.</p>
 </div>
 <div class="paragraph">
 <p>This chapter introduces more new types of inputs and explains how you can configure them to your liking.</p>
@@ -494,7 +494,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <i class="fa icon-note" title="Note"></i>
 </td>
 <td class="content">
-If you&#8217;re used to working with HTML, be aware that XP&#8217;s <code>input</code> elements are <em>not</em> the same as HTML <code>input</code> elements.
+If you&#8217;re used to working with HTML, be aware that XP&#8217;s inputs are <em>not</em> the same as HTML <code>input</code> elements.
 </td>
 </tr>
 </table>
@@ -506,7 +506,7 @@ If you&#8217;re used to working with HTML, be aware that XP&#8217;s <code>input<
 <i class="fa icon-note" title="Note"></i>
 </td>
 <td class="content">
-The tasks and examples in this chapter are based on work done in previous chapters (starting with <a href="sandbox.ahtml">the sandboxes chapter</a>). If you want to follow along with the examples, make sure you&#8217;re all caught up.
+The tasks and examples in this chapter are based on work done in previous chapters (starting with <a href="setup.ahtml">the setup chapter</a>). If you want to follow along with the examples, make sure you&#8217;re all caught up.
 </td>
 </tr>
 </table>
@@ -517,10 +517,18 @@ The tasks and examples in this chapter are based on work done in previous chapte
 <h2 id="general_config"><a class="link" href="#general_config">General config</a></h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>All input types share a number of options that affect how they act. These options are:</p>
+<p>All input types share a number of settings that affect how they act. These settings are:</p>
 </div>
 <div class="dlist">
 <dl>
+<dt class="hdlist1"><code>type</code> (required)</dt>
+<dd>
+<p>Which kind of input this is, such as <code>TextLine</code> or <code>ImageSelector</code>.</p>
+</dd>
+<dt class="hdlist1"><code>name</code> (required)</dt>
+<dd>
+<p>The property name the value is stored under.</p>
+</dd>
 <dt class="hdlist1"><code>label</code> (required)</dt>
 <dd>
 <p>What the input should be labeled as in the content form.</p>
@@ -533,18 +541,14 @@ The tasks and examples in this chapter are based on work done in previous chapte
 <dd>
 <p>Gives a default value to the input.</p>
 </dd>
-<dt class="hdlist1"><code>help-text</code> (optional)</dt>
+<dt class="hdlist1"><code>helpText</code> (optional)</dt>
 <dd>
 <p>Lets you specify a description of the input field to show to the user.</p>
 </dd>
-<dt class="hdlist1"><code>config</code> (optional)</dt>
-<dd>
-<p>Input type-specific configuration.</p>
-<div class="paragraph">
-<p>The <code>config</code> element is for input-specific configuration. Because the input types are so different to each other, they all support different options. The <code>config</code> element allows us to use regex validation for TextLine inputs, configure formatting options for HtmlAreas, and to dictate what numeric values a Long or a Double input accepts.</p>
-</div>
-</dd>
 </dl>
+</div>
+<div class="paragraph">
+<p>Because the input types are so different from each other, they also support different type-specific settings. These are placed directly on the input, next to the shared ones. That is how we use regex validation for TextLine inputs, configure formatting options for HtmlAreas, and dictate what numeric values a Long or a Double input accepts.</p>
 </div>
 <div class="admonitionblock note">
 <table>
@@ -553,34 +557,39 @@ The tasks and examples in this chapter are based on work done in previous chapte
 <i class="fa icon-note" title="Note"></i>
 </td>
 <td class="content">
-All of the shared configuration options (<code>label</code>, <code>occurrences</code>, etc.), and the list of available input types are described in the <a href="https://developer.enonic.com/docs/xp/stable/cms/schemas/input-types" target="_blank" rel="noopener">input types documentation</a>.
+All of the shared settings (<code>label</code>, <code>occurrences</code>, etc.), and the list of available input types are described in the <a href="https://developer.enonic.com/docs/cms/stable/schemas/form-items">form items documentation</a>.
 </td>
 </tr>
 </table>
 </div>
 <div class="paragraph">
-<p>To show an example of the configuration options work, let&#8217;s examine some TextLine inputs with different configurations.</p>
+<p>To show how the settings work, let&#8217;s examine some TextLine inputs with different configurations.</p>
 </div>
 <div class="listingblock">
-<div class="title">TextLine inputs using all the shared configuration options</div>
+<div class="title">TextLine inputs using all the shared settings</div>
 <div class="content">
-<pre class="highlight"><code class="language-xml" data-lang="xml">&lt;input type="TextLine" name="textlineRequired"&gt;
-  &lt;label&gt;Required input with default&lt;/label&gt; <i class="conum" data-value="1"></i><b>(1)</b>
-  &lt;help-text&gt;This text should provide additional information to the user.&lt;/help-text&gt; <i class="conum" data-value="2"></i><b>(2)</b>
-  &lt;occurrences minimum="1" maximum="1" /&gt; <i class="conum" data-value="3"></i><b>(3)</b>
-  &lt;default&gt;This is a required input with a default value.&lt;/default&gt; <i class="conum" data-value="4"></i><b>(4)</b>
-&lt;/input&gt;
-
-&lt;input type="TextLine" name="textlineOptional"&gt;
-  &lt;label&gt;Optional input&lt;/label&gt;
-  &lt;occurrences minimum="0" maximum="1" /&gt; <i class="conum" data-value="5"></i><b>(5)</b>
-&lt;/input&gt;
-
-&lt;input type="TextLine" name="textlineList"&gt;
-  &lt;label&gt;Input list&lt;/label&gt;
-  &lt;help-text&gt;This input can have as many values as you want.&lt;/help-text&gt;
-  &lt;occurrences minimum="0" maximum="0" /&gt; <i class="conum" data-value="6"></i><b>(6)</b>
-&lt;/input&gt;</code></pre>
+<pre class="highlight"><code class="language-yaml" data-lang="yaml">form:
+  - type: "TextLine"
+    name: "textlineRequired"
+    label: "Required input with default" <i class="conum" data-value="1"></i><b>(1)</b>
+    helpText: "This text should provide additional information to the user." <i class="conum" data-value="2"></i><b>(2)</b>
+    occurrences: <i class="conum" data-value="3"></i><b>(3)</b>
+      min: 1
+      max: 1
+    default: "This is a required input with a default value." <i class="conum" data-value="4"></i><b>(4)</b>
+  - type: "TextLine"
+    name: "textlineOptional"
+    label: "Optional input"
+    occurrences: <i class="conum" data-value="5"></i><b>(5)</b>
+      min: 0
+      max: 1
+  - type: "TextLine"
+    name: "textlineList"
+    label: "Input list"
+    helpText: "This input can have as many values as you want."
+    occurrences: <i class="conum" data-value="6"></i><b>(6)</b>
+      min: 0
+      max: 0</code></pre>
 </div>
 </div>
 <div class="colist arabic">
@@ -591,11 +600,11 @@ All of the shared configuration options (<code>label</code>, <code>occurrences</
 </tr>
 <tr>
 <td><i class="conum" data-value="2"></i><b>2</b></td>
-<td>The help-text can provide extra context and information to the user. It&#8217;s hidden by default, but can be shown by activating the help text button.</td>
+<td>The help text can provide extra context and information to the user. It&#8217;s hidden by default, but can be shown by activating the help text button.</td>
 </tr>
 <tr>
 <td><i class="conum" data-value="3"></i><b>3</b></td>
-<td>This instance of the <code>occurrences</code> element specifies that this is a <em>required</em> input. It must have <em>at least</em> one and <em>at most</em> one value.</td>
+<td>This instance of <code>occurrences</code> specifies that this is a <em>required</em> input. It must have <em>at least</em> one and <em>at most</em> one value.</td>
 </tr>
 <tr>
 <td><i class="conum" data-value="4"></i><b>4</b></td>
@@ -603,11 +612,11 @@ All of the shared configuration options (<code>label</code>, <code>occurrences</
 </tr>
 <tr>
 <td><i class="conum" data-value="5"></i><b>5</b></td>
-<td>When you specify <code>minimum="0"</code> and <code>maximum="1"</code> on an <code>occurrences</code> element, that makes the input optional. This is the default.</td>
+<td>When you specify <code>min: 0</code> and <code>max: 1</code>, that makes the input optional. This is the default.</td>
 </tr>
 <tr>
 <td><i class="conum" data-value="6"></i><b>6</b></td>
-<td>When you set <code>maximum="0"</code> on an <code>occurrences</code> element, the user can add as many values as they want to.</td>
+<td>When you set <code>max: 0</code>, the user can add as many values as they want to.</td>
 </tr>
 </table>
 </div>
@@ -623,26 +632,26 @@ All of the shared configuration options (<code>label</code>, <code>occurrences</
 <div class="paragraph">
 <p>Note that:
 - The required input field has a red asterisk to signify that it must be filled out.
-- The required input field already has a value provided via the <code>default</code> configuration option.
+- The required input field already has a value provided via the <code>default</code> setting.
 - The help texts for the required input field and for the input list are both visible
 - The input list has controls to add more inputs and remove existing inputs</p>
 </div>
 </div>
 </div>
 <div class="sect1">
-<h2 id="the_ocurrences_config"><a class="link" href="#the_ocurrences_config">The ocurrences config</a></h2>
+<h2 id="the_occurrences_setting"><a class="link" href="#the_occurrences_setting">The occurrences setting</a></h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>The occurrences configuration option decides how XP treats the input value. Use occurrences to indicate whether an input is expected to be a list or a single element and whether the input is required or not.</p>
+<p>The occurrences setting decides how XP treats the input value. Use occurrences to indicate whether an input is expected to be a list or a single element and whether the input is required or not.</p>
 </div>
 <div class="paragraph">
-<p>The occurrences element has two required attributes, <code>minimum</code> and <code>maximum</code>. Use these to control the number of instances the user can create.</p>
+<p>The setting has two required keys, <code>min</code> and <code>max</code>. Use these to control the number of instances the user can create.</p>
 </div>
 <div class="paragraph">
-<p>The <code>minimum</code> attribute specifies that the user must fill out <em>at least</em> this many instances of the field. Usually it is set to <code>0</code> or <code>1</code>. A zero indicates that the field is optional and that the user does not need to fill it out. A one means the field is required.</p>
+<p><code>min</code> specifies that the user must fill out <em>at least</em> this many instances of the field. Usually it is set to <code>0</code> or <code>1</code>. A zero indicates that the field is optional and that the user does not need to fill it out. A one means the field is required.</p>
 </div>
 <div class="paragraph">
-<p>The <code>maximum</code> attribute tells XP how many instances the input field can have <em>at most</em>. <code>0</code> is a special value here, indicating that the user can have <em>as many as they want</em> (in other words: there is no maximum).</p>
+<p><code>max</code> tells XP how many instances the input field can have <em>at most</em>. <code>0</code> is a special value here, indicating that the user can have <em>as many as they want</em> (in other words: there is no maximum).</p>
 </div>
 <div class="paragraph">
 <p>A couple of common configuration tricks:</p>
@@ -650,7 +659,7 @@ All of the shared configuration options (<code>label</code>, <code>occurrences</
 <div class="sect2">
 <h3 id="optional"><a class="link" href="#optional">Optional</a></h3>
 <div class="paragraph">
-<p>If you don&#8217;t add an <code>occurrences</code> element, XP uses the default, which is <code>minimum="0"</code>, <code>maximum="1"</code>.</p>
+<p>If you don&#8217;t add an <code>occurrences</code> setting, XP uses the default, which is <code>min: 0</code>, <code>max: 1</code>.</p>
 </div>
 <div class="paragraph">
 <p>That means that the input is <strong>optional</strong> and can have at most <strong>one entry</strong>.</p>
@@ -659,19 +668,19 @@ All of the shared configuration options (<code>label</code>, <code>occurrences</
 <div class="sect2">
 <h3 id="required"><a class="link" href="#required">Required</a></h3>
 <div class="paragraph">
-<p>To make the input required, set both <code>minimum</code> and <code>maximum</code> to <code>1</code>.</p>
+<p>To make the input required, set both <code>min</code> and <code>max</code> to <code>1</code>.</p>
 </div>
 <div class="paragraph">
 <p>That means that the input is <strong>required</strong>, and can have at most <strong>one entry</strong>.</p>
 </div>
 <div class="paragraph">
-<p>By keeping the minimum at <code>1</code> and changing the maximum to a number <code>n</code> above <code>1</code>, you&#8217;ll be able to keep the field <strong>required</strong>, but make it able to have at most <strong>n entries</strong>.</p>
+<p>By keeping <code>min</code> at <code>1</code> and changing <code>max</code> to a number <code>n</code> above <code>1</code>, you&#8217;ll be able to keep the field <strong>required</strong>, but make it able to have at most <strong>n entries</strong>.</p>
 </div>
 </div>
 <div class="sect2">
 <h3 id="unlimited"><a class="link" href="#unlimited">Unlimited</a></h3>
 <div class="paragraph">
-<p>By seeting <code>maximum</code> to <code>0</code>, you allow the input to have an <strong>unilimited amount of entries</strong>.</p>
+<p>By setting <code>max</code> to <code>0</code>, you allow the input to have an <strong>unlimited amount of entries</strong>.</p>
 </div>
 <div class="admonitionblock tip">
 <table>
@@ -680,7 +689,7 @@ All of the shared configuration options (<code>label</code>, <code>occurrences</
 <i class="fa icon-tip" title="Tip"></i>
 </td>
 <td class="content">
-If <code>maximum</code> is greater than <code>0</code>, make sure that <code>minimum</code> is less than or equal to <code>maximum</code>. Otherwise, the input will never be considered valid according to XP.
+If <code>max</code> is greater than <code>0</code>, make sure that <code>min</code> is less than or equal to <code>max</code>. Otherwise, the input will never be considered valid according to XP.
 </td>
 </tr>
 </table>
@@ -692,11 +701,11 @@ If <code>maximum</code> is greater than <code>0</code>, make sure that <code>min
 <h2 id="common_inputs"><a class="link" href="#common_inputs">Common inputs</a></h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>Apart from the input types we&#8217;ve already gotten familiar with, XP also has input types created for other kinds of data. You can always find the full list over <a href="https://developer.enonic.com/docs/xp/stable/cms/schemas/input-types" target="_blank" rel="noopener">at the input types reference docs</a>, but some useful and common ones are:</p>
+<p>Apart from the input types we&#8217;ve already gotten familiar with, XP also has input types created for other kinds of data. You can always find the full list over <a href="https://developer.enonic.com/docs/cms/stable/schemas/form-items">at the form items reference docs</a>, but some useful and common ones are:</p>
 </div>
 <div class="dlist">
 <dl>
-<dt class="hdlist1"><a href="https://developer.enonic.com/docs/xp/stable/cms/schemas/input-types/combobox">ComboBox</a></dt>
+<dt class="hdlist1"><a href="https://developer.enonic.com/docs/cms/stable/schemas/form-items/combobox">ComboBox</a></dt>
 <dd>
 <p>A dropdown menu containing predefined options for the user to select from. Allows selection of one or more options.</p>
 <div class="imageblock text-center">
@@ -706,9 +715,9 @@ If <code>maximum</code> is greater than <code>0</code>, make sure that <code>min
 <div class="title">Figure 2. The ComboBox input type</div>
 </div>
 </dd>
-<dt class="hdlist1"><a href="https://developer.enonic.com/docs/xp/stable/cms/schemas/input-types/date">Date</a> and <a href="https://developer.enonic.com/docs/xp/stable/cms/schemas/input-types/datetime">DateTime</a></dt>
+<dt class="hdlist1"><a href="https://developer.enonic.com/docs/cms/stable/schemas/form-items/date">Date</a>, <a href="https://developer.enonic.com/docs/cms/stable/schemas/form-items/datetime">DateTime</a> and <a href="https://developer.enonic.com/docs/cms/stable/schemas/form-items/instant">Instant</a></dt>
 <dd>
-<p>Provides an interactive date picker (with a time component in DateTime&#8217;s case) to save date and times.</p>
+<p>Provide an interactive date picker (with a time component for DateTime and Instant) to save dates and times. DateTime stores a local date and time, while Instant stores an exact point in time with its time zone.</p>
 <div class="imageblock text-center">
 <div class="content">
 <img src="media/input-type-date-time.webp" alt="A calendar showing year and month with a time indicator to the side." width="750">
@@ -716,7 +725,7 @@ If <code>maximum</code> is greater than <code>0</code>, make sure that <code>min
 <div class="title">Figure 3. The DateTime input type</div>
 </div>
 </dd>
-<dt class="hdlist1"><a href="https://developer.enonic.com/docs/xp/stable/cms/schemas/input-types/geopoint">GeoPoint</a></dt>
+<dt class="hdlist1"><a href="https://developer.enonic.com/docs/cms/stable/schemas/form-items/geopoint">GeoPoint</a></dt>
 <dd>
 <p>Stores GPS coordinates.</p>
 <div class="imageblock text-center">
@@ -726,7 +735,7 @@ If <code>maximum</code> is greater than <code>0</code>, make sure that <code>min
 <div class="title">Figure 4. The GeoPoint input type</div>
 </div>
 </dd>
-<dt class="hdlist1"><a href="https://developer.enonic.com/docs/xp/stable/cms/schemas/input-types/htmlarea">HtmlArea</a></dt>
+<dt class="hdlist1"><a href="https://developer.enonic.com/docs/cms/stable/schemas/form-items/htmlarea">HtmlArea</a></dt>
 <dd>
 <p>Provides a rich text, multi-line input. We&#8217;ll discuss this in detail in <a href="rich-text.ahtml">the rich-text chapter</a>.</p>
 <div class="imageblock text-center">
@@ -753,24 +762,24 @@ If <code>maximum</code> is greater than <code>0</code>, make sure that <code>min
 <div class="title">Figure 6. The ImageSelector input type</div>
 </div>
 <div class="paragraph">
-<p>Images are a key part of many web experiences: they add color, break up the content, and gives the reader something to rest their eyes on.</p>
+<p>Images are a key part of many web experiences: they add color, break up the content, and give the reader something to rest their eyes on.</p>
 </div>
 <div class="paragraph">
 <p>XP&#8217;s image selector allows you to select an image for a piece of content and also to upload new images.</p>
 </div>
 <div class="listingblock">
-<div class="title">An minimal ImageSelector configuration</div>
+<div class="title">A minimal ImageSelector configuration</div>
 <div class="content">
-<pre class="highlight"><code class="language-xml" data-lang="xml">&lt;input name="myimage" type="ImageSelector"&gt;
-  &lt;label&gt;My Image&lt;/label&gt;
-&lt;/input&gt;</code></pre>
+<pre class="highlight"><code class="language-yaml" data-lang="yaml">- type: "ImageSelector"
+  name: "myimage"
+  label: "My Image"</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>Read more about the <a href="https://developer.enonic.com/docs/xp/stable/cms/schemas/input-types/imageselector" target="_blank" rel="noopener">configuration of image selectors</a> in the reference docs.</p>
+<p>Read more about the <a href="https://developer.enonic.com/docs/cms/stable/schemas/form-items/imageselector">configuration of image selectors</a> in the reference docs.</p>
 </div>
 <div class="paragraph">
-<p>After you&#8217;ve added an image (or several), you can highlight it and click the edit button. This will take you to the image editing form. This is the same form as we saw in <a href="files.ahtml#_editing_images">the previous chapter</a>.</p>
+<p>After you&#8217;ve added an image (or several), you can highlight it and click the edit button. This will take you to the image editing form. This is the same form as we saw in <a href="files.ahtml#_image_form">the previous chapter</a>.</p>
 </div>
 <div class="imageblock">
 <div class="content">
@@ -793,23 +802,22 @@ If <code>maximum</code> is greater than <code>0</code>, make sure that <code>min
 <p>The image selector we just saw is actually a specialized form of the more complex ContentSelector input type.</p>
 </div>
 <div class="paragraph">
-<p>The ContentSelector input type allows you to reference other content. Let&#8217;s say you have two content types: one of type person and one of type food. If you want to be able to specify which dishes the person likes, you could use a content type to create a reference from the person to their favored dish.</p>
+<p>The ContentSelector input type allows you to reference other content. Let&#8217;s say you have two content types: one of type person and one of type food. If you want to be able to specify which dishes the person likes, you could use a content selector to create a reference from the person to their favored dish.</p>
 </div>
 <div class="paragraph">
-<p>Because referencing other content types comes with a lot of variability, the ContentSelector type has configuration options to support this. You can choose to allow only certain content types or only content that&#8217;s available at a certain path. You can also change whether the selector should show content in a tree-style hierarchy or as a flat list of content.</p>
+<p>Because referencing other content types comes with a lot of variability, the ContentSelector type has settings to support this. You can choose to allow only certain content types or only content that&#8217;s available at a certain path. You can also change whether the selector should show content in a tree-style hierarchy or as a flat list of content.</p>
 </div>
 <div class="paragraph">
-<p><a href="https://developer.enonic.com/docs/xp/stable/cms/schemas/input-types/contentselector" target="_blank" rel="noopener">The full list of ContentSelector configuration options</a> is available in the reference docs, including a number of examples to explain content inclusion and exclusion. However, a simple configuration could look like this:</p>
+<p><a href="https://developer.enonic.com/docs/cms/stable/schemas/form-items/contentselector">The full list of ContentSelector settings</a> is available in the reference docs, including a number of examples to explain content inclusion and exclusion. However, a simple configuration could look like this:</p>
 </div>
 <div class="listingblock">
 <div class="title">A basic ContentSelector configuration that only allows one specific content type</div>
 <div class="content">
-<pre class="highlight"><code class="language-xml" data-lang="xml">&lt;input name="mycontentselector" type="ContentSelector"&gt;
-  &lt;label&gt;My ContentSelector&lt;/label&gt;
-  &lt;config&gt;
-    &lt;allowContentType&gt;citation&lt;/allowContentType&gt;
-  &lt;/config&gt;
-&lt;/input&gt;</code></pre>
+<pre class="highlight"><code class="language-yaml" data-lang="yaml">- type: "ContentSelector"
+  name: "mycontentselector"
+  label: "My ContentSelector"
+  allowContentType:
+    - "citation"</code></pre>
 </div>
 </div>
 </div>
@@ -818,7 +826,7 @@ If <code>maximum</code> is greater than <code>0</code>, make sure that <code>min
 <h2 id="attachmentuploader"><a class="link" href="#attachmentuploader">AttachmentUploader</a></h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>XP also has a rather special input type named <a href="https://developer.enonic.com/docs/xp/stable/cms/schemas/input-types/attachmentuploader" target="_blank" rel="noopener">AttachmentUploader</a>. Unlike <a href="files.ahtml">media</a> content, which creates an independent content item for each file you upload, attachmentUploader lets you store one (or more) files within the specific content content item. Under the hood, it uses the same <code>attachment</code> property structure as media when persisting the file.</p>
+<p>XP also has a rather special input type named <a href="https://developer.enonic.com/docs/cms/stable/schemas/form-items/attachmentuploader">AttachmentUploader</a>. Unlike <a href="files.ahtml">media</a> content, which creates an independent content item for each file you upload, AttachmentUploader lets you store one (or more) files within the specific content item. Under the hood, it uses the same <code>attachment</code> property structure as media when persisting the file.</p>
 </div>
 <div class="imageblock">
 <div class="content">
@@ -841,35 +849,49 @@ Imagine creating a content type for e-mail, you would probably use an Attachment
 <div class="listingblock">
 <div class="title">Here is what an AttachmentUploader definition looks like</div>
 <div class="content">
-<pre class="highlight"><code class="language-xml" data-lang="xml">&lt;input type="AttachmentUploader" name="attachments"&gt;
-  &lt;label&gt;Attachments&lt;/label&gt;
-  &lt;occurrences minimum="0" maximum="0"/&gt; <i class="conum" data-value="1"></i><b>(1)</b>
-&lt;/input&gt;</code></pre>
+<pre class="highlight"><code class="language-yaml" data-lang="yaml">- type: "AttachmentUploader"
+  name: "attachments"
+  label: "Attachments"
+  occurrences: <i class="conum" data-value="1"></i><b>(1)</b>
+    min: 0
+    max: 0</code></pre>
 </div>
 </div>
 <div class="colist arabic">
 <table>
 <tr>
 <td><i class="conum" data-value="1"></i><b>1</b></td>
-<td><em>minimum="0"</em> shows that this is not a required field, while <em>maxiumum="0"</em> shows that we can upload as many attachments as we want.</td>
+<td><code>min: 0</code> shows that this is not a required field, while <code>max: 0</code> shows that we can upload as many attachments as we want.</td>
 </tr>
 </table>
 </div>
 <div class="sect2">
 <h3 id="attachmenturl"><a class="link" href="#attachmenturl">attachmentUrl</a></h3>
 <div class="paragraph">
-<p>Remember how we used <code>mediaUrl</code> to get a link to the media&#8217;s attachment. MediaUrl is only available for "media" content, for other content types using attachmentUrl we have to use a different approach: <code>attachmentUrl</code> to the rescue:</p>
+<p>Remember how we used <code>mediaUrl</code> to get a link to a media item&#8217;s file. <code>mediaUrl</code> is only available for media content. For attachments stored on any content item, use the <code>attachments</code> field and its <code>attachmentUrl</code> instead:</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-GraphQL" data-lang="GraphQL">query {
+<pre class="highlight"><code class="language-GraphQL" data-lang="GraphQL">{
   guillotine {
-    get(key: "/developer/media/ready-set-code.png") {
+    queryDsl(
+      query: {
+        term: {
+          field: "type",
+          value: {
+            string: "media:image"
+          }
+        }
+      }
+    ) {
       displayName
       type
-      attachments{
+      attachments {
         name
-        attachmentUrl
+        attachmentUrl {
+          path
+          queryString
+        }
       }
     }
   }
@@ -896,20 +918,28 @@ If you have multiple attachments in your content, they will all be listed.
 <pre class="highlight"><code class="language-json" data-lang="json">{
   "data": {
     "guillotine": {
-      "get": {
-        "displayName": "ready-set-code",
-        "type": "media:image",
-        "attachments": [
-          {
-            "name": "ready-set-code.png",
-            "attachmentUrl": "/site/preview/dev-portal/draft/_/attachment/inline/f7efd6e4-9eed-45d2-83b6-d088a7bdc685:8652e625afe7bbda595a190a3b8624e322dc9f1a/ready-set-code.png"
-          }
-        ]
-      }
+      "queryDsl": [
+        {
+          "displayName": "lion",
+          "type": "media:image",
+          "attachments": [
+            {
+              "name": "lion.jpg",
+              "attachmentUrl": {
+                "path": "/media:attachment/my-first-project:draft/f7efd6e4-9eed-45d2-83b6-d088a7bdc685:8652e625afe7bbda595a190a3b8624e322dc9f1a/lion.jpg",
+                "queryString": ""
+              }
+            }
+          ]
+        }
+      ]
     }
   }
 }</code></pre>
 </div>
+</div>
+<div class="paragraph">
+<p>As with <code>mediaUrl</code> in the previous chapter, put your API base URL in front of <code>path</code> to get a working link - for your sandbox that is <code><a href="http://localhost:8080/api" class="bare">http://localhost:8080/api</a></code>.</p>
 </div>
 <div class="admonitionblock tip">
 <table>
@@ -918,7 +948,7 @@ If you have multiple attachments in your content, they will all be listed.
 <i class="fa icon-tip" title="Tip"></i>
 </td>
 <td class="content">
-Under the hood, the <em>attachment</em> field argument <em>attachmentUrl</em> uses Enonic&#8217;s javascript lib portal <a href="https://developer.enonic.com/docs/xp/stable/api/lib-portal#attachmenturl">attachmentUrl</a> function, so you can follow the link to better understand the arguments that you pass to this field when creating queries that uses it.
+Under the hood, <code>attachmentUrl</code> uses the same logic as Enonic&#8217;s portal library function <a href="https://developer.enonic.com/docs/code/stable/libraries/lib-portal#attachmenturlparts">attachmentUrlParts</a>, so you can follow the link to better understand the arguments that you pass to this field when creating queries that use it.
 </td>
 </tr>
 </table>
@@ -961,7 +991,7 @@ If you&#8217;re wondering how to achieve some of the goals, try consulting the d
 <div class="ulist">
 <ul>
 <li>
-<p>Make the display name use "species" as its label. <em>Hint: check out <a href="https://developer.enonic.com/docs/xp/stable/cms/content-types#form_definition" target="_blank" rel="noopener">the content type form definition</a> and look for something that allows you to do this.</em></p>
+<p>Make the display name use "Species" as its label. <em>Hint: check out <a href="https://developer.enonic.com/docs/cms/stable/content/content-types#display-name">the display name section of the content type documentation</a> and look for something that allows you to do this.</em></p>
 </li>
 <li>
 <p>An animal can also have alternative names for its species (for instance, the reindeer is also known as <em>caribou</em>). Allow the user to add as many alternative names as they want.</p>
@@ -980,7 +1010,7 @@ If you&#8217;re wondering how to achieve some of the goals, try consulting the d
 <div class="ulist">
 <ul>
 <li>
-<p>Add a ContentSelector input that allows only content of the "Animal" type and that must be nested under the site&#8217;s "animals" folder. Call it <code>favoriteAnimal</code>.</p>
+<p>Add a ContentSelector input that allows only content of the "Animal" type and that must be nested under the "animals" folder. Call it <code>favoriteAnimal</code>.</p>
 </li>
 </ul>
 </div>
@@ -990,7 +1020,7 @@ If you&#8217;re wondering how to achieve some of the goals, try consulting the d
 <div class="ulist">
 <ul>
 <li>
-<p>Create a GraphQL query that&#8217;ll fetch all artists and list what their favorite animals are, as well their animals' descriptions.</p>
+<p>Create a GraphQL query that&#8217;ll fetch all artists and list what their favorite animals are, as well their animals' other names.</p>
 </li>
 </ul>
 </div>
@@ -1007,7 +1037,7 @@ If you&#8217;re wondering how to achieve some of the goals, try consulting the d
 <i class="fa icon-tip" title="Tip"></i>
 </td>
 <td class="content">
-Don&#8217;t worry if something did not work, we&#8217;ll show the solutions on the next section.
+Don&#8217;t worry if something did not work, we&#8217;ll show the solutions in the next section.
 </td>
 </tr>
 </table>
@@ -1023,100 +1053,86 @@ Don&#8217;t worry if something did not work, we&#8217;ll show the solutions on t
 <div class="olist arabic">
 <ol class="arabic">
 <li>
-<p>Create the animal content type. In <code>src/main/resources/site/content-types/animal/animal.xml</code>, place the following content:</p>
+<p>Create the animal content type. In <code>src/main/resources/cms/content-types/animal/animal.yaml</code>, place the following content:</p>
 <div class="listingblock">
 <div class="title">The animal content type</div>
 <div class="content">
-<pre class="highlight"><code class="language-xml" data-lang="xml">&lt;content-type&gt;
-  &lt;display-name&gt;Animal&lt;/display-name&gt;
-  &lt;description&gt;An animal that lives on planet Earth&lt;/description&gt;
-  &lt;display-name-label&gt;Species&lt;/display-name-label&gt; <i class="conum" data-value="1"></i><b>(1)</b>
-  &lt;super-type&gt;base:structured&lt;/super-type&gt;
-  &lt;form&gt;
-
-    &lt;input type="TextLine" name="otherNames"&gt;
-      &lt;label&gt;Other names&lt;/label&gt;
-      &lt;help-text&gt;Other names for this species.&lt;/help-text&gt;
-      &lt;occurrences minimum="0" maximum="0" /&gt;
-    &lt;/input&gt;
-
-    &lt;input name="images" type="ImageSelector"&gt;
-      &lt;label&gt;Images&lt;/label&gt;
-      &lt;help-text&gt;Images of the animal&lt;/help-text&gt;
-      &lt;occurrences minimum="0" maximum="3" /&gt;
-    &lt;/input&gt;
-
-  &lt;/form&gt;
-&lt;/content-type&gt;</code></pre>
+<pre class="highlight"><code class="language-yaml" data-lang="yaml">kind: "ContentType"
+title: "Animal"
+description: "An animal that lives on planet Earth"
+displayNamePlaceholder: "Species" <i class="conum" data-value="1"></i><b>(1)</b>
+superType: "base:structured"
+form:
+  - type: "TextLine"
+    name: "otherNames"
+    label: "Other names"
+    helpText: "Other names for this species."
+    occurrences:
+      min: 0
+      max: 0
+  - type: "ImageSelector"
+    name: "images"
+    label: "Images"
+    helpText: "Images of the animal"
+    occurrences:
+      min: 0
+      max: 3</code></pre>
 </div>
 </div>
 <div class="colist arabic">
 <table>
 <tr>
 <td><i class="conum" data-value="1"></i><b>1</b></td>
-<td>This field lets you customize what Content Studio calls the "display name" field and what it puts in the placeholder text.</td>
+<td>This setting lets you customize what Content Studio calls the built-in "display name" field.</td>
 </tr>
 </table>
 </div>
 </li>
 <li>
 <p>Next, update the <code>Artist</code> content type.</p>
+</li>
+</ol>
+</div>
 <div class="listingblock">
-<div class="title">An updated artist</div>
 <div class="content">
-<pre class="highlight"><code class="language-xml" data-lang="xml">&lt;content-type&gt;
-  &lt;display-name&gt;Artist&lt;/display-name&gt;
-  &lt;description&gt;Information about an artist&lt;/description&gt;
-  &lt;super-type&gt;base:structured&lt;/super-type&gt;
-  &lt;form&gt;
-
-    &lt;input name="name" type="TextLine"&gt;
-      &lt;label&gt;Name&lt;/label&gt;
-      &lt;help-text&gt;
-        The artist's name (if different from their professional moniker).
-      &lt;/help-text&gt;
-    &lt;/input&gt;
-
-    &lt;input type="TextArea" name="about"&gt;
-      &lt;label&gt;About the artist&lt;/label&gt;
-    &lt;/input&gt;
-
-    &lt;input name="favoriteAnimal" type="ContentSelector"&gt; <i class="conum" data-value="1"></i><b>(1)</b>
-      &lt;label&gt;Favorite animal&lt;/label&gt;
-      &lt;config&gt;
-        &lt;allowContentType&gt;animal&lt;/allowContentType&gt;
-        &lt;allowPath&gt;${site}/animals/&lt;/allowPath&gt;
-      &lt;/config&gt;
-    &lt;/input&gt;
-
-  &lt;/form&gt;
-&lt;/content-type&gt;</code></pre>
+<pre>kind: "ContentType"
+title: "{content-type-1-capitalized}"
+description: "Information about an {content-type-1}"
+superType: "base:structured"
+form:
+  - type: "TextLine"
+    name: "name"
+    label: "Name"
+    helpText: "The artist's name (if different from their professional moniker)."
+  - type: "TextArea"
+    name: "about"
+    label: "About the {content-type-1}"
+  - type: "Date"
+    name: "birthday"
+    label: "Birthday"
+  - type: "ContentSelector" <i class="conum" data-value="1"></i><b>(1)</b>
+    name: "favorite{content-type-2-capitalized}"
+    label: "Favorite {content-type-2}"
+    allowContentType:
+      - "{content-type-2}"
+    allowPath:
+      - "/{content-type-2}s/*"</pre>
 </div>
 </div>
-<div class="colist arabic">
-<table>
-<tr>
-<td><i class="conum" data-value="1"></i><b>1</b></td>
-<td>This ContentSelector uses the <code>config</code> section to narrow the possible types of content to only be <code>Animal</code></td>
-</tr>
-</table>
+<div class="paragraph">
+<p>+
+&lt;1&gt; This ContentSelector uses <code>allowContentType</code> and <code>allowPath</code> to narrow the possible content to only Animals in the animals folder</p>
 </div>
-</li>
-<li>
-<p>Create some animals. Either pick your favorites, or, if you&#8217;re not feeling creative, add these (content from Wikipedia), :</p>
-<div class="ulist">
-<ul>
-<li>
-<p><a href="https://en.wikipedia.org/wiki/Lion" target="_blank" rel="noopener">Wiki article for lion</a></p>
-</li>
-<li>
-<p><a href="https://en.wikipedia.org/wiki/Reindeer">Wiki article for reindeer</a></p>
-</li>
-</ul>
+<div class="paragraph">
+<p>+
+. Create a folder called "animals" next to the "artists" folder, and create some animals in it. Either pick your favorites, or, if you&#8217;re not feeling creative, add these (content from Wikipedia):
+- <a href="https://en.wikipedia.org/wiki/Lion">Wiki article for lion</a>
+- <a href="https://en.wikipedia.org/wiki/Reindeer">Wiki article for reindeer</a></p>
 </div>
-</li>
+<div class="olist arabic">
+<ol class="arabic">
 <li>
-<p>Create some links using ContentSelector from artists to animals to get familiar with linking content.</p>
+<p>Create some links using the ContentSelector from artists to animals to get familiar with linking content.</p>
 </li>
 </ol>
 </div>
@@ -1127,7 +1143,7 @@ Don&#8217;t worry if something did not work, we&#8217;ll show the solutions on t
 <p>Finally, it&#8217;s time to introduce the query in GraphQL.</p>
 </div>
 <div class="paragraph">
-<p>A ContentSelector input will store a reference to the target content item. When using the Guillotine API, you may simply follow this reference to access the target content, and access it&#8217;s fields instantly.</p>
+<p>A ContentSelector input will store a reference to the target content item. When using the Guillotine API, you may simply follow this reference to access the target content, and access its fields instantly.</p>
 </div>
 <div class="listingblock">
 <div class="title">Fetch artists and their associated favorite animals</div>
@@ -1136,12 +1152,12 @@ Don&#8217;t worry if something did not work, we&#8217;ll show the solutions on t
   guillotine {
     getChildren(key: "/artists") {
       displayName
-      ... on com_example_myapp_Artist {
+      ... on com_example_tutorial101_Artist {
         _id
         data {
            favoriteAnimal {
             displayName
-            ... on com_example_myapp_Animal{
+            ... on com_example_tutorial101_Animal{
               data {
                 otherNames
               }
@@ -1211,7 +1227,7 @@ Don&#8217;t worry if something did not work, we&#8217;ll show the solutions on t
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2026-10-09 10:32:21 UTC
+Last updated 2026-10-09 12:40:35 UTC
 </div>
 </div>
 </body>

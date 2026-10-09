@@ -5,8 +5,8 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="generator" content="Asciidoctor 2.0.26">
-<meta name="description" content="XP has a number of ways to group inputs together. Learn all about them in this chapter.">
-<title>Sets</title>
+<meta name="description" content="XP has a number of ways to group inputs together, and to reuse groups across schemas. Learn all about them in this chapter.">
+<title>Sets and form fragments</title>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,300italic,400,400italic,600,600italic%7CNoto+Serif:400,400italic,700,700italic%7CDroid+Sans+Mono:400,700">
 <style>
 /*! Asciidoctor default stylesheet | MIT License | https://asciidoctor.org */
@@ -438,14 +438,14 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 </head>
 <body class="article toc2 toc-right">
 <div id="header">
-<h1>Sets</h1>
+<h1>Sets and form fragments</h1>
 <div id="toc" class="toc2">
 <div id="toctitle">Table of Contents</div>
 <ul class="sectlevel1">
 <li><a href="#field_sets">Field sets</a></li>
 <li><a href="#item_sets">Item sets</a></li>
 <li><a href="#option_sets">Option sets</a></li>
-<li><a href="#mixins">Mixins</a></li>
+<li><a href="#form_fragments">Form fragments</a></li>
 <li><a href="#tasks">Tasks</a>
 <ul class="sectlevel2">
 <li><a href="#adding_an_item_set_to_artist">Adding an item set to Artist</a></li>
@@ -466,7 +466,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <div id="preamble">
 <div class="sectionbody">
 <div class="paragraph">
-<p>XP also offers ways for you to group inputs, both visually and structurally. Collectively, these are known as sets. This chapter explains what they are and how to use them.</p>
+<p>XP also offers ways for you to group inputs, both visually and structurally. Collectively, these are known as sets. XP can also reuse a group of inputs across several schemas, through form fragments. This chapter explains what they are and how to use them.</p>
 </div>
 <div class="admonitionblock note">
 <table>
@@ -475,7 +475,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <i class="fa icon-note" title="Note"></i>
 </td>
 <td class="content">
-The tasks and examples in this chapter are based on work done in previous chapters (starting with <a href="sandbox.ahtml">the sandboxes chapter</a>). If you want to follow along with the examples, make sure you&#8217;re all caught up.
+The tasks and examples in this chapter are based on work done in previous chapters (starting with <a href="setup.ahtml">the setup chapter</a>). If you want to follow along with the examples, make sure you&#8217;re all caught up.
 </td>
 </tr>
 </table>
@@ -489,33 +489,31 @@ The tasks and examples in this chapter are based on work done in previous chapte
 <p>Field sets are the simplest form of sets XP offers&#8230;&#8203; they group inputs visually and have no effect on the data model.</p>
 </div>
 <div class="paragraph">
-<p>In a schema, the field set element wraps the input elements it should contain.</p>
+<p>In a schema, the field set wraps the inputs it should contain.</p>
 </div>
 <div class="paragraph">
-<p>To create a field set that contains a TextLine and a TextArea, the markup would look like this:</p>
+<p>To create a field set that contains a TextLine and a TextArea, the definition would look like this:</p>
 </div>
 <div class="listingblock">
 <div class="title">A field set</div>
 <div class="content">
-<pre class="highlight"><code class="language-xml" data-lang="xml">&lt;field-set&gt;
-  &lt;label&gt;FieldSet&lt;/label&gt;
-  &lt;items&gt; <i class="conum" data-value="1"></i><b>(1)</b>
-    &lt;input type="TextLine" name="fieldSetTextLine"&gt;
-      &lt;label&gt;Heading&lt;/label&gt;
-    &lt;/input&gt;
-    &lt;input type="TextArea" name="fieldSetTextArea"&gt;
-      &lt;label&gt;Text&lt;/label&gt;
-      &lt;help-text&gt;Write something? 🖊️&lt;/help-text&gt;
-    &lt;/input&gt;
-  &lt;/items&gt;
-&lt;/field-set&gt;</code></pre>
+<pre class="highlight"><code class="language-yaml" data-lang="yaml">- type: "FieldSet"
+  label: "FieldSet"
+  items: <i class="conum" data-value="1"></i><b>(1)</b>
+    - type: "TextLine"
+      name: "fieldSetTextLine"
+      label: "Heading"
+    - type: "TextArea"
+      name: "fieldSetTextArea"
+      label: "Text"
+      helpText: "Write something? 🖊️"</code></pre>
 </div>
 </div>
 <div class="colist arabic">
 <table>
 <tr>
 <td><i class="conum" data-value="1"></i><b>1</b></td>
-<td>Use the <code>items</code> element place other inputs inside the field set.</td>
+<td>Use <code>items</code> to place other inputs inside the field set. A field set has no <code>name</code> of its own, since it never produces data.</td>
 </tr>
 </table>
 </div>
@@ -536,7 +534,7 @@ The tasks and examples in this chapter are based on work done in previous chapte
 <div class="ulist">
 <ul>
 <li>
-<p>The <a href="https://developer.enonic.com/docs/xp/stable/cms/schemas/item-set" target="_blank" rel="noopener">item set documentation</a> does a standout job of explaining exactly how they work, so check that out for an overview.</p>
+<p>The <a href="https://developer.enonic.com/docs/cms/stable/schemas/form-items/item-set">item set documentation</a> does a standout job of explaining exactly how they work, so check that out for an overview.</p>
 </li>
 </ul>
 </div>
@@ -552,7 +550,7 @@ The tasks and examples in this chapter are based on work done in previous chapte
 <h2 id="option_sets"><a class="link" href="#option_sets">Option sets</a></h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>Option sets enable editors (working in Content Studio) to choose from a set of predefined options. This is similar to the ComboBox element, but option sets also allow options to carry extra data.</p>
+<p>Option sets enable editors (working in Content Studio) to choose from a set of predefined options. This is similar to the ComboBox input, but option sets also allow options to carry extra data.</p>
 </div>
 <div class="paragraph">
 <p>Option sets where users can select only one of a number of options are known as <em>single-select</em> option sets. You can also use a <em>multi-select</em> option set if the user should be able to select multiple options simultaneously. We&#8217;ll look at this too in a task.</p>
@@ -560,7 +558,7 @@ The tasks and examples in this chapter are based on work done in previous chapte
 <div class="ulist">
 <ul>
 <li>
-<p>The <a href="https://developer.enonic.com/docs/xp/stable/cms/schemas/option-set" target="_blank" rel="noopener">option set reference documentation</a> provides a good overview (with accompanying pictures) of how option sets work.</p>
+<p>The <a href="https://developer.enonic.com/docs/cms/stable/schemas/form-items/option-set">option set reference documentation</a> provides a good overview (with accompanying pictures) of how option sets work.</p>
 </li>
 </ul>
 </div>
@@ -573,19 +571,31 @@ The tasks and examples in this chapter are based on work done in previous chapte
 </div>
 </div>
 <div class="sect1">
-<h2 id="mixins"><a class="link" href="#mixins">Mixins</a></h2>
+<h2 id="form_fragments"><a class="link" href="#form_fragments">Form fragments</a></h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p><em>Mixins</em> facilitate a form of reuse in XP. They allow you to reuse fields across several content types.</p>
+<p><em>Form fragments</em> facilitate a form of reuse in XP. They allow you to reuse fields across several content types, or several places within one content type.</p>
 </div>
 <div class="paragraph">
-<p>They won&#8217;t look or behave any different from if you manually typed the same fields into multiple content types, but it lets you keep them in sync.</p>
+<p>They won&#8217;t look or behave any different from if you manually typed the same fields into multiple places, but they let you keep them in sync.</p>
 </div>
 <div class="paragraph">
-<p>Mixins go in the <code>/src/main/resources/site/mixins</code> directory, following the same naming pattern as the other schemas we&#8217;ve seen (<code>&lt;mixin-name&gt;/&lt;mixin-name&gt;.xml</code>).</p>
+<p>Form fragments go in the <code>src/main/resources/cms/form-fragments</code> directory, following the same naming pattern as the other schemas we&#8217;ve seen (<code>&lt;fragment-name&gt;/&lt;fragment-name&gt;.yaml</code>).</p>
+</div>
+<div class="admonitionblock warning">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-warning" title="Warning"></i>
+</td>
+<td class="content">
+If you have read XP 7 material, be aware that form fragments were called <em>mixins</em> there. In XP 8, the word mixin means something else, which you will meet in <a href="mixins.ahtml">a later chapter</a>.
+</td>
+</tr>
+</table>
 </div>
 <div class="paragraph">
-<p>We&#8217;ll see them in the upcoming task, but if you want to learn more about them, consult <a href="https://developer.enonic.com/docs/xp/stable/cms/schemas/mixins">the mixins reference documentation</a>.</p>
+<p>We&#8217;ll see them in the upcoming task, but if you want to learn more about them, consult <a href="https://developer.enonic.com/docs/cms/stable/schemas/form-fragments">the form fragments reference documentation</a>.</p>
 </div>
 </div>
 </div>
@@ -601,7 +611,7 @@ The tasks and examples in this chapter are based on work done in previous chapte
 <p>Let&#8217;s add an item set to the <code>Artist</code>. The goal will be to add a Filmography item set, featuring where and when a specific artist was featured in a movie.</p>
 </div>
 <div class="paragraph">
-<p>To add an item set, use it as you would any other input type: place it within the <code>form</code> element of a content type.</p>
+<p>To add an item set, use it as you would any other input type: place it within the <code>form</code> of a content type.</p>
 </div>
 <div class="paragraph">
 <p>If we add it to the <code>Artist</code> content type, it&#8217;d look something like this:</p>
@@ -609,41 +619,45 @@ The tasks and examples in this chapter are based on work done in previous chapte
 <div class="listingblock">
 <div class="title">Artist with an added Item Set</div>
 <div class="content">
-<pre class="highlight"><code class="language-xml" data-lang="xml">&lt;content-type&gt;
-  &lt;display-name&gt;Artist&lt;/display-name&gt;
-  &lt;description&gt;A description of an artist&lt;/description&gt;
-  &lt;super-type&gt;base:structured&lt;/super-type&gt;
-  &lt;form&gt;
+<pre class="highlight"><code class="language-yaml" data-lang="yaml">kind: "ContentType"
+title: "Artist"
+description: "Information about an artist"
+superType: "base:structured"
+form:
 
-    &lt;!-- Other fields elided for brevity --&gt;
+  # Other fields elided for brevity
 
-    &lt;item-set name="filmography"&gt;
-      &lt;label&gt;Filmography&lt;/label&gt;
-      &lt;occurrences minimum="0" maximum="0" /&gt;
-      &lt;items&gt; <i class="conum" data-value="1"></i><b>(1)</b>
-        &lt;input name="title" type="TextLine"&gt;
-          &lt;label&gt;Title&lt;/label&gt;
-          &lt;occurrences minimum="1" maximum="1" /&gt;
-        &lt;/input&gt;
-        &lt;input name="year" type="Double"&gt;
-            &lt;label&gt;Year&lt;/label&gt;
-            &lt;occurrences minimum="1" maximum="1" /&gt;
-            &lt;config&gt;
-              &lt;min&gt;0&lt;/min&gt;
-            &lt;/config&gt;
-        &lt;/input&gt;
-      &lt;/items&gt;
-    &lt;/item-set&gt;
-
-  &lt;/form&gt;
-&lt;/content-type&gt;</code></pre>
+  - type: "ItemSet"
+    name: "filmography"
+    label: "Filmography"
+    occurrences:
+      min: 0
+      max: 0
+    items: <i class="conum" data-value="1"></i><b>(1)</b>
+      - type: "TextLine"
+        name: "title"
+        label: "Title"
+        occurrences:
+          min: 1
+          max: 1
+      - type: "Double"
+        name: "year"
+        label: "Year"
+        occurrences:
+          min: 1
+          max: 1
+        min: 0 <i class="conum" data-value="2"></i><b>(2)</b></code></pre>
 </div>
 </div>
 <div class="colist arabic">
 <table>
 <tr>
 <td><i class="conum" data-value="1"></i><b>1</b></td>
-<td>Much like with field sets, use the <code>items</code> element to nest inputs within the item set.</td>
+<td>Much like with field sets, use <code>items</code> to nest inputs within the item set.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="2"></i><b>2</b></td>
+<td>Type-specific settings, like the lowest value a Double accepts, go directly on the input.</td>
 </tr>
 </table>
 </div>
@@ -663,15 +677,15 @@ The tasks and examples in this chapter are based on work done in previous chapte
 <div class="sect2">
 <h3 id="adding_an_option_set_to_animal"><a class="link" href="#adding_an_option_set_to_animal">Adding an option set to Animal</a></h3>
 <div class="paragraph">
-<p>In this section, we&#8217;ll use option sets to add some extra data to <code>Animal</code> data type. The goal is:</p>
+<p>In this section, we&#8217;ll use option sets to add some extra data to the <code>Animal</code> content type. The goal is:</p>
 </div>
 <div class="ulist">
 <ul>
 <li>
-<p>Add an option set for feeding behavior. Intentionally simplified, this option set should indicate whether the animal is an herbivore or a carnivore. If it is a carnivore, it should also let the user add a list of prey.</p>
+<p>Add an option set for feeding behavior. Intentionally simplified, this option set should indicate whether the animal is a herbivore or a carnivore. If it is a carnivore, it should also let the user add a list of prey.</p>
 </li>
 <li>
-<p>Create a mixin for distribution options. Because each distribution option should have the same fields, create a <em>mixin</em> to reuse it.</p>
+<p>Create a form fragment for distribution options. Because each distribution option should have the same fields, create a <em>form fragment</em> to reuse it.</p>
 </li>
 <li>
 <p>Add an option for distribution across continents. The user should be able to select as many as they want from the 7 continents to indicate where the animal lives. Each option should have an associated <code>TextArea</code> called "notes", where the user can add more data for each option.</p>
@@ -686,40 +700,34 @@ The tasks and examples in this chapter are based on work done in previous chapte
 <div class="listingblock">
 <div class="title">The <code>Animal</code> content type with feeding behavior</div>
 <div class="content">
-<pre class="highlight"><code class="language-xml" data-lang="xml">&lt;?xml version="1.0" encoding="utf-8"?&gt;
-&lt;content-type&gt;
-  &lt;display-name&gt;Animal&lt;/display-name&gt;
-  &lt;description&gt;An animal that lives on planet Earth&lt;/description&gt;
-  &lt;super-type&gt;base:structured&lt;/super-type&gt;
-  &lt;form&gt;
+<pre class="highlight"><code class="language-yaml" data-lang="yaml">kind: "ContentType"
+title: "Animal"
+description: "An animal that lives on planet Earth"
+superType: "base:structured"
+form:
 
-    &lt;!-- other fields elided for brevity --&gt;
+  # other fields elided for brevity
 
-    &lt;option-set name="feedingBehavior"&gt;
-      &lt;label&gt;Feeding behavior&lt;/label&gt;
-      &lt;options minimum="1" maximum="1"&gt; <i class="conum" data-value="1"></i><b>(1)</b>
-
-        &lt;option name="herbivore"&gt; <i class="conum" data-value="2"></i><b>(2)</b>
-          &lt;help-text&gt;Subsists primarily on plant material.&lt;/help-text&gt;
-          &lt;label&gt;Herbivore&lt;/label&gt;
-        &lt;/option&gt;
-
-        &lt;option name="carnivore"&gt; <i class="conum" data-value="3"></i><b>(3)</b>
-          &lt;label&gt;Carnivore&lt;/label&gt;
-          &lt;help-text&gt;Subsists primarily on animal tissue and meat.&lt;/help-text&gt;
-          &lt;items&gt;
-            &lt;input name="prey" type="TextLine"&gt;
-              &lt;label&gt;Prey&lt;/label&gt;
-              &lt;occurrences minimum="0" maximum="0" /&gt;
-            &lt;/input&gt;
-          &lt;/items&gt;
-        &lt;/option&gt;
-
-      &lt;/options&gt;
-    &lt;/option-set&gt;
-
-  &lt;/form&gt;
-&lt;/content-type&gt;</code></pre>
+  - type: "OptionSet"
+    name: "feedingBehavior"
+    label: "Feeding behavior"
+    selection: <i class="conum" data-value="1"></i><b>(1)</b>
+      min: 1
+      max: 1
+    options:
+      - name: "herbivore" <i class="conum" data-value="2"></i><b>(2)</b>
+        label: "Herbivore"
+        helpText: "Subsists primarily on plant material."
+      - name: "carnivore" <i class="conum" data-value="3"></i><b>(3)</b>
+        label: "Carnivore"
+        helpText: "Subsists primarily on animal tissue and meat."
+        items:
+          - type: "TextLine"
+            name: "prey"
+            label: "Prey"
+            occurrences:
+              min: 0
+              max: 0</code></pre>
 </div>
 </div>
 <div class="colist arabic">
@@ -730,7 +738,7 @@ The tasks and examples in this chapter are based on work done in previous chapte
 </tr>
 <tr>
 <td><i class="conum" data-value="2"></i><b>2</b></td>
-<td>The herbivore option has no associated data, so it consists solely of a label.</td>
+<td>The herbivore option has no associated data, so it consists solely of a label and a help text.</td>
 </tr>
 <tr>
 <td><i class="conum" data-value="3"></i><b>3</b></td>
@@ -744,96 +752,68 @@ The tasks and examples in this chapter are based on work done in previous chapte
 <div class="olist arabic">
 <ol class="arabic">
 <li>
-<p>Start by creating the mixin. Call it <code>distributionData</code> and place it in <code>src/main/resources/site/mixins/distributionData/distributionData.xml</code>. It only contains a text area:</p>
+<p>Start by creating the form fragment. Call it <code>distributionData</code> and place it in <code>src/main/resources/cms/form-fragments/distributionData/distributionData.yaml</code>. It only contains a text area:</p>
 <div class="listingblock">
-<div class="title">The <code>distributionData</code> mixin</div>
+<div class="title">The <code>distributionData</code> form fragment</div>
 <div class="content">
-<pre class="highlight"><code class="language-xml" data-lang="xml">&lt;mixin&gt;
-  &lt;display-name&gt;Distribution data&lt;/display-name&gt;
-  &lt;form&gt;
-
-    &lt;input type="TextArea" name="notes"&gt;
-      &lt;label&gt;Notes&lt;/label&gt;
-    &lt;/input&gt;
-
-  &lt;/form&gt;
-&lt;/mixin&gt;</code></pre>
+<pre class="highlight"><code class="language-yaml" data-lang="yaml">kind: "FormFragment"
+title: "Distribution data"
+form:
+  - type: "TextArea"
+    name: "notes"
+    label: "Notes"</code></pre>
 </div>
 </div>
 </li>
 <li>
-<p>Moving onto animals, add the multi-select option set.</p>
+<p>Moving on to animals, add the multi-select option set.</p>
 <div class="listingblock">
 <div class="title">The <code>Animal</code> content type with distribution data</div>
 <div class="content">
-<pre class="highlight"><code class="language-xml" data-lang="xml">&lt;?xml version="1.0" encoding="utf-8"?&gt;
-&lt;content-type&gt;
-  &lt;display-name&gt;Animal&lt;/display-name&gt;
-  &lt;description&gt;An animal that lives on planet Earth&lt;/description&gt;
-  &lt;super-type&gt;base:structured&lt;/super-type&gt;
-  &lt;form&gt;
+<pre class="highlight"><code class="language-yaml" data-lang="yaml">kind: "ContentType"
+title: "Animal"
+description: "An animal that lives on planet Earth"
+superType: "base:structured"
+form:
 
-    &lt;!-- other fields elided for brevity --&gt;
+  # other fields elided for brevity
 
-    &lt;option-set name="distribution"&gt;
-      &lt;label&gt;Distribution across continents&lt;/label&gt;
-      &lt;help-text&gt;Continents where the animal can be found in the wild&lt;/help-text&gt;
-      &lt;options minimum="0" maximum="0"&gt; <i class="conum" data-value="1"></i><b>(1)</b>
-
-        &lt;option name="africa"&gt;
-          &lt;label&gt;Africa&lt;/label&gt;
-          &lt;items&gt;
-            &lt;mixin name="distributionData" /&gt;
-          &lt;/items&gt;
-        &lt;/option&gt;
-
-        &lt;option name="antarctica"&gt;
-          &lt;label&gt;Antarctica&lt;/label&gt;
-          &lt;items&gt;
-            &lt;mixin name="distributionData" /&gt;
-          &lt;/items&gt;
-        &lt;/option&gt;
-
-        &lt;option name="asia"&gt;
-          &lt;label&gt;Asia&lt;/label&gt;
-          &lt;items&gt;
-            &lt;mixin name="distributionData" /&gt;
-          &lt;/items&gt;
-        &lt;/option&gt;
-
-        &lt;option name="australia"&gt;
-          &lt;label&gt;Australia&lt;/label&gt;
-          &lt;items&gt;
-            &lt;mixin name="distributionData" /&gt;
-          &lt;/items&gt;
-        &lt;/option&gt;
-
-        &lt;option name="europe"&gt;
-          &lt;label&gt;Europe&lt;/label&gt;
-          &lt;items&gt;
-            &lt;mixin name="distributionData" /&gt;
-          &lt;/items&gt;
-        &lt;/option&gt;
-
-        &lt;option name="northAmerica"&gt;
-          &lt;label&gt;North America&lt;/label&gt;
-          &lt;items&gt;
-            &lt;mixin name="distributionData" /&gt;
-          &lt;/items&gt;
-        &lt;/option&gt;
-
-        &lt;option name="southAmerica"&gt;
-          &lt;label&gt;South America&lt;/label&gt;
-          &lt;items&gt;
-            &lt;mixin name="distributionData" /&gt;
-          &lt;/items&gt;
-        &lt;/option&gt;
-
-      &lt;/options&gt;
-    &lt;/option-set&gt;
-
-  &lt;/form&gt;
-&lt;/content-type&gt;</code></pre>
+  - type: "OptionSet"
+    name: "distribution"
+    label: "Distribution across continents"
+    helpText: "Continents where the animal can be found in the wild"
+    selection: <i class="conum" data-value="1"></i><b>(1)</b>
+      min: 0
+      max: 7
+    options:
+      - name: "africa"
+        label: "Africa"
+        items:
+          - include: "distributionData" <i class="conum" data-value="2"></i><b>(2)</b>
+      - name: "antarctica"
+        label: "Antarctica"
+        items:
+          - include: "distributionData"
+      - name: "asia"
+        label: "Asia"
+        items:
+          - include: "distributionData"
+      - name: "australia"
+        label: "Australia"
+        items:
+          - include: "distributionData"
+      - name: "europe"
+        label: "Europe"
+        items:
+          - include: "distributionData"
+      - name: "northAmerica"
+        label: "North America"
+        items:
+          - include: "distributionData"
+      - name: "southAmerica"
+        label: "South America"
+        items:
+          - include: "distributionData"</code></pre>
 </div>
 </div>
 </li>
@@ -843,7 +823,11 @@ The tasks and examples in this chapter are based on work done in previous chapte
 <table>
 <tr>
 <td><i class="conum" data-value="1"></i><b>1</b></td>
-<td>This specifies that you can add as many distributions as you want.</td>
+<td>This specifies that you can select as many of the seven continents as you want. A <code>max</code> above <code>1</code> is what turns the option set into a multi-select.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="2"></i><b>2</b></td>
+<td><code>include</code> pulls the fields of the form fragment into this option.</td>
 </tr>
 </table>
 </div>
@@ -854,7 +838,7 @@ The tasks and examples in this chapter are based on work done in previous chapte
 <i class="fa icon-note" title="Note"></i>
 </td>
 <td class="content">
-The use of the <code>mixin</code> helps us both reduce duplication and keep all options in sync. If we wanted to add more data, such as current population, we would only have to add it to the <code>mixin</code> to have it duplicate to all distributions.
+The use of the form fragment helps us both reduce duplication and keep all options in sync. If we wanted to add more data, such as current population, we would only have to add it to the fragment to have it duplicated to all distributions.
 </td>
 </tr>
 </table>
@@ -864,7 +848,7 @@ The use of the <code>mixin</code> helps us both reduce duplication and keep all 
 <div class="sect2">
 <h3 id="result"><a class="link" href="#result">Result</a></h3>
 <div class="paragraph">
-<p>With the new option sets and added, the Lion entry could look something like this:</p>
+<p>With the new option sets added, the Lion entry could look something like this:</p>
 </div>
 <div class="imageblock">
 <div class="content">
@@ -899,7 +883,7 @@ The use of the <code>mixin</code> helps us both reduce duplication and keep all 
               term: {
                 field: "type",
                 value: {
-                  string: "com.example.myapp:artist"
+                  string: "com.example.tutorial101:artist"
                 }
               }
             },
@@ -917,7 +901,7 @@ The use of the <code>mixin</code> helps us both reduce duplication and keep all 
       }
     ) {
       displayName
-      ... on com_example_myapp_Artist {
+      ... on com_example_tutorial101_Artist {
         data {
           filmography {
             title
@@ -934,7 +918,7 @@ The use of the <code>mixin</code> helps us both reduce duplication and keep all 
 <p>With some data added for Cardi B, you&#8217;d get a result like this:</p>
 </div>
 <div class="listingblock">
-<div class="title">Album data</div>
+<div class="title">Filmography data</div>
 <div class="content">
 <pre class="highlight"><code class="language-json" data-lang="json">{
   "data": {
@@ -985,7 +969,7 @@ The use of the <code>mixin</code> helps us both reduce duplication and keep all 
 <div class="sect2">
 <h3 id="option_sets_2"><a class="link" href="#option_sets_2">Option sets</a></h3>
 <div class="paragraph">
-<p>When fetching option set data, you can get the list of currently selected items and each item separately.</p>
+<p>When fetching option set data, you can get the list of currently selected options and each option separately.</p>
 </div>
 <div class="listingblock">
 <div class="title">Querying for feeding behavior and distribution</div>
@@ -1000,7 +984,7 @@ The use of the <code>mixin</code> helps us both reduce duplication and keep all 
               term: {
                 field: "type",
                 value: {
-                  string: "com.example.myapp:animal"
+                  string: "com.example.tutorial101:animal"
                 }
               }
             },
@@ -1018,7 +1002,7 @@ The use of the <code>mixin</code> helps us both reduce duplication and keep all 
       }
     ) {
       displayName
-      ... on com_example_myapp_Animal {
+      ... on com_example_tutorial101_Animal {
         data {
           feedingBehavior {
             _selected <i class="conum" data-value="1"></i><b>(1)</b>
@@ -1043,7 +1027,7 @@ The use of the <code>mixin</code> helps us both reduce duplication and keep all 
 <table>
 <tr>
 <td><i class="conum" data-value="1"></i><b>1</b></td>
-<td>This provides data about what the animals selected feeding behavior is.</td>
+<td>This provides data about what the animal&#8217;s selected feeding behavior is.</td>
 </tr>
 <tr>
 <td><i class="conum" data-value="2"></i><b>2</b></td>
@@ -1093,7 +1077,7 @@ The use of the <code>mixin</code> helps us both reduce duplication and keep all 
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2026-10-09 10:32:21 UTC
+Last updated 2026-10-09 12:40:35 UTC
 </div>
 </div>
 </body>

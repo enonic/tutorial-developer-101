@@ -5,7 +5,8 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="generator" content="Asciidoctor 2.0.26">
-<title>Data toolbox</title>
+<meta name="description" content="Peek under the hood with Data Toolbox and see how your content is stored.">
+<title>Data Toolbox</title>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,300italic,400,400italic,600,600italic%7CNoto+Serif:400,400italic,700,700italic%7CDroid+Sans+Mono:400,700">
 <style>
 /*! Asciidoctor default stylesheet | MIT License | https://asciidoctor.org */
@@ -437,7 +438,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 </head>
 <body class="article toc2 toc-right">
 <div id="header">
-<h1>Data toolbox</h1>
+<h1>Data Toolbox</h1>
 <div id="toc" class="toc2">
 <div id="toctitle">Table of Contents</div>
 <ul class="sectlevel1">
@@ -451,7 +452,19 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <div id="preamble">
 <div class="sectionbody">
 <div class="paragraph">
-<p>In this chapter, we&#8217;ll give a short introduction to a popular application called Data Toolbox, the developers best friend for playing around with the low level NoSQL storage in Enonic XP.</p>
+<p>In this chapter, we&#8217;ll give a short introduction to a popular application called Data Toolbox, the developer&#8217;s best friend for playing around with the low level NoSQL storage in Enonic XP.</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+The tasks and examples in this chapter are based on work done in previous chapters (starting with <a href="setup.ahtml">the setup chapter</a>). If you want to follow along with the examples, make sure you&#8217;re all caught up.
+</td>
+</tr>
+</table>
 </div>
 </div>
 </div>
@@ -462,10 +475,10 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <p>Data Toolbox provides you with a web interface to visualize and manipulate your XP data, as well as other system related information. We&#8217;ll now see how to inspect content using Data Toolbox.</p>
 </div>
 <div class="paragraph">
-<p>Data Toolbox is <a href="https://market.enonic.com/vendors/glenn-ricaud/data-toolbox" target="_blank" rel="noopener">available on Enonic Market</a>.</p>
+<p>Data Toolbox is <a href="https://market.enonic.com/vendors/glenn-ricaud/data-toolbox">available on Enonic Market</a>.</p>
 </div>
 <div class="paragraph">
-<p>Just like Content Studio, Data toolbox should already have been installed, and can be launched from XP Admin: <code>XP menu</code> &#8594; <code>Data Toolbox</code>.</p>
+<p>Just like Content Studio, Data Toolbox should already have been installed, and can be launched from XP Admin: <code>XP menu</code> &#8594; <code>Data Toolbox</code>.</p>
 </div>
 <div class="imageblock">
 <div class="content">
@@ -489,11 +502,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <dl>
 <dt class="hdlist1">com.enonic.cms.my-first-project</dt>
 <dd>
-<p>This is the current repository that holds your content.</p>
-</dd>
-<dt class="hdlist1">com.enonic.cms.default</dt>
-<dd>
-<p>This is the default repository.</p>
+<p>This is the repository that holds the content of your project. Every content project gets a repository of its own.</p>
 </dd>
 <dt class="hdlist1">system.auditlog</dt>
 <dd>
@@ -511,10 +520,10 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 </div>
 </li>
 <li>
-<p>Move into <code>com.enonic.cms.my-first-project</code>. Here you will see two branches (as discussed above). As long as you&#8217;ve published your content, you can choose either one of these.</p>
+<p>Move into <code>com.enonic.cms.my-first-project</code>. Here you will see the two branches discussed in the previous chapter. As long as you&#8217;ve published your content, you can choose either one of these.</p>
 </li>
 <li>
-<p>Keep navigating further down the tree: <code>root</code> &#8594; <code>content</code>. Now you should see all the content of your site listed. Navigate to <code>artists</code> to find actual pieces of content.</p>
+<p>Keep navigating further down the tree: <code>root</code> &#8594; <code>content</code>. Now you should see all the content of your project listed. Navigate to <code>artists</code> to find actual pieces of content.</p>
 </li>
 <li>
 <p>Choose one of your artists and check out both the info view and the JSON view, available via the buttons in the table row.</p>
@@ -554,14 +563,14 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <p>Inspecting content is only a fraction of what Data Toolbox can do: it&#8217;s a versatile and powerful administrative tool, and we&#8217;ll see more of it in a later chapter.</p>
 </div>
 <div class="paragraph">
-<p>Now, let&#8217;s have a look at the <a href="headless-api.ahtml">cutting edge headless cms API - aka Guillotine</a>.</p>
+<p>Now, let&#8217;s have a look at the <a href="headless-api.ahtml">cutting edge headless CMS API - aka Guillotine</a>.</p>
 </div>
 </div>
 </div>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2026-10-09 10:32:21 UTC
+Last updated 2026-10-09 12:40:35 UTC
 </div>
 </div>
 </body>

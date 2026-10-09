@@ -466,11 +466,11 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <li><a href="#graphql_api">GraphQL API</a>
 <ul class="sectlevel2">
 <li><a href="#links_2">Links</a></li>
-<li><a href="#image_srcset">Image srcset</a></li>
-<li><a href="#image_details">Image details</a></li>
+<li><a href="#images_2">Images</a></li>
 <li><a href="#macros_2">Macros</a></li>
 </ul>
 </li>
+<li><a href="#summary">Summary</a></li>
 </ul>
 </div>
 </div>
@@ -478,16 +478,16 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <div id="preamble">
 <div class="sectionbody">
 <div class="paragraph">
-<p>If you want to work with rich text, HtmlArea is the input type to go.</p>
+<p>If you want to work with rich text, HtmlArea is the input type to go for.</p>
 </div>
 <div class="paragraph">
 <p>This input type offers some very powerful editing capabilities and a lot of configuration options.</p>
 </div>
 <div class="paragraph">
-<p>This whole chapter is dedicated to the <a href="https://developer.enonic.com/docs/xp/stable/cms/schemas/input-types/htmlarea" target="_blank" rel="noopener">HtmlArea input type</a> and the editor used to define its data.</p>
+<p>This whole chapter is dedicated to the <a href="https://developer.enonic.com/docs/cms/stable/schemas/form-items/htmlarea">HtmlArea input type</a> and the editor used to define its data.</p>
 </div>
 <div class="paragraph">
-<p>The user-oriented documentation of the Rich text editor can be found in the <a href="https://developer.enonic.com/docs/content-studio/stable/editor/rich-text-editor" target="_blank" rel="noopener">Content Studio docs</a>.</p>
+<p>The user-oriented documentation of the Rich text editor can be found in the <a href="https://developer.enonic.com/docs/content-studio/stable/editor/rich-text-editor">Content Studio docs</a>.</p>
 </div>
 <div class="admonitionblock note">
 <table>
@@ -496,7 +496,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <i class="fa icon-note" title="Note"></i>
 </td>
 <td class="content">
-The tasks and examples in this chapter are based on work done in previous chapters (starting with <a href="sandbox.ahtml">the sandboxes chapter</a>). If you want to follow along with the examples, make sure you&#8217;re all caught up.
+The tasks and examples in this chapter are based on work done in previous chapters (starting with <a href="setup.ahtml">the setup chapter</a>). If you want to follow along with the examples, make sure you&#8217;re all caught up.
 </td>
 </tr>
 </table>
@@ -516,7 +516,7 @@ The tasks and examples in this chapter are based on work done in previous chapte
 <p>The HtmlArea input type gives you a multi-line input field with rich formatting options, much like what you&#8217;re used to from your favorite word processor. It supports text formatting and justification, lists, links, and even lets you insert images.</p>
 </div>
 <div class="paragraph">
-<p>You can configure the HtmlArea to be exactly what you want by dictating what formatting tools to include or exclude (the <code>include</code> and <code>exclude</code> attributes, respectively), by what heading levels are allowed (<code>allowedHeadings</code>), and by giving it a default value (<code>default</code>).</p>
+<p>You can configure the HtmlArea to be exactly what you want by dictating what formatting tools to include or exclude (the <code>include</code> and <code>exclude</code> settings, respectively), by what heading levels are allowed (<code>allowHeadings</code>), and by giving it a default value (<code>default</code>).</p>
 </div>
 <div class="paragraph">
 <p>Additionally, the HtmlArea supports the use of <em>macros</em>, giving you the ability to insert prefabricated rich components into your markup.</p>
@@ -527,38 +527,36 @@ The tasks and examples in this chapter are based on work done in previous chapte
 <h2 id="htmlarea_include_and_exclude"><a class="link" href="#htmlarea_include_and_exclude">HtmlArea include and exclude</a></h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>We can use the HtmlArea&#8217;s <code>config</code> section to specify which rich text controls should be available when editing. Using a combination of the <code>include</code> and <code>exclude</code> tags, we can customize the input&#8217;s appearance.</p>
+<p>We can use the HtmlArea&#8217;s settings to specify which rich text controls should be available when editing. Using a combination of <code>include</code> and <code>exclude</code>, we can customize the input&#8217;s appearance.</p>
 </div>
 <div class="paragraph">
-<p>By default, it includes a limited, but useful selection of tools at your disposal. Using <code>&lt;include&gt;*&lt;/include&gt;</code> as an option is the same as including the default tools.</p>
+<p>By default, it includes a limited, but useful selection of tools at your disposal. Using <code>include: "*"</code> is the same as including the default tools.</p>
 </div>
 <div class="listingblock">
 <div class="title">The HtmlArea with default configuration</div>
 <div class="content">
-<pre class="highlight"><code class="language-xml" data-lang="xml">&lt;input type="HtmlArea" name="everything"&gt;
-  &lt;label&gt;HtmlArea&lt;/label&gt;
-&lt;/input&gt;</code></pre>
+<pre class="highlight"><code class="language-yaml" data-lang="yaml">- type: "HtmlArea"
+  name: "everything"
+  label: "HtmlArea"</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>If you want to exclude all controls, use <code>&lt;exclude&gt;*&lt;/exclude&gt;</code>:</p>
+<p>If you want to exclude all controls, use <code>exclude: "*"</code>:</p>
 </div>
 <div class="listingblock">
 <div class="title">The HtmlArea configured to include nothing</div>
 <div class="content">
-<pre class="highlight"><code class="language-xml" data-lang="xml">&lt;input type="HtmlArea" name="nothing"&gt;
-  &lt;label&gt;HtmlArea with exclude: *&lt;/label&gt;
-  &lt;config&gt;
-    &lt;exclude&gt;*&lt;/exclude&gt;
-  &lt;/config&gt;
-&lt;/input&gt;</code></pre>
+<pre class="highlight"><code class="language-yaml" data-lang="yaml">- type: "HtmlArea"
+  name: "nothing"
+  label: "HtmlArea with exclude: *"
+  exclude: "*"</code></pre>
 </div>
 </div>
 <div class="imageblock text-center">
 <div class="content">
 <img src="media/input-type-html-area-no-controls.png" alt="An HtmlArea configured to exclude all editing tools" width="750">
 </div>
-<div class="title">Figure 2. An HtmlArea exput with <code>&lt;exclude&gt;*&lt;/exclude&gt;</code> and a selection of tools.</div>
+<div class="title">Figure 2. An HtmlArea input with <code>exclude: "*"</code> and no tools.</div>
 </div>
 <div class="paragraph">
 <p>Finally, if you want to exclude most tools, but not all, you can exclude all and then add back in the ones you want:</p>
@@ -566,29 +564,26 @@ The tasks and examples in this chapter are based on work done in previous chapte
 <div class="listingblock">
 <div class="title">The HtmlArea configured to include a selection of controls</div>
 <div class="content">
-<pre class="highlight"><code class="language-xml" data-lang="xml">&lt;input type="HtmlArea" name="something"&gt;
-  &lt;label&gt;HtmlArea with some controls&lt;/label&gt;
-  &lt;config&gt;
-    &lt;exclude&gt;*&lt;/exclude&gt;
-    &lt;include&gt;Format | Bold Italic Underline | JustifyBlock
-    JustifyLeft JustifyCenter JustifyRight | HorizontalRule Blockquote&lt;/include&gt;
-  &lt;/config&gt;
-&lt;/input&gt;</code></pre>
+<pre class="highlight"><code class="language-yaml" data-lang="yaml">- type: "HtmlArea"
+  name: "something"
+  label: "HtmlArea with some controls"
+  exclude: "*"
+  include: "Format | Bold Italic Underline | JustifyBlock JustifyLeft JustifyCenter JustifyRight | HorizontalRule Blockquote"</code></pre>
 </div>
 </div>
 <div class="imageblock text-center">
 <div class="content">
 <img src="media/input-type-html-area-some-controls.png" alt="An HtmlArea configured to include a selection of editing tools" width="750">
 </div>
-<div class="title">Figure 3. An HtmlArea with a selection of tools and <code>&lt;exclude&gt;*&lt;/exclude&gt;</code></div>
+<div class="title">Figure 3. An HtmlArea with a selection of tools and <code>exclude: "*"</code></div>
 </div>
 <div class="paragraph">
-<p>As introduced in the beginning, for a full overview of the available text tools and HtmlArea configuration options, visit the <a href="https://developer.enonic.com/docs/xp/stable/cms/schemas/input-types/htmlarea" target="_blank" rel="noopener">HtmlArea input type reference docs</a>.</p>
+<p>As introduced in the beginning, for a full overview of the available text tools and HtmlArea settings, visit the <a href="https://developer.enonic.com/docs/cms/stable/schemas/form-items/htmlarea">HtmlArea reference docs</a>.</p>
 </div>
 <div class="sect2">
 <h3 id="task_animal_description"><a class="link" href="#task_animal_description">Task: Animal description</a></h3>
 <div class="paragraph">
-<p>Let&#8217;s add a rich-text description field to the animal content type. The input should be optional and have at most a single occurrence. You can include any editor tools you want, but it must at least have the <code>Link</code> ,<code>Image</code> and <code>Macro</code> tools, as we&#8217;ll be using these later. Otherwise, configure it as you want.</p>
+<p>Let&#8217;s add a rich-text description field to the animal content type. The input should be optional and have at most a single occurrence. You can include any editor tools you want, but it must at least have the <code>Link</code>, <code>Image</code> and <code>Macro</code> tools, as we&#8217;ll be using these later. Otherwise, configure it as you want.</p>
 </div>
 <div class="paragraph">
 <p>Your content type should now look something like this:</p>
@@ -596,32 +591,24 @@ The tasks and examples in this chapter are based on work done in previous chapte
 <div class="listingblock">
 <div class="title">Animal with an HtmlArea input type</div>
 <div class="content">
-<pre class="highlight"><code class="language-xml" data-lang="xml">&lt;?xml version="1.0" encoding="utf-8"?&gt;
-&lt;content-type&gt;
-  &lt;display-name&gt;Animal&lt;/display-name&gt;
-  &lt;description&gt;An animal that lives on planet Earth&lt;/description&gt;
-  &lt;super-type&gt;base:structured&lt;/super-type&gt;
-  &lt;form&gt;
+<pre class="highlight"><code class="language-yaml" data-lang="yaml">kind: "ContentType"
+title: "Animal"
+description: "An animal that lives on planet Earth"
+superType: "base:structured"
+form:
 
-    &lt;!-- other fields elided for brevity --&gt;
+  # other fields elided for brevity
 
-    &lt;input name="description" type="HtmlArea"&gt;
-      &lt;label&gt;Description&lt;/label&gt;
-      &lt;help-text&gt;
-        Describe the animal. Where its habitats are, what it eats, etc.
-      &lt;/help-text&gt;
-      &lt;config&gt;
-        &lt;exclude&gt;*&lt;/exclude&gt;
-        &lt;include&gt;Format Link Macro Image&lt;/include&gt;
-      &lt;/config&gt;
-    &lt;/input&gt;
-
-  &lt;/form&gt;
-&lt;/content-type&gt;</code></pre>
+  - type: "HtmlArea"
+    name: "description"
+    label: "Description"
+    helpText: "Describe the animal. Where its habitats are, what it eats, etc."
+    exclude: "*"
+    include: "Format Link Macro Image"</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>With the new content type deployed, you are ready to continue with further tasks we&#8217;ll introduce in next sections.</p>
+<p>With the new content type deployed, you are ready to continue with the further tasks we&#8217;ll introduce in the next sections.</p>
 </div>
 </div>
 </div>
@@ -635,18 +622,18 @@ The tasks and examples in this chapter are based on work done in previous chapte
 <div class="ulist">
 <ul>
 <li>
-<p>Reference other content items (possbily passing query parameters);</p>
+<p>Reference other content items (possibly passing query parameters);</p>
 </li>
 <li>
 <p>If the referenced content is of type media, you can set a specific link to: open the file, directly download the file, or treat it as a regular content;</p>
 </li>
 <li>
-<p>Insert url links of type: https, http, ftp, cel or relative;</p>
+<p>Insert URL links of type: https, http, ftp, tel or relative;</p>
 </li>
 </ul>
 </div>
 <div class="paragraph">
-<p>An important feature, is that when creating internal links (content or media links), XP will save references to the target items, similar to how the ContentSelector works. This is useful when looking for usage and dependencies between content items later.</p>
+<p>An important feature is that when creating internal links (content or media links), XP will save references to the target items, similar to how the ContentSelector works. This is useful when looking for usage and dependencies between content items later.</p>
 </div>
 <div class="admonitionblock note">
 <table>
@@ -655,7 +642,7 @@ The tasks and examples in this chapter are based on work done in previous chapte
 <i class="fa icon-note" title="Note"></i>
 </td>
 <td class="content">
-Because links are created using the item&#8217;s unique id. It is perfectly safe to move items around in the tree structure, or change it&#8217;s path name. The links will not break.
+Because links are created using the item&#8217;s unique id, it is perfectly safe to move items around in the tree structure, or change their path name. The links will not break.
 </td>
 </tr>
 </table>
@@ -706,18 +693,18 @@ You can also use <span class="keyseq"><kbd>ctrl</kbd>+<kbd>K</kbd></span> to ins
 <h2 id="images"><a class="link" href="#images">Images</a></h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>With the image tool enabled, you insert an image anywhere within your document. During the insert process, you may customize the image further.</p>
+<p>With the image tool enabled, you can insert an image anywhere within your document. During the insert process, you may customize the image further.</p>
 </div>
 <div class="paragraph">
-<p>The following options are available: Caption, alt text, change the image&#8217;s justification, and apply a predefined image styles.</p>
+<p>The following options are available: Caption, alt text, change the image&#8217;s justification, and apply predefined image styles.</p>
 </div>
 <div class="sect2">
 <h3 id="task_animal_pictures"><a class="link" href="#task_animal_pictures">Task: Animal pictures</a></h3>
 <div class="paragraph">
-<p>Try out the image controls that Content Studio give you by uploading a picture and seeing what you can do with it.</p>
+<p>Try out the image controls that Content Studio gives you by uploading a picture and seeing what you can do with it.</p>
 </div>
 <div class="paragraph">
-<p>We looked at <a href="input-types.ahtml#_working_with_images">editing images in the input types chapter</a>, but when inserting images in the HtmlArea, you also have something called "image styles", which we&#8217;ll have a look at now.</p>
+<p>We looked at <a href="files.ahtml#_image_form">editing images in the media chapter</a>, but when inserting images in the HtmlArea, you also have something called "image styles", which we&#8217;ll have a look at now.</p>
 </div>
 <div class="paragraph">
 <p>Continue editing the "Lynx" content created in the previous task.</p>
@@ -739,31 +726,31 @@ You can also use <span class="keyseq"><kbd>ctrl</kbd>+<kbd>K</kbd></span> to ins
 <div class="content">
 <img src="media/rich-text-insert-image.png" alt="The insert image dialog, showing the image, an image styles dropdown, caption, and alt text fields" width="1050">
 </div>
-<div class="title">Figure 5. The HtmlArea insert image dialog. Photo by <a href="https://unsplash.com/@zmachacek" target="_blank" rel="noopener">Zdeněk Macháček</a></div>
+<div class="title">Figure 5. The HtmlArea insert image dialog. Photo by <a href="https://unsplash.com/@zmachacek">Zdeněk Macháček</a></div>
 </div>
 </li>
 <li>
-<p>When accessing the "image styles" dropdown, you&#8217;ll find that it&#8217;s only got two options and neither of them seem to do much. To make this more exciting, let&#8217;s also create a custom image style.</p>
+<p>When accessing the "image styles" dropdown, you&#8217;ll find that it&#8217;s only got a couple of built-in options. To make this more exciting, let&#8217;s create a custom image style.</p>
 <div class="paragraph">
 <p>In your app, add a new file:</p>
 </div>
 <div class="listingblock">
-<div class="title">src/main/resources/site/styles.xml</div>
+<div class="title">src/main/resources/cms/style/style.yaml</div>
 <div class="content">
-<pre class="highlight"><code class="language-xml" data-lang="xml">&lt;styles&gt;
-  &lt;image name="square-grayscale"&gt;
-    &lt;display-name&gt;Grayscale&lt;/display-name&gt;
-    &lt;aspect-ratio&gt;1:1&lt;/aspect-ratio&gt; <i class="conum" data-value="1"></i><b>(1)</b>
-    &lt;filter&gt;hsbcolorize(0x000000); grayscale(); border(6, 0x000000)&lt;/filter&gt; <i class="conum" data-value="2"></i><b>(2)</b>
-  &lt;/image&gt;
-&lt;/styles&gt;</code></pre>
+<pre class="highlight"><code class="language-yaml" data-lang="yaml">kind: "Style"
+styles:
+  - type: "image"
+    name: "square-grayscale"
+    label: "Grayscale"
+    aspectRatio: "1:1" <i class="conum" data-value="1"></i><b>(1)</b>
+    filter: "hsbcolorize(0x000000); grayscale(); border(6, 0x000000)" <i class="conum" data-value="2"></i><b>(2)</b></code></pre>
 </div>
 </div>
 <div class="colist arabic">
 <table>
 <tr>
 <td><i class="conum" data-value="1"></i><b>1</b></td>
-<td>The aspect ratio controls how the image is displayed. 1:1 makes the image square.</td>
+<td>The aspect ratio controls how the image is cropped. 1:1 makes the image square.</td>
 </tr>
 <tr>
 <td><i class="conum" data-value="2"></i><b>2</b></td>
@@ -775,7 +762,7 @@ You can also use <span class="keyseq"><kbd>ctrl</kbd>+<kbd>K</kbd></span> to ins
 <i class="fa icon-note" title="Note"></i>
 </td>
 <td class="content">
-<a href="https://developer.enonic.com/docs/xp/stable/cms/styles" target="_blank" rel="noopener">The styles reference doc</a> has more information on how you can style your images, so go check it out for a deeper dive.
+<a href="https://developer.enonic.com/docs/cms/stable/richtext/styles">The styles reference doc</a> has more information on how you can style your images, so go check it out for a deeper dive.
 </td>
 </tr>
 </table>
@@ -795,6 +782,18 @@ You can also use <span class="keyseq"><kbd>ctrl</kbd>+<kbd>K</kbd></span> to ins
 </li>
 </ol>
 </div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+Image styles are offered from the apps assigned to your project. Your app is assigned, which is why the style shows up. The same goes for the macros we&#8217;ll look at next.
+</td>
+</tr>
+</table>
+</div>
 </div>
 </div>
 </div>
@@ -802,7 +801,7 @@ You can also use <span class="keyseq"><kbd>ctrl</kbd>+<kbd>K</kbd></span> to ins
 <h2 id="macros"><a class="link" href="#macros">Macros</a></h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>Macros enable you to insert custom components within your rich text field</p>
+<p>Macros enable you to insert custom components within your rich text field.</p>
 </div>
 <div class="paragraph">
 <p>When the content is rendered, the macro is replaced with the actual component implementation.</p>
@@ -813,7 +812,7 @@ You can also use <span class="keyseq"><kbd>ctrl</kbd>+<kbd>K</kbd></span> to ins
 <div class="sect2">
 <h3 id="task_embed_iframe_macro"><a class="link" href="#task_embed_iframe_macro">Task: Embed iframe macro</a></h3>
 <div class="paragraph">
-<p>The embed macro enable you to insert iframes. In this context, we&#8217;ll embed this <a href="https://www.youtube.com/watch?v=gr5EwZo_CHQ" target="_blank" rel="noopener">Lynx youtube video</a>.</p>
+<p>The embed macro enables you to insert iframes. In this context, we&#8217;ll embed this <a href="https://www.youtube.com/watch?v=gr5EwZo_CHQ">Lynx youtube video</a>.</p>
 </div>
 <div class="paragraph">
 <p>Let&#8217;s add the macro to the "Lynx" content item.</p>
@@ -844,13 +843,13 @@ You can also use <span class="keyseq"><kbd>ctrl</kbd>+<kbd>K</kbd></span> to ins
 <i class="fa icon-note" title="Note"></i>
 </td>
 <td class="content">
-This macro can&#8217;t be previewed because the Embed iframe macro does not includes a standard preview.
+This macro can&#8217;t be previewed because the Embed iframe macro does not include a standard preview.
 </td>
 </tr>
 </table>
 </div>
 <div class="paragraph">
-<p>As you&#8217;ll see in next section, when querying the description of an Animal content, you&#8217;ll be able to properly get the iframe we passed to "Embed iframe" macro and process it as you&#8217;d like in your front-end.</p>
+<p>As you&#8217;ll see in the next section, when querying the description of an Animal content, you&#8217;ll be able to properly get the iframe we passed to the "Embed iframe" macro and process it as you&#8217;d like in your front-end.</p>
 </div>
 <div class="admonitionblock tip">
 <table>
@@ -859,7 +858,7 @@ This macro can&#8217;t be previewed because the Embed iframe macro does not incl
 <i class="fa icon-tip" title="Tip"></i>
 </td>
 <td class="content">
-For more information on macros, including how to create your very own, visit to <a href="https://developer.enonic.com/docs/xp/stable/cms/macros" target="_blank" rel="noopener">the macro reference docs</a>.
+For more information on macros, including how to create your very own, visit <a href="https://developer.enonic.com/docs/cms/stable/richtext/macros">the macro reference docs</a>.
 </td>
 </tr>
 </table>
@@ -871,13 +870,10 @@ For more information on macros, including how to create your very own, visit to 
 <h2 id="graphql_api"><a class="link" href="#graphql_api">GraphQL API</a></h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>When fetching rich text via the API, the most commonly used output is "processed html". This is essentially unstyled, semantic HTML. It&#8217;s then up to you to style the content in your client.</p>
+<p>When fetching rich text via the API, the most commonly used output is "processed HTML". This is essentially unstyled, semantic HTML, and it&#8217;s up to your client to style it. Internal links, images and macros also need a little work from your client, as you will see below.</p>
 </div>
 <div class="paragraph">
-<p>Links, images and macros will potentially require additional client-side processing.</p>
-</div>
-<div class="paragraph">
-<p>The following query returns the "Lynx" content, and the <code>description</code> field al processed HTML.</p>
+<p>The following query returns the "Lynx" content, and the <code>description</code> field as processed HTML.</p>
 </div>
 <div class="listingblock">
 <div class="title">Fetching rich text via GraphQL API</div>
@@ -894,7 +890,7 @@ For more information on macros, including how to create your very own, visit to 
         }
       }
     ) {
-      ... on com_example_myapp_Animal {
+      ... on com_example_tutorial101_Animal {
         data {
           description {
             processedHtml
@@ -916,7 +912,7 @@ For more information on macros, including how to create your very own, visit to 
         {
           "data": {
             "description": {
-              "processedHtml": "&lt;p&gt;Lynx are cats, just like &lt;a href=\"/admin/site/preview/my-first-project/draft/animals/lion\" data-link-ref=\"8cc82fd1-9063-4604-9f51-5f059d7a5d2e\"&gt;lions&lt;/a&gt;.&lt;/p&gt;\n\n&lt;figure class=\"captioned editor-align-justify square-grayscale\"&gt;&lt;img alt=\"lynx.jpg\" src=\"/admin/site/preview/my-first-project/draft/_/image/be6bb93a-7d99-4ed2-b424-4e435b89f392:6a1e144ef4ebab19e9071794ad753130d5bb5497/width-768/lynx.jpg\" style=\"width:100%\" data-image-ref=\"4dced964-cd1c-445d-bb9f-80387467e165\"&gt;\n\n&lt;/figure&gt;\n\n&lt;p&gt;&lt;editor-macro data-macro-name=\"embed\" data-macro-ref=\"a1490c65-3654-4b29-9b1a-eb3894b6f59f\"&gt;&amp;lt;iframe title=\"YouTube video player\" src=\"https://www.youtube.com/embed/gr5EwZo_CHQ?si=IlkTGRuGVV7BxEOs\" height=\"315\" width=\"560\"&amp;gt;&amp;lt;/iframe&amp;gt;&lt;/editor-macro&gt;&lt;/p&gt;\n"
+              "processedHtml": "&lt;p&gt;Lynx are cats, just like &lt;a href=\"/animals/lion\" data-link-ref=\"8cc82fd1-9063-4604-9f51-5f059d7a5d2e\"&gt;lions&lt;/a&gt;.&lt;/p&gt;\n\n&lt;figure class=\"captioned editor-align-justify square-grayscale\"&gt;&lt;img alt=\"lynx.jpg\" src=\"/media:image/my-first-project:draft/be6bb93a-7d99-4ed2-b424-4e435b89f392:6a1e144ef4ebab19e9071794ad753130d5bb5497/width-768/lynx.jpg\" style=\"width:100%\" data-image-ref=\"4dced964-cd1c-445d-bb9f-80387467e165\"&gt;\n\n&lt;/figure&gt;\n\n&lt;p&gt;&lt;editor-macro data-macro-name=\"embed\" data-macro-ref=\"a1490c65-3654-4b29-9b1a-eb3894b6f59f\"&gt;&amp;lt;iframe title=\"YouTube video player\" src=\"https://www.youtube.com/embed/gr5EwZo_CHQ?si=IlkTGRuGVV7BxEOs\" height=\"315\" width=\"560\"&amp;gt;&amp;lt;/iframe&amp;gt;&lt;/editor-macro&gt;&lt;/p&gt;\n"
             }
           }
         }
@@ -933,11 +929,11 @@ For more information on macros, including how to create your very own, visit to 
 <div class="title">Processed HTML output</div>
 <div class="content">
 <pre class="highlight"><code class="language-html" data-lang="html">&lt;p&gt;
-  Lynx are cats, just like &lt;a href="/admin/site/preview/my-first-project/draft/animals/lion" data-link-ref="8cc82fd1-9063-4604-9f51-5f059d7a5d2e"&gt;lions&lt;/a&gt;.
+  Lynx are cats, just like &lt;a href="/animals/lion" data-link-ref="8cc82fd1-9063-4604-9f51-5f059d7a5d2e"&gt;lions&lt;/a&gt;.
 &lt;/p&gt;
 
 &lt;figure class="captioned editor-align-justify square-grayscale"&gt;
-  &lt;img alt="lynx.jpg" src="/admin/site/preview/my-first-project/draft/_/image/be6bb93a-7d99-4ed2-b424-4e435b89f392:6a1e144ef4ebab19e9071794ad753130d5bb5497/width-768/lynx.jpg" style="width:100%" data-image-ref="4dced964-cd1c-445d-bb9f-80387467e165"&gt;
+  &lt;img alt="lynx.jpg" src="/media:image/my-first-project:draft/be6bb93a-7d99-4ed2-b424-4e435b89f392:6a1e144ef4ebab19e9071794ad753130d5bb5497/width-768/lynx.jpg" style="width:100%" data-image-ref="4dced964-cd1c-445d-bb9f-80387467e165"&gt;
 &lt;/figure&gt;
 
 &lt;p&gt;
@@ -948,30 +944,15 @@ For more information on macros, including how to create your very own, visit to 
 </div>
 </div>
 <div class="paragraph">
-<p>With the excepton of macro&#8217;s this is all valid HTML. Below, you&#8217;ll learn more about handling these elements.</p>
+<p>With the exception of the macro, this is all valid HTML. Look closely at the link and the image, though. The <code>href</code> is the lion&#8217;s path within your project, and the <code>src</code> is the image&#8217;s path on the media API, with no host in front of it. These are defaults: Guillotine does not know where your front-end lives or how it routes its pages, so it leaves the final URL to you. Each element carries a reference attribute that points to structured data about the link or image, which is what your client uses to build the URL it wants. Below, you&#8217;ll learn how.</p>
 </div>
 <div class="sect2">
 <h3 id="links_2"><a class="link" href="#links_2">Links</a></h3>
 <div class="paragraph">
-<p>Looking specifically at the processed html link output above, the most interesting part is the <code>data-link-ref</code> attribute.</p>
-</div>
-<div class="admonitionblock note">
-<table>
-<tr>
-<td class="icon">
-<i class="fa icon-note" title="Note"></i>
-</td>
-<td class="content">
-Wondering why the href points to a location within the admin? No worries. Guillotine automatically generates contextual links. When deploying the API to production, you may customize the base url as needed.
-</td>
-</tr>
-</table>
+<p>Looking specifically at the processed HTML link output above, the most interesting part is the <code>data-link-ref</code> attribute.</p>
 </div>
 <div class="paragraph">
-<p>This example is an internal link, you may want access more details about it, for instance to override the URL, optimize accessibility etc.</p>
-</div>
-<div class="paragraph">
-<p>To acccess these details, you need to extend your query with the links field:</p>
+<p>This example is an internal link. To build the final URL, and to access more details about the target, extend your query with the <code>links</code> field:</p>
 </div>
 <div class="listingblock">
 <div class="title">Query for link details</div>
@@ -988,18 +969,24 @@ Wondering why the href points to a location within the admin? No worries. Guillo
         }
       }
     ) {
-      ... on com_example_myapp_Animal {
+      ... on com_example_tutorial101_Animal {
         data {
           description {
             processedHtml
             links {
-              ref
+              ref <i class="conum" data-value="1"></i><b>(1)</b>
               uri
-              content {
+              content { <i class="conum" data-value="2"></i><b>(2)</b>
                 displayName
                 _path
                 type
               }
+              pageUrl { <i class="conum" data-value="3"></i><b>(3)</b>
+                baseUrl
+                path
+                queryString
+              }
+              fragment
             }
           }
         }
@@ -1009,46 +996,60 @@ Wondering why the href points to a location within the admin? No worries. Guillo
 }</code></pre>
 </div>
 </div>
+<div class="colist arabic">
+<table>
+<tr>
+<td><i class="conum" data-value="1"></i><b>1</b></td>
+<td>Matches the <code>data-link-ref</code> attribute in the processed HTML.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="2"></i><b>2</b></td>
+<td>The content item the link points to.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="3"></i><b>3</b></td>
+<td>The components of the link&#8217;s page URL. <code>baseUrl</code> is the base URL configured for your project, and is <code>null</code> when you have not configured one.</td>
+</tr>
+</table>
+</div>
 <div class="paragraph">
 <p>By executing this query, you will get some more data. Specifically:</p>
 </div>
 <div class="listingblock">
 <div class="title">Link query result</div>
 <div class="content">
-<pre class="highlight"><code class="language-GraphQL" data-lang="GraphQL">...
+<pre class="highlight"><code class="language-json" data-lang="json">...
 "links": [
   {
-    "ref": "5c351456-b22f-4162-aad6-6d921c686544",
+    "ref": "8cc82fd1-9063-4604-9f51-5f059d7a5d2e",
     "uri": "content://89daa74e-1482-493d-9a22-8ec08acaf4f8",
     "content": {
       "displayName": "Lion",
       "_path": "/animals/lion",
-      "type": "com.example.myproject:animal"
-    }
+      "type": "com.example.tutorial101:animal"
+    },
+    "pageUrl": {
+      "baseUrl": null,
+      "path": "/animals/lion",
+      "queryString": ""
+    },
+    "fragment": ""
   }
 ]
 ...</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>As you can see, you now have access to the full name of the referenced item, as well as it&#8217;s type. Use the ref values from the HTML link element to match it with the specific link data - as you may have more than one link.</p>
+<p>You now have access to the full name and type of the referenced item, and to the parts of its URL. Match the <code>ref</code> value with the <code>data-link-ref</code> attribute in the HTML, as you may have more than one link, and replace the <code>href</code> with your front-end&#8217;s own route for the lion, for instance <code><a href="https://www.example.com/animals/lion" class="bare">https://www.example.com/animals/lion</a></code>. In a headless setup, your front-end decides what the URL of a content item looks like, not XP.</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="image_srcset"><a class="link" href="#image_srcset">Image srcset</a></h3>
+<h3 id="images_2"><a class="link" href="#images_2">Images</a></h3>
 <div class="paragraph">
-<p>In the processed HTML, you can see the <code>&lt;img&gt;</code> element with style attributes. Additionally, by looking more closely at the <code>src</code> value, you will find that the style settings are applied in the image service URL.</p>
-</div>
-<div class="literalblock">
-<div class="content">
-<pre>..../_/image/&lt;id&gt;:&lt;version&gt;/width-768/lynx.jpg</pre>
-</div>
+<p>Images work the same way: the <code>data-image-ref</code> attribute points to an entry in the <code>images</code> field, which holds the parts of every image URL. The default <code>src</code> is the media path, so the simplest fix is to prefix it with your media base URL - the same <code><a href="http://localhost:8080/api" class="bare">http://localhost:8080/api</a></code> you used in the <a href="files.ahtml">media chapter</a>.</p>
 </div>
 <div class="paragraph">
-<p>But wait, there&#8217;s more!</p>
-</div>
-<div class="paragraph">
-<p>If you want to optimize how fast images load on various devices, Guillotine can also return the image in multiple different sizes (using <a href="https://developer.mozilla.org/en-US/docs/Web/API/HTMLImageElement/srcset" target="_blank" rel="noopener">the <code>srcset</code> attribute (MDN)</a>). This is achieved by adding an argument to the <code>description</code> field:</p>
+<p>If you want to optimize how fast images load on various devices, Guillotine can also return the image in multiple different sizes (using <a href="https://developer.mozilla.org/en-US/docs/Web/API/HTMLImageElement/srcset">the <code>srcset</code> attribute (MDN)</a>). This is achieved by adding an argument to the <code>description</code> field:</p>
 </div>
 <div class="listingblock">
 <div class="title">Fetching rich text with <code>srcset</code></div>
@@ -1065,69 +1066,25 @@ Wondering why the href points to a location within the admin? No worries. Guillo
         }
       }
     ) {
-      ... on {project-name-query}_{content-type-2-Capitalized} {
+      ... on com_example_tutorial101_Animal {
         data {
           description(processHtml: {imageWidths: [200, 500]}) {
             processedHtml
-          }
-        }
-      }
-    }
-  }
-}</code></pre>
-</div>
-</div>
-<div class="paragraph">
-<p>This time, you should find the '&lt;img&gt;' element will include srcset with links to a 200w and 500w respectively.</p>
-</div>
-<div class="listingblock">
-<div class="title">Img tag, now with srcset</div>
-<div class="content">
-<pre class="highlight"><code class="language-Html" data-lang="Html">&lt;img alt="lynx.jpg"
-  src=".../width-768/lynx.jpg"
-  style="width:100%"
-  srcset=".../width-200/lynx jpg 200w,.../width-500/lynx.jpg 500w"
-  data-image-ref="c771dac7-8158-4791-92fb-18ebd5ef2fd3" /&gt;</code></pre>
-</div>
-</div>
-<div class="admonitionblock note">
-<table>
-<tr>
-<td class="icon">
-<i class="fa icon-note" title="Note"></i>
-</td>
-<td class="content">
-URLs about above were shortened for readability
-</td>
-</tr>
-</table>
-</div>
-</div>
-<div class="sect2">
-<h3 id="image_details"><a class="link" href="#image_details">Image details</a></h3>
-<div class="paragraph">
-<p>If you prefer to handle all details related to images yourself, or optimize the markup further, you may access more details about the image - like you did for links.</p>
-</div>
-<div class="listingblock">
-<div class="title">Get description with image style details</div>
-<div class="content">
-<pre class="highlight"><code class="language-GraphQL" data-lang="GraphQL">{
-  guillotine {
-    queryDsl(
-      query: {
-        term: {
-          field: "displayName",
-          value: {
-            string: "Lynx"
-          }
-        }
-      }
-    ) {
-      ... on com_example_myapp_Animal {
-        data {
-          description {
             images {
-              style {
+              ref <i class="conum" data-value="1"></i><b>(1)</b>
+              src { <i class="conum" data-value="2"></i><b>(2)</b>
+                path
+                queryString
+              }
+              srcset { <i class="conum" data-value="3"></i><b>(3)</b>
+                width
+                imageUrl {
+                  path
+                  queryString
+                }
+              }
+              style { <i class="conum" data-value="4"></i><b>(4)</b>
+                application
                 name
                 aspectRatio
                 filter
@@ -1141,17 +1098,59 @@ URLs about above were shortened for readability
 }</code></pre>
 </div>
 </div>
+<div class="colist arabic">
+<table>
+<tr>
+<td><i class="conum" data-value="1"></i><b>1</b></td>
+<td>Matches the <code>data-image-ref</code> attribute in the processed HTML.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="2"></i><b>2</b></td>
+<td>The components of the URL for the <code>src</code> attribute.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="3"></i><b>3</b></td>
+<td>One entry per requested width, for the <code>srcset</code> attribute.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="4"></i><b>4</b></td>
+<td>The image style you applied in the editor, including which app provides it.</td>
+</tr>
+</table>
+</div>
 <div class="paragraph">
-<p>You can extract the properties that you specified in your <code>styles.xml</code> previously:</p>
+<p>This time, you should find that the <code>&lt;img&gt;</code> element in the processed HTML includes a <code>srcset</code> with 200w and 500w candidates, and that the <code>images</code> entry holds the parts of each URL:</p>
 </div>
 <div class="listingblock">
-<div class="title">Additional result of fetching image styles</div>
+<div class="title">Image data</div>
 <div class="content">
 <pre class="highlight"><code class="language-json" data-lang="json">...
 "images": [
   {
+    "ref": "4dced964-cd1c-445d-bb9f-80387467e165",
+    "src": {
+      "path": "/media:image/my-first-project:draft/be6bb93a-7d99-4ed2-b424-4e435b89f392:6a1e144ef4ebab19e9071794ad753130d5bb5497/width-768/lynx.jpg",
+      "queryString": "?filter=hsbcolorize%280x000000%29%3B+grayscale%28%29%3B+border%286%2C+0x000000%29"
+    },
+    "srcset": [
+      {
+        "width": 200,
+        "imageUrl": {
+          "path": "/media:image/my-first-project:draft/be6bb93a-7d99-4ed2-b424-4e435b89f392:...../width-200/lynx.jpg",
+          "queryString": "?filter=..."
+        }
+      },
+      {
+        "width": 500,
+        "imageUrl": {
+          "path": "/media:image/my-first-project:draft/be6bb93a-7d99-4ed2-b424-4e435b89f392:...../width-500/lynx.jpg",
+          "queryString": "?filter=..."
+        }
+      }
+    ],
     "style": {
-      "name": "editor-style-grayscale",
+      "application": "com.example.tutorial101",
+      "name": "square-grayscale",
       "aspectRatio": "1:1",
       "filter": "hsbcolorize(0x000000); grayscale(); border(6, 0x000000)"
     }
@@ -1160,11 +1159,38 @@ URLs about above were shortened for readability
 ...</code></pre>
 </div>
 </div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+URLs above were shortened for readability.
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>Prefix each <code>path</code> with <code><a href="http://localhost:8080/api" class="bare">http://localhost:8080/api</a></code> and append its <code>queryString</code>, and you have working image URLs for both <code>src</code> and <code>srcset</code>. The <code>style</code> object shows the properties from your <code>style.yaml</code>, and the aspect ratio and filter are already baked into the paths.</p>
+</div>
+<div class="admonitionblock warning">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-warning" title="Warning"></i>
+</td>
+<td class="content">
+Use each image URL as it is returned, and don&#8217;t make other sizes by editing the width segment of a URL yourself. Ask Guillotine for the sizes you need with <code>imageWidths</code> instead.
+</td>
+</tr>
+</table>
+</div>
 </div>
 <div class="sect2">
 <h3 id="macros_2"><a class="link" href="#macros_2">Macros</a></h3>
 <div class="paragraph">
-<p>In the headless context, the client is responsible for rendering of your content. In the case of macros - this gets obvious.</p>
+<p>In the headless context, the client is responsible for rendering your content. In the case of macros - this gets obvious.</p>
 </div>
 <div class="paragraph">
 <p>In the processed HTML, each macro is represented by an <code>&lt;editor-macro&gt;</code> element containing a unique reference key. As for links and images, this reference can be used to access detailed data fields for the macro.</p>
@@ -1184,7 +1210,7 @@ URLs about above were shortened for readability
         }
       }
     ) {
-      ... on com_example_myapp_Animal {
+      ... on com_example_tutorial101_Animal {
         data {
           description {
             processedHtml
@@ -1217,7 +1243,7 @@ URLs about above were shortened for readability
 </div>
 </div>
 <div class="paragraph">
-<p>To access specific macros and fields, like for content type may use the full GraphQL schema. Try the following:</p>
+<p>To access specific macros and fields, like for content types, you may use the full GraphQL schema. Try the following:</p>
 </div>
 <div class="admonitionblock note">
 <table>
@@ -1246,7 +1272,7 @@ If you used a different macro than the "Embed iframe" macro, the query must be u
         }
       }
     ) {
-      ... on com_example_myapp_Animal {
+      ... on com_example_tutorial101_Animal {
         data {
           description {
             processedHtml
@@ -1291,15 +1317,26 @@ If you used a different macro than the "Embed iframe" macro, the query must be u
 </div>
 </div>
 <div class="paragraph">
-<p>By accessing the macro config, you are able to down drill into every single field, accessing all the details you actually you need.</p>
+<p>By accessing the macro config, you are able to drill down into every single field, accessing all the details you actually need.</p>
 </div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="summary"><a class="link" href="#summary">Summary</a></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>You have configured a rich text input, created links, styled images and inserted a macro, and seen how all three come back from the API as placeholders plus structured data for your front-end to render.</p>
+</div>
+<div class="paragraph">
+<p>Next up, <a href="mixins.ahtml">mixins</a> let you add fields to many content types at once.</p>
 </div>
 </div>
 </div>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2026-10-09 10:32:21 UTC
+Last updated 2026-10-09 12:40:35 UTC
 </div>
 </div>
 </body>

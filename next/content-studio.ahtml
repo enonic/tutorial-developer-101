@@ -5,8 +5,8 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="generator" content="Asciidoctor 2.0.26">
-<meta name="description" content="Get familiar with Content Studio and Content types, and start creating some content.">
-<title>Content studio and content creation</title>
+<meta name="description" content="Get familiar with Content Studio and content types, and start creating some content.">
+<title>Content Studio and content creation</title>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,300italic,400,400italic,600,600italic%7CNoto+Serif:400,400italic,700,700italic%7CDroid+Sans+Mono:400,700">
 <style>
 /*! Asciidoctor default stylesheet | MIT License | https://asciidoctor.org */
@@ -438,14 +438,14 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 </head>
 <body class="article toc2 toc-right">
 <div id="header">
-<h1>Content studio and content creation</h1>
+<h1>Content Studio and content creation</h1>
 <div id="toc" class="toc2">
 <div id="toctitle">Table of Contents</div>
 <ul class="sectlevel1">
 <li><a href="#content_studio">Content Studio</a>
 <ul class="sectlevel2">
 <li><a href="#task_your_first_project">Task: your first project</a></li>
-<li><a href="#assiging_an_app_to_a_project">Assiging an app to a project</a></li>
+<li><a href="#assigning_an_app_to_a_project">Assigning an app to a project</a></li>
 </ul>
 </li>
 <li><a href="#apps_vs_projects">Apps vs projects</a></li>
@@ -453,7 +453,6 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <ul class="sectlevel2">
 <li><a href="#task_your_first_content_type">Task: your first content type</a></li>
 <li><a href="#task_your_first_content_creation">Task: your first content creation</a></li>
-<li><a href="#content_type_validation">Content type validation</a></li>
 </ul>
 </li>
 <li><a href="#publishing_your_content">Publishing your content</a>
@@ -472,7 +471,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <p>In this chapter, we&#8217;ll give a short introduction to Content Studio, an app that serves as the main content management interface for XP, providing editors an efficient way of creating, and curating content without technical skills.</p>
 </div>
 <div class="paragraph">
-<p>For a more comprehensive overview, watch <a href="https://www.youtube.com/watch?v=tR9KHOcZOs0" target="_blank" rel="noopener">this short video on Content Studio basics</a> or head to the <a href="https://developer.enonic.com/docs/content-studio" target="_blank" rel="noopener">Content Studio reference documentation</a>.</p>
+<p>For a more comprehensive overview, head to the <a href="https://developer.enonic.com/docs/content-studio">Content Studio reference documentation</a>.</p>
 </div>
 <div class="admonitionblock note">
 <table>
@@ -481,7 +480,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <i class="fa icon-note" title="Note"></i>
 </td>
 <td class="content">
-The tasks and examples in this chapter are based on work done in previous chapters (starting with <a href="sandbox.ahtml">the sandboxes chapter</a>). If you want to follow along with the examples, make sure you&#8217;re all caught up.
+The tasks and examples in this chapter are based on work done in previous chapters (starting with <a href="setup.ahtml">the setup chapter</a>). If you want to follow along with the examples, make sure you&#8217;re all caught up.
 </td>
 </tr>
 </table>
@@ -506,6 +505,9 @@ If you wish to install or update an application, this can be done from <code>XP 
 </tr>
 </table>
 </div>
+<div class="paragraph">
+<p>Content Studio has three parts: a project bar across the top, a menu bar on the left, and a main panel that fills the rest. The menu bar holds the content navigator, items contributed by installed apps, and <strong>Settings</strong> at the very bottom. We will visit all of them during this tutorial.</p>
+</div>
 <div class="sect2">
 <h3 id="task_your_first_project"><a class="link" href="#task_your_first_project">Task: your first project</a></h3>
 <div class="paragraph">
@@ -513,15 +515,15 @@ If you wish to install or update an application, this can be done from <code>XP 
 </div>
 <div class="imageblock">
 <div class="content">
-<img src="media/content-studio-no-available-projects-found-dialog.png" alt="Content studio no available projects found dialog" width="816w">
+<img src="media/content-studio-no-available-projects-found-dialog.png" alt="Content Studio dialog offering to start the project wizard" width="816w">
 </div>
-<div class="title">Figure 1. No available projects found dialog</div>
+<div class="title">Figure 1. No projects found dialog</div>
 </div>
 <div class="paragraph">
 <p>Content Studio manages content, and content is organized in independent repositories, which are called <em>content projects</em>, or simply as <em>projects</em>.</p>
 </div>
 <div class="paragraph">
-<p>A project offer individual access control and permissions, as well as other settings to toggle features and language(s).</p>
+<p>A project offers individual access control and permissions, as well as other settings to toggle features and language(s).</p>
 </div>
 <div class="admonitionblock tip">
 <table>
@@ -536,47 +538,90 @@ Privileged users can manage projects via Content Studio settings.
 </table>
 </div>
 <div class="paragraph">
-<p>Now, head back to the project wizard dialog to create your first project:</p>
-</div>
-<div class="imageblock">
-<div class="content">
-<img src="media/content-studio-my-first-project.gif" alt="Content studio project creation wizard walkthrough." width="964w">
-</div>
-<div class="title">Figure 2. Creating your first project</div>
-</div>
-</div>
-<div class="sect2">
-<h3 id="assiging_an_app_to_a_project"><a class="link" href="#assiging_an_app_to_a_project">Assiging an app to a project</a></h3>
-<div class="paragraph">
-<p>Content Studio is a powerful app with a lot of features, and one of its main goal is to provide an awesome user experience for creating and curating content.</p>
-</div>
-<div class="paragraph">
-<p>Content is defined through content types (a concept we&#8217;ll introduce in the next section), which are defined and installed via applications.</p>
-</div>
-<div class="paragraph">
-<p>Therefore, if we want to enable Content Studio to manage a specific type of content, we need to access content studio in a project which has an app assigned to it, and in this app, this specific content should defined via a content type.</p>
-</div>
-<div class="paragraph">
-<p>With all this in mind, note that one of the last steps on the previous creation wizard was to assign your app to the project. If you followed along, you should have your app assigned to the your first project, and in case you missed it, no worries, let&#8217;s assign it to the created project:</p>
+<p>Click <b class="button">Start Project wizard</b> and follow the steps to create your first project:</p>
 </div>
 <div class="olist arabic">
 <ol class="arabic">
 <li>
-<p>On the green widget sidebar, click on settings</p>
+<p>Keep the default parent project and pick a default language, for instance <code>English</code>.</p>
 </li>
 <li>
-<p>Double click on the project you just created to edit it</p>
+<p>Choose the <code>Public</code> access mode. This lets anyone read published content, which is what we want for an API that is going to be open.</p>
 </li>
 <li>
-<p>Scroll down and on the "Applications" section, select the application you&#8217;ve previously deployed to this sandbox</p>
+<p>Keep the default roles. You are the super user, so you already have access.</p>
+</li>
+<li>
+<p>In the "Applications" step, select the app you deployed in the previous chapter.</p>
+</li>
+<li>
+<p>Give the project the display name "My First Project". The identifier is derived from it, and becomes <code>my-first-project</code>.</p>
 </li>
 </ol>
 </div>
 <div class="imageblock">
 <div class="content">
-<img src="media/content-studio-project-app-assignment.png" alt="Content studio assigning apps to projects walkthrough." width="547w">
+<img src="media/content-studio-my-first-project.gif" alt="Content Studio project creation wizard walkthrough." width="964w">
+</div>
+<div class="title">Figure 2. Creating your first project</div>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+The identifier cannot be changed later. Several later chapters refer to the project as <code>my-first-project</code>, so stick with that name if you want to copy their examples verbatim.
+</td>
+</tr>
+</table>
+</div>
+</div>
+<div class="sect2">
+<h3 id="assigning_an_app_to_a_project"><a class="link" href="#assigning_an_app_to_a_project">Assigning an app to a project</a></h3>
+<div class="paragraph">
+<p>Content Studio is a powerful app with a lot of features, and one of its main goals is to provide an awesome user experience for creating and curating content.</p>
+</div>
+<div class="paragraph">
+<p>Content is defined through content types (a concept we&#8217;ll introduce in the next section), which are defined and installed via applications.</p>
+</div>
+<div class="paragraph">
+<p>Therefore, if we want to enable Content Studio to manage a specific type of content, we need to access Content Studio in a project which has an app assigned to it, and in this app, this specific content should be defined via a content type.</p>
+</div>
+<div class="paragraph">
+<p>With all this in mind, note that one of the steps in the wizard was to assign your app to the project. If you followed along, you should have your app assigned to your first project, and in case you missed it, no worries, let&#8217;s assign it to the created project:</p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Click <strong>Settings</strong> at the bottom of the menu bar on the left</p>
+</li>
+<li>
+<p>Double click on the project you just created to edit it</p>
+</li>
+<li>
+<p>Scroll down and in the "Applications" section, select the application you&#8217;ve previously deployed to this sandbox</p>
+</li>
+</ol>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="media/content-studio-project-app-assignment.png" alt="Content Studio assigning apps to projects walkthrough." width="547w">
 </div>
 <div class="title">Figure 3. Assigning your first app to your first project</div>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+Only applications with a CMS descriptor (the <code>cms/cms.yaml</code> file you saw in the previous chapter) can be assigned to a project. The vanilla starter ships one, which is why your app shows up in the list.
+</td>
+</tr>
+</table>
 </div>
 </div>
 </div>
@@ -585,7 +630,7 @@ Privileged users can manage projects via Content Studio settings.
 <h2 id="apps_vs_projects"><a class="link" href="#apps_vs_projects">Apps vs projects</a></h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>We&#8217;ve reached a certain point in this guide where its worth giving a section to reiterate the differences between:</p>
+<p>We&#8217;ve reached a certain point in this guide where it&#8217;s worth giving a section to reiterate the differences between:</p>
 </div>
 <div class="olist arabic">
 <ol class="arabic">
@@ -601,20 +646,20 @@ Privileged users can manage projects via Content Studio settings.
 </ol>
 </div>
 <div class="paragraph">
-<p>An <code>XP project folder</code> is the folder containing the files needed in order to create an <code>XP app</code>. The folder was automatically generated from the Vanilla starter when we ran the command: <code>enonic project create</code>.</p>
+<p>An <code>XP project folder</code> is the folder containing the files needed in order to create an <code>XP app</code>. The folder was automatically generated from the Vanilla starter when we ran the command: <code>enonic create</code>.</p>
 </div>
 <div class="paragraph">
-<p>The <code>XP app</code> is the compiled file that is generated when you run the command <code>enonic project build</code> on the project root folder.</p>
+<p>The <code>XP app</code> is the compiled file that is generated when you run the command <code>enonic project build</code> (or <code>enonic dev</code>) in the project root folder.</p>
 </div>
 <div class="paragraph">
-<p>A <code>Content Project</code>, as explained above, is a place you can store content. Content can be created based on the apps you assign to a project.</p>
+<p>A <code>Content project</code>, as explained above, is a place you can store content. Content can be created based on the apps you assign to a project.</p>
 </div>
 <div class="paragraph">
 <p>In summary, you can have the following flow in mind:</p>
 </div>
 <div class="imageblock text-center">
 <div class="content">
-<img src="media/app-vs-projects-flow.png" alt="Simplied flow explaining the difference between an Enonic XP project folder and its files" width="300" height="and a Content Studio project">
+<img src="media/app-vs-projects-flow.png" alt="Simplified flow explaining the difference between an Enonic XP project folder and its files" width="300" height="and a Content Studio project">
 </div>
 </div>
 <div class="admonitionblock note">
@@ -624,7 +669,7 @@ Privileged users can manage projects via Content Studio settings.
 <i class="fa icon-note" title="Note"></i>
 </td>
 <td class="content">
-This flow is super simplified and there are a lot of details to each one of those boxes, but it should be sufficient to explain the main difference between those ideas and how they connect to eachother.
+This flow is super simplified and there are a lot of details to each one of those boxes, but it should be sufficient to explain the main difference between those ideas and how they connect to each other.
 </td>
 </tr>
 </table>
@@ -673,62 +718,59 @@ As mentioned before, content types are defined and installed via applications. I
 <div class="title">Figure 4. The target for your first content type</div>
 </div>
 <div class="paragraph">
-<p>Back to your preferred editor, make sure you&#8217;re in the project folder (<code>myapp/</code>) that you created in a previous chapter. All paths will be relative to this root folder.</p>
+<p>Back to your preferred editor, make sure you&#8217;re in the project folder (<code>tutorial101/</code>) that you created in a previous chapter. All paths will be relative to this root folder.</p>
 </div>
 <div class="olist arabic">
 <ol class="arabic">
 <li>
-<p>Create a directory for content types: <code>src/main/resources/site/content-types/</code>. XP is quite particular about project folder structure, so you need to put content types right where it expects to find them.</p>
+<p>Content types live in <code>src/main/resources/cms/content-types/</code>. The starter created this directory for you. XP is quite particular about project folder structure, so you need to put content types right where it expects to find them.</p>
 </li>
 <li>
-<p>Create a directory called <code>artist</code> in the newly created <code>content-types/</code> directory. XP expects all content types to have their own directories.</p>
+<p>Create a directory called <code>artist</code> in the <code>content-types/</code> directory. XP expects all content types to have their own directories.</p>
 </li>
 <li>
-<p>Within the <code>artist</code> directory, create a file called <code>artist.xml</code>. The file name must match the directory name  (except for the file extension). The full path to the content type from the project root should be <code>src/main/resources/site/content-types/artist/artist.xml</code>.</p>
+<p>Within the <code>artist</code> directory, create a file called <code>artist.yaml</code>. The file name must match the directory name (except for the file extension). The full path to the content type from the project root should be <code>src/main/resources/cms/content-types/artist/artist.yaml</code>.</p>
 </li>
 <li>
-<p>In the <code>artist.xml</code> file, place the following content:</p>
+<p>In the <code>artist.yaml</code> file, place the following content:</p>
 <div class="listingblock">
 <div class="title">The 'Artist' content type</div>
 <div class="content">
-<pre class="highlight"><code class="language-xml" data-lang="xml">&lt;content-type&gt;
-  &lt;display-name&gt;Artist&lt;/display-name&gt; <i class="conum" data-value="1"></i><b>(1)</b>
-  &lt;description&gt;Information about an artist&lt;/description&gt; <i class="conum" data-value="2"></i><b>(2)</b>
-  &lt;super-type&gt;base:structured&lt;/super-type&gt;
-  &lt;form&gt; <i class="conum" data-value="3"></i><b>(3)</b>
-
-    &lt;input name="name" type="TextLine"&gt; <i class="conum" data-value="4"></i><b>(4)</b>
-      &lt;label&gt;Name&lt;/label&gt;
-      &lt;help-text&gt;
-        The artist's name (if different from their professional moniker).
-      &lt;/help-text&gt;
-    &lt;/input&gt;
-
-    &lt;input type="TextArea" name="about"&gt;
-      &lt;label&gt;About the artist&lt;/label&gt;
-    &lt;/input&gt;
-
-  &lt;/form&gt;
-&lt;/content-type&gt;</code></pre>
+<pre class="highlight"><code class="language-yaml" data-lang="yaml">kind: "ContentType" <i class="conum" data-value="1"></i><b>(1)</b>
+title: "Artist" <i class="conum" data-value="2"></i><b>(2)</b>
+description: "Information about an artist" <i class="conum" data-value="3"></i><b>(3)</b>
+superType: "base:structured"
+form: <i class="conum" data-value="4"></i><b>(4)</b>
+  - type: "TextLine" <i class="conum" data-value="5"></i><b>(5)</b>
+    name: "name"
+    label: "Name"
+    helpText: "The artist's name (if different from their professional moniker)."
+  - type: "TextArea"
+    name: "about"
+    label: "About the artist"</code></pre>
 </div>
 </div>
 <div class="colist arabic">
 <table>
 <tr>
 <td><i class="conum" data-value="1"></i><b>1</b></td>
-<td>This is what will be displayed in Content Studio when creating new content.</td>
+<td>Every schema file starts by declaring what kind of schema it is.</td>
 </tr>
 <tr>
 <td><i class="conum" data-value="2"></i><b>2</b></td>
-<td>This is an optional description, but it is still recommended to add, as it will make life easier for your editors.</td>
+<td>This is what will be displayed in Content Studio when creating new content.</td>
 </tr>
 <tr>
 <td><i class="conum" data-value="3"></i><b>3</b></td>
-<td>This is where we specify which fields (aka inputs) this content type shall have, basically the form, as seen in Content Studio.</td>
+<td>This is an optional description, but it is still recommended to add, as it will make life easier for your editors.</td>
 </tr>
 <tr>
 <td><i class="conum" data-value="4"></i><b>4</b></td>
-<td>The <code>type</code> attribute specifies what kind of input input the user will see in Content Studio, and the <code>label</code> specifies how the input will be labeled.
+<td>This is where we specify which fields (aka inputs) this content type shall have, basically the form, as seen in Content Studio.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="5"></i><b>5</b></td>
+<td>The <code>type</code> specifies what kind of input the user will see in Content Studio, and the <code>label</code> specifies how the input will be labeled.
 <div class="admonitionblock note">
 <table>
 <tr>
@@ -736,7 +778,7 @@ As mentioned before, content types are defined and installed via applications. I
 <i class="fa icon-note" title="Note"></i>
 </td>
 <td class="content">
-Content types also have a large number of other, optional fields that we won&#8217;t get into here. If you&#8217;d like to learn more about this, consult <a href="https://developer.enonic.com/docs/xp/stable/cms/content-types" target="_blank" rel="noopener">the reference documentation</a>.
+Content types also have a number of other, optional settings that we won&#8217;t get into here. If you&#8217;d like to learn more about this, consult <a href="https://developer.enonic.com/docs/cms/stable/content/content-types">the reference documentation</a>.
 </td>
 </tr>
 </table>
@@ -748,8 +790,7 @@ Content types also have a large number of other, optional fields that we won&#82
 <i class="fa icon-note" title="Note"></i>
 </td>
 <td class="content">
-XP&#8217;s <code>input</code> elements are <em>not</em> the same as HTML <code>input</code> elements. To read more about it, <a href="input-types.ahtml">see the chapter on input types</a>
-.
+XP&#8217;s inputs are <em>not</em> the same as HTML <code>input</code> elements. To read more about them, <a href="input-types.ahtml">see the chapter on input types</a>.
 </td>
 </tr>
 </table>
@@ -758,18 +799,18 @@ XP&#8217;s <code>input</code> elements are <em>not</em> the same as HTML <code>i
 </table>
 </div>
 </li>
-<li>
-<p>Now run:</p>
-</li>
 </ol>
+</div>
+<div class="paragraph">
+<p>If <code>enonic dev</code> is still running from the previous chapter, it picks up the new file and redeploys your app. If not, start it again from the project folder:</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-shell" data-lang="shell">  enonic project dev</code></pre>
+<pre class="highlight"><code class="language-shell" data-lang="shell">enonic dev</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>This command will watch for changes under <code>myapp/</code> and redeploy as needed.</p>
+<p>If everything goes well, you should see your sandbox logs update now. And that&#8217;s the basics of creating new content types.</p>
 </div>
 <div class="admonitionblock tip">
 <table>
@@ -778,13 +819,10 @@ XP&#8217;s <code>input</code> elements are <em>not</em> the same as HTML <code>i
 <i class="fa icon-tip" title="Tip"></i>
 </td>
 <td class="content">
-Make sure you&#8217;re already running your sandbox with the <code>--dev</code> flag in another terminal, otherwise the sandbox will be started in detached mode, so you&#8217;ll lose logs. More on CLI&#8217;s dev command <a href="https://developer.enonic.com/docs/enonic-cli/stable/dev#dev" target="_blank" rel="noopener">here</a>.
+XP validates every schema when the app is deployed. A typo in a key, such as <code>helptext</code> instead of <code>helpText</code>, is rejected and reported in the sandbox log, so keep an eye on it whenever you change a schema.
 </td>
 </tr>
 </table>
-</div>
-<div class="paragraph">
-<p>If everything goes well, you should see your sandbox logs update now. And that&#8217;s the basics of creating new content types.</p>
 </div>
 <div class="paragraph">
 <p>Next, let&#8217;s go back to Content Studio and create some actual content!</p>
@@ -793,7 +831,7 @@ Make sure you&#8217;re already running your sandbox with the <code>--dev</code> 
 <div class="sect2">
 <h3 id="task_your_first_content_creation"><a class="link" href="#task_your_first_content_creation">Task: your first content creation</a></h3>
 <div class="paragraph">
-<p>Go back to content studio and make sure you are on the project you&#8217;ve created on the beginning of this chapter.</p>
+<p>Go back to Content Studio and make sure you are on the project you&#8217;ve created at the beginning of this chapter.</p>
 </div>
 <div class="paragraph">
 <p>Press <b class="button">New &#8230;&#8203;</b> to open a new dialog. You should see a content type called <code>Artist</code>.</p>
@@ -805,7 +843,7 @@ Make sure you&#8217;re already running your sandbox with the <code>--dev</code> 
 <i class="fa icon-note" title="Note"></i>
 </td>
 <td class="content">
-This content type is only visible there because of the update we did to the app, i.e, your app is responsible to be delivering the artist definition which content studio can use to actually create content.
+This content type is only visible there because of the update we did to the app, i.e, your app is responsible for delivering the artist definition which Content Studio can use to actually create content.
 </td>
 </tr>
 </table>
@@ -839,7 +877,7 @@ This content type is only visible there because of the update we did to the app,
 <li>
 <p>Use these details to fill in the form:</p>
 <div class="dlist">
-<div class="title">Artist details (<a href="https://en.wikipedia.org/wiki/Cardi_B" target="_blank" rel="noopener">Cardi B on Wikipedia</a>)</div>
+<div class="title">Artist details (<a href="https://en.wikipedia.org/wiki/Cardi_B">Cardi B on Wikipedia</a>)</div>
 <dl>
 <dt class="hdlist1">Name</dt>
 <dd>
@@ -859,9 +897,9 @@ This content type is only visible there because of the update we did to the app,
 </div>
 </li>
 <li>
-<p>Again, save and close the tab. Now repeat this process for these next two entries. Be aware that Content Studio lets you nest content, so if you try and create new content when "Cardi B" is selected in the hierarchy, it&#8217;ll nest the new content under "Cardi B". In this case, though, we want the artists to be nested directly under the current folder, so make sure "artists" folder is selected when you create new content.</p>
+<p>Again, save and close the tab. Now repeat this process for these next two entries. Be aware that Content Studio lets you nest content, so if you try and create new content when "Cardi B" is selected in the hierarchy, it&#8217;ll nest the new content under "Cardi B". In this case, though, we want the artists to be nested directly under the current folder, so make sure the "artists" folder is selected when you create new content.</p>
 <div class="dlist">
-<div class="title">Missy Elliott (<a href="https://en.wikipedia.org/wiki/Missy_Elliott" target="_blank" rel="noopener">Missy Elliott on Wikipedia</a>)</div>
+<div class="title">Missy Elliott (<a href="https://en.wikipedia.org/wiki/Missy_Elliott">Missy Elliott on Wikipedia</a>)</div>
 <dl>
 <dt class="hdlist1">Name</dt>
 <dd>
@@ -874,7 +912,7 @@ This content type is only visible there because of the update we did to the app,
 </dl>
 </div>
 <div class="dlist">
-<div class="title">P!nk (<a href="https://en.wikipedia.org/wiki/Pink_(singer)" target="_blank" rel="noopener">P!nk on Wikipedia</a>)</div>
+<div class="title">P!nk (<a href="https://en.wikipedia.org/wiki/Pink_(singer)">P!nk on Wikipedia</a>)</div>
 <dl>
 <dt class="hdlist1">Name</dt>
 <dd>
@@ -899,53 +937,29 @@ This content type is only visible there because of the update we did to the app,
 <div class="title">Figure 7. The hierarchy as it should look after creating some content</div>
 </div>
 </div>
-<div class="sect2">
-<h3 id="content_type_validation"><a class="link" href="#content_type_validation">Content type validation</a></h3>
-<div class="paragraph">
-<p>Enonic provides XML Schema Definitions (XSDs) for text editor integration and validation of your XML schemas. To use it, add the attribute <code>xmlns</code>, <code>xmlns:xsi</code>, and <code>xsi:schemaLocation</code> to your content types as shown below:</p>
-</div>
-<div class="listingblock">
-<div class="title">Using XSDs for schema validation of a content type definition.</div>
-<div class="content">
-<pre class="highlight"><code class="language-xml" data-lang="xml">&lt;?xml version="1.0" encoding="utf-8"?&gt;
-&lt;content-type
-    xmlns="urn:enonic:xp:model:1.0"
-    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-    xsi:schemaLocation="urn:enonic:xp:model:1.0 https://raw.githubusercontent.com/enonic/xp/master/modules/core/core-api/src/main/resources/META-INF/xsd/model.xsd"&gt;
-  &lt;display-name&gt;Content type display name&lt;/display-name&gt;
-
-  &lt;!-- rest of content elided for brevity --&gt;
-
-&lt;/content-type&gt;</code></pre>
-</div>
-</div>
-<div class="paragraph">
-<p>Note that in-editor schema validation depends on whether your text editor supports validating against XSD schemas or not. If your editor doesn&#8217;t support it out of the box, it may be available via a Language Server Protocol (LSP) client.</p>
-</div>
-</div>
 </div>
 </div>
 <div class="sect1">
 <h2 id="publishing_your_content"><a class="link" href="#publishing_your_content">Publishing your content</a></h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>You might have noticed the yellow circles with exclamation marks displayed on all the content we&#8217;ve been working on, both in the wizard and in the content grid. This is how Content Studio indicates whether something is published or not and whether there are any errors with it. There are four states:</p>
+<p>You might have noticed the status indicators displayed on all the content we&#8217;ve been working on, both in the wizard and in the content grid. This is how Content Studio indicates whether something is published or not and whether there are any errors with it.</p>
 </div>
 <div class="dlist">
 <dl>
-<dt class="hdlist1">Error (red circle with a cross)</dt>
+<dt class="hdlist1">Error</dt>
 <dd>
-<p>This indicates that there is something wrong with your content. Because XP uses structured content it can also validate content as it is created. If something doesn&#8217;t conform to the specified schema (for example: a required field has no value), it will fail to validate and be marked with this symbol.</p>
+<p>This indicates that there is something wrong with your content. Because XP uses structured content it can also validate content as it is created. If something doesn&#8217;t conform to the specified schema (for example: a required field has no value), it will fail to validate and be marked as invalid.</p>
 </dd>
-<dt class="hdlist1">Work in progress (yellow circle with exclamation mark)</dt>
+<dt class="hdlist1">Work in progress</dt>
 <dd>
-<p>This symbol indicates that this piece of content has unpublished changes. That could be either because this is new content that has never been published, or it could be because there have been changes to this piece of content since it was last published.</p>
+<p>This piece of content has unpublished changes. That could be either because this is new content that has never been published, or it could be because there have been changes to this piece of content since it was last published.</p>
 </dd>
-<dt class="hdlist1">Ready for publishing (green circle with a check mark)</dt>
+<dt class="hdlist1">Ready for publishing</dt>
 <dd>
 <p>This piece of content is marked as ready to be published.</p>
 </dd>
-<dt class="hdlist1">Published (no icon)</dt>
+<dt class="hdlist1">Published</dt>
 <dd>
 <p>This piece of content is published and has not been modified since.</p>
 </dd>
@@ -953,7 +967,7 @@ This content type is only visible there because of the update we did to the app,
 </div>
 <div class="imageblock">
 <div class="content">
-<img src="media/content-studio-content-status.png" alt="Three pieces of content displaying the three statuses that a piece of content can have" width="270w">
+<img src="media/content-studio-content-status.png" alt="Three pieces of content displaying different statuses" width="270w">
 </div>
 </div>
 <div class="paragraph">
@@ -962,7 +976,7 @@ This content type is only visible there because of the update we did to the app,
 <div class="sect2">
 <h3 id="branches"><a class="link" href="#branches">Branches</a></h3>
 <div class="paragraph">
-<p>Content Studio operates with two branches:</p>
+<p>Every content project has two branches:</p>
 </div>
 <div class="ulist">
 <ul>
@@ -1015,7 +1029,7 @@ You can also publish a piece of content by using the keyboard shortcut <span cla
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2026-10-09 10:32:21 UTC
+Last updated 2026-10-09 12:40:35 UTC
 </div>
 </div>
 </body>

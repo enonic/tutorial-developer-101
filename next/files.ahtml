@@ -449,21 +449,20 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <li><a href="#data_toolbox">Data Toolbox</a></li>
 </ul>
 </li>
-<li><a href="#attachment_service">Attachment service</a>
+<li><a href="#media_apis">Media APIs</a>
 <ul class="sectlevel2">
 <li><a href="#mediaurl">mediaUrl</a></li>
 </ul>
 </li>
 <li><a href="#images">Images</a>
 <ul class="sectlevel2">
-<li><a href="#image_service">Image service</a></li>
+<li><a href="#image_api">Image API</a></li>
 <li><a href="#image_form">Image form</a></li>
 <li><a href="#autofocus">Autofocus</a></li>
 </ul>
 </li>
 <li><a href="#graphql_api">GraphQL API</a>
 <ul class="sectlevel2">
-<li><a href="#general_media_type">General media type</a></li>
 <li><a href="#image_media_type">Image media type</a></li>
 </ul>
 </li>
@@ -487,7 +486,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <i class="fa icon-note" title="Note"></i>
 </td>
 <td class="content">
-The tasks and examples in this chapter are based on work done in previous chapters (starting with <a href="sandbox.ahtml">the sandboxes chapter</a>). If you want to follow along with the examples, make sure you&#8217;re all caught up. This chapter requires that you&#8217;ve got your site up and running.
+The tasks and examples in this chapter are based on work done in previous chapters (starting with <a href="setup.ahtml">the setup chapter</a>). If you want to follow along with the examples, make sure you&#8217;re all caught up.
 </td>
 </tr>
 </table>
@@ -503,10 +502,10 @@ The tasks and examples in this chapter are based on work done in previous chapte
 <div class="sect2">
 <h3 id="media_types"><a class="link" href="#media_types">Media types</a></h3>
 <div class="paragraph">
-<p>Media types are standard content types that ship with XP. When you upload a file to XP, XP will assign it one of these content types, also referred to as media types. The media type will be resoved from the file&#8217;s content. Some common media types are images, audio, video, and executables.</p>
+<p>Media types are standard content types that ship with XP. When you upload a file to XP, XP will assign it one of these content types, also referred to as media types. The media type will be resolved from the file&#8217;s content. Some common media types are images, audio, video, and executables.</p>
 </div>
 <div class="paragraph">
-<p>For a full overview of all the media types baked into XP, see the <a href="https://developer.enonic.com/docs/xp/stable/cms/content-types#media" target="_blank" rel="noopener">reference docs for media content types</a>.</p>
+<p>For a full overview of all the media types baked into XP, see the <a href="https://developer.enonic.com/docs/cms/stable/media">reference docs for media</a>.</p>
 </div>
 </div>
 <div class="sect2">
@@ -529,10 +528,10 @@ The tasks and examples in this chapter are based on work done in previous chapte
 <div class="olist arabic">
 <ol class="arabic">
 <li>
-<p>Find an image to upload. For the purposes of the tasks in this chapter, you should work with an image where the important part isn&#8217;t centered in the shot. If you have one yourself, feel free to use that. If not, how about using <a href="https://unsplash.com/photos/8oLnCRz7hwM" target="_blank" rel="noopener">this picture of a lion</a> by <a href="https://unsplash.com/@keyursphotography" target="_blank" rel="noopener">Keyur Nandaniya</a>?</p>
+<p>Find an image to upload. For the purposes of the tasks in this chapter, you should work with an image where the important part isn&#8217;t centered in the shot. If you have one yourself, feel free to use that. If not, how about using <a href="https://unsplash.com/photos/8oLnCRz7hwM">this picture of a lion</a> by <a href="https://unsplash.com/@keyursphotography">Keyur Nandaniya</a>?</p>
 </li>
 <li>
-<p>Create a folder for your images. Call it "images". Just like the "artist" folder we created previously, you may place the folder anywhere in your project structure.</p>
+<p>Create a folder for your images. Call it "images". Just like the "artists" folder we created previously, you may place the folder anywhere in your project structure.</p>
 </li>
 <li>
 <p>Open the "create content" dialog. Press the upload button to bring up your OS&#8217;s file browsing dialog and select your image. You can also drag and drop the image from your file system browser onto the dialog.</p>
@@ -546,7 +545,7 @@ The tasks and examples in this chapter are based on work done in previous chapte
 <div class="sect2">
 <h3 id="data_toolbox"><a class="link" href="#data_toolbox">Data Toolbox</a></h3>
 <div class="paragraph">
-<p>Like we saw in the chapter on content, Data Toolbox lets you view and edit your content. Images and other media are also available in Data Toolbox as content, but in addition to the same properties you saw previously, media also have a property called <code>attachment</code>. The attachment will essentially hold all the data from the file that you uploaded.</p>
+<p>Like we saw in the chapter on Data Toolbox, it lets you view and edit your content. Images and other media are also available in Data Toolbox as content, but in addition to the same properties you saw previously, media also have a property called <code>attachment</code>. The attachment will essentially hold all the data from the file that you uploaded.</p>
 </div>
 <div class="paragraph">
 <p>For instance, if you have a look at the image you uploaded earlier, you should see that it points to the image file you uploaded.</p>
@@ -601,33 +600,57 @@ The tasks and examples in this chapter are based on work done in previous chapte
 </div>
 </div>
 <div class="sect1">
-<h2 id="attachment_service"><a class="link" href="#attachment_service">Attachment service</a></h2>
+<h2 id="media_apis"><a class="link" href="#media_apis">Media APIs</a></h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>Uploading a file is only half the job. XP also includes and Attachment Service that lets you download the same file (now stored as an attachment within the content) when you need it.</p>
+<p>Uploading a file is only half the job. XP also includes APIs that let you download the same file (now stored as an attachment within the content) when you need it: the <em>attachment API</em> serves any file as it was uploaded, and the <em>image API</em> serves images, with scaling and filters applied on the fly.</p>
 </div>
 <div class="paragraph">
-<p>Essentially, what you need is a URL to download the specific attachment stored within your media:</p>
+<p>Both are served from your instance&#8217;s API base URL, which on your sandbox is <code><a href="http://localhost:8080/api" class="bare">http://localhost:8080/api</a></code>. We&#8217;ll see what the URLs look like in a moment.</p>
 </div>
 <div class="sect2">
 <h3 id="mediaurl"><a class="link" href="#mediaurl">mediaUrl</a></h3>
 <div class="paragraph">
-<p>To get the URL you may use the following GraphQL query. The mediaUrl field will return a link to the original file you uploaded.</p>
+<p>To get the URL of a media item&#8217;s file, use the <code>mediaUrl</code> field in GraphQL. It returns the <em>components</em> of the URL rather than a finished address, so that your front-end can decide which host to serve media from:</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-GraphQL" data-lang="GraphQL">query {
+<pre class="highlight"><code class="language-GraphQL" data-lang="GraphQL">{
   guillotine {
-    get(key: "/developer/media/ready-set-code.png") {
+    queryDsl(
+      query: {
+        term: {
+          field: "type",
+          value: {
+            string: "media:image"
+          }
+        }
+      }
+    ) {
       displayName
       type
-      ... on media_Image {
-        mediaUrl
+      ... on media_Image { <i class="conum" data-value="1"></i><b>(1)</b>
+        mediaUrl { <i class="conum" data-value="2"></i><b>(2)</b>
+          path
+          queryString
+        }
       }
     }
   }
 }</code></pre>
 </div>
+</div>
+<div class="colist arabic">
+<table>
+<tr>
+<td><i class="conum" data-value="1"></i><b>1</b></td>
+<td>This allows us to query fields that belong to the <code>media_Image</code> GraphQL type.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="2"></i><b>2</b></td>
+<td>The <code>mediaUrl</code> field (also available on all other media types) gives you the path from where the raw file can be downloaded.</td>
+</tr>
+</table>
 </div>
 <div class="paragraph">
 <p>If everything went fine, you should expect a response that looks something like this:</p>
@@ -637,15 +660,43 @@ The tasks and examples in this chapter are based on work done in previous chapte
 <pre class="highlight"><code class="language-json" data-lang="json">{
   "data": {
     "guillotine": {
-      "get": {
-        "displayName": "ready-set-code",
-        "type": "media:image",
-        "mediaUrl": "/site/preview/dev-portal/draft/_/attachment/inline/f7efd6e4-9eed-45d2-83b6-d088a7bdc685:8652e625afe7bbda595a190a3b8624e322dc9f1a/ready-set-code.png"
-      }
+      "queryDsl": [
+        {
+          "displayName": "lion",
+          "type": "media:image",
+          "mediaUrl": {
+            "path": "/media:attachment/my-first-project:draft/21f827e0-ba57-4824-b3bc-f101ae08568b:9475135781b315daad078d91c27746bc3222d024/lion.jpg",
+            "queryString": ""
+          }
+        }
+      ]
     }
   }
 }</code></pre>
 </div>
+</div>
+<div class="paragraph">
+<p>Put the API base URL in front of <code>path</code>, append <code>queryString</code>, and you have the address of your file. For the response above, that is:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>http://localhost:8080/api/media:attachment/my-first-project:draft/21f827e0-ba57-4824-b3bc-f101ae08568b:9475135781b315daad078d91c27746bc3222d024/lion.jpg</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Open it in your browser to see the original image you uploaded.</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+The path tells you which project and branch the file comes from. Because Query Playground was querying the draft branch, the context segment is <code>my-first-project:draft</code>. For published content on master it is just <code>my-first-project</code>. The long identifier is the content ID followed by a fingerprint that changes whenever the file does, which makes the URL safe to cache forever.
+</td>
+</tr>
+</table>
 </div>
 </div>
 </div>
@@ -657,15 +708,15 @@ The tasks and examples in this chapter are based on work done in previous chapte
 <p>One of the standard media content types is <code>media:image</code>. Images are important in content management, and as such, XP and Content Studio provide some interesting features to help you make the most of your images.</p>
 </div>
 <div class="sect2">
-<h3 id="image_service"><a class="link" href="#image_service">Image service</a></h3>
+<h3 id="image_api"><a class="link" href="#image_api">Image API</a></h3>
 <div class="paragraph">
-<p>Whenever XP serves you an image, the image is delivered via <a href="https://developer.enonic.com/docs/xp/stable/runtime/engines/site-engine/image-service" target="_blank" rel="noopener">XP&#8217;s image service</a>.</p>
+<p>Whenever XP serves you an image, the image is delivered via <a href="https://developer.enonic.com/docs/cms/stable/apis/image">XP&#8217;s image API</a>.</p>
 </div>
 <div class="paragraph">
-<p>The image service takes care of scaling and applying filters to your images based on parameters you give it. For instance, it&#8217;s common to want to have all images in a section conform to the same dimensions. But because images are generally of different shapes and sizes, this might require cropping the image. The image service takes care of that for you as long as you specify what you want.</p>
+<p>The image API takes care of scaling and applying filters to your images based on parameters you give it. For instance, it&#8217;s common to want to have all images in a section conform to the same dimensions. But because images are generally of different shapes and sizes, this might require cropping the image. The image API takes care of that for you as long as you specify what you want.</p>
 </div>
 <div class="paragraph">
-<p>The image service works in tandem with Content Studio&#8217;s image editing tools, so it respects crops, flips, and focal points that you create.</p>
+<p>The image API works in tandem with Content Studio&#8217;s image editing tools, so it respects crops, flips, and focal points that you create.</p>
 </div>
 </div>
 <div class="sect2">
@@ -675,7 +726,7 @@ The tasks and examples in this chapter are based on work done in previous chapte
 </div>
 <div class="imageblock">
 <div class="content">
-<img src="media/image-content-form.png" alt="A content form showing the image with image editing tools, inputs for caption, alternative text, copyright, and tags." width="621w}">
+<img src="media/image-content-form.png" alt="A content form showing the image with image editing tools, inputs for caption, alternative text, copyright, and tags." width="621w">
 </div>
 <div class="title">Figure 2. The image content form</div>
 </div>
@@ -725,7 +776,7 @@ Without setting a focal point, XP will focus around the center of the image when
 <i class="fa icon-tip" title="Tip"></i>
 </td>
 <td class="content">
-You can read more about <a href="https://enonic.com/blog/enonic-simplifies-image-problems" target="_blank" rel="noopener">how Enonic simplifies your everyday image problems</a> to get more info about how to use images in a traditional CMS model and for a quick overview of the autofocus feature.
+You can read more about <a href="https://enonic.com/blog/enonic-simplifies-image-problems">how Enonic simplifies your everyday image problems</a> to get more info about how to use images in a traditional CMS model and for a quick overview of the autofocus feature.
 </td>
 </tr>
 </table>
@@ -748,13 +799,13 @@ You can read more about <a href="https://enonic.com/blog/enonic-simplifies-image
 <div class="olist arabic">
 <ol class="arabic">
 <li>
-<p>Click the autofocus tool. A red circle will show up over the image. This circle indicates where the focal point is.</p>
+<p>Click the autofocus tool. A circle will show up over the image. This circle indicates where the focal point is.</p>
 </li>
 <li>
 <p>Move the circle onto the lion (or whatever your focal point is) and press "apply".</p>
 <div class="imageblock">
 <div class="content">
-<img src="media/image-editing-focal-point.png" alt="The lion image with a red circle indicating the focal point around its head." width="626w">
+<img src="media/image-editing-focal-point.png" alt="The lion image with a circle indicating the focal point around its head." width="626w">
 </div>
 <div class="title">Figure 4. The focal point editor</div>
 </div>
@@ -783,73 +834,15 @@ You can read more about <a href="https://enonic.com/blog/enonic-simplifies-image
 <p>Some functionality is shared between all media types, while other queries only work on specific media types.</p>
 </div>
 <div class="paragraph">
-<p>We&#8217;ll look at how to fetch general media and then have a closer look at what we can do with images and attachments.</p>
-</div>
-<div class="sect2">
-<h3 id="general_media_type"><a class="link" href="#general_media_type">General media type</a></h3>
-<div class="paragraph">
-<p>To get the resource URL of media you have uploaded, use the <code>mediaUrl</code> property on any media type. For instance, to get the URL of the raw image you uploaded previously, you could use a query like this:</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="highlight"><code class="language-GraphQL" data-lang="GraphQL">{
-  guillotine {
-    queryDsl(
-      query: {
-        term: {
-          field: "type",
-          value: {
-            string: "media:image"
-          }
-        }
-      }
-    ) {
-      displayName
-      ... on media_Image { <i class="conum" data-value="1"></i><b>(1)</b>
-        mediaUrl <i class="conum" data-value="2"></i><b>(2)</b>
-      }
-    }
-  }
-}</code></pre>
-</div>
-</div>
-<div class="colist arabic">
-<table>
-<tr>
-<td><i class="conum" data-value="1"></i><b>1</b></td>
-<td>This allows us to query properties that belong to the <code>media:Image</code> GraphQL type.</td>
-</tr>
-<tr>
-<td><i class="conum" data-value="2"></i><b>2</b></td>
-<td>The <code>mediaUrl</code> property (also available on all other media types) gives you a URL from where the raw file can be downloaded.</td>
-</tr>
-</table>
-</div>
-<div class="listingblock">
-<div class="title">The response would look something like this:</div>
-<div class="content">
-<pre class="highlight"><code class="language-json" data-lang="json">{
-  "data": {
-    "guillotine": {
-      "queryDsl": [
-        {
-          "displayName": "keyur-nandaniya-8oLnCRz7hwM-unsplash",
-          "mediaUrl": "/admin/site/preview/my-first-project/draft/_/attachment/inline/21f827e0-ba57-4824-b3bc-f101ae08568b:9475135781b315daad078d91c27746bc3222d024/keyur-nandaniya-8oLnCRz7hwM-unsplash.jpg"
-        }
-      ]
-    }
-  }
-}</code></pre>
-</div>
-</div>
+<p>We saw <code>mediaUrl</code> above, which works on any media type. Let&#8217;s have a closer look at what we can do with images.</p>
 </div>
 <div class="sect2">
 <h3 id="image_media_type"><a class="link" href="#image_media_type">Image media type</a></h3>
 <div class="paragraph">
-<p>XP supports a number of image manipulation functions on the fly. When querying for an image via the GraphQL API, you can use the <code>imageUrl</code> function to specify scale and filters for the result you want.</p>
+<p>XP supports a number of image manipulation functions on the fly. When querying for an image via the GraphQL API, you can use the <code>imageUrl</code> field to specify scale and filters for the result you want.</p>
 </div>
 <div class="paragraph">
-<p>The scale argument is <code>required</code> and allows you to specify how you want to crop the image. Common scaling functions include <em>block</em>, which allows you to specify width and height and <em>width</em> which scales the image proportionally to the specified width.</p>
+<p>The <code>scale</code> argument allows you to specify how you want to crop the image. Common scaling functions include <em>block</em>, which allows you to specify width and height, and <em>width</em>, which scales the image proportionally to the specified width. Leave it out, and you get the image as it was uploaded.</p>
 </div>
 <div class="admonitionblock tip">
 <table>
@@ -858,13 +851,13 @@ You can read more about <a href="https://enonic.com/blog/enonic-simplifies-image
 <i class="fa icon-tip" title="Tip"></i>
 </td>
 <td class="content">
-<a href="https://developer.enonic.com/docs/xp/stable/runtime/engines/site-engine/image-service#scaling_methods" target="_blank" rel="noopener">The scaling methods reference docs</a> show off all the available scaling functions with examples of how they affect the image.
+<a href="https://developer.enonic.com/docs/cms/stable/apis/image">The image API reference docs</a> show off all the available scaling functions with examples of how they affect the image.
 </td>
 </tr>
 </table>
 </div>
 <div class="paragraph">
-<p>As the name implies, the filters argument lets you apply filters to the image. Use filters to apply coloration functions and to rotate and flip images on the fly. To combine filters, separate them with a semicolon.</p>
+<p>As the name implies, the <code>filter</code> argument lets you apply filters to the image. Use filters to apply coloration functions and to rotate and flip images on the fly. To combine filters, separate them with a semicolon.</p>
 </div>
 <div class="admonitionblock tip">
 <table>
@@ -873,7 +866,7 @@ You can read more about <a href="https://enonic.com/blog/enonic-simplifies-image
 <i class="fa icon-tip" title="Tip"></i>
 </td>
 <td class="content">
-<a href="https://developer.enonic.com/docs/xp/stable/runtime/engines/site-engine/image-service#filters" target="_blank" rel="noopener">The filters documentation</a> has an exhaustive list of the available filters.
+The same page has an exhaustive list of the available filters.
 </td>
 </tr>
 </table>
@@ -899,9 +892,11 @@ You can read more about <a href="https://enonic.com/blog/enonic-simplifies-image
       displayName
       ... on media_Image {
         imageUrl( <i class="conum" data-value="1"></i><b>(1)</b>
-          type: absolute, <i class="conum" data-value="2"></i><b>(2)</b>
-          scale: "block(600,700)", <i class="conum" data-value="3"></i><b>(3)</b>
-          filter: "grayscale(); border(10, 0x000000)") <i class="conum" data-value="4"></i><b>(4)</b>
+          scale: "block(600,700)", <i class="conum" data-value="2"></i><b>(2)</b>
+          filter: "grayscale(); border(10, 0x000000)") { <i class="conum" data-value="3"></i><b>(3)</b>
+          path
+          queryString
+        }
       }
     }
   }
@@ -912,18 +907,14 @@ You can read more about <a href="https://enonic.com/blog/enonic-simplifies-image
 <table>
 <tr>
 <td><i class="conum" data-value="1"></i><b>1</b></td>
-<td>The <code>imageUrl</code> function lets you specify how you want the images to look.</td>
+<td>The <code>imageUrl</code> field lets you specify how you want the images to look.</td>
 </tr>
 <tr>
 <td><i class="conum" data-value="2"></i><b>2</b></td>
-<td>The <code>type</code> argument specifies whether the URL should be absolute or relative to the server.</td>
-</tr>
-<tr>
-<td><i class="conum" data-value="3"></i><b>3</b></td>
 <td>The scale argument specifies the dimensions of the image.</td>
 </tr>
 <tr>
-<td><i class="conum" data-value="4"></i><b>4</b></td>
+<td><i class="conum" data-value="3"></i><b>3</b></td>
 <td>The filter argument lets you apply filters.</td>
 </tr>
 </table>
@@ -939,8 +930,11 @@ You can read more about <a href="https://enonic.com/blog/enonic-simplifies-image
     "guillotine": {
       "queryDsl": [
         {
-          "displayName": "keyur-nandaniya-8oLnCRz7hwM-unsplash",
-          "imageUrl": "http://localhost:8080/admin/site/preview/my-first-project/draft/_/image/21f827e0-ba57-4824-b3bc-f101ae08568b:6d89657e4bfae6eaa62de22bd6fb63b2697f091d/block-600-700/keyur-nandaniya-8oLnCRz7hwM-unsplash.jpg?filter=grayscale%28%29%3B+border%2810%2C+0x000000%29"
+          "displayName": "lion",
+          "imageUrl": {
+            "path": "/media:image/my-first-project:draft/21f827e0-ba57-4824-b3bc-f101ae08568b:6d89657e4bfae6eaa62de22bd6fb63b2697f091d/block-600-700/lion.jpg",
+            "queryString": "?filter=grayscale%28%29%3B+border%2810%2C+0x000000%29"
+          }
         }
       ]
     }
@@ -949,13 +943,25 @@ You can read more about <a href="https://enonic.com/blog/enonic-simplifies-image
 </div>
 </div>
 <div class="paragraph">
-<p>Which, if you have followed the steps in this chapter, should show you something like this if you try and navigate to the <code>imageUrl</code> property value:</p>
+<p>As with <code>mediaUrl</code>, prefix the path with <code><a href="http://localhost:8080/api" class="bare">http://localhost:8080/api</a></code> and append the query string. If you have followed the steps in this chapter, the resulting address should show you something like this:</p>
 </div>
 <div class="imageblock">
 <div class="content">
-<img src="media/image-processed.jpg" alt="The lion image, cropped, in black and white, and flipped upside down." width="600w">
+<img src="media/image-processed.jpg" alt="The lion image, cropped, in black and white, with a black border." width="600w">
 </div>
 <div class="title">Figure 6. The processed image</div>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+Asking for scaled and filtered images is allowed when you query Guillotine&#8217;s own API endpoint, which is what Query Playground does. When Guillotine is mounted on a site instead, image transformations are turned off by default, so that visitors cannot generate endless variants of your images.
+</td>
+</tr>
+</table>
 </div>
 </div>
 </div>
@@ -964,7 +970,7 @@ You can read more about <a href="https://enonic.com/blog/enonic-simplifies-image
 <h2 id="summary"><a class="link" href="#summary">Summary</a></h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>You should now have a deep understanding of how media is stored, and accessed - as well as XP&#8217;s image handing and image service, including how to access it all from the GraphQL API.</p>
+<p>You should now have a deep understanding of how media is stored and accessed - as well as XP&#8217;s image handling and image API, including how to access it all from the GraphQL API.</p>
 </div>
 <div class="paragraph">
 <p>Pushing forward, it&#8217;s time to <a href="input-types.ahtml">have a closer look at the basic building blocks of the content forms; input types</a>.</p>
@@ -974,7 +980,7 @@ You can read more about <a href="https://enonic.com/blog/enonic-simplifies-image
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2026-10-09 10:32:21 UTC
+Last updated 2026-10-09 12:40:35 UTC
 </div>
 </div>
 </body>

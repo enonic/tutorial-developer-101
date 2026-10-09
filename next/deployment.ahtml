@@ -476,14 +476,14 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <p>Enonic Cloud is Enonic&#8217;s fully managed and hassle free hosting option. Sit back, relax and let Enonic take care of your infrastructure, monitoring, backups, etc.</p>
 </div>
 <div class="paragraph">
-<p>Enough with the sales pitch. Follow the steps below to get deploy your app on Enonic Cloud:</p>
+<p>Enough with the sales pitch. Follow the steps below to deploy your app on Enonic Cloud:</p>
 </div>
 <div class="sect2">
 <h3 id="task_install_application"><a class="link" href="#task_install_application">Task: Install application</a></h3>
 <div class="olist arabic">
 <ol class="arabic">
 <li>
-<p>Sign up by visiting <a href="https://cloud.enonic.com" target="_blank" rel="noopener">https://cloud.enonic.com</a> (no credit card needed)</p>
+<p>Sign up by visiting <a href="https://cloud.enonic.com">https://cloud.enonic.com</a> (no credit card needed)</p>
 </li>
 <li>
 <p>After accessing your account for the first time, make sure to choose the <code>free trial</code> plan</p>
@@ -498,7 +498,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <p>Create a new solution. Choose the <code>CMS essentials</code> template, and go with the default values</p>
 </li>
 <li>
-<p>Connect CLI to the cloud by running this command, and follow the instructions:</p>
+<p>Connect the CLI to the cloud by running this command, and follow the instructions:</p>
 <div class="listingblock">
 <div class="content">
 <pre class="highlight"><code class="language-bash" data-lang="bash">enonic cloud login</code></pre>
@@ -518,9 +518,12 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 </li>
 <li>
 <p>In the end, you should get something like this in your terminal:</p>
+</li>
+</ol>
+</div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-bash" data-lang="bash">bre@bre-enonic:~/tutorial/myproject$ enonic cloud login
+<pre>~/tutorial/{project-name}$ enonic cloud login
 
   Your login code is &lt;code&gt;
 
@@ -528,24 +531,21 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 
   Waiting for you to login ... success!
 
-  Session expires at: 2023-08-31 02:18:37 +0200 CEST
+  Session expires at: 2026-10-31 02:18:37 +0200 CEST
 
-bre@bre-enonic:~/tutorial/myproject$ enonic cloud app install
+~/tutorial/{project-name}$ enonic cloud app install
 
-  ? Deploy '/home/bre/tutorial/myproject/build/libs/myproject.jar' to 'bre1/guide101/production/xp7'. Is this correct? Yes
+  ? Deploy '/home/you/tutorial/{project-name}/build/libs/{project-name}.jar' to 'myorg/guide101/production/xp'. Is this correct? Yes
 
   Uploading jar [=======================================================================================] 100.00% 4s
 
-  Deploying jar to service 'bre1/guide101/production/xp7'
+  Deploying jar to service 'myorg/guide101/production/xp'
 
-  Success!</code></pre>
+  Success!</pre>
 </div>
-</div>
-</li>
-</ol>
 </div>
 <div class="paragraph">
-<p>To make sure it all worked, click on the red "launch" button on your Cloud console Dashboard, then access the "Applications" app, and check if your app is listed on the installed applications list.</p>
+<p>To make sure it all worked, click on the "launch" button on your Cloud console Dashboard, then open the "Applications" tool, and check if your app is listed on the installed applications list.</p>
 </div>
 </div>
 <div class="sect2">
@@ -567,7 +567,7 @@ bre@bre-enonic:~/tutorial/myproject$ enonic cloud app install
 </ul>
 </div>
 <div class="paragraph">
-<p>Lets try the second option, i.e, to export data locally and import on enonic cloud:</p>
+<p>Let&#8217;s try the second option, i.e, to export data locally and import on Enonic Cloud:</p>
 </div>
 <div class="admonitionblock warning">
 <table>
@@ -584,22 +584,22 @@ Before proceeding, access Content Studio on your cloud instance and make sure to
 <div class="olist arabic">
 <ol class="arabic">
 <li>
-<p>Access the Data toolbox app and go to "Data tree";</p>
+<p>Access the Data Toolbox app and go to "Data tree";</p>
 </li>
 <li>
-<p>Navigate to <code>com.enonic.cms.myfirstproject</code> &gt; <code>draft</code> &gt; <code>[root]</code>, then select <code>content</code> and click on "Export selected node";</p>
+<p>Navigate to <code>com.enonic.cms.my-first-project</code> &gt; <code>draft</code> &gt; <code>[root]</code>, then select <code>content</code> and click on "Export selected node";</p>
 </li>
 <li>
-<p>You&#8217;ll be redirected to the "Node exports" page. Now click on the export item and then on the top right icon that says "Archive and download selected node exports". This will download a zip file locally;</p>
+<p>You&#8217;ll be redirected to the "Node exports" page. Download the export, which is a zip file;</p>
 </li>
 <li>
-<p>Go back to your cloud instance, access Data toolbox "Node exports" page, click on "Upload and unarchive node exports" and then select the zip file downloaded on the previous step;</p>
+<p>Go back to your cloud instance, access the Data Toolbox "Node exports" page, upload the zip file downloaded in the previous step;</p>
 </li>
 <li>
-<p>Vist "Data tree" page on Data toolbox and navigate to <code>com.enonic.cms.&lt;name-of-your-cloud-project&gt;</code> &gt; <code>draft</code> &gt; <code>[root]</code>, click on "Import node export" and select the one that was created on the previous step;</p>
+<p>Visit the "Data tree" page in Data Toolbox and navigate to <code>com.enonic.cms.&lt;name-of-your-cloud-project&gt;</code> &gt; <code>draft</code> &gt; <code>[root]</code>, click on "Import node export" and select the one that was uploaded in the previous step;</p>
 </li>
 <li>
-<p>Now access Content Studio and check that your data is imported as it should. Make sure to publish everything to make it available on master branch.</p>
+<p>Now access Content Studio and check that your data is imported as it should. Make sure to publish everything to make it available on the master branch.</p>
 </li>
 </ol>
 </div>
@@ -625,24 +625,55 @@ Before proceeding, access Content Studio on your cloud instance and make sure to
 <p>Accept the default domain</p>
 </li>
 <li>
-<p>Use the internal path <code>/site/&lt;name-of-your-cloud-project&gt;/master</code></p>
+<p>Use the internal path <code>/api</code></p>
 </li>
 <li>
-<p>The public path could for instance be <code>/api</code></p>
+<p>Use the public path <code>/api</code> as well</p>
 </li>
 </ul>
 </div>
 </li>
 <li>
-<p>Congratulations, your API is now live and your content on master branch can be fetched at the <code>/api</code> route:</p>
+<p>Congratulations, your API is now live. The route exposes every API mounted on XP&#8217;s API endpoint: Guillotine at <code>/api/com.enonic.app.guillotine:graphql</code>, and the media APIs you met earlier, so that image and attachment paths work with the same base URL.</p>
+</li>
+</ol>
+</div>
+<div class="paragraph">
+<p>To try it out, use a GraphQL client such as <a href="https://altairgraphql.dev/">Altair</a>. Point it at your domain followed by <code>/api/com.enonic.app.guillotine:graphql</code>, use HTTP POST, and run a query. Outside Content Studio there is no selected project, so the query has to name the project and the branch:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-GraphQL" data-lang="GraphQL">{
+  guillotine(project: "&lt;name-of-your-cloud-project&gt;", branch: "master") {
+    getChildren(key: "/animals") {
+      displayName
+      ... on com_example_tutorial101_Animal {
+        data {
+          otherNames
+        }
+      }
+    }
+  }
+}</code></pre>
+</div>
+</div>
 <div class="imageblock">
 <div class="content">
 <img src="media/graphql-altair-querying-on-exposed-route.png" alt="Altair GraphQL client querying Lion animal data on the &quot;/api&quot; route defined on cloud console" width="1200">
 </div>
-<div class="title">Figure 2. Querying Lion data on /api route using Altair GraphQL client</div>
+<div class="title">Figure 2. Querying animal data on the /api route using the Altair GraphQL client</div>
 </div>
-</li>
-</ol>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+Only published content is readable without logging in, which is why the query asks for the <code>master</code> branch. Reading <code>draft</code> requires an authenticated user with a role in the project.
+</td>
+</tr>
+</table>
 </div>
 <div class="admonitionblock tip">
 <table>
@@ -651,7 +682,7 @@ Before proceeding, access Content Studio on your cloud instance and make sure to
 <i class="fa icon-tip" title="Tip"></i>
 </td>
 <td class="content">
-For more information on Enonic Cloud, visit <a href="https://enonic.com/pricing" target="_blank" rel="noopener">the Enonic Cloud marketing page</a>.
+For more information on Enonic Cloud, visit <a href="https://enonic.com/pricing">the Enonic Cloud marketing page</a>.
 </td>
 </tr>
 </table>
@@ -666,13 +697,13 @@ For more information on Enonic Cloud, visit <a href="https://enonic.com/pricing"
 <p>If Enonic Cloud isn&#8217;t your thing, you need to start by getting the platform (Enonic XP) up and running, before you can actually deploy your application.</p>
 </div>
 <div class="paragraph">
-<p>Enonic XP is compatibile with just about any public cloud out there. There&#8217;s a number of different deployment strategies and subscription options to choose from, based on what suits your particular situation best.</p>
+<p>Enonic XP is compatible with just about any public cloud out there. There&#8217;s a number of different deployment strategies and subscription options to choose from, based on what suits your particular situation best.</p>
 </div>
 <div class="paragraph">
 <p>Setting up the entire platform is beyond the scope of this tutorial. As such, we&#8217;ll focus on the steps required for getting your app live - assuming you already have the platform running.</p>
 </div>
 <div class="paragraph">
-<p>For more details on deplying the platform, check out <a href="https://developer.enonic.com/docs/xp/stable/deployment" target="_blank" rel="noopener">the Deployment section of the XP reference docs</a>.</p>
+<p>For more details on deploying the platform, check out <a href="https://developer.enonic.com/docs/platform/stable/deployment">the Deployment section of the XP platform docs</a>.</p>
 </div>
 <div class="sect2">
 <h3 id="installing_the_app"><a class="link" href="#installing_the_app">Installing the app</a></h3>
@@ -680,7 +711,7 @@ For more information on Enonic Cloud, visit <a href="https://enonic.com/pricing"
 <p>Regardless of how you deploy your XP instance, installing your app is commonly done in one of two ways:</p>
 </div>
 <div class="paragraph">
-<p>First alternative is via Admin console. Follow these simple steps:</p>
+<p>The first alternative is via the admin console. Follow these simple steps:</p>
 </div>
 <div class="admonitionblock note">
 <table>
@@ -697,7 +728,7 @@ Your application executable (*.jar file) can be found in <code>project-folder/bu
 <div class="olist arabic">
 <ol class="arabic">
 <li>
-<p>Log into the XP admin console (user must have Administrator priveliges)</p>
+<p>Log into the XP admin console (user must have Administrator privileges)</p>
 </li>
 <li>
 <p>From the XP menu, open the Applications tool.</p>
@@ -714,39 +745,36 @@ Your application executable (*.jar file) can be found in <code>project-folder/bu
 </ol>
 </div>
 <div class="paragraph">
-<p>Second alternative is via API:</p>
+<p>The second alternative is via API:</p>
 </div>
 <div class="paragraph">
-<p>If you have access to your server&#8217;s management API (available on port 4848), you can also deploy directly via this endpoint, or by using <a href="https://developer.enonic.com/docs/enonic-cli/stable/xp#app" target="_blank" rel="noopener">the CLI</a>.</p>
+<p>If you have access to your server&#8217;s management API (available on port 4848), you can also deploy directly via this endpoint, or by using <a href="https://developer.enonic.com/docs/enonic-cli/stable/xp#app">the CLI</a>.</p>
 </div>
 <div class="paragraph">
-<p>This approach is most commonly used in a <a href="https://developer.enonic.com/guides/ci-cd-for-xp-apps" target="_blank" rel="noopener">Continuous Integration/Delivery</a> setup, where your build server automatically checks out, builds and installs the application.</p>
+<p>This approach is most commonly used in a Continuous Integration/Delivery setup, where your build server automatically checks out, builds and installs the application.</p>
 </div>
 </div>
 <div class="sect2">
 <h3 id="vhosts"><a class="link" href="#vhosts">Virtual hosts = pretty URLs</a></h3>
 <div class="paragraph">
-<p>When accessing XP resources such as the GraphQL API explorer in this tutorial, the URLs have been long and unsightly. In a production setting you want short, pretty URLs that are easy to remember. Virtual host (<em>vhosts</em>) configuration lets you do just that.</p>
+<p>In a production setting you want short, memorable URLs on your own domain. Virtual host (<em>vhosts</em>) configuration lets you do just that.</p>
 </div>
 <div class="paragraph">
-<p>Setting up a vhost is only required once per application/site you want deploy.</p>
+<p>Vhosts are defined in a configuration file in your XP instance&#8217;s <code>config</code> directory. This file contains mappings from public-facing URLs to internal URLs.</p>
 </div>
 <div class="paragraph">
-<p>Vhosts can be defined in your sandbox&#8217;s configuration directory. This file contains mappings from public-facing URLs to internal URLs.</p>
-</div>
-<div class="paragraph">
-<p>For instance, this lets the user access <code>myapp.com/api</code> and while retrieving content from <code>/site/myapp/master/</code>.</p>
+<p>For instance, this lets a client access <code>tutorial101.com/api</code> while XP serves the request from its internal <code>/api</code> endpoint, exactly like the Cloud route you created above.</p>
 </div>
 <div class="paragraph">
 <p>An example vhosts file that achieves the mapping mentioned would look something like this:</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre>enabled = true <i class="conum" data-value="1"></i><b>(1)</b>
+<pre class="highlight"><code class="language-properties" data-lang="properties">enabled = true <i class="conum" data-value="1"></i><b>(1)</b>
 
-mapping.example.host = myapp.com/api <i class="conum" data-value="2"></i><b>(2)</b>
-mapping.example.source = / <i class="conum" data-value="3"></i><b>(3)</b>
-mapping.example.target = /site/myapp/master <i class="conum" data-value="4"></i><b>(4)</b></pre>
+mapping.api.host = tutorial101.com <i class="conum" data-value="2"></i><b>(2)</b>
+mapping.api.source = /api <i class="conum" data-value="3"></i><b>(3)</b>
+mapping.api.target = /api <i class="conum" data-value="4"></i><b>(4)</b></code></pre>
 </div>
 </div>
 <div class="colist arabic">
@@ -757,7 +785,7 @@ mapping.example.target = /site/myapp/master <i class="conum" data-value="4"></i>
 </tr>
 <tr>
 <td><i class="conum" data-value="2"></i><b>2</b></td>
-<td>For all requests to <code>my-first-site.com/api</code></td>
+<td>For all requests to <code>tutorial101.com</code></td>
 </tr>
 <tr>
 <td><i class="conum" data-value="3"></i><b>3</b></td>
@@ -769,27 +797,42 @@ mapping.example.target = /site/myapp/master <i class="conum" data-value="4"></i>
 </tr>
 </table>
 </div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+Guillotine serves every project from this one endpoint, and the query names the project and branch. If you want a mapping dedicated to a single project, or you want to serve the API from a site, head to <a href="https://developer.enonic.com/docs/guillotine/stable/setup">the Guillotine setup docs</a>, which also explains how to allow image scaling on such mappings.
+</td>
+</tr>
+</table>
+</div>
 <div class="paragraph">
-<p>For more details on virtual hosts, head to the <a href="https://developer.enonic.com/docs/xp/stable/deployment/vhosts"><em>Vhosts</em> section of the deployment documentation</a>.</p>
+<p>For more details on virtual hosts, head to the <a href="https://developer.enonic.com/docs/platform/stable/config/vhosts"><em>Vhosts</em> section of the platform documentation</a>.</p>
 </div>
 </div>
 <div class="sect2">
 <h3 id="task_setup_vhosts_in_your_sandbox"><a class="link" href="#task_setup_vhosts_in_your_sandbox">Task: Setup vhosts in your Sandbox</a></h3>
 <div class="paragraph">
-<p>To explore how vhost mappings work, let&#8217;s configure vhosts for your local XP instance, then, to test it, we&#8217;ll have override your computer&#8217;s DNS resolver by updating it&#8217;s <code>hosts</code> file.</p>
+<p>To explore how vhost mappings work, let&#8217;s configure vhosts for your local XP instance, then, to test it, we&#8217;ll override your computer&#8217;s DNS resolver by updating its <code>hosts</code> file.</p>
 </div>
 <div class="olist arabic">
 <ol class="arabic">
 <li>
-<p>Find and open your sandbox&#8217;s vhosts file. From your user&#8217;s home directory, the path will be <code>.enonic/sandboxes/&lt;sandbox-name&gt;/home/config/com.enonic.xp.web.vhost.cfg</code>, where <code>&lt;sandbox-name&gt;</code> varies depending on which sandbox you want to configure. For instance, it might be <code>Sandbox1</code>.</p>
+<p>Find and open your sandbox&#8217;s vhosts file. From your user&#8217;s home directory, the path will be <code>.enonic/sandboxes/&lt;sandbox-name&gt;/home/config/com.enonic.xp.web.vhost.cfg</code>, where <code>&lt;sandbox-name&gt;</code> varies depending on which sandbox you want to configure. For the sandbox created in this tutorial, it is <code>tutorial</code>.</p>
 </li>
 <li>
 <p>Update the vhosts file.</p>
+</li>
+</ol>
+</div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-config" data-lang="config">enabled = true
+<pre>enabled = true
 
-mapping.admin.host = xp-admin.com <i class="conum" data-value="1"></i><b>(1)</b>
+mapping.admin.host = {vhost-host} <i class="conum" data-value="1"></i><b>(1)</b>
 mapping.admin.source = /
 mapping.admin.target = /admin
 mapping.admin.idProvider.system = default
@@ -797,36 +840,32 @@ mapping.admin.idProvider.system = default
 mapping.localhost.host = localhost <i class="conum" data-value="2"></i><b>(2)</b>
 mapping.localhost.source = /
 mapping.localhost.target = /
-mapping.localhost.idProvider.system = default</code></pre>
-</div>
-</div>
-<div class="colist arabic">
-<table>
-<tr>
-<td><i class="conum" data-value="1"></i><b>1</b></td>
-<td>If requests go to <code>xp-admin.com:8080</code>, send them to <code>:8080/admin</code></td>
-</tr>
-<tr>
-<td><i class="conum" data-value="2"></i><b>2</b></td>
-<td>This block allows the localhost mappings to keep working. Without this, <code>localhost:8080</code> wouldn&#8217;t work anymore.</td>
-</tr>
-</table>
-</div>
-</li>
-<li>
-<p>If you&#8217;re watching your XP process, you should see a message like this:</p>
-<div class="literalblock">
-<div class="content">
-<pre>2021-06-09 13:49:43,405 INFO  c.e.x.s.i.config.ConfigInstallerImpl - Loaded config for [com.enonic.xp.web.vhost]
-2021-06-09 13:49:43,411 INFO  c.e.x.w.v.i.c.VirtualHostServiceImpl - Virtual host is enabled and mappings updated.</pre>
+mapping.localhost.idProvider.system = default</pre>
 </div>
 </div>
 <div class="paragraph">
-<p>This means that XP has updated the mappings and is ready to go.</p>
+<p>+
+&lt;1&gt; If requests go to <code>xp-admin.com:8080</code>, send them to <code>:8080/admin</code>
+&lt;2&gt; This block allows the localhost mappings to keep working. Without this, <code>localhost:8080</code> wouldn&#8217;t work anymore.</p>
 </div>
-</li>
+<div class="paragraph">
+<p>+
+. If you&#8217;re watching your XP process, you should see a message like this:</p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>[...] INFO  c.e.x.s.i.config.ConfigInstallerImpl - Loaded config for [com.enonic.xp.web.vhost]
+[...] INFO  c.e.x.w.v.i.c.VirtualHostServiceImpl - Virtual host is enabled and mappings updated.</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>+
+This means that XP has updated the mappings and is ready to go.</p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
 <li>
-<p>To test this out, update your local hosts file (<a href="https://en.wikipedia.org/wiki/Hosts_%28file%29" target="_blank" rel="noopener"><em>hosts file</em> on Wikipedia</a>) to point <code>xp-admin.com</code> to <code>127.0.0.1</code> by adding the following line to the file:</p>
+<p>To test this out, update your local hosts file (<a href="https://en.wikipedia.org/wiki/Hosts_%28file%29"><em>hosts file</em> on Wikipedia</a>) to point <code>xp-admin.com</code> to <code>127.0.0.1</code> by adding the following line to the file:</p>
 <div class="listingblock">
 <div class="content">
 <pre class="highlight"><code class="language-conf" data-lang="conf">127.0.0.1 xp-admin.com</code></pre>
@@ -846,7 +885,7 @@ On Linux and macOS you&#8217;ll find the hosts file at <code>/etc/hosts</code>. 
 </div>
 </li>
 <li>
-<p>Now access <code><a href="http://xp-admin.com:8080" target="_blank" rel="noopener">http://xp-admin.com:8080</a></code> in your browser. If all has gone well, you should see the familiar XP login screen.</p>
+<p>Now access <code><a href="http://xp-admin.com:8080" class="bare">http://xp-admin.com:8080</a></code> in your browser. If all has gone well, you should see the familiar XP login screen.</p>
 </li>
 </ol>
 </div>
@@ -854,11 +893,11 @@ On Linux and macOS you&#8217;ll find the hosts file at <code>/etc/hosts</code>. 
 <div class="sect2">
 <h3 id="vhost_troubleshooting"><a class="link" href="#vhost_troubleshooting">Vhost troubleshooting</a></h3>
 <div class="paragraph">
-<p>If you&#8217;re not seeing anything when you direct your browser to <code><a href="http://xp-admin.com:8080" target="_blank" rel="noopener">http://xp-admin.com:8080</a></code> or aren&#8217;t able to access the resources, that may be due to a browser setting. Try using a different browser and see if that makes a difference. Alternatively, you can try running</p>
+<p>If you&#8217;re not seeing anything when you direct your browser to <code><a href="http://xp-admin.com:8080" class="bare">http://xp-admin.com:8080</a></code> or aren&#8217;t able to access the resources, that may be due to a browser setting. Try using a different browser and see if that makes a difference. Alternatively, you can try running</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-bash" data-lang="bash">curl -v xp-admin.com:8080/tools</code></pre>
+<pre class="highlight"><code class="language-bash" data-lang="bash">curl -v xp-admin.com:8080/</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -866,11 +905,11 @@ On Linux and macOS you&#8217;ll find the hosts file at <code>/etc/hosts</code>. 
 </div>
 <div class="listingblock">
 <div class="content">
-<pre>* Connected to xp-admin.com (127.0.0.1) port 8080 (#0)</pre>
+<pre>* Connected to xp-admin.com (127.0.0.1) port 8080</pre>
 </div>
 </div>
 <div class="paragraph">
-<p>and you should get a massive block of HTML printed to the terminal.
+<p>and you should get a block of HTML printed to the terminal.
 This HTML is the content of the login page in raw form.</p>
 </div>
 <div class="paragraph">
@@ -883,21 +922,21 @@ This HTML is the content of the login page in raw form.</p>
 <h2 id="whats_next"><a class="link" href="#whats_next">What&#8217;s next?</a></h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>Congrats! You&#8217;ve reached the end of this introduction. If you&#8217;d like to go further now, try one of the following guides which introduce additional aspects of the Enonic experience?</p>
+<p>Congrats! You&#8217;ve reached the end of this introduction. If you&#8217;d like to go further now, try one of the following guides which introduce additional aspects of the Enonic experience:</p>
 </div>
 <div class="dlist">
 <dl>
-<dt class="hdlist1"><a href="https://developer.enonic.com/guides/my-first-site">My first site</a></dt>
+<dt class="hdlist1"><a href="https://developer.enonic.com/docs/intro">Introduction to Enonic</a></dt>
 <dd>
 <p>Building a website with the Enonic Framework (no 3rd party framework required). This tutorial also introduces the concept of pages, and building blocks such as regions, parts, and page templates.</p>
 </dd>
 <dt class="hdlist1"><a href="https://developer.enonic.com/docs/next.xp">Building sites with Enonic and Next.js</a></dt>
 <dd>
-<p>Everything you need to start building Next.js-based sites with Enonic as your CMS - including full WYSIWYG editing. This tutorial also introduces the concept of pages, and building blocks such as regions, parts, and page templates.</p>
+<p>Everything you need to start building Next.js-based sites with Enonic as your CMS - including full WYSIWYG editing.</p>
 </dd>
-<dt class="hdlist1"><a href="https://developer.enonic.com/guides/my-first-webapp">My first webapp</a></dt>
+<dt class="hdlist1"><a href="https://developer.enonic.com/docs/graphql-tutorial">Building a custom GraphQL API</a></dt>
 <dd>
-<p>Build and service webapps directly using the Enonic framework. Focuses on JavaScript controllers, serving assets, and basic routing.</p>
+<p>Go beyond Guillotine and build your own GraphQL API on Enonic XP, with mutations and subscriptions.</p>
 </dd>
 </dl>
 </div>
@@ -906,7 +945,7 @@ This HTML is the content of the login page in raw form.</p>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2026-10-09 10:32:21 UTC
+Last updated 2026-10-09 12:40:35 UTC
 </div>
 </div>
 </body>

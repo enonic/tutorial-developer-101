@@ -5,8 +5,8 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="generator" content="Asciidoctor 2.0.26">
-<meta name="description" content="Introducing a fundamental concept of Enonic XP development: sandboxes.">
-<title>Sandbox</title>
+<meta name="description" content="Mixins are a way for you to add extra fields to all your content types in a simple manner. This chapter covers what they are and how to use them.">
+<title>Mixins</title>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,300italic,400,400italic,600,600italic%7CNoto+Serif:400,400italic,700,700italic%7CDroid+Sans+Mono:400,700">
 <style>
 /*! Asciidoctor default stylesheet | MIT License | https://asciidoctor.org */
@@ -438,16 +438,13 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 </head>
 <body class="article toc2 toc-right">
 <div id="header">
-<h1>Sandbox</h1>
+<h1>Mixins</h1>
 <div id="toc" class="toc2">
 <div id="toctitle">Table of Contents</div>
 <ul class="sectlevel1">
-<li><a href="#what_is_a_sandbox">What is a sandbox?</a></li>
-<li><a href="#your_first_sandbox">Your first sandbox</a></li>
-<li><a href="#stopping_and_starting">Stopping and starting</a></li>
-<li><a href="#xp_admin">XP Admin</a></li>
-<li><a href="#troubleshooting">Troubleshooting</a></li>
-<li><a href="#summary">Summary</a></li>
+<li><a href="#your_first_mixin">Your first mixin</a></li>
+<li><a href="#headless">Headless</a></li>
+<li><a href="#bonus_seo_metafields">Bonus: SEO Metafields</a></li>
 </ul>
 </div>
 </div>
@@ -455,150 +452,25 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <div id="preamble">
 <div class="sectionbody">
 <div class="paragraph">
-<p>In this chapter we&#8217;ll introduce a fundamental concept to start developing with Enonic XP - <strong>Sandboxes</strong></p>
+<p>Mixins are a smart way of dynamically extending existing content types with more fields.</p>
 </div>
 <div class="paragraph">
-<p>By the end, you&#8217;ll have created and started a sandbox using the CLI, understanding what it is and what is their purpose.</p>
-</div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="what_is_a_sandbox"><a class="link" href="#what_is_a_sandbox">What is a sandbox?</a></h2>
-<div class="sectionbody">
-<div class="paragraph">
-<p>A <em>sandbox</em> is basically a local developer instance of Enonic XP. Each sandbox may have different versions of XP, different data and configuration.</p>
+<p>The idea is to basically define new fields and decide what content types those fields should be applied to. If no content type is selected while registering a mixin, those fields will be enabled for all content types.</p>
 </div>
 <div class="paragraph">
-<p>Having a local (and running) instance of XP is essential for developing apps on Enonic XP.</p>
+<p>In Content Studio, a mixin is visually displayed as a separate section of the form, listed below the content type&#8217;s standard fields.</p>
 </div>
-<div class="paragraph">
-<p>It is possible to setup multiple sandboxes on your machine, each one of them using XP on a specific version.</p>
-</div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="your_first_sandbox"><a class="link" href="#your_first_sandbox">Your first sandbox</a></h2>
-<div class="sectionbody">
-<div class="paragraph">
-<p>To create a sandbox using the CLI, start by running the following command:</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="highlight"><code class="language-shell" data-lang="shell">enonic enonic sandbox create tutorial -t essentials -v 7.16.4</code></pre>
-</div>
-</div>
-<div class="paragraph">
-<p>This creates a sandbox called <code>tutorial</code> based on the <code>essentials</code> templat (a set of applications on Enonic Market), and starts it. The <code>-v</code> forces the use of an XP7 version.</p>
-</div>
-<div class="paragraph">
-<p>You will now see a fair amount of output in your terminal, here are the most notable parts:</p>
-</div>
-<div class="listingblock">
-<div class="title">Creating the sandbox</div>
-<div class="content">
-<pre class="highlight"><code class="language-shell" data-lang="shell">Loading templates from Enonic Market...Done.
-Using template 'Essentials'
-Loading...Done
-Downloading distro [=======================================================] 100.00%
-Unzipping distro...Done
-
-Sandbox 'tutorial' created with distro 'enonic-xp-mac-sdk-7.16.4'.</code></pre>
-</div>
-</div>
-<div class="listingblock">
-<div class="title">Starting the sandbox</div>
-<div class="content">
-<pre class="highlight"><code class="language-shell" data-lang="shell">____________________________(_)______   ____  _________
-_  _ \_  __ \  __ \_  __ \_  /_  ___/   __  |/_/__  __ \
-/  __/  / / / /_/ /  / / /  / / /__     __&gt;  &lt; __  /_/ /
-\___//_/ /_/\____//_/ /_//_/  \___/     /_/|_| _  .___/
-                                               /_/
-
-# Enonic XP 7.16.4
-# Built on 2023-07-26T12:31:19Z (hash = d5bf8d725738b778e153d839f16cdaa9e4641444, branch = d5bf8d725738b778e153d839f16cdaa9e4641444)
-# OpenJDK 64-Bit Server VM 17.0.7 (GraalVM Community)
-# Linux 5.19.0-50-generic (amd64)
-# Install directory is /home/username/.enonic/distributions/enonic-xp-linux-sdk-7.16.4
-# Home directory is /home/username/.enonic/sandboxes/tutorial/home
-
-*
-* DEV mode is ON. This will slow down the system and should NOT BE used in production.
-*
-[...]</code></pre>
-</div>
-</div>
-<div class="paragraph">
-<p>This gives you some useful information about this sandbox, including its XP version, and the Home directory.</p>
-</div>
-<div class="listingblock">
-<div class="title">Reserved ports</div>
-<div class="content">
-<pre class="highlight"><code class="language-shell" data-lang="shell">[...] - Started xp@523d2774{HTTP/1.1,[http/1.1]}{0.0.0.0:8080}
-[...] - Started api@22bce39c{HTTP/1.1,[http/1.1]}{0.0.0.0:4848}
-[...] - Started status@37f8a3e8{HTTP/1.1,[http/1.1]}{0.0.0.0:2609}
-[...] - Started @12314ms
-[...] - Started Jetty
-[...] - Listening on ports [8080](xp), [4848](management) and [2609](monitoring)
-[...] - Searching for installed applications
-[...] - Found [0] installed applications
-[...] - Started Enonic XP in 11207 ms
-[...]</code></pre>
-</div>
-</div>
-<div class="paragraph">
-<p>This means that your local XP instance is up and running and ready to serve requests. The instance exposes the following ports:</p>
-</div>
-<div class="ulist">
-<ul>
-<li>
-<p><strong>8080</strong>: Web</p>
-</li>
-<li>
-<p><strong>4848</strong>: Management API (Used by the CLI when running commands against this XP instance)</p>
-</li>
-<li>
-<p><strong>2609</strong>: Monitoring API (Used for metrics and instance info)</p>
-</li>
-</ul>
-</div>
-<div class="listingblock">
-<div class="title">Installing and starting applications</div>
-<div class="content">
-<pre class="highlight"><code class="language-shell" data-lang="shell">[...] - Installed application com.enonic.app.contentstudio bundle 101
-[...] - Registering application com.enonic.app.contentstudio bundle 101
-[...] - Global Application [com.enonic.app.contentstudio] installed successfully</code></pre>
-</div>
-</div>
-<div class="paragraph">
-<p>The sandbox will download and install the applications from the <code>essentials</code> template, producing logs like you see above. Applications may also produces logs when it is started.</p>
-</div>
-<div class="admonitionblock tip">
+<div class="admonitionblock warning">
 <table>
 <tr>
 <td class="icon">
-<i class="fa icon-tip" title="Tip"></i>
+<i class="fa icon-warning" title="Warning"></i>
 </td>
 <td class="content">
-If you experience problems starting the sandbox, check the Troubleshooting section at the end of this chapter.
+If you have read XP 7 material, be aware that the word <strong>mixin</strong> changed meaning in XP 8. What XP 7 called <em>x-data</em> is what this chapter calls a mixin. What XP 7 called a <em>mixin</em> is now a <a href="sets.ahtml#_form_fragments">form fragment</a>.
 </td>
 </tr>
 </table>
-</div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="stopping_and_starting"><a class="link" href="#stopping_and_starting">Stopping and starting</a></h2>
-<div class="sectionbody">
-<div class="paragraph">
-<p>To stop your sandbox, press <kbd>ctrl-c</kbd> in the terminal hosting the process. You can also run <code>enonic sandbox stop</code> in a different terminal instance.</p>
-</div>
-<div class="paragraph">
-<p>To start your sandbox, use the following command:</p>
-</div>
-<div class="literalblock">
-<div class="content">
-<pre>enonic sandbox start tutorial</pre>
-</div>
 </div>
 <div class="admonitionblock note">
 <table>
@@ -607,7 +479,7 @@ If you experience problems starting the sandbox, check the Troubleshooting secti
 <i class="fa icon-note" title="Note"></i>
 </td>
 <td class="content">
-The sandbox starts in development (aka dev) mode by default. To run the sandbox in production mode simply add <code>--prod</code> to the start command
+The tasks and examples in this chapter are based on work done in previous chapters (starting with <a href="setup.ahtml">the setup chapter</a>). If you want to follow along with the examples, make sure you&#8217;re all caught up.
 </td>
 </tr>
 </table>
@@ -615,96 +487,70 @@ The sandbox starts in development (aka dev) mode by default. To run the sandbox 
 </div>
 </div>
 <div class="sect1">
-<h2 id="xp_admin"><a class="link" href="#xp_admin">XP Admin</a></h2>
+<h2 id="your_first_mixin"><a class="link" href="#your_first_mixin">Your first mixin</a></h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>Let&#8217;s have a look at the Sandbox' web interface. Open <a href="http://localhost:8080" target="_blank" rel="noopener">http://localhost:8080</a> in your browser (or just click this link).</p>
+<p>If your requirement is to add new fields to a specific content type, it doesn&#8217;t make sense to use a mixin, since you can directly update that content type.</p>
 </div>
 <div class="paragraph">
-<p>You should now see the XP boot page:</p>
-</div>
-<div class="imageblock">
-<div class="content">
-<img src="media/xp-boot.png" alt="The XP boot page" width="1085w">
-</div>
+<p>Now, if your requirement is to add new fields to multiple content types, that is when mixins come into place.</p>
 </div>
 <div class="paragraph">
-<p>The boot page provides an overview of the sandbox, including installed application, as well as the <a href="https://developer.enonic.com/docs/xp/stable/deployment/config" target="_blank" rel="noopener">default configuration files</a>.</p>
-</div>
-<div class="admonitionblock note">
-<table>
-<tr>
-<td class="icon">
-<i class="fa icon-note" title="Note"></i>
-</td>
-<td class="content">
-Thanks to the <code>Essentials</code> template, several useful XP apps, including Content Studio, were automatically downloaded and installed.
-</td>
-</tr>
-</table>
+<p>The same behaviour of extending multiple content types can be achieved through form fragments. You can create a form fragment and include it in the content types you want to extend. The difference is where the data in those fields is stored, and in the fact that mixins are easier to maintain when adding to a lot of content types - or to content types you don&#8217;t own, such as the built-in folders and media types.</p>
 </div>
 <div class="paragraph">
-<p>Click <b class="button">Log In as Guest</b> to open the XP admin dashboard. What this actually does is log you in as the XP instance&#8217;s Super User. After logging in you should see something like this:</p>
-</div>
-<div class="imageblock">
-<div class="content">
-<img src="media/xp-dashboard.png" alt="The XP admin dashboard" width="1727w">
-</div>
+<p>Let&#8217;s now add a "notes" mixin, which will extend both the Artist and Animal content types.</p>
 </div>
 <div class="paragraph">
-<p>You are now on the Admin Dashboard. The right hand menu (aka <code>XP menu</code>) enables navigation between admin tools. More admin tools may be injected as extensions via applications.</p>
-</div>
-<div class="admonitionblock note">
-<table>
-<tr>
-<td class="icon">
-<i class="fa icon-note" title="Note"></i>
-</td>
-<td class="content">
-If things don&#8217;t look exactly the same, don&#8217;t worry. In every new version of XP the background picture gets updated. Also, admin dashboard is automatically localized - based on your browsers preferred language.
-</td>
-</tr>
-</table>
-</div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="troubleshooting"><a class="link" href="#troubleshooting">Troubleshooting</a></h2>
-<div class="sectionbody">
-<div class="paragraph">
-<p>If you have problems booting the sandbox, it may be that one or more of the ports used by XP are already in use. The command should warn you if something doesn&#8217;t work right. It&#8217;ll do this in one of two ways:</p>
+<p>Similar to content types, mixin schemas have a specific naming and placement convention within your app: <code>src/main/resources/cms/mixins/&lt;mixin-name&gt;/&lt;mixin-name&gt;.yaml</code>.</p>
 </div>
 <div class="olist arabic">
 <ol class="arabic">
 <li>
-<p>If the CLI checks for the availability of some ports when starting up. If one of these ports isn&#8217;t available, the CLI will abort with a message like this:</p>
+<p>Create the "notes" mixin schema:</p>
 <div class="listingblock">
+<div class="title">src/main/resources/cms/mixins/notes/notes.yaml</div>
 <div class="content">
-<pre class="highlight"><code class="language-shell" data-lang="shell">Port 8080 is not available, stop the app using it first!</code></pre>
+<pre class="highlight"><code class="language-yaml" data-lang="yaml">kind: "Mixin"
+title: "Notes"
+form:
+  - type: "TextLine"
+    name: "notes"
+    label: "Notes"
+    occurrences:
+      min: 0
+      max: 3</code></pre>
 </div>
 </div>
 </li>
 <li>
-<p>For ports where the CLI doesn&#8217;t check for availability before starting, you might get an exception in the boot log. This is usually identifiable by a printed stack trace in your logs. Here&#8217;s an example from what happens if port 4848 isn&#8217;t available.</p>
-<div class="listingblock">
-<div class="content">
-<pre class="highlight"><code class="language-shell" data-lang="shell">2021-04-06 11:24:01,168 ERROR c.e.xp.web.jetty.impl.JettyActivator - bundle com.enonic.xp.web.jetty:7.6.1 (80)[com.enonic.xp.web.jetty.impl.JettyActivator(171)] : The activate method has thrown an exception
-org.apache.felix.log.LogException: java.io.IOException: Failed to bind to 0.0.0.0/0.0.0.0:4848
-	at org.eclipse.jetty.server.ServerConnector.openAcceptChannel(ServerConnector.java:349)
-	at org.eclipse.jetty.server.ServerConnector.open(ServerConnector.java:310)
-[...]
-Caused by: java.net.BindException: Address already in use
-	at java.base/sun.nio.ch.Net.bind0(Native Method)
-	at java.base/sun.nio.ch.Net.bind(Net.java:455)
-	at java.base/sun.nio.ch.Net.bind(Net.java:447)
-	at java.base/sun.nio.ch.ServerSocketChannelImpl.bind(ServerSocketChannelImpl.java:227)
-	at java.base/sun.nio.ch.ServerSocketAdaptor.bind(ServerSocketAdaptor.java:80)
-	at org.eclipse.jetty.server.ServerConnector.openAcceptChannel(ServerConnector.java:345)
-	... 78 common frames omitted</code></pre>
-</div>
-</div>
+<p>A mixin schema on its own is dormant. You also need to register it, and define which content types it applies to. This is done in your app&#8217;s CMS descriptor, <code>cms.yaml</code>, which the starter created as an empty file:</p>
 </li>
 </ol>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>kind: "CMS"
+mixins:
+  - name: "notes"
+    allowContentTypes: "{project-name-full}:{content-type-1}|{project-name-full}:{content-type-2}" <i class="conum" data-value="1"></i><b>(1)</b></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>+
+&lt;1&gt; A regular expression matched against the full content type name. Leave it out to apply the mixin to every content type in the project.</p>
+</div>
+<div class="paragraph">
+<p>+
+. Your app is redeployed, so open a Artist or an Animal content item. You should see the following section at the bottom of the form:</p>
+</div>
+<div class="paragraph">
+<p>+
+image::notes-x-data.png["Notes mixin fields showing at the bottom of an animal content item",width=1050]</p>
+</div>
+<div class="paragraph">
+<p>+
+. Finally, add some notes to some content.</p>
 </div>
 <div class="admonitionblock note">
 <table>
@@ -713,47 +559,197 @@ Caused by: java.net.BindException: Address already in use
 <i class="fa icon-note" title="Note"></i>
 </td>
 <td class="content">
-The <code>[&#8230;&#8203;]</code> replaces most of the stack trace for legibility reasons.
+For more details and configuration options for mixins, visit <a href="https://developer.enonic.com/docs/cms/stable/content/mixins">the mixins documentation</a> and the <a href="https://developer.enonic.com/docs/cms/stable/schemas/cms-descriptor">CMS descriptor documentation</a>.
 </td>
 </tr>
 </table>
 </div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="headless"><a class="link" href="#headless">Headless</a></h2>
+<div class="sectionbody">
 <div class="paragraph">
-<p>If some ports are unavailable, you&#8217;ll have to find out what programs are using those ports and then shut those programs down.</p>
+<p>As you might expect, your mixin fields are also available via the Guillotine API.</p>
 </div>
 <div class="paragraph">
-<p>How you find open ports varies from operating system to operating system, but if you&#8217;re unsure about how to do it on your OS, check out the appropriate guide for:</p>
+<p>Mixin data is stored separately from the content type&#8217;s own fields, under the key <code>x</code>, grouped by the app that provides the mixin. Use the following query to quickly access all mixin fields in your content.</p>
 </div>
-<div class="ulist">
-<ul>
-<li>
-<p><a href="https://www.cyberciti.biz/faq/unix-linux-check-if-port-is-in-use-command/" target="_blank" rel="noopener">Linux</a></p>
-</li>
-<li>
-<p><a href="https://www.micahsmith.com/blog/2019/09/find-ports-in-use-on-macos/" target="_blank" rel="noopener">macOS</a></p>
-</li>
-<li>
-<p><a href="https://www.howtogeek.com/28609/how-can-i-tell-what-is-listening-on-a-tcpip-port-in-windows/" target="_blank" rel="noopener">Windows</a></p>
-</li>
-</ul>
+<div class="listingblock">
+<div class="title">Querying for mixins</div>
+<div class="content">
+<pre class="highlight"><code class="language-GraphQL" data-lang="GraphQL">{
+  guillotine {
+    queryDsl(
+      query: {
+        boolean: {
+          must: [
+            {
+              term: {
+                field: "type",
+                value: {
+                  string: "com.example.tutorial101:animal"
+                }
+              }
+            },
+            {
+              term: {
+                field: "displayName",
+                value: {
+                  string: "Lynx"
+                }
+              }
+            }
+          ]
+        }
+
+      }
+    ) {
+      displayName
+      xAsJson
+    }
+  }
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>If you&#8217;ve added any values to your Lynx&#8217;s Notes fields, this is what you might get.</p>
+</div>
+<div class="listingblock">
+<div class="title">Mixin results</div>
+<div class="content">
+<pre class="highlight"><code class="language-json" data-lang="json">{
+  "data": {
+    "guillotine": {
+      "queryDsl": [
+        {
+          "displayName": "Lynx",
+          "xAsJson": {
+            "com_example_tutorial101": {
+              "notes": {
+                "notes": [
+                  "Lynx note 1",
+                  "Lynx note 2",
+                  "Lynx note 3"
+                ]
+              }
+            }
+          }
+        }
+      ]
+    }
+  }
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Should you require specific fields only, or wish to drill into more details, for instance by following a reference, use the typed GraphQL fields instead of <code>xAsJson</code>. For instance like this:</p>
+</div>
+<div class="listingblock">
+<div class="title">Typed mixin query</div>
+<div class="content">
+<pre class="highlight"><code class="language-GraphQL" data-lang="GraphQL">{
+  guillotine {
+    queryDsl(
+      query: {
+        boolean: {
+          must: [
+            {
+              term: {
+                field: "type",
+                value: {
+                  string: "com.example.tutorial101:animal"
+                }
+              }
+            },
+            {
+              term: {
+                field: "displayName",
+                value: {
+                  string: "Lynx"
+                }
+              }
+            }
+          ]
+        }
+
+      }
+    ) {
+      displayName
+      x {
+        com_example_tutorial101 { <i class="conum" data-value="1"></i><b>(1)</b>
+          notes { <i class="conum" data-value="2"></i><b>(2)</b>
+            notes <i class="conum" data-value="3"></i><b>(3)</b>
+          }
+        }
+      }
+    }
+  }
+}</code></pre>
+</div>
+</div>
+<div class="colist arabic">
+<table>
+<tr>
+<td><i class="conum" data-value="1"></i><b>1</b></td>
+<td>The app providing the mixin. Dots in the app name become underscores in GraphQL field names.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="2"></i><b>2</b></td>
+<td>This is the name of the mixin. In this case, "notes" because we defined it to be like so in the <code>notes.yaml</code> file</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="3"></i><b>3</b></td>
+<td>This is the "notes" field (TextLine input type) inside the "notes" mixin.</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>If you made it here - you are officially equipped with an essential overview of Enonic&#8217;s fundamental content modelling capabilities. 🙌</p>
 </div>
 </div>
 </div>
 <div class="sect1">
-<h2 id="summary"><a class="link" href="#summary">Summary</a></h2>
+<h2 id="bonus_seo_metafields"><a class="link" href="#bonus_seo_metafields">Bonus: SEO Metafields</a></h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>Congrats! Now you know what a <em>sandbox</em> is, got more familiar with the CLI, and also visited the admin dashboard page for the first time.</p>
+<p>There&#8217;s a well-known app on Enonic Market named <em>SEO Metafields</em>. Its main purpose is to provide SEO capabilities to your project, and for that purpose, it adds a mixin, which is then enabled for all content types in your project.</p>
 </div>
 <div class="paragraph">
-<p>You&#8217;re now ready to move forward by <a href="apps.ahtml">creating your own app</a>.</p>
+<p>This is a bonus section, so you&#8217;re not missing much if you skip it, but it&#8217;s worth installing it to better understand the capabilities of mixins.</p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Install the <a href="https://market.enonic.com/vendors/enonic/seo-metafields">SEO Metafields app</a>.</p>
+<div class="imageblock">
+<div class="content">
+<img src="media/x-data-seo-app-install.png" alt="Install SEO Metafields app" width="1050">
+</div>
+</div>
+</li>
+<li>
+<p>Edit your project in Settings and add the app to it.</p>
+</li>
+<li>
+<p>Immediately after adding the app, the form of every content item gets a new section with the SEO fields.</p>
+<div class="paragraph">
+<p>So, now you have some additional fields on all your content. If you check some of your content items, like an animal, you will see the fields are there as well.</p>
+</div>
+</li>
+</ol>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="media/x-data-seo-animal.png" alt="SEO fields available for the animals content type as well." width="1200">
+</div>
 </div>
 </div>
 </div>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2026-10-09 10:32:21 UTC
+Last updated 2026-10-09 12:40:35 UTC
 </div>
 </div>
 </body>

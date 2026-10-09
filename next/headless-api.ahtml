@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="generator" content="Asciidoctor 2.0.26">
-<meta name="description" content="What is a headless CMS without an API? Learn about the Guillotine library and the powers it unlocks here.">
+<meta name="description" content="What is a headless CMS without an API? Learn about the Guillotine app and the powers it unlocks here.">
 <title>GraphQL API</title>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,300italic,400,400italic,600,600italic%7CNoto+Serif:400,400italic,700,700italic%7CDroid+Sans+Mono:400,700">
 <style>
@@ -443,9 +443,9 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <div id="toctitle">Table of Contents</div>
 <ul class="sectlevel1">
 <li><a href="#guillotine">Guillotine</a></li>
-<li><a href="#query_playground">Query playground</a>
+<li><a href="#query_playground">Query Playground</a>
 <ul class="sectlevel2">
-<li><a href="#buttons">Buttons</a></li>
+<li><a href="#getting_around">Getting around</a></li>
 <li><a href="#schemas">Schemas</a></li>
 <li><a href="#querying_with_inline_fragments">Querying with inline fragments</a></li>
 <li><a href="#query_with_dataasjson">Query with dataAsJson</a></li>
@@ -469,7 +469,19 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <p>Enonic is a highly flexible CMS, capable of delivering content in many ways. In this chapter we will focus on delivery via the out-of-the-box GraphQL API.</p>
 </div>
 <div class="paragraph">
-<p>Now that we&#8217;ve created some content, let&#8217;s see how we can access and use it in via API - headless style.</p>
+<p>Now that we&#8217;ve created some content, let&#8217;s see how we can access and use it via an API - headless style.</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+The tasks and examples in this chapter are based on work done in previous chapters (starting with <a href="setup.ahtml">the setup chapter</a>). If you want to follow along with the examples, make sure you&#8217;re all caught up.
+</td>
+</tr>
+</table>
 </div>
 </div>
 </div>
@@ -477,32 +489,47 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <h2 id="guillotine"><a class="link" href="#guillotine">Guillotine</a></h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>Introducing <em>Guillotine</em>, the app that&#8217;s responsible for automatically generating a GraphQL APIs for your content.</p>
+<p>Introducing <em>Guillotine</em>, the app that&#8217;s responsible for automatically generating a GraphQL API for your content.</p>
 </div>
 <div class="paragraph">
-<p>Guillotine should be pre-installed based on the <code>Essentials</code> template you used when setting up your sandbox. It is available on <a href="https://market.enonic.com/vendors/enonic/guillotine" target="_blank" rel="noopener">Enonic Market</a>, and may also be installed manually.</p>
+<p>Guillotine should be pre-installed based on the <code>Essentials</code> template you used when setting up your sandbox. It is available on <a href="https://market.enonic.com/vendors/enonic/guillotine">Enonic Market</a>, and may also be installed manually.</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+This tutorial is written for Guillotine 9, which requires XP 8.1 or newer. Check the version in <code>XP menu</code> &#8594; <code>Applications</code> if your queries do not behave as described.
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>Guillotine exposes a single API endpoint for all your projects. On your sandbox, it is <code><a href="http://localhost:8080/api/com.enonic.app.guillotine:graphql" class="bare">http://localhost:8080/api/com.enonic.app.guillotine:graphql</a></code>. We&#8217;ll use it directly in the <a href="deployment.ahtml">deployment chapter</a>. For now, Content Studio offers a much more comfortable way to explore it.</p>
 </div>
 </div>
 </div>
 <div class="sect1">
-<h2 id="query_playground"><a class="link" href="#query_playground">Query playground</a></h2>
+<h2 id="query_playground"><a class="link" href="#query_playground">Query Playground</a></h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>Back in Content Studio, you should now have access to a new item called <code>Query Playground</code> in the left green widget sidebar. Open it, and you should see this:</p>
+<p>Back in Content Studio, you should now have access to a new item called <code>Query Playground</code> in the menu bar on the left. Open it, and you should see this:</p>
 </div>
 <div class="imageblock">
 <div class="content">
-<img src="media/query-playground-empty.png" alt="API browser integrated in Content Studio" width="602w">
+<img src="media/query-playground-empty.png" alt="Query Playground integrated in Content Studio" width="602w">
 </div>
 </div>
 <div class="paragraph">
-<p>Query playground is an interactive GraphQL API explorer. You enter your query in the text area to your left and when you execute it, you&#8217;ll get the results of the query on the other side of the screen.</p>
+<p>Query Playground is an interactive GraphQL API explorer. You enter your query in the editor in the middle and when you execute it, you&#8217;ll get the results of the query in the panel on the right.</p>
 </div>
 <div class="paragraph">
-<p>GraphQL is a graph "query language". It allows you to create highly specific queries for exactly the content that you need (visit the <a href="https://graphql.org/learn/" target="_blank" rel="noopener">official GraphQL docs to learn more</a>).</p>
+<p>GraphQL is a graph "query language". It allows you to create highly specific queries for exactly the content that you need (visit the <a href="https://graphql.org/learn/">official GraphQL docs to learn more</a>).</p>
 </div>
 <div class="paragraph">
-<p>As an example on how to retrieve some minimal info about your previously created artists, run the following query:</p>
+<p>As an example of how to retrieve some minimal info about your previously created artists, run the following query:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -518,155 +545,67 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 </div>
 </div>
 <div class="paragraph">
-<p>After running, you should get something like this on the right area:</p>
+<p>After running, you should get something like this in the response panel:</p>
 </div>
 <div class="imageblock">
 <div class="content">
-<img src="media/query-playground-artists-minimal.png" alt="Query playground response of running mimimal query to retrieve artists" width="1073w">
+<img src="media/query-playground-artists-minimal.png" alt="Query playground response of running minimal query to retrieve artists" width="1073w">
 </div>
 <div class="title">Figure 1. Results of running the suggested query</div>
 </div>
 <div class="sect2">
-<h3 id="buttons"><a class="link" href="#buttons">Buttons</a></h3>
+<h3 id="getting_around"><a class="link" href="#getting_around">Getting around</a></h3>
 <div class="paragraph">
-<p>Before trying to come up with complex queries, let&#8217;s make familiarize ourselves with Query Playground.</p>
+<p>Before trying to come up with complex queries, let&#8217;s familiarize ourselves with Query Playground. It consists of a few panels:</p>
 </div>
-<table class="tableblock frame-all grid-all stretch">
-<colgroup>
-<col style="width: 16.6666%;">
-<col style="width: 58.3333%;">
-<col style="width: 25.0001%;">
-</colgroup>
-<thead>
-<tr>
-<th class="tableblock halign-left valign-top">Icon</th>
-<th class="tableblock halign-left valign-top">Description</th>
-<th class="tableblock halign-left valign-top">Shortcuts</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td class="tableblock halign-left valign-top"><div class="content"><div class="imageblock">
-<div class="content">
-<img src="media/query-playground-button-1.png" alt="Query playground play button" width="50w">
+<div class="dlist">
+<dl>
+<dt class="hdlist1">Docs</dt>
+<dd>
+<p>Opens on the left, and lets you browse every type and field in the API. We&#8217;ll use it in a moment.</p>
+</dd>
+<dt class="hdlist1">Query</dt>
+<dd>
+<p>The editor in the middle, where you write your query. Press the play button, or <span class="keyseq"><kbd>ctrl</kbd>+<kbd>enter</kbd></span>, to run it.</p>
+</dd>
+<dt class="hdlist1">Response</dt>
+<dd>
+<p>The panel on the right, showing the result of the query, or any errors.</p>
+</dd>
+<dt class="hdlist1">Variables</dt>
+<dd>
+<p>Expands below the query editor, and lets you supply query variables as a JSON object.</p>
+</dd>
+<dt class="hdlist1">Draft / Master</dt>
+<dd>
+<p>The buttons above the response panel select which branch to query. Draft is your work in progress, Master is what has been published.</p>
+</dd>
+</dl>
 </div>
-</div></div></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><em>Play</em> - Execute your query</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><span class="keyseq"><kbd>ctrl</kbd>+<kbd>enter</kbd></span></p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><div class="content"><div class="imageblock">
-<div class="content">
-<img src="media/query-playground-button-2.png" alt="Query playground prettify button" width="50">
+<div class="paragraph">
+<p>Queries run in the project currently selected in Content Studio&#8217;s top bar, so you never have to tell Query Playground which project to use.</p>
 </div>
-</div></div></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><em>Prettify</em> - Format your query, removing comments and unecessary spaces / indentation</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><span class="keyseq"><kbd>ctl</kbd>+<kbd>shift</kbd>+<kbd>p</kbd></span></p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><div class="content"><div class="imageblock">
-<div class="content">
-<img src="media/query-playground-button-3.png" alt="Query playground merge button" width="50">
-</div>
-</div></div></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><em>Merge fragments</em> - Rewrites your query based on the declared <a href="https://graphql.org/learn/queries/#fragments">fragments</a></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><span class="keyseq"><kbd>ctl</kbd>+<kbd>shift</kbd>+<kbd>m</kbd></span></p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><div class="content"><div class="imageblock">
-<div class="content">
-<img src="media/query-playground-button-4.png" alt="Query playground copy button" width="50">
-</div>
-</div></div></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><em>Copy</em> - Copy your query to your clipboard.</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><span class="keyseq"><kbd>ctl</kbd>+<kbd>shift</kbd>+<kbd>c</kbd></span></p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><div class="content"><div class="imageblock">
-<div class="content">
-<img src="media/query-playground-button-5.png" alt="Query playground docs button" width="50">
-</div>
-</div></div></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><em>Docs</em> - Show the API documentation</p></td>
-<td class="tableblock halign-left valign-top"></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><div class="content"><div class="imageblock">
-<div class="content">
-<img src="media/query-playground-button-6.png" alt="Query playground history button" width="50">
-</div>
-</div></div></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><em>History</em> - Shows all previously executed queries</p></td>
-<td class="tableblock halign-left valign-top"></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><div class="content"><div class="imageblock">
-<div class="content">
-<img src="media/query-playground-button-7.png" alt="Query playground tab button" width="50">
-</div>
-</div></div></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><em>Tab</em> - Creates new tabs for you to manage testing multiple queries</p></td>
-<td class="tableblock halign-left valign-top"></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><div class="content"><div class="imageblock">
-<div class="content">
-<img src="media/query-playground-button-9.png" alt="Query playground re-fetch button" width="50">
-</div>
-</div></div></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><em>Re-fetch schema</em> - Reloads your GraphQL schemas based on recent changes</p></td>
-<td class="tableblock halign-left valign-top"></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><div class="content"><div class="imageblock">
-<div class="content">
-<img src="media/query-playground-button-10.png" alt="Query playground shortkeys button" width="50">
-</div>
-</div></div></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><em>Shortkeys</em> - Displays all short keys that can be used in Query Playground</p></td>
-<td class="tableblock halign-left valign-top"></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><div class="content"><div class="imageblock">
-<div class="content">
-<img src="media/query-playground-button-11.png" alt="Query playground settings button" width="50">
-</div>
-</div></div></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><em>Settings</em> -  Opens settings dialog</p></td>
-<td class="tableblock halign-left valign-top"></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><div class="content"><div class="imageblock">
-<div class="content">
-<img src="media/query-playground-button-8.png" alt="Query playground draft and master buttons" width="100">
-</div>
-</div></div></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Draft / master toggle_ - Switch between querying draft or master branch (published items)</p></td>
-<td class="tableblock halign-left valign-top"></td>
-</tr>
-</tbody>
-</table>
 </div>
 <div class="sect2">
 <h3 id="schemas"><a class="link" href="#schemas">Schemas</a></h3>
 <div class="paragraph">
-<p>Now, locate and click on the docs button. On this opened section you have detailed info about all <a href="https://graphql.org/learn/schema/" target="_blank" rel="noopener">schemas</a> available on your project.</p>
+<p>Now, locate and open the Docs panel. Here you have detailed info about all <a href="https://graphql.org/learn/schema/">schemas</a> available in your project.</p>
 </div>
 <div class="paragraph">
-<p>On the top search bar in the docs section, search for <code>artist</code> and locate the <code>com_example_myproject_Artist</code> schema:</p>
+<p>In the search field of the Docs panel, search for <code>artist</code> and locate the <code>com_example_tutorial101_Artist</code> schema:</p>
 </div>
 <div class="imageblock">
 <div class="content">
-<img src="media/query-playground-artist-schema.png" alt="Query playground docs section showing the details of com_example_myproject_Artist schema" width="777w">
+<img src="media/query-playground-artist-schema.png" alt="Query playground docs section showing the details of the Artist schema" width="777w">
 </div>
 <div class="title">Figure 2. The Artist schema</div>
 </div>
 <div class="paragraph">
-<p>Note that it&#8217;s said that the <code>Artist</code> schema <em>implements</em> the <code>Content</code> schema. This basically means that the <code>Artist</code> schema will have the structure defined by the <code>Content</code> schema, together with possibly some additional structure&#8230;&#8203; in this case, that additional structure is a <code>data</code> field, defined by <code>com_example_myproject_Artist_Data</code> schema:</p>
+<p>Note that it says that the <code>Artist</code> schema <em>implements</em> the <code>Content</code> schema. This basically means that the <code>Artist</code> schema will have the structure defined by the <code>Content</code> schema, together with possibly some additional structure&#8230;&#8203; in this case, that additional structure is a <code>data</code> field, defined by the <code>com_example_tutorial101_Artist_Data</code> schema:</p>
 </div>
 <div class="imageblock">
 <div class="content">
-<img src="media/query-playground-artist-data-schema.png" alt="Query playground docs sections showing the details of com_example_myproject_Artist_Data schema" width="777w">
+<img src="media/query-playground-artist-data-schema.png" alt="Query playground docs section showing the details of the Artist data schema" width="777w">
 </div>
 <div class="title">Figure 3. The Artist data schema</div>
 </div>
@@ -677,7 +616,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <i class="fa icon-note" title="Note"></i>
 </td>
 <td class="content">
-Note that this matches the structure defined by the Artist content type, which is a natural thing to expect.
+Note that this matches the structure defined by the Artist content type, which is a natural thing to expect. The name of the schema is derived from your app name and the content type name, with dots replaced by underscores.
 </td>
 </tr>
 </table>
@@ -686,13 +625,13 @@ Note that this matches the structure defined by the Artist content type, which i
 <div class="sect2">
 <h3 id="querying_with_inline_fragments"><a class="link" href="#querying_with_inline_fragments">Querying with inline fragments</a></h3>
 <div class="paragraph">
-<p>We&#8217;ve used the Docs section to inspect the structure of the <code>Artist</code> schema. Let&#8217;s now, based on a broader understanding of this schema, we&#8217;ll query to get proper data from artists.</p>
+<p>We&#8217;ve used the Docs panel to inspect the structure of the <code>Artist</code> schema. Now, based on a broader understanding of this schema, we&#8217;ll query to get proper data from artists.</p>
 </div>
 <div class="paragraph">
-<p>Close the docs section, head back to the text area to edit your query and remove <code>displayName</code>, <code>_path</code> and <code>_id</code> from the query we introduced earlier.</p>
+<p>Close the Docs panel, head back to the editor and remove <code>displayName</code>, <code>_path</code> and <code>_id</code> from the query we introduced earlier.</p>
 </div>
 <div class="paragraph">
-<p>Now, with your cursor on the inner curly braces of the query, press <span class="keyseq"><kbd>ctrl</kbd>+<kbd>space</kbd></span> to get a list of suggestions about what fields you can request on your query:</p>
+<p>Now, with your cursor on the inner curly braces of the query, press <span class="keyseq"><kbd>ctrl</kbd>+<kbd>space</kbd></span> to get a list of suggestions about what fields you can request in your query:</p>
 </div>
 <div class="imageblock">
 <div class="content">
@@ -700,23 +639,23 @@ Note that this matches the structure defined by the Artist content type, which i
 </div>
 </div>
 <div class="paragraph">
-<p>As can be seen, we do not have the artist <code>name</code> and <code>about</code> fields available, and the reason for that is because the <code>getChildren</code> field can return any content that implements the <code>Content</code> schema, but it can&#8217;t directly infer what schema that is, which in this case is the <code>com_example_myproject_Artist</code> schema:</p>
+<p>As can be seen, we do not have the artist <code>name</code> and <code>about</code> fields available, and the reason for that is because the <code>getChildren</code> field can return any content that implements the <code>Content</code> schema, but it can&#8217;t directly infer what schema that is, which in this case is the <code>com_example_tutorial101_Artist</code> schema:</p>
 </div>
 <div class="imageblock">
 <div class="content">
 <img src="media/query-playground-getChildren-infer.png" alt="Query playground getChildren can&#8217;t directly infer what schema is implementing Content schema" width="331w">
 </div>
-<div class="title">Figure 4. getChildren can&#8217;t directly infer what schema is implementing Content schema</div>
+<div class="title">Figure 4. getChildren can&#8217;t directly infer what schema is implementing the Content schema</div>
 </div>
 <div class="paragraph">
-<p>So to proceed, we use <a href="https://graphql.org/learn/queries/#inline-fragments" target="_blank" rel="noopener">inline fragments</a>:</p>
+<p>So to proceed, we use <a href="https://graphql.org/learn/queries/#inline-fragments">inline fragments</a>:</p>
 </div>
 <div class="listingblock">
 <div class="content">
 <pre class="highlight"><code class="language-GraphQL" data-lang="GraphQL">{
   guillotine {
     getChildren(key: "/artists") {
-      ... on com_example_myproject_Artist {
+      ... on com_example_tutorial101_Artist {
         _id
         data {
           name
@@ -729,7 +668,7 @@ Note that this matches the structure defined by the Artist content type, which i
 </div>
 </div>
 <div class="paragraph">
-<p>With this, we basically built a query that understands that under <code>"/artists"</code> path we have content types of <code>Artist</code>, and based on this we can request general content data, such as <code>_id</code>, but also specific content data, such as the artist name and about:</p>
+<p>With this, we basically built a query that understands that under the <code>"/artists"</code> path we have content of type <code>Artist</code>, and based on this we can request general content data, such as <code>_id</code>, but also specific content data, such as the artist&#8217;s name and about:</p>
 </div>
 <div class="imageblock">
 <div class="content">
@@ -757,7 +696,7 @@ Note that this matches the structure defined by the Artist content type, which i
 </div>
 <div class="imageblock">
 <div class="content">
-<img src="media/query-playground-artists-dataAsJson.png" alt="Query playground query returning artists content together with is name and about data - using dataAsJson field" width="945w">
+<img src="media/query-playground-artists-dataAsJson.png" alt="Query playground query returning artists content together with its name and about data - using dataAsJson field" width="945w">
 </div>
 <div class="title">Figure 6. Getting all data using dataAsJson</div>
 </div>
@@ -768,7 +707,7 @@ Note that this matches the structure defined by the Artist content type, which i
 <h2 id="advanced_queries"><a class="link" href="#advanced_queries">Advanced queries</a></h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>We&#8217;ll now introduce and show examples of usages of different fields underneath the <code>guillotine</code> field, that allow us to search the system for specific data.</p>
+<p>We&#8217;ll now introduce and show examples of usage of different fields underneath the <code>guillotine</code> field, that allow us to search the system for specific data.</p>
 </div>
 <div class="sect2">
 <h3 id="querydsl"><a class="link" href="#querydsl">QueryDsl</a></h3>
@@ -791,7 +730,7 @@ Note that this matches the structure defined by the Artist content type, which i
 </dl>
 </div>
 <div class="paragraph">
-<p>In order to exemplify this field usage on some queries, we&#8217;ll query on the data set we&#8217;ve created so far on in this guide:</p>
+<p>In order to exemplify this field&#8217;s usage, we&#8217;ll query the data set we&#8217;ve created so far in this guide:</p>
 </div>
 <div class="listingblock">
 <div class="title">A Guillotine query using some of the arguments mentioned.</div>
@@ -803,15 +742,15 @@ Note that this matches the structure defined by the Artist content type, which i
         term: {
           field: "type",
           value: {
-            string: "com.example.myapp:artist"
+            string: "com.example.tutorial101:artist"
           }
         }
       },
       first: 1,
-      sort: {
+      sort: [{
         field: "displayName",
         direction: DESC
-      }
+      }]
     ) {
       _id
       displayName
@@ -821,10 +760,10 @@ Note that this matches the structure defined by the Artist content type, which i
 </div>
 </div>
 <div class="paragraph">
-<p>Note that this query is getting the last artist that is alphabetically sorted by name, regardless of where the content type is located in the tree structure.</p>
+<p>Note that this query is getting the last artist when sorted alphabetically by name, regardless of where the content is located in the tree structure.</p>
 </div>
 <div class="paragraph">
-<p>The following GraphQL query uses the <a href="https://developer.enonic.com/docs/xp/stable/storage/dsl#ngram" target="_blank" rel="noopener">n-gram functionality</a> to find all the artists that have a term (part of a text) that starts with <code>rap</code> somewhere in their data:</p>
+<p>The following GraphQL query uses the <a href="https://developer.enonic.com/docs/code/stable/storage/dsl#ngram">n-gram functionality</a> to find all the artists that have a term (part of a text) that starts with <code>rap</code> somewhere in their data:</p>
 </div>
 <div class="listingblock">
 <div class="title">A Guillotine query using <em>nGram</em> search functionality</div>
@@ -839,9 +778,11 @@ Note that this matches the structure defined by the Artist content type, which i
               term: {
                 field: "type",
                 value: {
-                  string: "com.example.myapp:artist"
+                  string: "com.example.tutorial101:artist"
                 }
-              },
+              }
+            },
+            {
               ngram: {
                 fields: ["_allText"],
                 query: "rap"
@@ -850,10 +791,10 @@ Note that this matches the structure defined by the Artist content type, which i
           ]
         }
       },
-      sort: {
+      sort: [{
         field: "displayName",
         direction: DESC
-      }
+      }]
     ) {
       _id
       displayName
@@ -878,13 +819,13 @@ Note that this matches the structure defined by the Artist content type, which i
               term: {
                 field: "type",
                 value: {
-                  string: "com.example.myapp:artist"
+                  string: "com.example.tutorial101:artist"
                 }
               }
             },
             {
               ngram: {
-                fields: "data.about"
+                fields: ["data.about"]
                 query: "rap sing"
                 operator: AND
               }
@@ -892,10 +833,10 @@ Note that this matches the structure defined by the Artist content type, which i
           ]
         }
       },
-      sort: {
+      sort: [{
         field: "displayName",
         direction: DESC
-      }
+      }]
     ) {
       _id
       displayName
@@ -911,7 +852,7 @@ Note that this matches the structure defined by the Artist content type, which i
 <i class="fa icon-note" title="Note"></i>
 </td>
 <td class="content">
-If you&#8217;ve previously used Elasticsearch API to query data, you&#8217;ll be quite familiar with how <code>queryDsl</code> works!
+If you&#8217;ve previously used the Elasticsearch API to query data, you&#8217;ll be quite familiar with how <code>queryDsl</code> works!
 </td>
 </tr>
 </table>
@@ -923,7 +864,7 @@ If you&#8217;ve previously used Elasticsearch API to query data, you&#8217;ll be
 <i class="fa icon-tip" title="Tip"></i>
 </td>
 <td class="content">
-To learn more about queryDSL capabilities, visit the <a href="https://developer.enonic.com/docs/xp/stable/storage/dsl" target="_blank" rel="noopener">DSL reference</a>
+To learn more about queryDSL capabilities, visit the <a href="https://developer.enonic.com/docs/code/stable/storage/dsl">DSL reference</a>
 </td>
 </tr>
 </table>
@@ -935,43 +876,32 @@ To learn more about queryDSL capabilities, visit the <a href="https://developer.
 <p>Just like there is a <code>queryDsl</code> field underneath <code>guillotine</code>, the API also provides other fields such as <code>queryDslConnection</code>.</p>
 </div>
 <div class="paragraph">
-<p>We&#8217;ll not go into much details, but basically, the fields with <em>connection</em> in their name have new parameters for aggregating and paginating data.</p>
+<p>We&#8217;ll not go into much detail, but basically, the fields with <em>connection</em> in their name have extra parameters for aggregating and paginating data.</p>
 </div>
 <div class="paragraph">
-<p>To finish this chapter, we&#8217;ll add a new <em>birthyear</em> field to the artist content type, update all artist to have data on this field, and then use <code>queryDslConnection</code> field to get aggregated data. Let&#8217;s get to work!</p>
+<p>To finish this chapter, we&#8217;ll add a new <em>birthday</em> field to the artist content type, update all artists to have data in this field, and then use the <code>queryDslConnection</code> field to get aggregated data. Let&#8217;s get to work!</p>
 </div>
 <div class="olist arabic">
 <ol class="arabic">
 <li>
 <p>Start by updating the Artist content type to the following structure:</p>
-</li>
-</ol>
-</div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-xml" data-lang="xml">&lt;content-type&gt;
-  &lt;display-name&gt;Artist&lt;/display-name&gt;
-  &lt;description&gt;Information about an artist&lt;/description&gt;
-  &lt;super-type&gt;base:structured&lt;/super-type&gt;
-  &lt;form&gt;
-
-    &lt;input name="name" type="TextLine"&gt;
-      &lt;label&gt;Name&lt;/label&gt;
-      &lt;help-text&gt;
-        The artist's name (if different from their professional moniker).
-      &lt;/help-text&gt;
-    &lt;/input&gt;
-
-    &lt;input type="TextArea" name="about"&gt;
-      &lt;label&gt;About the artist&lt;/label&gt;
-    &lt;/input&gt;
-
-    &lt;input type="Date" name="birthday" &gt;
-      &lt;label&gt;Birthday&lt;/label&gt;
-    &lt;/input&gt;
-
-  &lt;/form&gt;
-&lt;/content-type&gt;</code></pre>
+<pre class="highlight"><code class="language-yaml" data-lang="yaml">kind: "ContentType"
+title: "Artist"
+description: "Information about an artist"
+superType: "base:structured"
+form:
+  - type: "TextLine"
+    name: "name"
+    label: "Name"
+    helpText: "The artist's name (if different from their professional moniker)."
+  - type: "TextArea"
+    name: "about"
+    label: "About the artist"
+  - type: "Date"
+    name: "birthday"
+    label: "Birthday"</code></pre>
 </div>
 </div>
 <div class="admonitionblock tip">
@@ -981,13 +911,12 @@ To learn more about queryDSL capabilities, visit the <a href="https://developer.
 <i class="fa icon-tip" title="Tip"></i>
 </td>
 <td class="content">
-If are not running the project in dev mode (<code>enonic project dev</code> introduced in the previous $chapter), make sure to run <code>enonic project deploy</code> in the terminal on the project&#8217;s root directory
+If you are not running the project in dev mode (<code>enonic dev</code>, introduced in an earlier chapter), make sure to run <code>enonic project deploy</code> in the terminal in the project&#8217;s root directory
 </td>
 </tr>
 </table>
 </div>
-<div class="olist arabic">
-<ol class="arabic" start="2">
+</li>
 <li>
 <p>Update each of the previously created artists with the following dates:</p>
 <div class="ulist">
@@ -996,7 +925,7 @@ If are not running the project in dev mode (<code>enonic project dev</code> intr
 <p>P!nk: 1979-09-08</p>
 </li>
 <li>
-<p>Missy Elliot: 1971-07-01</p>
+<p>Missy Elliott: 1971-07-01</p>
 </li>
 <li>
 <p>Cardi B: 1992-10-11</p>
@@ -1005,10 +934,10 @@ If are not running the project in dev mode (<code>enonic project dev</code> intr
 </div>
 </li>
 <li>
-<p>Go back to Query playground and click on the <em>re-fetch schema button</em>. This will update the Artist data schema to contain the birthday structure, which is in sync with the Artist content type structure</p>
+<p>Go back to Query Playground and reopen it, so that it reloads the schema. The Artist data schema now contains the birthday field, in sync with the Artist content type structure.</p>
 </li>
 <li>
-<p>Run the following query on the playground:</p>
+<p>Run the following query in the playground:</p>
 <div class="listingblock">
 <div class="content">
 <pre class="highlight"><code class="language-GraphQL" data-lang="GraphQL">{
@@ -1016,20 +945,24 @@ If are not running the project in dev mode (<code>enonic project dev</code> intr
     queryDslConnection(
       query: {
         boolean: {
-          must: {
-            term: {
-              field: "type"
-              value: {
-                string: "com.example.myapp:artist"
+          must: [
+            {
+              term: {
+                field: "type"
+                value: {
+                  string: "com.example.tutorial101:artist"
+                }
+              }
+            },
+            {
+              exists: {
+                field: "data.birthday"
               }
             }
-            exists: {
-              field: "data.birthday"
-            }
-          }
+          ]
         }
       }
-      aggregations: {
+      aggregations: [{
         name: "generationsAggregation"
         dateRange: {
           field: "data.birthday"
@@ -1038,40 +971,40 @@ If are not running the project in dev mode (<code>enonic project dev</code> intr
               key: "The Greatest Generation"
               from: "1901"
               to: "1927"
-          	}
+            }
             {
               key: "The Silent Generation"
               from: "1928"
               to: "1945"
-          	}
+            }
             {
               key: "The Baby Boomer Generation"
               from: "1946"
               to: "1964"
-          	}
+            }
             {
               key: "Generation X"
               from: "1965"
               to: "1980"
-          	}
+            }
             {
               key: "Millennials"
               from: "1981"
               to: "1996"
-          	}
+            }
             {
               key: "Generation Z"
               from: "1997"
               to: "2012"
-          	}
+            }
             {
               key: "Gen Alpha"
               from: "2013"
               to: "2025"
-          	}
+            }
           ]
-          }
         }
+      }]
     )
     {
       aggregationsAsJson
@@ -1084,7 +1017,7 @@ If are not running the project in dev mode (<code>enonic project dev</code> intr
 </ol>
 </div>
 <div class="paragraph">
-<p>And this are the results</p>
+<p>And these are the results:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -1147,7 +1080,7 @@ If are not running the project in dev mode (<code>enonic project dev</code> intr
 </div>
 </div>
 <div class="paragraph">
-<p>Which shows that two of those artists are from Generation X, and one of them is a Millenial.</p>
+<p>Which shows that two of those artists are from Generation X, and one of them is a Millennial.</p>
 </div>
 </div>
 </div>
@@ -1158,13 +1091,13 @@ If are not running the project in dev mode (<code>enonic project dev</code> intr
 <div class="ulist">
 <ul>
 <li>
-<p>For more query examples and information about how to get up and running with Guillotine, you can check out <a href="https://developer.enonic.com/docs/intro" target="_blank" rel="noopener">Quick introduction guide</a> or the <a href="https://developer.enonic.com/docs/guillotine" target="_blank" rel="noopener">Guillotine docs</a></p>
+<p>For more query examples and information about how to get up and running with Guillotine, check out the <a href="https://developer.enonic.com/docs/guillotine">Guillotine docs</a></p>
 </li>
 <li>
-<p>If you want to understand how to extend available schemas on the GraphQL Api, you can head to <a href="https://developer.enonic.com/docs/guillotine/stable/extending" target="_blank" rel="noopener">Extending section on Guillotine docs</a> or check some examples on this <a href="https://developer.enonic.com/docs/build-a-custom-selector#customizing_with_guilliotine_lib_optional" target="_blank" rel="noopener">guide</a></p>
+<p>If you want to understand how to extend the available schemas in the GraphQL API, head to the <a href="https://developer.enonic.com/docs/guillotine/stable/extending">Extending section of the Guillotine docs</a></p>
 </li>
 <li>
-<p>If you want to learn more about GraphQL in general, the <a href="https://graphql.org/learn/" target="_blank" rel="noopener"><em>Introduction to GraphQL</em> documentation</a> is a good place to start</p>
+<p>If you want to learn more about GraphQL in general, the <a href="https://graphql.org/learn/"><em>Introduction to GraphQL</em> documentation</a> is a good place to start</p>
 </li>
 </ul>
 </div>
@@ -1181,7 +1114,7 @@ If are not running the project in dev mode (<code>enonic project dev</code> intr
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2026-10-09 10:32:21 UTC
+Last updated 2026-10-09 12:40:35 UTC
 </div>
 </div>
 </body>
