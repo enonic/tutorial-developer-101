@@ -250,4 +250,4 @@ TIP: You can also publish a piece of content by using the keyboard shortcut kbd:
 
 You've been introduced to Content Studio, content projects and content types, and how to create and publish content.
 
-Next up, we'll read that content back through the <<headless-api#, GraphQL API>>.
+Next up, we'll read that content back through the <<headless-api#, Headless API>>.

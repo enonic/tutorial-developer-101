@@ -63,8 +63,6 @@ They won't look or behave any different from if you manually typed the same fiel
 
 Form fragments go in the `{app-root}/cms/form-fragments` directory, following the same naming pattern as the other schemas we've seen (`<fragment-name>/<fragment-name>.yaml`).
 
-WARNING: If you have read XP 7 material, be aware that form fragments were called _mixins_ there. In XP 8, the word mixin means something else, which you will meet in <<mixins#, a later {document}>>.
-
 We'll see them in the upcoming task, but if you want to learn more about them, consult https://developer.enonic.com/docs/cms/stable/schemas/form-fragments[the form fragments reference documentation].
 
 [TIP]

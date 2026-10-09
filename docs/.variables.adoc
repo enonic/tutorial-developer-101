@@ -24,7 +24,7 @@
 :title-setup: Setup
 :title-content-studio: Content Studio and content creation
 :title-data-toolbox: Under the hood with Data Toolbox
-:title-headless-api: GraphQL API
+:title-headless-api: Headless API
 :title-files: Media - files are content too
 :title-form-items: Form items
 :title-sets: Sets and form fragments

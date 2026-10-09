@@ -11,7 +11,7 @@ Along the way you will:
 
 * <<setup#, set up>> the CLI, a local sandbox and your own app
 * create content types and content in <<content-studio#, Content Studio>>
-* query your content through the <<headless-api#, GraphQL API>>
+* query your content through the <<headless-api#, Headless API>>
 * upload <<files#, images and other media>>, and serve them scaled and cropped
 * model richer content with <<form-items#, form items>>, <<sets#, sets and form fragments>>, <<rich-text#, rich text>> and <<mixins#, mixins>>
 * fetch it all from a <<frontend#, front-end>>, with routing, paging and URLs

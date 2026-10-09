@@ -14,7 +14,7 @@ So before anything else, publish your content: in Content Studio, select the "{c
 
 == The request
 
-The endpoint is `{graphql-url}`, as you saw in the <<headless-api#_one_endpoint_for_every_api, GraphQL {document}>>. It takes an HTTP POST with `Content-Type: application/json` and a JSON body with two properties:
+The endpoint is `{graphql-url}`, as you saw in the <<headless-api#_one_endpoint_for_every_api, Headless API {document}>>. It takes an HTTP POST with `Content-Type: application/json` and a JSON body with two properties:
 
 [%header,cols="1,1,4"]
 |===

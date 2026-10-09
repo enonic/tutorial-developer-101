@@ -8,8 +8,6 @@ The idea is to basically define new fields and decide what content types those f
 
 In Content Studio, a mixin is visually displayed as a separate section of the form, listed below the content type's standard fields.
 
-WARNING: If you have read XP 7 material, be aware that the word *mixin* changed meaning in XP 8. What XP 7 called _x-data_ is what this {document} calls a mixin. What XP 7 called a _mixin_ is now a <<sets#_form_fragments, form fragment>>.
-
 NOTE: {see-prev-docs}
 
 == Your first mixin

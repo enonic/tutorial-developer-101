@@ -81,7 +81,7 @@ If you view the content as JSON, some relevant parts of the structure are the `d
 
 Uploading a file is only half the job. XP also includes APIs that let you download the same file (now stored as an attachment within the content) when you need it: the _attachment API_, `media:attachment`, serves any file as it was uploaded, and the _image API_, `media:image`, serves images, with scaling and filters applied on the fly.
 
-Both are Universal APIs, just like Guillotine, so they are served from the same API base URL you met in the <<headless-api#_one_endpoint_for_every_api, GraphQL {document}>>: `{api-base-url}` on your sandbox. We'll see what the URLs look like in a moment.
+Both are Universal APIs, just like Guillotine, so they are served from the same API base URL you met in the <<headless-api#_one_endpoint_for_every_api, Headless API {document}>>: `{api-base-url}` on your sandbox. We'll see what the URLs look like in a moment.
 
 === mediaUrl
 

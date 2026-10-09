@@ -20,9 +20,17 @@ NOTE: This tutorial is written for Guillotine 9, which requires XP 8.1 or newer.
 
 Guillotine exposes a single API endpoint for all your projects. On your sandbox, it is `{graphql-url}`.
 
-Look at that address for a moment, because the pattern comes back throughout this tutorial. In XP 8, every web API is a _Universal API_: it has a name of the form `<app>:<name>`, and it is mounted under the instance's single `/api` endpoint. Guillotine's API is `com.enonic.app.guillotine:graphql`. The images you upload later are served by `media:image`, and other files by `media:attachment`, from the very same place. An app of your own can add more.
+Look at that address for a moment, because the pattern comes back throughout this tutorial. In XP 8, every web API is a _Universal API_: it has a name of the form `<app>:<name>`, and it is mounted under the instance's single `/api` endpoint. The ones you will meet in this tutorial are:
+
+`com.enonic.app.guillotine:graphql`:: Guillotine's GraphQL API, the one you are about to use.
+`media:image`:: Serves the images you upload later, scaled and cropped on request.
+`media:attachment`:: Serves any other uploaded file, as it was uploaded.
+
+By default, all three live at the very same place, and an app of your own can add more.
 
 This is why one base URL is enough. Everything you will ask XP for - queries, images, downloads - lives under `{api-base-url}` on your sandbox. On a live server it lives under that server's address instead, and that is the only difference: the same APIs, the same names, the same paths. Your front-end is the one that knows which base to use. You will build media URLs on top of this base in the <<files#, media {document}>>, and call it from code in the <<frontend#, front-end {document}>>.
+
+NOTE: The single endpoint is the default, not a limit. In production, each API can be given its own address, for instance serving the media APIs from a CDN at `cdn.example.com` while GraphQL stays at `api.example.com`. Because Guillotine returns URL paths rather than finished addresses, your front-end simply uses a different base for media than for queries. The https://developer.enonic.com/docs/platform/stable/config/vhosts[virtual host configuration] in the platform docs covers how.
 
 For now, Content Studio offers a much more comfortable way to explore the API than calling the endpoint yourself.
 
