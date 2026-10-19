@@ -1,6 +1,6 @@
-# Developer 101 - Content Modelling and the GraphQL API
+# Developer 101 - Content Modeling and the GraphQL API
 
-A hands-on tutorial covering content modelling, schema management and the Guillotine GraphQL API on Enonic XP.
+A hands-on tutorial covering content modeling, schema management and the Guillotine GraphQL API on Enonic XP.
 
 These docs are written in asciidoc.
 

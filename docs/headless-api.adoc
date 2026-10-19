@@ -161,7 +161,7 @@ There is a `queryDsl` field underneath `guillotine` which allows you to search t
 
 The syntax is based on two types of operators: `Expressions` and `Compound`.
 
-`Expression`:: Used to check particular fields for various native and analysed values.
+`Expression`:: Used to check particular fields for various native and analyzed values.
 `Compound`:: Used to logically combine various expressions and compounds to fetch nodes based on complex conditions.
 
 In order to exemplify this field's usage, we'll query the data set we've created so far in this guide:

@@ -53,7 +53,7 @@ Option sets where users can select only one of a number of options are known as 
 - The https://developer.enonic.com/docs/cms/stable/schemas/form-items/option-set[option set reference documentation] provides a good overview (with accompanying pictures) of how option sets work.
 
 .A multi-select option set
-image::option-set-sample.png["An input form labelled 'multi-selection'. The user has selected one out of four options. Some options contain extra data such as an image selector or other input fields.", {image-s}, align=center]
+image::option-set-sample.png["An input form labeled 'multi-selection'. The user has selected one out of four options. Some options contain extra data such as an image selector or other input fields.", {image-s}, align=center]
 
 == Form fragments
 
@@ -166,7 +166,7 @@ With the new option sets added, the Lion entry could look something like this:
 
 // TODO(xp8-verify): recapture from Content Studio 6.1
 .Distribution and feeding behavior for Lion
-image::option-sets.png["Diet and distribution data filled out for lion. The feeding behaviour selected is 'Carnivore' and the list of prey includes zebras and giraffes. For the distribution data, Africa and Asia is selected, with a short text about how Lions live in these areas today.", {image-xl}]
+image::option-sets.png["Diet and distribution data filled out for lion. The feeding behavior selected is 'Carnivore' and the list of prey includes zebras and giraffes. For the distribution data, Africa and Asia is selected, with a short text about how Lions live in these areas today.", {image-xl}]
 
 == Querying item sets and option sets
 
