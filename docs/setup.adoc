@@ -38,14 +38,20 @@ The `essentials` template installs a set of applications from Enonic Market, inc
 
 NOTE: This tutorial is written for Enonic XP 8.1 and the versions of Content Studio and Guillotine that go with it. If the CLI offers you an older version, pick 8.1 or newer.
 
-The sandbox prints a fair amount of output while it downloads XP, installs the applications and starts up. Once you see a line saying that Enonic XP has started, open http://localhost:8080[http://localhost:8080] in your browser. You should see the XP boot page, listing the sandbox's installed applications.
+The sandbox prints a fair amount of output while it downloads XP, installs the applications and starts up. Once you see a line saying that Enonic XP has started, open http://localhost:8080[http://localhost:8080] in your browser. You should see the Enonic SDK welcome page, listing the sandbox's installed applications:
+
+image::setup-sdk.png["The Enonic SDK welcome page for XP 8.1.0, with the Admin, APIs and VHosts cards, the installed applications Content Studio, Data Toolbox and Guillotine, and the sandbox's configuration files", width=1001]
 
 Click btn:[Log In as Guest] to open the XP admin as the instance's super user. You should see something like this:
 
-// TODO(xp8-verify): recapture screenshot from XP 8.1
-image::xp-dashboard.png[The XP menu and dashboard, 1727w]
+image::setup-home.jpg["The XP menu for the 101tutorial sandbox, with useful links on the left and tiles for Dashboard, Applications, Content Studio, Data toolbox and Users", width=1440]
 
-The `XP menu` lists the admin tools your user has access to. Dashboard, Applications and Users come with the platform, and applications such as Content Studio add their own. Once inside a tool, the XP menu stays available in the top right corner so you can switch between tools.
+This is the _XP menu_, the start page of the XP admin.
+It lists the admin tools your user has access to.
+Dashboard, Applications and Users come with the platform, and applications such as Content Studio add their own.
+Once inside a tool, click the XP icon in the top right corner to return to the XP menu and switch to another tool.
+
+In this tutorial, a path such as `XP menu` -> `Applications` means: open the XP menu, then click the Applications tile.
 
 TIP: To stop the sandbox, press kbd:[ctrl-c] in its terminal. To start it again, run `enonic sandbox start {sandbox-name}`.
 
@@ -109,30 +115,19 @@ Waiting for changes to input files...
 
 To confirm the app is running, open `XP menu` -> `Applications` in the XP admin. Your app is listed as "Vanilla Example":
 
-// TODO(xp8-verify): recapture screenshot from the XP 8.1 Applications tool
-image::applications-vanilla.png["The applications list with a few applications installed, and the vanilla app selected.", 421w]
+image::setup-app.png["The Applications tool listing Content Studio, Data Toolbox, Guillotine and Vanilla Example, with Vanilla Example selected and its key com.example.dev101 shown", width=1440]
 
 === Change the app's title
 
-Let's make a first change to the app, to see the development loop in action. Open the application descriptor, `{app-root}/enonic.yaml`, in your editor:
-
-.{app-root}/enonic.yaml
-[source,yaml]
-----
-kind: "Application"
-title: "Vanilla Example"
-description: "Edit app description at src/main/resources/enonic.yaml"
-vendorName: "Acme Inc"
-vendorUrl: "https://example.com"
-----
-
-Change the `title` to something more descriptive, and replace the stock `description` while you're at it:
+Let's make a first change to the app, to see the development loop in action. Open the application descriptor, `{app-root}/enonic.yaml`, in your editor, and change the `title` and `description`:
 
 .{app-root}/enonic.yaml
 [source,yaml]
 ----
 include::../{app-root}/enonic.yaml[]
 ----
+<1> The starter calls the app "Vanilla Example". Give it a more descriptive title.
+<2> Replace the stock description while you're at it.
 
 Save the file, and watch the `enonic dev` terminal rebuild and redeploy. Revisit the Applications tool and you should see your new title.
 

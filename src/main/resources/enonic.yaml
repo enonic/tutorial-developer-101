@@ -1,5 +1,5 @@
 kind: "Application"
-title: "Developer 101"
-description: "Content types and schemas from the Developer 101 tutorial"
+title: "Developer 101" # <1>
+description: "Content types and schemas from the Developer 101 tutorial" # <2>
 vendorName: "Acme Inc"
 vendorUrl: "https://example.com"

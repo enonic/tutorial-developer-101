@@ -5,9 +5,9 @@
 :xp-url: http://localhost:8080
 :api-base-url: {xp-url}/api
 :graphql-url: {api-base-url}/com.enonic.app.guillotine:graphql
-:sandbox-name: tutorial
+:sandbox-name: 101tutorial
 :app-root: src/main/resources
-:app-name: tutorial101
+:app-name: dev101
 :app-name-full: com.example.{app-name}
 :app-name-query: com_example_{app-name}
 :cms-project-name: My First Project
