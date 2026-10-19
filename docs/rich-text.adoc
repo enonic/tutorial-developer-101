@@ -1,6 +1,6 @@
-= {title-rich-text}
+= Rich text
 include::.variables.adoc[]
-:description: {description-rich-text}
+:description: Rich text is an incredibly powerful editing tool and an important part of the XP experience. Learn how to configure it here.
 
 If you want to work with rich text, HtmlArea is the form item to go for.
 
@@ -69,29 +69,20 @@ image::input-type-html-area-some-controls.png[An HtmlArea configured to include 
 
 As introduced in the beginning, for a full overview of the available text tools and HtmlArea settings, visit the https://developer.enonic.com/docs/cms/stable/schemas/form-items/htmlarea[HtmlArea reference docs].
 
-=== Task: {content-type-2-capitalized} description
+=== Task: Animal description
 
-Let's add a rich-text description field to the {content-type-2} content type. The input should be optional and have at most a single occurrence. You can include any editor tools you want, but it must at least have the `Link`, `Image` and `Macro` tools, as we'll be using these later. Otherwise, configure it as you want.
+Let's add a rich-text description field to the animal content type. The input should be optional and have at most a single occurrence. You can include any editor tools you want, but it must at least have the `Link`, `Image` and `Macro` tools, as we'll be using these later. Otherwise, configure it as you want.
 
 Your content type should now look something like this:
 
-.{content-type-2-capitalized} with an HtmlArea form item
-[source,yaml,{subs}]
+.Animal with an HtmlArea form item
+[source,yaml]
 ----
-kind: "ContentType"
-title: "{content-type-2-capitalized}"
-description: "An {content-type-2} that lives on planet Earth"
-superType: "base:structured"
-form:
+include::../{app-root}/cms/content-types/animal/animal.yaml[tags=header]
 
   # other fields elided for brevity
 
-  - type: "HtmlArea"
-    name: "description"
-    label: "Description"
-    helpText: "Describe the animal. Where its habitats are, what it eats, etc."
-    exclude: "*"
-    include: "Format Link Macro Image"
+include::../{app-root}/cms/content-types/animal/animal.yaml[tags=description]
 ----
 
 With the new content type deployed, you are ready to continue with the further tasks we'll introduce in the next sections.
@@ -116,9 +107,9 @@ NOTE: Because links are created using the item's unique id, it is perfectly safe
 
 === Task: Internal link
 
-In this task, you'll create an internal link to another {content-type-2}.
+In this task, you'll create an internal link to another animal.
 
-Create a new {content-type-2}, "Lynx".
+Create a new animal, "Lynx".
 
 . In the `Description` field, type some text, i.e. "Lynx are cats, just like lions". Select the "lions" text and click "insert link" in the toolbar.
 +
@@ -138,7 +129,7 @@ With the image tool enabled, you can insert an image anywhere within your docume
 
 The following options are available: Caption, alt text, change the image's justification, and apply predefined image styles.
 
-=== Task: {content-type-2-capitalized} pictures
+=== Task: Animal pictures
 
 Try out the image controls that Content Studio gives you by uploading a picture and seeing what you can do with it.
 
@@ -164,17 +155,11 @@ In your app, add a new file:
 .{app-root}/cms/style/style.yaml
 [source,yaml]
 ----
-kind: "Style"
-styles:
-  - type: "image"
-    name: "square-grayscale"
-    label: "Grayscale"
-    aspectRatio: "1:1" # <1>
-    filter: "hsbcolorize(0x000000); grayscale(); border(6, 0x000000)" # <2>
+include::../{app-root}/cms/style/style.yaml[]
 ----
 +
-<1> The aspect ratio controls how the image is cropped. 1:1 makes the image square.
-<2> The filters add a grayscale effect and then a border
+* `aspectRatio`: The aspect ratio controls how the image is cropped. 1:1 makes the image square.
+* `filter`: The filters add a grayscale effect and then a border
 +
 NOTE: https://developer.enonic.com/docs/cms/stable/richtext/styles[The styles reference doc] has more information on how you can style your images, so go check it out for a deeper dive.
 +
@@ -233,7 +218,7 @@ The following query returns the "Lynx" content, and the `description` field as p
         }
       }
     ) {
-      ... on {app-name-query}_{content-type-2-capitalized} {
+      ... on {app-name-query}_Animal {
         data {
           description {
             processedHtml
@@ -256,7 +241,7 @@ The following query returns the "Lynx" content, and the `description` field as p
         {
           "data": {
             "description": {
-              "processedHtml": "<p>Lynx are cats, just like <a href=\"/{content-type-2}s/lion\" data-link-ref=\"8cc82fd1-9063-4604-9f51-5f059d7a5d2e\">lions</a>.</p>\n\n<figure class=\"captioned editor-align-justify square-grayscale\"><img alt=\"lynx.jpg\" src=\"/media:image/{cms-project}:draft/be6bb93a-7d99-4ed2-b424-4e435b89f392:6a1e144ef4ebab19e9071794ad753130d5bb5497/width-768/lynx.jpg\" style=\"width:100%\" data-image-ref=\"4dced964-cd1c-445d-bb9f-80387467e165\">\n\n</figure>\n\n<p><editor-macro data-macro-name=\"embed\" data-macro-ref=\"a1490c65-3654-4b29-9b1a-eb3894b6f59f\">&lt;iframe title=\"YouTube video player\" src=\"https://www.youtube.com/embed/gr5EwZo_CHQ?si=IlkTGRuGVV7BxEOs\" height=\"315\" width=\"560\"&gt;&lt;/iframe&gt;</editor-macro></p>\n"
+              "processedHtml": "<p>Lynx are cats, just like <a href=\"/animals/lion\" data-link-ref=\"8cc82fd1-9063-4604-9f51-5f059d7a5d2e\">lions</a>.</p>\n\n<figure class=\"captioned editor-align-justify square-grayscale\"><img alt=\"lynx.jpg\" src=\"/media:image/{cms-project}:draft/be6bb93a-7d99-4ed2-b424-4e435b89f392:6a1e144ef4ebab19e9071794ad753130d5bb5497/width-768/lynx.jpg\" style=\"width:100%\" data-image-ref=\"4dced964-cd1c-445d-bb9f-80387467e165\">\n\n</figure>\n\n<p><editor-macro data-macro-name=\"embed\" data-macro-ref=\"a1490c65-3654-4b29-9b1a-eb3894b6f59f\">&lt;iframe title=\"YouTube video player\" src=\"https://www.youtube.com/embed/gr5EwZo_CHQ?si=IlkTGRuGVV7BxEOs\" height=\"315\" width=\"560\"&gt;&lt;/iframe&gt;</editor-macro></p>\n"
             }
           }
         }
@@ -272,7 +257,7 @@ By unescaping the HTML, you will find the following:
 [source,html,{subs}]
 ----
 <p>
-  Lynx are cats, just like <a href="/{content-type-2}s/lion" data-link-ref="8cc82fd1-9063-4604-9f51-5f059d7a5d2e">lions</a>.
+  Lynx are cats, just like <a href="/animals/lion" data-link-ref="8cc82fd1-9063-4604-9f51-5f059d7a5d2e">lions</a>.
 </p>
 
 <figure class="captioned editor-align-justify square-grayscale">
@@ -310,7 +295,7 @@ This example is an internal link. To build the final URL, and to access more det
         }
       }
     ) {
-      ... on {app-name-query}_{content-type-2-capitalized} {
+      ... on {app-name-query}_Animal {
         data {
           description {
             processedHtml
@@ -354,12 +339,12 @@ By executing this query, you will get some more data. Specifically:
     "uri": "content://89daa74e-1482-493d-9a22-8ec08acaf4f8",
     "content": {
       "displayName": "Lion",
-      "_path": "/{content-type-2}s/lion",
-      "type": "{app-name-full}:{content-type-2}"
+      "_path": "/animals/lion",
+      "type": "{app-name-full}:animal"
     },
     "pageUrl": {
       "baseUrl": null,
-      "path": "/{content-type-2}s/lion",
+      "path": "/animals/lion",
       "queryString": ""
     },
     "fragment": ""
@@ -391,7 +376,7 @@ If you want to optimize how fast images load on various devices, Guillotine can 
         }
       }
     ) {
-      ... on {app-name-query}_{content-type-2-capitalized} {
+      ... on {app-name-query}_Animal {
         data {
           description(processHtml: {imageWidths: [200, 500]}) {
             processedHtml
@@ -496,7 +481,7 @@ In the processed HTML, each macro is represented by an `<editor-macro>` element 
         }
       }
     ) {
-      ... on {app-name-query}_{content-type-2-capitalized} {
+      ... on {app-name-query}_Animal {
         data {
           description {
             processedHtml
@@ -548,7 +533,7 @@ NOTE: If you used a different macro than the "Embed iframe" macro, the query mus
         }
       }
     ) {
-      ... on {app-name-query}_{content-type-2-capitalized} {
+      ... on {app-name-query}_Animal {
         data {
           description {
             processedHtml

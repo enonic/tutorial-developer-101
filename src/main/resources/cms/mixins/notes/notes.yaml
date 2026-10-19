@@ -1,0 +1,9 @@
+kind: "Mixin"
+title: "Notes"
+form:
+  - type: "TextLine"
+    name: "notes"
+    label: "Notes"
+    occurrences:
+      min: 0
+      max: 3

@@ -1,0 +1,7 @@
+kind: "Style"
+styles:
+  - type: "image"
+    name: "square-grayscale"
+    label: "Grayscale"
+    aspectRatio: "1:1"
+    filter: "hsbcolorize(0x000000); grayscale(); border(6, 0x000000)"

@@ -1,6 +1,6 @@
-= {title-frontend}
+= Fetching content from a front-end
 include::.variables.adoc[]
-:description: {description-frontend}
+:description: Call the API from cURL, Node and a browser. Publish content, configure CORS, resolve a route, page a list and build page and media URLs from their parts.
 
 So far you have run every query from Query Playground, which quietly supplied the project, the branch and your login. A front-end has none of that. In this {document} you'll send the same queries over HTTP, from the command line, from Node and from a browser, and handle the four things every front-end on Enonic needs: the request format, published versus draft content, URLs for pages and media, and lists that page.
 
@@ -10,7 +10,7 @@ NOTE: {see-prev-docs}
 
 Everything you have created so far lives in the draft branch. Draft content is only readable by logged-in users with a role in the content project, which a front-end does not have. The master branch, on the other hand, is readable by anyone in a public project like yours.
 
-So before anything else, publish your content: in Content Studio, select the "{content-type-1}s", "{content-type-2}s" and "images" folders, choose btn:[Publish], and make sure the dialog includes their children. From now on, use the `master` branch in your queries.
+So before anything else, publish your content: in Content Studio, select the "artists", "animals" and "images" folders, choose btn:[Publish], and make sure the dialog includes their children. From now on, use the `master` branch in your queries.
 
 == The request
 
@@ -30,7 +30,7 @@ Save this as `request.json`:
 [source,json,{subs}]
 ----
 {
-  "query": "query Artists($project: String!, $branch: String!) { guillotine(project: $project, branch: $branch) { getChildren(key: \"/{content-type-1}s\", first: 10) { _id displayName } } }",
+  "query": "query Artists($project: String!, $branch: String!) { guillotine(project: $project, branch: $branch) { getChildren(key: \"/artists\", first: 10) { _id displayName } } }",
   "variables": {
     "project": "{cms-project}",
     "branch": "master"
@@ -47,7 +47,7 @@ curl "{graphql-url}" \
   --data-binary @request.json
 ----
 
-You should get the three {content-type-1}s back as JSON, the same shape you saw in the playground's response panel. If the list is empty, the content is not published, or you spelled the project name differently when you created it.
+You should get the three artists back as JSON, the same shape you saw in the playground's response panel. If the list is empty, the content is not published, or you spelled the project name differently when you created it.
 
 == From JavaScript
 
@@ -60,10 +60,10 @@ const apiBaseUrl = '{api-base-url}';
 const query = `
   query Artists($project: String!, $branch: String!) {
     guillotine(project: $project, branch: $branch) {
-      getChildren(key: "/{content-type-1}s", first: 10) {
+      getChildren(key: "/artists", first: 10) {
         _id
         displayName
-        ... on {app-name-query}_{content-type-1-capitalized} {
+        ... on {app-name-query}_Artist {
           data {
             name
             birthday
@@ -136,7 +136,7 @@ query AnimalPage($project: String!, $branch: String!, $path: ID!) {
   guillotine(project: $project, branch: $branch) {
     get(key: $path) {
       displayName
-      ... on {app-name-query}_{content-type-2-capitalized} {
+      ... on {app-name-query}_Animal {
         data {
           otherNames
           description {
@@ -149,7 +149,7 @@ query AnimalPage($project: String!, $branch: String!, $path: ID!) {
 }
 ----
 
-With `path` set to `/{content-type-2}s/lion`, this is everything the lion's page needs. The route in your front-end can be the content path itself, or any mapping you prefer, as long as the front-end knows how to turn it back into a path.
+With `path` set to `/animals/lion`, this is everything the lion's page needs. The route in your front-end can be the content path itself, or any mapping you prefer, as long as the front-end knows how to turn it back into a path.
 
 == Paging a list
 
@@ -159,7 +159,7 @@ With `path` set to `/{content-type-2}s/lion`, this is everything the lion's page
 ----
 query AnimalsPage($project: String!, $branch: String!, $after: String) {
   guillotine(project: $project, branch: $branch) {
-    getChildrenConnection(key: "/{content-type-2}s", first: 2, after: $after, sort: "displayName ASC") {
+    getChildrenConnection(key: "/animals", first: 2, after: $after, sort: "displayName ASC") {
       totalCount
       edges {
         node {

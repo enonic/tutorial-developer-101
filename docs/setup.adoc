@@ -1,6 +1,6 @@
-= {title-setup}
+= Setup
 include::.variables.adoc[]
-:description: {description-setup}
+:description: Install the Enonic CLI, start a local XP sandbox and create the app that will hold your content types. Three commands and you are ready.
 
 Before we can model any content, we need somewhere to put it. This {document} gets you there in three steps: install the Enonic CLI, start a local instance of XP, and create the app that will hold your content types.
 
@@ -126,7 +126,15 @@ vendorName: "Acme Inc"
 vendorUrl: "https://example.com"
 ----
 
-Change the `title` to something more descriptive, and replace the stock `description` while you're at it. Save the file, and watch the `enonic dev` terminal rebuild and redeploy. Revisit the Applications tool and you should see your new title.
+Change the `title` to something more descriptive, and replace the stock `description` while you're at it:
+
+.{app-root}/enonic.yaml
+[source,yaml]
+----
+include::../{app-root}/enonic.yaml[]
+----
+
+Save the file, and watch the `enonic dev` terminal rebuild and redeploy. Revisit the Applications tool and you should see your new title.
 
 === Troubleshooting
 

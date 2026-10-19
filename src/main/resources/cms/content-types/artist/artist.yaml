@@ -1,0 +1,52 @@
+# tag::header[]
+kind: "ContentType"
+title: "Artist"
+description: "Information about an artist"
+superType: "base:structured"
+form:
+# end::header[]
+# tag::basics[]
+  - type: "TextLine"
+    name: "name"
+    label: "Name"
+    helpText: "The artist's name (if different from their professional moniker)."
+  - type: "TextArea"
+    name: "about"
+    label: "About the artist"
+# end::basics[]
+# tag::birthday[]
+  - type: "Date"
+    name: "birthday"
+    label: "Birthday"
+# end::birthday[]
+# tag::favoriteAnimal[]
+  - type: "ContentSelector"
+    name: "favoriteAnimal"
+    label: "Favorite animal"
+    allowContentType:
+      - "animal"
+    allowPath:
+      - "/animals/*"
+# end::favoriteAnimal[]
+# tag::filmography[]
+  - type: "ItemSet"
+    name: "filmography"
+    label: "Filmography"
+    occurrences:
+      min: 0
+      max: 0
+    items:
+      - type: "TextLine"
+        name: "title"
+        label: "Title"
+        occurrences:
+          min: 1
+          max: 1
+      - type: "Double"
+        name: "year"
+        label: "Year"
+        occurrences:
+          min: 1
+          max: 1
+        min: 0
+# end::filmography[]

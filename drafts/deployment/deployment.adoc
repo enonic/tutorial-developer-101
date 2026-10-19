@@ -1,6 +1,6 @@
-= {title-deployment}
+= Deployment and next steps
 include::.variables.adoc[]
-:description: {description-deployment}
+:description: How do you actually deploy Enonic XP and use it for more than local development? And where do you go from here to learn more?
 :vhost-host: xp-admin.com
 
 In this final chapter, we'll look into how you can deploy your application for real-life usage. There are essentially two options - Enonic Cloud, and everything else.
@@ -105,9 +105,9 @@ To try it out, send the requests from the <<frontend#, front-end {document}>> wi
 ----
 {
   guillotine(project: "<name-of-your-cloud-project>", branch: "master") {
-    getChildren(key: "/{content-type-2}s") {
+    getChildren(key: "/animals") {
       displayName
-      ... on {app-name-query}_{content-type-2-capitalized} {
+      ... on {app-name-query}_Animal {
         data {
           otherNames
         }

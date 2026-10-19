@@ -1,6 +1,6 @@
-= {title-iam}
+= IAM: identities and providers
 include::.variables.adoc[]
-:description: {description-iam}
+:description: How do you restrict access to your sites? What kinds of access control exist for XP? This {document} explores users, roles, groups, and identity providers.
 :host: xp-admin.com
 :provider: my provider
 

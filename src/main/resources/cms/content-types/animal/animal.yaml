@@ -1,0 +1,92 @@
+# tag::header[]
+kind: "ContentType"
+title: "Animal"
+description: "An animal that lives on planet Earth"
+displayNamePlaceholder: "Species"
+superType: "base:structured"
+form:
+# end::header[]
+# tag::basics[]
+  - type: "TextLine"
+    name: "otherNames"
+    label: "Other names"
+    helpText: "Other names for this species."
+    occurrences:
+      min: 0
+      max: 0
+  - type: "ImageSelector"
+    name: "images"
+    label: "Images"
+    helpText: "Images of the animal"
+    occurrences:
+      min: 0
+      max: 3
+# end::basics[]
+# tag::feedingBehavior[]
+  - type: "OptionSet"
+    name: "feedingBehavior"
+    label: "Feeding behavior"
+    selection:
+      min: 1
+      max: 1
+    options:
+      - name: "herbivore"
+        label: "Herbivore"
+        helpText: "Subsists primarily on plant material."
+      - name: "carnivore"
+        label: "Carnivore"
+        helpText: "Subsists primarily on animal tissue and meat."
+        items:
+          - type: "TextLine"
+            name: "prey"
+            label: "Prey"
+            occurrences:
+              min: 0
+              max: 0
+# end::feedingBehavior[]
+# tag::distribution[]
+  - type: "OptionSet"
+    name: "distribution"
+    label: "Distribution across continents"
+    helpText: "Continents where the animal can be found in the wild"
+    selection:
+      min: 0
+      max: 7
+    options:
+      - name: "africa"
+        label: "Africa"
+        items:
+          - include: "distributionData"
+      - name: "antarctica"
+        label: "Antarctica"
+        items:
+          - include: "distributionData"
+      - name: "asia"
+        label: "Asia"
+        items:
+          - include: "distributionData"
+      - name: "australia"
+        label: "Australia"
+        items:
+          - include: "distributionData"
+      - name: "europe"
+        label: "Europe"
+        items:
+          - include: "distributionData"
+      - name: "northAmerica"
+        label: "North America"
+        items:
+          - include: "distributionData"
+      - name: "southAmerica"
+        label: "South America"
+        items:
+          - include: "distributionData"
+# end::distribution[]
+# tag::description[]
+  - type: "HtmlArea"
+    name: "description"
+    label: "Description"
+    helpText: "Describe the animal. Where its habitats are, what it eats, etc."
+    exclude: "*"
+    include: "Format Link Macro Image"
+# end::description[]

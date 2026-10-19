@@ -1,6 +1,6 @@
-= {title-form-items}
+= Form items
 include::.variables.adoc[]
-:description: {description-form-items}
+:description: Take your content types to the next level with more form items. Learn how to configure them, what kinds there are, and how to link content together.
 
 The content types we've created previously in this guide have only used a few basic form items: TextLine, TextArea and Date.
 
@@ -294,7 +294,7 @@ As with `mediaUrl` in the previous {document}, put your API base URL in front of
 TIP: Under the hood, `attachmentUrl` uses the same logic as Enonic's portal library function https://developer.enonic.com/docs/code/stable/libraries/lib-portal#attachmenturlparts[attachmentUrlParts], so you can follow the link to better understand the arguments that you pass to this field when creating queries that use it.
 
 
-== Task: {content-type-1} and {content-type-2}s
+== Task: artist and animals
 
 Time for a little recap! We'll put together everything we've learned about content types and form items thus far to create a new data set.
 
@@ -302,104 +302,64 @@ A solution is listed below, but try and see if you can solve it yourself first.
 
 TIP: If you're wondering how to achieve some of the goals, try consulting the documentation that's been linked to in this {document}.
 
-Your task is to create a new content type: `{content-type-2-capitalized}` and to update the `{content-type-1-capitalized}` content type with new constraints and fields. By the end of this {document}, you should have content types that look like this in Content Studio:
+Your task is to create a new content type: `Animal` and to update the `Artist` content type with new constraints and fields. By the end of this {document}, you should have content types that look like this in Content Studio:
 
 // TODO(xp8-verify): recapture from Content Studio 6.1
-.The target for this task: {content-type-2} and {content-type-1}
-image::{content-type-2}-and-{content-type-1}-target.png["An {content-type-2} content wizard next to an {content-type-1} wizard", {image-xl}]
+.The target for this task: animal and artist
+image::animal-and-artist-target.png["An animal content wizard next to an artist wizard", {image-xl}]
 
-=== {content-type-2-capitalized} constraints
+=== Animal constraints
 
 * Make the display name use "Species" as its label. _Hint: check out https://developer.enonic.com/docs/cms/stable/content/content-types#display-name[the display name section of the content type documentation] and look for something that allows you to do this._
-* An {content-type-2} can also have alternative names for its species (for instance, the reindeer is also known as _caribou_). Allow the user to add as many alternative names as they want.
+* An animal can also have alternative names for its species (for instance, the reindeer is also known as _caribou_). Allow the user to add as many alternative names as they want.
 * An image selector that accepts between 0 and 3 images.
 * Help text where you think it would be helpful.
 
 
-=== {content-type-1-capitalized} constraints
+=== Artist constraints
 
-* Add a ContentSelector that allows only content of the "{content-type-2-capitalized}" type and that must be nested under the "{content-type-2}s" folder. Call it `favorite{content-type-2-capitalized}`.
+* Add a ContentSelector that allows only content of the "Animal" type and that must be nested under the "animals" folder. Call it `favoriteAnimal`.
 
 === Querying
 
-* Create a GraphQL query that'll fetch all {content-type-1}s and list what their favorite animals are, as well their animals' other names.
+* Create a GraphQL query that'll fetch all artists and list what their favorite animals are, as well their animals' other names.
 
 === Check your work
 
-To verify that everything works, create some animals, create a content link between a {content-type-1} and an {content-type-2} and run your query to fetch some new data on this new structure.
+To verify that everything works, create some animals, create a content link between an artist and an animal and run your query to fetch some new data on this new structure.
 
 TIP: Don't worry if something did not work, we'll show the solutions in the next section.
 
 == Task solution
 
 === Content types
-. Create the animal content type. In `{app-root}/cms/content-types/{content-type-2}/{content-type-2}.yaml`, place the following content:
+. Create the animal content type. In `{app-root}/cms/content-types/animal/animal.yaml`, place the following content:
 +
-.The {content-type-2} content type
-[source,yaml,{subs}]
+.The animal content type
+[source,yaml]
 ----
-kind: "ContentType"
-title: "{content-type-2-capitalized}"
-description: "An {content-type-2} that lives on planet Earth"
-displayNamePlaceholder: "Species" # <1>
-superType: "base:structured"
-form:
-  - type: "TextLine"
-    name: "otherNames"
-    label: "Other names"
-    helpText: "Other names for this species."
-    occurrences:
-      min: 0
-      max: 0
-  - type: "ImageSelector"
-    name: "images"
-    label: "Images"
-    helpText: "Images of the animal"
-    occurrences:
-      min: 0
-      max: 3
+include::../{app-root}/cms/content-types/animal/animal.yaml[tags=header;basics]
 ----
 +
-<1> This setting lets you customize what Content Studio calls the built-in "display name" field.
+`displayNamePlaceholder` lets you customize what Content Studio calls the built-in "display name" field.
 +
-. Next, update the `{content-type-1-capitalized}` content type.
+. Next, update the `Artist` content type.
 +
 // TODO(xp8-verify): confirm the allowPath pattern matches the animals folder in a project without a site
-.An updated {content-type-1}
-[source,yaml,{subs}]
+.An updated artist
+[source,yaml]
 ----
-kind: "ContentType"
-title: "{content-type-1-capitalized}"
-description: "Information about an {content-type-1}"
-superType: "base:structured"
-form:
-  - type: "TextLine"
-    name: "name"
-    label: "Name"
-    helpText: "The artist's name (if different from their professional moniker)."
-  - type: "TextArea"
-    name: "about"
-    label: "About the {content-type-1}"
-  - type: "Date"
-    name: "birthday"
-    label: "Birthday"
-  - type: "ContentSelector" # <1>
-    name: "favorite{content-type-2-capitalized}"
-    label: "Favorite {content-type-2}"
-    allowContentType:
-      - "{content-type-2}"
-    allowPath:
-      - "/{content-type-2}s/*"
+include::../{app-root}/cms/content-types/artist/artist.yaml[tags=header;basics;birthday;favoriteAnimal]
 ----
 +
-<1> This ContentSelector uses `allowContentType` and `allowPath` to narrow the possible content to only {content-type-2-capitalized}s in the {content-type-2}s folder
+The new `favoriteAnimal` ContentSelector uses `allowContentType` and `allowPath` to narrow the possible content to only Animals in the animals folder
 +
-. Create a folder called "{content-type-2}s" next to the "{content-type-1}s" folder, and create some {content-type-2}s in it. Either pick your favorites, or, if you're not feeling creative, add these (content from Wikipedia):
+. Create a folder called "animals" next to the "artists" folder, and create some animals in it. Either pick your favorites, or, if you're not feeling creative, add these (content from Wikipedia):
 - https://en.wikipedia.org/wiki/Lion[Wiki article for lion]
 - https://en.wikipedia.org/wiki/Reindeer[Wiki article for reindeer]
 
 
-. Create some links using the ContentSelector from {content-type-1}s to {content-type-2}s to get familiar with linking content.
+. Create some links using the ContentSelector from artists to animals to get familiar with linking content.
 
 === GraphQL query
 
@@ -407,19 +367,19 @@ Finally, it's time to introduce the query in GraphQL.
 
 A ContentSelector will store a reference to the target content item. When using the Guillotine API, you may simply follow this reference to access the target content, and access its fields instantly.
 
-.Fetch {content-type-1}s and their associated favorite animals
+.Fetch artists and their associated favorite animals
 [source,GraphQL,{subs}]
 ----
 {
   guillotine {
-    getChildren(key: "/{content-type-1}s") {
+    getChildren(key: "/artists") {
       displayName
-      ... on {app-name-query}_{content-type-1-capitalized} {
+      ... on {app-name-query}_Artist {
         _id
         data {
-           favorite{content-type-2-capitalized} {
+           favoriteAnimal {
             displayName
-            ... on {app-name-query}_{content-type-2-capitalized}{
+            ... on {app-name-query}_Animal{
               data {
                 otherNames
               }
@@ -432,9 +392,9 @@ A ContentSelector will store a reference to the target content item. When using 
 }
 ----
 
-Depending on the links (and {content-type-2}s) you created, your result might look a little something like this:
+Depending on the links (and animals) you created, your result might look a little something like this:
 
-.The list of {content-type-1}s with their favorite animals
+.The list of artists with their favorite animals
 [source,json]
 ----
 {

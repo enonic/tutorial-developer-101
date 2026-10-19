@@ -1,0 +1,4 @@
+kind: "CMS"
+mixins:
+  - name: "notes"
+    allowContentTypes: "com.example.tutorial101:artist|com.example.tutorial101:animal"

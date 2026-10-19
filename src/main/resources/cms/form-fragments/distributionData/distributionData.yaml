@@ -1,0 +1,6 @@
+kind: "FormFragment"
+title: "Distribution data"
+form:
+  - type: "TextArea"
+    name: "notes"
+    label: "Notes"

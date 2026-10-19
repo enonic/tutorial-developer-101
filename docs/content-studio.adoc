@@ -1,6 +1,6 @@
-= {title-content-studio}
+= Content Studio and content creation
 include::.variables.adoc[]
-:description: {description-content-studio}
+:description: Get familiar with Content Studio and content types, and start creating some content.
 
 In this {document}, we'll give a short introduction to Content Studio, an app that serves as the main content management interface for XP, providing editors an efficient way of creating, and curating content without technical skills.
 
@@ -95,34 +95,23 @@ Back to your preferred editor, make sure you're in the app folder (`{app-name}/`
 
 . Content types live in `{app-root}/cms/content-types/`. The starter created this directory for you. XP is quite particular about the app's folder structure, so you need to put content types right where it expects to find them.
 
-. Create a directory called `{content-type-1}` in the `content-types/` directory. XP expects all content types to have their own directories.
+. Create a directory called `artist` in the `content-types/` directory. XP expects all content types to have their own directories.
 
-. Within the `{content-type-1}` directory, create a file called `{content-type-1}.yaml`. The file name must match the directory name (except for the file extension). The full path to the content type from the app's root folder should be `{app-root}/cms/content-types/{content-type-1}/{content-type-1}.yaml`.
+. Within the `artist` directory, create a file called `artist.yaml`. The file name must match the directory name (except for the file extension). The full path to the content type from the app's root folder should be `{app-root}/cms/content-types/artist/artist.yaml`.
 
-. In the `{content-type-1}.yaml` file, place the following content:
+. In the `artist.yaml` file, place the following content:
 +
-.The '{content-type-1-capitalized}' content type
-[source,yaml,{subs}]
+.The 'Artist' content type
+[source,yaml]
 ----
-kind: "ContentType" # <1>
-title: "{content-type-1-capitalized}" # <2>
-description: "Information about an {content-type-1}" # <3>
-superType: "base:structured"
-form: # <4>
-  - type: "TextLine" # <5>
-    name: "name"
-    label: "Name"
-    helpText: "The {content-type-1}'s name (if different from their professional moniker)."
-  - type: "TextArea"
-    name: "about"
-    label: "About the {content-type-1}"
+include::../{app-root}/cms/content-types/artist/artist.yaml[tags=header;basics]
 ----
 +
-<1> Every schema file starts by declaring what kind of schema it is.
-<2> This is what will be displayed in Content Studio when creating new content.
-<3> This is an optional description, but it is still recommended to add, as it will make life easier for your editors.
-<4> This is where we specify which fields (aka inputs) this content type shall have, basically the form, as seen in Content Studio.
-<5> The `type` specifies what kind of input the user will see in Content Studio, and the `label` specifies how the input will be labeled.
+* `kind`: Every schema file starts by declaring what kind of schema it is.
+* `title`: This is what will be displayed in Content Studio when creating new content.
+* `description`: This is an optional description, but it is still recommended to add, as it will make life easier for your editors.
+* `form`: This is where we specify which fields (aka inputs) this content type shall have, basically the form, as seen in Content Studio.
+* `type` and `label`: The `type` specifies what kind of input the user will see in Content Studio, and the `label` specifies how the input will be labeled.
 +
 [TIP]
 .When to use it
@@ -136,7 +125,7 @@ NOTE: XP's inputs are _not_ the same as HTML `input` elements. To read more abou
 
 === Names and namespaces
 
-XP identifies the content type you just created as `{app-name-full}:{content-type-1}` - the app name, a colon, and the file name. The app name acts as a _namespace_: everything an app ships, from content types to mixins and APIs, is prefixed with it. This isolates the schemas and functionality of one app from every other app on the same instance, so two apps never conflict, even if both define a content type called `{content-type-1}`.
+XP identifies the content type you just created as `{app-name-full}:artist` - the app name, a colon, and the file name. The app name acts as a _namespace_: everything an app ships, from content types to mixins and APIs, is prefixed with it. This isolates the schemas and functionality of one app from every other app on the same instance, so two apps never conflict, even if both define a content type called `artist`.
 
 The types XP ships with use reserved namespaces, such as `base:folder` and `media:image`. You will meet these qualified names again when querying the API.
 
@@ -161,57 +150,57 @@ Next, let's go back to Content Studio and create some actual content!
 
 Go back to Content Studio and make sure you are on the project you've created at the beginning of this {document}.
 
-Press btn:[New ...] to open a new dialog. You should see a content type called `{content-type-1-capitalized}`.
+Press btn:[New ...] to open a new dialog. You should see a content type called `Artist`.
 
-NOTE: This content type is only visible there because of the update we did to the app, i.e, your app is responsible for delivering the {content-type-1} definition which Content Studio can use to actually create content.
+NOTE: This content type is only visible there because of the update we did to the app, i.e, your app is responsible for delivering the artist definition which Content Studio can use to actually create content.
 
 // TODO(xp8-verify): recapture from Content Studio 6.1
-.The content creation dialog with the {content-type-1} content type
-image::content-studio-new-content.png["The \"Create Content\" dialog when creating content under the created project. It contains elements, including the \"{content-type-1-capitalized}\" content type that we created earlier.", 819w]
+.The content creation dialog with the artist content type
+image::content-studio-new-content.png["The \"Create Content\" dialog when creating content under the created project. It contains elements, including the \"Artist\" content type that we created earlier.", 819w]
 
-However, before we start creating {content-type-1}s, let's create a folder.
+However, before we start creating artists, let's create a folder.
 
-Since we'll be using this content project in the coming {document}s with more content types, having some hierarchy will make things easier. Create a new folder and call it "{content-type-1}s".
+Since we'll be using this content project in the coming {document}s with more content types, having some hierarchy will make things easier. Create a new folder and call it "artists".
 
 [TIP]
 .When to use it
 ====
-The content path, such as `/{content-type-1}s/cardi-b`, is what a front-end will use to find an item and often to build its URL. Group content by type in folders from the start, and name the folders as you want them to appear in those paths. Moving content later does not break references, but it does change paths.
+The content path, such as `/artists/cardi-b`, is what a front-end will use to find an item and often to build its URL. Group content by type in folders from the start, and name the folders as you want them to appear in those paths. Moving content later does not break references, but it does change paths.
 ====
 
-Next, let's create a few {content-type-1}s to get used to the workflow. We'll start with Cardi B.
+Next, let's create a few artists to get used to the workflow. We'll start with Cardi B.
 
-. Select the {content-type-1}s folder (make sure it's highlighted).
-. Create a new {content-type-1}.
+. Select the artists folder (make sure it's highlighted).
+. Create a new artist.
 . Give it the display name "Cardi B".
 . Use these details to fill in the form:
 +
 .Artist details (https://en.wikipedia.org/wiki/Cardi_B[Cardi B on Wikipedia])
 Name:: Belcalis Marlenis Almánzar
-About:: {content-about-cardi}
+About:: Belcalis Marlenis Almánzar (born October 11, 1992), known professionally as Cardi B, is an American rapper and songwriter.
 
 +
 // TODO(xp8-verify): recapture from Content Studio 6.1
-.The content form filled out for the {content-type-1} "Cardi B"
-image::content-type-filled-out.png[The form for "{content-type-1}" fully filled out., 748w]
+.The content form filled out for the artist "Cardi B"
+image::content-type-filled-out.png[The form for "artist" fully filled out., 748w]
 +
 
-. Again, save and close the tab. Now repeat this process for these next two entries. Be aware that Content Studio lets you nest content, so if you try and create new content when "Cardi B" is selected in the hierarchy, it'll nest the new content under "Cardi B". In this case, though, we want the {content-type-1}s to be nested directly under the current folder, so make sure the "{content-type-1}s" folder is selected when you create new content.
+. Again, save and close the tab. Now repeat this process for these next two entries. Be aware that Content Studio lets you nest content, so if you try and create new content when "Cardi B" is selected in the hierarchy, it'll nest the new content under "Cardi B". In this case, though, we want the artists to be nested directly under the current folder, so make sure the "artists" folder is selected when you create new content.
 +
 .Missy Elliott (https://en.wikipedia.org/wiki/Missy_Elliott[Missy Elliott on Wikipedia])
 Name:: Melissa Arnette Elliott
-About:: {content-about-missy}
+About:: Melissa Arnette Elliott (born July 1, 1971) is an American rapper, singer, songwriter, and record producer.
 
 +
 .P!nk (https://en.wikipedia.org/wiki/Pink_(singer)[P!nk on Wikipedia])
 Name:: Alecia Beth Moore
-About:: {content-about-pink}
+About:: Alecia Beth Moore (born September 8, 1979), known professionally as Pink (stylized as P!nk), is an American singer and songwriter.
 
-With these {content-type-1}s created, your content hierarchy should now list the {content-type-1}s folder and the three {content-type-1}s.
+With these artists created, your content hierarchy should now list the artists folder and the three artists.
 
 // TODO(xp8-verify): recapture from Content Studio 6.1
 .The hierarchy as it should look after creating some content
-image::content-studio-with-{content-type-1}s.png["The content hierarchy showing {content-type-1}s folder with \"Cardi B\", \"Missy Elliot\" and \"P!nk\" listed directly underneath it.", 527w]
+image::content-studio-with-artists.png["The content hierarchy showing artists folder with \"Cardi B\", \"Missy Elliot\" and \"P!nk\" listed directly underneath it.", 527w]
 
 == Publishing your content
 

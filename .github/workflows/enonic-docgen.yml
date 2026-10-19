@@ -7,6 +7,7 @@ on:
       - "xp7"
     paths:
       - 'docs/**'
+      - 'src/main/resources/**'
   workflow_dispatch:
 
 jobs:

@@ -1,6 +1,6 @@
-= {title-sets}
+= Sets and form fragments
 include::.variables.adoc[]
-:description: {description-sets}
+:description: XP has a number of ways to group inputs together, and to reuse groups across schemas. Learn all about them in this {document}.
 
 Some form items exist to group other form items, both visually and structurally. Collectively, these are known as sets. XP can also reuse a group of inputs across several schemas, through form fragments. This {document} explains what they are and how to use them.
 
@@ -78,61 +78,38 @@ We'll see them in the upcoming task, but if you want to learn more about them, c
 
 So far we've theoretically presented sets. For a proper understanding of those concepts, we'll introduce some tasks. Make sure to follow along in order to strengthen your knowledge on this subject.
 
-=== Adding an item set to {content-type-1-capitalized}
+=== Adding an item set to Artist
 
-Let's add an item set to the `{content-type-1-capitalized}`. The goal will be to add a Filmography item set, featuring where and when a specific artist was featured in a movie.
+Let's add an item set to the `Artist`. The goal will be to add a Filmography item set, featuring where and when a specific artist was featured in a movie.
 
 To add an item set, use it as you would any other form item: place it within the `form` of a content type.
 
-If we add it to the `{content-type-1-capitalized}` content type, it'd look something like this:
+If we add it to the `Artist` content type, it'd look something like this:
 
-.{content-type-1-capitalized} with an added Item Set
-[source,yaml,{subs}]
+.Artist with an added Item Set
+[source,yaml]
 ----
-kind: "ContentType"
-title: "{content-type-1-capitalized}"
-description: "Information about an {content-type-1}"
-superType: "base:structured"
-form:
+include::../{app-root}/cms/content-types/artist/artist.yaml[tags=header]
 
   # Other fields elided for brevity
 
-  - type: "ItemSet"
-    name: "filmography"
-    label: "Filmography"
-    occurrences:
-      min: 0
-      max: 0
-    items: # <1>
-      - type: "TextLine"
-        name: "title"
-        label: "Title"
-        occurrences:
-          min: 1
-          max: 1
-      - type: "Double"
-        name: "year"
-        label: "Year"
-        occurrences:
-          min: 1
-          max: 1
-        min: 0 # <2>
+include::../{app-root}/cms/content-types/artist/artist.yaml[tags=filmography]
 ----
 
-<1> Much like with field sets, use `items` to nest inputs within the item set.
-<2> Type-specific settings, like the lowest value a Double accepts, go directly on the input.
+* `items`: Much like with field sets, use `items` to nest inputs within the item set.
+* `min` on `year`: Type-specific settings, like the lowest value a Double accepts, go directly on the input.
 
 Note that the remaining fields of the form have been left out in the above example.
 
-With this new item set added to the {content-type-1-capitalized} content type, make sure to add some data:
+With this new item set added to the Artist content type, make sure to add some data:
 
 // TODO(xp8-verify): recapture from Content Studio 6.1
 .Item set for filmography
 image::artist-filmography-item-set.png["An example of using the Filmography item set.", {image-l}]
 
-=== Adding an option set to {content-type-2-capitalized}
+=== Adding an option set to Animal
 
-In this section, we'll use option sets to add some extra data to the `{content-type-2-capitalized}` content type. The goal is:
+In this section, we'll use option sets to add some extra data to the `Animal` content type. The goal is:
 
 - Add an option set for feeding behavior. Intentionally simplified, this option set should indicate whether the animal is a herbivore or a carnivore. If it is a carnivore, it should also let the user add a list of prey.
 - Create a form fragment for distribution options. Because each distribution option should have the same fields, create a _form fragment_ to reuse it.
@@ -140,44 +117,21 @@ In this section, we'll use option sets to add some extra data to the `{content-t
 
 ==== Single-select: dietary data
 
-Open your {content-type-2} content type and add a single-select option set.  As before, we use option sets as we would any other form item.
+Open your animal content type and add a single-select option set.  As before, we use option sets as we would any other form item.
 
-.The `{content-type-2-capitalized}` content type with feeding behavior
+.The `Animal` content type with feeding behavior
 [source,yaml]
 ----
-kind: "ContentType"
-title: "Animal"
-description: "An animal that lives on planet Earth"
-superType: "base:structured"
-form:
+include::../{app-root}/cms/content-types/animal/animal.yaml[tags=header]
 
   # other fields elided for brevity
 
-  - type: "OptionSet"
-    name: "feedingBehavior"
-    label: "Feeding behavior"
-    selection: # <1>
-      min: 1
-      max: 1
-    options:
-      - name: "herbivore" # <2>
-        label: "Herbivore"
-        helpText: "Subsists primarily on plant material."
-      - name: "carnivore" # <3>
-        label: "Carnivore"
-        helpText: "Subsists primarily on animal tissue and meat."
-        items:
-          - type: "TextLine"
-            name: "prey"
-            label: "Prey"
-            occurrences:
-              min: 0
-              max: 0
+include::../{app-root}/cms/content-types/animal/animal.yaml[tags=feedingBehavior]
 ----
 
-<1> This specifies that if you add feeding behavior, you must select one of the options, and you can not select more than one.
-<2> The herbivore option has no associated data, so it consists solely of a label and a help text.
-<3> The carnivore option allows you to optionally specify prey for the animal.
+* `selection`: This specifies that if you add feeding behavior, you must select one of the options, and you can not select more than one.
+* `herbivore`: The herbivore option has no associated data, so it consists solely of a label and a help text.
+* `carnivore`: The carnivore option allows you to optionally specify prey for the animal.
 
 ==== Multi-select: distribution
 
@@ -186,67 +140,23 @@ form:
 .The `distributionData` form fragment
 [source,yaml]
 ----
-kind: "FormFragment"
-title: "Distribution data"
-form:
-  - type: "TextArea"
-    name: "notes"
-    label: "Notes"
+include::../{app-root}/cms/form-fragments/distributionData/distributionData.yaml[]
 ----
 
-. Moving on to {content-type-2}s, add the multi-select option set.
+. Moving on to animals, add the multi-select option set.
 +
-.The `{content-type-2-capitalized}` content type with distribution data
+.The `Animal` content type with distribution data
 [source,yaml]
 ----
-kind: "ContentType"
-title: "Animal"
-description: "An animal that lives on planet Earth"
-superType: "base:structured"
-form:
+include::../{app-root}/cms/content-types/animal/animal.yaml[tags=header]
 
   # other fields elided for brevity
 
-  - type: "OptionSet"
-    name: "distribution"
-    label: "Distribution across continents"
-    helpText: "Continents where the animal can be found in the wild"
-    selection: # <1>
-      min: 0
-      max: 7
-    options:
-      - name: "africa"
-        label: "Africa"
-        items:
-          - include: "distributionData" # <2>
-      - name: "antarctica"
-        label: "Antarctica"
-        items:
-          - include: "distributionData"
-      - name: "asia"
-        label: "Asia"
-        items:
-          - include: "distributionData"
-      - name: "australia"
-        label: "Australia"
-        items:
-          - include: "distributionData"
-      - name: "europe"
-        label: "Europe"
-        items:
-          - include: "distributionData"
-      - name: "northAmerica"
-        label: "North America"
-        items:
-          - include: "distributionData"
-      - name: "southAmerica"
-        label: "South America"
-        items:
-          - include: "distributionData"
+include::../{app-root}/cms/content-types/animal/animal.yaml[tags=distribution]
 ----
 
-<1> This specifies that you can select as many of the seven continents as you want. A `max` above `1` is what turns the option set into a multi-select.
-<2> `include` pulls the fields of the form fragment into this option.
+* `selection`: This specifies that you can select as many of the seven continents as you want. A `max` above `1` is what turns the option set into a multi-select.
+* `include`: Pulls the fields of the form fragment into this option.
 
 NOTE: The use of the form fragment helps us both reduce duplication and keep all options in sync. If we wanted to add more data, such as current population, we would only have to add it to the fragment to have it duplicated to all distributions.
 
@@ -266,7 +176,7 @@ Let's look at how option and item sets work in headless contexts.
 
 Getting item sets via GraphQL is not much different than anything else we've seen:
 
-.Fetching an {content-type-1-capitalized} filmography
+.Fetching an Artist filmography
 [source,GraphQL,{subs}]
 ----
 {
@@ -279,7 +189,7 @@ Getting item sets via GraphQL is not much different than anything else we've see
               term: {
                 field: "type",
                 value: {
-                  string: "{app-name-full}:{content-type-1}"
+                  string: "{app-name-full}:artist"
                 }
               }
             },
@@ -297,7 +207,7 @@ Getting item sets via GraphQL is not much different than anything else we've see
       }
     ) {
       displayName
-      ... on {app-name-query}_{content-type-1-capitalized} {
+      ... on {app-name-query}_Artist {
         data {
           filmography {
             title
@@ -377,7 +287,7 @@ When fetching option set data, you can get the list of currently selected option
               term: {
                 field: "type",
                 value: {
-                  string: "{app-name-full}:{content-type-2}"
+                  string: "{app-name-full}:animal"
                 }
               }
             },
@@ -395,7 +305,7 @@ When fetching option set data, you can get the list of currently selected option
       }
     ) {
       displayName
-      ... on {app-name-query}_{content-type-2-capitalized} {
+      ... on {app-name-query}_Animal {
         data {
           feedingBehavior {
             _selected # <1>
@@ -417,7 +327,7 @@ When fetching option set data, you can get the list of currently selected option
 
 ----
 
-<1> This provides data about what the {content-type-2}'s selected feeding behavior is.
+<1> This provides data about what the animal's selected feeding behavior is.
 <2> This gives more data about a particular option
 
 .Query result

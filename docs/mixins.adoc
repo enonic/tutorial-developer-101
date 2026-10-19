@@ -1,6 +1,6 @@
-= {title-mixins}
+= Mixins
 include::.variables.adoc[]
-:description: {description-mixins}
+:description: Mixins are a way for you to add extra fields to all your content types in a simple manner. This {document} covers what they are and how to use them.
 
 Mixins are a smart way of dynamically extending existing content types with more fields.
 
@@ -24,7 +24,7 @@ The same behaviour of extending multiple content types can be achieved through f
 Use a mixin when the fields cut across content types rather than belong to one: SEO settings, editorial notes, tracking data. Mixins reach types you do not own, such as folders and media, can be made optional so editors switch them on per item, and keep their data apart from the type's own fields under `x`. Use a form fragment when the fields are part of what the type _is_; they then land in `data` like any other field.
 ====
 
-Let's now add a "notes" mixin, which will extend both the {content-type-1-capitalized} and {content-type-2-capitalized} content types.
+Let's now add a "notes" mixin, which will extend both the Artist and Animal content types.
 
 Similar to content types, mixin schemas have a specific naming and placement convention within your app: `{app-root}/cms/mixins/<mixin-name>/<mixin-name>.yaml`.
 
@@ -33,32 +33,21 @@ Similar to content types, mixin schemas have a specific naming and placement con
 .{app-root}/cms/mixins/notes/notes.yaml
 [source,yaml]
 ----
-kind: "Mixin"
-title: "Notes"
-form:
-  - type: "TextLine"
-    name: "notes"
-    label: "Notes"
-    occurrences:
-      min: 0
-      max: 3
+include::../{app-root}/cms/mixins/notes/notes.yaml[]
 ----
 +
 . A mixin schema on its own is dormant. You also need to register it, and define which content types it applies to. This is done in your app's CMS descriptor, `cms.yaml`, which the starter created as an empty file:
 +
 // TODO(xp8-verify): confirm that the unqualified mixin name resolves to the app's own mixin
 .{app-root}/cms/cms.yaml
-[source,yaml,{subs}]
+[source,yaml]
 ----
-kind: "CMS"
-mixins:
-  - name: "notes"
-    allowContentTypes: "{app-name-full}:{content-type-1}|{app-name-full}:{content-type-2}" # <1>
+include::../{app-root}/cms/cms.yaml[]
 ----
 +
-<1> A regular expression matched against the full content type name. Leave it out to apply the mixin to every content type in the project.
+`allowContentTypes` is a regular expression matched against the full content type name. Leave it out to apply the mixin to every content type in the project.
 +
-. Your app is redeployed, so open a {content-type-1-capitalized} or an {content-type-2-capitalized} content item. You should see the following section at the bottom of the form:
+. Your app is redeployed, so open an Artist or an Animal content item. You should see the following section at the bottom of the form:
 +
 // TODO(xp8-verify): recapture from Content Studio 6.1
 image::notes-x-data.png["Notes mixin fields showing at the bottom of an animal content item",{image-l}]
@@ -86,7 +75,7 @@ Mixin data is stored separately from the content type's own fields, under the ke
               term: {
                 field: "type",
                 value: {
-                  string: "{app-name-full}:{content-type-2}"
+                  string: "{app-name-full}:animal"
                 }
               }
             },
@@ -156,7 +145,7 @@ Should you require specific fields only, or wish to drill into more details, for
               term: {
                 field: "type",
                 value: {
-                  string: "{app-name-full}:{content-type-2}"
+                  string: "{app-name-full}:animal"
                 }
               }
             },
@@ -275,7 +264,7 @@ image::x-data-seo-app-install.png["Install SEO Metafields app",{image-l}]
 +
 . Immediately after adding the app, the form of every content item gets a new section with the SEO fields.
 +
-So, now you have some additional fields on all your content. If you check some of your content items, like an {content-type-2}, you will see the fields are there as well.
+So, now you have some additional fields on all your content. If you check some of your content items, like an animal, you will see the fields are there as well.
 
 image::x-data-seo-animal.png["SEO fields available for the animals content type as well.",{image-xl}]
 

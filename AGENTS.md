@@ -16,15 +16,15 @@ This repository is documentation only:
 
 * `docs/` contains the AsciiDoc tutorial published on Enonic's developer portal.
 * `drafts/` holds pages parked outside the build: the deployment chapter, which waits for the self-service cloud for XP 8, and an unfinished IAM chapter that belongs in the 201 tutorial. Do not mention Enonic Cloud or deployment flows in `docs/` until the deployment chapter is back; the tutorial says only that a live server differs from the sandbox by its URL.
-* The reader builds their own app from the `starter-vanilla` starter. That app is **not** checked in here, so every path such as `{app-root}/cms/content-types/` refers to the reader's app, not to this repository. The resource root is the `app-root` attribute in `docs/.variables.adoc`, currently `src/main/resources`, so the planned XP 8.2 lightweight app layout with `cms/` at the app root is a one-line change. Never write the root out literally in prose or block titles.
+* The reader builds their own app from the `starter-vanilla` starter. Every path such as `{app-root}/cms/content-types/` in prose refers to the reader's app; this repository holds a finished copy of it under `src/main/resources/` for the chapters to include. The resource root is the `app-root` attribute in `docs/.variables.adoc`, currently `src/main/resources`, so the planned XP 8.2 lightweight app layout with `cms/` at the app root is a one-line change. Never write the root out literally in prose or block titles.
 * Say "app" for the folder the reader edits and for the application running in XP. Do not call the folder a project; the only projects in this tutorial are content projects.
 * The `master` branch targets Enonic XP 8.1, Guillotine 9 and Content Studio 6.1, and is published as the `next` version. The `xp7` branch holds the XP 7 edition and is published as `stable` until the XP 8 edition is complete. All schemas are YAML, Guillotine URL fields return `path` and `queryString` components, and the API endpoint is `/api/com.enonic.app.guillotine:graphql`.
 * Statements that still need checking against a running sandbox are marked with an AsciiDoc comment starting with `// TODO(xp8-verify):` directly above the affected block. Comments are not rendered. Remove the comment once the content has been verified or the screenshot recaptured.
-* `src/` holds unrelated scaffolding from the initial commit. No chapter references it. Do not treat it as the tutorial's sample application.
+* `src/main/resources/` holds the finished tutorial app: the `enonic.yaml` application descriptor, and under `cms/` the complete schemas: the Artist and Animal content types, the `distributionData` form fragment, the `notes` mixin, `cms.yaml` and `style.yaml`. Chapters show them with `include::../{app-root}/cms/...[]` instead of inline YAML. Where a schema grows across chapters, each chapter's addition is wrapped in `# tag::<name>[]` and `# end::<name>[]` comments named after the field, and the chapter includes the tags for its step. Explain lines in prose or a bullet list naming the field, since callout markers cannot live in the schema files. Illustrative snippets that are not part of the app, such as the form item and HtmlArea examples, stay inline. When the lightweight app layout ships, move `cms/` to the repository root and update `app-root`.
 
 The tutorial is a sequential story. Navigation is defined by `docs/menu.json`, and `docs/index.adoc` groups the same chapters into themed sections. Keep both in the same order.
 
-**Keep the chapters consistent with each other.** Later chapters build on the content types, content items, and app created earlier. Names, paths, app keys, and sandbox names are shared through attributes in `docs/.variables.adoc`; change the attribute rather than editing the value in individual chapters.
+**Keep the chapters consistent with each other.** Later chapters build on the content types, content items, and app created earlier. Names, paths, app keys, and sandbox names are shared through attributes in `docs/.variables.adoc`; change the attribute rather than editing the value in individual chapters. Do not put anything schema-related in `docs/.variables.adoc`: content type, field, form fragment and mixin names are written out literally in prose, YAML and GraphQL.
 
 ### LLM readability
 
@@ -69,7 +69,7 @@ The documentation build maps source documents to routes based on their paths and
 
 Sequential steps are numbered in `docs/menu.json` using the `"<n> - <Title>"` title format, as in Enonic's other tutorials. The numbers live only in the menu titles; a page's own `=` heading stays unnumbered. When inserting, removing, or reordering a step, renumber the remaining entries so the sequence stays unbroken, and check that no prose refers to a step by its old number. Menu titles may be shorter than the chapter heading because the sidebar is narrow.
 
-Every chapter starts with its title, then `include::.variables.adoc[]`, then its own attribute overrides such as `:description:`. Chapter titles and descriptions are defined as `:title-<page>:` and `:description-<page>:` attributes in `docs/.variables.adoc` so `index.adoc` and the chapter stay in sync. Add both attributes when creating a chapter.
+Every chapter starts with its title, then `include::.variables.adoc[]`, then its own attribute overrides such as `:description:`. Write the title and description directly in the chapter; `docs/.variables.adoc` holds only values shared across chapters, not single-use text such as page titles or sample content.
 
 ## AsciiDoc Conventions
 
@@ -88,6 +88,6 @@ Before finishing a change, check the relevant items:
 
 1. The prose, commands, and screenshots are accurate for the XP version the tutorial targets and for the current CLI, starter, Content Studio, and Guillotine releases.
 2. Tutorial steps still work in menu order and do not rely on a later chapter.
-3. Content type names, app names, sandbox names, project names, and URLs come from `docs/.variables.adoc` and match across chapters.
-4. New or renamed pages and media are reflected in `docs/menu.json`, `docs/index.adoc`, `docs/.variables.adoc`, cross-references, and image paths.
+3. Content type and other schema names are written out literally and match across chapters; app names, sandbox names, project names, and URLs come from `docs/.variables.adoc` and match across chapters.
+4. New or renamed pages and media are reflected in `docs/menu.json`, `docs/index.adoc`, cross-references, and image paths.
 5. JSON files are valid and every attribute used in a page is defined.
