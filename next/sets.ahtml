@@ -651,7 +651,7 @@ form:
     occurrences:
       min: 0
       max: 0
-    items: <i class="conum" data-value="1"></i><b>(1)</b>
+    items:
       - type: "TextLine"
         name: "title"
         label: "Title"
@@ -664,20 +664,18 @@ form:
         occurrences:
           min: 1
           max: 1
-        min: 0 <i class="conum" data-value="2"></i><b>(2)</b></code></pre>
+        min: 0</code></pre>
 </div>
 </div>
-<div class="colist arabic">
-<table>
-<tr>
-<td><i class="conum" data-value="1"></i><b>1</b></td>
-<td>Much like with field sets, use <code>items</code> to nest inputs within the item set.</td>
-</tr>
-<tr>
-<td><i class="conum" data-value="2"></i><b>2</b></td>
-<td>Type-specific settings, like the lowest value a Double accepts, go directly on the input.</td>
-</tr>
-</table>
+<div class="ulist">
+<ul>
+<li>
+<p><code>items</code>: Much like with field sets, use <code>items</code> to nest inputs within the item set.</p>
+</li>
+<li>
+<p><code>min</code> on <code>year</code>: Type-specific settings, like the lowest value a Double accepts, go directly on the input.</p>
+</li>
+</ul>
 </div>
 <div class="paragraph">
 <p>Note that the remaining fields of the form have been left out in the above example.</p>
@@ -721,6 +719,7 @@ form:
 <pre class="highlight"><code class="language-yaml" data-lang="yaml">kind: "ContentType"
 title: "Animal"
 description: "An animal that lives on planet Earth"
+displayNamePlaceholder: "Species"
 superType: "base:structured"
 form:
 
@@ -729,14 +728,14 @@ form:
   - type: "OptionSet"
     name: "feedingBehavior"
     label: "Feeding behavior"
-    selection: <i class="conum" data-value="1"></i><b>(1)</b>
+    selection:
       min: 1
       max: 1
     options:
-      - name: "herbivore" <i class="conum" data-value="2"></i><b>(2)</b>
+      - name: "herbivore"
         label: "Herbivore"
         helpText: "Subsists primarily on plant material."
-      - name: "carnivore" <i class="conum" data-value="3"></i><b>(3)</b>
+      - name: "carnivore"
         label: "Carnivore"
         helpText: "Subsists primarily on animal tissue and meat."
         items:
@@ -748,21 +747,18 @@ form:
               max: 0</code></pre>
 </div>
 </div>
-<div class="colist arabic">
-<table>
-<tr>
-<td><i class="conum" data-value="1"></i><b>1</b></td>
-<td>This specifies that if you add feeding behavior, you must select one of the options, and you can not select more than one.</td>
-</tr>
-<tr>
-<td><i class="conum" data-value="2"></i><b>2</b></td>
-<td>The herbivore option has no associated data, so it consists solely of a label and a help text.</td>
-</tr>
-<tr>
-<td><i class="conum" data-value="3"></i><b>3</b></td>
-<td>The carnivore option allows you to optionally specify prey for the animal.</td>
-</tr>
-</table>
+<div class="ulist">
+<ul>
+<li>
+<p><code>selection</code>: This specifies that if you add feeding behavior, you must select one of the options, and you can not select more than one.</p>
+</li>
+<li>
+<p><code>herbivore</code>: The herbivore option has no associated data, so it consists solely of a label and a help text.</p>
+</li>
+<li>
+<p><code>carnivore</code>: The carnivore option allows you to optionally specify prey for the animal.</p>
+</li>
+</ul>
 </div>
 </div>
 <div class="sect3">
@@ -791,6 +787,7 @@ form:
 <pre class="highlight"><code class="language-yaml" data-lang="yaml">kind: "ContentType"
 title: "Animal"
 description: "An animal that lives on planet Earth"
+displayNamePlaceholder: "Species"
 superType: "base:structured"
 form:
 
@@ -800,14 +797,14 @@ form:
     name: "distribution"
     label: "Distribution across continents"
     helpText: "Continents where the animal can be found in the wild"
-    selection: <i class="conum" data-value="1"></i><b>(1)</b>
+    selection:
       min: 0
       max: 7
     options:
       - name: "africa"
         label: "Africa"
         items:
-          - include: "distributionData" <i class="conum" data-value="2"></i><b>(2)</b>
+          - include: "distributionData"
       - name: "antarctica"
         label: "Antarctica"
         items:
@@ -834,20 +831,18 @@ form:
           - include: "distributionData"</code></pre>
 </div>
 </div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>selection</code>: This specifies that you can select as many of the seven continents as you want. A <code>max</code> above <code>1</code> is what turns the option set into a multi-select.</p>
+</li>
+<li>
+<p><code>include</code>: Pulls the fields of the form fragment into this option.</p>
+</li>
+</ul>
+</div>
 </li>
 </ol>
-</div>
-<div class="colist arabic">
-<table>
-<tr>
-<td><i class="conum" data-value="1"></i><b>1</b></td>
-<td>This specifies that you can select as many of the seven continents as you want. A <code>max</code> above <code>1</code> is what turns the option set into a multi-select.</td>
-</tr>
-<tr>
-<td><i class="conum" data-value="2"></i><b>2</b></td>
-<td><code>include</code> pulls the fields of the form fragment into this option.</td>
-</tr>
-</table>
 </div>
 <div class="admonitionblock note">
 <table>
@@ -1106,7 +1101,7 @@ The use of the form fragment helps us both reduce duplication and keep all optio
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2026-10-09 14:22:36 UTC
+Last updated 2026-10-19 13:58:35 UTC
 </div>
 </div>
 </body>

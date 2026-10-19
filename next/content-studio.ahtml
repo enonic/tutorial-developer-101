@@ -706,12 +706,12 @@ As mentioned before, content types are defined and installed via applications. I
 <div class="listingblock">
 <div class="title">The 'Artist' content type</div>
 <div class="content">
-<pre class="highlight"><code class="language-yaml" data-lang="yaml">kind: "ContentType" <i class="conum" data-value="1"></i><b>(1)</b>
-title: "Artist" <i class="conum" data-value="2"></i><b>(2)</b>
-description: "Information about an artist" <i class="conum" data-value="3"></i><b>(3)</b>
+<pre class="highlight"><code class="language-yaml" data-lang="yaml">kind: "ContentType"
+title: "Artist"
+description: "Information about an artist"
 superType: "base:structured"
-form: <i class="conum" data-value="4"></i><b>(4)</b>
-  - type: "TextLine" <i class="conum" data-value="5"></i><b>(5)</b>
+form:
+  - type: "TextLine"
     name: "name"
     label: "Name"
     helpText: "The artist's name (if different from their professional moniker)."
@@ -720,27 +720,22 @@ form: <i class="conum" data-value="4"></i><b>(4)</b>
     label: "About the artist"</code></pre>
 </div>
 </div>
-<div class="colist arabic">
-<table>
-<tr>
-<td><i class="conum" data-value="1"></i><b>1</b></td>
-<td>Every schema file starts by declaring what kind of schema it is.</td>
-</tr>
-<tr>
-<td><i class="conum" data-value="2"></i><b>2</b></td>
-<td>This is what will be displayed in Content Studio when creating new content.</td>
-</tr>
-<tr>
-<td><i class="conum" data-value="3"></i><b>3</b></td>
-<td>This is an optional description, but it is still recommended to add, as it will make life easier for your editors.</td>
-</tr>
-<tr>
-<td><i class="conum" data-value="4"></i><b>4</b></td>
-<td>This is where we specify which fields (aka inputs) this content type shall have, basically the form, as seen in Content Studio.</td>
-</tr>
-<tr>
-<td><i class="conum" data-value="5"></i><b>5</b></td>
-<td>The <code>type</code> specifies what kind of input the user will see in Content Studio, and the <code>label</code> specifies how the input will be labeled.
+<div class="ulist">
+<ul>
+<li>
+<p><code>kind</code>: Every schema file starts by declaring what kind of schema it is.</p>
+</li>
+<li>
+<p><code>title</code>: This is what will be displayed in Content Studio when creating new content.</p>
+</li>
+<li>
+<p><code>description</code>: This is an optional description, but it is still recommended to add, as it will make life easier for your editors.</p>
+</li>
+<li>
+<p><code>form</code>: This is where we specify which fields (aka inputs) this content type shall have, basically the form, as seen in Content Studio.</p>
+</li>
+<li>
+<p><code>type</code> and <code>label</code>: The <code>type</code> specifies what kind of input the user will see in Content Studio, and the <code>label</code> specifies how the input will be labeled.</p>
 <div class="admonitionblock tip">
 <table>
 <tr>
@@ -779,9 +774,9 @@ XP&#8217;s inputs are <em>not</em> the same as HTML <code>input</code> elements.
 </td>
 </tr>
 </table>
-</div></td>
-</tr>
-</table>
+</div>
+</li>
+</ul>
 </div>
 </li>
 </ol>
@@ -1053,7 +1048,7 @@ You can also publish a piece of content by using the keyboard shortcut <span cla
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2026-10-09 14:22:36 UTC
+Last updated 2026-10-19 13:58:35 UTC
 </div>
 </div>
 </body>

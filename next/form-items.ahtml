@@ -1090,7 +1090,7 @@ If you&#8217;re wondering how to achieve some of the goals, try consulting the d
 <div class="sect2">
 <h3 id="check_your_work"><a class="link" href="#check_your_work">Check your work</a></h3>
 <div class="paragraph">
-<p>To verify that everything works, create some animals, create a content link between a artist and an animal and run your query to fetch some new data on this new structure.</p>
+<p>To verify that everything works, create some animals, create a content link between an artist and an animal and run your query to fetch some new data on this new structure.</p>
 </div>
 <div class="admonitionblock tip">
 <table>
@@ -1122,7 +1122,7 @@ Don&#8217;t worry if something did not work, we&#8217;ll show the solutions in t
 <pre class="highlight"><code class="language-yaml" data-lang="yaml">kind: "ContentType"
 title: "Animal"
 description: "An animal that lives on planet Earth"
-displayNamePlaceholder: "Species" <i class="conum" data-value="1"></i><b>(1)</b>
+displayNamePlaceholder: "Species"
 superType: "base:structured"
 form:
   - type: "TextLine"
@@ -1141,13 +1141,8 @@ form:
       max: 3</code></pre>
 </div>
 </div>
-<div class="colist arabic">
-<table>
-<tr>
-<td><i class="conum" data-value="1"></i><b>1</b></td>
-<td>This setting lets you customize what Content Studio calls the built-in "display name" field.</td>
-</tr>
-</table>
+<div class="paragraph">
+<p><code>displayNamePlaceholder</code> lets you customize what Content Studio calls the built-in "display name" field.</p>
 </div>
 </li>
 <li>
@@ -1158,8 +1153,8 @@ form:
 <div class="listingblock">
 <div class="content">
 <pre>kind: "ContentType"
-title: "{content-type-1-capitalized}"
-description: "Information about an {content-type-1}"
+title: "Artist"
+description: "Information about an artist"
 superType: "base:structured"
 form:
   - type: "TextLine"
@@ -1168,22 +1163,22 @@ form:
     helpText: "The artist's name (if different from their professional moniker)."
   - type: "TextArea"
     name: "about"
-    label: "About the {content-type-1}"
+    label: "About the artist"
   - type: "Date"
     name: "birthday"
     label: "Birthday"
-  - type: "ContentSelector" <i class="conum" data-value="1"></i><b>(1)</b>
-    name: "favorite{content-type-2-capitalized}"
-    label: "Favorite {content-type-2}"
+  - type: "ContentSelector"
+    name: "favoriteAnimal"
+    label: "Favorite animal"
     allowContentType:
-      - "{content-type-2}"
+      - "animal"
     allowPath:
-      - "/{content-type-2}s/*"</pre>
+      - "/animals/*"</pre>
 </div>
 </div>
 <div class="paragraph">
 <p>+
-&lt;1&gt; This ContentSelector uses <code>allowContentType</code> and <code>allowPath</code> to narrow the possible content to only Animals in the animals folder</p>
+The new <code>favoriteAnimal</code> ContentSelector uses <code>allowContentType</code> and <code>allowPath</code> to narrow the possible content to only Animals in the animals folder</p>
 </div>
 <div class="paragraph">
 <p>+
@@ -1300,7 +1295,7 @@ form:
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2026-10-09 14:22:36 UTC
+Last updated 2026-10-19 13:58:35 UTC
 </div>
 </div>
 </body>
