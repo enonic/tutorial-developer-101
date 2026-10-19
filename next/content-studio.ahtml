@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="generator" content="Asciidoctor 2.0.26">
-<meta name="application-name" content="tutorial101">
+<meta name="application-name" content="dev101">
 <meta name="description" content="Get familiar with Content Studio and content types, and start creating some content.">
 <title>Content Studio and content creation</title>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,300italic,400,400italic,600,600italic%7CNoto+Serif:400,400italic,700,700italic%7CDroid+Sans+Mono:400,700">
@@ -688,7 +688,7 @@ As mentioned before, content types are defined and installed via applications. I
 <div class="title">Figure 4. The target for your first content type</div>
 </div>
 <div class="paragraph">
-<p>Back to your preferred editor, make sure you&#8217;re in the app folder (<code>tutorial101/</code>) that you created in a previous chapter. All paths will be relative to this root folder.</p>
+<p>Back to your preferred editor, make sure you&#8217;re in the app folder (<code>dev101/</code>) that you created in a previous chapter. All paths will be relative to this root folder.</p>
 </div>
 <div class="olist arabic">
 <ol class="arabic">
@@ -785,7 +785,7 @@ XP&#8217;s inputs are <em>not</em> the same as HTML <code>input</code> elements.
 <div class="sect2">
 <h3 id="names_and_namespaces"><a class="link" href="#names_and_namespaces">Names and namespaces</a></h3>
 <div class="paragraph">
-<p>XP identifies the content type you just created as <code>com.example.tutorial101:artist</code> - the app name, a colon, and the file name. The app name acts as a <em>namespace</em>: everything an app ships, from content types to mixins and APIs, is prefixed with it. This isolates the schemas and functionality of one app from every other app on the same instance, so two apps never conflict, even if both define a content type called <code>artist</code>.</p>
+<p>XP identifies the content type you just created as <code>com.example.dev101:artist</code> - the app name, a colon, and the file name. The app name acts as a <em>namespace</em>: everything an app ships, from content types to mixins and APIs, is prefixed with it. This isolates the schemas and functionality of one app from every other app on the same instance, so two apps never conflict, even if both define a content type called <code>artist</code>.</p>
 </div>
 <div class="paragraph">
 <p>The types XP ships with use reserved namespaces, such as <code>base:folder</code> and <code>media:image</code>. You will meet these qualified names again when querying the API.</p>
@@ -1048,7 +1048,7 @@ You can also publish a piece of content by using the keyboard shortcut <span cla
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2026-10-19 14:04:32 UTC
+Last updated 2026-10-19 15:00:40 UTC
 </div>
 </div>
 </body>

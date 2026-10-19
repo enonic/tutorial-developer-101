@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="generator" content="Asciidoctor 2.0.26">
-<meta name="application-name" content="tutorial101">
+<meta name="application-name" content="dev101">
 <meta name="description" content="XP has a number of ways to group inputs together, and to reuse groups across schemas. Learn all about them in this chapter.">
 <title>Sets and form fragments</title>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,300italic,400,400italic,600,600italic%7CNoto+Serif:400,400italic,700,700italic%7CDroid+Sans+Mono:400,700">
@@ -896,7 +896,7 @@ The use of the form fragment helps us both reduce duplication and keep all optio
               term: {
                 field: "type",
                 value: {
-                  string: "com.example.tutorial101:artist"
+                  string: "com.example.dev101:artist"
                 }
               }
             },
@@ -914,7 +914,7 @@ The use of the form fragment helps us both reduce duplication and keep all optio
       }
     ) {
       displayName
-      ... on com_example_tutorial101_Artist {
+      ... on com_example_dev101_Artist {
         data {
           filmography {
             title
@@ -997,7 +997,7 @@ The use of the form fragment helps us both reduce duplication and keep all optio
               term: {
                 field: "type",
                 value: {
-                  string: "com.example.tutorial101:animal"
+                  string: "com.example.dev101:animal"
                 }
               }
             },
@@ -1015,7 +1015,7 @@ The use of the form fragment helps us both reduce duplication and keep all optio
       }
     ) {
       displayName
-      ... on com_example_tutorial101_Animal {
+      ... on com_example_dev101_Animal {
         data {
           feedingBehavior {
             _selected <i class="conum" data-value="1"></i><b>(1)</b>
@@ -1101,7 +1101,7 @@ The use of the form fragment helps us both reduce duplication and keep all optio
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2026-10-19 14:04:32 UTC
+Last updated 2026-10-19 15:00:40 UTC
 </div>
 </div>
 </body>

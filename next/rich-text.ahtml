@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="generator" content="Asciidoctor 2.0.26">
-<meta name="application-name" content="tutorial101">
+<meta name="application-name" content="dev101">
 <meta name="description" content="Rich text is an incredibly powerful editing tool and an important part of the XP experience. Learn how to configure it here.">
 <title>Rich text</title>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,300italic,400,400italic,600,600italic%7CNoto+Serif:400,400italic,700,700italic%7CDroid+Sans+Mono:400,700">
@@ -905,7 +905,7 @@ For more information on macros, including how to create your very own, visit <a 
         }
       }
     ) {
-      ... on com_example_tutorial101_Animal {
+      ... on com_example_dev101_Animal {
         data {
           description {
             processedHtml
@@ -984,7 +984,7 @@ For more information on macros, including how to create your very own, visit <a 
         }
       }
     ) {
-      ... on com_example_tutorial101_Animal {
+      ... on com_example_dev101_Animal {
         data {
           description {
             processedHtml
@@ -1041,7 +1041,7 @@ For more information on macros, including how to create your very own, visit <a 
     "content": {
       "displayName": "Lion",
       "_path": "/animals/lion",
-      "type": "com.example.tutorial101:animal"
+      "type": "com.example.dev101:animal"
     },
     "pageUrl": {
       "baseUrl": null,
@@ -1081,7 +1081,7 @@ For more information on macros, including how to create your very own, visit <a 
         }
       }
     ) {
-      ... on com_example_tutorial101_Animal {
+      ... on com_example_dev101_Animal {
         data {
           description(processHtml: {imageWidths: [200, 500]}) {
             processedHtml
@@ -1164,7 +1164,7 @@ For more information on macros, including how to create your very own, visit <a 
       }
     ],
     "style": {
-      "application": "com.example.tutorial101",
+      "application": "com.example.dev101",
       "name": "square-grayscale",
       "aspectRatio": "1:1",
       "filter": "hsbcolorize(0x000000); grayscale(); border(6, 0x000000)"
@@ -1225,7 +1225,7 @@ Use each image URL as it is returned, and don&#8217;t make other sizes by editin
         }
       }
     ) {
-      ... on com_example_tutorial101_Animal {
+      ... on com_example_dev101_Animal {
         data {
           description {
             processedHtml
@@ -1287,7 +1287,7 @@ If you used a different macro than the "Embed iframe" macro, the query must be u
         }
       }
     ) {
-      ... on com_example_tutorial101_Animal {
+      ... on com_example_dev101_Animal {
         data {
           description {
             processedHtml
@@ -1351,7 +1351,7 @@ If you used a different macro than the "Embed iframe" macro, the query must be u
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2026-10-19 14:04:32 UTC
+Last updated 2026-10-19 15:00:40 UTC
 </div>
 </div>
 </body>

@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="generator" content="Asciidoctor 2.0.26">
-<meta name="application-name" content="tutorial101">
+<meta name="application-name" content="dev101">
 <meta name="description" content="Call the API from cURL, Node and a browser. Publish content, configure CORS, resolve a route, page a list and build page and media URLs from their parts.">
 <title>Fetching content from a front-end</title>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,300italic,400,400italic,600,600italic%7CNoto+Serif:400,400italic,700,700italic%7CDroid+Sans+Mono:400,700">
@@ -570,7 +570,7 @@ const query = `
       getChildren(key: "/artists", first: 10) {
         _id
         displayName
-        ... on com_example_tutorial101_Artist {
+        ... on com_example_dev101_Artist {
           data {
             name
             birthday
@@ -628,7 +628,7 @@ getArtists().then(console.log).catch(console.error);</code></pre>
 <p>Running the same code in a web page served from another origin, say a dev server on <code><a href="http://localhost:3000" class="bare">http://localhost:3000</a></code>, fails until XP is told to allow that origin. This is browser cross-origin protection, CORS, and Guillotine has a configuration file for it.</p>
 </div>
 <div class="paragraph">
-<p>Create the file <code>com.enonic.app.guillotine.cfg</code> in your sandbox&#8217;s config directory, <code>~/.enonic/sandboxes/tutorial/home/config/</code>:</p>
+<p>Create the file <code>com.enonic.app.guillotine.cfg</code> in your sandbox&#8217;s config directory, <code>~/.enonic/sandboxes/101tutorial/home/config/</code>:</p>
 </div>
 <div class="listingblock">
 <div class="title">com.enonic.app.guillotine.cfg</div>
@@ -673,7 +673,7 @@ CORS only controls which origins a browser lets read the response. It does not g
   guillotine(project: $project, branch: $branch) {
     get(key: $path) {
       displayName
-      ... on com_example_tutorial101_Animal {
+      ... on com_example_dev101_Animal {
         data {
           otherNames
           description {
@@ -806,7 +806,7 @@ for (const image of description.images) {
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2026-10-19 14:04:32 UTC
+Last updated 2026-10-19 15:00:40 UTC
 </div>
 </div>
 </body>
