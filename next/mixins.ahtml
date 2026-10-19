@@ -487,7 +487,7 @@ The tasks and examples in this chapter are based on work done in previous chapte
 <p>Now, if your requirement is to add new fields to multiple content types, that is when mixins come into place.</p>
 </div>
 <div class="paragraph">
-<p>The same behaviour of extending multiple content types can be achieved through form fragments. You can create a form fragment and include it in the content types you want to extend. The difference is where the data in those fields is stored, and in the fact that mixins are easier to maintain when adding to a lot of content types - or to content types you don&#8217;t own, such as the built-in folders and media types.</p>
+<p>The same behavior of extending multiple content types can be achieved through form fragments. You can create a form fragment and include it in the content types you want to extend. The difference is where the data in those fields is stored, and in the fact that mixins are easier to maintain when adding to a lot of content types - or to content types you don&#8217;t own, such as the built-in folders and media types.</p>
 </div>
 <div class="admonitionblock tip">
 <table>
@@ -711,7 +711,7 @@ For more details and configuration options for mixins, visit <a href="https://de
 </table>
 </div>
 <div class="paragraph">
-<p>If you made it here - you are officially equipped with an essential overview of Enonic&#8217;s fundamental content modelling capabilities. 🙌</p>
+<p>If you made it here - you are officially equipped with an essential overview of Enonic&#8217;s fundamental content modeling capabilities. 🙌</p>
 </div>
 </div>
 </div>
@@ -864,7 +864,7 @@ For more details and configuration options for mixins, visit <a href="https://de
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2026-10-19 13:58:35 UTC
+Last updated 2026-10-19 14:04:32 UTC
 </div>
 </div>
 </body>

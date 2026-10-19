@@ -6,7 +6,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="generator" content="Asciidoctor 2.0.26">
 <meta name="application-name" content="tutorial101">
-<title>Developer 101 - Content Modelling and the GraphQL API</title>
+<title>Developer 101 - Content Modeling and the GraphQL API</title>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,300italic,400,400italic,600,600italic%7CNoto+Serif:400,400italic,700,700italic%7CDroid+Sans+Mono:400,700">
 <style>
 /*! Asciidoctor default stylesheet | MIT License | https://asciidoctor.org */
@@ -438,7 +438,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 </head>
 <body class="article toc2 toc-right">
 <div id="header">
-<h1>Developer 101 - Content Modelling and the GraphQL API</h1>
+<h1>Developer 101 - Content Modeling and the GraphQL API</h1>
 <div id="toc" class="toc2">
 <div id="toctitle">Table of Contents</div>
 <ul class="sectlevel1">
@@ -450,7 +450,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <div id="preamble">
 <div class="sectionbody">
 <div class="paragraph">
-<p>Hands-on introduction to modelling content in Enonic and reading it through the Guillotine GraphQL API.</p>
+<p>Hands-on introduction to modeling content in Enonic and reading it through the Guillotine GraphQL API.</p>
 </div>
 </div>
 </div>
@@ -458,7 +458,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <h2 id="introduction"><a class="link" href="#introduction">Introduction</a></h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>This tutorial is for developers who define content types and build front-ends against Enonic&#8217;s GraphQL API. It covers content modelling, schema management and the Guillotine API, using the Enonic CLI, Content Studio and a local sandbox. Every chapter builds on the previous one, so you gain understanding incrementally while building a small content model of your own.</p>
+<p>This tutorial is for developers who define content types and build front-ends against Enonic&#8217;s GraphQL API. It covers content modeling, schema management and the Guillotine API, using the Enonic CLI, Content Studio and a local sandbox. Every chapter builds on the previous one, so you gain understanding incrementally while building a small content model of your own.</p>
 </div>
 <div class="paragraph">
 <p>Along the way you will:</p>
@@ -527,7 +527,7 @@ When we mention "XP", we are referring to "Enonic XP", the platform behind Enoni
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2026-10-19 13:58:35 UTC
+Last updated 2026-10-19 14:04:32 UTC
 </div>
 </div>
 </body>

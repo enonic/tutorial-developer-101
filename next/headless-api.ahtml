@@ -769,7 +769,7 @@ Note that this matches the structure defined by the Artist content type, which i
 <dl>
 <dt class="hdlist1"><code>Expression</code></dt>
 <dd>
-<p>Used to check particular fields for various native and analysed values.</p>
+<p>Used to check particular fields for various native and analyzed values.</p>
 </dd>
 <dt class="hdlist1"><code>Compound</code></dt>
 <dd>
@@ -1162,7 +1162,7 @@ If you are not running the app in dev mode (<code>enonic dev</code>, introduced 
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2026-10-19 13:58:35 UTC
+Last updated 2026-10-19 14:04:32 UTC
 </div>
 </div>
 </body>

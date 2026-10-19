@@ -566,7 +566,7 @@ The tasks and examples in this chapter are based on work done in previous chapte
 </div>
 <div class="imageblock text-center">
 <div class="content">
-<img src="media/option-set-sample.png" alt="An input form labelled 'multi-selection'. The user has selected one out of four options. Some options contain extra data such as an image selector or other input fields." width="750">
+<img src="media/option-set-sample.png" alt="An input form labeled 'multi-selection'. The user has selected one out of four options. Some options contain extra data such as an image selector or other input fields." width="750">
 </div>
 <div class="title">Figure 3. A multi-select option set</div>
 </div>
@@ -865,7 +865,7 @@ The use of the form fragment helps us both reduce duplication and keep all optio
 </div>
 <div class="imageblock">
 <div class="content">
-<img src="media/option-sets.png" alt="Diet and distribution data filled out for lion. The feeding behaviour selected is 'Carnivore' and the list of prey includes zebras and giraffes. For the distribution data, Africa and Asia is selected, with a short text about how Lions live in these areas today." width="1200">
+<img src="media/option-sets.png" alt="Diet and distribution data filled out for lion. The feeding behavior selected is 'Carnivore' and the list of prey includes zebras and giraffes. For the distribution data, Africa and Asia is selected, with a short text about how Lions live in these areas today." width="1200">
 </div>
 <div class="title">Figure 5. Distribution and feeding behavior for Lion</div>
 </div>
@@ -1101,7 +1101,7 @@ The use of the form fragment helps us both reduce duplication and keep all optio
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2026-10-19 13:58:35 UTC
+Last updated 2026-10-19 14:04:32 UTC
 </div>
 </div>
 </body>
