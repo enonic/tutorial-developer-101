@@ -5,8 +5,6 @@ include::.variables.adoc[]
 
 In this chapter, you'll upload images and other files, see how XP stores them as content, and fetch them, scaled and cropped, through the GraphQL API.
 
-NOTE: {see-prev-docs}
-
 == Media
 
 A file may be uploaded to XP to become an individual piece of content. Similar to other content items.

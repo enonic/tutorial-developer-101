@@ -4,8 +4,6 @@ include::.variables.adoc[]
 
 In this chapter, you'll read the content you created through Guillotine, Enonic's GraphQL API, and query it from Query Playground.
 
-NOTE: {see-prev-docs}
-
 == Guillotine
 
 Introducing _Guillotine_, the app that's responsible for automatically generating a GraphQL API for your content.
@@ -289,6 +287,7 @@ To finish this chapter, we'll add a new _birthday_ field to the artist content t
 
 . Start by updating the Artist content type to the following structure:
 +
+.{app-root}/cms/content-types/artist/artist.yaml
 [source,yaml]
 ----
 include::../{app-root}/cms/content-types/artist/artist.yaml[tags=header;basics;birthday]

@@ -5,8 +5,6 @@ include::.variables.adoc[]
 In this chapter, you'll use Data Toolbox, the developer's best friend for exploring the low-level NoSQL storage in Enonic XP, to see how everything you have built is actually saved.
 That includes content types with sets, option sets, references and rich text, media with focal points, and a mixin on top.
 
-NOTE: {see-prev-docs}
-
 == Web interface
 
 Data Toolbox provides you with a web interface to visualize and manipulate your XP data, as well as other system related information. We'll now see how to inspect content using Data Toolbox.

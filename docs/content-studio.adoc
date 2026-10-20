@@ -4,8 +4,6 @@ include::.variables.adoc[]
 
 In this chapter, you'll create a content project in Content Studio, define your first content type, and create and publish some content.
 
-NOTE: {see-prev-docs}
-
 == Content Studio
 
 Content Studio is Enonic's editorial interface, where editors create and curate content without technical skills. It is already installed in your sandbox: open it from `XP menu` -> `Content Studio`.
@@ -17,7 +15,7 @@ Content Studio has three parts: a project bar across the top, a menu bar on the 
 When you open Content Studio for the first time, it offers to create a project:
 
 .No projects found dialog
-image::cs-project-create.png["Content Studio dialog offering to start the project wizard", 660px]
+image::cs-project-create.png["Content Studio dialog offering to start the project wizard", width=660]
 
 Content in Enonic is stored in _content projects_, or simply _projects_.
 Each project has its own permissions, languages and other settings, and its own selection of apps.
@@ -29,43 +27,55 @@ Click btn:[Start Project wizard] and follow the steps to create your first proje
 +
 NOTE: The project identifier is important, and cannot be changed later. Later chapters refer to the project as `{cms-project-id}`, so stick with that name if you want to copy their examples verbatim.
 +
-. Choose the `Public` access mode. This lets anyone read published content, which is what we want for a public website for instance
+. Choose the `Public` access mode. This lets anyone read published content, which is what you want for a public website, for instance.
 . No need to change the roles. You are the super user, so you already have access.
 . In the "Applications" step, select the `Developer 101` app you deployed earlier.
 
 .Project summary showing the values you have set in the wizard
-image::cs-project-summary.png["Content Studio project creation summary", 964w]
+image::cs-project-summary.png["Content Studio project creation summary", width=910]
 
 TIP: Only apps that contain a CMS descriptor, `cms/cms.yaml`, can be assigned to a project. The vanilla starter includes one out of the box.
 
+
 == What are content types?
 
-Every content item has a content type, which defines the data fields the item can and must have.
-Content Studio validates the item against its content type as editors fill in the form.
+Every content item has a content type, which defines the data fields the item can and must have. Content Studio validates the item against its content type as editors fill in the form.
 
-Content types are defined in apps, while content projects hold the content.
-Assigning an app to a project is what connects the two: editors can then create the app's content types in that project. This also means you may re-use the same apps and schemas across multiple projects.
+Content types are defined in apps, while content projects hold the content. Assigning an app to a project is what connects the two: editors can then create the app's content types in that project. This also means you may re-use the same apps and schemas across multiple projects.
+
+XP also ships with built-in content types, such as Folder, that are available in every project.
+
+=== Task: create a folder
+
+Your app does not define any content types yet, so start with a built-in one: create a folder called "Artists" to hold the artists you'll add later in this chapter.
+
+TIP: Content can be organized as a tree, much like files and folders on your computer. Grouping content in logical folders provides several benefits, as you will see later in this tutorial.
+
+. In Content Studio, make sure your project is selected, and press btn:[New ...].
+The dialog lists only the built-in content types.
++
+.The content creation dialog showing the built-in content types
+image::cs-folder-create.png["The Create content dialog, listing the built-in content types: Folder, Shortcut and Site", width=830]
+. Select btn:[Folder].
+. Give the folder the display name "Artists".
++
+.The folder form with its display name filled in
+image::cs-folder-form.png["The Folder form, with the display name Artists", width=546]
+. Save and close the tab.
 
 === Task: your first content type
 
-You'll create a content type with two fields. In Content Studio, its form will look like this:
+You'll create a custom content type Artist for artists, with two fields. Later, when editors create an Artist content item, Content Studio will show this form:
 
-// TODO(xp8-verify): recapture from Content Studio 6.1
-.The target for your first content type
-image::content-type-target.png["A content creation form with legal name and biography fields"]
+.The Artist form in Content Studio
+image::cs-artist-form.png["The Artist form, with a display name field showing the Stage name placeholder, and the Legal name and About the artist fields", width=546]
 
-In your editor, open the app folder, `{app-name}/`, that you created in the previous chapter.
-All paths are relative to it.
 
-. Content types live in `{app-root}/cms/content-types/`, which the starter created.
-XP expects each content type in a directory of its own, so create a directory called `artist` there.
+Content types live in `{app-root}/cms/content-types/`, which the starter created. XP expects each content type in a directory of its own, with a dedicated yaml descriptor file:
 
-. In the `artist` directory, create a file called `artist.yaml`.
-The file name must match the directory name, so the full path is `{app-root}/cms/content-types/artist/artist.yaml`.
-
-. Add the following content:
+. Add the following file to your app and save it:
 +
-.The 'Artist' content type
+.{app-root}/cms/content-types/artist/artist.yaml
 [source,yaml]
 ----
 include::../{app-root}/cms/content-types/artist/artist.yaml[tags=header;basics]
@@ -77,109 +87,81 @@ include::../{app-root}/cms/content-types/artist/artist.yaml[tags=header;basics]
 * `displayNamePlaceholder`: The hint shown in the built-in display name field, here telling editors it holds the artist's stage name.
 * `form`: The fields editors fill in.
 * `type` and `label`: The kind of input editors see, and its label.
-+
-[TIP]
-.When to use it
-====
-Every content type has a built-in display name, so don't add a `title` or `name` field that stores the same thing: editors get two fields to fill in, and your front-end gets two places to look. Here the display name is the artist's stage name and `legalName` is the name on their official documents, which is why both earn their place. Add a field only when it carries different information from the item's name.
-====
-+
-NOTE: Content types have more optional settings, described in https://developer.enonic.com/docs/cms/stable/content/content-types[the reference documentation].
-The fields are form items, not HTML `input` elements; <<form-items#, the form items chapter>> covers them.
+
+. `enonic dev` should still be running from the previous chapter. It redeploys your app automatically. If you stopped it, run `enonic dev` in the app folder again.
+
+NOTE: XP validates the schema when it deploys, and reports mistakes such as `helptext` instead of `helpText` in the sandbox log.
+
+
+=== Display name field
+
+Every content type has a built-in display name, so don't add a `title` or `name` field that stores the same thing. Here the display name is the artist's stage name and `legalName` is the name on their official documents, which is why both earn their place. Add a field only when it carries different information from the item's display name. Also notice how the `displayNamePlaceholder` sets a different placeholder text for the display name field.
+
+TIP: Content types have more optional settings, described in https://developer.enonic.com/docs/cms/stable/content/content-types[the reference documentation].
 
 === Names and namespaces
 
 XP identifies the content type you just created as `{app-name-full}:artist` - the app name, a colon, and the file name. The app name acts as a _namespace_: everything an app ships, from content types to mixins and APIs, is prefixed with it. This isolates the schemas and functionality of one app from every other app on the same instance, so two apps never conflict, even if both define a content type called `artist`.
 
-The types XP ships with use reserved namespaces, such as `base:folder` and `media:image`. You will meet these qualified names again when querying the API.
+XP's built-in content types have namespaces of their own, such as `base:folder` for the folder you created and `media:image` for images, which are reserved for XP.
+Your Artist content type already refers to one: `superType: "base:structured"`.
+In the next chapter, you'll use these full names, namespace included, to filter content by type.
 
 NOTE: Read more about https://developer.enonic.com/docs/cms/stable/schemas/namespaces[namespaces] in the CMS reference docs.
 
-=== Deploying the content type
+=== Task: create artists
 
-If `enonic dev` is still running from the previous chapter, it redeploys your app as soon as you save the file.
-If not, start it again from the app folder:
+Now, using the brand new Artist content type, create three artists, starting with Cardi B:
 
-[source,shell]
-----
-enonic dev
-----
-
-TIP: XP validates every schema when the app is deployed. A typo in a key, such as `helptext` instead of `helpText`, is rejected and reported in the sandbox log, so keep an eye on it whenever you change a schema.
-
-=== Task: your first content creation
-
-Back in Content Studio, make sure your project is selected, and press btn:[New ...].
-The `Artist` content type is listed, because your app now delivers it.
-
-// TODO(xp8-verify): recapture from Content Studio 6.1
-.The content creation dialog with the artist content type
-image::content-studio-new-content.png["The \"Create Content\" dialog when creating content under the created project. It contains elements, including the \"Artist\" content type that we created earlier.", 819w]
-
-Before creating artists, create a folder called "artists" to hold them.
-Later chapters add more content types, and folders keep each type together.
-
-[TIP]
-.When to use it
-====
-The content path, such as `/artists/cardi-b`, is what a front-end will use to find an item and often to build its URL. Group content by type in folders from the start, and name the folders as you want them to appear in those paths. Moving content later does not break references, but it does change paths.
-====
-
-Now create three artists, starting with Cardi B:
-
-. Select the "artists" folder, so the new content is created inside it.
-. Create a new artist, and give it the display name "Cardi B".
-. Fill in the form with these details:
+. In Content Studio, select the "Artists" folder, so the new content is created inside it.
+. Press btn:[New ...].
+Since your app is assigned to the project, the dialog now lists Artist next to the built-in content types.
 +
-.Artist details (https://en.wikipedia.org/wiki/Cardi_B[Cardi B on Wikipedia])
-Legal name:: Belcalis Marlenis Almánzar
-About:: Belcalis Marlenis Almánzar (born October 11, 1992), known professionally as Cardi B, is an American rapper and songwriter.
-
+.The content creation dialog showing the Artist content type
+image::cs-artist-create.png["The Create content dialog, listing the available content types: Artist, Folder, Shortcut and Site", width=830]
+. Select btn:[Artist], and start filling in the form. Use details of https://en.wikipedia.org/wiki/Cardi_B[Cardi B on Wikipedia].
 +
-// TODO(xp8-verify): recapture from Content Studio 6.1
 .The content form filled out for the artist "Cardi B"
-image::content-type-filled-out.png[The form for "artist" fully filled out., 748w]
-+
-
+image::cs-cardib-form.png["The Artist form filled out for Cardi B, with the legal name and the text about the artist", width=546]
 . Save and close the tab, then create the next two artists the same way.
-Select the "artists" folder each time: Content Studio nests new content under whatever item is selected.
+Select the "Artists" folder each time: Content Studio nests new content under whatever item is selected.
 +
-.Missy Elliott (https://en.wikipedia.org/wiki/Missy_Elliott[Missy Elliott on Wikipedia])
-Legal name:: Melissa Arnette Elliott
-About:: Melissa Arnette Elliott (born July 1, 1971) is an American rapper, singer, songwriter, and record producer.
+* https://en.wikipedia.org/wiki/Missy_Elliott[Missy Elliott on Wikipedia]
+* https://en.wikipedia.org/wiki/Pink_(singer)[P!nk on Wikipedia]
 
-+
-.P!nk (https://en.wikipedia.org/wiki/Pink_(singer)[P!nk on Wikipedia])
-Legal name:: Alecia Beth Moore
-About:: Alecia Beth Moore (born September 8, 1979), known professionally as Pink (stylized as P!nk), is an American singer and songwriter.
+Content Studio should now list the "Artists" folder and the three artists.
 
-Your content hierarchy should now list the "artists" folder and the three artists.
-
-// TODO(xp8-verify): recapture from Content Studio 6.1
 .The hierarchy as it should look after creating some content
-image::content-studio-with-artists.png["The content hierarchy showing artists folder with \"Cardi B\", \"Missy Elliot\" and \"P!nk\" listed directly underneath it.", 527w]
+image::cs-hierarchy.png["The content hierarchy showing the Artists folder with P!nk, Missy Elliott and Cardi B listed directly underneath it", width=750]
 
 [#branches]
-== Publishing your content
+== Publishing
 
-Content Studio shows a status on every item: _Work in progress_ for unpublished changes, _Ready for publishing_ once an editor has marked it, and _Published_ when nothing has changed since publishing.
-Content that does not validate against its content type, for instance because a required field is empty, is marked as invalid.
-
-// TODO(xp8-verify): check the status names and icons against Content Studio 6.1 and recapture the screenshot
-image::content-studio-content-status.png[Three pieces of content displaying different statuses, 270w]
-
-Every content project has two branches.
+Every content project has two branches under the hood.
 You create and edit content in the _draft_ branch, and publishing copies it to the _master_ branch, which holds the published content.
-When you edit published content, only draft changes until you publish again.
 
-To publish an item, right-click it and select *Publish*.
-You don't need to publish anything yet; the front-end chapter does it when the content needs to be public.
+When you edit published content, only the draft branch changes - until you publish again.
 
-// TODO(xp8-verify): confirm the publish shortcut in Content Studio 6.1
-TIP: You can also publish a piece of content by using the keyboard shortcut kbd:[Ctrl+Alt+P]/kbd:[control+option+P].
+During the editing process, Content Studio has different workflow statuses like _Invalid_, _Work in progress_, and _Ready for publishing_.
+
+=== Task: Publish all items
+
+. In our case, the content items should all be _Work in progress_. To publish all items at once, select the "Artists" folder, right-click, and choose btn:[Publish]. The publishing wizard will appear.
++
+.The publishing wizard
+image::cs-publish.png["The publishing wizard in Content Studio", width=910]
+. Click the btn:[include child items] checkbox, and then btn:[Apply]. The whole tree of content under the "Artists" folder will now be included in the publication.
++
+.The publishing wizard with child items included
+image::cs-include-children.png["Once the include child items checkbox is selected and Apply is clicked - all the unpublished child items are also listed", width=910]
+. The publish button is still disabled, because the items are not yet marked as ready for publishing. Click btn:[Mark as ready], and the publish button will become enabled.
+. Click btn:[Publish Now (4)] to publish all items in a single batch.
+
+After completing the publication, publishing state should have changed from Offline to Online.
+
+TIP: You can also publish a piece of content by using the keyboard shortcut: Windows: kbd:[Ctrl+Alt+P] | Mac: kbd:[control+option+P].
 
 
 == Coming up
 
-You've created a content project, your first content type and some content.
-In the next chapter, you'll read that content back through the <<headless-api#, Headless API>>.
+You've created a content project, your first content type and some content. In the next chapter, you'll read that content back through the <<headless-api#, Headless API>>.

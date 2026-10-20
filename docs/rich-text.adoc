@@ -5,8 +5,6 @@ include::.variables.adoc[]
 In this chapter, you'll add a rich text field with the https://developer.enonic.com/docs/cms/stable/schemas/form-items/htmlarea[HtmlArea form item], insert links, images and a macro, and fetch the result through the API.
 For the editor itself, see the https://developer.enonic.com/docs/content-studio/stable/editor/rich-text-editor[Content Studio docs].
 
-NOTE: {see-prev-docs}
-
 == Overview
 
 .The HtmlArea form item with the default tools selection
@@ -70,7 +68,7 @@ Let's add a rich-text description field to the animal content type. The input sh
 
 Your content type should now look something like this:
 
-.Animal with an HtmlArea form item
+.{app-root}/cms/content-types/animal/animal.yaml
 [source,yaml]
 ----
 include::../{app-root}/cms/content-types/animal/animal.yaml[tags=header]
@@ -112,8 +110,8 @@ NOTE: You can also use kbd:[ctrl+K] to insert the link.
 +
 . You'll be greeted by the "Insert link" dialog:
 .Choose the content tab, and select the previously created "Lion" as the target item
-+
 // TODO(xp8-verify): recapture from Content Studio 6.1, whose link dialog was reworked
++
 image::rich-text-insert-content-link.png[Screenshot of the insert link dialog]
 
 When done, save the item - but keep the tab open to complete the upcoming tasks.
@@ -133,8 +131,8 @@ We looked at <<files#_image_form, editing images in the media chapter>>, but whe
 Continue editing the "Lynx" content created in the previous task.
 
 . Insert an image below the existing text. Use the "insert image" button in the toolbar.
-+
 // TODO(xp8-verify): recapture from Content Studio 6.1
++
 .The toolbar with the image tool highlighted
 image::rich-text-toolbar-image-highlight.png[The rich text toolbar with the image tool circled by a blue circle]
 +

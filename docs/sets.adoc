@@ -4,8 +4,6 @@ include::.variables.adoc[]
 
 In this chapter, you'll group form items with field sets, item sets and option sets, and reuse a group of them across schemas with a form fragment.
 
-NOTE: {see-prev-docs}
-
 == Field sets
 
 Field sets are the simplest form of sets XP offers... they group inputs visually and have no effect on the data model.
@@ -86,7 +84,7 @@ To add an item set, use it as you would any other form item: place it within the
 
 If we add it to the `Artist` content type, it'd look something like this:
 
-.Artist with an added Item Set
+.{app-root}/cms/content-types/artist/artist.yaml
 [source,yaml]
 ----
 include::../{app-root}/cms/content-types/artist/artist.yaml[tags=header]
@@ -119,7 +117,7 @@ In this section, we'll use option sets to add some extra data to the `Animal` co
 
 Open your animal content type and add a single-select option set.  As before, we use option sets as we would any other form item.
 
-.The `Animal` content type with feeding behavior
+.{app-root}/cms/content-types/animal/animal.yaml
 [source,yaml]
 ----
 include::../{app-root}/cms/content-types/animal/animal.yaml[tags=header]
@@ -135,9 +133,9 @@ include::../{app-root}/cms/content-types/animal/animal.yaml[tags=feedingBehavior
 
 ==== Multi-select: distribution
 
-. Start by creating the form fragment. Call it `distributionData` and place it in `{app-root}/cms/form-fragments/distributionData/distributionData.yaml`. It only contains a text area:
+. Start by creating the form fragment. Call it `distributionData`. It only contains a text area:
 +
-.The `distributionData` form fragment
+.{app-root}/cms/form-fragments/distributionData/distributionData.yaml
 [source,yaml]
 ----
 include::../{app-root}/cms/form-fragments/distributionData/distributionData.yaml[]
@@ -145,7 +143,7 @@ include::../{app-root}/cms/form-fragments/distributionData/distributionData.yaml
 
 . Moving on to animals, add the multi-select option set.
 +
-.The `Animal` content type with distribution data
+.{app-root}/cms/content-types/animal/animal.yaml
 [source,yaml]
 ----
 include::../{app-root}/cms/content-types/animal/animal.yaml[tags=header]

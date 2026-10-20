@@ -12,4 +12,3 @@
 :cms-project-displayname: My First Project
 :cms-project-id: my-first-project
 :subs: subs="attributes+"
-:see-prev-docs: The tasks and examples in this chapter are based on work done in previous chapters (starting with <<setup#, the setup chapter>>). If you want to follow along with the examples, make sure you're all caught up.

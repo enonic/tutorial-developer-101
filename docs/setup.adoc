@@ -118,7 +118,7 @@ image::setup-app.png["The Applications tool listing Content Studio, Data Toolbox
 
 === Change the app's title
 
-Let's make a first change to the app, to see the development loop in action. Open the application descriptor, `{app-root}/enonic.yaml`, in your editor, and change the `title` and `description`:
+Let's make a first change to the app, to see the development loop in action. Open the application descriptor, `enonic.yaml`, in your editor, and change the `title` and `description`:
 
 .{app-root}/enonic.yaml
 [source,yaml]

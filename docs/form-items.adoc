@@ -9,8 +9,6 @@ So far, your content type has only used TextLine, TextArea and Date.
 
 NOTE: If you're used to working with HTML, be aware that XP's form items are _not_ the same as HTML `input` elements.
 
-NOTE: {see-prev-docs}
-
 == Common settings
 
 All form items share a number of settings that affect how they act. These settings are:
@@ -332,27 +330,27 @@ TIP: Don't worry if something did not work, we'll show the solutions in the next
 == Task solution
 
 === Content types
-. Create the animal content type. In `{app-root}/cms/content-types/animal/animal.yaml`, place the following content:
+. Create the animal content type:
 +
-.The animal content type
+.{app-root}/cms/content-types/animal/animal.yaml
 [source,yaml]
 ----
 include::../{app-root}/cms/content-types/animal/animal.yaml[tags=header;basics]
 ----
 +
 As with Artist, `displayNamePlaceholder` tells editors what the display name holds, here the species.
-+
+
 . Next, update the `Artist` content type.
-+
 // TODO(xp8-verify): confirm the allowPath pattern matches the animals folder in a project without a site
-.An updated artist
++
+.{app-root}/cms/content-types/artist/artist.yaml
 [source,yaml]
 ----
 include::../{app-root}/cms/content-types/artist/artist.yaml[tags=header;basics;birthday;favoriteAnimal]
 ----
 +
 The new `favoriteAnimal` ContentSelector uses `allowContentType` and `allowPath` to narrow the possible content to only Animals in the animals folder
-+
+
 . Create a folder called "animals" next to the "artists" folder, and create some animals in it. Either pick your favorites, or, if you're not feeling creative, add these (content from Wikipedia):
 - https://en.wikipedia.org/wiki/Lion[Wiki article for lion]
 - https://en.wikipedia.org/wiki/Reindeer[Wiki article for reindeer]

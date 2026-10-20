@@ -8,8 +8,6 @@ The idea is to basically define new fields and decide what content types those f
 
 In Content Studio, a mixin is visually displayed as a separate section of the form, listed below the content type's standard fields.
 
-NOTE: {see-prev-docs}
-
 == Your first mixin
 
 If your requirement is to add new fields to a specific content type, it doesn't make sense to use a mixin, since you can directly update that content type.
@@ -37,8 +35,8 @@ include::../{app-root}/cms/mixins/notes/notes.yaml[]
 ----
 +
 . A mixin schema on its own is dormant. You also need to register it, and define which content types it applies to. This is done in your app's CMS descriptor, `cms.yaml`, which the starter created as an empty file:
-+
 // TODO(xp8-verify): confirm that the unqualified mixin name resolves to the app's own mixin
++
 .{app-root}/cms/cms.yaml
 [source,yaml]
 ----
@@ -48,8 +46,8 @@ include::../{app-root}/cms/cms.yaml[]
 `allowContentTypes` is a regular expression matched against the full content type name. Leave it out to apply the mixin to every content type in the project.
 +
 . Your app is redeployed, so open an Artist or an Animal content item. You should see the following section at the bottom of the form:
-+
 // TODO(xp8-verify): recapture from Content Studio 6.1
++
 image::notes-x-data.png["Notes mixin fields showing at the bottom of an animal content item"]
 +
 . Finally, add some notes to some content.

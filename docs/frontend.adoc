@@ -6,8 +6,6 @@ In this chapter, you'll send your queries over HTTP, from the command line, from
 So far, Query Playground has quietly supplied the project, the branch and your login, and a front-end has none of that.
 You'll handle the four things every front-end on Enonic needs: the request format, published versus draft content, URLs for pages and media, and lists that page.
 
-NOTE: {see-prev-docs}
-
 == Publish first
 
 Everything you have created so far lives in the draft branch. Draft content is only readable by logged-in users with a role in the content project, which a front-end does not have. The master branch, on the other hand, is readable by anyone in a public project like yours.
