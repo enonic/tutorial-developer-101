@@ -1,8 +1,8 @@
 = Sets and form fragments
 include::.variables.adoc[]
-:description: XP has a number of ways to group inputs together, and to reuse groups across schemas. Learn all about them in this {document}.
+:description: XP has a number of ways to group inputs together, and to reuse groups across schemas. Learn all about them in this chapter.
 
-Some form items exist to group other form items, both visually and structurally. Collectively, these are known as sets. XP can also reuse a group of inputs across several schemas, through form fragments. This {document} explains what they are and how to use them.
+In this chapter, you'll group form items with field sets, item sets and option sets, and reuse a group of them across schemas with a form fragment.
 
 NOTE: {see-prev-docs}
 
@@ -33,7 +33,7 @@ To create a field set that contains a TextLine and a TextArea, the definition wo
 
 // TODO(xp8-verify): recapture from Content Studio 6.1
 .A field set grouping
-image::field-set.png["A field set containing TextLine and TextArea inputs. The field set groups them visually and adds a shared heading.", {image-s}, align=center]
+image::field-set.png["A field set containing TextLine and TextArea inputs. The field set groups them visually and adds a shared heading.", align=center]
 
 == Item sets
 
@@ -42,7 +42,7 @@ Item sets also allow you to group input fields, but as opposed to field sets, it
 - The https://developer.enonic.com/docs/cms/stable/schemas/form-items/item-set[item set documentation] does a standout job of explaining exactly how they work, so check that out for an overview.
 
 .An item set containing contact info
-image::item-set-sample.png["A pair of visually grouped inputs on a card element. The card has a header that says 'contact info'. There is also a button to add more contact info forms.", {image-s}, align=center]
+image::item-set-sample.png["A pair of visually grouped inputs on a card element. The card has a header that says 'contact info'. There is also a button to add more contact info forms.", align=center]
 
 == Option sets
 
@@ -53,7 +53,7 @@ Option sets where users can select only one of a number of options are known as 
 - The https://developer.enonic.com/docs/cms/stable/schemas/form-items/option-set[option set reference documentation] provides a good overview (with accompanying pictures) of how option sets work.
 
 .A multi-select option set
-image::option-set-sample.png["An input form labeled 'multi-selection'. The user has selected one out of four options. Some options contain extra data such as an image selector or other input fields.", {image-s}, align=center]
+image::option-set-sample.png["An input form labeled 'multi-selection'. The user has selected one out of four options. Some options contain extra data such as an image selector or other input fields.", align=center]
 
 == Form fragments
 
@@ -105,7 +105,7 @@ With this new item set added to the Artist content type, make sure to add some d
 
 // TODO(xp8-verify): recapture from Content Studio 6.1
 .Item set for filmography
-image::artist-filmography-item-set.png["An example of using the Filmography item set.", {image-l}]
+image::artist-filmography-item-set.png["An example of using the Filmography item set."]
 
 === Adding an option set to Animal
 
@@ -166,7 +166,7 @@ With the new option sets added, the Lion entry could look something like this:
 
 // TODO(xp8-verify): recapture from Content Studio 6.1
 .Distribution and feeding behavior for Lion
-image::option-sets.png["Diet and distribution data filled out for lion. The feeding behavior selected is 'Carnivore' and the list of prey includes zebras and giraffes. For the distribution data, Africa and Asia is selected, with a short text about how Lions live in these areas today.", {image-xl}]
+image::option-sets.png["Diet and distribution data filled out for lion. The feeding behavior selected is 'Carnivore' and the list of prey includes zebras and giraffes. For the distribution data, Africa and Asia is selected, with a short text about how Lions live in these areas today."]
 
 == Querying item sets and option sets
 
@@ -366,8 +366,8 @@ When fetching option set data, you can get the list of currently selected option
 }
 ----
 
-== Summary
+== Coming up
 
 You have grouped inputs visually with a field set, structurally with an item set, let editors choose between options with option sets, and reused a form with a fragment.
 
-Next up, <<rich-text#, rich text>> gives your editors a proper text editor, with links, images and macros.
+In the next chapter, you'll give your editors a proper text editor with <<rich-text#, rich text>>, including links, images and macros.

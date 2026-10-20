@@ -1,7 +1,6 @@
 :toc: right
 :imagesdir: media
 :experimental:
-:document: chapter
 :xp-url: http://localhost:8080
 :api-base-url: {xp-url}/api
 :graphql-url: {api-base-url}/com.enonic.app.guillotine:graphql
@@ -10,12 +9,7 @@
 :app-name: dev101
 :app-name-full: com.example.{app-name}
 :app-name-query: com_example_{app-name}
-:cms-project-name: My First Project
-:cms-project: my-first-project
+:cms-project-displayname: My First Project
+:cms-project-id: my-first-project
 :subs: subs="attributes+"
-:see-prev-docs: The tasks and examples in this {document} are based on work done in previous {document}s (starting with <<setup#, the setup chapter>>). If you want to follow along with the examples, make sure you're all caught up.
-:image-xs: width=600
-:image-s: width=750
-:image-m: width=900
-:image-l: width=1050
-:image-xl: width=1200
+:see-prev-docs: The tasks and examples in this chapter are based on work done in previous chapters (starting with <<setup#, the setup chapter>>). If you want to follow along with the examples, make sure you're all caught up.

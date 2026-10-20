@@ -1,11 +1,9 @@
 = Media - files are content too
 include::.variables.adoc[]
 :image-folder: images
-:description: How does XP deal with images and other media? This {document} covers XP media support, how to upload and query for media, how to work with images and attachments.
+:description: How does XP deal with images and other media? This chapter covers XP media support, how to upload and query for media, how to work with images and attachments.
 
-Naturally, XP can store any file you would want to serve or associate with your content. This {document} explores how XP handles file uploads, and dives into the image handling specifically.
-
-At the end of the chapter we'll walk through how to use images in a headless fashion.
+In this chapter, you'll upload images and other files, see how XP stores them as content, and fetch them, scaled and cropped, through the GraphQL API.
 
 NOTE: {see-prev-docs}
 
@@ -31,7 +29,7 @@ This process is the same for whatever media type you want to upload.
 
 To get familiar with uploading media to XP, let's start with one of the most common media types on the web: images! As mentioned above, this process will also work for any other media type.
 
-. Find an image to upload. For the purposes of the tasks in this {document}, you should work with an image where the important part isn't centered in the shot. If you have one yourself, feel free to use that. If not, how about using https://unsplash.com/photos/8oLnCRz7hwM[this picture of a lion] by https://unsplash.com/@keyursphotography[Keyur Nandaniya]?
+. Find an image to upload. For the purposes of the tasks in this chapter, you should work with an image where the important part isn't centered in the shot. If you have one yourself, feel free to use that. If not, how about using https://unsplash.com/photos/8oLnCRz7hwM[this picture of a lion] by https://unsplash.com/@keyursphotography[Keyur Nandaniya]?
 
 . Create a folder for your images. Call it "{image-folder}". Just like the "artists" folder we created previously, you may place the folder anywhere in your content structure.
 . Open the "create content" dialog. Press the upload button to bring up your OS's file browsing dialog and select your image. You can also drag and drop the image from your file system browser onto the dialog.
@@ -40,7 +38,7 @@ And that's all it takes to upload files to Content Studio!
 
 === How media is stored
 
-Under the hood, an image is a content item like any other: a JSON document with the usual properties, plus one more called `attachment`. The attachment will essentially hold all the data from the file that you uploaded. You will learn how to inspect this storage yourself in <<data-toolbox#, a later {document}>>; for now, here is what it looks like.
+Under the hood, an image is a content item like any other: a JSON document with the usual properties, plus one more called `attachment`. The attachment will essentially hold all the data from the file that you uploaded. You will learn how to inspect this storage yourself in <<data-toolbox#, a later chapter>>; for now, here is what it looks like.
 
 For instance, if you have a look at the image you uploaded earlier, you should see that it points to the image file you uploaded.
 
@@ -81,7 +79,7 @@ If you view the content as JSON, some relevant parts of the structure are the `d
 
 Uploading a file is only half the job. XP also includes APIs that let you download the same file (now stored as an attachment within the content) when you need it: the _attachment API_, `media:attachment`, serves any file as it was uploaded, and the _image API_, `media:image`, serves images, with scaling and filters applied on the fly.
 
-Both are Universal APIs, just like Guillotine, so they are served from the same API base URL you met in the <<headless-api#_one_endpoint_for_every_api, Headless API {document}>>: `{api-base-url}` on your sandbox. We'll see what the URLs look like in a moment.
+Both are Universal APIs, just like Guillotine, so they are served from the same API base URL you met in the <<headless-api#_one_endpoint_for_every_api, Headless API chapter>>: `{api-base-url}` on your sandbox. We'll see what the URLs look like in a moment.
 
 === mediaUrl
 
@@ -130,7 +128,7 @@ If everything went fine, you should expect a response that looks something like 
           "displayName": "lion",
           "type": "media:image",
           "mediaUrl": {
-            "path": "/media:attachment/{cms-project}:draft/21f827e0-ba57-4824-b3bc-f101ae08568b:9475135781b315daad078d91c27746bc3222d024/lion.jpg",
+            "path": "/media:attachment/{cms-project-id}:draft/21f827e0-ba57-4824-b3bc-f101ae08568b:9475135781b315daad078d91c27746bc3222d024/lion.jpg",
             "queryString": ""
           }
         }
@@ -144,12 +142,12 @@ Put the API base URL in front of `path`, append `queryString`, and you have the 
 
 [{subs}]
 ----
-{api-base-url}/media:attachment/{cms-project}:draft/21f827e0-ba57-4824-b3bc-f101ae08568b:9475135781b315daad078d91c27746bc3222d024/lion.jpg
+{api-base-url}/media:attachment/{cms-project-id}:draft/21f827e0-ba57-4824-b3bc-f101ae08568b:9475135781b315daad078d91c27746bc3222d024/lion.jpg
 ----
 
 Open it in your browser to see the original image you uploaded.
 
-NOTE: The path tells you which project and branch the file comes from. Because Query Playground was querying the draft branch, the context segment is `{cms-project}:draft`. For published content on master it is just `{cms-project}`. The long identifier is the content ID followed by a fingerprint that changes whenever the file does, which makes the URL safe to cache forever.
+NOTE: The path tells you which project and branch the file comes from. Because Query Playground was querying the draft branch, the context segment is `{cms-project-id}:draft`. For published content on master it is just `{cms-project-id}`. The long identifier is the content ID followed by a fingerprint that changes whenever the file does, which makes the URL safe to cache forever.
 
 
 == Images
@@ -277,7 +275,7 @@ The above query should return a response that looks a little something like this
         {
           "displayName": "lion",
           "imageUrl": {
-            "path": "/media:image/{cms-project}:draft/21f827e0-ba57-4824-b3bc-f101ae08568b:6d89657e4bfae6eaa62de22bd6fb63b2697f091d/block-600-700/lion.jpg",
+            "path": "/media:image/{cms-project-id}:draft/21f827e0-ba57-4824-b3bc-f101ae08568b:6d89657e4bfae6eaa62de22bd6fb63b2697f091d/block-600-700/lion.jpg",
             "queryString": "?filter=grayscale%28%29%3B+border%2810%2C+0x000000%29"
           }
         }
@@ -287,7 +285,7 @@ The above query should return a response that looks a little something like this
 }
 ----
 
-As with `mediaUrl`, prefix the path with `{api-base-url}` and append the query string. If you have followed the steps in this {document}, the resulting address should show you something like this:
+As with `mediaUrl`, prefix the path with `{api-base-url}` and append the query string. If you have followed the steps in this chapter, the resulting address should show you something like this:
 
 .The processed image
 image::image-processed.jpg["The lion image, cropped, in black and white, with a black border.",600w]
@@ -295,8 +293,7 @@ image::image-processed.jpg["The lion image, cropped, in black and white, with a 
 NOTE: Asking for scaled and filtered images is allowed when you query Guillotine's own API endpoint, which is what Query Playground does. When Guillotine is mounted on a site instead, image transformations are turned off by default, so that visitors cannot generate endless variants of your images.
 
 
-== Summary
+== Coming up
 
-You should now have a deep understanding of how media is stored and accessed - as well as XP's image handling and image API, including how to access it all from the GraphQL API.
-
-Pushing forward, it's time to <<form-items#, have a closer look at the building blocks of content forms; form items>>.
+You've uploaded media, seen how it is stored, and fetched processed images through the GraphQL API.
+In the next chapter, you'll take a closer look at <<form-items#, form items>>, the building blocks of content forms.

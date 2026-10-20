@@ -2,7 +2,9 @@
 include::.variables.adoc[]
 :description: Call the API from cURL, Node and a browser. Publish content, configure CORS, resolve a route, page a list and build page and media URLs from their parts.
 
-So far you have run every query from Query Playground, which quietly supplied the project, the branch and your login. A front-end has none of that. In this {document} you'll send the same queries over HTTP, from the command line, from Node and from a browser, and handle the four things every front-end on Enonic needs: the request format, published versus draft content, URLs for pages and media, and lists that page.
+In this chapter, you'll send your queries over HTTP, from the command line, from Node and from a browser.
+So far, Query Playground has quietly supplied the project, the branch and your login, and a front-end has none of that.
+You'll handle the four things every front-end on Enonic needs: the request format, published versus draft content, URLs for pages and media, and lists that page.
 
 NOTE: {see-prev-docs}
 
@@ -14,7 +16,7 @@ So before anything else, publish your content: in Content Studio, select the "ar
 
 == The request
 
-The endpoint is `{graphql-url}`, as you saw in the <<headless-api#_one_endpoint_for_every_api, Headless API {document}>>. It takes an HTTP POST with `Content-Type: application/json` and a JSON body with two properties:
+The endpoint is `{graphql-url}`, as you saw in the <<headless-api#_one_endpoint_for_every_api, Headless API chapter>>. It takes an HTTP POST with `Content-Type: application/json` and a JSON body with two properties:
 
 [%header,cols="1,1,4"]
 |===
@@ -32,7 +34,7 @@ Save this as `request.json`:
 {
   "query": "query Artists($project: String!, $branch: String!) { guillotine(project: $project, branch: $branch) { getChildren(key: \"/artists\", first: 10) { _id displayName } } }",
   "variables": {
-    "project": "{cms-project}",
+    "project": "{cms-project-id}",
     "branch": "master"
   }
 }
@@ -65,7 +67,7 @@ const query = `
         displayName
         ... on {app-name-query}_Artist {
           data {
-            name
+            legalName
             birthday
           }
         }
@@ -80,7 +82,7 @@ async function getArtists() {
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({
       query,
-      variables: { project: '{cms-project}', branch: 'master' }
+      variables: { project: '{cms-project-id}', branch: 'master' }
     })
   });
 
@@ -234,10 +236,10 @@ Here `frontendBaseUrl` is wherever your front-end serves its pages. A link whose
 
 == Going live
 
-Everything in this {document} ran against your sandbox, but there is no difference between the sandbox and a live Enonic server except the URL. The same request format, the same API names, the same paths in every response, the same CORS configuration file. When your app and content are on a server, point `apiBaseUrl` at that server's `/api` and the front-end is live. Keep that base in one place, as the examples do, and going live is a configuration change rather than a code change.
+Everything in this chapter ran against your sandbox, but there is no difference between the sandbox and a live Enonic server except the URL. The same request format, the same API names, the same paths in every response, the same CORS configuration file. When your app and content are on a server, point `apiBaseUrl` at that server's `/api` and the front-end is live. Keep that base in one place, as the examples do, and going live is a configuration change rather than a code change.
 
-== Summary
+== Coming up
 
 You have called the API from cURL, Node and a browser, published content so a front-end can read it, resolved a route to a content item, paged a list, and built page and media URLs from their parts. That is the whole contract between Enonic and a front-end; everything else is your framework's business.
 
-Next up, let's look <<data-toolbox#, under the hood>> at how XP actually stores all of this.
+In the final chapter, you'll look <<data-toolbox#, under the hood>> at how XP actually stores all of this.

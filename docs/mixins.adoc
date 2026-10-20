@@ -1,8 +1,8 @@
 = Mixins
 include::.variables.adoc[]
-:description: Mixins are a way for you to add extra fields to all your content types in a simple manner. This {document} covers what they are and how to use them.
+:description: Mixins are a way for you to add extra fields to all your content types in a simple manner. This chapter covers what they are and how to use them.
 
-Mixins are a smart way of dynamically extending existing content types with more fields.
+In this chapter, you'll extend existing content types with more fields, using a mixin.
 
 The idea is to basically define new fields and decide what content types those fields should be applied to. If no content type is selected while registering a mixin, those fields will be enabled for all content types.
 
@@ -50,7 +50,7 @@ include::../{app-root}/cms/cms.yaml[]
 . Your app is redeployed, so open an Artist or an Animal content item. You should see the following section at the bottom of the form:
 +
 // TODO(xp8-verify): recapture from Content Studio 6.1
-image::notes-x-data.png["Notes mixin fields showing at the bottom of an animal content item",{image-l}]
+image::notes-x-data.png["Notes mixin fields showing at the bottom of an animal content item"]
 +
 . Finally, add some notes to some content.
 
@@ -258,7 +258,7 @@ This is a bonus section, so you're not missing much if you skip it, but it's wor
 
 . Install the https://market.enonic.com/vendors/enonic/seo-metafields[SEO Metafields app] from `XP menu` -> `Applications`.
 +
-image::x-data-seo-app-install.png["Install SEO Metafields app",{image-l}]
+image::x-data-seo-app-install.png["Install SEO Metafields app"]
 +
 . Edit your project in Settings and add the app to it.
 +
@@ -266,10 +266,10 @@ image::x-data-seo-app-install.png["Install SEO Metafields app",{image-l}]
 +
 So, now you have some additional fields on all your content. If you check some of your content items, like an animal, you will see the fields are there as well.
 
-image::x-data-seo-animal.png["SEO fields available for the animals content type as well.",{image-xl}]
+image::x-data-seo-animal.png["SEO fields available for the animals content type as well."]
 
-== Summary
+== Coming up
 
 Your content model is complete: content types, sets, references, rich text, media and mixins, all readable through the API.
 
-Next up, let's fetch it all <<frontend#, from a front-end>>.
+In the next chapter, you'll fetch it all <<frontend#, from a front-end>>.

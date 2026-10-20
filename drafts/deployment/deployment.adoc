@@ -17,7 +17,7 @@ Enough with the sales pitch. Follow the steps below to deploy your app on Enonic
 +
 // TODO(xp8-verify): recapture from the current Cloud console
 .Enonic Cloud plans
-image::enonic-cloud-free-trial.png[Enonic cloud welcome page with 3 plans, hobby, professional and enterprise,{image-l}]
+image::enonic-cloud-free-trial.png[Enonic cloud welcome page with 3 plans, hobby, professional and enterprise]
 +
 . Create a new solution. Choose the `CMS essentials` template, and go with the default values
 . Connect the CLI to the cloud by running this command, and follow the instructions:
@@ -79,7 +79,7 @@ WARNING: Before proceeding, access Content Studio on your cloud instance and mak
 
 // TODO(xp8-verify): walk through this with the XP 8 Data Toolbox, whose exports are now zip archives, and consider Content Studio 6's native import instead
 . Access the Data Toolbox app and go to "Data tree";
-. Navigate to `com.enonic.cms.{cms-project}` > `draft` > `[root]`, then select `content` and click on "Export selected node";
+. Navigate to `com.enonic.cms.{cms-project-id}` > `draft` > `[root]`, then select `content` and click on "Export selected node";
 . You'll be redirected to the "Node exports" page. Download the export, which is a zip file;
 . Go back to your cloud instance, access the Data Toolbox "Node exports" page, upload the zip file downloaded in the previous step;
 . Visit the "Data tree" page in Data Toolbox and navigate to `com.enonic.cms.<name-of-your-cloud-project>` > `draft` > `[root]`, click on "Import node export" and select the one that was uploaded in the previous step;
@@ -99,7 +99,7 @@ To make your content accessible publicly, the final step is to create a Route. F
 +
 . Congratulations, your API is now live. Because every Universal API is mounted under `/api`, this one route exposes all of them: Guillotine at `/api/com.enonic.app.guillotine:graphql`, and the `media:image` and `media:attachment` APIs you met earlier, so the media paths your queries return work with your domain followed by `/api` as the base URL.
 
-To try it out, send the requests from the <<frontend#, front-end {document}>> with your domain followed by `/api` as the API base URL, or use a GraphQL client such as https://altairgraphql.dev/[Altair]: point it at your domain followed by `/api/com.enonic.app.guillotine:graphql`, use HTTP POST, and run a query that names the project and the branch:
+To try it out, send the requests from the <<frontend#, front-end chapter>> with your domain followed by `/api` as the API base URL, or use a GraphQL client such as https://altairgraphql.dev/[Altair]: point it at your domain followed by `/api/com.enonic.app.guillotine:graphql`, use HTTP POST, and run a query that names the project and the branch:
 
 [source,GraphQL,{subs}]
 ----
@@ -119,7 +119,7 @@ To try it out, send the requests from the <<frontend#, front-end {document}>> wi
 
 // TODO(xp8-verify): recapture with Guillotine 9 at the new endpoint
 .Querying animal data on the /api route using the Altair GraphQL client
-image::graphql-altair-querying-on-exposed-route.png[Altair GraphQL client querying Lion animal data on the "/api" route defined on cloud console,{image-xl}]
+image::graphql-altair-querying-on-exposed-route.png[Altair GraphQL client querying Lion animal data on the "/api" route defined on cloud console]
 
 NOTE: Only published content is readable without logging in, which is why the query asks for the `master` branch. Reading `draft` requires an authenticated user with a role in the project.
 
@@ -149,7 +149,7 @@ NOTE: Your application executable (*.jar file) can be found in `project-folder/b
 +
 // TODO(xp8-verify): recapture from the XP 8.1 Applications tool
 .Drag and drop applications to upload them
-image::deployment-app-upload.png["The application installation menu with a blue overlay. The overlay says 'drop files to upload'",{image-xl}]
+image::deployment-app-upload.png["The application installation menu with a blue overlay. The overlay says 'drop files to upload'"]
 
 The second alternative is via API:
 

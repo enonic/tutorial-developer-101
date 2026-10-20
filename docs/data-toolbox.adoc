@@ -2,9 +2,8 @@
 include::.variables.adoc[]
 :description: Now that your content model is complete, peek under the hood with Data Toolbox and see how XP stores all of it.
 
-You have now built a complete little content model and fetched it from a front-end: content types with sets, option sets, references and rich text, media with focal points, and a mixin on top. Before we deploy it, let's look at how all of that is actually saved.
-
-In this {document}, we'll give a short introduction to a popular application called Data Toolbox, the developer's best friend for playing around with the low level NoSQL storage in Enonic XP.
+In this chapter, you'll use Data Toolbox, the developer's best friend for exploring the low-level NoSQL storage in Enonic XP, to see how everything you have built is actually saved.
+That includes content types with sets, option sets, references and rich text, media with focal points, and a mixin on top.
 
 NOTE: {see-prev-docs}
 
@@ -27,7 +26,7 @@ Follow these steps to find and examine what your content looks like from the low
 
 . Navigate to the `Data Tree` in the menu. Here, the toolbox lists repositories within your XP instance, you should at least have the following:
 +
-com.enonic.cms.{cms-project}:: This is the repository that holds the content of your project. Every content project gets a repository of its own.
+com.enonic.cms.{cms-project-id}:: This is the repository that holds the content of your project. Every content project gets a repository of its own.
 
 system.auditlog:: This is where the _audit log_ is stored. The audit log allows you to see a log of everything that's been done in your XP instance, such as content creation, user administration, etc., and also tells you when it was done and by whom.
 
@@ -35,7 +34,7 @@ system-repo:: This is where XP stores core data about your system, such as insta
 
 system.scheduler:: This is a separate repository where scheduled jobs are stored.
 
-. Move into `com.enonic.cms.{cms-project}`. Here you will see the two branches you met in the <<content-studio#_branches, Content Studio {document}>>: `draft` and `master`. Everything you have published exists in both.
+. Move into `com.enonic.cms.{cms-project-id}`. Here you will see the two branches you met in the <<content-studio#branches, Content Studio chapter>>: `draft` and `master`. Everything you have published exists in both.
 
 . Keep navigating further down the tree: `root` -> `content`. Now you should see all the content of your project listed, as a tree of _nodes_ that mirrors the hierarchy in Content Studio. Navigate to `animals` to find your animals.
 
@@ -60,11 +59,9 @@ image::data-toolbox-properties-data.png["A table showing the data stored about t
 
 What you see here is the same data the GraphQL API returns. Guillotine reads these nodes, applies the content type to give them a typed schema, and resolves references and media URLs on the way out. When a query returns something you did not expect, this is the place to check what is actually stored.
 
-== Summary
-
 Inspecting content is only a fraction of what Data Toolbox can do: it's a versatile and powerful administrative tool. Among other things, it can export your content and import it on another instance, which is handy the day you move from your sandbox to a live server.
 
-== What's next?
+== Where to go next
 
 Congrats! You've reached the end of this tutorial. You can model content, read it through the API and fetch it from a front-end. If you'd like to go further, try one of the following guides, which introduce additional aspects of the Enonic experience:
 

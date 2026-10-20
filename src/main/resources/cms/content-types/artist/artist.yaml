@@ -2,14 +2,15 @@
 kind: "ContentType"
 title: "Artist"
 description: "Information about an artist"
+displayNamePlaceholder: "Stage name"
 superType: "base:structured"
 form:
 # end::header[]
 # tag::basics[]
   - type: "TextLine"
-    name: "name"
-    label: "Name"
-    helpText: "The artist's name (if different from their professional moniker)."
+    name: "legalName"
+    label: "Legal name"
+    helpText: "The artist's name on official documents, if different from their stage name."
   - type: "TextArea"
     name: "about"
     label: "About the artist"

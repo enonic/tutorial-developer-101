@@ -2,20 +2,15 @@
 include::.variables.adoc[]
 :description: Rich text is an incredibly powerful editing tool and an important part of the XP experience. Learn how to configure it here.
 
-If you want to work with rich text, HtmlArea is the form item to go for.
-
-This form item offers some very powerful editing capabilities and a lot of configuration options.
-
-This whole {document} is dedicated to the https://developer.enonic.com/docs/cms/stable/schemas/form-items/htmlarea[HtmlArea form item] and the editor used to define its data.
-
-The user-oriented documentation of the Rich text editor can be found in the https://developer.enonic.com/docs/content-studio/stable/editor/rich-text-editor[Content Studio docs].
+In this chapter, you'll add a rich text field with the https://developer.enonic.com/docs/cms/stable/schemas/form-items/htmlarea[HtmlArea form item], insert links, images and a macro, and fetch the result through the API.
+For the editor itself, see the https://developer.enonic.com/docs/content-studio/stable/editor/rich-text-editor[Content Studio docs].
 
 NOTE: {see-prev-docs}
 
 == Overview
 
 .The HtmlArea form item with the default tools selection
-image::input-type-html-area.png["A text input field with a tools ribbon just above.", {image-s}, align=center]
+image::input-type-html-area.png["A text input field with a tools ribbon just above.", align=center]
 
 The HtmlArea form item gives you a multi-line input field with rich formatting options, much like what you're used to from your favorite word processor. It supports text formatting and justification, lists, links, and even lets you insert images.
 
@@ -50,7 +45,7 @@ If you want to exclude all controls, use `exclude: "*"`:
 
 // TODO(xp8-verify): recapture from Content Studio 6.1
 .An HtmlArea input with `exclude: "*"` and no tools.
-image::input-type-html-area-no-controls.png[An HtmlArea configured to exclude all editing tools, {image-s}, align=center]
+image::input-type-html-area-no-controls.png[An HtmlArea configured to exclude all editing tools, align=center]
 
 Finally, if you want to exclude most tools, but not all, you can exclude all and then add back in the ones you want:
 
@@ -65,7 +60,7 @@ Finally, if you want to exclude most tools, but not all, you can exclude all and
 ----
 
 .An HtmlArea with a selection of tools and `exclude: "*"`
-image::input-type-html-area-some-controls.png[An HtmlArea configured to include a selection of editing tools, {image-s}, align=center]
+image::input-type-html-area-some-controls.png[An HtmlArea configured to include a selection of editing tools, align=center]
 
 As introduced in the beginning, for a full overview of the available text tools and HtmlArea settings, visit the https://developer.enonic.com/docs/cms/stable/schemas/form-items/htmlarea[HtmlArea reference docs].
 
@@ -119,7 +114,7 @@ NOTE: You can also use kbd:[ctrl+K] to insert the link.
 .Choose the content tab, and select the previously created "Lion" as the target item
 +
 // TODO(xp8-verify): recapture from Content Studio 6.1, whose link dialog was reworked
-image::rich-text-insert-content-link.png[Screenshot of the insert link dialog,{image-l}]
+image::rich-text-insert-content-link.png[Screenshot of the insert link dialog]
 
 When done, save the item - but keep the tab open to complete the upcoming tasks.
 
@@ -133,7 +128,7 @@ The following options are available: Caption, alt text, change the image's justi
 
 Try out the image controls that Content Studio gives you by uploading a picture and seeing what you can do with it.
 
-We looked at <<files#_image_form, editing images in the media {document}>>, but when inserting images in the HtmlArea, you also have something called "image styles", which we'll have a look at now.
+We looked at <<files#_image_form, editing images in the media chapter>>, but when inserting images in the HtmlArea, you also have something called "image styles", which we'll have a look at now.
 
 Continue editing the "Lynx" content created in the previous task.
 
@@ -141,12 +136,12 @@ Continue editing the "Lynx" content created in the previous task.
 +
 // TODO(xp8-verify): recapture from Content Studio 6.1
 .The toolbar with the image tool highlighted
-image::rich-text-toolbar-image-highlight.png[The rich text toolbar with the image tool circled by a blue circle,{image-l}]
+image::rich-text-toolbar-image-highlight.png[The rich text toolbar with the image tool circled by a blue circle]
 +
 . You'll be greeted by the "insert image" dialog:
 +
 .The HtmlArea insert image dialog. Photo by https://unsplash.com/@zmachacek[Zdeněk Macháček]
-image::rich-text-insert-image.png["The insert image dialog, showing the image, an image styles dropdown, caption, and alt text fields", {image-l}]
+image::rich-text-insert-image.png["The insert image dialog, showing the image, an image styles dropdown, caption, and alt text fields"]
 +
 . When accessing the "image styles" dropdown, you'll find that it's only got a couple of built-in options. To make this more exciting, let's create a custom image style.
 +
@@ -166,7 +161,7 @@ NOTE: https://developer.enonic.com/docs/cms/stable/richtext/styles[The styles re
 . With this style picked up by XP, you'll have the "Grayscale" option available in the image styles dropdown. Select it to apply it to the image and update your image.
 +
 .Example of description with inserted image styled
-image::rich-text-insert-image-styled.png["The description rich text showing the results of applying the image styles to the image", {image-l}]
+image::rich-text-insert-image-styled.png["The description rich text showing the results of applying the image styles to the image"]
 
 NOTE: Image styles are offered from the apps assigned to your project. Your app is assigned, which is why the style shows up. The same goes for the macros we'll look at next.
 
@@ -185,7 +180,7 @@ The embed macro enables you to insert iframes. In this context, we'll embed this
 Let's add the macro to the "Lynx" content item.
 
 .The toolbar with the macro button highlighted
-image::rich-text-toolbar-macro-highlight.png[The rich text toolbar with the macro button circled by a blue circle,{image-l}]
+image::rich-text-toolbar-macro-highlight.png[The rich text toolbar with the macro button circled by a blue circle]
 
 . Click "insert macro".
 . Select the "Embed iframe" macro
@@ -241,7 +236,7 @@ The following query returns the "Lynx" content, and the `description` field as p
         {
           "data": {
             "description": {
-              "processedHtml": "<p>Lynx are cats, just like <a href=\"/animals/lion\" data-link-ref=\"8cc82fd1-9063-4604-9f51-5f059d7a5d2e\">lions</a>.</p>\n\n<figure class=\"captioned editor-align-justify square-grayscale\"><img alt=\"lynx.jpg\" src=\"/media:image/{cms-project}:draft/be6bb93a-7d99-4ed2-b424-4e435b89f392:6a1e144ef4ebab19e9071794ad753130d5bb5497/width-768/lynx.jpg\" style=\"width:100%\" data-image-ref=\"4dced964-cd1c-445d-bb9f-80387467e165\">\n\n</figure>\n\n<p><editor-macro data-macro-name=\"embed\" data-macro-ref=\"a1490c65-3654-4b29-9b1a-eb3894b6f59f\">&lt;iframe title=\"YouTube video player\" src=\"https://www.youtube.com/embed/gr5EwZo_CHQ?si=IlkTGRuGVV7BxEOs\" height=\"315\" width=\"560\"&gt;&lt;/iframe&gt;</editor-macro></p>\n"
+              "processedHtml": "<p>Lynx are cats, just like <a href=\"/animals/lion\" data-link-ref=\"8cc82fd1-9063-4604-9f51-5f059d7a5d2e\">lions</a>.</p>\n\n<figure class=\"captioned editor-align-justify square-grayscale\"><img alt=\"lynx.jpg\" src=\"/media:image/{cms-project-id}:draft/be6bb93a-7d99-4ed2-b424-4e435b89f392:6a1e144ef4ebab19e9071794ad753130d5bb5497/width-768/lynx.jpg\" style=\"width:100%\" data-image-ref=\"4dced964-cd1c-445d-bb9f-80387467e165\">\n\n</figure>\n\n<p><editor-macro data-macro-name=\"embed\" data-macro-ref=\"a1490c65-3654-4b29-9b1a-eb3894b6f59f\">&lt;iframe title=\"YouTube video player\" src=\"https://www.youtube.com/embed/gr5EwZo_CHQ?si=IlkTGRuGVV7BxEOs\" height=\"315\" width=\"560\"&gt;&lt;/iframe&gt;</editor-macro></p>\n"
             }
           }
         }
@@ -261,7 +256,7 @@ By unescaping the HTML, you will find the following:
 </p>
 
 <figure class="captioned editor-align-justify square-grayscale">
-  <img alt="lynx.jpg" src="/media:image/{cms-project}:draft/be6bb93a-7d99-4ed2-b424-4e435b89f392:6a1e144ef4ebab19e9071794ad753130d5bb5497/width-768/lynx.jpg" style="width:100%" data-image-ref="4dced964-cd1c-445d-bb9f-80387467e165">
+  <img alt="lynx.jpg" src="/media:image/{cms-project-id}:draft/be6bb93a-7d99-4ed2-b424-4e435b89f392:6a1e144ef4ebab19e9071794ad753130d5bb5497/width-768/lynx.jpg" style="width:100%" data-image-ref="4dced964-cd1c-445d-bb9f-80387467e165">
 </figure>
 
 <p>
@@ -357,7 +352,7 @@ You now have access to the full name and type of the referenced item, and to the
 
 === Images
 
-Images work the same way: the `data-image-ref` attribute points to an entry in the `images` field, which holds the parts of every image URL. The default `src` is the media path, so the simplest fix is to prefix it with your media base URL - the same `{api-base-url}` you used in the <<files#, media {document}>>.
+Images work the same way: the `data-image-ref` attribute points to an entry in the `images` field, which holds the parts of every image URL. The default `src` is the media path, so the simplest fix is to prefix it with your media base URL - the same `{api-base-url}` you used in the <<files#, media chapter>>.
 
 If you want to optimize how fast images load on various devices, Guillotine can also return the image in multiple different sizes (using https://developer.mozilla.org/en-US/docs/Web/API/HTMLImageElement/srcset[the `srcset` attribute (MDN)]). This is achieved by adding an argument to the `description` field:
 
@@ -424,21 +419,21 @@ This time, you should find that the `<img>` element in the processed HTML includ
   {
     "ref": "4dced964-cd1c-445d-bb9f-80387467e165",
     "src": {
-      "path": "/media:image/{cms-project}:draft/be6bb93a-7d99-4ed2-b424-4e435b89f392:6a1e144ef4ebab19e9071794ad753130d5bb5497/width-768/lynx.jpg",
+      "path": "/media:image/{cms-project-id}:draft/be6bb93a-7d99-4ed2-b424-4e435b89f392:6a1e144ef4ebab19e9071794ad753130d5bb5497/width-768/lynx.jpg",
       "queryString": "?filter=hsbcolorize%280x000000%29%3B+grayscale%28%29%3B+border%286%2C+0x000000%29"
     },
     "srcset": [
       {
         "width": 200,
         "imageUrl": {
-          "path": "/media:image/{cms-project}:draft/be6bb93a-7d99-4ed2-b424-4e435b89f392:...../width-200/lynx.jpg",
+          "path": "/media:image/{cms-project-id}:draft/be6bb93a-7d99-4ed2-b424-4e435b89f392:...../width-200/lynx.jpg",
           "queryString": "?filter=..."
         }
       },
       {
         "width": 500,
         "imageUrl": {
-          "path": "/media:image/{cms-project}:draft/be6bb93a-7d99-4ed2-b424-4e435b89f392:...../width-500/lynx.jpg",
+          "path": "/media:image/{cms-project-id}:draft/be6bb93a-7d99-4ed2-b424-4e435b89f392:...../width-500/lynx.jpg",
           "queryString": "?filter=..."
         }
       }
@@ -578,8 +573,8 @@ This time, you only get the explicit fields you were looking for
 
 By accessing the macro config, you are able to drill down into every single field, accessing all the details you actually need.
 
-== Summary
+== Coming up
 
 You have configured a rich text input, created links, styled images and inserted a macro, and seen how all three come back from the API as placeholders plus structured data for your front-end to render.
 
-Next up, <<mixins#, mixins>> let you add fields to many content types at once.
+In the next chapter, you'll add fields to many content types at once with <<mixins#, mixins>>.

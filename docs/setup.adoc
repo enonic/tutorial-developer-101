@@ -2,9 +2,8 @@
 include::.variables.adoc[]
 :description: Install the Enonic CLI, start a local XP sandbox and create the app that will hold your content types. Three commands and you are ready.
 
-Before we can model any content, we need somewhere to put it. This {document} gets you there in three steps: install the Enonic CLI, start a local instance of XP, and create the app that will hold your content types.
-
-The whole thing takes a few minutes. Everything you install here is used again in every following {document}.
+In this chapter, you'll install the Enonic CLI, start a local XP sandbox, and create the app that will hold your content types.
+It takes a few minutes, and everything you install here is used in every later chapter.
 
 == Install the CLI
 
@@ -34,7 +33,7 @@ Create and start a sandbox called `{sandbox-name}` by running this command in yo
 enonic sandbox create {sandbox-name} -t essentials -f
 ----
 
-The `essentials` template installs a set of applications from Enonic Market, including Content Studio and Guillotine, which you will meet in the coming {document}s. The `-f` flag accepts the default answer to every prompt, which selects the most recent release of Enonic XP, and starts the sandbox.
+The `essentials` template installs a set of applications from Enonic Market, including Content Studio and Guillotine, which you will meet in the coming chapters. The `-f` flag accepts the default answer to every prompt, which selects the most recent release of Enonic XP, and starts the sandbox.
 
 NOTE: This tutorial is written for Enonic XP 8.1 and the versions of Content Studio and Guillotine that go with it. If the CLI offers you an older version, pick 8.1 or newer.
 
@@ -144,8 +143,7 @@ enonic project sandbox
 
 For anything else, the https://developer.enonic.com/docs/enonic-cli[CLI documentation] covers every command and option, and the https://developer.enonic.com/docs/platform[platform documentation] covers the sandbox's configuration and ports.
 
-== Summary
+== Coming up
 
-You now have the CLI, a running sandbox with Content Studio and Guillotine installed, and your own app deployed to it. That is all the infrastructure this tutorial needs.
-
-Next up, you'll <<content-studio#, get familiar with Content Studio and create your first content type>>.
+You now have the CLI, a running sandbox with Content Studio and Guillotine, and your own app deployed to it.
+In the next chapter, you'll <<content-studio#, get familiar with Content Studio and create your first content type>>.

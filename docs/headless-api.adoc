@@ -2,9 +2,7 @@
 include::.variables.adoc[]
 :description: What is a headless CMS without an API? Learn about the Guillotine app and the powers it unlocks here.
 
-Enonic is a highly flexible CMS, capable of delivering content in many ways. In this {document} we will focus on delivery via the out-of-the-box GraphQL API.
-
-Now that we've created some content, let's see how we can access and use it via an API - headless style.
+In this chapter, you'll read the content you created through Guillotine, Enonic's GraphQL API, and query it from Query Playground.
 
 NOTE: {see-prev-docs}
 
@@ -28,7 +26,7 @@ Look at that address for a moment, because the pattern comes back throughout thi
 
 By default, all three live at the very same place, and an app of your own can add more.
 
-This is why one base URL is enough. Everything you will ask XP for - queries, images, downloads - lives under `{api-base-url}` on your sandbox. On a live server it lives under that server's address instead, and that is the only difference: the same APIs, the same names, the same paths. Your front-end is the one that knows which base to use. You will build media URLs on top of this base in the <<files#, media {document}>>, and call it from code in the <<frontend#, front-end {document}>>.
+This is why one base URL is enough. Everything you will ask XP for - queries, images, downloads - lives under `{api-base-url}` on your sandbox. On a live server it lives under that server's address instead, and that is the only difference: the same APIs, the same names, the same paths. Your front-end is the one that knows which base to use. You will build media URLs on top of this base in the <<files#, media chapter>>, and call it from code in the <<frontend#, front-end chapter>>.
 
 NOTE: The single endpoint is the default, not a limit. In production, each API can be given its own address, for instance serving the media APIs from a CDN at `cdn.example.com` while GraphQL stays at `api.example.com`. Because Guillotine returns URL paths rather than finished addresses, your front-end simply uses a different base for media than for queries. The https://developer.enonic.com/docs/platform/stable/config/vhosts[virtual host configuration] in the platform docs covers how.
 
@@ -103,7 +101,7 @@ Now, with your cursor on the inner curly braces of the query, press kbd:[ctrl+sp
 
 image::query-playground-artist-query-inspection.gif[Query playground query section showing suggested fields for content schema, 654w]
 
-As can be seen, we do not have the artist `name` and `about` fields available, and the reason for that is because the `getChildren` field can return any content that implements the `Content` schema, but it can't directly infer what schema that is, which in this case is the `{app-name-query}_Artist` schema:
+As can be seen, we do not have the artist `legalName` and `about` fields available, and the reason for that is because the `getChildren` field can return any content that implements the `Content` schema, but it can't directly infer what schema that is, which in this case is the `{app-name-query}_Artist` schema:
 
 .getChildren can't directly infer what schema is implementing the Content schema
 image::query-playground-getChildren-infer.png[Query playground getChildren can't directly infer what schema is implementing Content schema, 331w]
@@ -118,7 +116,7 @@ So to proceed, we use https://graphql.org/learn/queries/#inline-fragments[inline
       ... on {app-name-query}_Artist {
         _id
         data {
-          name
+          legalName
           about
         }
       }
@@ -127,10 +125,10 @@ So to proceed, we use https://graphql.org/learn/queries/#inline-fragments[inline
 }
 ----
 
-With this, we basically built a query that understands that under the `"/artists"` path we have content of type `Artist`, and based on this we can request general content data, such as `_id`, but also specific content data, such as the artist's name and about:
+With this, we basically built a query that understands that under the `"/artists"` path we have content of type `Artist`, and based on this we can request general content data, such as `_id`, but also specific content data, such as the artist's legal name and about:
 
 .Getting specific data of artists
-image::query-playground-artists-data.png[Query playground query returning artists content together with its name and about data, 945w]
+image::query-playground-artists-data.png[Query playground query returning artists content together with its legal name and about data, 945w]
 
 === Query with dataAsJson
 
@@ -149,7 +147,7 @@ If you don't need or care about types when creating your queries, you can ignore
 ----
 
 .Getting all data using dataAsJson
-image::query-playground-artists-dataAsJson.png[Query playground query returning artists content together with its name and about data - using dataAsJson field, 945w]
+image::query-playground-artists-dataAsJson.png[Query playground query returning artists content together with its legal name and about data - using dataAsJson field, 945w]
 
 == Advanced queries
 
@@ -193,7 +191,7 @@ In order to exemplify this field's usage, we'll query the data set we've created
 }
 ----
 
-Note that this query is getting the last artist when sorted alphabetically by name, regardless of where the content is located in the tree structure.
+Note that this query is getting the last artist when sorted alphabetically by display name, regardless of where the content is located in the tree structure.
 
 // TODO(xp8-verify): confirm the _allText field name and the ngram results against XP 8.1
 The following GraphQL query uses the https://developer.enonic.com/docs/code/stable/storage/dsl#ngram[n-gram functionality] to find all the artists that have a term (part of a text) that starts with `rap` somewhere in their data:
@@ -287,7 +285,7 @@ Just like there is a `queryDsl` field underneath `guillotine`, the API also prov
 
 We'll not go into much detail, but basically, the fields with _connection_ in their name have extra parameters for aggregating and paginating data.
 
-To finish this {document}, we'll add a new _birthday_ field to the artist content type, update all artists to have data in this field, and then use the `queryDslConnection` field to get aggregated data. Let's get to work!
+To finish this chapter, we'll add a new _birthday_ field to the artist content type, update all artists to have data in this field, and then use the `queryDslConnection` field to get aggregated data. Let's get to work!
 
 . Start by updating the Artist content type to the following structure:
 +
@@ -296,7 +294,7 @@ To finish this {document}, we'll add a new _birthday_ field to the artist conten
 include::../{app-root}/cms/content-types/artist/artist.yaml[tags=header;basics;birthday]
 ----
 +
-TIP: If you are not running the app in dev mode (`enonic dev`, introduced in an earlier {document}), make sure to run `enonic project deploy` in the terminal in the app folder
+TIP: If you are not running the app in dev mode (`enonic dev`, introduced in an earlier chapter), make sure to run `enonic project deploy` in the terminal in the app folder
 
 . Update each of the previously created artists with the following dates:
 +
@@ -453,6 +451,7 @@ Which shows that two of those artists are from Generation X, and one of them is 
 - If you want to learn more about GraphQL in general, the https://graphql.org/learn/[_Introduction to GraphQL_ documentation] is a good place to start
 
 
-== Summary
+== Coming up
 
-In this {document} you've learned about the Guillotine app and its API. Next up let's have a look at <<files#, how XP deals with files (aka media)>>.
+You've queried your content through Guillotine, from simple lookups to search and aggregations.
+In the next chapter, you'll see <<files#, how XP deals with files and images>>.

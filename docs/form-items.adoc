@@ -2,11 +2,10 @@
 include::.variables.adoc[]
 :description: Take your content types to the next level with more form items. Learn how to configure them, what kinds there are, and how to link content together.
 
-The content types we've created previously in this guide have only used a few basic form items: TextLine, TextArea and Date.
+In this chapter, you'll configure form items, add new kinds of them to your content types, and link content items to each other.
 
-However, Content Studio has a lot more up its sleeve than that! _Form items_ are the building blocks of forms. They dictate what kind of data the user can or must add to any piece of content, and how it is edited.
-
-This {document} introduces more kinds of form items and explains how you can configure them to your liking.
+_Form items_ are the building blocks of forms. They dictate what kind of data the user can or must add to any piece of content, and how it is edited.
+So far, your content type has only used TextLine, TextArea and Date.
 
 NOTE: If you're used to working with HTML, be aware that XP's form items are _not_ the same as HTML `input` elements.
 
@@ -75,7 +74,7 @@ This set of inputs would be rendered as in the following picture. As specified i
 
 // TODO(xp8-verify): recapture from Content Studio 6.1
 .TextLine inputs showing common configuration options
-image::input-type-common-configuration.png["Three TextLine inputs showing all the common configuration options: labels, help text, default text, and occurrences.", {image-s}, align=center]
+image::input-type-common-configuration.png["Three TextLine inputs showing all the common configuration options: labels, help text, default text, and occurrences.", align=center]
 
 Note that:
 - The required input field has a red asterisk to signify that it must be filled out.
@@ -125,29 +124,29 @@ Apart from the form items we've already gotten familiar with, XP also has form i
 https://developer.enonic.com/docs/cms/stable/schemas/form-items/combobox[ComboBox]:: A dropdown menu containing predefined options for the user to select from. Allows selection of one or more options.
 +
 .The ComboBox form item
-image::input-type-combo-box.webp["A standard select list / dropdown list / combo box with a few visible dummy options.", {image-s}, align=center]
+image::input-type-combo-box.webp["A standard select list / dropdown list / combo box with a few visible dummy options.", align=center]
 +
 https://developer.enonic.com/docs/cms/stable/schemas/form-items/date[Date], https://developer.enonic.com/docs/cms/stable/schemas/form-items/datetime[DateTime] and https://developer.enonic.com/docs/cms/stable/schemas/form-items/instant[Instant]:: Provide an interactive date picker (with a time component for DateTime and Instant) to save dates and times. The reference explains which of the two to pick for a date with a time.
 +
 .The DateTime form item
-image::input-type-date-time.webp["A calendar showing year and month with a time indicator to the side.", {image-s}, align=center]
+image::input-type-date-time.webp["A calendar showing year and month with a time indicator to the side.", align=center]
 +
 https://developer.enonic.com/docs/cms/stable/schemas/form-items/geopoint[GeoPoint]:: Stores GPS coordinates.
 +
 .The GeoPoint form item
-image::input-type-geo-point.webp["A text line input with coordinates.", {image-s}, align=center]
+image::input-type-geo-point.webp["A text line input with coordinates.", align=center]
 +
-https://developer.enonic.com/docs/cms/stable/schemas/form-items/htmlarea[HtmlArea]:: Provides a rich text, multi-line input. We'll discuss this in detail in <<rich-text#,the rich-text {document}>>.
+https://developer.enonic.com/docs/cms/stable/schemas/form-items/htmlarea[HtmlArea]:: Provides a rich text, multi-line input. We'll discuss this in detail in <<rich-text#,the rich-text chapter>>.
 +
 .The HtmlArea form item
-image::input-type-html-area.png["A text area with a tools ribbon on the top. The ribbon provides rich text tools such as justification, macro insertion, text styles, etc.", {image-s}, align=center]
+image::input-type-html-area.png["A text area with a tools ribbon on the top. The ribbon provides rich text tools such as justification, macro insertion, text styles, etc.", align=center]
 
-Additionally, XP has form items that group other form items, called sets, which get <<sets#, a {document} of their own>>. First, let's look at the form items that reference other content.
+Additionally, XP has form items that group other form items, called sets, which get <<sets#, a chapter of their own>>. First, let's look at the form items that reference other content.
 
 == ImageSelector
 
 .The ImageSelector form item
-image::input-type-image-selector.png[ImageSelector: An interactive image selection tool., {image-xl}]
+image::input-type-image-selector.png[ImageSelector: An interactive image selection tool.]
 
 Images are a key part of many web experiences: they add color, break up the content, and give the reader something to rest their eyes on.
 
@@ -163,15 +162,15 @@ XP's image selector allows you to select an image for a piece of content and als
 
 Read more about the https://developer.enonic.com/docs/cms/stable/schemas/form-items/imageselector[configuration of image selectors] in the reference docs.
 
-After you've added an image (or several), you can highlight it and click the edit button. This will take you to the image editing form. This is the same form as we saw in <<files#_image_form, the previous {document}>>.
+After you've added an image (or several), you can highlight it and click the edit button. This will take you to the image editing form. This is the same form as we saw in <<files#_image_form, the previous chapter>>.
 
 .The image selector with uploaded and selected images
-image::input-type-image-selector-highlighted-image.png["The image selector input field with two images of lions -- one male, one female - - below. Under the images, there's a set of buttons saying 'edit' and 'remove'.", {image-xl}]
+image::input-type-image-selector-highlighted-image.png["The image selector input field with two images of lions -- one male, one female - - below. Under the images, there's a set of buttons saying 'edit' and 'remove'."]
 
 == ContentSelector
 
 .The ContentSelector form item
-image::input-type-content-selector.png[ContentSelector: An interactive content selection tool., {image-xl}]
+image::input-type-content-selector.png[ContentSelector: An interactive content selection tool.]
 
 The image selector we just saw is actually a specialized form of the more general ContentSelector.
 
@@ -196,7 +195,7 @@ https://developer.enonic.com/docs/cms/stable/schemas/form-items/contentselector[
 [TIP]
 .When to use it
 ====
-Reference another content item when the thing has a life of its own: it is published, moved, reused from several places or edited by someone else. An artist's favorite animal is an animal that exists regardless of the artist, so it is a reference. When the data only makes sense inside the parent, such as an artist's filmography entries, embed it instead with the sets you will meet in the <<sets#, next {document}>>.
+Reference another content item when the thing has a life of its own: it is published, moved, reused from several places or edited by someone else. An artist's favorite animal is an animal that exists regardless of the artist, so it is a reference. When the data only makes sense inside the parent, such as an artist's filmography entries, embed it instead with the sets you will meet in the <<sets#, next chapter>>.
 ====
 
 == AttachmentUploader
@@ -277,7 +276,7 @@ NOTE: If you have multiple attachments in your content, they will all be listed.
             {
               "name": "lion.jpg",
               "attachmentUrl": {
-                "path": "/media:attachment/{cms-project}:draft/f7efd6e4-9eed-45d2-83b6-d088a7bdc685:8652e625afe7bbda595a190a3b8624e322dc9f1a/lion.jpg",
+                "path": "/media:attachment/{cms-project-id}:draft/f7efd6e4-9eed-45d2-83b6-d088a7bdc685:8652e625afe7bbda595a190a3b8624e322dc9f1a/lion.jpg",
                 "queryString": ""
               }
             }
@@ -289,7 +288,7 @@ NOTE: If you have multiple attachments in your content, they will all be listed.
 }
 ----
 
-As with `mediaUrl` in the previous {document}, put your API base URL in front of `path` to get a working link - for your sandbox that is `{api-base-url}`.
+As with `mediaUrl` in the previous chapter, put your API base URL in front of `path` to get a working link - for your sandbox that is `{api-base-url}`.
 
 TIP: Under the hood, `attachmentUrl` uses the same logic as Enonic's portal library function https://developer.enonic.com/docs/code/stable/libraries/lib-portal#attachmenturlparts[attachmentUrlParts], so you can follow the link to better understand the arguments that you pass to this field when creating queries that use it.
 
@@ -300,13 +299,13 @@ Time for a little recap! We'll put together everything we've learned about conte
 
 A solution is listed below, but try and see if you can solve it yourself first.
 
-TIP: If you're wondering how to achieve some of the goals, try consulting the documentation that's been linked to in this {document}.
+TIP: If you're wondering how to achieve some of the goals, try consulting the documentation that's been linked to in this chapter.
 
-Your task is to create a new content type: `Animal` and to update the `Artist` content type with new constraints and fields. By the end of this {document}, you should have content types that look like this in Content Studio:
+Your task is to create a new content type: `Animal` and to update the `Artist` content type with new constraints and fields. By the end of this chapter, you should have content types that look like this in Content Studio:
 
 // TODO(xp8-verify): recapture from Content Studio 6.1
 .The target for this task: animal and artist
-image::animal-and-artist-target.png["An animal content wizard next to an artist wizard", {image-xl}]
+image::animal-and-artist-target.png["An animal content wizard next to an artist wizard"]
 
 === Animal constraints
 
@@ -341,7 +340,7 @@ TIP: Don't worry if something did not work, we'll show the solutions in the next
 include::../{app-root}/cms/content-types/animal/animal.yaml[tags=header;basics]
 ----
 +
-`displayNamePlaceholder` lets you customize what Content Studio calls the built-in "display name" field.
+As with Artist, `displayNamePlaceholder` tells editors what the display name holds, here the species.
 +
 . Next, update the `Artist` content type.
 +
@@ -442,8 +441,8 @@ Depending on the links (and animals) you created, your result might look a littl
 }
 ----
 
-== Summary
+== Coming up
 
 You have configured form items with occurrences, defaults and help text, linked content with selectors, and followed a reference through the API.
 
-Next up, <<sets#, sets and form fragments>> let you group and reuse form items.
+In the next chapter, you'll group and reuse form items with <<sets#, sets and form fragments>>.

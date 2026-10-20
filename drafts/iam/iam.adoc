@@ -1,12 +1,12 @@
 = IAM: identities and providers
 include::.variables.adoc[]
-:description: How do you restrict access to your sites? What kinds of access control exist for XP? This {document} explores users, roles, groups, and identity providers.
+:description: How do you restrict access to your sites? What kinds of access control exist for XP? This chapter explores users, roles, groups, and identity providers.
 :host: xp-admin.com
 :provider: my provider
 
 When you deploy  your XP instance to anywhere outside of your own, local computer, you're most likely going to want to restrict access to parts of it. You very likely aren't going to want to leave your admin pages open to the public, and in many cases you're also going to want to create content that requires a user to log in before accessing it. To facilitate that, XP uses something called identity providers (_ID providers_ for short).
 
-This {document} covers the basics of _Identity and Access Management_ (IAM) in XP. It covers _users_, _groups_, and _roles_, _permissions_, and finally how to set up and configure ID providers in XP.
+This chapter covers the basics of _Identity and Access Management_ (IAM) in XP. It covers _users_, _groups_, and _roles_, _permissions_, and finally how to set up and configure ID providers in XP.
 
 == Principals: Users, groups, and roles
 // This does not need to be a deep dive on these topics, but it should give the reader an overview of what these are and why they exist. Should also mention the granularity with which they can be applied.
@@ -55,7 +55,7 @@ ID providers are hooked up to sites or applications via https://developer.enonic
 
 == Task: restrict admin access
 
-Time to put what we have learned about in this {document} to use! Combined with what we covered <<deployment#vhosts, about virtual hosts in the previous {document}>>, we'll use a new ID provider to secure the admin console of our XP instance.
+Time to put what we have learned about in this chapter to use! Combined with what we covered <<deployment#vhosts, about virtual hosts in the previous chapter>>, we'll use a new ID provider to secure the admin console of our XP instance.
 
 When you're done with the task you'll have:
 

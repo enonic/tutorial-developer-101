@@ -24,7 +24,7 @@ This repository is documentation only:
 
 The tutorial is a sequential story. Navigation is defined by `docs/menu.json`, and `docs/index.adoc` groups the same chapters into themed sections. Keep both in the same order.
 
-**Keep the chapters consistent with each other.** Later chapters build on the content types, content items, and app created earlier. Names, paths, app keys, and sandbox names are shared through attributes in `docs/.variables.adoc`; change the attribute rather than editing the value in individual chapters. Do not put anything schema-related in `docs/.variables.adoc`: content type, field, form fragment and mixin names are written out literally in prose, YAML and GraphQL.
+**Keep the chapters consistent with each other.** Later chapters build on the content types, content items, and app created earlier. Names, paths, app keys, and sandbox names are shared through attributes in `docs/.variables.adoc`; change the attribute rather than editing the value in individual chapters. Use attributes only for values that depend on the reader's setup or are expected to change, such as paths, URLs and the sandbox and app names; write ordinary words out. Call each page a "chapter", as Enonic's other tutorials do, and keep "step" for numbered instructions within a page. Do not put anything schema-related in `docs/.variables.adoc`: content type, field, form fragment and mixin names are written out literally in prose, YAML and GraphQL.
 
 ### LLM readability
 
@@ -70,11 +70,11 @@ The documentation build maps source documents to routes based on their paths and
 
 Sequential steps are numbered in `docs/menu.json` using the `"<n> - <Title>"` title format, as in Enonic's other tutorials. The numbers live only in the menu titles; a page's own `=` heading stays unnumbered. When inserting, removing, or reordering a step, renumber the remaining entries so the sequence stays unbroken, and check that no prose refers to a step by its old number. Menu titles may be shorter than the chapter heading because the sidebar is narrow.
 
-Every chapter starts with its title, then `include::.variables.adoc[]`, then its own attribute overrides such as `:description:`. Write the title and description directly in the chapter; `docs/.variables.adoc` holds only values shared across chapters, not single-use text such as page titles or sample content.
+Every chapter starts with its title, then `include::.variables.adoc[]`, then its own attribute overrides such as `:description:`. The first sentence of a chapter says what the reader will do, in the form "In this chapter, you'll …", as in Enonic's other tutorials. Every chapter ends with a `== Coming up` section: a one-sentence recap, then "In the next chapter, you'll …" with a link to it. The last chapter ends with `== Where to go next` instead. Write the title and description directly in the chapter; `docs/.variables.adoc` holds only values shared across chapters, not single-use text such as page titles or sample content.
 
 ## AsciiDoc Conventions
 
-* Use `image::filename.ext["alt text", width=<n>]` for block images stored in `docs/media/`. Screenshots are captured at 2x on a Retina display, so set `width` to half the image's pixel width, for example `width=1440` for a 2880-pixel-wide file. Images not yet recaptured still use the `{image-xs}` to `{image-xl}` attributes from `docs/.variables.adoc`; switch each to a halved `width` when it is replaced. Save photo-heavy screenshots as JPEG at quality 80, and flat UI screenshots as PNG.
+* Use `image::filename.ext["alt text", width=<n>]` for block images stored in `docs/media/`. Screenshots are captured at 2x on a Retina display, so set `width` to half the image's pixel width, for example `width=1440` for a 2880-pixel-wide file. Images not yet recaptured have no width yet; add the halved `width` when each one is replaced. Save photo-heavy screenshots as JPEG at quality 80, and flat UI screenshots as PNG.
 * Use relative cross-document links such as `<<setup#, the setup chapter>>` so links remain version-aware on the developer portal.
 * Use source blocks with the correct language (`xml`, `graphql`, `json`, `shell` or `bash`, `html`) and callouts when individual lines need explanation. Add `[{subs}]` when a block uses attributes.
 * Use `kbd:[]` for keystrokes and `menu:` or the existing backtick `XP menu` -> `Applications` style for navigation paths. Follow the surrounding chapter.
