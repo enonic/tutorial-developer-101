@@ -447,7 +447,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <li><a href="#headless">Headless</a></li>
 <li><a href="#choosing_the_right_tool">Choosing the right tool</a></li>
 <li><a href="#bonus_seo_metafields">Bonus: SEO Metafields</a></li>
-<li><a href="#summary">Summary</a></li>
+<li><a href="#coming_up">Coming up</a></li>
 </ul>
 </div>
 </div>
@@ -455,7 +455,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <div id="preamble">
 <div class="sectionbody">
 <div class="paragraph">
-<p>Mixins are a smart way of dynamically extending existing content types with more fields.</p>
+<p>In this chapter, you&#8217;ll extend existing content types with more fields, using a mixin.</p>
 </div>
 <div class="paragraph">
 <p>The idea is to basically define new fields and decide what content types those fields should be applied to. If no content type is selected while registering a mixin, those fields will be enabled for all content types.</p>
@@ -552,7 +552,7 @@ mixins:
 </div>
 <div class="paragraph">
 <p>+
-image::notes-x-data.png["Notes mixin fields showing at the bottom of an animal content item",width=1050]</p>
+image::notes-x-data.png["Notes mixin fields showing at the bottom of an animal content item"]</p>
 </div>
 <div class="paragraph">
 <p>+
@@ -828,7 +828,7 @@ For more details and configuration options for mixins, visit <a href="https://de
 <p>Install the <a href="https://market.enonic.com/vendors/enonic/seo-metafields">SEO Metafields app</a> from <code>XP menu</code> &#8594; <code>Applications</code>.</p>
 <div class="imageblock">
 <div class="content">
-<img src="media/x-data-seo-app-install.png" alt="Install SEO Metafields app" width="1050">
+<img src="media/x-data-seo-app-install.png" alt="Install SEO Metafields app">
 </div>
 </div>
 </li>
@@ -845,26 +845,26 @@ For more details and configuration options for mixins, visit <a href="https://de
 </div>
 <div class="imageblock">
 <div class="content">
-<img src="media/x-data-seo-animal.png" alt="SEO fields available for the animals content type as well." width="1200">
+<img src="media/x-data-seo-animal.png" alt="SEO fields available for the animals content type as well.">
 </div>
 </div>
 </div>
 </div>
 <div class="sect1">
-<h2 id="summary"><a class="link" href="#summary">Summary</a></h2>
+<h2 id="coming_up"><a class="link" href="#coming_up">Coming up</a></h2>
 <div class="sectionbody">
 <div class="paragraph">
 <p>Your content model is complete: content types, sets, references, rich text, media and mixins, all readable through the API.</p>
 </div>
 <div class="paragraph">
-<p>Next up, let&#8217;s fetch it all <a href="frontend.ahtml">from a front-end</a>.</p>
+<p>In the next chapter, you&#8217;ll fetch it all <a href="frontend.ahtml">from a front-end</a>.</p>
 </div>
 </div>
 </div>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2026-10-19 15:00:40 UTC
+Last updated 2026-10-20 07:01:26 UTC
 </div>
 </div>
 </body>

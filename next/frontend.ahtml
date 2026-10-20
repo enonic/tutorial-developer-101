@@ -455,7 +455,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <li><a href="#paging_a_list">Paging a list</a></li>
 <li><a href="#building_urls">Building URLs</a></li>
 <li><a href="#going_live">Going live</a></li>
-<li><a href="#summary">Summary</a></li>
+<li><a href="#coming_up">Coming up</a></li>
 </ul>
 </div>
 </div>
@@ -463,7 +463,9 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <div id="preamble">
 <div class="sectionbody">
 <div class="paragraph">
-<p>So far you have run every query from Query Playground, which quietly supplied the project, the branch and your login. A front-end has none of that. In this chapter you&#8217;ll send the same queries over HTTP, from the command line, from Node and from a browser, and handle the four things every front-end on Enonic needs: the request format, published versus draft content, URLs for pages and media, and lists that page.</p>
+<p>In this chapter, you&#8217;ll send your queries over HTTP, from the command line, from Node and from a browser.
+So far, Query Playground has quietly supplied the project, the branch and your login, and a front-end has none of that.
+You&#8217;ll handle the four things every front-end on Enonic needs: the request format, published versus draft content, URLs for pages and media, and lists that page.</p>
 </div>
 <div class="admonitionblock note">
 <table>
@@ -572,7 +574,7 @@ const query = `
         displayName
         ... on com_example_dev101_Artist {
           data {
-            name
+            legalName
             birthday
           }
         }
@@ -793,20 +795,20 @@ for (const image of description.images) {
 </div>
 </div>
 <div class="sect1">
-<h2 id="summary"><a class="link" href="#summary">Summary</a></h2>
+<h2 id="coming_up"><a class="link" href="#coming_up">Coming up</a></h2>
 <div class="sectionbody">
 <div class="paragraph">
 <p>You have called the API from cURL, Node and a browser, published content so a front-end can read it, resolved a route to a content item, paged a list, and built page and media URLs from their parts. That is the whole contract between Enonic and a front-end; everything else is your framework&#8217;s business.</p>
 </div>
 <div class="paragraph">
-<p>Next up, let&#8217;s look <a href="data-toolbox.ahtml">under the hood</a> at how XP actually stores all of this.</p>
+<p>In the final chapter, you&#8217;ll look <a href="data-toolbox.ahtml">under the hood</a> at how XP actually stores all of this.</p>
 </div>
 </div>
 </div>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2026-10-19 15:00:40 UTC
+Last updated 2026-10-20 07:01:26 UTC
 </div>
 </div>
 </body>

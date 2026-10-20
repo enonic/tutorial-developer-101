@@ -463,7 +463,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 </ul>
 </li>
 <li><a href="#dive_deeper">Dive deeper</a></li>
-<li><a href="#summary">Summary</a></li>
+<li><a href="#coming_up">Coming up</a></li>
 </ul>
 </div>
 </div>
@@ -471,10 +471,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <div id="preamble">
 <div class="sectionbody">
 <div class="paragraph">
-<p>Enonic is a highly flexible CMS, capable of delivering content in many ways. In this chapter we will focus on delivery via the out-of-the-box GraphQL API.</p>
-</div>
-<div class="paragraph">
-<p>Now that we&#8217;ve created some content, let&#8217;s see how we can access and use it via an API - headless style.</p>
+<p>In this chapter, you&#8217;ll read the content you created through Guillotine, Enonic&#8217;s GraphQL API, and query it from Query Playground.</p>
 </div>
 <div class="admonitionblock note">
 <table>
@@ -687,7 +684,7 @@ Note that this matches the structure defined by the Artist content type, which i
 </div>
 </div>
 <div class="paragraph">
-<p>As can be seen, we do not have the artist <code>name</code> and <code>about</code> fields available, and the reason for that is because the <code>getChildren</code> field can return any content that implements the <code>Content</code> schema, but it can&#8217;t directly infer what schema that is, which in this case is the <code>com_example_dev101_Artist</code> schema:</p>
+<p>As can be seen, we do not have the artist <code>legalName</code> and <code>about</code> fields available, and the reason for that is because the <code>getChildren</code> field can return any content that implements the <code>Content</code> schema, but it can&#8217;t directly infer what schema that is, which in this case is the <code>com_example_dev101_Artist</code> schema:</p>
 </div>
 <div class="imageblock">
 <div class="content">
@@ -706,7 +703,7 @@ Note that this matches the structure defined by the Artist content type, which i
       ... on com_example_dev101_Artist {
         _id
         data {
-          name
+          legalName
           about
         }
       }
@@ -716,11 +713,11 @@ Note that this matches the structure defined by the Artist content type, which i
 </div>
 </div>
 <div class="paragraph">
-<p>With this, we basically built a query that understands that under the <code>"/artists"</code> path we have content of type <code>Artist</code>, and based on this we can request general content data, such as <code>_id</code>, but also specific content data, such as the artist&#8217;s name and about:</p>
+<p>With this, we basically built a query that understands that under the <code>"/artists"</code> path we have content of type <code>Artist</code>, and based on this we can request general content data, such as <code>_id</code>, but also specific content data, such as the artist&#8217;s legal name and about:</p>
 </div>
 <div class="imageblock">
 <div class="content">
-<img src="media/query-playground-artists-data.png" alt="Query playground query returning artists content together with its name and about data" width="945w">
+<img src="media/query-playground-artists-data.png" alt="Query playground query returning artists content together with its legal name and about data" width="945w">
 </div>
 <div class="title">Figure 5. Getting specific data of artists</div>
 </div>
@@ -744,7 +741,7 @@ Note that this matches the structure defined by the Artist content type, which i
 </div>
 <div class="imageblock">
 <div class="content">
-<img src="media/query-playground-artists-dataAsJson.png" alt="Query playground query returning artists content together with its name and about data - using dataAsJson field" width="945w">
+<img src="media/query-playground-artists-dataAsJson.png" alt="Query playground query returning artists content together with its legal name and about data - using dataAsJson field" width="945w">
 </div>
 <div class="title">Figure 6. Getting all data using dataAsJson</div>
 </div>
@@ -808,7 +805,7 @@ Note that this matches the structure defined by the Artist content type, which i
 </div>
 </div>
 <div class="paragraph">
-<p>Note that this query is getting the last artist when sorted alphabetically by name, regardless of where the content is located in the tree structure.</p>
+<p>Note that this query is getting the last artist when sorted alphabetically by display name, regardless of where the content is located in the tree structure.</p>
 </div>
 <div class="paragraph">
 <p>The following GraphQL query uses the <a href="https://developer.enonic.com/docs/code/stable/storage/dsl#ngram">n-gram functionality</a> to find all the artists that have a term (part of a text) that starts with <code>rap</code> somewhere in their data:</p>
@@ -938,12 +935,13 @@ To learn more about queryDSL capabilities, visit the <a href="https://developer.
 <pre class="highlight"><code class="language-yaml" data-lang="yaml">kind: "ContentType"
 title: "Artist"
 description: "Information about an artist"
+displayNamePlaceholder: "Stage name"
 superType: "base:structured"
 form:
   - type: "TextLine"
-    name: "name"
-    label: "Name"
-    helpText: "The artist's name (if different from their professional moniker)."
+    name: "legalName"
+    label: "Legal name"
+    helpText: "The artist's name on official documents, if different from their stage name."
   - type: "TextArea"
     name: "about"
     label: "About the artist"
@@ -1152,17 +1150,18 @@ If you are not running the app in dev mode (<code>enonic dev</code>, introduced 
 </div>
 </div>
 <div class="sect1">
-<h2 id="summary"><a class="link" href="#summary">Summary</a></h2>
+<h2 id="coming_up"><a class="link" href="#coming_up">Coming up</a></h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>In this chapter you&#8217;ve learned about the Guillotine app and its API. Next up let&#8217;s have a look at <a href="files.ahtml">how XP deals with files (aka media)</a>.</p>
+<p>You&#8217;ve queried your content through Guillotine, from simple lookups to search and aggregations.
+In the next chapter, you&#8217;ll see <a href="files.ahtml">how XP deals with files and images</a>.</p>
 </div>
 </div>
 </div>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2026-10-19 15:00:40 UTC
+Last updated 2026-10-20 07:01:26 UTC
 </div>
 </div>
 </body>

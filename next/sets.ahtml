@@ -460,7 +460,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <li><a href="#option_sets_2">Option sets</a></li>
 </ul>
 </li>
-<li><a href="#summary">Summary</a></li>
+<li><a href="#coming_up">Coming up</a></li>
 </ul>
 </div>
 </div>
@@ -468,7 +468,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <div id="preamble">
 <div class="sectionbody">
 <div class="paragraph">
-<p>Some form items exist to group other form items, both visually and structurally. Collectively, these are known as sets. XP can also reuse a group of inputs across several schemas, through form fragments. This chapter explains what they are and how to use them.</p>
+<p>In this chapter, you&#8217;ll group form items with field sets, item sets and option sets, and reuse a group of them across schemas with a form fragment.</p>
 </div>
 <div class="admonitionblock note">
 <table>
@@ -521,7 +521,7 @@ The tasks and examples in this chapter are based on work done in previous chapte
 </div>
 <div class="imageblock text-center">
 <div class="content">
-<img src="media/field-set.png" alt="A field set containing TextLine and TextArea inputs. The field set groups them visually and adds a shared heading." width="750">
+<img src="media/field-set.png" alt="A field set containing TextLine and TextArea inputs. The field set groups them visually and adds a shared heading.">
 </div>
 <div class="title">Figure 1. A field set grouping</div>
 </div>
@@ -542,7 +542,7 @@ The tasks and examples in this chapter are based on work done in previous chapte
 </div>
 <div class="imageblock text-center">
 <div class="content">
-<img src="media/item-set-sample.png" alt="A pair of visually grouped inputs on a card element. The card has a header that says 'contact info'. There is also a button to add more contact info forms." width="750">
+<img src="media/item-set-sample.png" alt="A pair of visually grouped inputs on a card element. The card has a header that says 'contact info'. There is also a button to add more contact info forms.">
 </div>
 <div class="title">Figure 2. An item set containing contact info</div>
 </div>
@@ -566,7 +566,7 @@ The tasks and examples in this chapter are based on work done in previous chapte
 </div>
 <div class="imageblock text-center">
 <div class="content">
-<img src="media/option-set-sample.png" alt="An input form labeled 'multi-selection'. The user has selected one out of four options. Some options contain extra data such as an image selector or other input fields." width="750">
+<img src="media/option-set-sample.png" alt="An input form labeled 'multi-selection'. The user has selected one out of four options. Some options contain extra data such as an image selector or other input fields.">
 </div>
 <div class="title">Figure 3. A multi-select option set</div>
 </div>
@@ -640,6 +640,7 @@ The tasks and examples in this chapter are based on work done in previous chapte
 <pre class="highlight"><code class="language-yaml" data-lang="yaml">kind: "ContentType"
 title: "Artist"
 description: "Information about an artist"
+displayNamePlaceholder: "Stage name"
 superType: "base:structured"
 form:
 
@@ -685,7 +686,7 @@ form:
 </div>
 <div class="imageblock">
 <div class="content">
-<img src="media/artist-filmography-item-set.png" alt="An example of using the Filmography item set." width="1050">
+<img src="media/artist-filmography-item-set.png" alt="An example of using the Filmography item set.">
 </div>
 <div class="title">Figure 4. Item set for filmography</div>
 </div>
@@ -865,7 +866,7 @@ The use of the form fragment helps us both reduce duplication and keep all optio
 </div>
 <div class="imageblock">
 <div class="content">
-<img src="media/option-sets.png" alt="Diet and distribution data filled out for lion. The feeding behavior selected is 'Carnivore' and the list of prey includes zebras and giraffes. For the distribution data, Africa and Asia is selected, with a short text about how Lions live in these areas today." width="1200">
+<img src="media/option-sets.png" alt="Diet and distribution data filled out for lion. The feeding behavior selected is 'Carnivore' and the list of prey includes zebras and giraffes. For the distribution data, Africa and Asia is selected, with a short text about how Lions live in these areas today.">
 </div>
 <div class="title">Figure 5. Distribution and feeding behavior for Lion</div>
 </div>
@@ -1088,20 +1089,20 @@ The use of the form fragment helps us both reduce duplication and keep all optio
 </div>
 </div>
 <div class="sect1">
-<h2 id="summary"><a class="link" href="#summary">Summary</a></h2>
+<h2 id="coming_up"><a class="link" href="#coming_up">Coming up</a></h2>
 <div class="sectionbody">
 <div class="paragraph">
 <p>You have grouped inputs visually with a field set, structurally with an item set, let editors choose between options with option sets, and reused a form with a fragment.</p>
 </div>
 <div class="paragraph">
-<p>Next up, <a href="rich-text.ahtml">rich text</a> gives your editors a proper text editor, with links, images and macros.</p>
+<p>In the next chapter, you&#8217;ll give your editors a proper text editor with <a href="rich-text.ahtml">rich text</a>, including links, images and macros.</p>
 </div>
 </div>
 </div>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2026-10-19 15:00:40 UTC
+Last updated 2026-10-20 07:01:26 UTC
 </div>
 </div>
 </body>

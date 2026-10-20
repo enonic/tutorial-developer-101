@@ -445,8 +445,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <ul class="sectlevel1">
 <li><a href="#web_interface">Web interface</a></li>
 <li><a href="#examine_your_content">Examine your content</a></li>
-<li><a href="#summary">Summary</a></li>
-<li><a href="#whats_next">What&#8217;s next?</a></li>
+<li><a href="#where_to_go_next">Where to go next</a></li>
 </ul>
 </div>
 </div>
@@ -454,10 +453,8 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <div id="preamble">
 <div class="sectionbody">
 <div class="paragraph">
-<p>You have now built a complete little content model and fetched it from a front-end: content types with sets, option sets, references and rich text, media with focal points, and a mixin on top. Before we deploy it, let&#8217;s look at how all of that is actually saved.</p>
-</div>
-<div class="paragraph">
-<p>In this chapter, we&#8217;ll give a short introduction to a popular application called Data Toolbox, the developer&#8217;s best friend for playing around with the low level NoSQL storage in Enonic XP.</p>
+<p>In this chapter, you&#8217;ll use Data Toolbox, the developer&#8217;s best friend for exploring the low-level NoSQL storage in Enonic XP, to see how everything you have built is actually saved.
+That includes content types with sets, option sets, references and rich text, media with focal points, and a mixin on top.</p>
 </div>
 <div class="admonitionblock note">
 <table>
@@ -525,7 +522,7 @@ The tasks and examples in this chapter are based on work done in previous chapte
 </div>
 </li>
 <li>
-<p>Move into <code>com.enonic.cms.my-first-project</code>. Here you will see the two branches you met in the <a href="content-studio.ahtml#_branches">Content Studio chapter</a>: <code>draft</code> and <code>master</code>. Everything you have published exists in both.</p>
+<p>Move into <code>com.enonic.cms.my-first-project</code>. Here you will see the two branches you met in the <a href="content-studio.ahtml#branches">Content Studio chapter</a>: <code>draft</code> and <code>master</code>. Everything you have published exists in both.</p>
 </li>
 <li>
 <p>Keep navigating further down the tree: <code>root</code> &#8594; <code>content</code>. Now you should see all the content of your project listed, as a tree of <em>nodes</em> that mirrors the hierarchy in Content Studio. Navigate to <code>animals</code> to find your animals.</p>
@@ -568,18 +565,13 @@ The tasks and examples in this chapter are based on work done in previous chapte
 <div class="paragraph">
 <p>What you see here is the same data the GraphQL API returns. Guillotine reads these nodes, applies the content type to give them a typed schema, and resolves references and media URLs on the way out. When a query returns something you did not expect, this is the place to check what is actually stored.</p>
 </div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="summary"><a class="link" href="#summary">Summary</a></h2>
-<div class="sectionbody">
 <div class="paragraph">
 <p>Inspecting content is only a fraction of what Data Toolbox can do: it&#8217;s a versatile and powerful administrative tool. Among other things, it can export your content and import it on another instance, which is handy the day you move from your sandbox to a live server.</p>
 </div>
 </div>
 </div>
 <div class="sect1">
-<h2 id="whats_next"><a class="link" href="#whats_next">What&#8217;s next?</a></h2>
+<h2 id="where_to_go_next"><a class="link" href="#where_to_go_next">Where to go next</a></h2>
 <div class="sectionbody">
 <div class="paragraph">
 <p>Congrats! You&#8217;ve reached the end of this tutorial. You can model content, read it through the API and fetch it from a front-end. If you&#8217;d like to go further, try one of the following guides, which introduce additional aspects of the Enonic experience:</p>
@@ -605,7 +597,7 @@ The tasks and examples in this chapter are based on work done in previous chapte
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2026-10-19 15:00:40 UTC
+Last updated 2026-10-20 07:01:26 UTC
 </div>
 </div>
 </body>

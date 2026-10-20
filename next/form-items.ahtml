@@ -473,7 +473,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <li><a href="#graphql_query">GraphQL query</a></li>
 </ul>
 </li>
-<li><a href="#summary">Summary</a></li>
+<li><a href="#coming_up">Coming up</a></li>
 </ul>
 </div>
 </div>
@@ -481,13 +481,11 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <div id="preamble">
 <div class="sectionbody">
 <div class="paragraph">
-<p>The content types we&#8217;ve created previously in this guide have only used a few basic form items: TextLine, TextArea and Date.</p>
+<p>In this chapter, you&#8217;ll configure form items, add new kinds of them to your content types, and link content items to each other.</p>
 </div>
 <div class="paragraph">
-<p>However, Content Studio has a lot more up its sleeve than that! <em>Form items</em> are the building blocks of forms. They dictate what kind of data the user can or must add to any piece of content, and how it is edited.</p>
-</div>
-<div class="paragraph">
-<p>This chapter introduces more kinds of form items and explains how you can configure them to your liking.</p>
+<p><em>Form items</em> are the building blocks of forms. They dictate what kind of data the user can or must add to any piece of content, and how it is edited.
+So far, your content type has only used TextLine, TextArea and Date.</p>
 </div>
 <div class="admonitionblock note">
 <table>
@@ -654,7 +652,7 @@ All of the shared settings (<code>label</code>, <code>occurrences</code>, etc.),
 </div>
 <div class="imageblock text-center">
 <div class="content">
-<img src="media/input-type-common-configuration.png" alt="Three TextLine inputs showing all the common configuration options: labels, help text, default text, and occurrences." width="750">
+<img src="media/input-type-common-configuration.png" alt="Three TextLine inputs showing all the common configuration options: labels, help text, default text, and occurrences.">
 </div>
 <div class="title">Figure 1. TextLine inputs showing common configuration options</div>
 </div>
@@ -754,7 +752,7 @@ If <code>max</code> is greater than <code>0</code>, make sure that <code>min</co
 <p>A dropdown menu containing predefined options for the user to select from. Allows selection of one or more options.</p>
 <div class="imageblock text-center">
 <div class="content">
-<img src="media/input-type-combo-box.webp" alt="A standard select list / dropdown list / combo box with a few visible dummy options." width="750">
+<img src="media/input-type-combo-box.webp" alt="A standard select list / dropdown list / combo box with a few visible dummy options.">
 </div>
 <div class="title">Figure 2. The ComboBox form item</div>
 </div>
@@ -764,7 +762,7 @@ If <code>max</code> is greater than <code>0</code>, make sure that <code>min</co
 <p>Provide an interactive date picker (with a time component for DateTime and Instant) to save dates and times. The reference explains which of the two to pick for a date with a time.</p>
 <div class="imageblock text-center">
 <div class="content">
-<img src="media/input-type-date-time.webp" alt="A calendar showing year and month with a time indicator to the side." width="750">
+<img src="media/input-type-date-time.webp" alt="A calendar showing year and month with a time indicator to the side.">
 </div>
 <div class="title">Figure 3. The DateTime form item</div>
 </div>
@@ -774,7 +772,7 @@ If <code>max</code> is greater than <code>0</code>, make sure that <code>min</co
 <p>Stores GPS coordinates.</p>
 <div class="imageblock text-center">
 <div class="content">
-<img src="media/input-type-geo-point.webp" alt="A text line input with coordinates." width="750">
+<img src="media/input-type-geo-point.webp" alt="A text line input with coordinates.">
 </div>
 <div class="title">Figure 4. The GeoPoint form item</div>
 </div>
@@ -784,7 +782,7 @@ If <code>max</code> is greater than <code>0</code>, make sure that <code>min</co
 <p>Provides a rich text, multi-line input. We&#8217;ll discuss this in detail in <a href="rich-text.ahtml">the rich-text chapter</a>.</p>
 <div class="imageblock text-center">
 <div class="content">
-<img src="media/input-type-html-area.png" alt="A text area with a tools ribbon on the top. The ribbon provides rich text tools such as justification, macro insertion, text styles, etc." width="750">
+<img src="media/input-type-html-area.png" alt="A text area with a tools ribbon on the top. The ribbon provides rich text tools such as justification, macro insertion, text styles, etc.">
 </div>
 <div class="title">Figure 5. The HtmlArea form item</div>
 </div>
@@ -801,7 +799,7 @@ If <code>max</code> is greater than <code>0</code>, make sure that <code>min</co
 <div class="sectionbody">
 <div class="imageblock">
 <div class="content">
-<img src="media/input-type-image-selector.png" alt="ImageSelector: An interactive image selection tool." width="1200">
+<img src="media/input-type-image-selector.png" alt="ImageSelector: An interactive image selection tool.">
 </div>
 <div class="title">Figure 6. The ImageSelector form item</div>
 </div>
@@ -827,7 +825,7 @@ If <code>max</code> is greater than <code>0</code>, make sure that <code>min</co
 </div>
 <div class="imageblock">
 <div class="content">
-<img src="media/input-type-image-selector-highlighted-image.png" alt="The image selector input field with two images of lions&#8201;&#8212;&#8201;one male, one female - - below. Under the images, there&#8217;s a set of buttons saying 'edit' and 'remove'." width="1200">
+<img src="media/input-type-image-selector-highlighted-image.png" alt="The image selector input field with two images of lions&#8201;&#8212;&#8201;one male, one female - - below. Under the images, there&#8217;s a set of buttons saying 'edit' and 'remove'.">
 </div>
 <div class="title">Figure 7. The image selector with uploaded and selected images</div>
 </div>
@@ -838,7 +836,7 @@ If <code>max</code> is greater than <code>0</code>, make sure that <code>min</co
 <div class="sectionbody">
 <div class="imageblock">
 <div class="content">
-<img src="media/input-type-content-selector.png" alt="ContentSelector: An interactive content selection tool." width="1200">
+<img src="media/input-type-content-selector.png" alt="ContentSelector: An interactive content selection tool.">
 </div>
 <div class="title">Figure 8. The ContentSelector form item</div>
 </div>
@@ -1044,7 +1042,7 @@ If you&#8217;re wondering how to achieve some of the goals, try consulting the d
 </div>
 <div class="imageblock">
 <div class="content">
-<img src="media/animal-and-artist-target.png" alt="An animal content wizard next to an artist wizard" width="1200">
+<img src="media/animal-and-artist-target.png" alt="An animal content wizard next to an artist wizard">
 </div>
 <div class="title">Figure 10. The target for this task: animal and artist</div>
 </div>
@@ -1142,7 +1140,7 @@ form:
 </div>
 </div>
 <div class="paragraph">
-<p><code>displayNamePlaceholder</code> lets you customize what Content Studio calls the built-in "display name" field.</p>
+<p>As with Artist, <code>displayNamePlaceholder</code> tells editors what the display name holds, here the species.</p>
 </div>
 </li>
 <li>
@@ -1155,12 +1153,13 @@ form:
 <pre>kind: "ContentType"
 title: "Artist"
 description: "Information about an artist"
+displayNamePlaceholder: "Stage name"
 superType: "base:structured"
 form:
   - type: "TextLine"
-    name: "name"
-    label: "Name"
-    helpText: "The artist's name (if different from their professional moniker)."
+    name: "legalName"
+    label: "Legal name"
+    helpText: "The artist's name on official documents, if different from their stage name."
   - type: "TextArea"
     name: "about"
     label: "About the artist"
@@ -1282,20 +1281,20 @@ The new <code>favoriteAnimal</code> ContentSelector uses <code>allowContentType<
 </div>
 </div>
 <div class="sect1">
-<h2 id="summary"><a class="link" href="#summary">Summary</a></h2>
+<h2 id="coming_up"><a class="link" href="#coming_up">Coming up</a></h2>
 <div class="sectionbody">
 <div class="paragraph">
 <p>You have configured form items with occurrences, defaults and help text, linked content with selectors, and followed a reference through the API.</p>
 </div>
 <div class="paragraph">
-<p>Next up, <a href="sets.ahtml">sets and form fragments</a> let you group and reuse form items.</p>
+<p>In the next chapter, you&#8217;ll group and reuse form items with <a href="sets.ahtml">sets and form fragments</a>.</p>
 </div>
 </div>
 </div>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2026-10-19 15:00:40 UTC
+Last updated 2026-10-20 07:01:26 UTC
 </div>
 </div>
 </body>

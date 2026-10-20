@@ -467,7 +467,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <li><a href="#image_media_type">Image media type</a></li>
 </ul>
 </li>
-<li><a href="#summary">Summary</a></li>
+<li><a href="#coming_up">Coming up</a></li>
 </ul>
 </div>
 </div>
@@ -475,10 +475,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <div id="preamble">
 <div class="sectionbody">
 <div class="paragraph">
-<p>Naturally, XP can store any file you would want to serve or associate with your content. This chapter explores how XP handles file uploads, and dives into the image handling specifically.</p>
-</div>
-<div class="paragraph">
-<p>At the end of the chapter we&#8217;ll walk through how to use images in a headless fashion.</p>
+<p>In this chapter, you&#8217;ll upload images and other files, see how XP stores them as content, and fetch them, scaled and cropped, through the GraphQL API.</p>
 </div>
 <div class="admonitionblock note">
 <table>
@@ -968,20 +965,18 @@ Asking for scaled and filtered images is allowed when you query Guillotine&#8217
 </div>
 </div>
 <div class="sect1">
-<h2 id="summary"><a class="link" href="#summary">Summary</a></h2>
+<h2 id="coming_up"><a class="link" href="#coming_up">Coming up</a></h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>You should now have a deep understanding of how media is stored and accessed - as well as XP&#8217;s image handling and image API, including how to access it all from the GraphQL API.</p>
-</div>
-<div class="paragraph">
-<p>Pushing forward, it&#8217;s time to <a href="form-items.ahtml">have a closer look at the building blocks of content forms; form items</a>.</p>
+<p>You&#8217;ve uploaded media, seen how it is stored, and fetched processed images through the GraphQL API.
+In the next chapter, you&#8217;ll take a closer look at <a href="form-items.ahtml">form items</a>, the building blocks of content forms.</p>
 </div>
 </div>
 </div>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2026-10-19 15:00:40 UTC
+Last updated 2026-10-20 07:01:26 UTC
 </div>
 </div>
 </body>

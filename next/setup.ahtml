@@ -452,7 +452,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <li><a href="#troubleshooting">Troubleshooting</a></li>
 </ul>
 </li>
-<li><a href="#summary">Summary</a></li>
+<li><a href="#coming_up">Coming up</a></li>
 </ul>
 </div>
 </div>
@@ -460,10 +460,8 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <div id="preamble">
 <div class="sectionbody">
 <div class="paragraph">
-<p>Before we can model any content, we need somewhere to put it. This chapter gets you there in three steps: install the Enonic CLI, start a local instance of XP, and create the app that will hold your content types.</p>
-</div>
-<div class="paragraph">
-<p>The whole thing takes a few minutes. Everything you install here is used again in every following chapter.</p>
+<p>In this chapter, you&#8217;ll install the Enonic CLI, start a local XP sandbox, and create the app that will hold your content types.
+It takes a few minutes, and everything you install here is used in every later chapter.</p>
 </div>
 </div>
 </div>
@@ -736,20 +734,18 @@ vendorUrl: "https://example.com"</code></pre>
 </div>
 </div>
 <div class="sect1">
-<h2 id="summary"><a class="link" href="#summary">Summary</a></h2>
+<h2 id="coming_up"><a class="link" href="#coming_up">Coming up</a></h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>You now have the CLI, a running sandbox with Content Studio and Guillotine installed, and your own app deployed to it. That is all the infrastructure this tutorial needs.</p>
-</div>
-<div class="paragraph">
-<p>Next up, you&#8217;ll <a href="content-studio.ahtml">get familiar with Content Studio and create your first content type</a>.</p>
+<p>You now have the CLI, a running sandbox with Content Studio and Guillotine, and your own app deployed to it.
+In the next chapter, you&#8217;ll <a href="content-studio.ahtml">get familiar with Content Studio and create your first content type</a>.</p>
 </div>
 </div>
 </div>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2026-10-19 15:00:40 UTC
+Last updated 2026-10-20 07:01:26 UTC
 </div>
 </div>
 </body>
