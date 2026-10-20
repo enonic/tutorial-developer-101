@@ -450,13 +450,18 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 </li>
 <li><a href="#what_are_content_types">What are content types?</a>
 <ul class="sectlevel2">
+<li><a href="#task_create_a_folder">Task: create a folder</a></li>
 <li><a href="#task_your_first_content_type">Task: your first content type</a></li>
+<li><a href="#display_name_field">Display name field</a></li>
 <li><a href="#names_and_namespaces">Names and namespaces</a></li>
-<li><a href="#deploying_the_content_type">Deploying the content type</a></li>
-<li><a href="#task_your_first_content_creation">Task: your first content creation</a></li>
+<li><a href="#task_create_artists">Task: create artists</a></li>
 </ul>
 </li>
-<li><a href="#branches">Publishing your content</a></li>
+<li><a href="#branches">Publishing</a>
+<ul class="sectlevel2">
+<li><a href="#task_publish_all_items">Task: Publish all items</a></li>
+</ul>
+</li>
 <li><a href="#coming_up">Coming up</a></li>
 </ul>
 </div>
@@ -466,18 +471,6 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <div class="sectionbody">
 <div class="paragraph">
 <p>In this chapter, you&#8217;ll create a content project in Content Studio, define your first content type, and create and publish some content.</p>
-</div>
-<div class="admonitionblock note">
-<table>
-<tr>
-<td class="icon">
-<i class="fa icon-note" title="Note"></i>
-</td>
-<td class="content">
-The tasks and examples in this chapter are based on work done in previous chapters (starting with <a href="setup.ahtml">the setup chapter</a>). If you want to follow along with the examples, make sure you&#8217;re all caught up.
-</td>
-</tr>
-</table>
 </div>
 </div>
 </div>
@@ -497,7 +490,7 @@ The tasks and examples in this chapter are based on work done in previous chapte
 </div>
 <div class="imageblock">
 <div class="content">
-<img src="media/cs-project-create.png" alt="Content Studio dialog offering to start the project wizard" width="660px">
+<img src="media/cs-project-create.png" alt="Content Studio dialog offering to start the project wizard" width="660">
 </div>
 <div class="title">Figure 1. No projects found dialog</div>
 </div>
@@ -529,7 +522,7 @@ The project identifier is important, and cannot be changed later. Later chapters
 </div>
 </li>
 <li>
-<p>Choose the <code>Public</code> access mode. This lets anyone read published content, which is what we want for a public website for instance</p>
+<p>Choose the <code>Public</code> access mode. This lets anyone read published content, which is what you want for a public website, for instance.</p>
 </li>
 <li>
 <p>No need to change the roles. You are the super user, so you already have access.</p>
@@ -541,7 +534,7 @@ The project identifier is important, and cannot be changed later. Later chapters
 </div>
 <div class="imageblock">
 <div class="content">
-<img src="media/cs-project-summary.png" alt="Content Studio project creation summary" width="964w">
+<img src="media/cs-project-summary.png" alt="Content Studio project creation summary" width="910">
 </div>
 <div class="title">Figure 2. Project summary showing the values you have set in the wizard</div>
 </div>
@@ -564,42 +557,81 @@ Only apps that contain a CMS descriptor, <code>cms/cms.yaml</code>, can be assig
 <h2 id="what_are_content_types"><a class="link" href="#what_are_content_types">What are content types?</a></h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>Every content item has a content type, which defines the data fields the item can and must have.
-Content Studio validates the item against its content type as editors fill in the form.</p>
+<p>Every content item has a content type, which defines the data fields the item can and must have. Content Studio validates the item against its content type as editors fill in the form.</p>
 </div>
 <div class="paragraph">
-<p>Content types are defined in apps, while content projects hold the content.
-Assigning an app to a project is what connects the two: editors can then create the app&#8217;s content types in that project. This also means you may re-use the same apps and schemas across multiple projects.</p>
+<p>Content types are defined in apps, while content projects hold the content. Assigning an app to a project is what connects the two: editors can then create the app&#8217;s content types in that project. This also means you may re-use the same apps and schemas across multiple projects.</p>
+</div>
+<div class="paragraph">
+<p>XP also ships with built-in content types, such as Folder, that are available in every project.</p>
 </div>
 <div class="sect2">
-<h3 id="task_your_first_content_type"><a class="link" href="#task_your_first_content_type">Task: your first content type</a></h3>
+<h3 id="task_create_a_folder"><a class="link" href="#task_create_a_folder">Task: create a folder</a></h3>
 <div class="paragraph">
-<p>You&#8217;ll create a content type with two fields. In Content Studio, its form will look like this:</p>
+<p>Your app does not define any content types yet, so start with a built-in one: create a folder called "Artists" to hold the artists you&#8217;ll add later in this chapter.</p>
 </div>
-<div class="imageblock">
-<div class="content">
-<img src="media/content-type-target.png" alt="A content creation form with legal name and biography fields">
-</div>
-<div class="title">Figure 3. The target for your first content type</div>
-</div>
-<div class="paragraph">
-<p>In your editor, open the app folder, <code>dev101/</code>, that you created in the previous chapter.
-All paths are relative to it.</p>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+Content can be organized as a tree, much like files and folders on your computer. Grouping content in logical folders provides several benefits, as you will see later in this tutorial.
+</td>
+</tr>
+</table>
 </div>
 <div class="olist arabic">
 <ol class="arabic">
 <li>
-<p>Content types live in <code>src/main/resources/cms/content-types/</code>, which the starter created.
-XP expects each content type in a directory of its own, so create a directory called <code>artist</code> there.</p>
+<p>In Content Studio, make sure your project is selected, and press <b class="button">New &#8230;&#8203;</b>.
+The dialog lists only the built-in content types.</p>
+<div class="imageblock">
+<div class="content">
+<img src="media/cs-folder-create.png" alt="The Create content dialog, listing the built-in content types: Folder, Shortcut and Site" width="830">
+</div>
+<div class="title">Figure 3. The content creation dialog showing the built-in content types</div>
+</div>
 </li>
 <li>
-<p>In the <code>artist</code> directory, create a file called <code>artist.yaml</code>.
-The file name must match the directory name, so the full path is <code>src/main/resources/cms/content-types/artist/artist.yaml</code>.</p>
+<p>Select <b class="button">Folder</b>.</p>
 </li>
 <li>
-<p>Add the following content:</p>
+<p>Give the folder the display name "Artists".</p>
+<div class="imageblock">
+<div class="content">
+<img src="media/cs-folder-form.png" alt="The Folder form, with the display name Artists" width="546">
+</div>
+<div class="title">Figure 4. The folder form with its display name filled in</div>
+</div>
+</li>
+<li>
+<p>Save and close the tab.</p>
+</li>
+</ol>
+</div>
+</div>
+<div class="sect2">
+<h3 id="task_your_first_content_type"><a class="link" href="#task_your_first_content_type">Task: your first content type</a></h3>
+<div class="paragraph">
+<p>You&#8217;ll create a custom content type Artist for artists, with two fields. Later, when editors create an Artist content item, Content Studio will show this form:</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="media/cs-artist-form.png" alt="The Artist form, with a display name field showing the Stage name placeholder, and the Legal name and About the artist fields" width="546">
+</div>
+<div class="title">Figure 5. The Artist form in Content Studio</div>
+</div>
+<div class="paragraph">
+<p>Content types live in <code>src/main/resources/cms/content-types/</code>, which the starter created. XP expects each content type in a directory of its own, with a dedicated yaml descriptor file:</p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Add the following file to your app and save it:</p>
 <div class="listingblock">
-<div class="title">The 'Artist' content type</div>
+<div class="title">src/main/resources/cms/content-types/artist/artist.yaml</div>
 <div class="content">
 <pre class="highlight"><code class="language-yaml" data-lang="yaml">kind: "ContentType"
 title: "Artist"
@@ -635,20 +667,14 @@ form:
 </li>
 <li>
 <p><code>type</code> and <code>label</code>: The kind of input editors see, and its label.</p>
-<div class="admonitionblock tip">
-<table>
-<tr>
-<td class="icon">
-<i class="fa icon-tip" title="Tip"></i>
-</td>
-<td class="content">
-<div class="title">When to use it</div>
-<div class="paragraph">
-<p>Every content type has a built-in display name, so don&#8217;t add a <code>title</code> or <code>name</code> field that stores the same thing: editors get two fields to fill in, and your front-end gets two places to look. Here the display name is the artist&#8217;s stage name and <code>legalName</code> is the name on their official documents, which is why both earn their place. Add a field only when it carries different information from the item&#8217;s name.</p>
+</li>
+</ul>
 </div>
-</td>
-</tr>
-</table>
+</li>
+<li>
+<p><code>enonic dev</code> should still be running from the previous chapter. It redeploys your app automatically. If you stopped it, run <code>enonic dev</code> in the app folder again.</p>
+</li>
+</ol>
 </div>
 <div class="admonitionblock note">
 <table>
@@ -657,17 +683,28 @@ form:
 <i class="fa icon-note" title="Note"></i>
 </td>
 <td class="content">
-Content types have more optional settings, described in <a href="https://developer.enonic.com/docs/cms/stable/content/content-types">the reference documentation</a>.
-The fields are form items, not HTML <code>input</code> elements; <a href="form-items.ahtml">the form items chapter</a> covers them.
+XP validates the schema when it deploys, and reports mistakes such as <code>helptext</code> instead of <code>helpText</code> in the sandbox log.
 </td>
 </tr>
 </table>
 </div>
-</li>
-</ul>
 </div>
-</li>
-</ol>
+<div class="sect2">
+<h3 id="display_name_field"><a class="link" href="#display_name_field">Display name field</a></h3>
+<div class="paragraph">
+<p>Every content type has a built-in display name, so don&#8217;t add a <code>title</code> or <code>name</code> field that stores the same thing. Here the display name is the artist&#8217;s stage name and <code>legalName</code> is the name on their official documents, which is why both earn their place. Add a field only when it carries different information from the item&#8217;s display name. Also notice how the <code>displayNamePlaceholder</code> sets a different placeholder text for the display name field.</p>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+Content types have more optional settings, described in <a href="https://developer.enonic.com/docs/cms/stable/content/content-types">the reference documentation</a>.
+</td>
+</tr>
+</table>
 </div>
 </div>
 <div class="sect2">
@@ -676,7 +713,9 @@ The fields are form items, not HTML <code>input</code> elements; <a href="form-i
 <p>XP identifies the content type you just created as <code>com.example.dev101:artist</code> - the app name, a colon, and the file name. The app name acts as a <em>namespace</em>: everything an app ships, from content types to mixins and APIs, is prefixed with it. This isolates the schemas and functionality of one app from every other app on the same instance, so two apps never conflict, even if both define a content type called <code>artist</code>.</p>
 </div>
 <div class="paragraph">
-<p>The types XP ships with use reserved namespaces, such as <code>base:folder</code> and <code>media:image</code>. You will meet these qualified names again when querying the API.</p>
+<p>XP&#8217;s built-in content types have namespaces of their own, such as <code>base:folder</code> for the folder you created and <code>media:image</code> for images, which are reserved for XP.
+Your Artist content type already refers to one: <code>superType: "base:structured"</code>.
+In the next chapter, you&#8217;ll use these full names, namespace included, to filter content by type.</p>
 </div>
 <div class="admonitionblock note">
 <table>
@@ -692,157 +731,107 @@ Read more about <a href="https://developer.enonic.com/docs/cms/stable/schemas/na
 </div>
 </div>
 <div class="sect2">
-<h3 id="deploying_the_content_type"><a class="link" href="#deploying_the_content_type">Deploying the content type</a></h3>
+<h3 id="task_create_artists"><a class="link" href="#task_create_artists">Task: create artists</a></h3>
 <div class="paragraph">
-<p>If <code>enonic dev</code> is still running from the previous chapter, it redeploys your app as soon as you save the file.
-If not, start it again from the app folder:</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="highlight"><code class="language-shell" data-lang="shell">enonic dev</code></pre>
-</div>
-</div>
-<div class="admonitionblock tip">
-<table>
-<tr>
-<td class="icon">
-<i class="fa icon-tip" title="Tip"></i>
-</td>
-<td class="content">
-XP validates every schema when the app is deployed. A typo in a key, such as <code>helptext</code> instead of <code>helpText</code>, is rejected and reported in the sandbox log, so keep an eye on it whenever you change a schema.
-</td>
-</tr>
-</table>
-</div>
-</div>
-<div class="sect2">
-<h3 id="task_your_first_content_creation"><a class="link" href="#task_your_first_content_creation">Task: your first content creation</a></h3>
-<div class="paragraph">
-<p>Back in Content Studio, make sure your project is selected, and press <b class="button">New &#8230;&#8203;</b>.
-The <code>Artist</code> content type is listed, because your app now delivers it.</p>
-</div>
-<div class="imageblock">
-<div class="content">
-<img src="media/content-studio-new-content.png" alt="The &quot;Create Content&quot; dialog when creating content under the created project. It contains elements, including the &quot;Artist&quot; content type that we created earlier." width="819w">
-</div>
-<div class="title">Figure 4. The content creation dialog with the artist content type</div>
-</div>
-<div class="paragraph">
-<p>Before creating artists, create a folder called "artists" to hold them.
-Later chapters add more content types, and folders keep each type together.</p>
-</div>
-<div class="admonitionblock tip">
-<table>
-<tr>
-<td class="icon">
-<i class="fa icon-tip" title="Tip"></i>
-</td>
-<td class="content">
-<div class="title">When to use it</div>
-<div class="paragraph">
-<p>The content path, such as <code>/artists/cardi-b</code>, is what a front-end will use to find an item and often to build its URL. Group content by type in folders from the start, and name the folders as you want them to appear in those paths. Moving content later does not break references, but it does change paths.</p>
-</div>
-</td>
-</tr>
-</table>
-</div>
-<div class="paragraph">
-<p>Now create three artists, starting with Cardi B:</p>
+<p>Now, using the brand new Artist content type, create three artists, starting with Cardi B:</p>
 </div>
 <div class="olist arabic">
 <ol class="arabic">
 <li>
-<p>Select the "artists" folder, so the new content is created inside it.</p>
+<p>In Content Studio, select the "Artists" folder, so the new content is created inside it.</p>
 </li>
 <li>
-<p>Create a new artist, and give it the display name "Cardi B".</p>
-</li>
-<li>
-<p>Fill in the form with these details:</p>
-<div class="dlist">
-<div class="title">Artist details (<a href="https://en.wikipedia.org/wiki/Cardi_B">Cardi B on Wikipedia</a>)</div>
-<dl>
-<dt class="hdlist1">Legal name</dt>
-<dd>
-<p>Belcalis Marlenis Almánzar</p>
-</dd>
-<dt class="hdlist1">About</dt>
-<dd>
-<p>Belcalis Marlenis Almánzar (born October 11, 1992), known professionally as Cardi B, is an American rapper and songwriter.</p>
-</dd>
-</dl>
-</div>
+<p>Press <b class="button">New &#8230;&#8203;</b>.
+Since your app is assigned to the project, the dialog now lists Artist next to the built-in content types.</p>
 <div class="imageblock">
 <div class="content">
-<img src="media/content-type-filled-out.png" alt="The form for &quot;artist&quot; fully filled out." width="748w">
+<img src="media/cs-artist-create.png" alt="The Create content dialog, listing the available content types: Artist, Folder, Shortcut and Site" width="830">
 </div>
-<div class="title">Figure 5. The content form filled out for the artist "Cardi B"</div>
+<div class="title">Figure 6. The content creation dialog showing the Artist content type</div>
+</div>
+</li>
+<li>
+<p>Select <b class="button">Artist</b>, and start filling in the form. Use details of <a href="https://en.wikipedia.org/wiki/Cardi_B">Cardi B on Wikipedia</a>.</p>
+<div class="imageblock">
+<div class="content">
+<img src="media/cs-cardib-form.png" alt="The Artist form filled out for Cardi B, with the legal name and the text about the artist" width="546">
+</div>
+<div class="title">Figure 7. The content form filled out for the artist "Cardi B"</div>
 </div>
 </li>
 <li>
 <p>Save and close the tab, then create the next two artists the same way.
-Select the "artists" folder each time: Content Studio nests new content under whatever item is selected.</p>
-<div class="dlist">
-<div class="title">Missy Elliott (<a href="https://en.wikipedia.org/wiki/Missy_Elliott">Missy Elliott on Wikipedia</a>)</div>
-<dl>
-<dt class="hdlist1">Legal name</dt>
-<dd>
-<p>Melissa Arnette Elliott</p>
-</dd>
-<dt class="hdlist1">About</dt>
-<dd>
-<p>Melissa Arnette Elliott (born July 1, 1971) is an American rapper, singer, songwriter, and record producer.</p>
-</dd>
-</dl>
-</div>
-<div class="dlist">
-<div class="title">P!nk (<a href="https://en.wikipedia.org/wiki/Pink_(singer)">P!nk on Wikipedia</a>)</div>
-<dl>
-<dt class="hdlist1">Legal name</dt>
-<dd>
-<p>Alecia Beth Moore</p>
-</dd>
-<dt class="hdlist1">About</dt>
-<dd>
-<p>Alecia Beth Moore (born September 8, 1979), known professionally as Pink (stylized as P!nk), is an American singer and songwriter.</p>
-</dd>
-</dl>
+Select the "Artists" folder each time: Content Studio nests new content under whatever item is selected.</p>
+<div class="ulist">
+<ul>
+<li>
+<p><a href="https://en.wikipedia.org/wiki/Missy_Elliott">Missy Elliott on Wikipedia</a></p>
+</li>
+<li>
+<p><a href="https://en.wikipedia.org/wiki/Pink_(singer)">P!nk on Wikipedia</a></p>
+</li>
+</ul>
 </div>
 </li>
 </ol>
 </div>
 <div class="paragraph">
-<p>Your content hierarchy should now list the "artists" folder and the three artists.</p>
+<p>Content Studio should now list the "Artists" folder and the three artists.</p>
 </div>
 <div class="imageblock">
 <div class="content">
-<img src="media/content-studio-with-artists.png" alt="The content hierarchy showing artists folder with &quot;Cardi B&quot;, &quot;Missy Elliot&quot; and &quot;P!nk&quot; listed directly underneath it." width="527w">
+<img src="media/cs-hierarchy.png" alt="The content hierarchy showing the Artists folder with P!nk, Missy Elliott and Cardi B listed directly underneath it" width="750">
 </div>
-<div class="title">Figure 6. The hierarchy as it should look after creating some content</div>
+<div class="title">Figure 8. The hierarchy as it should look after creating some content</div>
 </div>
 </div>
 </div>
 </div>
 <div class="sect1">
-<h2 id="branches"><a class="link" href="#branches">Publishing your content</a></h2>
+<h2 id="branches"><a class="link" href="#branches">Publishing</a></h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>Content Studio shows a status on every item: <em>Work in progress</em> for unpublished changes, <em>Ready for publishing</em> once an editor has marked it, and <em>Published</em> when nothing has changed since publishing.
-Content that does not validate against its content type, for instance because a required field is empty, is marked as invalid.</p>
+<p>Every content project has two branches under the hood.
+You create and edit content in the <em>draft</em> branch, and publishing copies it to the <em>master</em> branch, which holds the published content.</p>
 </div>
+<div class="paragraph">
+<p>When you edit published content, only the draft branch changes - until you publish again.</p>
+</div>
+<div class="paragraph">
+<p>During the editing process, Content Studio has different workflow statuses like <em>Invalid</em>, <em>Work in progress</em>, and <em>Ready for publishing</em>.</p>
+</div>
+<div class="sect2">
+<h3 id="task_publish_all_items"><a class="link" href="#task_publish_all_items">Task: Publish all items</a></h3>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>In our case, the content items should all be <em>Work in progress</em>. To publish all items at once, select the "Artists" folder, right-click, and choose <b class="button">Publish</b>. The publishing wizard will appear.</p>
 <div class="imageblock">
 <div class="content">
-<img src="media/content-studio-content-status.png" alt="Three pieces of content displaying different statuses" width="270w">
+<img src="media/cs-publish.png" alt="The publishing wizard in Content Studio" width="910">
 </div>
+<div class="title">Figure 9. The publishing wizard</div>
+</div>
+</li>
+<li>
+<p>Click the <b class="button">include child items</b> checkbox, and then <b class="button">Apply</b>. The whole tree of content under the "Artists" folder will now be included in the publication.</p>
+<div class="imageblock">
+<div class="content">
+<img src="media/cs-include-children.png" alt="Once the include child items checkbox is selected and Apply is clicked - all the unpublished child items are also listed" width="910">
+</div>
+<div class="title">Figure 10. The publishing wizard with child items included</div>
+</div>
+</li>
+<li>
+<p>The publish button is still disabled, because the items are not yet marked as ready for publishing. Click <b class="button">Mark as ready</b>, and the publish button will become enabled.</p>
+</li>
+<li>
+<p>Click <b class="button">Publish Now (4)</b> to publish all items in a single batch.</p>
+</li>
+</ol>
 </div>
 <div class="paragraph">
-<p>Every content project has two branches.
-You create and edit content in the <em>draft</em> branch, and publishing copies it to the <em>master</em> branch, which holds the published content.
-When you edit published content, only draft changes until you publish again.</p>
-</div>
-<div class="paragraph">
-<p>To publish an item, right-click it and select <strong>Publish</strong>.
-You don&#8217;t need to publish anything yet; the front-end chapter does it when the content needs to be public.</p>
+<p>After completing the publication, publishing state should have changed from Offline to Online.</p>
 </div>
 <div class="admonitionblock tip">
 <table>
@@ -851,10 +840,11 @@ You don&#8217;t need to publish anything yet; the front-end chapter does it when
 <i class="fa icon-tip" title="Tip"></i>
 </td>
 <td class="content">
-You can also publish a piece of content by using the keyboard shortcut <span class="keyseq"><kbd>Ctrl</kbd>+<kbd>Alt</kbd>+<kbd>P</kbd></span>/<span class="keyseq"><kbd>control</kbd>+<kbd>option</kbd>+<kbd>P</kbd></span>.
+You can also publish a piece of content by using the keyboard shortcut: Windows: <span class="keyseq"><kbd>Ctrl</kbd>+<kbd>Alt</kbd>+<kbd>P</kbd></span> | Mac: <span class="keyseq"><kbd>control</kbd>+<kbd>option</kbd>+<kbd>P</kbd></span>.
 </td>
 </tr>
 </table>
+</div>
 </div>
 </div>
 </div>
@@ -862,15 +852,14 @@ You can also publish a piece of content by using the keyboard shortcut <span cla
 <h2 id="coming_up"><a class="link" href="#coming_up">Coming up</a></h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>You&#8217;ve created a content project, your first content type and some content.
-In the next chapter, you&#8217;ll read that content back through the <a href="headless-api.ahtml">Headless API</a>.</p>
+<p>You&#8217;ve created a content project, your first content type and some content. In the next chapter, you&#8217;ll read that content back through the <a href="headless-api.ahtml">Headless API</a>.</p>
 </div>
 </div>
 </div>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2026-10-20 07:01:26 UTC
+Last updated 2026-10-20 15:57:50 UTC
 </div>
 </div>
 </body>

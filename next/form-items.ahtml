@@ -499,18 +499,6 @@ If you&#8217;re used to working with HTML, be aware that XP&#8217;s form items a
 </tr>
 </table>
 </div>
-<div class="admonitionblock note">
-<table>
-<tr>
-<td class="icon">
-<i class="fa icon-note" title="Note"></i>
-</td>
-<td class="content">
-The tasks and examples in this chapter are based on work done in previous chapters (starting with <a href="setup.ahtml">the setup chapter</a>). If you want to follow along with the examples, make sure you&#8217;re all caught up.
-</td>
-</tr>
-</table>
-</div>
 </div>
 </div>
 <div class="sect1">
@@ -1113,9 +1101,9 @@ Don&#8217;t worry if something did not work, we&#8217;ll show the solutions in t
 <div class="olist arabic">
 <ol class="arabic">
 <li>
-<p>Create the animal content type. In <code>src/main/resources/cms/content-types/animal/animal.yaml</code>, place the following content:</p>
+<p>Create the animal content type:</p>
 <div class="listingblock">
-<div class="title">The animal content type</div>
+<div class="title">src/main/resources/cms/content-types/animal/animal.yaml</div>
 <div class="content">
 <pre class="highlight"><code class="language-yaml" data-lang="yaml">kind: "ContentType"
 title: "Animal"
@@ -1145,12 +1133,10 @@ form:
 </li>
 <li>
 <p>Next, update the <code>Artist</code> content type.</p>
-</li>
-</ol>
-</div>
 <div class="listingblock">
+<div class="title">src/main/resources/cms/content-types/artist/artist.yaml</div>
 <div class="content">
-<pre>kind: "ContentType"
+<pre class="highlight"><code class="language-yaml" data-lang="yaml">kind: "ContentType"
 title: "Artist"
 description: "Information about an artist"
 displayNamePlaceholder: "Stage name"
@@ -1172,21 +1158,26 @@ form:
     allowContentType:
       - "animal"
     allowPath:
-      - "/animals/*"</pre>
+      - "/animals/*"</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>+
-The new <code>favoriteAnimal</code> ContentSelector uses <code>allowContentType</code> and <code>allowPath</code> to narrow the possible content to only Animals in the animals folder</p>
+<p>The new <code>favoriteAnimal</code> ContentSelector uses <code>allowContentType</code> and <code>allowPath</code> to narrow the possible content to only Animals in the animals folder</p>
 </div>
-<div class="paragraph">
-<p>+
-. Create a folder called "animals" next to the "artists" folder, and create some animals in it. Either pick your favorites, or, if you&#8217;re not feeling creative, add these (content from Wikipedia):
-- <a href="https://en.wikipedia.org/wiki/Lion">Wiki article for lion</a>
-- <a href="https://en.wikipedia.org/wiki/Reindeer">Wiki article for reindeer</a></p>
+</li>
+<li>
+<p>Create a folder called "animals" next to the "artists" folder, and create some animals in it. Either pick your favorites, or, if you&#8217;re not feeling creative, add these (content from Wikipedia):</p>
+<div class="ulist">
+<ul>
+<li>
+<p><a href="https://en.wikipedia.org/wiki/Lion">Wiki article for lion</a></p>
+</li>
+<li>
+<p><a href="https://en.wikipedia.org/wiki/Reindeer">Wiki article for reindeer</a></p>
+</li>
+</ul>
 </div>
-<div class="olist arabic">
-<ol class="arabic">
+</li>
 <li>
 <p>Create some links using the ContentSelector from artists to animals to get familiar with linking content.</p>
 </li>
@@ -1294,7 +1285,7 @@ The new <code>favoriteAnimal</code> ContentSelector uses <code>allowContentType<
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2026-10-20 07:01:26 UTC
+Last updated 2026-10-20 15:57:50 UTC
 </div>
 </div>
 </body>

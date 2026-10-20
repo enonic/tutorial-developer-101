@@ -467,18 +467,6 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 So far, Query Playground has quietly supplied the project, the branch and your login, and a front-end has none of that.
 You&#8217;ll handle the four things every front-end on Enonic needs: the request format, published versus draft content, URLs for pages and media, and lists that page.</p>
 </div>
-<div class="admonitionblock note">
-<table>
-<tr>
-<td class="icon">
-<i class="fa icon-note" title="Note"></i>
-</td>
-<td class="content">
-The tasks and examples in this chapter are based on work done in previous chapters (starting with <a href="setup.ahtml">the setup chapter</a>). If you want to follow along with the examples, make sure you&#8217;re all caught up.
-</td>
-</tr>
-</table>
-</div>
 </div>
 </div>
 <div class="sect1">
@@ -808,7 +796,7 @@ for (const image of description.images) {
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2026-10-20 07:01:26 UTC
+Last updated 2026-10-20 15:57:50 UTC
 </div>
 </div>
 </body>

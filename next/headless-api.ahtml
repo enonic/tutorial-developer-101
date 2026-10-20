@@ -473,18 +473,6 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <div class="paragraph">
 <p>In this chapter, you&#8217;ll read the content you created through Guillotine, Enonic&#8217;s GraphQL API, and query it from Query Playground.</p>
 </div>
-<div class="admonitionblock note">
-<table>
-<tr>
-<td class="icon">
-<i class="fa icon-note" title="Note"></i>
-</td>
-<td class="content">
-The tasks and examples in this chapter are based on work done in previous chapters (starting with <a href="setup.ahtml">the setup chapter</a>). If you want to follow along with the examples, make sure you&#8217;re all caught up.
-</td>
-</tr>
-</table>
-</div>
 </div>
 </div>
 <div class="sect1">
@@ -931,6 +919,7 @@ To learn more about queryDSL capabilities, visit the <a href="https://developer.
 <li>
 <p>Start by updating the Artist content type to the following structure:</p>
 <div class="listingblock">
+<div class="title">src/main/resources/cms/content-types/artist/artist.yaml</div>
 <div class="content">
 <pre class="highlight"><code class="language-yaml" data-lang="yaml">kind: "ContentType"
 title: "Artist"
@@ -1161,7 +1150,7 @@ In the next chapter, you&#8217;ll see <a href="files.ahtml">how XP deals with fi
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2026-10-20 07:01:26 UTC
+Last updated 2026-10-20 15:57:50 UTC
 </div>
 </div>
 </body>

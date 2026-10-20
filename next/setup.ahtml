@@ -686,7 +686,7 @@ Waiting for changes to input files...</code></pre>
 <div class="sect2">
 <h3 id="change_the_apps_title"><a class="link" href="#change_the_apps_title">Change the app&#8217;s title</a></h3>
 <div class="paragraph">
-<p>Let&#8217;s make a first change to the app, to see the development loop in action. Open the application descriptor, <code>src/main/resources/enonic.yaml</code>, in your editor, and change the <code>title</code> and <code>description</code>:</p>
+<p>Let&#8217;s make a first change to the app, to see the development loop in action. Open the application descriptor, <code>enonic.yaml</code>, in your editor, and change the <code>title</code> and <code>description</code>:</p>
 </div>
 <div class="listingblock">
 <div class="title">src/main/resources/enonic.yaml</div>
@@ -745,7 +745,7 @@ In the next chapter, you&#8217;ll <a href="content-studio.ahtml">get familiar wi
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2026-10-20 07:01:26 UTC
+Last updated 2026-10-20 15:57:50 UTC
 </div>
 </div>
 </body>

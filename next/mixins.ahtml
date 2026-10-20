@@ -463,18 +463,6 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <div class="paragraph">
 <p>In Content Studio, a mixin is visually displayed as a separate section of the form, listed below the content type&#8217;s standard fields.</p>
 </div>
-<div class="admonitionblock note">
-<table>
-<tr>
-<td class="icon">
-<i class="fa icon-note" title="Note"></i>
-</td>
-<td class="content">
-The tasks and examples in this chapter are based on work done in previous chapters (starting with <a href="setup.ahtml">the setup chapter</a>). If you want to follow along with the examples, make sure you&#8217;re all caught up.
-</td>
-</tr>
-</table>
-</div>
 </div>
 </div>
 <div class="sect1">
@@ -531,32 +519,31 @@ form:
 </li>
 <li>
 <p>A mixin schema on its own is dormant. You also need to register it, and define which content types it applies to. This is done in your app&#8217;s CMS descriptor, <code>cms.yaml</code>, which the starter created as an empty file:</p>
-</li>
-</ol>
-</div>
 <div class="listingblock">
+<div class="title">src/main/resources/cms/cms.yaml</div>
 <div class="content">
-<pre>kind: "CMS"
+<pre class="highlight"><code class="language-yaml" data-lang="yaml">kind: "CMS"
 mixins:
   - name: "notes"
-    allowContentTypes: "com.example.dev101:artist|com.example.dev101:animal"</pre>
+    allowContentTypes: "com.example.dev101:artist|com.example.dev101:animal"</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>+
-<code>allowContentTypes</code> is a regular expression matched against the full content type name. Leave it out to apply the mixin to every content type in the project.</p>
+<p><code>allowContentTypes</code> is a regular expression matched against the full content type name. Leave it out to apply the mixin to every content type in the project.</p>
 </div>
-<div class="paragraph">
-<p>+
-. Your app is redeployed, so open an Artist or an Animal content item. You should see the following section at the bottom of the form:</p>
+</li>
+<li>
+<p>Your app is redeployed, so open an Artist or an Animal content item. You should see the following section at the bottom of the form:</p>
+<div class="imageblock">
+<div class="content">
+<img src="media/notes-x-data.png" alt="Notes mixin fields showing at the bottom of an animal content item">
 </div>
-<div class="paragraph">
-<p>+
-image::notes-x-data.png["Notes mixin fields showing at the bottom of an animal content item"]</p>
 </div>
-<div class="paragraph">
-<p>+
-. Finally, add some notes to some content.</p>
+</li>
+<li>
+<p>Finally, add some notes to some content.</p>
+</li>
+</ol>
 </div>
 <div class="admonitionblock note">
 <table>
@@ -864,7 +851,7 @@ For more details and configuration options for mixins, visit <a href="https://de
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2026-10-20 07:01:26 UTC
+Last updated 2026-10-20 15:57:50 UTC
 </div>
 </div>
 </body>
