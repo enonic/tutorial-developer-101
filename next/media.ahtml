@@ -508,7 +508,7 @@ Check that the destination shown is <code>/images/</code>.</p>
 <p>Click the upload area to select your file, or drag the file onto it.</p>
 <div class="imageblock">
 <div class="content">
-<img src="media/media-drag-and-drop.png" alt="New Content dialog with the Media tab selected and /images/ as the upload destination" width="1440">
+<img src="images/media-upload.png" alt="New Content dialog with the Media tab selected and /images/ as the upload destination" width="1440">
 </div>
 <div class="title">Figure 1. The Media tab in the New Content dialog</div>
 </div>
@@ -767,7 +767,7 @@ Without a focal point, the crop is centered, which can cut off an off-center sub
 </div>
 <div class="imageblock">
 <div class="content">
-<img src="media/image-cropped-unfocused.jpg" alt="Portrait crop with part of the lion cut off at the left edge" width="400">
+<img src="images/image-cropped-unfocused.jpg" alt="Portrait crop with part of the lion cut off at the left edge" width="400">
 </div>
 <div class="title">Figure 2. Portrait crop before setting a focal point</div>
 </div>
@@ -790,7 +790,7 @@ It guides the crop; it does not guarantee that the entire subject fits every sha
 The content form contains fields such as Caption and Alternative text, and the image preview includes editing controls.</p>
 <div class="imageblock">
 <div class="content">
-<img src="media/image-content-form.jpg" alt="Content Studio image editor showing the lion preview, editorial fields and image editing toolbar" width="1440">
+<img src="images/image-content-form.jpg" alt="Content Studio image editor showing the lion preview, editorial fields and image editing toolbar" width="1440">
 </div>
 <div class="title">Figure 3. The image content form and preview</div>
 </div>
@@ -800,7 +800,7 @@ The content form contains fields such as Caption and Alternative text, and the i
 Click the lion&#8217;s face, or drag the marker onto the subject of your own image.</p>
 <div class="imageblock">
 <div class="content">
-<img src="media/image-editing-focal-point.jpg" alt="Image preview in focal-point mode with the marker on the lion&#8217;s face and Apply and Cancel controls" width="1440">
+<img src="images/image-editing-focal-point.jpg" alt="Image preview in focal-point mode with the marker on the lion&#8217;s face and Apply and Cancel controls" width="1440">
 </div>
 <div class="title">Figure 4. Positioning the focal point</div>
 </div>
@@ -819,7 +819,7 @@ Assemble and open the <strong>newly returned URL</strong> so you see the saved c
 </div>
 <div class="imageblock">
 <div class="content">
-<img src="media/image-cropped-focused.jpg" alt="Portrait crop after setting the focal point, with the lion&#8217;s face in view" width="400">
+<img src="images/image-cropped-focused.jpg" alt="Portrait crop after setting the focal point, with the lion&#8217;s face in view" width="400">
 </div>
 <div class="title">Figure 5. The same portrait crop with a focal point</div>
 </div>
@@ -860,7 +860,7 @@ Build and open the URL as before, including the complete <code>queryString</code
 </div>
 <div class="imageblock">
 <div class="content">
-<img src="media/image-processed.jpg" alt="Portrait crop of the lion in grayscale with a black border" width="400">
+<img src="images/image-processed.jpg" alt="Portrait crop of the lion in grayscale with a black border" width="400">
 </div>
 <div class="title">Figure 6. The cropped image with filters</div>
 </div>
@@ -915,7 +915,7 @@ In the next chapter, you&#8217;ll take a closer look at <a href="form-items.ahtm
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2026-10-27 13:21:38 UTC
+Last updated 2026-10-27 13:36:21 UTC
 </div>
 </div>
 </body>

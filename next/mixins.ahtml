@@ -536,7 +536,7 @@ mixins:
 <p>Your app is redeployed, so open an Artist or an Animal content item. You should see the following section at the bottom of the form:</p>
 <div class="imageblock">
 <div class="content">
-<img src="media/notes-x-data.png" alt="Notes mixin fields showing at the bottom of an animal content item">
+<img src="images/notes-x-data.png" alt="Notes mixin fields showing at the bottom of an animal content item">
 </div>
 </div>
 </li>
@@ -815,7 +815,7 @@ For more details and configuration options for mixins, visit <a href="https://de
 <p>Install the <a href="https://market.enonic.com/vendors/enonic/seo-metafields">SEO Metafields app</a> from <code>XP menu</code> &#8594; <code>Applications</code>.</p>
 <div class="imageblock">
 <div class="content">
-<img src="media/x-data-seo-app-install.png" alt="Install SEO Metafields app">
+<img src="images/x-data-seo-app-install.png" alt="Install SEO Metafields app">
 </div>
 </div>
 </li>
@@ -832,7 +832,7 @@ For more details and configuration options for mixins, visit <a href="https://de
 </div>
 <div class="imageblock">
 <div class="content">
-<img src="media/x-data-seo-animal.png" alt="SEO fields available for the animals content type as well.">
+<img src="images/x-data-seo-animal.png" alt="SEO fields available for the animals content type as well.">
 </div>
 </div>
 </div>
@@ -851,7 +851,7 @@ For more details and configuration options for mixins, visit <a href="https://de
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2026-10-27 13:21:38 UTC
+Last updated 2026-10-27 13:36:21 UTC
 </div>
 </div>
 </body>

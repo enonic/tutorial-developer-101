@@ -490,7 +490,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 </div>
 <div class="imageblock">
 <div class="content">
-<img src="media/cs-project-create.png" alt="Content Studio dialog offering to start the project wizard" width="660">
+<img src="images/cs-project-create.png" alt="Content Studio dialog offering to start the project wizard" width="660">
 </div>
 <div class="title">Figure 1. No projects found dialog</div>
 </div>
@@ -534,7 +534,7 @@ The project identifier is important, and cannot be changed later. Later chapters
 </div>
 <div class="imageblock">
 <div class="content">
-<img src="media/cs-project-summary.png" alt="Content Studio project creation summary" width="910">
+<img src="images/cs-project-summary.png" alt="Content Studio project creation summary" width="910">
 </div>
 <div class="title">Figure 2. Project summary showing the values you have set in the wizard</div>
 </div>
@@ -589,7 +589,7 @@ Content can be organized as a tree, much like files and folders on your computer
 The dialog lists only the built-in content types.</p>
 <div class="imageblock">
 <div class="content">
-<img src="media/cs-folder-create.png" alt="The Create content dialog, listing the built-in content types: Folder, Shortcut and Site" width="830">
+<img src="images/cs-folder-create.png" alt="The Create content dialog, listing the built-in content types: Folder, Shortcut and Site" width="830">
 </div>
 <div class="title">Figure 3. The content creation dialog showing the built-in content types</div>
 </div>
@@ -601,7 +601,7 @@ The dialog lists only the built-in content types.</p>
 <p>Give the folder the display name "Artists".</p>
 <div class="imageblock">
 <div class="content">
-<img src="media/cs-folder-form.png" alt="The Folder form, with the display name Artists" width="546">
+<img src="images/cs-folder-form.png" alt="The Folder form, with the display name Artists" width="546">
 </div>
 <div class="title">Figure 4. The folder form with its display name filled in</div>
 </div>
@@ -619,7 +619,7 @@ The dialog lists only the built-in content types.</p>
 </div>
 <div class="imageblock">
 <div class="content">
-<img src="media/cs-artist-form.png" alt="The Artist form, with a display name field showing the Stage name placeholder, and the Legal name and About the artist fields" width="546">
+<img src="images/cs-artist-form.png" alt="The Artist form, with a display name field showing the Stage name placeholder, and the Legal name and About the artist fields" width="546">
 </div>
 <div class="title">Figure 5. The Artist form in Content Studio</div>
 </div>
@@ -745,7 +745,7 @@ Read more about <a href="https://developer.enonic.com/docs/cms/stable/schemas/na
 Since your app is assigned to the project, the dialog now lists Artist next to the built-in content types.</p>
 <div class="imageblock">
 <div class="content">
-<img src="media/cs-artist-create.png" alt="The Create content dialog, listing the available content types: Artist, Folder, Shortcut and Site" width="830">
+<img src="images/cs-artist-create.png" alt="The Create content dialog, listing the available content types: Artist, Folder, Shortcut and Site" width="830">
 </div>
 <div class="title">Figure 6. The content creation dialog showing the Artist content type</div>
 </div>
@@ -754,7 +754,7 @@ Since your app is assigned to the project, the dialog now lists Artist next to t
 <p>Select <b class="button">Artist</b>, and start filling in the form. Use details of <a href="https://en.wikipedia.org/wiki/Cardi_B">Cardi B on Wikipedia</a>.</p>
 <div class="imageblock">
 <div class="content">
-<img src="media/cs-cardib-form.png" alt="The Artist form filled out for Cardi B, with the legal name and the text about the artist" width="546">
+<img src="images/cs-cardib-form.png" alt="The Artist form filled out for Cardi B, with the legal name and the text about the artist" width="546">
 </div>
 <div class="title">Figure 7. The content form filled out for the artist "Cardi B"</div>
 </div>
@@ -780,7 +780,7 @@ Select the "Artists" folder each time: Content Studio nests new content under wh
 </div>
 <div class="imageblock">
 <div class="content">
-<img src="media/cs-hierarchy.png" alt="The content hierarchy showing the Artists folder with P!nk, Missy Elliott and Cardi B listed directly underneath it" width="750">
+<img src="images/cs-hierarchy.png" alt="The content hierarchy showing the Artists folder with P!nk, Missy Elliott and Cardi B listed directly underneath it" width="750">
 </div>
 <div class="title">Figure 8. The hierarchy as it should look after creating some content</div>
 </div>
@@ -808,7 +808,7 @@ You create and edit content in the <em>draft</em> branch, and publishing copies 
 <p>In our case, the content items should all be <em>Work in progress</em>. To publish all items at once, select the "Artists" folder, right-click, and choose <b class="button">Publish</b>. The publishing wizard will appear.</p>
 <div class="imageblock">
 <div class="content">
-<img src="media/cs-publish.png" alt="The publishing wizard in Content Studio" width="910">
+<img src="images/cs-publish.png" alt="The publishing wizard in Content Studio" width="910">
 </div>
 <div class="title">Figure 9. The publishing wizard</div>
 </div>
@@ -817,7 +817,7 @@ You create and edit content in the <em>draft</em> branch, and publishing copies 
 <p>Click the <b class="button">include child items</b> checkbox, and then <b class="button">Apply</b>. The whole tree of content under the "Artists" folder will now be included in the publication.</p>
 <div class="imageblock">
 <div class="content">
-<img src="media/cs-include-children.png" alt="Once the include child items checkbox is selected and Apply is clicked - all the unpublished child items are also listed" width="910">
+<img src="images/cs-include-children.png" alt="Once the include child items checkbox is selected and Apply is clicked - all the unpublished child items are also listed" width="910">
 </div>
 <div class="title">Figure 10. The publishing wizard with child items included</div>
 </div>
@@ -859,7 +859,7 @@ You can also publish a piece of content by using the keyboard shortcut: Windows:
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2026-10-27 13:21:38 UTC
+Last updated 2026-10-27 13:36:21 UTC
 </div>
 </div>
 </body>

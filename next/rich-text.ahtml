@@ -489,7 +489,7 @@ For the editor itself, see the <a href="https://developer.enonic.com/docs/conten
 <div class="sectionbody">
 <div class="imageblock text-center">
 <div class="content">
-<img src="media/input-type-html-area.png" alt="A text input field with a tools ribbon just above.">
+<img src="images/input-type-html-area.png" alt="A text input field with a tools ribbon just above.">
 </div>
 <div class="title">Figure 1. The HtmlArea form item with the default tools selection</div>
 </div>
@@ -535,7 +535,7 @@ For the editor itself, see the <a href="https://developer.enonic.com/docs/conten
 </div>
 <div class="imageblock text-center">
 <div class="content">
-<img src="media/input-type-html-area-no-controls.png" alt="An HtmlArea configured to exclude all editing tools">
+<img src="images/input-type-html-area-no-controls.png" alt="An HtmlArea configured to exclude all editing tools">
 </div>
 <div class="title">Figure 2. An HtmlArea input with <code>exclude: "*"</code> and no tools.</div>
 </div>
@@ -554,7 +554,7 @@ For the editor itself, see the <a href="https://developer.enonic.com/docs/conten
 </div>
 <div class="imageblock text-center">
 <div class="content">
-<img src="media/input-type-html-area-some-controls.png" alt="An HtmlArea configured to include a selection of editing tools">
+<img src="images/input-type-html-area-some-controls.png" alt="An HtmlArea configured to include a selection of editing tools">
 </div>
 <div class="title">Figure 3. An HtmlArea with a selection of tools and <code>exclude: "*"</code></div>
 </div>
@@ -674,7 +674,7 @@ You can also use <span class="keyseq"><kbd>ctrl</kbd>+<kbd>K</kbd></span> to ins
 .Choose the content tab, and select the previously created "Lion" as the target item</p>
 <div class="imageblock">
 <div class="content">
-<img src="media/rich-text-insert-content-link.png" alt="Screenshot of the insert link dialog">
+<img src="images/rich-text-insert-content-link.png" alt="Screenshot of the insert link dialog">
 </div>
 </div>
 </li>
@@ -712,7 +712,7 @@ You can also use <span class="keyseq"><kbd>ctrl</kbd>+<kbd>K</kbd></span> to ins
 <p>Insert an image below the existing text. Use the "insert image" button in the toolbar.</p>
 <div class="imageblock">
 <div class="content">
-<img src="media/rich-text-toolbar-image-highlight.png" alt="The rich text toolbar with the image tool circled by a blue circle">
+<img src="images/rich-text-toolbar-image-highlight.png" alt="The rich text toolbar with the image tool circled by a blue circle">
 </div>
 <div class="title">Figure 4. The toolbar with the image tool highlighted</div>
 </div>
@@ -721,7 +721,7 @@ You can also use <span class="keyseq"><kbd>ctrl</kbd>+<kbd>K</kbd></span> to ins
 <p>You&#8217;ll be greeted by the "insert image" dialog:</p>
 <div class="imageblock">
 <div class="content">
-<img src="media/rich-text-insert-image.png" alt="The insert image dialog, showing the image, an image styles dropdown, caption, and alt text fields">
+<img src="images/rich-text-insert-image.png" alt="The insert image dialog, showing the image, an image styles dropdown, caption, and alt text fields">
 </div>
 <div class="title">Figure 5. The HtmlArea insert image dialog. Photo by <a href="https://unsplash.com/@zmachacek">Zdeněk Macháček</a></div>
 </div>
@@ -770,7 +770,7 @@ styles:
 <p>With this style picked up by XP, you&#8217;ll have the "Grayscale" option available in the image styles dropdown. Select it to apply it to the image and update your image.</p>
 <div class="imageblock">
 <div class="content">
-<img src="media/rich-text-insert-image-styled.png" alt="The description rich text showing the results of applying the image styles to the image">
+<img src="images/rich-text-insert-image-styled.png" alt="The description rich text showing the results of applying the image styles to the image">
 </div>
 <div class="title">Figure 6. Example of description with inserted image styled</div>
 </div>
@@ -814,7 +814,7 @@ Image styles are offered from the apps assigned to your project. Your app is ass
 </div>
 <div class="imageblock">
 <div class="content">
-<img src="media/rich-text-toolbar-macro-highlight.png" alt="The rich text toolbar with the macro button circled by a blue circle">
+<img src="images/rich-text-toolbar-macro-highlight.png" alt="The rich text toolbar with the macro button circled by a blue circle">
 </div>
 <div class="title">Figure 7. The toolbar with the macro button highlighted</div>
 </div>
@@ -1331,7 +1331,7 @@ If you used a different macro than the "Embed iframe" macro, the query must be u
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2026-10-27 13:21:38 UTC
+Last updated 2026-10-27 13:36:21 UTC
 </div>
 </div>
 </body>

@@ -640,7 +640,7 @@ All of the shared settings (<code>label</code>, <code>occurrences</code>, etc.),
 </div>
 <div class="imageblock text-center">
 <div class="content">
-<img src="media/input-type-common-configuration.png" alt="Three TextLine inputs showing all the common configuration options: labels, help text, default text, and occurrences.">
+<img src="images/input-type-common-configuration.png" alt="Three TextLine inputs showing all the common configuration options: labels, help text, default text, and occurrences.">
 </div>
 <div class="title">Figure 1. TextLine inputs showing common configuration options</div>
 </div>
@@ -740,7 +740,7 @@ If <code>max</code> is greater than <code>0</code>, make sure that <code>min</co
 <p>A dropdown menu containing predefined options for the user to select from. Allows selection of one or more options.</p>
 <div class="imageblock text-center">
 <div class="content">
-<img src="media/input-type-combo-box.webp" alt="A standard select list / dropdown list / combo box with a few visible dummy options.">
+<img src="images/input-type-combo-box.webp" alt="A standard select list / dropdown list / combo box with a few visible dummy options.">
 </div>
 <div class="title">Figure 2. The ComboBox form item</div>
 </div>
@@ -750,7 +750,7 @@ If <code>max</code> is greater than <code>0</code>, make sure that <code>min</co
 <p>Provide an interactive date picker (with a time component for DateTime and Instant) to save dates and times. The reference explains which of the two to pick for a date with a time.</p>
 <div class="imageblock text-center">
 <div class="content">
-<img src="media/input-type-date-time.webp" alt="A calendar showing year and month with a time indicator to the side.">
+<img src="images/input-type-date-time.webp" alt="A calendar showing year and month with a time indicator to the side.">
 </div>
 <div class="title">Figure 3. The DateTime form item</div>
 </div>
@@ -760,7 +760,7 @@ If <code>max</code> is greater than <code>0</code>, make sure that <code>min</co
 <p>Stores GPS coordinates.</p>
 <div class="imageblock text-center">
 <div class="content">
-<img src="media/input-type-geo-point.webp" alt="A text line input with coordinates.">
+<img src="images/input-type-geo-point.webp" alt="A text line input with coordinates.">
 </div>
 <div class="title">Figure 4. The GeoPoint form item</div>
 </div>
@@ -770,7 +770,7 @@ If <code>max</code> is greater than <code>0</code>, make sure that <code>min</co
 <p>Provides a rich text, multi-line input. We&#8217;ll discuss this in detail in <a href="rich-text.ahtml">the rich-text chapter</a>.</p>
 <div class="imageblock text-center">
 <div class="content">
-<img src="media/input-type-html-area.png" alt="A text area with a tools ribbon on the top. The ribbon provides rich text tools such as justification, macro insertion, text styles, etc.">
+<img src="images/input-type-html-area.png" alt="A text area with a tools ribbon on the top. The ribbon provides rich text tools such as justification, macro insertion, text styles, etc.">
 </div>
 <div class="title">Figure 5. The HtmlArea form item</div>
 </div>
@@ -787,7 +787,7 @@ If <code>max</code> is greater than <code>0</code>, make sure that <code>min</co
 <div class="sectionbody">
 <div class="imageblock">
 <div class="content">
-<img src="media/input-type-image-selector.png" alt="ImageSelector: An interactive image selection tool.">
+<img src="images/input-type-image-selector.png" alt="ImageSelector: An interactive image selection tool.">
 </div>
 <div class="title">Figure 6. The ImageSelector form item</div>
 </div>
@@ -813,7 +813,7 @@ If <code>max</code> is greater than <code>0</code>, make sure that <code>min</co
 </div>
 <div class="imageblock">
 <div class="content">
-<img src="media/input-type-image-selector-highlighted-image.png" alt="The image selector input field with two images of lions&#8201;&#8212;&#8201;one male, one female - - below. Under the images, there&#8217;s a set of buttons saying 'edit' and 'remove'.">
+<img src="images/input-type-image-selector-highlighted-image.png" alt="The image selector input field with two images of lions&#8201;&#8212;&#8201;one male, one female - - below. Under the images, there&#8217;s a set of buttons saying 'edit' and 'remove'.">
 </div>
 <div class="title">Figure 7. The image selector with uploaded and selected images</div>
 </div>
@@ -824,7 +824,7 @@ If <code>max</code> is greater than <code>0</code>, make sure that <code>min</co
 <div class="sectionbody">
 <div class="imageblock">
 <div class="content">
-<img src="media/input-type-content-selector.png" alt="ContentSelector: An interactive content selection tool.">
+<img src="images/input-type-content-selector.png" alt="ContentSelector: An interactive content selection tool.">
 </div>
 <div class="title">Figure 8. The ContentSelector form item</div>
 </div>
@@ -875,7 +875,7 @@ If <code>max</code> is greater than <code>0</code>, make sure that <code>min</co
 </div>
 <div class="imageblock">
 <div class="content">
-<img src="media/input-type-attachmentuploader.png" alt="AttachmentUploader: Store any number of files within your content item" width="651w">
+<img src="images/input-type-attachmentuploader.png" alt="AttachmentUploader: Store any number of files within your content item" width="651w">
 </div>
 <div class="title">Figure 9. The AttachmentUploader form item</div>
 </div>
@@ -1030,7 +1030,7 @@ If you&#8217;re wondering how to achieve some of the goals, try consulting the d
 </div>
 <div class="imageblock">
 <div class="content">
-<img src="media/animal-and-artist-target.png" alt="An animal content wizard next to an artist wizard">
+<img src="images/animal-and-artist-target.png" alt="An animal content wizard next to an artist wizard">
 </div>
 <div class="title">Figure 10. The target for this task: animal and artist</div>
 </div>
@@ -1296,7 +1296,7 @@ form:
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2026-10-27 13:21:38 UTC
+Last updated 2026-10-27 13:36:21 UTC
 </div>
 </div>
 </body>

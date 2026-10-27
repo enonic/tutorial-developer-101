@@ -533,7 +533,7 @@ This tutorial is written for Enonic XP 8.1 and the versions of Content Studio an
 </div>
 <div class="imageblock">
 <div class="content">
-<img src="media/setup-sdk.png" alt="The Enonic SDK welcome page for XP 8.1.0, with the Admin, APIs and VHosts cards, the installed applications Content Studio, Data Toolbox and Guillotine, and the sandbox&#8217;s configuration files" width="1001">
+<img src="images/setup-sdk.png" alt="The Enonic SDK welcome page for XP 8.1.0, with the Admin, APIs and VHosts cards, the installed applications Content Studio, Data Toolbox and Guillotine, and the sandbox&#8217;s configuration files" width="1001">
 </div>
 </div>
 <div class="paragraph">
@@ -541,7 +541,7 @@ This tutorial is written for Enonic XP 8.1 and the versions of Content Studio an
 </div>
 <div class="imageblock">
 <div class="content">
-<img src="media/setup-home.jpg" alt="The XP menu for the 101tutorial sandbox, with useful links on the left and tiles for Dashboard, Applications, Content Studio, Data toolbox and Users" width="1440">
+<img src="images/setup-home.jpg" alt="The XP menu for the 101tutorial sandbox, with useful links on the left and tiles for Dashboard, Applications, Content Studio, Data toolbox and Users" width="1440">
 </div>
 </div>
 <div class="paragraph">
@@ -680,7 +680,7 @@ Waiting for changes to input files...</code></pre>
 </div>
 <div class="imageblock">
 <div class="content">
-<img src="media/setup-app.png" alt="The Applications tool listing Content Studio, Data Toolbox, Guillotine and Vanilla Example, with Vanilla Example selected and its key com.example.dev101 shown" width="1440">
+<img src="images/setup-app.png" alt="The Applications tool listing Content Studio, Data Toolbox, Guillotine and Vanilla Example, with Vanilla Example selected and its key com.example.dev101 shown" width="1440">
 </div>
 </div>
 <div class="sect2">
@@ -745,7 +745,7 @@ In the next chapter, you&#8217;ll <a href="content-studio.ahtml">get familiar wi
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2026-10-27 13:21:38 UTC
+Last updated 2026-10-27 13:36:21 UTC
 </div>
 </div>
 </body>

@@ -509,7 +509,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 </div>
 <div class="imageblock text-center">
 <div class="content">
-<img src="media/field-set.png" alt="A field set containing TextLine and TextArea inputs. The field set groups them visually and adds a shared heading.">
+<img src="images/field-set.png" alt="A field set containing TextLine and TextArea inputs. The field set groups them visually and adds a shared heading.">
 </div>
 <div class="title">Figure 1. A field set grouping</div>
 </div>
@@ -530,7 +530,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 </div>
 <div class="imageblock text-center">
 <div class="content">
-<img src="media/item-set-sample.png" alt="A pair of visually grouped inputs on a card element. The card has a header that says 'contact info'. There is also a button to add more contact info forms.">
+<img src="images/item-set-sample.png" alt="A pair of visually grouped inputs on a card element. The card has a header that says 'contact info'. There is also a button to add more contact info forms.">
 </div>
 <div class="title">Figure 2. An item set containing contact info</div>
 </div>
@@ -554,7 +554,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 </div>
 <div class="imageblock text-center">
 <div class="content">
-<img src="media/option-set-sample.png" alt="An input form labeled 'multi-selection'. The user has selected one out of four options. Some options contain extra data such as an image selector or other input fields.">
+<img src="images/option-set-sample.png" alt="An input form labeled 'multi-selection'. The user has selected one out of four options. Some options contain extra data such as an image selector or other input fields.">
 </div>
 <div class="title">Figure 3. A multi-select option set</div>
 </div>
@@ -674,7 +674,7 @@ form:
 </div>
 <div class="imageblock">
 <div class="content">
-<img src="media/artist-filmography-item-set.png" alt="An example of using the Filmography item set.">
+<img src="images/artist-filmography-item-set.png" alt="An example of using the Filmography item set.">
 </div>
 <div class="title">Figure 4. Item set for filmography</div>
 </div>
@@ -854,7 +854,7 @@ The use of the form fragment helps us both reduce duplication and keep all optio
 </div>
 <div class="imageblock">
 <div class="content">
-<img src="media/option-sets.png" alt="Diet and distribution data filled out for lion. The feeding behavior selected is 'Carnivore' and the list of prey includes zebras and giraffes. For the distribution data, Africa and Asia is selected, with a short text about how Lions live in these areas today.">
+<img src="images/option-sets.png" alt="Diet and distribution data filled out for lion. The feeding behavior selected is 'Carnivore' and the list of prey includes zebras and giraffes. For the distribution data, Africa and Asia is selected, with a short text about how Lions live in these areas today.">
 </div>
 <div class="title">Figure 5. Distribution and feeding behavior for Lion</div>
 </div>
@@ -1090,7 +1090,7 @@ The use of the form fragment helps us both reduce duplication and keep all optio
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2026-10-27 13:21:38 UTC
+Last updated 2026-10-27 13:36:21 UTC
 </div>
 </div>
 </body>

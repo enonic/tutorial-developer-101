@@ -510,7 +510,7 @@ This tutorial is written for Guillotine 9, which requires XP 8.1 or newer. Check
 </div>
 <div class="imageblock">
 <div class="content">
-<img src="media/api-playground.png" alt="Query Playground in Content Studio, with the query editor on the left, response panel on the right, and Draft selected" width="1440">
+<img src="images/api-playground.png" alt="Query Playground in Content Studio, with the query editor on the left, response panel on the right, and Draft selected" width="1440">
 </div>
 </div>
 <div class="paragraph">
@@ -645,7 +645,7 @@ Search for <code>artist</code> and locate the <code>{app-name-query}_Artist</cod
 </div>
 <div class="imageblock">
 <div class="content">
-<img src="media/api-doc.png" alt="Query Playground Docs panel showing the Artist GraphQL object type, its Content interface, and common fields" width="477">
+<img src="images/api-doc.png" alt="Query Playground Docs panel showing the Artist GraphQL object type, its Content interface, and common fields" width="477">
 </div>
 <div class="title">Figure 1. The Artist GraphQL type</div>
 </div>
@@ -1063,7 +1063,7 @@ In the next chapter, you&#8217;ll see <a href="media.ahtml">how XP deals with fi
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2026-10-27 13:21:38 UTC
+Last updated 2026-10-27 13:36:21 UTC
 </div>
 </div>
 </body>

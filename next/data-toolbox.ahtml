@@ -472,7 +472,7 @@ That includes content types with sets, option sets, references and rich text, me
 </div>
 <div class="imageblock">
 <div class="content">
-<img src="media/data-toolbox-landing-page.png" alt="The Data Toolbox landing page: grid of icons for administrative actions and accompanying explanations. " width="639w">
+<img src="images/data-toolbox-landing-page.png" alt="The Data Toolbox landing page: grid of icons for administrative actions and accompanying explanations. " width="639w">
 </div>
 <div class="title">Figure 1. Data Toolbox</div>
 </div>
@@ -519,7 +519,7 @@ That includes content types with sets, option sets, references and rich text, me
 <p>Choose "Lion" and check out both the info view and the JSON view, available via the buttons in the table row.</p>
 <div class="imageblock">
 <div class="content">
-<img src="media/data-toolbox-info-view.png" alt="The Data Toolbox info view. the view contains options for exporting, moving, and deleting the node, as well as for displaying permissions for the node, versions of the node, and indexing data (and much more)." width="750w">
+<img src="images/data-toolbox-info-view.png" alt="The Data Toolbox info view. the view contains options for exporting, moving, and deleting the node, as well as for displaying permissions for the node, versions of the node, and indexing data (and much more)." width="750w">
 </div>
 <div class="title">Figure 2. The Data Toolbox node info view</div>
 </div>
@@ -528,7 +528,7 @@ That includes content types with sets, option sets, references and rich text, me
 <p>To inspect the data associated with the animal, you can select "Display properties", which will bring up data about the node, such as its display name, its owner, when it was created, etc.</p>
 <div class="imageblock">
 <div class="content">
-<img src="media/data-toolbox-properties.png" alt="A table with columns 'name', 'index, 'value', and 'type' that describes the node. Example names are 'valid', 'type', 'displayName'." width="606w">
+<img src="images/data-toolbox-properties.png" alt="A table with columns 'name', 'index, 'value', and 'type' that describes the node. Example names are 'valid', 'type', 'displayName'." width="606w">
 </div>
 <div class="title">Figure 3. The display properties view</div>
 </div>
@@ -537,7 +537,7 @@ That includes content types with sets, option sets, references and rich text, me
 <p>Navigate into the <code>data</code> property, where you&#8217;ll find the data stored for the animal. Compare it with the content type you wrote: every input you declared is a property with the same name, the option sets carry a <code>_selected</code> property next to the options, and the rich text description is stored as one HTML string.</p>
 <div class="imageblock">
 <div class="content">
-<img src="media/data-toolbox-properties-data.png" alt="A table showing the data stored about the animal." width="606w">
+<img src="images/data-toolbox-properties-data.png" alt="A table showing the data stored about the animal." width="606w">
 </div>
 <div class="title">Figure 4. The properties.data view</div>
 </div>
@@ -587,7 +587,7 @@ When a query returns something you did not expect, this is the place to check wh
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2026-10-27 13:21:38 UTC
+Last updated 2026-10-27 13:36:21 UTC
 </div>
 </div>
 </body>
