@@ -307,7 +307,7 @@ image::animal-and-artist-target.png["An animal content wizard next to an artist 
 
 === Animal constraints
 
-* Make the display name use "Species" as its label. _Hint: check out https://developer.enonic.com/docs/cms/stable/content/content-types#display-name[the display name section of the content type documentation] and look for something that allows you to do this._
+* Make the display name use "Species" as its placeholder. _Hint: check out https://developer.enonic.com/docs/cms/stable/content/content-types#display-name[the display name section of the content type documentation] and look for something that allows you to do this._
 * An animal can also have alternative names for its species (for instance, the reindeer is also known as _caribou_). Allow the user to add as many alternative names as they want.
 * An image selector that accepts between 0 and 3 images.
 * Help text where you think it would be helpful.
@@ -364,15 +364,25 @@ Finally, it's time to introduce the query in GraphQL.
 
 A ContentSelector will store a reference to the target content item. When using the Guillotine API, you may simply follow this reference to access the target content, and access its fields instantly.
 
+Start with the type-filtered artist query from the Headless API chapter, and select `favoriteAnimal` to follow each artist's reference.
+
 .Fetch artists and their associated favorite animals
 [source,GraphQL,{subs}]
 ----
 {
   guillotine {
-    getChildren(key: "/artists") {
+    queryDsl(
+      query: {
+        term: {
+          field: "type"
+          value: { string: "{app-name-full}:artist" }
+        }
+      }
+      first: 10
+      sort: [{ field: "displayName", direction: ASC }]
+    ) {
       displayName
       ... on {app-name-query}_Artist {
-        _id
         data {
            favoriteAnimal {
             displayName
@@ -397,7 +407,7 @@ Depending on the links (and animals) you created, your result might look a littl
 {
   "data": {
     "guillotine": {
-      "getChildren": [
+      "queryDsl": [
         {
           "displayName": "Cardi B",
           "data": {

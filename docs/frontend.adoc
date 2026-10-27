@@ -14,7 +14,7 @@ So before anything else, publish your content: in Content Studio, select the "ar
 
 == The request
 
-The endpoint is `{graphql-url}`, as you saw in the <<headless-api#_one_endpoint_for_every_api, Headless API chapter>>. It takes an HTTP POST with `Content-Type: application/json` and a JSON body with two properties:
+The endpoint is `{graphql-url}`, as you saw in the <<headless-api#_other_clients, Headless API chapter>>. It takes an HTTP POST with `Content-Type: application/json` and a JSON body with two properties:
 
 [%header,cols="1,1,4"]
 |===
@@ -25,12 +25,14 @@ The endpoint is `{graphql-url}`, as you saw in the <<headless-api#_one_endpoint_
 
 Outside Content Studio there is no selected project, so the query names the project and the branch as arguments on the `guillotine` field. Passing them as variables keeps the query reusable between environments.
 
+Use the same artist type filter and alphabetical sorting as in the Headless API chapter.
+
 Save this as `request.json`:
 
 [source,json,{subs}]
 ----
 {
-  "query": "query Artists($project: String!, $branch: String!) { guillotine(project: $project, branch: $branch) { getChildren(key: \"/artists\", first: 10) { _id displayName } } }",
+  "query": "query Artists($project: String!, $branch: String!) { guillotine(project: $project, branch: $branch) { queryDsl(query: { term: { field: \"type\", value: { string: \"{app-name-full}:artist\" } } }, first: 10, sort: [{ field: \"displayName\", direction: ASC }]) { _id displayName } } }",
   "variables": {
     "project": "{cms-project-id}",
     "branch": "master"
@@ -53,6 +55,9 @@ You should get the three artists back as JSON, the same shape you saw in the pla
 
 The same request with `fetch()`. Save it as `artists.mjs` and run it with `node artists.mjs`. Node 18 or newer has `fetch` built in.
 
+Set `apiBaseUrl` to `{api-base-url}` for your sandbox, or to the live server's address followed by `/api`.
+The API name stays the same; keeping the base URL in one place lets you switch servers without changing the query.
+
 [source,javascript,{subs}]
 ----
 const apiBaseUrl = '{api-base-url}';
@@ -60,7 +65,16 @@ const apiBaseUrl = '{api-base-url}';
 const query = `
   query Artists($project: String!, $branch: String!) {
     guillotine(project: $project, branch: $branch) {
-      getChildren(key: "/artists", first: 10) {
+      queryDsl(
+        query: {
+          term: {
+            field: "type"
+            value: { string: "{app-name-full}:artist" }
+          }
+        }
+        first: 10
+        sort: [{ field: "displayName", direction: ASC }]
+      ) {
         _id
         displayName
         ... on {app-name-query}_Artist {
@@ -93,16 +107,14 @@ async function getArtists() {
     throw new Error(result.errors.map((error) => error.message).join('\n'));
   }
 
-  return result.data.guillotine.getChildren;
+  return result.data.guillotine.queryDsl;
 }
 
 getArtists().then(console.log).catch(console.error);
 ----
 
-Two details worth copying into any client you write:
-
-* A GraphQL response can be HTTP 200 and still carry errors, in the `errors` array next to `data`. Check both.
-* The API base URL is the only thing that changes between your sandbox and production. Keep it in one place, as here, so that going live is a configuration change.
+A GraphQL response can be HTTP 200 and still carry errors, in the `errors` array next to `data`.
+Check both, as the example does.
 
 == From a browser
 
@@ -153,13 +165,25 @@ With `path` set to `/animals/lion`, this is everything the lion's page needs. Th
 
 == Paging a list
 
-`getChildren` and `queryDsl` take `first` and `offset`, which is enough for a short list. For a list of unknown length, use the connection variant, which returns a cursor for the next page and the total count:
+`queryDsl` takes `first` and `offset`, which is enough for a short list.
+For a list of unknown length, use `queryDslConnection`, which returns a cursor for the next page and the total count.
+This query finds animals anywhere in the project and returns two at a time, sorted by display name:
 
 [source,GraphQL,{subs}]
 ----
 query AnimalsPage($project: String!, $branch: String!, $after: String) {
   guillotine(project: $project, branch: $branch) {
-    getChildrenConnection(key: "/animals", first: 2, after: $after, sort: "displayName ASC") {
+    queryDslConnection(
+      query: {
+        term: {
+          field: "type"
+          value: { string: "{app-name-full}:animal" }
+        }
+      }
+      first: 2
+      after: $after
+      sort: [{ field: "displayName", direction: ASC }]
+    ) {
       totalCount
       edges {
         node {
@@ -185,7 +209,7 @@ async function allAnimals() {
   let after = null;
   do {
     const page = await send(query, { project, branch, after });
-    const connection = page.guillotine.getChildrenConnection;
+    const connection = page.guillotine.queryDslConnection;
     animals.push(...connection.edges.map((edge) => edge.node));
     after = connection.pageInfo.hasNext ? connection.pageInfo.endCursor : null;
   } while (after);
@@ -193,7 +217,7 @@ async function allAnimals() {
 }
 ----
 
-Treat the cursor as an opaque value, and keep the key and sorting the same while paging. With two animals per page and three animals, you get two requests.
+Treat the cursor as an opaque value, and keep the query filter and sorting the same while paging. With two animals per page and three animals, you get two requests.
 
 == Building URLs
 

@@ -55,7 +55,9 @@ image::data-toolbox-properties-data.png["A table showing the data stored about t
 
 . Finally, find one of your artists and look at its `favoriteAnimal` property. A reference is stored as the ID of the target content, not its path, which is why you can move and rename content without breaking links.
 
-What you see here is the same data the GraphQL API returns. Guillotine reads these nodes, applies the content type to give them a typed schema, and resolves references and media URLs on the way out. When a query returns something you did not expect, this is the place to check what is actually stored.
+What you see here is the same data the GraphQL API returns.
+Guillotine reads these nodes, exposes their data through GraphQL types generated from the CMS content types, and resolves references and media URLs on the way out.
+When a query returns something you did not expect, this is the place to check what is actually stored.
 
 Inspecting content is only a fraction of what Data Toolbox can do: it's a versatile and powerful administrative tool. Among other things, it can export your content and import it on another instance, which is handy the day you move from your sandbox to a live server.
 
