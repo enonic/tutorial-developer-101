@@ -1,4 +1,4 @@
 kind: "CMS"
 mixins:
-  - name: "notes"
+  - name: "editorial"
     allowContentTypes: "com.example.dev101:artist|com.example.dev101:animal"

@@ -1,5 +1,5 @@
 kind: "Mixin"
-title: "Notes"
+title: "Editorial"
 form:
   - type: "TextLine"
     name: "notes"
