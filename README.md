@@ -57,7 +57,7 @@ must:
 
 #### 📷 Adding images/screenshots
 
-When adding screenshots, place them in the `docs/media` directory.
+When adding screenshots, place them in the `docs/images` directory.
 Ideally, screenshots should be captured at the expected size and
 resolution. That means that in general, you should not adjust your
 zoom to 300% to get a larger image. Instead, try and capture images
@@ -109,8 +109,8 @@ The documentation files should all be placed in the `docs` directory directly.
 
 #### 🖼️ Images
 
-Images go in the `media` subdirectory of the `docs` directory. That
-is: `docs/media`
+Images go in the `images` subdirectory of the `docs` directory. That
+is: `docs/images`
 
 #### 🤫 Hiding files from the build system
 

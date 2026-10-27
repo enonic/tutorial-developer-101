@@ -20,7 +20,7 @@ Check that the destination shown is `/images/`.
 . Click the upload area to select your file, or drag the file onto it.
 +
 .The Media tab in the New Content dialog
-image::media-drag-and-drop.png["New Content dialog with the Media tab selected and /images/ as the upload destination", width=1440]
+image::media-upload.png["New Content dialog with the Media tab selected and /images/ as the upload destination", width=1440]
 
 The uploaded image now appears as a content item in the Images folder.
 It is saved in Draft and has not been published.

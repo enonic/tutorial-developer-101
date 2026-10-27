@@ -64,7 +64,7 @@ This project relies on GitHub Actions for building and publishing. There are no 
 * **Published versions:** `docs/versions.json`
 * **Shared attributes:** `docs/.variables.adoc`
 * **Page format:** AsciiDoc (`.adoc`)
-* **Media:** `docs/media/`
+* **Media:** `docs/images/`
 
 The documentation build maps source documents to routes based on their paths and menu entries. Add every new reader-facing page to `docs/menu.json` and to the overview in `docs/index.adoc`, and keep `docs/versions.json` valid. Files with a leading `.` are not picked up by the build.
 
@@ -74,7 +74,7 @@ Every chapter starts with its title, then `include::.variables.adoc[]`, then its
 
 ## AsciiDoc Conventions
 
-* Use `image::filename.ext["alt text", width=<n>]` for block images stored in `docs/media/`. Screenshots are captured at 2x on a Retina display, so set `width` to half the image's pixel width, for example `width=1440` for a 2880-pixel-wide file. Images not yet recaptured have no width yet; add the halved `width` when each one is replaced. Save photo-heavy screenshots as JPEG at quality 80, and flat UI screenshots as PNG.
+* Use `image::filename.ext["alt text", width=<n>]` for block images stored in `docs/images/`. Screenshots are captured at 2x on a Retina display, so set `width` to half the image's pixel width, for example `width=1440` for a 2880-pixel-wide file. Images not yet recaptured have no width yet; add the halved `width` when each one is replaced. Save photo-heavy screenshots as JPEG at quality 80, and flat UI screenshots as PNG.
 * Use relative cross-document links such as `<<setup#, the setup chapter>>` so links remain version-aware on the developer portal.
 * Use source blocks with the correct language (`xml`, `graphql`, `json`, `shell` or `bash`, `html`) and callouts when individual lines need explanation. Add `[{subs}]` when a block uses attributes.
 * Use `kbd:[]` for keystrokes and `menu:` or the existing backtick `XP menu` -> `Applications` style for navigation paths. Follow the surrounding chapter.

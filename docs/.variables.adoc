@@ -1,5 +1,5 @@
 :toc: right
-:imagesdir: media
+:imagesdir: images
 :experimental:
 :xp-url: http://localhost:8080
 :api-base-url: {xp-url}/api
