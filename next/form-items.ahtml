@@ -6,7 +6,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="generator" content="Asciidoctor 2.0.26">
 <meta name="application-name" content="dev101">
-<meta name="description" content="Take your content types to the next level with more form items. Learn how to configure them, what kinds there are, and how to link content together.">
+<meta name="description" content="Create an Animal content type, configure repeatable fields, select images, and link artists to animals through the GraphQL API.">
 <title>Form items</title>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,300italic,400,400italic,600,600italic%7CNoto+Serif:400,400italic,700,700italic%7CDroid+Sans+Mono:400,700">
 <style>
@@ -443,36 +443,29 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <div id="toc" class="toc2">
 <div id="toctitle">Table of Contents</div>
 <ul class="sectlevel1">
-<li><a href="#common_settings">Common settings</a></li>
-<li><a href="#the_occurrences_setting">The occurrences setting</a>
+<li><a href="#create_the_animal_form">Create the Animal form</a>
 <ul class="sectlevel2">
-<li><a href="#optional">Optional</a></li>
-<li><a href="#required">Required</a></li>
-<li><a href="#unlimited">Unlimited</a></li>
+<li><a href="#task_add_alternative_names">Task: Add alternative names</a></li>
 </ul>
 </li>
-<li><a href="#common_form_items">Common form items</a></li>
-<li><a href="#imageselector">ImageSelector</a></li>
-<li><a href="#contentselector">ContentSelector</a></li>
-<li><a href="#attachmentuploader">AttachmentUploader</a>
+<li><a href="#select_an_image">Select an image</a>
 <ul class="sectlevel2">
-<li><a href="#attachmenturl">attachmentUrl</a></li>
+<li><a href="#task_add_an_image_selector">Task: Add an image selector</a></li>
+<li><a href="#task_create_two_animals">Task: Create two animals</a></li>
 </ul>
 </li>
-<li><a href="#task_artist_and_animals">Task: artist and animals</a>
+<li><a href="#query_the_animals_fields">Query the animal&#8217;s fields</a>
 <ul class="sectlevel2">
-<li><a href="#animal_constraints">Animal constraints</a></li>
-<li><a href="#artist_constraints">Artist constraints</a></li>
-<li><a href="#querying">Querying</a></li>
-<li><a href="#check_your_work">Check your work</a></li>
+<li><a href="#task_fetch_the_lion_and_its_image">Task: Fetch the lion and its image</a></li>
 </ul>
 </li>
-<li><a href="#task_solution">Task solution</a>
+<li><a href="#link_artists_to_animals">Link artists to animals</a>
 <ul class="sectlevel2">
-<li><a href="#content_types">Content types</a></li>
-<li><a href="#graphql_query">GraphQL query</a></li>
+<li><a href="#task_add_a_favorite_animal">Task: Add a favorite animal</a></li>
+<li><a href="#task_follow_the_reference_in_a_query">Task: Follow the reference in a query</a></li>
 </ul>
 </li>
+<li><a href="#more_form_items">More form items</a></li>
 <li><a href="#coming_up">Coming up</a></li>
 </ul>
 </div>
@@ -481,627 +474,27 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <div id="preamble">
 <div class="sectionbody">
 <div class="paragraph">
-<p>In this chapter, you&#8217;ll configure form items, add new kinds of them to your content types, and link content items to each other.</p>
+<p>In this chapter, you&#8217;ll create an Animal content type, give it alternative names and images, and link your artists to their favorite animals.
+You&#8217;ll then follow those relationships in Guillotine.</p>
 </div>
 <div class="paragraph">
-<p><em>Form items</em> are the building blocks of forms. They dictate what kind of data the user can or must add to any piece of content, and how it is edited.
-So far, your content type has only used TextLine, TextArea and Date.</p>
-</div>
-<div class="admonitionblock note">
-<table>
-<tr>
-<td class="icon">
-<i class="fa icon-note" title="Note"></i>
-</td>
-<td class="content">
-If you&#8217;re used to working with HTML, be aware that XP&#8217;s form items are <em>not</em> the same as HTML <code>input</code> elements.
-</td>
-</tr>
-</table>
+<p><em>Form items</em> are the building blocks of content forms.
+You&#8217;ve already used TextLine, TextArea and Date; now you&#8217;ll make a field repeatable and use selectors to reference other content.</p>
 </div>
 </div>
 </div>
 <div class="sect1">
-<h2 id="common_settings"><a class="link" href="#common_settings">Common settings</a></h2>
+<h2 id="create_the_animal_form"><a class="link" href="#create_the_animal_form">Create the Animal form</a></h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>All form items share a number of settings that affect how they act. These settings are:</p>
-</div>
-<div class="dlist">
-<dl>
-<dt class="hdlist1"><code>type</code> (required)</dt>
-<dd>
-<p>Which kind of form item this is, such as <code>TextLine</code> or <code>ImageSelector</code>.</p>
-</dd>
-<dt class="hdlist1"><code>name</code> (required)</dt>
-<dd>
-<p>The property name the value is stored under.</p>
-</dd>
-<dt class="hdlist1"><code>label</code> (required)</dt>
-<dd>
-<p>What the form item should be labeled as in the content form.</p>
-</dd>
-<dt class="hdlist1"><code>occurrences</code> (optional)</dt>
-<dd>
-<p>Specifies the minimum and maximum instances of this field. Defaults to "one optional".</p>
-</dd>
-<dt class="hdlist1"><code>default</code> (optional)</dt>
-<dd>
-<p>Gives a default value to the form item.</p>
-</dd>
-<dt class="hdlist1"><code>helpText</code> (optional)</dt>
-<dd>
-<p>Lets you specify a description of the field to show to the user.</p>
-</dd>
-</dl>
-</div>
-<div class="paragraph">
-<p>Because the form items are so different from each other, they also support type-specific settings. These are placed directly on the form item, next to the shared ones. That is how we use regex validation for TextLine inputs, configure formatting options for HtmlAreas, and dictate what numeric values a Long or a Double accepts.</p>
-</div>
-<div class="admonitionblock important">
-<table>
-<tr>
-<td class="icon">
-<i class="fa icon-important" title="Important"></i>
-</td>
-<td class="content">
-Use <code>camelCase</code> for names, such as <code>otherNames</code>. Names are used as they are for field names in the GraphQL API, where camelCase is the convention and matches built-in fields such as <code>displayName</code>. One caveat: property paths are lowercased in the index, so never give two form items on the same level names that differ only by case.
-</td>
-</tr>
-</table>
-</div>
-<div class="admonitionblock tip">
-<table>
-<tr>
-<td class="icon">
-<i class="fa icon-tip" title="Tip"></i>
-</td>
-<td class="content">
-<div class="title">When to use it</div>
-<div class="paragraph">
-<p>Names are part of your API, so choose them to last. Renaming a form item does not rename the data already stored under the old name: existing items keep their values under a property the form no longer shows, and every query that selected the old field breaks. Labels, on the other hand, can change whenever you like.</p>
-</div>
-</td>
-</tr>
-</table>
-</div>
-<div class="admonitionblock note">
-<table>
-<tr>
-<td class="icon">
-<i class="fa icon-note" title="Note"></i>
-</td>
-<td class="content">
-All of the shared settings (<code>label</code>, <code>occurrences</code>, etc.), and the list of available form items are described in the <a href="https://developer.enonic.com/docs/cms/stable/schemas/form-items">form items documentation</a>.
-</td>
-</tr>
-</table>
-</div>
-<div class="paragraph">
-<p>To show how the settings work, let&#8217;s examine some TextLine inputs with different configurations.</p>
-</div>
-<div class="listingblock">
-<div class="title">TextLine inputs using all the shared settings</div>
-<div class="content">
-<pre class="highlight"><code class="language-yaml" data-lang="yaml">form:
-  - type: "TextLine"
-    name: "textlineRequired"
-    label: "Required input with default" <i class="conum" data-value="1"></i><b>(1)</b>
-    helpText: "This text should provide additional information to the user." <i class="conum" data-value="2"></i><b>(2)</b>
-    occurrences: <i class="conum" data-value="3"></i><b>(3)</b>
-      min: 1
-      max: 1
-    default: "This is a required input with a default value." <i class="conum" data-value="4"></i><b>(4)</b>
-  - type: "TextLine"
-    name: "textlineOptional"
-    label: "Optional input"
-    occurrences: <i class="conum" data-value="5"></i><b>(5)</b>
-      min: 0
-      max: 1
-  - type: "TextLine"
-    name: "textlineList"
-    label: "Input list"
-    helpText: "This input can have as many values as you want."
-    occurrences: <i class="conum" data-value="6"></i><b>(6)</b>
-      min: 0
-      max: 0</code></pre>
-</div>
-</div>
-<div class="colist arabic">
-<table>
-<tr>
-<td><i class="conum" data-value="1"></i><b>1</b></td>
-<td>The label is shown above the input and provides context to the user.</td>
-</tr>
-<tr>
-<td><i class="conum" data-value="2"></i><b>2</b></td>
-<td>The help text can provide extra context and information to the user. It&#8217;s hidden by default, but can be shown by activating the help text button.</td>
-</tr>
-<tr>
-<td><i class="conum" data-value="3"></i><b>3</b></td>
-<td>This instance of <code>occurrences</code> specifies that this is a <em>required</em> input. It must have <em>at least</em> one and <em>at most</em> one value.</td>
-</tr>
-<tr>
-<td><i class="conum" data-value="4"></i><b>4</b></td>
-<td>The default value gets added to the input by default. The user can manually override this.</td>
-</tr>
-<tr>
-<td><i class="conum" data-value="5"></i><b>5</b></td>
-<td>When you specify <code>min: 0</code> and <code>max: 1</code>, that makes the input optional. This is the default.</td>
-</tr>
-<tr>
-<td><i class="conum" data-value="6"></i><b>6</b></td>
-<td>When you set <code>max: 0</code>, the user can add as many values as they want to.</td>
-</tr>
-</table>
-</div>
-<div class="paragraph">
-<p>This set of inputs would be rendered as in the following picture. As specified in the above configuration:</p>
-</div>
-<div class="imageblock text-center">
-<div class="content">
-<img src="images/input-type-common-configuration.png" alt="Three TextLine inputs showing all the common configuration options: labels, help text, default text, and occurrences.">
-</div>
-<div class="title">Figure 1. TextLine inputs showing common configuration options</div>
-</div>
-<div class="paragraph">
-<p>Note that:
-- The required input field has a red asterisk to signify that it must be filled out.
-- The required input field already has a value provided via the <code>default</code> setting.
-- The help texts for the required input field and for the input list are both visible
-- The input list has controls to add more inputs and remove existing inputs</p>
-</div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="the_occurrences_setting"><a class="link" href="#the_occurrences_setting">The occurrences setting</a></h2>
-<div class="sectionbody">
-<div class="paragraph">
-<p>The occurrences setting decides how XP treats the value. Use occurrences to indicate whether a form item is expected to be a list or a single element and whether it is required or not.</p>
-</div>
-<div class="paragraph">
-<p>The setting has two required keys, <code>min</code> and <code>max</code>. Use these to control the number of instances the user can create.</p>
-</div>
-<div class="paragraph">
-<p><code>min</code> specifies that the user must fill out <em>at least</em> this many instances of the field. Usually it is set to <code>0</code> or <code>1</code>. A zero indicates that the field is optional and that the user does not need to fill it out. A one means the field is required.</p>
-</div>
-<div class="paragraph">
-<p><code>max</code> tells XP how many instances the field can have <em>at most</em>. <code>0</code> is a special value here, indicating that the user can have <em>as many as they want</em> (in other words: there is no maximum).</p>
-</div>
-<div class="paragraph">
-<p>A couple of common configuration tricks:</p>
+<p>An animal needs a species name and may have other names, such as "Caribou" for a reindeer.
+Use the display name for the species and a repeatable TextLine for its other names.</p>
 </div>
 <div class="sect2">
-<h3 id="optional"><a class="link" href="#optional">Optional</a></h3>
+<h3 id="task_add_alternative_names"><a class="link" href="#task_add_alternative_names">Task: Add alternative names</a></h3>
 <div class="paragraph">
-<p>If you don&#8217;t add an <code>occurrences</code> setting, XP uses the default, which is <code>min: 0</code>, <code>max: 1</code>.</p>
+<p>Create the Animal content type in your app:</p>
 </div>
-<div class="paragraph">
-<p>That means that the field is <strong>optional</strong> and can have at most <strong>one entry</strong>.</p>
-</div>
-</div>
-<div class="sect2">
-<h3 id="required"><a class="link" href="#required">Required</a></h3>
-<div class="paragraph">
-<p>To make the field required, set both <code>min</code> and <code>max</code> to <code>1</code>.</p>
-</div>
-<div class="paragraph">
-<p>That means that the field is <strong>required</strong>, and can have at most <strong>one entry</strong>.</p>
-</div>
-<div class="paragraph">
-<p>By keeping <code>min</code> at <code>1</code> and changing <code>max</code> to a number <code>n</code> above <code>1</code>, you&#8217;ll be able to keep the field <strong>required</strong>, but make it able to have at most <strong>n entries</strong>.</p>
-</div>
-</div>
-<div class="sect2">
-<h3 id="unlimited"><a class="link" href="#unlimited">Unlimited</a></h3>
-<div class="paragraph">
-<p>By setting <code>max</code> to <code>0</code>, you allow the field to have an <strong>unlimited amount of entries</strong>.</p>
-</div>
-<div class="admonitionblock tip">
-<table>
-<tr>
-<td class="icon">
-<i class="fa icon-tip" title="Tip"></i>
-</td>
-<td class="content">
-If <code>max</code> is greater than <code>0</code>, make sure that <code>min</code> is less than or equal to <code>max</code>. Otherwise, the field will never be considered valid according to XP.
-</td>
-</tr>
-</table>
-</div>
-<div class="admonitionblock tip">
-<table>
-<tr>
-<td class="icon">
-<i class="fa icon-tip" title="Tip"></i>
-</td>
-<td class="content">
-<div class="title">When to use it</div>
-<div class="paragraph">
-<p>Make a field required only when your front-end cannot render the item without it. A required field blocks editors from saving work in progress, and an invalid item cannot be published. Most fields are better optional, with the front-end handling an empty value.</p>
-</div>
-</td>
-</tr>
-</table>
-</div>
-</div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="common_form_items"><a class="link" href="#common_form_items">Common form items</a></h2>
-<div class="sectionbody">
-<div class="paragraph">
-<p>Apart from the form items we&#8217;ve already gotten familiar with, XP also has form items created for other kinds of data. You can always find the full list over <a href="https://developer.enonic.com/docs/cms/stable/schemas/form-items">at the form items reference docs</a>, grouped by the kind of value they produce, but some useful and common ones are:</p>
-</div>
-<div class="dlist">
-<dl>
-<dt class="hdlist1"><a href="https://developer.enonic.com/docs/cms/stable/schemas/form-items/combobox">ComboBox</a></dt>
-<dd>
-<p>A dropdown menu containing predefined options for the user to select from. Allows selection of one or more options.</p>
-<div class="imageblock text-center">
-<div class="content">
-<img src="images/input-type-combo-box.webp" alt="A standard select list / dropdown list / combo box with a few visible dummy options.">
-</div>
-<div class="title">Figure 2. The ComboBox form item</div>
-</div>
-</dd>
-<dt class="hdlist1"><a href="https://developer.enonic.com/docs/cms/stable/schemas/form-items/date">Date</a>, <a href="https://developer.enonic.com/docs/cms/stable/schemas/form-items/datetime">DateTime</a> and <a href="https://developer.enonic.com/docs/cms/stable/schemas/form-items/instant">Instant</a></dt>
-<dd>
-<p>Provide an interactive date picker (with a time component for DateTime and Instant) to save dates and times. The reference explains which of the two to pick for a date with a time.</p>
-<div class="imageblock text-center">
-<div class="content">
-<img src="images/input-type-date-time.webp" alt="A calendar showing year and month with a time indicator to the side.">
-</div>
-<div class="title">Figure 3. The DateTime form item</div>
-</div>
-</dd>
-<dt class="hdlist1"><a href="https://developer.enonic.com/docs/cms/stable/schemas/form-items/geopoint">GeoPoint</a></dt>
-<dd>
-<p>Stores GPS coordinates.</p>
-<div class="imageblock text-center">
-<div class="content">
-<img src="images/input-type-geo-point.webp" alt="A text line input with coordinates.">
-</div>
-<div class="title">Figure 4. The GeoPoint form item</div>
-</div>
-</dd>
-<dt class="hdlist1"><a href="https://developer.enonic.com/docs/cms/stable/schemas/form-items/htmlarea">HtmlArea</a></dt>
-<dd>
-<p>Provides a rich text, multi-line input. We&#8217;ll discuss this in detail in <a href="rich-text.ahtml">the rich-text chapter</a>.</p>
-<div class="imageblock text-center">
-<div class="content">
-<img src="images/input-type-html-area.png" alt="A text area with a tools ribbon on the top. The ribbon provides rich text tools such as justification, macro insertion, text styles, etc.">
-</div>
-<div class="title">Figure 5. The HtmlArea form item</div>
-</div>
-</dd>
-</dl>
-</div>
-<div class="paragraph">
-<p>Additionally, XP has form items that group other form items, called sets, which get <a href="sets.ahtml">a chapter of their own</a>. First, let&#8217;s look at the form items that reference other content.</p>
-</div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="imageselector"><a class="link" href="#imageselector">ImageSelector</a></h2>
-<div class="sectionbody">
-<div class="imageblock">
-<div class="content">
-<img src="images/input-type-image-selector.png" alt="ImageSelector: An interactive image selection tool.">
-</div>
-<div class="title">Figure 6. The ImageSelector form item</div>
-</div>
-<div class="paragraph">
-<p>Images are a key part of many web experiences: they add color, break up the content, and give the reader something to rest their eyes on.</p>
-</div>
-<div class="paragraph">
-<p>XP&#8217;s image selector allows you to select an image for a piece of content and also to upload new images.</p>
-</div>
-<div class="listingblock">
-<div class="title">A minimal ImageSelector configuration</div>
-<div class="content">
-<pre class="highlight"><code class="language-yaml" data-lang="yaml">- type: "ImageSelector"
-  name: "myImage"
-  label: "My Image"</code></pre>
-</div>
-</div>
-<div class="paragraph">
-<p>Read more about the <a href="https://developer.enonic.com/docs/cms/stable/schemas/form-items/imageselector">configuration of image selectors</a> in the reference docs.</p>
-</div>
-<div class="paragraph">
-<p>After you&#8217;ve added an image (or several), you can highlight it and click the edit button. This will take you to the image editing form. This is the same form as we saw in <a href="media.ahtml#_image_form">the previous chapter</a>.</p>
-</div>
-<div class="imageblock">
-<div class="content">
-<img src="images/input-type-image-selector-highlighted-image.png" alt="The image selector input field with two images of lions&#8201;&#8212;&#8201;one male, one female - - below. Under the images, there&#8217;s a set of buttons saying 'edit' and 'remove'.">
-</div>
-<div class="title">Figure 7. The image selector with uploaded and selected images</div>
-</div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="contentselector"><a class="link" href="#contentselector">ContentSelector</a></h2>
-<div class="sectionbody">
-<div class="imageblock">
-<div class="content">
-<img src="images/input-type-content-selector.png" alt="ContentSelector: An interactive content selection tool.">
-</div>
-<div class="title">Figure 8. The ContentSelector form item</div>
-</div>
-<div class="paragraph">
-<p>The image selector we just saw is actually a specialized form of the more general ContentSelector.</p>
-</div>
-<div class="paragraph">
-<p>The ContentSelector allows you to reference other content. Let&#8217;s say you have two content types: one of type person and one of type food. If you want to be able to specify which dishes the person likes, you could use a content selector to create a reference from the person to their favored dish.</p>
-</div>
-<div class="paragraph">
-<p>Because referencing other content types comes with a lot of variability, the ContentSelector has settings to support this. You can choose to allow only certain content types or only content that&#8217;s available at a certain path. You can also change whether the selector should show content in a tree-style hierarchy or as a flat list of content.</p>
-</div>
-<div class="paragraph">
-<p><a href="https://developer.enonic.com/docs/cms/stable/schemas/form-items/contentselector">The full list of ContentSelector settings</a> is available in the reference docs, including a number of examples to explain content inclusion and exclusion. However, a simple configuration could look like this:</p>
-</div>
-<div class="listingblock">
-<div class="title">A basic ContentSelector configuration that only allows one specific content type</div>
-<div class="content">
-<pre class="highlight"><code class="language-yaml" data-lang="yaml">- type: "ContentSelector"
-  name: "myContentSelector"
-  label: "My ContentSelector"
-  allowContentType:
-    - "citation"</code></pre>
-</div>
-</div>
-<div class="admonitionblock tip">
-<table>
-<tr>
-<td class="icon">
-<i class="fa icon-tip" title="Tip"></i>
-</td>
-<td class="content">
-<div class="title">When to use it</div>
-<div class="paragraph">
-<p>Reference another content item when the thing has a life of its own: it is published, moved, reused from several places or edited by someone else. An artist&#8217;s favorite animal is an animal that exists regardless of the artist, so it is a reference. When the data only makes sense inside the parent, such as an artist&#8217;s filmography entries, embed it instead with the sets you will meet in the <a href="sets.ahtml">next chapter</a>.</p>
-</div>
-</td>
-</tr>
-</table>
-</div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="attachmentuploader"><a class="link" href="#attachmentuploader">AttachmentUploader</a></h2>
-<div class="sectionbody">
-<div class="paragraph">
-<p>XP also has a rather special form item named <a href="https://developer.enonic.com/docs/cms/stable/schemas/form-items/attachmentuploader">AttachmentUploader</a>. Unlike <a href="media.ahtml">media</a> content, which creates an independent content item for each file you upload, AttachmentUploader lets you store one (or more) files within the specific content item. Under the hood, it uses the same <code>attachment</code> property structure as media when persisting the file.</p>
-</div>
-<div class="imageblock">
-<div class="content">
-<img src="images/input-type-attachmentuploader.png" alt="AttachmentUploader: Store any number of files within your content item" width="651w">
-</div>
-<div class="title">Figure 9. The AttachmentUploader form item</div>
-</div>
-<div class="admonitionblock tip">
-<table>
-<tr>
-<td class="icon">
-<i class="fa icon-tip" title="Tip"></i>
-</td>
-<td class="content">
-<div class="title">When to use it</div>
-<div class="paragraph">
-<p>Upload a file as media when it is an asset in its own right: an image used on several pages, a brochure linked from many places, anything editors should find, reuse and publish independently. Use an AttachmentUploader when the file belongs to exactly one item and should live and die with it, such as the attachments of an e-mail or the PDF version of a report. Media can be referenced from an ImageSelector or ContentSelector; attachments cannot.</p>
-</div>
-</td>
-</tr>
-</table>
-</div>
-<div class="listingblock">
-<div class="title">Here is what an AttachmentUploader definition looks like</div>
-<div class="content">
-<pre class="highlight"><code class="language-yaml" data-lang="yaml">- type: "AttachmentUploader"
-  name: "attachments"
-  label: "Attachments"
-  occurrences: <i class="conum" data-value="1"></i><b>(1)</b>
-    min: 0
-    max: 0</code></pre>
-</div>
-</div>
-<div class="colist arabic">
-<table>
-<tr>
-<td><i class="conum" data-value="1"></i><b>1</b></td>
-<td><code>min: 0</code> shows that this is not a required field, while <code>max: 0</code> shows that we can upload as many attachments as we want.</td>
-</tr>
-</table>
-</div>
-<div class="sect2">
-<h3 id="attachmenturl"><a class="link" href="#attachmenturl">attachmentUrl</a></h3>
-<div class="paragraph">
-<p>Remember how we used <code>mediaUrl</code> to get a link to a media item&#8217;s file. <code>mediaUrl</code> is only available for media content. For attachments stored on any content item, use the <code>attachments</code> field and its <code>attachmentUrl</code> instead:</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="highlight"><code class="language-GraphQL" data-lang="GraphQL">{
-  guillotine {
-    queryDsl(
-      query: {
-        term: {
-          field: "type",
-          value: {
-            string: "media:image"
-          }
-        }
-      }
-    ) {
-      displayName
-      type
-      attachments {
-        name
-        attachmentUrl {
-          path
-          queryString
-        }
-      }
-    }
-  }
-}</code></pre>
-</div>
-</div>
-<div class="paragraph">
-<p>And the result should look something like this:</p>
-</div>
-<div class="admonitionblock note">
-<table>
-<tr>
-<td class="icon">
-<i class="fa icon-note" title="Note"></i>
-</td>
-<td class="content">
-If you have multiple attachments in your content, they will all be listed.
-</td>
-</tr>
-</table>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="highlight"><code class="language-json" data-lang="json">{
-  "data": {
-    "guillotine": {
-      "queryDsl": [
-        {
-          "displayName": "lion",
-          "type": "media:image",
-          "attachments": [
-            {
-              "name": "lion.jpg",
-              "attachmentUrl": {
-                "path": "/media:attachment/my-first-project:draft/f7efd6e4-9eed-45d2-83b6-d088a7bdc685:8652e625afe7bbda595a190a3b8624e322dc9f1a/lion.jpg",
-                "queryString": ""
-              }
-            }
-          ]
-        }
-      ]
-    }
-  }
-}</code></pre>
-</div>
-</div>
-<div class="paragraph">
-<p>As with <code>mediaUrl</code> in the previous chapter, put your API base URL in front of <code>path</code> to get a working link - for your sandbox that is <code><a href="http://localhost:8080/api" class="bare">http://localhost:8080/api</a></code>.</p>
-</div>
-<div class="admonitionblock tip">
-<table>
-<tr>
-<td class="icon">
-<i class="fa icon-tip" title="Tip"></i>
-</td>
-<td class="content">
-Under the hood, <code>attachmentUrl</code> uses the same logic as Enonic&#8217;s portal library function <a href="https://developer.enonic.com/docs/code/stable/libraries/lib-portal#attachmenturlparts">attachmentUrlParts</a>, so you can follow the link to better understand the arguments that you pass to this field when creating queries that use it.
-</td>
-</tr>
-</table>
-</div>
-</div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="task_artist_and_animals"><a class="link" href="#task_artist_and_animals">Task: artist and animals</a></h2>
-<div class="sectionbody">
-<div class="paragraph">
-<p>Time for a little recap! We&#8217;ll put together everything we&#8217;ve learned about content types and form items thus far to create a new data set.</p>
-</div>
-<div class="paragraph">
-<p>A solution is listed below, but try and see if you can solve it yourself first.</p>
-</div>
-<div class="admonitionblock tip">
-<table>
-<tr>
-<td class="icon">
-<i class="fa icon-tip" title="Tip"></i>
-</td>
-<td class="content">
-If you&#8217;re wondering how to achieve some of the goals, try consulting the documentation that&#8217;s been linked to in this chapter.
-</td>
-</tr>
-</table>
-</div>
-<div class="paragraph">
-<p>Your task is to create a new content type: <code>Animal</code> and to update the <code>Artist</code> content type with new constraints and fields. By the end of this chapter, you should have content types that look like this in Content Studio:</p>
-</div>
-<div class="imageblock">
-<div class="content">
-<img src="images/animal-and-artist-target.png" alt="An animal content wizard next to an artist wizard">
-</div>
-<div class="title">Figure 10. The target for this task: animal and artist</div>
-</div>
-<div class="sect2">
-<h3 id="animal_constraints"><a class="link" href="#animal_constraints">Animal constraints</a></h3>
-<div class="ulist">
-<ul>
-<li>
-<p>Make the display name use "Species" as its placeholder. <em>Hint: check out <a href="https://developer.enonic.com/docs/cms/stable/content/content-types#display-name">the display name section of the content type documentation</a> and look for something that allows you to do this.</em></p>
-</li>
-<li>
-<p>An animal can also have alternative names for its species (for instance, the reindeer is also known as <em>caribou</em>). Allow the user to add as many alternative names as they want.</p>
-</li>
-<li>
-<p>An image selector that accepts between 0 and 3 images.</p>
-</li>
-<li>
-<p>Help text where you think it would be helpful.</p>
-</li>
-</ul>
-</div>
-</div>
-<div class="sect2">
-<h3 id="artist_constraints"><a class="link" href="#artist_constraints">Artist constraints</a></h3>
-<div class="ulist">
-<ul>
-<li>
-<p>Add a ContentSelector that allows only content of the "Animal" type and that must be nested under the "animals" folder. Call it <code>favoriteAnimal</code>.</p>
-</li>
-</ul>
-</div>
-</div>
-<div class="sect2">
-<h3 id="querying"><a class="link" href="#querying">Querying</a></h3>
-<div class="ulist">
-<ul>
-<li>
-<p>Create a GraphQL query that&#8217;ll fetch all artists and list what their favorite animals are, as well their animals' other names.</p>
-</li>
-</ul>
-</div>
-</div>
-<div class="sect2">
-<h3 id="check_your_work"><a class="link" href="#check_your_work">Check your work</a></h3>
-<div class="paragraph">
-<p>To verify that everything works, create some animals, create a content link between an artist and an animal and run your query to fetch some new data on this new structure.</p>
-</div>
-<div class="admonitionblock tip">
-<table>
-<tr>
-<td class="icon">
-<i class="fa icon-tip" title="Tip"></i>
-</td>
-<td class="content">
-Don&#8217;t worry if something did not work, we&#8217;ll show the solutions in the next section.
-</td>
-</tr>
-</table>
-</div>
-</div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="task_solution"><a class="link" href="#task_solution">Task solution</a></h2>
-<div class="sectionbody">
-<div class="sect2">
-<h3 id="content_types"><a class="link" href="#content_types">Content types</a></h3>
-<div class="olist arabic">
-<ol class="arabic">
-<li>
-<p>Create the animal content type:</p>
 <div class="listingblock">
 <div class="title">src/main/resources/cms/content-types/animal/animal.yaml</div>
 <div class="content">
@@ -1117,8 +510,67 @@ form:
     helpText: "Other names for this species."
     occurrences:
       min: 0
-      max: 0
-  - type: "ImageSelector"
+      max: 0</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>As with Artist, <code>displayNamePlaceholder</code> tells editors what to enter in the display name, here the species.
+For the <code>otherNames</code> field:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>type</code> chooses the form item, in this case TextLine.</p>
+</li>
+<li>
+<p><code>name</code> is the property name used to store the value and expose it through GraphQL.</p>
+</li>
+<li>
+<p><code>label</code> and <code>helpText</code> guide the editor filling out the form.</p>
+</li>
+<li>
+<p><code>occurrences</code> allows the editor to add multiple values: <code>min: 0</code> makes the field optional, and <code>max: 0</code> means there is no upper limit.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>Without <code>occurrences</code>, a field is optional and accepts a single value (<code>min: 0</code>, <code>max: 1</code>).
+Setting both to <code>1</code> makes it required.
+Content Studio allows editors to save drafts with missing required values, but those items cannot be marked as ready or published.</p>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+Choose field names that will last, and use <code>camelCase</code>, such as <code>otherNames</code>.
+Renaming a field does not migrate its stored values, and queries using its old name will need updating.
+You can change its label without changing the stored property or API field.
+</td>
+</tr>
+</table>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="select_an_image"><a class="link" href="#select_an_image">Select an image</a></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>The lion image you uploaded in the <a href="media.ahtml">previous chapter</a> is a separate content item.
+An ImageSelector stores a reference to it, so you can reuse the same image across several animals without uploading copies.</p>
+</div>
+<div class="sect2">
+<h3 id="task_add_an_image_selector"><a class="link" href="#task_add_an_image_selector">Task: Add an image selector</a></h3>
+<div class="paragraph">
+<p>Append this form item to the Animal form, at the same indentation as <code>otherNames</code>:</p>
+</div>
+<div class="listingblock">
+<div class="title">src/main/resources/cms/content-types/animal/animal.yaml</div>
+<div class="content">
+<pre class="highlight"><code class="language-yaml" data-lang="yaml">  - type: "ImageSelector"
     name: "images"
     label: "Images"
     helpText: "Images of the animal"
@@ -1128,31 +580,126 @@ form:
 </div>
 </div>
 <div class="paragraph">
-<p>As with Artist, <code>displayNamePlaceholder</code> tells editors what the display name holds, here the species.</p>
+<p>Here, <code>min: 0</code> and <code>max: 3</code> allow up to three images, including none.
+ImageSelector lets editors select existing images or upload new ones.
+For this exercise, you&#8217;ll select the existing lion image.</p>
 </div>
+</div>
+<div class="sect2">
+<h3 id="task_create_two_animals"><a class="link" href="#task_create_two_animals">Task: Create two animals</a></h3>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Save the schema file and let your running <code>enonic dev</code> watcher update the app.</p>
 </li>
 <li>
-<p>Next, update the <code>Artist</code> content type.</p>
+<p>In Content Studio, create a folder named "Animals" at the root of "My First Project", next to Artists and Images.
+Check that its path is <code>/animals</code>.</p>
+</li>
+<li>
+<p>Select Animals, click <b class="button">New</b>, and choose <strong>Animal</strong>.
+Enter "Lion" as the display name and select your uploaded <code>lion.jpg</code> in the Images field.
+Leave Other names empty and save the item.</p>
+</li>
+<li>
+<p>Create another Animal named "Reindeer" in the same folder.
+Enter "Caribou" in Other names, leave Images empty, and save it.
+Notice that you can add another Other names entry because the field is repeatable.</p>
+</li>
+</ol>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/form-animal.png" alt="Animal form for Lion with an empty Other names field and the selected lion image" width="578">
+</div>
+<div class="title">Figure 1. The Animal form with a reference to the uploaded lion image</div>
+</div>
+<div class="paragraph">
+<p>Both items are saved in Draft; keep using Draft in Query Playground for the exercises below.</p>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="query_the_animals_fields"><a class="link" href="#query_the_animals_fields">Query the animal&#8217;s fields</a></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Guillotine uses <code>occurrences</code> when generating the GraphQL fields.
+Both <code>otherNames</code> and <code>images</code> accept multiple values, so both become lists, even when an item has just one value.
+The names are strings; the images are content references whose fields you can select.</p>
+</div>
+<div class="sect2">
+<h3 id="task_fetch_the_lion_and_its_image"><a class="link" href="#task_fetch_the_lion_and_its_image">Task: Fetch the lion and its image</a></h3>
+<div class="paragraph">
+<p>Open Query Playground for "My First Project", keep <strong>Draft</strong> selected, and run:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-graphql" data-lang="graphql">{
+  guillotine {
+    get(key: "/animals/lion") {
+      displayName
+      ... on com_example_dev101_Animal {
+        data {
+          otherNames
+          images {
+            displayName
+            ... on media_Image {
+              imageUrl(scale: "width(600)") {
+                path
+                queryString
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The <code>get</code> result and the items in <code>images</code> use GraphQL&#8217;s <code>Content</code> interface.
+As in the <a href="headless-api.ahtml">Headless API chapter</a>, an inline fragment selects fields belonging to a more specific GraphQL type:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>... on {app-name-query}_Animal</code> gives you access to the Animal&#8217;s <code>data</code>.</p>
+</li>
+<li>
+<p><code>... on media_Image</code> gives you access to the image&#8217;s <code>imageUrl</code>.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>These are GraphQL type names; your CMS content types are <code>com.example.dev101:animal</code> and <code>media:image</code>.
+The image selector stores the image&#8217;s ID, and Guillotine resolves that reference for you.</p>
+</div>
+<div class="paragraph">
+<p>The result contains an empty <code>otherNames</code> array and one entry in <code>images</code>.
+Build the image URL by joining <code><a href="http://localhost:8080/api" class="bare">http://localhost:8080/api</a></code>, <code>path</code> and <code>queryString</code>, as in the media chapter.
+Change the key to <code>/animals/reindeer</code> and run the query again: <code>otherNames</code> now contains <code>"Caribou"</code>, while <code>images</code> is empty.</p>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="link_artists_to_animals"><a class="link" href="#link_artists_to_animals">Link artists to animals</a></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>A ContentSelector can reference other kinds of content, just as ImageSelector references images.
+You&#8217;ll use it to give each artist one optional favorite animal.</p>
+</div>
+<div class="sect2">
+<h3 id="task_add_a_favorite_animal"><a class="link" href="#task_add_a_favorite_animal">Task: Add a favorite animal</a></h3>
+<div class="paragraph">
+<p>Append this field to the Artist form, after <code>birthday</code>:</p>
+</div>
 <div class="listingblock">
 <div class="title">src/main/resources/cms/content-types/artist/artist.yaml</div>
 <div class="content">
-<pre class="highlight"><code class="language-yaml" data-lang="yaml">kind: "ContentType"
-title: "Artist"
-description: "Information about an artist"
-displayNamePlaceholder: "Stage name"
-superType: "base:structured"
-form:
-  - type: "TextLine"
-    name: "legalName"
-    label: "Legal name"
-    helpText: "The artist's name on official documents, if different from their stage name."
-  - type: "TextArea"
-    name: "about"
-    label: "About the artist"
-  - type: "Date"
-    name: "birthday"
-    label: "Birthday"
-  - type: "ContentSelector"
+<pre class="highlight"><code class="language-yaml" data-lang="yaml">  - type: "ContentSelector"
     name: "favoriteAnimal"
     label: "Favorite animal"
     allowContentType:
@@ -1162,43 +709,83 @@ form:
 </div>
 </div>
 <div class="paragraph">
-<p>The new <code>favoriteAnimal</code> ContentSelector uses <code>allowContentType</code> and <code>allowPath</code> to narrow the possible content to only Animals in the animals folder</p>
+<p>The selector narrows the available choices in two ways:</p>
 </div>
-</li>
-<li>
-<p>Create a folder called "animals" next to the "artists" folder, and create some animals in it. Either pick your favorites, or, if you&#8217;re not feeling creative, add these (content from Wikipedia):</p>
 <div class="ulist">
 <ul>
 <li>
-<p><a href="https://en.wikipedia.org/wiki/Lion">Wiki article for lion</a></p>
+<p><code>allowContentType</code> permits only the <code>animal</code> content type from this app.</p>
 </li>
 <li>
-<p><a href="https://en.wikipedia.org/wiki/Reindeer">Wiki article for reindeer</a></p>
+<p><code>allowPath</code> restricts the choices to content below <code>/animals</code>.</p>
 </li>
 </ul>
 </div>
-</li>
-<li>
-<p>Create some links using the ContentSelector from artists to animals to get familiar with linking content.</p>
-</li>
-</ol>
+<div class="paragraph">
+<p>There is no <code>occurrences</code> setting, so the editor can select at most one animal and can leave the field empty.</p>
+</div>
+<div class="paragraph">
+<p>Save the schema, let the watcher update the app, and reopen your artists in Content Studio.
+Use these selections as sample data for the exercise:</p>
+</div>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 50%;">
+<col style="width: 50%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Artist</th>
+<th class="tableblock halign-left valign-top">Favorite animal</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Cardi B</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Lion</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Missy Elliott</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Reindeer</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">P!nk</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Lion</p></td>
+</tr>
+</tbody>
+</table>
+<div class="paragraph">
+<p>Save each artist after making the selection.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/form-artist-favorite-animal.png" alt="Artist form for Missy Elliott with Reindeer selected as her favorite animal" width="548">
+</div>
+<div class="title">Figure 2. The Artist form with an animal selected</div>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+Reference an item when it should be edited and reused independently.
+Two artists can reference the same Lion, and an edit to that animal is visible through both references.
+For data that only belongs to one item, such as an artist&#8217;s filmography entries, you&#8217;ll use sets in the next chapter.
+</td>
+</tr>
+</table>
 </div>
 </div>
 <div class="sect2">
-<h3 id="graphql_query"><a class="link" href="#graphql_query">GraphQL query</a></h3>
+<h3 id="task_follow_the_reference_in_a_query"><a class="link" href="#task_follow_the_reference_in_a_query">Task: Follow the reference in a query</a></h3>
 <div class="paragraph">
-<p>Finally, it&#8217;s time to introduce the query in GraphQL.</p>
-</div>
-<div class="paragraph">
-<p>A ContentSelector will store a reference to the target content item. When using the Guillotine API, you may simply follow this reference to access the target content, and access its fields instantly.</p>
-</div>
-<div class="paragraph">
-<p>Start with the type-filtered artist query from the Headless API chapter, and select <code>favoriteAnimal</code> to follow each artist&#8217;s reference.</p>
+<p>Start with the type-filtered artist query from the Headless API chapter and select <code>favoriteAnimal</code>:</p>
 </div>
 <div class="listingblock">
-<div class="title">Fetch artists and their associated favorite animals</div>
 <div class="content">
-<pre class="highlight"><code class="language-GraphQL" data-lang="GraphQL">{
+<pre class="highlight"><code class="language-graphql" data-lang="graphql">{
   guillotine {
     queryDsl(
       query: {
@@ -1207,15 +794,13 @@ form:
           value: { string: "com.example.dev101:artist" }
         }
       }
-      first: 10
-      sort: [{ field: "displayName", direction: ASC }]
     ) {
       displayName
       ... on com_example_dev101_Artist {
         data {
-           favoriteAnimal {
+          favoriteAnimal {
             displayName
-            ... on com_example_dev101_Animal{
+            ... on com_example_dev101_Animal {
               data {
                 otherNames
               }
@@ -1229,56 +814,69 @@ form:
 </div>
 </div>
 <div class="paragraph">
-<p>Depending on the links (and animals) you created, your result might look a little something like this:</p>
+<p>The <code>favoriteAnimal</code> field returns a single content item.
+You can read its <code>displayName</code> directly, then use an Animal fragment to select <code>data.otherNames</code>.
+There is no need for a separate query to fetch the referenced animal.</p>
+</div>
+<div class="paragraph">
+<p>With the sample selections above, the <code>data.guillotine.queryDsl</code> array contains the following items; their order may differ:</p>
 </div>
 <div class="listingblock">
-<div class="title">The list of artists with their favorite animals</div>
 <div class="content">
-<pre class="highlight"><code class="language-json" data-lang="json">{
-  "data": {
-    "guillotine": {
-      "queryDsl": [
-        {
-          "displayName": "Cardi B",
-          "data": {
-            "favoriteAnimal": {
-              "displayName": "Lion",
-              "data": {
-                "otherNames": []
-              }
-            }
-          }
-        },
-        {
-          "displayName": "Missy Elliott",
-          "data": {
-            "favoriteAnimal": {
-              "displayName": "Reindeer",
-              "data": {
-                "otherNames": [
-                  "Caribou"
-                ]
-              }
-            }
-          }
-        },
-        {
-          "displayName": "P!nk",
-          "data": {
-            "favoriteAnimal": {
-              "displayName": "Lion",
-              "data": {
-                "otherNames": []
-              }
-            }
-          }
+<pre class="highlight"><code class="language-json" data-lang="json">[
+  {
+    "displayName": "Cardi B",
+    "data": {
+      "favoriteAnimal": {
+        "displayName": "Lion",
+        "data": {
+          "otherNames": []
         }
-      ]
+      }
+    }
+  },
+  {
+    "displayName": "Missy Elliott",
+    "data": {
+      "favoriteAnimal": {
+        "displayName": "Reindeer",
+        "data": {
+          "otherNames": ["Caribou"]
+        }
+      }
+    }
+  },
+  {
+    "displayName": "P!nk",
+    "data": {
+      "favoriteAnimal": {
+        "displayName": "Lion",
+        "data": {
+          "otherNames": []
+        }
+      }
     }
   }
-}</code></pre>
+]</code></pre>
 </div>
 </div>
+<div class="paragraph">
+<p>If an artist has no selection, <code>favoriteAnimal</code> is <code>null</code>.
+Compare that with the empty lists for an animal&#8217;s unused <code>otherNames</code> or <code>images</code> fields.</p>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="more_form_items"><a class="link" href="#more_form_items">More form items</a></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>You now have the basics for configuring fields and linking content.
+The <a href="https://developer.enonic.com/docs/cms/stable/schemas/form-items">CMS form items reference</a> covers the full range of form items and their settings, including <a href="https://developer.enonic.com/docs/cms/stable/schemas/form-items/imageselector">ImageSelector</a> and <a href="https://developer.enonic.com/docs/cms/stable/schemas/form-items/contentselector">ContentSelector</a>.</p>
+</div>
+<div class="paragraph">
+<p>For a file that belongs directly to one content item, <a href="https://developer.enonic.com/docs/cms/stable/schemas/form-items/attachmentuploader">AttachmentUploader</a> stores it as an attachment on that item, instead of creating separate media content to reference.
+You can retrieve it through <code>attachments</code> and <code>attachmentUrl</code>, as you did in the <a href="media.ahtml">media chapter</a>.</p>
 </div>
 </div>
 </div>
@@ -1286,17 +884,15 @@ form:
 <h2 id="coming_up"><a class="link" href="#coming_up">Coming up</a></h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>You have configured form items with occurrences, defaults and help text, linked content with selectors, and followed a reference through the API.</p>
-</div>
-<div class="paragraph">
-<p>In the next chapter, you&#8217;ll group and reuse form items with <a href="sets.ahtml">sets and form fragments</a>.</p>
+<p>You&#8217;ve created repeatable fields, selected an image, linked artists to animals, and followed those references through Guillotine.
+In the next chapter, you&#8217;ll group and reuse form items with <a href="sets.ahtml">sets and form fragments</a>.</p>
 </div>
 </div>
 </div>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2026-10-27 13:36:21 UTC
+Last updated 2026-10-27 16:42:56 UTC
 </div>
 </div>
 </body>
