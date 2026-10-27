@@ -6,7 +6,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="generator" content="Asciidoctor 2.0.26">
 <meta name="application-name" content="dev101">
-<meta name="description" content="How does XP deal with images and other media? This chapter covers XP media support, how to upload and query for media, how to work with images and attachments.">
+<meta name="description" content="Upload an image, inspect its content data and attachment, retrieve the original file, and request cropped and filtered versions with Guillotine.">
 <title>Media - files are content too</title>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,300italic,400,400italic,600,600italic%7CNoto+Serif:400,400italic,700,700italic%7CDroid+Sans+Mono:400,700">
 <style>
@@ -443,30 +443,33 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <div id="toc" class="toc2">
 <div id="toctitle">Table of Contents</div>
 <ul class="sectlevel1">
-<li><a href="#media">Media</a>
+<li><a href="#upload_a_file">Upload a file</a>
 <ul class="sectlevel2">
-<li><a href="#media_types">Media types</a></li>
-<li><a href="#uploading">Uploading</a></li>
-<li><a href="#media_content_and_attachments">Media content and attachments</a></li>
+<li><a href="#task_upload_an_image">Task: Upload an image</a></li>
 </ul>
 </li>
-<li><a href="#media_apis">Media APIs</a>
+<li><a href="#inspect_the_uploaded_content">Inspect the uploaded content</a>
 <ul class="sectlevel2">
-<li><a href="#mediaurl">mediaUrl</a></li>
+<li><a href="#task_find_the_image_and_its_attachment">Task: Find the image and its attachment</a></li>
 </ul>
 </li>
-<li><a href="#images">Images</a>
+<li><a href="#retrieve_the_attached_file">Retrieve the attached file</a>
 <ul class="sectlevel2">
-<li><a href="#image_api">Image API</a></li>
-<li><a href="#image_form">Image form</a></li>
-<li><a href="#autofocus">Autofocus</a></li>
+<li><a href="#task_open_and_download_the_attachment">Task: Open and download the attachment</a></li>
 </ul>
 </li>
-<li><a href="#graphql_api">GraphQL API</a>
+<li><a href="#request_a_cropped_image">Request a cropped image</a>
 <ul class="sectlevel2">
-<li><a href="#image_media_type">Image media type</a></li>
+<li><a href="#task_open_a_portrait_crop">Task: Open a portrait crop</a></li>
 </ul>
 </li>
+<li><a href="#guide_cropping_with_a_focal_point">Guide cropping with a focal point</a>
+<ul class="sectlevel2">
+<li><a href="#_image_form">Task: Set a focal point and compare</a></li>
+<li><a href="#task_add_a_filter">Task: Add a filter</a></li>
+</ul>
+</li>
+<li><a href="#media_urls_and_caching">Media URLs and caching</a></li>
 <li><a href="#coming_up">Coming up</a></li>
 </ul>
 </div>
@@ -475,104 +478,183 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <div id="preamble">
 <div class="sectionbody">
 <div class="paragraph">
-<p>In this chapter, you&#8217;ll upload images and other files, see how XP stores them as content, and fetch them, scaled and cropped, through the GraphQL API.</p>
+<p>In this chapter, you&#8217;ll upload an image, inspect how it is stored as content with an attachment, and use Guillotine to get URLs for its original file and for cropped and filtered versions.
+The media APIs deliver the files at those URLs.</p>
 </div>
 </div>
 </div>
 <div class="sect1">
-<h2 id="media"><a class="link" href="#media">Media</a></h2>
+<h2 id="upload_a_file"><a class="link" href="#upload_a_file">Upload a file</a></h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>A file may be uploaded to XP to become an individual piece of content. Similar to other content items.</p>
+<p>Start by uploading an image that you&#8217;ll use throughout the chapter.</p>
 </div>
 <div class="sect2">
-<h3 id="media_types"><a class="link" href="#media_types">Media types</a></h3>
-<div class="paragraph">
-<p>Media types are standard content types that ship with XP. When you upload a file to XP, XP will assign it one of these content types, also referred to as media types. The media type will be resolved from the file&#8217;s content. Some common media types are images, audio, video, and executables.</p>
-</div>
-<div class="paragraph">
-<p>For a full overview of all the media types baked into XP, see the <a href="https://developer.enonic.com/docs/cms/stable/media">reference docs for media</a>.</p>
-</div>
-</div>
-<div class="sect2">
-<h3 id="uploading"><a class="link" href="#uploading">Uploading</a></h3>
-<div class="paragraph">
-<p>To upload files to Content Studio, simply click <b class="button">New &#8230;&#8203;</b> to use the content creation dialog. You may either click the "upload" icon in the dialog, or drag&#8217;n drop the files from your device - or even directly from another website.</p>
-</div>
-<div class="imageblock">
-<div class="content">
-<img src="media/media-drag-and-drop.png" alt="The drag and drop interface. Three file icons being dragged onto a large, blue, circular drop zone." width="960w">
-</div>
-<div class="title">Figure 1. Dragging and dropping files to the "create content dialog"</div>
-</div>
-<div class="paragraph">
-<p>This process is the same for whatever media type you want to upload.</p>
-</div>
-<div class="paragraph">
-<p>To get familiar with uploading media to XP, let&#8217;s start with one of the most common media types on the web: images! As mentioned above, this process will also work for any other media type.</p>
-</div>
+<h3 id="task_upload_an_image"><a class="link" href="#task_upload_an_image">Task: Upload an image</a></h3>
 <div class="olist arabic">
 <ol class="arabic">
 <li>
-<p>Find an image to upload. For the purposes of the tasks in this chapter, you should work with an image where the important part isn&#8217;t centered in the shot. If you have one yourself, feel free to use that. If not, how about using <a href="https://unsplash.com/photos/8oLnCRz7hwM">this picture of a lion</a> by <a href="https://unsplash.com/@keyursphotography">Keyur Nandaniya</a>?</p>
+<p>Download <a href="https://unsplash.com/photos/8oLnCRz7hwM">this lion photograph</a> by <a href="https://unsplash.com/@keyursphotography">Keyur Nandaniya</a>, or choose a JPEG with its main subject away from the center.
+Save it as <code>lion.jpg</code> if you want the filename to match the examples.</p>
 </li>
 <li>
-<p>Create a folder for your images. Call it "images". Just like the "artists" folder we created previously, you may place the folder anywhere in your content structure.</p>
+<p>In your "My First Project" content project, create a folder named "Images" at the root, with the path <code>/images</code>.</p>
 </li>
 <li>
-<p>Open the "create content" dialog. Press the upload button to bring up your OS&#8217;s file browsing dialog and select your image. You can also drag and drop the image from your file system browser onto the dialog.</p>
+<p>Select the Images folder, click <b class="button">New</b>, and choose the <strong>Media</strong> tab.
+Check that the destination shown is <code>/images/</code>.</p>
+</li>
+<li>
+<p>Click the upload area to select your file, or drag the file onto it.</p>
+<div class="imageblock">
+<div class="content">
+<img src="media/media-drag-and-drop.png" alt="New Content dialog with the Media tab selected and /images/ as the upload destination" width="1440">
+</div>
+<div class="title">Figure 1. The Media tab in the New Content dialog</div>
+</div>
 </li>
 </ol>
 </div>
 <div class="paragraph">
-<p>And that&#8217;s all it takes to upload files to Content Studio!</p>
-</div>
-</div>
-<div class="sect2">
-<h3 id="media_content_and_attachments"><a class="link" href="#media_content_and_attachments">Media content and attachments</a></h3>
-<div class="paragraph">
-<p>Uploading a file creates a media content item with properties such as a display name and content type.
-The file itself is stored as an attachment associated with that item.
-For an image, the content item also holds metadata and editing settings, such as a caption and focal point.
-You&#8217;ll inspect the underlying content storage in the <a href="data-toolbox.ahtml">Data Toolbox chapter</a>.</p>
+<p>The uploaded image now appears as a content item in the Images folder.
+It is saved in Draft and has not been published.</p>
 </div>
 </div>
 </div>
 </div>
 <div class="sect1">
-<h2 id="media_apis"><a class="link" href="#media_apis">Media APIs</a></h2>
+<h2 id="inspect_the_uploaded_content"><a class="link" href="#inspect_the_uploaded_content">Inspect the uploaded content</a></h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>Uploading a file is only half the job. XP also includes APIs that let you download the same file (now stored as an attachment within the content) when you need it: the <em>attachment API</em>, <code>media:attachment</code>, serves any file as it was uploaded, and the <em>image API</em>, <code>media:image</code>, serves images, with scaling and filters applied on the fly.</p>
-</div>
-<div class="paragraph">
-<p>Both are Universal APIs, just like Guillotine, and use the <code>/api/&lt;app&gt;:&lt;name&gt;</code> pattern introduced in the <a href="headless-api.ahtml#_other_clients">Headless API chapter</a>.
-On your sandbox, their URLs start with <code><a href="http://localhost:8080/api/media:attachment" class="bare">http://localhost:8080/api/media:attachment</a></code> and <code><a href="http://localhost:8080/api/media:image" class="bare">http://localhost:8080/api/media:image</a></code>.
-You&#8217;ll use this shared API base URL to build media URLs from the components Guillotine returns.</p>
+<p>Your uploaded image is now a content item, just like the artists you created earlier.
+Let&#8217;s inspect its data and find the file attached to it.</p>
 </div>
 <div class="sect2">
-<h3 id="mediaurl"><a class="link" href="#mediaurl">mediaUrl</a></h3>
+<h3 id="task_find_the_image_and_its_attachment"><a class="link" href="#task_find_the_image_and_its_attachment">Task: Find the image and its attachment</a></h3>
 <div class="paragraph">
-<p>To get the URL of a media item&#8217;s file, use the <code>mediaUrl</code> field in GraphQL. It returns the <em>components</em> of the URL rather than a finished address, so that your front-end can decide which host to serve media from:</p>
+<p>Open Query Playground, select "My First Project" and keep <strong>Draft</strong> selected throughout this chapter.
+Run this query to find up to ten images anywhere in the project:</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-GraphQL" data-lang="GraphQL">{
+<pre class="highlight"><code class="language-graphql" data-lang="graphql">{
   guillotine {
     queryDsl(
       query: {
         term: {
-          field: "type",
-          value: {
-            string: "media:image"
-          }
+          field: "type"
+          value: { string: "media:image" }
         }
       }
     ) {
       displayName
+      _path
       type
-      ... on media_Image { <i class="conum" data-value="1"></i><b>(1)</b>
-        mediaUrl { <i class="conum" data-value="2"></i><b>(2)</b>
+      dataAsJson
+      attachments {
+        name
+        label
+        mimeType
+        size
+      }
+    }
+  }
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The <code>dataAsJson</code> field shows the stored content data, as it did for your artists.
+The <code>attachments</code> field lists the attached files and their metadata.
+Both are common content fields, so this query does not need an inline fragment.</p>
+</div>
+<div class="paragraph">
+<p>Below is one item from the <code>data.guillotine.queryDsl</code> array.
+This example shows the image immediately after upload; your filename, dimensions, file size and additional metadata may differ:</p>
+</div>
+<div class="listingblock">
+<div class="title">The image content and its attachment</div>
+<div class="content">
+<pre class="highlight"><code class="language-json" data-lang="json">{
+  "displayName": "lion",
+  "_path": "/images/lion.jpg",
+  "type": "media:image",
+  "dataAsJson": {
+    "media": {
+      "imageWidth": 2400,
+      "attachment": "lion.jpg",
+      "imageHeight": 1600
+    }
+  },
+  "attachments": [
+    {
+      "name": "lion.jpg",
+      "label": "source",
+      "mimeType": "image/jpeg",
+      "size": 550171
+    }
+  ]
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Notice how the content and file fit together:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>type</code> is <code>media:image</code>: XP detected the uploaded file and created an image content item.</p>
+</li>
+<li>
+<p><code>dataAsJson.media</code> holds image data, including dimensions and the name of the source attachment.</p>
+</li>
+<li>
+<p><code>attachments</code> contains an entry with that same name, <code>lion.jpg</code>.
+Its <code>label</code> is <code>source</code>, identifying it as the original uploaded file; <code>mimeType</code> and <code>size</code> describe its format and size in bytes.
+The file&#8217;s binary data is stored as an attachment; it is not embedded in this JSON response.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>This upload-and-retrieve pattern is the same for any kind of file, including a PDF, an audio recording or a video.
+Each upload creates a media content item with the original file attached and labeled <code>source</code>.
+XP maps the file to the appropriate media content type: an image becomes <code>media:image</code>, while other files become types such as Audio, Video or Document.
+The type and its metadata fields vary, but the attachment structure and the <code>mediaUrl</code> field used to retrieve the original file work the same way.
+The <a href="https://developer.enonic.com/docs/cms/stable/media">CMS media reference</a> explains media structure, type mapping and file handling in more detail.</p>
+</div>
+<div class="paragraph">
+<p>XP automatically extracts readable text from known file formats, such as PDF, and indexes it for search.
+See <a href="https://developer.enonic.com/docs/cms/stable/media/media-indexing">Media indexing</a> for what becomes searchable and how to query it.
+You&#8217;ll explore the underlying storage directly in the <a href="data-toolbox.ahtml">Data Toolbox chapter</a>.</p>
+</div>
+<div class="paragraph">
+<p>Keep your image&#8217;s <code>_path</code> for the following queries.</p>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="retrieve_the_attached_file"><a class="link" href="#retrieve_the_attached_file">Retrieve the attached file</a></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>You&#8217;ve found the attachment&#8217;s metadata; now retrieve the file itself.
+For media content, <code>mediaUrl</code> gives you the URL components for its source attachment, <code>lion.jpg</code> in this example.
+The attachment API, <code>media:attachment</code>, delivers the file at that URL.
+Like Guillotine, it is a Universal API: on your sandbox, its address starts with <code><a href="http://localhost:8080/api/media:attachment" class="bare">http://localhost:8080/api/media:attachment</a></code>.</p>
+</div>
+<div class="sect2">
+<h3 id="task_open_and_download_the_attachment"><a class="link" href="#task_open_and_download_the_attachment">Task: Open and download the attachment</a></h3>
+<div class="paragraph">
+<p>Use <code>get</code> with the content path from your response.
+Replace <code>/images/lion.jpg</code> if your image has a different path:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-graphql" data-lang="graphql">{
+  guillotine {
+    get(key: "/images/lion.jpg") {
+      displayName
+      ... on media_Image {
+        mediaUrl {
           path
           queryString
         }
@@ -582,63 +664,237 @@ You&#8217;ll use this shared API base URL to build media URLs from the component
 }</code></pre>
 </div>
 </div>
-<div class="colist arabic">
-<table>
-<tr>
-<td><i class="conum" data-value="1"></i><b>1</b></td>
-<td>This allows us to query fields that belong to the <code>media_Image</code> GraphQL type.</td>
-</tr>
-<tr>
-<td><i class="conum" data-value="2"></i><b>2</b></td>
-<td>The <code>mediaUrl</code> field (also available on all other media types) gives you the path from where the raw file can be downloaded.</td>
-</tr>
-</table>
+<div class="paragraph">
+<p>The CMS content type is <code>media:image</code>; its GraphQL object type is <code>media_Image</code>.
+As with Artist in the previous chapter, the inline fragment gives access to fields belonging to that GraphQL type.
+<code>mediaUrl</code> is available on all media types.</p>
 </div>
 <div class="paragraph">
-<p>If everything went fine, you should expect a response that looks something like this:</p>
+<p>The <code>data.guillotine.get</code> object looks like this, with your own content ID, fingerprint and filename:</p>
+</div>
+<div class="listingblock">
+<div class="title">The source attachment&#8217;s URL components</div>
+<div class="content">
+<pre class="highlight"><code class="language-json" data-lang="json">{
+  "displayName": "lion",
+  "mediaUrl": {
+    "path": "/media:attachment/my-first-project:draft/3cff3960-08e9-4c92-828e-917187c1dc20:927e557892810fabb5e2c76cd686a7e7/lion.jpg",
+    "queryString": ""
+  }
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Build the file&#8217;s address from <strong>your own response</strong>: start with <code><a href="http://localhost:8080/api" class="bare">http://localhost:8080/api</a></code>, then append <code>mediaUrl.path</code> and <code>mediaUrl.queryString</code> exactly as returned.
+An empty <code>queryString</code> adds nothing.
+For the example above, the address would be:</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-json" data-lang="json">{
-  "data": {
-    "guillotine": {
-      "queryDsl": [
-        {
-          "displayName": "lion",
-          "type": "media:image",
-          "mediaUrl": {
-            "path": "/media:attachment/my-first-project:draft/21f827e0-ba57-4824-b3bc-f101ae08568b:9475135781b315daad078d91c27746bc3222d024/lion.jpg",
-            "queryString": ""
-          }
+<pre>http://localhost:8080/api/media:attachment/my-first-project:draft/3cff3960-08e9-4c92-828e-917187c1dc20:927e557892810fabb5e2c76cd686a7e7/lion.jpg</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Open your assembled URL in a new tab in the same browser where you are logged in to Content Studio.
+It displays the original uploaded image.
+Draft media requires an authenticated request; copying the example URL above will not retrieve your own image.</p>
+</div>
+<div class="paragraph">
+<p>To download the file instead of displaying it, change <code>mediaUrl</code> to <code>mediaUrl(download: true)</code> and run the query again.
+Assemble and open the new URL, including its <code>queryString</code>; the browser will download the attachment.</p>
+</div>
+<div class="paragraph">
+<p>The content item&#8217;s <code>_path</code>, such as <code>/images/lion.jpg</code>, identifies the item in queries.
+The media URL&#8217;s <code>path</code> identifies the attached file through the attachment API.</p>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="request_a_cropped_image"><a class="link" href="#request_a_cropped_image">Request a cropped image</a></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>The <code>imageUrl</code> field returns a URL served by the image API, <code>media:image</code>.
+It can resize, crop and filter images when delivering them, while the original attachment remains unchanged.</p>
+</div>
+<div class="paragraph">
+<p>The <code>scale</code> argument controls resizing and cropping.
+For example, <code>width(600)</code> scales proportionally to a width of 600 pixels; <code>block(400,600)</code> fills a 400-by-600-pixel rectangle, cropping what does not fit.
+Omitting <code>scale</code> means no resizing, but other processing and saved image edits can still affect the result.
+Use <code>mediaUrl</code> when you need the original uploaded file.</p>
+</div>
+<div class="sect2">
+<h3 id="task_open_a_portrait_crop"><a class="link" href="#task_open_a_portrait_crop">Task: Open a portrait crop</a></h3>
+<div class="paragraph">
+<p>Use <code>get</code> to retrieve the image whose content path you copied above.
+Replace <code>/images/lion.jpg</code> if your image has a different path:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-graphql" data-lang="graphql">{
+  guillotine {
+    get(key: "/images/lion.jpg") {
+      displayName
+      ... on media_Image {
+        imageUrl(scale: "block(400,600)") {
+          path
+          queryString
         }
-      ]
+      }
     }
   }
 }</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>Put the API base URL in front of <code>path</code>, append <code>queryString</code>, and you have the address of your file. For the response above, that is:</p>
+<p>The <code>data.guillotine.get</code> object contains:</p>
 </div>
 <div class="listingblock">
+<div class="title">Image with a crop URL</div>
 <div class="content">
-<pre>http://localhost:8080/api/media:attachment/my-first-project:draft/21f827e0-ba57-4824-b3bc-f101ae08568b:9475135781b315daad078d91c27746bc3222d024/lion.jpg</pre>
+<pre class="highlight"><code class="language-json" data-lang="json">{
+  "displayName": "lion",
+  "imageUrl": {
+    "path": "/media:image/my-first-project:draft/3cff3960-08e9-4c92-828e-917187c1dc20:4f827305024b80384b0aa939496e4688/block-400-600/lion.jpg",
+    "queryString": ""
+  }
+}</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>Open it in your browser to see the original image you uploaded.</p>
+<p>Assemble the URL from <code><a href="http://localhost:8080/api" class="bare">http://localhost:8080/api</a></code> plus your returned <code>imageUrl.path</code> and <code>imageUrl.queryString</code>, then open it in your browser.
+Without a focal point, the crop is centered, which can cut off an off-center subject:</p>
 </div>
-<div class="admonitionblock note">
+<div class="imageblock">
+<div class="content">
+<img src="media/image-cropped-unfocused.jpg" alt="Portrait crop with part of the lion cut off at the left edge" width="400">
+</div>
+<div class="title">Figure 2. Portrait crop before setting a focal point</div>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="guide_cropping_with_a_focal_point"><a class="link" href="#guide_cropping_with_a_focal_point">Guide cropping with a focal point</a></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>A focal point identifies the subject to prioritize when the image API crops an image to a different aspect ratio.
+It guides the crop; it does not guarantee that the entire subject fits every shape.</p>
+</div>
+<div class="sect2">
+<h3 id="_image_form"><a class="link" href="#_image_form">Task: Set a focal point and compare</a></h3>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Return to Content Studio, select your image and click <b class="button">Edit</b>.
+The content form contains fields such as Caption and Alternative text, and the image preview includes editing controls.</p>
+<div class="imageblock">
+<div class="content">
+<img src="media/image-content-form.jpg" alt="Content Studio image editor showing the lion preview, editorial fields and image editing toolbar" width="1440">
+</div>
+<div class="title">Figure 3. The image content form and preview</div>
+</div>
+</li>
+<li>
+<p>In the toolbar above the image preview, click <strong>Set Autofocus</strong> to edit the focal point.
+Click the lion&#8217;s face, or drag the marker onto the subject of your own image.</p>
+<div class="imageblock">
+<div class="content">
+<img src="media/image-editing-focal-point.jpg" alt="Image preview in focal-point mode with the marker on the lion&#8217;s face and Apply and Cancel controls" width="1440">
+</div>
+<div class="title">Figure 4. Positioning the focal point</div>
+</div>
+</li>
+<li>
+<p>Click <b class="button">Apply</b> to accept the position, then <b class="button">Save</b> in the Content Editor toolbar to save the content item.</p>
+</li>
+<li>
+<p>Return to Query Playground and run the same portrait-crop query again.
+Assemble and open the <strong>newly returned URL</strong> so you see the saved change.</p>
+</li>
+</ol>
+</div>
+<div class="paragraph">
+<p>The new crop prioritizes the selected subject:</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="media/image-cropped-focused.jpg" alt="Portrait crop after setting the focal point, with the lion&#8217;s face in view" width="400">
+</div>
+<div class="title">Figure 5. The same portrait crop with a focal point</div>
+</div>
+<div class="paragraph">
+<p>Image edits are stored on the content item; they do not rewrite the original attachment.
+The <a href="https://developer.enonic.com/docs/content-studio/stable/content-types/image">Content Studio image documentation</a> covers cropping, rotation, resetting edits and image metadata.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="task_add_a_filter"><a class="link" href="#task_add_a_filter">Task: Add a filter</a></h3>
+<div class="paragraph">
+<p>Keep the same image and scale, and add a <code>filter</code> argument:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-graphql" data-lang="graphql">{
+  guillotine {
+    get(key: "/images/lion.jpg") {
+      displayName
+      ... on media_Image {
+        imageUrl(
+          scale: "block(400,600)"
+          filter: "grayscale(); border(10, 0x000000)"
+        ) {
+          path
+          queryString
+        }
+      }
+    }
+  }
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Use your image&#8217;s content path if it differs from the example.
+The semicolon separates two filters: grayscale and a black border.
+Build and open the URL as before, including the complete <code>queryString</code> returned by Guillotine.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="media/image-processed.jpg" alt="Portrait crop of the lion in grayscale with a black border" width="400">
+</div>
+<div class="title">Figure 6. The cropped image with filters</div>
+</div>
+<div class="paragraph">
+<p>The <a href="https://developer.enonic.com/docs/cms/stable/apis/image">Image API reference</a> describes the available scaling methods and filters.</p>
+</div>
+<div class="admonitionblock tip">
 <table>
 <tr>
 <td class="icon">
-<i class="fa icon-note" title="Note"></i>
+<i class="fa icon-tip" title="Tip"></i>
 </td>
 <td class="content">
-The path tells you which project and branch the file comes from. Because Query Playground was querying the draft branch, the context segment is <code>my-first-project:draft</code>. For published content on master it is just <code>my-first-project</code>. The long identifier is the content ID followed by a fingerprint that changes whenever the file does, which makes the URL safe to cache forever.
+For presentation effects such as grayscale or borders, consider CSS or similar client-side styling.
+Use server-side filters when the effect needs to be part of the delivered image file, for example in a download or an email.
 </td>
 </tr>
 </table>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="media_urls_and_caching"><a class="link" href="#media_urls_and_caching">Media URLs and caching</a></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>The returned paths identify the content project and branch.
+In these examples, <code>my-first-project:draft</code> selects Draft; published content uses <code>my-first-project</code> without a branch suffix.
+Let Guillotine generate these paths and query strings rather than constructing or editing their internal parts yourself.</p>
+</div>
+<div class="paragraph">
+<p>The fingerprint in a media URL identifies a version of the file or processed image and supports caching.
+After changing an image or its editing settings, query again for the current URL.
+Actual caching follows the response&#8217;s <code>Cache-Control</code> header, with different settings for public and private content; a fingerprint does not make draft content public.</p>
 </div>
 <div class="paragraph">
 <p>Returning URL components also lets your front-end use a separate base URL for media, for example when serving published images and downloads through a content delivery network (CDN).
@@ -647,278 +903,11 @@ The platform&#8217;s <a href="https://developer.enonic.com/docs/platform/stable/
 </div>
 </div>
 </div>
-</div>
-<div class="sect1">
-<h2 id="images"><a class="link" href="#images">Images</a></h2>
-<div class="sectionbody">
-<div class="paragraph">
-<p>One of the standard media content types is <code>media:image</code>. Images are important in content management, and as such, XP and Content Studio provide some interesting features to help you make the most of your images.</p>
-</div>
-<div class="sect2">
-<h3 id="image_api"><a class="link" href="#image_api">Image API</a></h3>
-<div class="paragraph">
-<p>The <code>mediaUrl</code> field above gives you a URL for the original file through the attachment API.
-To request a scaled or filtered image, use <code>imageUrl</code>, which gives you a URL served by <a href="https://developer.enonic.com/docs/cms/stable/apis/image">XP&#8217;s image API</a>.</p>
-</div>
-<div class="paragraph">
-<p>The image API takes care of scaling and applying filters to your images based on parameters you give it. For instance, it&#8217;s common to want to have all images in a section conform to the same dimensions. But because images are generally of different shapes and sizes, this might require cropping the image. The image API takes care of that for you as long as you specify what you want.</p>
-</div>
-<div class="paragraph">
-<p>The image API works in tandem with Content Studio&#8217;s image editing tools, so it respects crops, flips, and focal points that you create.</p>
-</div>
-</div>
-<div class="sect2">
-<h3 id="image_form"><a class="link" href="#image_form">Image form</a></h3>
-<div class="paragraph">
-<p>Content Studio comes with a suite of image editing tools built in. After uploading an image to Content Studio, you can find it in the content grid and edit it to bring up the image&#8217;s content form.</p>
-</div>
-<div class="imageblock">
-<div class="content">
-<img src="media/image-content-form.png" alt="A content form showing the image with image editing tools, inputs for caption, alternative text, copyright, and tags." width="621w">
-</div>
-<div class="title">Figure 2. The image content form</div>
-</div>
-<div class="paragraph">
-<p>The content form allows you to provide an image caption, alt text, copyright and tag info.</p>
-</div>
-<div class="paragraph">
-<p>You can also add image properties such as dimensions, and where the image was taken and with what gear.</p>
-</div>
-<div class="admonitionblock note">
-<table>
-<tr>
-<td class="icon">
-<i class="fa icon-note" title="Note"></i>
-</td>
-<td class="content">
-Changing these properties, including size, width, height, etc, does not affect the image in any way.
-</td>
-</tr>
-</table>
-</div>
-<div class="paragraph">
-<p>The image editing tools allow you to crop, flip, and rotate the image as well as to set what&#8217;s known as <em>autofocus</em>.</p>
-</div>
-<div class="paragraph">
-<p>The autofocus control allows you to set an image focal point that XP will always keep in view, regardless of how the image is cropped.</p>
-</div>
-<div class="admonitionblock note">
-<table>
-<tr>
-<td class="icon">
-<i class="fa icon-note" title="Note"></i>
-</td>
-<td class="content">
-Without setting a focal point, XP will focus around the center of the image when cropping.
-</td>
-</tr>
-</table>
-</div>
-<div class="paragraph">
-<p>You can always reset the edits you&#8217;ve made to an image by using the 'reset filters' button.</p>
-</div>
-<div class="admonitionblock tip">
-<table>
-<tr>
-<td class="icon">
-<i class="fa icon-tip" title="Tip"></i>
-</td>
-<td class="content">
-You can read more about <a href="https://enonic.com/blog/enonic-simplifies-image-problems">how Enonic simplifies your everyday image problems</a> to get more info about how to use images in a traditional CMS model and for a quick overview of the autofocus feature.
-</td>
-</tr>
-</table>
-</div>
-</div>
-<div class="sect2">
-<h3 id="autofocus"><a class="link" href="#autofocus">Autofocus</a></h3>
-<div class="paragraph">
-<p>Because we chose an image with an off-center subject, the image might get cropped such that the lion disappears from the image. For instance, a small, square crop might turn out like this:</p>
-</div>
-<div class="imageblock">
-<div class="content">
-<img src="media/image-cropped-unfocused.jpg" alt="A crop of the lion in the savannah image. The image is square and the only part of the lion that is visible is part of its hind leg." width="500w">
-</div>
-<div class="title">Figure 3. Cropped image without focal point</div>
-</div>
-<div class="paragraph">
-<p>To get around this, try the autofocus tool.</p>
-</div>
-<div class="olist arabic">
-<ol class="arabic">
-<li>
-<p>Click the autofocus tool. A circle will show up over the image. This circle indicates where the focal point is.</p>
-</li>
-<li>
-<p>Move the circle onto the lion (or whatever your focal point is) and press "apply".</p>
-<div class="imageblock">
-<div class="content">
-<img src="media/image-editing-focal-point.png" alt="The lion image with a circle indicating the focal point around its head." width="626w">
-</div>
-<div class="title">Figure 4. The focal point editor</div>
-</div>
-</li>
-</ol>
-</div>
-<div class="paragraph">
-<p>Now, when the image gets cropped, XP will take care of keeping the lion in focus, both in traditional CMS solutions and in headless modes:</p>
-</div>
-<div class="imageblock">
-<div class="content">
-<img src="media/image-cropped-focused.jpg" alt="A crop of the lion in the savannah. In this square image, the lion is in full view square in the center." width="500w">
-</div>
-<div class="title">Figure 5. The same image with the same crop, but with a focal point</div>
-</div>
-</div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="graphql_api"><a class="link" href="#graphql_api">GraphQL API</a></h2>
-<div class="sectionbody">
-<div class="paragraph">
-<p>Guillotine makes it easy to fetch the data that you&#8217;ve uploaded.</p>
-</div>
-<div class="paragraph">
-<p>Some functionality is shared between all media types, while other queries only work on specific media types.</p>
-</div>
-<div class="paragraph">
-<p>We saw <code>mediaUrl</code> above, which works on any media type. Let&#8217;s have a closer look at what we can do with images.</p>
-</div>
-<div class="sect2">
-<h3 id="image_media_type"><a class="link" href="#image_media_type">Image media type</a></h3>
-<div class="paragraph">
-<p>XP supports a number of image manipulation functions on the fly. When querying for an image via the GraphQL API, you can use the <code>imageUrl</code> field to specify scale and filters for the result you want.</p>
-</div>
-<div class="paragraph">
-<p>The <code>scale</code> argument allows you to specify how you want to crop the image. Common scaling functions include <em>block</em>, which allows you to specify width and height, and <em>width</em>, which scales the image proportionally to the specified width. Leave it out, and you get the image as it was uploaded.</p>
-</div>
-<div class="admonitionblock tip">
-<table>
-<tr>
-<td class="icon">
-<i class="fa icon-tip" title="Tip"></i>
-</td>
-<td class="content">
-<a href="https://developer.enonic.com/docs/cms/stable/apis/image">The image API reference docs</a> show off all the available scaling functions with examples of how they affect the image.
-</td>
-</tr>
-</table>
-</div>
-<div class="paragraph">
-<p>As the name implies, the <code>filter</code> argument lets you apply filters to the image. Use filters to apply coloration functions and to rotate and flip images on the fly. To combine filters, separate them with a semicolon.</p>
-</div>
-<div class="admonitionblock tip">
-<table>
-<tr>
-<td class="icon">
-<i class="fa icon-tip" title="Tip"></i>
-</td>
-<td class="content">
-The same page has an exhaustive list of the available filters.
-</td>
-</tr>
-</table>
-</div>
-<div class="paragraph">
-<p>For instance, this query finds images anywhere in the selected content project and requests URLs for versions scaled to 600x700 pixels, in grayscale, with a black border:</p>
-</div>
-<div class="listingblock">
-<div class="title">Query image URLs with scaling and filters</div>
-<div class="content">
-<pre class="highlight"><code class="language-GraphQL" data-lang="GraphQL">{
-  guillotine {
-    queryDsl(
-      query: {
-        term: {
-          field: "type",
-          value: {
-            string: "media:image"
-          }
-        }
-      }
-    ) {
-      displayName
-      ... on media_Image {
-        imageUrl( <i class="conum" data-value="1"></i><b>(1)</b>
-          scale: "block(600,700)", <i class="conum" data-value="2"></i><b>(2)</b>
-          filter: "grayscale(); border(10, 0x000000)") { <i class="conum" data-value="3"></i><b>(3)</b>
-          path
-          queryString
-        }
-      }
-    }
-  }
-}</code></pre>
-</div>
-</div>
-<div class="colist arabic">
-<table>
-<tr>
-<td><i class="conum" data-value="1"></i><b>1</b></td>
-<td>The <code>imageUrl</code> field lets you specify how you want the images to look.</td>
-</tr>
-<tr>
-<td><i class="conum" data-value="2"></i><b>2</b></td>
-<td>The scale argument specifies the dimensions of the image.</td>
-</tr>
-<tr>
-<td><i class="conum" data-value="3"></i><b>3</b></td>
-<td>The filter argument lets you apply filters.</td>
-</tr>
-</table>
-</div>
-<div class="paragraph">
-<p>The above query should return a response that looks a little something like this:</p>
-</div>
-<div class="listingblock">
-<div class="title">A response with a cropped image with filters</div>
-<div class="content">
-<pre class="highlight"><code class="language-json" data-lang="json">{
-  "data": {
-    "guillotine": {
-      "queryDsl": [
-        {
-          "displayName": "lion",
-          "imageUrl": {
-            "path": "/media:image/my-first-project:draft/21f827e0-ba57-4824-b3bc-f101ae08568b:6d89657e4bfae6eaa62de22bd6fb63b2697f091d/block-600-700/lion.jpg",
-            "queryString": "?filter=grayscale%28%29%3B+border%2810%2C+0x000000%29"
-          }
-        }
-      ]
-    }
-  }
-}</code></pre>
-</div>
-</div>
-<div class="paragraph">
-<p>As with <code>mediaUrl</code>, prefix the path with <code><a href="http://localhost:8080/api" class="bare">http://localhost:8080/api</a></code> and append the query string. If you have followed the steps in this chapter, the resulting address should show you something like this:</p>
-</div>
-<div class="imageblock">
-<div class="content">
-<img src="media/image-processed.jpg" alt="The lion image, cropped, in black and white, with a black border." width="600w">
-</div>
-<div class="title">Figure 6. The processed image</div>
-</div>
-<div class="admonitionblock note">
-<table>
-<tr>
-<td class="icon">
-<i class="fa icon-note" title="Note"></i>
-</td>
-<td class="content">
-Asking for scaled and filtered images is allowed when you query Guillotine&#8217;s own API endpoint, which is what Query Playground does. When Guillotine is mounted on a site instead, image transformations are turned off by default, so that visitors cannot generate endless variants of your images.
-</td>
-</tr>
-</table>
-</div>
-</div>
-</div>
-</div>
 <div class="sect1">
 <h2 id="coming_up"><a class="link" href="#coming_up">Coming up</a></h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>You&#8217;ve uploaded media, seen how it is stored, and fetched processed images through the GraphQL API.
+<p>You&#8217;ve uploaded an image, inspected its content data and attachment, downloaded the original file, and requested cropped and filtered versions that use a focal point.
 In the next chapter, you&#8217;ll take a closer look at <a href="form-items.ahtml">form items</a>, the building blocks of content forms.</p>
 </div>
 </div>
@@ -926,7 +915,7 @@ In the next chapter, you&#8217;ll take a closer look at <a href="form-items.ahtm
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2026-10-27 11:08:34 UTC
+Last updated 2026-10-27 13:21:38 UTC
 </div>
 </div>
 </body>

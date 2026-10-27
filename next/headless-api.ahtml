@@ -593,7 +593,9 @@ Your content IDs will differ from these example values, and the paths depend on 
 <div class="paragraph">
 <p>Try changing <code>first</code> to <code>1</code> and <code>direction</code> to <code>DESC</code>, then run the query again.
 You should get only P!nk, the last artist alphabetically.
-Restore <code>first: 10</code> and <code>direction: ASC</code> before continuing.</p>
+Now remove the <code>first</code> and <code>sort</code> arguments before continuing.
+Without <code>first</code>, <code>queryDsl</code> returns up to ten results; without <code>sort</code>, it uses relevance order.
+The remaining examples use these defaults, so results may appear in a different order from the sample responses.</p>
 </div>
 </div>
 <div class="sect2">
@@ -703,8 +705,6 @@ This gives you access to the Artist&#8217;s <code>data</code> fields:</p>
           value: { string: "com.example.dev101:artist" }
         }
       }
-      first: 10
-      sort: [{ field: "displayName", direction: ASC }]
     ) {
       ... on com_example_dev101_Artist {
         _id
@@ -847,8 +847,6 @@ The "Dsl" stands for "Domain Specific Language": the structured query you pass t
           ]
         }
       }
-      first: 10
-      sort: [{ field: "displayName", direction: ASC }]
     ) {
       displayName
       ... on com_example_dev101_Artist {
@@ -947,8 +945,6 @@ Find <code>{app-name-query}_Artist_Data</code> in the Docs panel and notice its 
           value: { string: "com.example.dev101:artist" }
         }
       }
-      first: 10
-      sort: [{ field: "displayName", direction: ASC }]
     ) {
       displayName
       ... on com_example_dev101_Artist {
@@ -1028,7 +1024,7 @@ Use <code>branch: "master"</code> to read published content.</p>
 <div class="paragraph">
 <p>Guillotine is a <em>Universal API</em>, served at <code>/api/&lt;app&gt;:&lt;name&gt;</code>.
 Its API name, <code>com.enonic.app.guillotine:graphql</code>, follows the API base URL, <code><a href="http://localhost:8080/api" class="bare">http://localhost:8080/api</a></code> on your sandbox.
-The media APIs you&#8217;ll use in the <a href="files.ahtml">next chapter</a> follow the same pattern.</p>
+The media APIs you&#8217;ll use in the <a href="media.ahtml">next chapter</a> follow the same pattern.</p>
 </div>
 <div class="paragraph">
 <p>For browser requests from another origin, the server must allow that origin through CORS.
@@ -1060,14 +1056,14 @@ You&#8217;ll fetch your published artists from code in the <a href="frontend.aht
 <div class="sectionbody">
 <div class="paragraph">
 <p>You&#8217;ve found artists by type, selected their fields, retrieved a single item, searched descriptions and queried a new field from your content model.
-In the next chapter, you&#8217;ll see <a href="files.ahtml">how XP deals with files and images</a>.</p>
+In the next chapter, you&#8217;ll see <a href="media.ahtml">how XP deals with files and images</a>.</p>
 </div>
 </div>
 </div>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2026-10-27 11:08:34 UTC
+Last updated 2026-10-27 13:21:38 UTC
 </div>
 </div>
 </body>

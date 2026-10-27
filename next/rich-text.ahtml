@@ -701,7 +701,7 @@ You can also use <span class="keyseq"><kbd>ctrl</kbd>+<kbd>K</kbd></span> to ins
 <p>Try out the image controls that Content Studio gives you by uploading a picture and seeing what you can do with it.</p>
 </div>
 <div class="paragraph">
-<p>We looked at <a href="files.ahtml#_image_form">editing images in the media chapter</a>, but when inserting images in the HtmlArea, you also have something called "image styles", which we&#8217;ll have a look at now.</p>
+<p>We looked at <a href="media.ahtml#_image_form">editing images in the media chapter</a>, but when inserting images in the HtmlArea, you also have something called "image styles", which we&#8217;ll have a look at now.</p>
 </div>
 <div class="paragraph">
 <p>Continue editing the "Lynx" content created in the previous task.</p>
@@ -1041,7 +1041,7 @@ For more information on macros, including how to create your very own, visit <a 
 <div class="sect2">
 <h3 id="images_2"><a class="link" href="#images_2">Images</a></h3>
 <div class="paragraph">
-<p>Images work the same way: the <code>data-image-ref</code> attribute points to an entry in the <code>images</code> field, which holds the parts of every image URL. The default <code>src</code> is the media path, so the simplest fix is to prefix it with your media base URL - the same <code><a href="http://localhost:8080/api" class="bare">http://localhost:8080/api</a></code> you used in the <a href="files.ahtml">media chapter</a>.</p>
+<p>Images work the same way: the <code>data-image-ref</code> attribute points to an entry in the <code>images</code> field, which holds the parts of every image URL. The default <code>src</code> is the media path, so the simplest fix is to prefix it with your media base URL - the same <code><a href="http://localhost:8080/api" class="bare">http://localhost:8080/api</a></code> you used in the <a href="media.ahtml">media chapter</a>.</p>
 </div>
 <div class="paragraph">
 <p>If you want to optimize how fast images load on various devices, Guillotine can also return the image in multiple different sizes (using <a href="https://developer.mozilla.org/en-US/docs/Web/API/HTMLImageElement/srcset">the <code>srcset</code> attribute (MDN)</a>). This is achieved by adding an argument to the <code>description</code> field:</p>
@@ -1331,7 +1331,7 @@ If you used a different macro than the "Embed iframe" macro, the query must be u
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2026-10-27 11:08:34 UTC
+Last updated 2026-10-27 13:21:38 UTC
 </div>
 </div>
 </body>

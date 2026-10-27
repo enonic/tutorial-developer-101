@@ -809,7 +809,7 @@ If <code>max</code> is greater than <code>0</code>, make sure that <code>min</co
 <p>Read more about the <a href="https://developer.enonic.com/docs/cms/stable/schemas/form-items/imageselector">configuration of image selectors</a> in the reference docs.</p>
 </div>
 <div class="paragraph">
-<p>After you&#8217;ve added an image (or several), you can highlight it and click the edit button. This will take you to the image editing form. This is the same form as we saw in <a href="files.ahtml#_image_form">the previous chapter</a>.</p>
+<p>After you&#8217;ve added an image (or several), you can highlight it and click the edit button. This will take you to the image editing form. This is the same form as we saw in <a href="media.ahtml#_image_form">the previous chapter</a>.</p>
 </div>
 <div class="imageblock">
 <div class="content">
@@ -871,7 +871,7 @@ If <code>max</code> is greater than <code>0</code>, make sure that <code>min</co
 <h2 id="attachmentuploader"><a class="link" href="#attachmentuploader">AttachmentUploader</a></h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>XP also has a rather special form item named <a href="https://developer.enonic.com/docs/cms/stable/schemas/form-items/attachmentuploader">AttachmentUploader</a>. Unlike <a href="files.ahtml">media</a> content, which creates an independent content item for each file you upload, AttachmentUploader lets you store one (or more) files within the specific content item. Under the hood, it uses the same <code>attachment</code> property structure as media when persisting the file.</p>
+<p>XP also has a rather special form item named <a href="https://developer.enonic.com/docs/cms/stable/schemas/form-items/attachmentuploader">AttachmentUploader</a>. Unlike <a href="media.ahtml">media</a> content, which creates an independent content item for each file you upload, AttachmentUploader lets you store one (or more) files within the specific content item. Under the hood, it uses the same <code>attachment</code> property structure as media when persisting the file.</p>
 </div>
 <div class="imageblock">
 <div class="content">
@@ -1296,7 +1296,7 @@ form:
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2026-10-27 11:08:34 UTC
+Last updated 2026-10-27 13:21:38 UTC
 </div>
 </div>
 </body>
