@@ -484,7 +484,7 @@ You&#8217;ll handle the four things every front-end on Enonic needs: the request
 <h2 id="the_request"><a class="link" href="#the_request">The request</a></h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>The endpoint is <code><a href="http://localhost:8080/api/com.enonic.app.guillotine:graphql" class="bare">http://localhost:8080/api/com.enonic.app.guillotine:graphql</a></code>, as you saw in the <a href="headless-api.ahtml#_one_endpoint_for_every_api">Headless API chapter</a>. It takes an HTTP POST with <code>Content-Type: application/json</code> and a JSON body with two properties:</p>
+<p>The endpoint is <code><a href="http://localhost:8080/api/com.enonic.app.guillotine:graphql" class="bare">http://localhost:8080/api/com.enonic.app.guillotine:graphql</a></code>, as you saw in the <a href="headless-api.ahtml#_other_clients">Headless API chapter</a>. It takes an HTTP POST with <code>Content-Type: application/json</code> and a JSON body with two properties:</p>
 </div>
 <table class="tableblock frame-all grid-all stretch">
 <colgroup>
@@ -516,12 +516,15 @@ You&#8217;ll handle the four things every front-end on Enonic needs: the request
 <p>Outside Content Studio there is no selected project, so the query names the project and the branch as arguments on the <code>guillotine</code> field. Passing them as variables keeps the query reusable between environments.</p>
 </div>
 <div class="paragraph">
+<p>Use the same artist type filter and alphabetical sorting as in the Headless API chapter.</p>
+</div>
+<div class="paragraph">
 <p>Save this as <code>request.json</code>:</p>
 </div>
 <div class="listingblock">
 <div class="content">
 <pre class="highlight"><code class="language-json" data-lang="json">{
-  "query": "query Artists($project: String!, $branch: String!) { guillotine(project: $project, branch: $branch) { getChildren(key: \"/artists\", first: 10) { _id displayName } } }",
+  "query": "query Artists($project: String!, $branch: String!) { guillotine(project: $project, branch: $branch) { queryDsl(query: { term: { field: \"type\", value: { string: \"com.example.dev101:artist\" } } }, first: 10, sort: [{ field: \"displayName\", direction: ASC }]) { _id displayName } } }",
   "variables": {
     "project": "my-first-project",
     "branch": "master"
@@ -550,6 +553,10 @@ You&#8217;ll handle the four things every front-end on Enonic needs: the request
 <div class="paragraph">
 <p>The same request with <code>fetch()</code>. Save it as <code>artists.mjs</code> and run it with <code>node artists.mjs</code>. Node 18 or newer has <code>fetch</code> built in.</p>
 </div>
+<div class="paragraph">
+<p>Set <code>apiBaseUrl</code> to <code><a href="http://localhost:8080/api" class="bare">http://localhost:8080/api</a></code> for your sandbox, or to the live server&#8217;s address followed by <code>/api</code>.
+The API name stays the same; keeping the base URL in one place lets you switch servers without changing the query.</p>
+</div>
 <div class="listingblock">
 <div class="content">
 <pre class="highlight"><code class="language-javascript" data-lang="javascript">const apiBaseUrl = 'http://localhost:8080/api';
@@ -557,7 +564,16 @@ You&#8217;ll handle the four things every front-end on Enonic needs: the request
 const query = `
   query Artists($project: String!, $branch: String!) {
     guillotine(project: $project, branch: $branch) {
-      getChildren(key: "/artists", first: 10) {
+      queryDsl(
+        query: {
+          term: {
+            field: "type"
+            value: { string: "com.example.dev101:artist" }
+          }
+        }
+        first: 10
+        sort: [{ field: "displayName", direction: ASC }]
+      ) {
         _id
         displayName
         ... on com_example_dev101_Artist {
@@ -590,24 +606,15 @@ async function getArtists() {
     throw new Error(result.errors.map((error) =&gt; error.message).join('\n'));
   }
 
-  return result.data.guillotine.getChildren;
+  return result.data.guillotine.queryDsl;
 }
 
 getArtists().then(console.log).catch(console.error);</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>Two details worth copying into any client you write:</p>
-</div>
-<div class="ulist">
-<ul>
-<li>
-<p>A GraphQL response can be HTTP 200 and still carry errors, in the <code>errors</code> array next to <code>data</code>. Check both.</p>
-</li>
-<li>
-<p>The API base URL is the only thing that changes between your sandbox and production. Keep it in one place, as here, so that going live is a configuration change.</p>
-</li>
-</ul>
+<p>A GraphQL response can be HTTP 200 and still carry errors, in the <code>errors</code> array next to <code>data</code>.
+Check both, as the example does.</p>
 </div>
 </div>
 </div>
@@ -685,13 +692,25 @@ CORS only controls which origins a browser lets read the response. It does not g
 <h2 id="paging_a_list"><a class="link" href="#paging_a_list">Paging a list</a></h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p><code>getChildren</code> and <code>queryDsl</code> take <code>first</code> and <code>offset</code>, which is enough for a short list. For a list of unknown length, use the connection variant, which returns a cursor for the next page and the total count:</p>
+<p><code>queryDsl</code> takes <code>first</code> and <code>offset</code>, which is enough for a short list.
+For a list of unknown length, use <code>queryDslConnection</code>, which returns a cursor for the next page and the total count.
+This query finds animals anywhere in the project and returns two at a time, sorted by display name:</p>
 </div>
 <div class="listingblock">
 <div class="content">
 <pre class="highlight"><code class="language-GraphQL" data-lang="GraphQL">query AnimalsPage($project: String!, $branch: String!, $after: String) {
   guillotine(project: $project, branch: $branch) {
-    getChildrenConnection(key: "/animals", first: 2, after: $after, sort: "displayName ASC") {
+    queryDslConnection(
+      query: {
+        term: {
+          field: "type"
+          value: { string: "com.example.dev101:animal" }
+        }
+      }
+      first: 2
+      after: $after
+      sort: [{ field: "displayName", direction: ASC }]
+    ) {
       totalCount
       edges {
         node {
@@ -718,7 +737,7 @@ CORS only controls which origins a browser lets read the response. It does not g
   let after = null;
   do {
     const page = await send(query, { project, branch, after });
-    const connection = page.guillotine.getChildrenConnection;
+    const connection = page.guillotine.queryDslConnection;
     animals.push(...connection.edges.map((edge) =&gt; edge.node));
     after = connection.pageInfo.hasNext ? connection.pageInfo.endCursor : null;
   } while (after);
@@ -727,7 +746,7 @@ CORS only controls which origins a browser lets read the response. It does not g
 </div>
 </div>
 <div class="paragraph">
-<p>Treat the cursor as an opaque value, and keep the key and sorting the same while paging. With two animals per page and three animals, you get two requests.</p>
+<p>Treat the cursor as an opaque value, and keep the query filter and sorting the same while paging. With two animals per page and three animals, you get two requests.</p>
 </div>
 </div>
 </div>
@@ -796,7 +815,7 @@ for (const image of description.images) {
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2026-10-20 15:57:50 UTC
+Last updated 2026-10-27 11:08:34 UTC
 </div>
 </div>
 </body>

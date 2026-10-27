@@ -551,7 +551,9 @@ That includes content types with sets, option sets, references and rich text, me
 </ol>
 </div>
 <div class="paragraph">
-<p>What you see here is the same data the GraphQL API returns. Guillotine reads these nodes, applies the content type to give them a typed schema, and resolves references and media URLs on the way out. When a query returns something you did not expect, this is the place to check what is actually stored.</p>
+<p>What you see here is the same data the GraphQL API returns.
+Guillotine reads these nodes, exposes their data through GraphQL types generated from the CMS content types, and resolves references and media URLs on the way out.
+When a query returns something you did not expect, this is the place to check what is actually stored.</p>
 </div>
 <div class="paragraph">
 <p>Inspecting content is only a fraction of what Data Toolbox can do: it&#8217;s a versatile and powerful administrative tool. Among other things, it can export your content and import it on another instance, which is handy the day you move from your sandbox to a live server.</p>
@@ -585,7 +587,7 @@ That includes content types with sets, option sets, references and rich text, me
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2026-10-20 15:57:50 UTC
+Last updated 2026-10-27 11:08:34 UTC
 </div>
 </div>
 </body>

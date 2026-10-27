@@ -1039,7 +1039,7 @@ If you&#8217;re wondering how to achieve some of the goals, try consulting the d
 <div class="ulist">
 <ul>
 <li>
-<p>Make the display name use "Species" as its label. <em>Hint: check out <a href="https://developer.enonic.com/docs/cms/stable/content/content-types#display-name">the display name section of the content type documentation</a> and look for something that allows you to do this.</em></p>
+<p>Make the display name use "Species" as its placeholder. <em>Hint: check out <a href="https://developer.enonic.com/docs/cms/stable/content/content-types#display-name">the display name section of the content type documentation</a> and look for something that allows you to do this.</em></p>
 </li>
 <li>
 <p>An animal can also have alternative names for its species (for instance, the reindeer is also known as <em>caribou</em>). Allow the user to add as many alternative names as they want.</p>
@@ -1192,15 +1192,26 @@ form:
 <div class="paragraph">
 <p>A ContentSelector will store a reference to the target content item. When using the Guillotine API, you may simply follow this reference to access the target content, and access its fields instantly.</p>
 </div>
+<div class="paragraph">
+<p>Start with the type-filtered artist query from the Headless API chapter, and select <code>favoriteAnimal</code> to follow each artist&#8217;s reference.</p>
+</div>
 <div class="listingblock">
 <div class="title">Fetch artists and their associated favorite animals</div>
 <div class="content">
 <pre class="highlight"><code class="language-GraphQL" data-lang="GraphQL">{
   guillotine {
-    getChildren(key: "/artists") {
+    queryDsl(
+      query: {
+        term: {
+          field: "type"
+          value: { string: "com.example.dev101:artist" }
+        }
+      }
+      first: 10
+      sort: [{ field: "displayName", direction: ASC }]
+    ) {
       displayName
       ... on com_example_dev101_Artist {
-        _id
         data {
            favoriteAnimal {
             displayName
@@ -1226,7 +1237,7 @@ form:
 <pre class="highlight"><code class="language-json" data-lang="json">{
   "data": {
     "guillotine": {
-      "getChildren": [
+      "queryDsl": [
         {
           "displayName": "Cardi B",
           "data": {
@@ -1285,7 +1296,7 @@ form:
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2026-10-20 15:57:50 UTC
+Last updated 2026-10-27 11:08:34 UTC
 </div>
 </div>
 </body>
