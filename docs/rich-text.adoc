@@ -1,306 +1,76 @@
 = Rich text
 include::.variables.adoc[]
-:description: Rich text is an incredibly powerful editing tool and an important part of the XP experience. Learn how to configure it here.
+:description: Add a rich text description, insert links, images and a macro, and inspect how Guillotine returns each one for your front-end.
 
-In this chapter, you'll add a rich text field with the https://developer.enonic.com/docs/cms/stable/schemas/form-items/htmlarea[HtmlArea form item], insert links, images and a macro, and fetch the result through the API.
-For the editor itself, see the https://developer.enonic.com/docs/content-studio/stable/editor/rich-text-editor[Content Studio docs].
+In this chapter, you'll add rich text to Animal, insert a link, an image and a macro, and query each addition through Guillotine.
+You'll use a new animal, Lynx, for the exercises.
 
-== Overview
+== Add a description
 
-.The HtmlArea form item with the default tools selection
-image::input-type-html-area.png["A text input field with a tools ribbon just above.", align=center]
+The HtmlArea form item lets editors write formatted text with embedded content.
+Use it for free-form prose; use the <<sets#, option sets from the previous chapter>> when your front-end needs separate, structured entries.
 
-The HtmlArea form item gives you a multi-line input field with rich formatting options, much like what you're used to from your favorite word processor. It supports text formatting and justification, lists, links, and even lets you insert images.
+=== Task: Add the field and create Lynx
 
-You can configure the HtmlArea to be exactly what you want by dictating what formatting tools to include or exclude (the `include` and `exclude` settings, respectively), by what heading levels are allowed (`allowHeadings`), and by giving it a default value (`default`).
-
-Additionally, the HtmlArea supports the use of _macros_, giving you the ability to insert prefabricated rich components into your markup.
-
-== HtmlArea include and exclude
-
-We can use the HtmlArea's settings to specify which rich text controls should be available when editing. Using a combination of `include` and `exclude`, we can customize the input's appearance.
-
-By default, it includes a limited, but useful selection of tools at your disposal. Using `include: "*"` is the same as including the default tools.
-
-.The HtmlArea with default configuration
-[source,yaml]
-----
-- type: "HtmlArea"
-  name: "everything"
-  label: "HtmlArea"
-----
-
-If you want to exclude all controls, use `exclude: "*"`:
-
-.The HtmlArea configured to include nothing
-[source,yaml]
-----
-- type: "HtmlArea"
-  name: "nothing"
-  label: "HtmlArea with exclude: *"
-  exclude: "*"
-----
-
-// TODO(xp8-verify): recapture from Content Studio 6.1
-.An HtmlArea input with `exclude: "*"` and no tools.
-image::input-type-html-area-no-controls.png[An HtmlArea configured to exclude all editing tools, align=center]
-
-Finally, if you want to exclude most tools, but not all, you can exclude all and then add back in the ones you want:
-
-.The HtmlArea configured to include a selection of controls
-[source,yaml]
-----
-- type: "HtmlArea"
-  name: "something"
-  label: "HtmlArea with some controls"
-  exclude: "*"
-  include: "Format | Bold Italic Underline | JustifyBlock JustifyLeft JustifyCenter JustifyRight | HorizontalRule Blockquote"
-----
-
-.An HtmlArea with a selection of tools and `exclude: "*"`
-image::input-type-html-area-some-controls.png[An HtmlArea configured to include a selection of editing tools, align=center]
-
-As introduced in the beginning, for a full overview of the available text tools and HtmlArea settings, visit the https://developer.enonic.com/docs/cms/stable/schemas/form-items/htmlarea[HtmlArea reference docs].
-
-=== Task: Animal description
-
-Let's add a rich-text description field to the animal content type. The input should be optional and have at most a single occurrence. You can include any editor tools you want, but it must at least have the `Link`, `Image` and `Macro` tools, as we'll be using these later. Otherwise, configure it as you want.
-
-Your content type should now look something like this:
+Append this field to the Animal form, after `distribution`:
 
 .{app-root}/cms/content-types/animal/animal.yaml
 [source,yaml]
 ----
-include::../{app-root}/cms/content-types/animal/animal.yaml[tags=header]
-
-  # other fields elided for brevity
-
-include::../{app-root}/cms/content-types/animal/animal.yaml[tags=description]
+include::../{app-root}/cms/content-types/animal/animal.yaml[tag=description]
 ----
 
-With the new content type deployed, you are ready to continue with the further tasks we'll introduce in the next sections.
+`exclude: "*"` removes the default toolbar tools, and `include` adds the tools used in this chapter.
+The field is optional and accepts one value, since `occurrences` is omitted.
+Keep the toolbar focused on the formatting your front-end supports; the https://developer.enonic.com/docs/cms/stable/schemas/form-items/htmlarea[HtmlArea reference] covers the other settings.
 
-[TIP]
-.When to use it
-====
-Use an HtmlArea where editors need free-form prose: a description, an article body, a biography. When your front-end needs to render parts differently, such as a quote, a gallery and a call to action, model them as an OptionSet of blocks instead, so each part arrives as structured data rather than HTML to parse. And keep the toolbar small: every tool you allow is HTML your front-end has to style.
-====
+Save the schema and let your running `enonic dev` watcher update the app.
+In Content Studio, create an Animal named "Lynx" in the Animals folder, with the path `/animals/lynx`.
 
-== Links
+== Link to another animal
 
-In addition to good old URLs, the Rich text editor provides a more powerful way of creating links, in which you can:
+An internal link stores the target content item's ID, just like a ContentSelector reference.
+Moving or renaming the target preserves that reference; your front-end still needs to resolve it to the appropriate URL.
 
-- Reference other content items (possibly passing query parameters);
-- If the referenced content is of type media, you can set a specific link to: open the file, directly download the file, or treat it as a regular content;
-- Insert URL links of type: https, http, ftp, tel or relative;
+=== Task: Link to Lion
 
-An important feature is that when creating internal links (content or media links), XP will save references to the target items, similar to how the ContentSelector works. This is useful when looking for usage and dependencies between content items later.
-
-NOTE: Because links are created using the item's unique id, it is perfectly safe to move items around in the tree structure, or change their path name. The links will not break.
-
-=== Task: Internal link
-
-In this task, you'll create an internal link to another animal.
-
-Create a new animal, "Lynx".
-
-. In the `Description` field, type some text, i.e. "Lynx are cats, just like lions". Select the "lions" text and click "insert link" in the toolbar.
+. In Lynx's Description, enter this text:
 +
-NOTE: You can also use kbd:[ctrl+K] to insert the link.
-+
-. You'll be greeted by the "Insert link" dialog:
-.Choose the content tab, and select the previously created "Lion" as the target item
-// TODO(xp8-verify): recapture from Content Studio 6.1, whose link dialog was reworked
-+
-image::rich-text-insert-content-link.png[Screenshot of the insert link dialog]
-
-When done, save the item - but keep the tab open to complete the upcoming tasks.
-
-== Images
-
-With the image tool enabled, you can insert an image anywhere within your document. During the insert process, you may customize the image further.
-
-The following options are available: Caption, alt text, change the image's justification, and apply predefined image styles.
-
-=== Task: Animal pictures
-
-Try out the image controls that Content Studio gives you by uploading a picture and seeing what you can do with it.
-
-We looked at <<media#_image_form, editing images in the media chapter>>, but when inserting images in the HtmlArea, you also have something called "image styles", which we'll have a look at now.
-
-Continue editing the "Lynx" content created in the previous task.
-
-. Insert an image below the existing text. Use the "insert image" button in the toolbar.
-// TODO(xp8-verify): recapture from Content Studio 6.1
-+
-.The toolbar with the image tool highlighted
-image::rich-text-toolbar-image-highlight.png[The rich text toolbar with the image tool circled by a blue circle]
-+
-. You'll be greeted by the "insert image" dialog:
-+
-.The HtmlArea insert image dialog. Photo by https://unsplash.com/@zmachacek[Zdeněk Macháček]
-image::rich-text-insert-image.png["The insert image dialog, showing the image, an image styles dropdown, caption, and alt text fields"]
-+
-. When accessing the "image styles" dropdown, you'll find that it's only got a couple of built-in options. To make this more exciting, let's create a custom image style.
-+
-In your app, add a new file:
-+
-.{app-root}/cms/style/style.yaml
-[source,yaml]
 ----
-include::../{app-root}/cms/style/style.yaml[]
+Lynx are cats, just like lions.
 ----
-+
-* `aspectRatio`: The aspect ratio controls how the image is cropped. 1:1 makes the image square.
-* `filter`: The filters add a grayscale effect and then a border
-+
-NOTE: https://developer.enonic.com/docs/cms/stable/richtext/styles[The styles reference doc] has more information on how you can style your images, so go check it out for a deeper dive.
-+
-. With this style picked up by XP, you'll have the "Grayscale" option available in the image styles dropdown. Select it to apply it to the image and update your image.
-+
-.Example of description with inserted image styled
-image::rich-text-insert-image-styled.png["The description rich text showing the results of applying the image styles to the image"]
+. Select the word "lions" and click the *Link* toolbar button.
+. In the Content tab, search for and select Lion at `/animals/lion`.
+. Click btn:[Insert], then save Lynx.
 
-NOTE: Image styles are offered from the apps assigned to your project. Your app is assigned, which is why the style shows up. The same goes for the macros we'll look at next.
+.Selecting Lion as the link target
+image::rich-text-link.png["Insert Link dialog with lions as the text and Lion at /animals/lion as the selected content", width=800]
 
-== Macros
+=== Task: Inspect the link
 
-Macros enable you to insert custom components within your rich text field.
+Unlike TextArea, which returns a string, HtmlArea exposes a GraphQL object with several fields.
+`raw` is the stored markup; `processedHtml` is the result of processing it for delivery.
 
-When the content is rendered, the macro is replaced with the actual component implementation.
+Open Query Playground for "{cms-project-displayname}" and keep *Draft* selected throughout this chapter.
+Query both forms of the HTML together with the link's target and URL components:
 
-Similar to content types, macros can define forms that help editors configure them.
-
-=== Task: Embed iframe macro
-
-The embed macro enables you to insert iframes. In this context, we'll embed this https://www.youtube.com/watch?v=gr5EwZo_CHQ[Lynx youtube video].
-
-Let's add the macro to the "Lynx" content item.
-
-.The toolbar with the macro button highlighted
-image::rich-text-toolbar-macro-highlight.png[The rich text toolbar with the macro button circled by a blue circle]
-
-. Click "insert macro".
-. Select the "Embed iframe" macro
-. Add the following iframe to it: `<iframe width="560" height="315" src="https://www.youtube.com/embed/gr5EwZo_CHQ?si=IlkTGRuGVV7BxEOs" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>`
-
-NOTE: This macro can't be previewed because the Embed iframe macro does not include a standard preview.
-
-As you'll see in the next section, when querying the description of an Animal content, you'll be able to properly get the iframe we passed to the "Embed iframe" macro and process it as you'd like in your front-end.
-
-TIP: For more information on macros, including how to create your very own, visit https://developer.enonic.com/docs/cms/stable/richtext/macros[the macro reference docs].
-
-== GraphQL API
-
-When fetching rich text via the API, the most commonly used output is "processed HTML". This is essentially unstyled, semantic HTML, and it's up to your client to style it. Internal links, images and macros also need a little work from your client, as you will see below.
-
-The following query returns the "Lynx" content, and the `description` field as processed HTML.
-
-.Fetching rich text via GraphQL API
-[source,GraphQL,{subs}]
+[source,graphql,{subs}]
 ----
 {
   guillotine {
-    queryDsl(
-      query: {
-        term: {
-          field: "displayName",
-          value: {
-            string: "Lynx"
-          }
-        }
-      }
-    ) {
+    get(key: "/animals/lynx") {
       ... on {app-name-query}_Animal {
         data {
           description {
-            processedHtml
-          }
-        }
-      }
-    }
-  }
-}
-----
-
-// TODO(xp8-verify): recapture the response, including the exact link and image placeholders, from Guillotine 9
-.The query result may look something like this
-[source,json,{subs}]
-----
-{
-  "data": {
-    "guillotine": {
-      "queryDsl": [
-        {
-          "data": {
-            "description": {
-              "processedHtml": "<p>Lynx are cats, just like <a href=\"/animals/lion\" data-link-ref=\"8cc82fd1-9063-4604-9f51-5f059d7a5d2e\">lions</a>.</p>\n\n<figure class=\"captioned editor-align-justify square-grayscale\"><img alt=\"lynx.jpg\" src=\"/media:image/{cms-project-id}:draft/be6bb93a-7d99-4ed2-b424-4e435b89f392:6a1e144ef4ebab19e9071794ad753130d5bb5497/width-768/lynx.jpg\" style=\"width:100%\" data-image-ref=\"4dced964-cd1c-445d-bb9f-80387467e165\">\n\n</figure>\n\n<p><editor-macro data-macro-name=\"embed\" data-macro-ref=\"a1490c65-3654-4b29-9b1a-eb3894b6f59f\">&lt;iframe title=\"YouTube video player\" src=\"https://www.youtube.com/embed/gr5EwZo_CHQ?si=IlkTGRuGVV7BxEOs\" height=\"315\" width=\"560\"&gt;&lt;/iframe&gt;</editor-macro></p>\n"
-            }
-          }
-        }
-      ]
-    }
-  }
-}
-----
-
-By unescaping the HTML, you will find the following:
-
-.Processed HTML output
-[source,html,{subs}]
-----
-<p>
-  Lynx are cats, just like <a href="/animals/lion" data-link-ref="8cc82fd1-9063-4604-9f51-5f059d7a5d2e">lions</a>.
-</p>
-
-<figure class="captioned editor-align-justify square-grayscale">
-  <img alt="lynx.jpg" src="/media:image/{cms-project-id}:draft/be6bb93a-7d99-4ed2-b424-4e435b89f392:6a1e144ef4ebab19e9071794ad753130d5bb5497/width-768/lynx.jpg" style="width:100%" data-image-ref="4dced964-cd1c-445d-bb9f-80387467e165">
-</figure>
-
-<p>
-  <editor-macro data-macro-name="embed" data-macro-ref="a1490c65-3654-4b29-9b1a-eb3894b6f59f">
-    &lt;iframe title=\"YouTube video player\" src=\"https://www.youtube.com/embed/gr5EwZo_CHQ?si=IlkTGRuGVV7BxEOs\" height=\"315\" width=\"560\"&gt;&lt;/iframe&gt;
-  </editor-macro>
-</p>
-
-----
-
-With the exception of the macro, this is all valid HTML. Look closely at the link and the image, though. The `href` is the lion's path within your project, and the `src` is the image's path on the media API, with no host in front of it. These are defaults: Guillotine does not know where your front-end lives or how it routes its pages, so it leaves the final URL to you. Each element carries a reference attribute that points to structured data about the link or image, which is what your client uses to build the URL it wants. Below, you'll learn how.
-
-=== Links
-
-Looking specifically at the processed HTML link output above, the most interesting part is the `data-link-ref` attribute.
-
-This example is an internal link. To build the final URL, and to access more details about the target, extend your query with the `links` field:
-
-.Query for link details
-[source,GraphQL,{subs}]
-----
-{
-  guillotine {
-    queryDsl(
-      query: {
-        term: {
-          field: "displayName",
-          value: {
-            string: "Lynx"
-          }
-        }
-      }
-    ) {
-      ... on {app-name-query}_Animal {
-        data {
-          description {
+            raw
             processedHtml
             links {
-              ref # <1>
-              uri
-              content { # <2>
+              ref
+              content {
                 displayName
                 _path
-                type
               }
-              pageUrl { # <3>
+              pageUrl {
                 baseUrl
                 path
                 queryString
@@ -315,82 +85,96 @@ This example is an internal link. To build the final URL, and to access more det
 }
 ----
 
-<1> Matches the `data-link-ref` attribute in the processed HTML.
-<2> The content item the link points to.
-<3> The components of the link's page URL. `baseUrl` is the base URL configured for your project, and is `null` when you have not configured one.
+The response shows how processing changes the internal link:
 
-By executing this query, you will get some more data. Specifically:
-
-// TODO(xp8-verify): recapture from Guillotine 9
-.Link query result
-[source,json,{subs}]
-----
-...
-"links": [
-  {
-    "ref": "8cc82fd1-9063-4604-9f51-5f059d7a5d2e",
-    "uri": "content://89daa74e-1482-493d-9a22-8ec08acaf4f8",
-    "content": {
-      "displayName": "Lion",
-      "_path": "/animals/lion",
-      "type": "{app-name-full}:animal"
-    },
-    "pageUrl": {
-      "baseUrl": null,
-      "path": "/animals/lion",
-      "queryString": ""
-    },
-    "fragment": ""
-  }
-]
-...
-----
-
-You now have access to the full name and type of the referenced item, and to the parts of its URL. Match the `ref` value with the `data-link-ref` attribute in the HTML, as you may have more than one link, and replace the `href` with your front-end's own route for the lion, for instance `https://www.example.com/animals/lion`. In a headless setup, your front-end decides what the URL of a content item looks like, not XP.
-
-=== Images
-
-Images work the same way: the `data-image-ref` attribute points to an entry in the `images` field, which holds the parts of every image URL. The default `src` is the media path, so the simplest fix is to prefix it with your media base URL - the same `{api-base-url}` you used in the <<media#, media chapter>>.
-
-If you want to optimize how fast images load on various devices, Guillotine can also return the image in multiple different sizes (using https://developer.mozilla.org/en-US/docs/Web/API/HTMLImageElement/srcset[the `srcset` attribute (MDN)]). This is achieved by adding an argument to the `description` field:
-
-.Fetching rich text with `srcset`
-[source,GraphQL,{subs}]
+[source,json]
 ----
 {
-  guillotine {
-    queryDsl(
-      query: {
-        term: {
-          field: "displayName",
-          value: {
-            string: "Lynx"
+  "data": {
+    "guillotine": {
+      "get": {
+        "data": {
+          "description": {
+            "raw": "<p>Lynx are cats, just like <a href=\"content://95cd658d-a645-4f63-a3de-4601b06507bd\">lions</a>.</p>\n",
+            "processedHtml": "<p>Lynx are cats, just like <a href=\"/animals/lion\" data-link-ref=\"8aafba0c-cb32-457c-86c8-3b7772ea4750\">lions</a>.</p>\n",
+            "links": [
+              {
+                "ref": "8aafba0c-cb32-457c-86c8-3b7772ea4750",
+                "content": {
+                  "displayName": "Lion",
+                  "_path": "/animals/lion"
+                },
+                "pageUrl": {
+                  "baseUrl": null,
+                  "path": "/animals/lion",
+                  "queryString": ""
+                },
+                "fragment": ""
+              }
+            ]
           }
         }
       }
-    ) {
+    }
+  }
+}
+----
+
+In `raw`, the link's `href` contains `content://` followed by Lion's content ID.
+In `processedHtml`, it contains `/animals/lion` instead, and `data-link-ref` connects the HTML element to the structured `links` entry.
+The HTML values are JSON strings; a JSON parser handles the escaped quotes and newlines.
+
+Match `data-link-ref` in the HTML with `ref` in the link data from the same response.
+Your content IDs and reference values will differ from this example.
+The default `href` is the target's content path; it is not a guarantee that your front-end serves content at that URL.
+Use the target and URL components to construct your own route, supplying your front-end's base when `baseUrl` is `null`, and append any `queryString` and `fragment`.
+The <<frontend#_building_urls, front-end chapter>> shows how to apply the resulting URL.
+
+== Insert an image
+
+Images inside rich text reference media content too.
+The caption and alternative text you enter here belong to this use of the image in the description.
+
+=== Task: Add a lynx photograph
+
+. Download https://unsplash.com/photos/lynx-walking-on-grass-field-Oko2E4kt2oU[this lynx photograph] by https://unsplash.com/@zmachacek[Zdeněk Macháček] and save it as `lynx.jpg`, or choose your own image.
+. Reopen Lynx and place the cursor in a new paragraph below its description.
+Click the *Image* toolbar button.
+. Drop `lynx.jpg` onto the upload area in the Insert Image dialog, or click the upload area to choose the file.
+The uploaded image is selected automatically.
+. Leave the image style as *<None>* and Custom width unchecked.
+For the supplied photograph, enter "Lynx in human care. Photo: Zdeněk Macháček." as the caption.
+. Under Accessibility, choose *Alternative text* and enter "Lynx walking through grass."
+Click btn:[Insert], then save Lynx.
+. Return to the content tree and expand Lynx to find the new image at `/animals/lynx/lynx.jpg`.
+
+Uploading through this dialog creates a separate media content item under the animal you're editing.
+The description references that image by ID, and the uploaded file is an attachment of the image content item, as explained in the <<media#, media chapter>>.
+
+.Caption and alternative text for the inserted photograph
+image::rich-text-image-settings.jpg["Insert Image dialog showing /animals/lynx/lynx.jpg, its caption and Alternative text selection", width=880]
+
+Use the Decorative image option only when an image adds no information beyond its surrounding content.
+For more editing controls, see the https://developer.enonic.com/docs/content-studio/stable/editor/rich-text-editor[Content Studio rich-text editor documentation].
+
+=== Task: Inspect the image URL
+
+Query `images` alongside the processed HTML:
+
+[source,graphql,{subs}]
+----
+{
+  guillotine {
+    get(key: "/animals/lynx") {
       ... on {app-name-query}_Animal {
         data {
-          description(processHtml: {imageWidths: [200, 500]}) {
+          description {
             processedHtml
             images {
-              ref # <1>
-              src { # <2>
+              ref
+              src {
                 path
                 queryString
-              }
-              srcset { # <3>
-                width
-                imageUrl {
-                  path
-                  queryString
-                }
-              }
-              style { # <4>
-                application
-                name
-                aspectRatio
-                filter
               }
             }
           }
@@ -401,131 +185,116 @@ If you want to optimize how fast images load on various devices, Guillotine can 
 }
 ----
 
-<1> Matches the `data-image-ref` attribute in the processed HTML.
-<2> The components of the URL for the `src` attribute.
-<3> One entry per requested width, for the `srcset` attribute.
-<4> The image style you applied in the editor, including which app provides it.
+The inserted image appears in `processedHtml` as a `<figure>` with an `<img>` and a `<figcaption>`:
 
-This time, you should find that the `<img>` element in the processed HTML includes a `srcset` with 200w and 500w candidates, and that the `images` entry holds the parts of each URL:
+[source,html,{subs}]
+----
+<figure class="captioned editor-align-justify"><img alt="Lynx walking through grass." src="/media:image/{cms-project-id}:draft/304b9ac8-406e-4d05-80d7-86b868c225ed:2eb15046035b4e5f05e511c853da1216/width-768/lynx.jpg" style="width:100%" data-image-ref="52918d8b-9c15-49a2-9190-4b3249f90528">
+<figcaption>Lynx in human care. Photo: Zdeněk Macháček.</figcaption>
+</figure>
+----
 
-// TODO(xp8-verify): recapture from Guillotine 9
-.Image data
+Its `data-image-ref` matches this entry in the `images` array:
+
 [source,json,{subs}]
 ----
-...
-"images": [
-  {
-    "ref": "4dced964-cd1c-445d-bb9f-80387467e165",
-    "src": {
-      "path": "/media:image/{cms-project-id}:draft/be6bb93a-7d99-4ed2-b424-4e435b89f392:6a1e144ef4ebab19e9071794ad753130d5bb5497/width-768/lynx.jpg",
-      "queryString": "?filter=hsbcolorize%280x000000%29%3B+grayscale%28%29%3B+border%286%2C+0x000000%29"
-    },
-    "srcset": [
-      {
-        "width": 200,
-        "imageUrl": {
-          "path": "/media:image/{cms-project-id}:draft/be6bb93a-7d99-4ed2-b424-4e435b89f392:...../width-200/lynx.jpg",
-          "queryString": "?filter=..."
-        }
-      },
-      {
-        "width": 500,
-        "imageUrl": {
-          "path": "/media:image/{cms-project-id}:draft/be6bb93a-7d99-4ed2-b424-4e435b89f392:...../width-500/lynx.jpg",
-          "queryString": "?filter=..."
-        }
-      }
-    ],
-    "style": {
-      "application": "{app-name-full}",
-      "name": "square-grayscale",
-      "aspectRatio": "1:1",
-      "filter": "hsbcolorize(0x000000); grayscale(); border(6, 0x000000)"
-    }
-  }
-]
-...
-----
-
-NOTE: URLs above were shortened for readability.
-
-Prefix each `path` with `{api-base-url}` and append its `queryString`, and you have working image URLs for both `src` and `srcset`. The `style` object shows the properties from your `style.yaml`, and the aspect ratio and filter are already baked into the paths.
-
-WARNING: Use each image URL as it is returned, and don't make other sizes by editing the width segment of a URL yourself. Ask Guillotine for the sizes you need with `imageWidths` instead.
-
-=== Macros
-
-In the headless context, the client is responsible for rendering your content. In the case of macros - this gets obvious.
-
-In the processed HTML, each macro is represented by an `<editor-macro>` element containing a unique reference key. As for links and images, this reference can be used to access detailed data fields for the macro.
-
-.Query that fetches all macro data
-[source,GraphQL,{subs}]
-----
 {
-  guillotine {
-    queryDsl(
-      query: {
-        term: {
-          field: "displayName",
-          value: {
-            string: "Lynx"
-          }
-        }
-      }
-    ) {
-      ... on {app-name-query}_Animal {
-        data {
-          description {
-            processedHtml
-            macrosAsJson
-          }
-        }
-      }
-    }
+  "ref": "52918d8b-9c15-49a2-9190-4b3249f90528",
+  "src": {
+    "path": "/media:image/{cms-project-id}:draft/304b9ac8-406e-4d05-80d7-86b868c225ed:2eb15046035b4e5f05e511c853da1216/width-768/lynx.jpg",
+    "queryString": ""
   }
 }
 ----
 
+Build the image URL as `{api-base-url}` + `path` + `queryString`, just as in the media chapter.
+Use it for the matching image's `src`; the relative media path alone will point at your front-end's host when rendered there.
+Your IDs and URL fingerprints will differ from this example.
 
-.MacrosAsJson response (extract)
+== Apply an image style
+
+A custom image style gives editors a named choice for cropping or filtering images.
+You'll add a square crop with a grayscale filter.
+
+=== Task: Create and apply the style
+
+Create this file in your app:
+
+.{app-root}/cms/style/style.yaml
+[source,yaml]
+----
+include::../{app-root}/cms/style/style.yaml[]
+----
+
+`aspectRatio: "1:1"` requests a square crop, and `filter: "grayscale()"` removes color.
+Styles are available from apps assigned to the content project, including your app.
+For effects that only concern presentation, consider client-side CSS instead of server-side filters, as discussed in the media chapter.
+
+Save the file and let the watcher update the app.
+Reopen Lynx, double-click the image in Description, and choose *Square grayscale* from the style selector.
+Click btn:[Update] and save the animal.
+
+.Square grayscale selected for the Lynx image
+image::rich-text-image-style.jpg["Insert Image dialog with Square grayscale selected and a preview of the square, grayscale lynx photograph", width=880]
+
+Run the image query again.
+The returned URL now includes the crop and filter instructions; use both its `path` and `queryString` without modifying them.
+You can also inspect the selected style by adding this field next to `src` inside `images`:
+
+[source,graphql]
+----
+style {
+  name
+  aspectRatio
+  filter
+}
+----
+
+The `style` object contains:
+
 [source,json]
 ----
-...
-"macrosAsJson": [
-  {
-    "ref": "1f8703bc-ee13-4871-89b3-937a7299abc4",
-    "name": "embed",
-    "descriptor": "system:embed",
-    "config": {
-      "embed": {
-        "body": "&lt;iframe title=\"YouTube video player\" src=\"https://www.youtube.com/embed/gr5EwZo_CHQ?si=IlkTGRuGVV7BxEOs\" height=\"315\" width=\"560\"&gt;&lt;/iframe&gt;"
-      }
-    }
-  }
-]
-...
+{
+  "name": "square-grayscale",
+  "aspectRatio": "1:1",
+  "filter": "grayscale()"
+}
 ----
 
-To access specific macros and fields, like for content types, you may use the full GraphQL schema. Try the following:
+The style is not a stylesheet for your whole front-end: captions, text and layout still use your front-end's own styling.
+See the https://developer.enonic.com/docs/cms/stable/richtext/styles[CMS styles reference] for more options.
 
-NOTE: If you used a different macro than the "Embed iframe" macro, the query must be updated to match the specific macro.
+== Insert a macro
 
-.Query that fetches the fields for the Embed iframe macro
-[source,GraphQL,{subs}]
+A _macro_ embeds a configurable component in rich text.
+The built-in Embed IFrame macro lets editors provide an iframe, such as a video embed.
+In Guillotine, it becomes a placeholder plus configuration data for your client to render.
+
+=== Task: Add an iframe embed
+
+In Lynx's Description, place the cursor in a new paragraph after the image and click *Insert macro*.
+Choose *Embed IFrame* and enter:
+
+[source,html]
+----
+<iframe src="https://www.youtube.com/embed/gr5EwZo_CHQ" title="Lynx video" width="560" height="315" allowfullscreen></iframe>
+----
+
+Insert the macro and save Lynx.
+The macro stores the iframe configuration in the rich text.
+
+.Configuring the built-in Embed IFrame macro
+image::rich-text-macro.png["Insert Macro dialog with Embed IFrame selected and the lynx video iframe in IFrame HTML", width=880]
+
+=== Task: Query the macro configuration
+
+Query the typed `macros` fields:
+
+[source,graphql,{subs}]
 ----
 {
   guillotine {
-    queryDsl(
-      query: {
-        term: {
-          field: "displayName",
-          value: {
-            string: "Lynx"
-          }
-        }
-      }
-    ) {
+    get(key: "/animals/lynx") {
       ... on {app-name-query}_Animal {
         data {
           description {
@@ -548,31 +317,84 @@ NOTE: If you used a different macro than the "Embed iframe" macro, the query mus
 }
 ----
 
-This time, you only get the explicit fields you were looking for
+The processed HTML contains this macro placeholder:
 
-.Output from the field-based query
+[source,html]
+----
+<editor-macro data-macro-name="embed" data-macro-ref="c0357643-ddda-4e54-a3d9-c3ea39d1ba2f">&lt;iframe src="https://www.youtube.com/embed/gr5EwZo_CHQ" title="Lynx video" width="560" height="315" allowfullscreen=""&gt;&lt;/iframe&gt;</editor-macro>
+----
+
+The `macros` array contains its configuration:
+
 [source,json]
 ----
-...
-"macros": [
-  {
-    "ref": "9918c7b2-c87d-4d0b-8d6c-56ab85805f3a",
-    "name": "embed",
-    "descriptor": "system:embed",
-    "config": {
-      "embed": {
-        "body": "&lt;iframe title=\"YouTube video player\" src=\"https://www.youtube.com/embed/gr5EwZo_CHQ?si=IlkTGRuGVV7BxEOs\" height=\"315\" width=\"560\"&gt;&lt;/iframe&gt;"
+{
+  "ref": "c0357643-ddda-4e54-a3d9-c3ea39d1ba2f",
+  "name": "embed",
+  "descriptor": "system:embed",
+  "config": {
+    "embed": {
+      "body": "&lt;iframe src=\"https://www.youtube.com/embed/gr5EwZo_CHQ\" title=\"Lynx video\" width=\"560\" height=\"315\" allowfullscreen=\"\"&gt;&lt;/iframe&gt;"
+    }
+  }
+}
+----
+
+Match `data-macro-ref` with `ref`, then use the macro's name and configuration to render it in your client.
+In this example, `config.embed.body` contains HTML entities such as `&lt;` and `&gt;`.
+These remain after parsing the JSON; a client rendering this iframe must decode them as part of handling the embed macro.
+Returning `processedHtml` does not execute the macro or automatically turn its placeholder into a working video.
+
+The https://developer.enonic.com/docs/guillotine/stable/api#richtext[Guillotine RichText reference] also describes `macrosAsJson` for inspecting all macro data as JSON.
+The https://developer.enonic.com/docs/cms/stable/richtext/macros[CMS macros reference] covers macro definitions and other built-in macros.
+
+== Optional: Request responsive images
+
+Use `processHtml.imageSrcWidth` to change the default width of the main `src` image, and `imageWidths` to request additional sizes for `srcset`.
+This example requests an 800-pixel main image and two responsive alternatives:
+
+[source,graphql,{subs}]
+----
+{
+  guillotine {
+    get(key: "/animals/lynx") {
+      ... on {app-name-query}_Animal {
+        data {
+          description(processHtml: {
+            imageSrcWidth: 800
+            imageWidths: [320, 640]
+          }) {
+            processedHtml
+            images {
+              ref
+              src {
+                path
+                queryString
+              }
+              srcset {
+                width
+                imageUrl {
+                  path
+                  queryString
+                }
+              }
+            }
+          }
+        }
       }
     }
   }
-]
-...
+}
 ----
 
-By accessing the macro config, you are able to drill down into every single field, accessing all the details you actually need.
+The `images` entry now has an 800-pixel-wide `src` image, replacing the default width of 768, and two `srcset` candidates with widths of 320 and 640.
+The Square grayscale style still applies, so the main image is 800 × 800 pixels and retains the grayscale filter.
+Build its URL from `{api-base-url}` + `src.path` + `src.queryString`.
+For each candidate, combine `{api-base-url}` with its `imageUrl.path` and `imageUrl.queryString`.
+The <<frontend#_building_urls, front-end chapter>> shows how to populate `src` and `srcset` from these components.
+Request sizes through Guillotine; do not construct them by editing the returned URL paths.
 
 == Coming up
 
-You have configured a rich text input, created links, styled images and inserted a macro, and seen how all three come back from the API as placeholders plus structured data for your front-end to render.
-
-In the next chapter, you'll add fields to many content types at once with <<mixins#, mixins>>.
+You've added rich text with a link, an image style and a macro, and inspected the HTML and structured data your front-end uses to render them.
+In the next chapter, you'll add fields across content types with <<mixins#, mixins>>.
