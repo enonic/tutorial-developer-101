@@ -1,209 +1,59 @@
 = Sets and form fragments
 include::.variables.adoc[]
-:description: XP has a number of ways to group inputs together, and to reuse groups across schemas. Learn all about them in this chapter.
+:description: Add a filmography to artists, model animals with option sets, and reuse fields with a form fragment. Query each addition through Guillotine.
 
-In this chapter, you'll group form items with field sets, item sets and option sets, and reuse a group of them across schemas with a form fragment.
+In this chapter, you'll add filmography entries to your artists, describe animals with selectable options, and reuse fields with a form fragment.
+After each addition, you'll enter content and query it through Guillotine.
 
-== Field sets
+== Repeat a group of fields
 
-Field sets are the simplest form of sets XP offers... they group inputs visually and have no effect on the data model.
+In the previous chapter, `otherNames` repeated a single TextLine.
+An _item set_ groups several fields into one object and can repeat that whole group.
+For an artist's filmography, each entry will contain a title and a year.
+These entries belong to the artist; they are not separate content items like the referenced favorite animal.
 
-In a schema, the field set wraps the inputs it should contain.
+=== Task: Add filmography to Artist
 
-To create a field set that contains a TextLine and a TextArea, the definition would look like this:
-
-.A field set
-[source,yaml]
-----
-- type: "FieldSet"
-  label: "FieldSet"
-  items: # <1>
-    - type: "TextLine"
-      name: "fieldSetTextLine"
-      label: "Heading"
-    - type: "TextArea"
-      name: "fieldSetTextArea"
-      label: "Text"
-      helpText: "Write something? 🖊️"
-----
-
-<1> Use `items` to place other inputs inside the field set. A field set has no `name` of its own, since it never produces data.
-
-// TODO(xp8-verify): recapture from Content Studio 6.1
-.A field set grouping
-image::field-set.png["A field set containing TextLine and TextArea inputs. The field set groups them visually and adds a shared heading.", align=center]
-
-== Item sets
-
-Item sets also allow you to group input fields, but as opposed to field sets, item sets group values _both_ visually _and_ on a structural level. Item sets can be arbitrarily nested.
-
-- The https://developer.enonic.com/docs/cms/stable/schemas/form-items/item-set[item set documentation] does a standout job of explaining exactly how they work, so check that out for an overview.
-
-.An item set containing contact info
-image::item-set-sample.png["A pair of visually grouped inputs on a card element. The card has a header that says 'contact info'. There is also a button to add more contact info forms.", align=center]
-
-== Option sets
-
-Option sets enable editors (working in Content Studio) to choose from a set of predefined options. This is similar to the ComboBox input, but option sets also allow options to carry extra data.
-
-Option sets where users can select only one of a number of options are known as _single-select_ option sets. You can also use a _multi-select_ option set if the user should be able to select multiple options simultaneously. We'll look at this too in a task.
-
-- The https://developer.enonic.com/docs/cms/stable/schemas/form-items/option-set[option set reference documentation] provides a good overview (with accompanying pictures) of how option sets work.
-
-.A multi-select option set
-image::option-set-sample.png["An input form labeled 'multi-selection'. The user has selected one out of four options. Some options contain extra data such as an image selector or other input fields.", align=center]
-
-== Form fragments
-
-_Form fragments_ facilitate a form of reuse in XP. They allow you to reuse fields across several content types, or several places within one content type.
-
-They won't look or behave any different from if you manually typed the same fields into multiple places, but they let you keep them in sync.
-
-Form fragments go in the `{app-root}/cms/form-fragments` directory, following the same naming pattern as the other schemas we've seen (`<fragment-name>/<fragment-name>.yaml`).
-
-We'll see them in the upcoming task, but if you want to learn more about them, consult https://developer.enonic.com/docs/cms/stable/schemas/form-fragments[the form fragments reference documentation].
-
-[TIP]
-.When to use it
-====
-* *FieldSet* when the only goal is a tidier form. It changes nothing in the data.
-* *ItemSet* for repeating, structured data the item owns, such as filmography entries. Each occurrence becomes an object in the data.
-* *OptionSet* when editors choose between variants that carry different fields, such as a feeding behavior that may or may not list prey. If the choice carries no data, a *ComboBox* is enough.
-* *Form fragment* when the same group of form items appears in several places in your app. It is pure reuse at schema level; the data looks as if you had typed the fields in each place.
-====
-
-== Tasks
-
-So far we've theoretically presented sets. For a proper understanding of those concepts, we'll introduce some tasks. Make sure to follow along in order to strengthen your knowledge on this subject.
-
-=== Adding an item set to Artist
-
-Let's add an item set to the `Artist`. The goal will be to add a Filmography item set, featuring where and when a specific artist was featured in a movie.
-
-To add an item set, use it as you would any other form item: place it within the `form` of a content type.
-
-If we add it to the `Artist` content type, it'd look something like this:
+Append this item set to the Artist form, after `favoriteAnimal`:
 
 .{app-root}/cms/content-types/artist/artist.yaml
 [source,yaml]
 ----
-include::../{app-root}/cms/content-types/artist/artist.yaml[tags=header]
-
-  # Other fields elided for brevity
-
-include::../{app-root}/cms/content-types/artist/artist.yaml[tags=filmography]
+include::../{app-root}/cms/content-types/artist/artist.yaml[tag=filmography]
 ----
 
-* `items`: Much like with field sets, use `items` to nest inputs within the item set.
-* `min` on `year`: Type-specific settings, like the lowest value a Double accepts, go directly on the input.
+* `items` contains the fields in each filmography entry.
+* The item set's `occurrences` allows any number of entries, including none.
+* Each entry requires both a `title` and a `year`.
+* `Long` stores the year as an integer.
+The `min: 0` directly on `year` limits its numeric value; `occurrences.min` controls whether a value is required.
 
-Note that the remaining fields of the form have been left out in the above example.
+Save the schema and let your running `enonic dev` watcher update the app.
+Reopen Cardi B in Content Studio and add two Filmography entries:
 
-With this new item set added to the Artist content type, make sure to add some data:
+[cols="1,1", options="header"]
+|===
+| Title | Year
+| Hustlers | 2019
+| F9 | 2021
+|===
 
-// TODO(xp8-verify): recapture from Content Studio 6.1
-.Item set for filmography
-image::artist-filmography-item-set.png["An example of using the Filmography item set."]
+Use *Expand all* if you want to view both entries together, then save the artist.
+The entries are part of the same draft as Cardi B's other fields.
 
-=== Adding an option set to Animal
+.Two filmography entries on Cardi B
+image::sets-filmography.png["Filmography item set with Hustlers from 2019 and F9 from 2021", width=527]
 
-In this section, we'll use option sets to add some extra data to the `Animal` content type. The goal is:
+=== Task: Query the filmography
 
-- Add an option set for feeding behavior. Intentionally simplified, this option set should indicate whether the animal is a herbivore or a carnivore. If it is a carnivore, it should also let the user add a list of prey.
-- Create a form fragment for distribution options. Because each distribution option should have the same fields, create a _form fragment_ to reuse it.
-- Add an option for distribution across continents. The user should be able to select as many as they want from the 7 continents to indicate where the animal lives. Each option should have an associated `TextArea` called "notes", where the user can add more data for each option.
+Open Query Playground for "{cms-project-displayname}" and keep *Draft* selected throughout this chapter.
+Fetch Cardi B by path and select the fields within `filmography`:
 
-==== Single-select: dietary data
-
-Open your animal content type and add a single-select option set.  As before, we use option sets as we would any other form item.
-
-.{app-root}/cms/content-types/animal/animal.yaml
-[source,yaml]
-----
-include::../{app-root}/cms/content-types/animal/animal.yaml[tags=header]
-
-  # other fields elided for brevity
-
-include::../{app-root}/cms/content-types/animal/animal.yaml[tags=feedingBehavior]
-----
-
-* `selection`: This specifies that if you add feeding behavior, you must select one of the options, and you can not select more than one.
-* `herbivore`: The herbivore option has no associated data, so it consists solely of a label and a help text.
-* `carnivore`: The carnivore option allows you to optionally specify prey for the animal.
-
-==== Multi-select: distribution
-
-. Start by creating the form fragment. Call it `distributionData`. It only contains a text area:
-+
-.{app-root}/cms/form-fragments/distributionData/distributionData.yaml
-[source,yaml]
-----
-include::../{app-root}/cms/form-fragments/distributionData/distributionData.yaml[]
-----
-
-. Moving on to animals, add the multi-select option set.
-+
-.{app-root}/cms/content-types/animal/animal.yaml
-[source,yaml]
-----
-include::../{app-root}/cms/content-types/animal/animal.yaml[tags=header]
-
-  # other fields elided for brevity
-
-include::../{app-root}/cms/content-types/animal/animal.yaml[tags=distribution]
-----
-
-* `selection`: This specifies that you can select as many of the seven continents as you want. A `max` above `1` is what turns the option set into a multi-select.
-* `include`: Pulls the fields of the form fragment into this option.
-
-NOTE: The use of the form fragment helps us both reduce duplication and keep all options in sync. If we wanted to add more data, such as current population, we would only have to add it to the fragment to have it duplicated to all distributions.
-
-=== Result
-
-With the new option sets added, the Lion entry could look something like this:
-
-// TODO(xp8-verify): recapture from Content Studio 6.1
-.Distribution and feeding behavior for Lion
-image::option-sets.png["Diet and distribution data filled out for lion. The feeding behavior selected is 'Carnivore' and the list of prey includes zebras and giraffes. For the distribution data, Africa and Asia is selected, with a short text about how Lions live in these areas today."]
-
-== Querying item sets and option sets
-
-Let's look at how option and item sets work in headless contexts.
-
-=== Item sets
-
-Getting item sets via GraphQL is not much different than anything else we've seen:
-
-.Fetching an Artist filmography
-[source,GraphQL,{subs}]
+[source,graphql,{subs}]
 ----
 {
   guillotine {
-    queryDsl(
-      query: {
-        boolean: {
-          must: [
-            {
-              term: {
-                field: "type",
-                value: {
-                  string: "{app-name-full}:artist"
-                }
-              }
-            },
-            {
-              term: {
-                field: "displayName",
-                value: {
-                  string: "Cardi B"
-                }
-              }
-            }
-          ]
-        }
-
-      }
-    ) {
+    get(key: "/artists/cardi-b") {
       displayName
       ... on {app-name-query}_Artist {
         data {
@@ -218,102 +68,183 @@ Getting item sets via GraphQL is not much different than anything else we've see
 }
 ----
 
-With some data added for Cardi B, you'd get a result like this:
+The `data.guillotine.get` object contains:
 
-.Filmography data
 [source,json]
 ----
 {
+  "displayName": "Cardi B",
   "data": {
-    "guillotine": {
-      "queryDsl": [
-        {
-          "displayName": "Cardi B",
-          "data": {
-            "filmography": [
-              {
-                "title": "Love & Hip Hop: New York",
-                "year": 2015
-              },
-              {
-                "title": "Being Mary Jane",
-                "year": 2017
-              },
-              {
-                "title": "Hip Hop Squares",
-                "year": 2017
-              },
-              {
-                "title": "Saturday Night Live",
-                "year": 2018
-              },
-              {
-                "title": "The Tonight Show Starring Jimmy Fallon",
-                "year": 2018
-              },
-              {
-                "title": "Untold Stories of Hip Hop",
-                "year": 2019
-              },
-              {
-                "title": "Rhythm + Flow",
-                "year": 2019
-              }
-            ]
+    "filmography": [
+      { "title": "Hustlers", "year": 2019 },
+      { "title": "F9", "year": 2021 }
+    ]
+  }
+}
+----
+
+Guillotine generates a GraphQL object type for the item set's fields.
+Because `filmography` allows multiple occurrences, it returns a list of these objects, even when you enter just one film.
+You can select `title` and `year` directly inside each entry, without another inline fragment.
+
+== Choose an option with its own fields
+
+An _option set_ lets editors choose from named options, each of which can contain its own form items.
+For a deliberately simplified animal diet, you'll offer Herbivore and Carnivore.
+Only Carnivore needs a list of prey.
+
+=== Task: Add feeding behavior to Animal
+
+Append this option set to the Animal form, after `images`:
+
+.{app-root}/cms/content-types/animal/animal.yaml
+[source,yaml]
+----
+include::../{app-root}/cms/content-types/animal/animal.yaml[tag=feedingBehavior]
+----
+
+There are two different limits to keep in mind:
+
+* `occurrences` controls how many instances of the whole option set can exist.
+Here it is omitted, so feeding behavior is optional and can occur at most once.
+* `selection` controls how many options can be selected within an instance.
+Here both limits are `1`, so an editor adding feeding behavior must choose exactly one option.
+
+The `herbivore` option has no extra fields.
+The `carnivore` option contains a repeatable `prey` field.
+
+Save the schema and let the watcher update the app, then reopen your animals:
+
+. For Lion, add Feeding behavior, select *Carnivore*, and enter "Zebra" and "Giraffe" as separate Prey values.
+Save the animal.
+. For Reindeer, select *Herbivore* and save.
+Notice that there is no Prey field for this option.
+
+.Lion's feeding behavior with two prey values
+image::sets-feeding-behavior.png["Feeding behavior option set with Carnivore selected and Zebra and Giraffe entered as prey", width=527]
+
+=== Task: Query the selected option
+
+Run this query for Lion:
+
+[source,graphql,{subs}]
+----
+{
+  guillotine {
+    get(key: "/animals/lion") {
+      displayName
+      ... on {app-name-query}_Animal {
+        data {
+          feedingBehavior {
+            _selected
+            carnivore {
+              prey
+            }
           }
         }
-      ]
+      }
     }
   }
 }
 ----
 
-=== Option sets
+The `data.guillotine.get` object contains:
 
-When fetching option set data, you can get the list of currently selected options and each option separately.
+[source,json]
+----
+{
+  "displayName": "Lion",
+  "data": {
+    "feedingBehavior": {
+      "_selected": "carnivore",
+      "carnivore": {
+        "prey": ["Zebra", "Giraffe"]
+      }
+    }
+  }
+}
+----
 
-.Querying for feeding behavior and distribution
-[source,GraphQL,{subs}]
+The `+_selected+` field tells you which option was chosen, using its schema name rather than its label.
+For this single selection, it is a string.
+The `carnivore` object contains that option's fields.
+
+Change the key to `/animals/reindeer` and run the query again.
+The selected option is now `"herbivore"`, and `carnivore` is `null`.
+Use `+_selected+` to identify the choice even when it has no extra fields, as with Herbivore.
+
+== Reuse fields across options
+
+Next, you'll record where an animal lives.
+An animal may live on several continents, so this option set will allow multiple selections.
+Each selected continent needs its own Notes field.
+
+A _form fragment_ defines form items once so you can include them in several places.
+You'll use one here to give all seven continent options the same field definition.
+
+=== Task: Create the distribution form fragment
+
+Create this file in your app:
+
+.{app-root}/cms/form-fragments/distributionData/distributionData.yaml
+[source,yaml]
+----
+include::../{app-root}/cms/form-fragments/distributionData/distributionData.yaml[]
+----
+
+As with content types, the folder and filename match the schema name: `distributionData`.
+Its `form` contains the fields to insert wherever the fragment is included.
+
+=== Task: Add distribution to Animal
+
+Append this option set to the Animal form, after `feedingBehavior`:
+
+.{app-root}/cms/content-types/animal/animal.yaml
+[source,yaml]
+----
+include::../{app-root}/cms/content-types/animal/animal.yaml[tag=distribution]
+----
+
+`selection.min: 0` and `selection.max: 7` allow any number of the seven continents to be selected.
+Each `include: "distributionData"` inserts the fragment's Notes field into that option.
+
+The fragment shares the field definition, not its values: Africa and Asia each have their own notes.
+Changing the fragment updates the form wherever it is included, and it adds no extra level to the stored data or GraphQL response.
+A CMS form fragment is also separate from a GraphQL fragment, which groups fields in a query.
+
+Save both files, let the watcher update the app, and reopen Lion.
+In Distribution across continents, click btn:[Add], select Africa and Asia, and enter these notes:
+
+[cols="1,3", options="header"]
+|===
+| Continent | Notes
+| Africa | Found in parts of sub-Saharan Africa.
+| Asia | Found in Gujarat, India.
+|===
+
+Save the animal.
+
+.Lion's distribution with separate notes for each selected continent
+image::sets-distribution.png["Distribution option set with Africa and Asia selected, each showing its own Notes field", width=527]
+
+=== Task: Query the distribution
+
+Fetch both selected continents and their notes:
+
+[source,graphql,{subs}]
 ----
 {
   guillotine {
-    queryDsl(
-      query: {
-        boolean: {
-          must: [
-            {
-              term: {
-                field: "type",
-                value: {
-                  string: "{app-name-full}:animal"
-                }
-              }
-            },
-            {
-              term: {
-                field: "displayName",
-                value: {
-                  string: "Lion"
-                }
-              }
-            }
-          ]
-        }
-
-      }
-    ) {
+    get(key: "/animals/lion") {
       displayName
       ... on {app-name-query}_Animal {
         data {
-          feedingBehavior {
-            _selected # <1>
-            carnivore { # <2>
-              prey
-            }
-          }
           distribution {
             _selected
             africa {
+              notes
+            }
+            asia {
               notes
             }
           }
@@ -322,50 +253,41 @@ When fetching option set data, you can get the list of currently selected option
     }
   }
 }
-
 ----
 
-<1> This provides data about what the animal's selected feeding behavior is.
-<2> This gives more data about a particular option
+The `data.guillotine.get` object contains:
 
-.Query result
 [source,json]
 ----
 {
+  "displayName": "Lion",
   "data": {
-    "guillotine": {
-      "queryDsl": [
-        {
-          "displayName": "Lion",
-          "data": {
-            "feedingBehavior": {
-              "_selected": "carnivore",
-              "carnivore": {
-                "prey": [
-                  "Zebra",
-                  "Giraffe"
-                ]
-              }
-            },
-            "distribution": {
-              "_selected": [
-                "africa",
-                "asia"
-              ],
-              "africa": {
-                "notes": "African lions live in scattered populations across Sub-Saharan Africa. The lion prefers grassy plains and savannahs, scrub bordering rivers and open woodland with bushes. It is absent from rainforests and rarely enters closed forests."
-              }
-            }
-          }
-        }
-      ]
+    "distribution": {
+      "_selected": ["africa", "asia"],
+      "africa": {
+        "notes": "Found in parts of sub-Saharan Africa."
+      },
+      "asia": {
+        "notes": "Found in Gujarat, India."
+      }
     }
   }
 }
 ----
 
+This time, `+_selected+` is a list because the option set allows multiple selections.
+The whole `distribution` value is still one object: the number of selected options is independent of the number of occurrences of the set.
+The fragment's `notes` field appears directly inside each continent, with no `distributionData` wrapper.
+
+== Visual grouping and further reading
+
+If you only want to organize a form visually, a _field set_ puts a heading around a group of form items without changing their data structure.
+It has a label and nested `items`, but no property name of its own.
+For example, grouping Artist's existing fields in a field set would leave their GraphQL paths unchanged.
+
+The CMS reference covers the additional settings and nesting possibilities for https://developer.enonic.com/docs/cms/stable/schemas/form-items/field-set[field sets], https://developer.enonic.com/docs/cms/stable/schemas/form-items/item-set[item sets], https://developer.enonic.com/docs/cms/stable/schemas/form-items/option-set[option sets] and https://developer.enonic.com/docs/cms/stable/schemas/form-fragments[form fragments].
+
 == Coming up
 
-You have grouped inputs visually with a field set, structurally with an item set, let editors choose between options with option sets, and reused a form with a fragment.
-
-In the next chapter, you'll give your editors a proper text editor with <<rich-text#, rich text>>, including links, images and macros.
+You've repeated structured filmography entries, selected options with their own fields, reused a form fragment, and queried each addition through Guillotine.
+In the next chapter, you'll add <<rich-text#, rich text>>, including links, images and macros.

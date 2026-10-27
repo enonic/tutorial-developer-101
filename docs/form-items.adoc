@@ -1,373 +1,175 @@
 = Form items
 include::.variables.adoc[]
-:description: Take your content types to the next level with more form items. Learn how to configure them, what kinds there are, and how to link content together.
+:description: Create an Animal content type, configure repeatable fields, select images, and link artists to animals through the GraphQL API.
 
-In this chapter, you'll configure form items, add new kinds of them to your content types, and link content items to each other.
+In this chapter, you'll create an Animal content type, give it alternative names and images, and link your artists to their favorite animals.
+You'll then follow those relationships in Guillotine.
 
-_Form items_ are the building blocks of forms. They dictate what kind of data the user can or must add to any piece of content, and how it is edited.
-So far, your content type has only used TextLine, TextArea and Date.
+_Form items_ are the building blocks of content forms.
+You've already used TextLine, TextArea and Date; now you'll make a field repeatable and use selectors to reference other content.
 
-NOTE: If you're used to working with HTML, be aware that XP's form items are _not_ the same as HTML `input` elements.
+== Create the Animal form
 
-== Common settings
+An animal needs a species name and may have other names, such as "Caribou" for a reindeer.
+Use the display name for the species and a repeatable TextLine for its other names.
 
-All form items share a number of settings that affect how they act. These settings are:
+=== Task: Add alternative names
 
-`type` (required):: Which kind of form item this is, such as `TextLine` or `ImageSelector`.
-`name` (required):: The property name the value is stored under.
-`label` (required):: What the form item should be labeled as in the content form.
-`occurrences` (optional):: Specifies the minimum and maximum instances of this field. Defaults to "one optional".
-`default` (optional):: Gives a default value to the form item.
-`helpText` (optional):: Lets you specify a description of the field to show to the user.
+Create the Animal content type in your app:
 
-Because the form items are so different from each other, they also support type-specific settings. These are placed directly on the form item, next to the shared ones. That is how we use regex validation for TextLine inputs, configure formatting options for HtmlAreas, and dictate what numeric values a Long or a Double accepts.
-
-IMPORTANT: Use `camelCase` for names, such as `otherNames`. Names are used as they are for field names in the GraphQL API, where camelCase is the convention and matches built-in fields such as `displayName`. One caveat: property paths are lowercased in the index, so never give two form items on the same level names that differ only by case.
-
-[TIP]
-.When to use it
-====
-Names are part of your API, so choose them to last. Renaming a form item does not rename the data already stored under the old name: existing items keep their values under a property the form no longer shows, and every query that selected the old field breaks. Labels, on the other hand, can change whenever you like.
-====
-
-NOTE: All of the shared settings (`label`, `occurrences`, etc.), and the list of available form items are described in the https://developer.enonic.com/docs/cms/stable/schemas/form-items[form items documentation].
-
-To show how the settings work, let's examine some TextLine inputs with different configurations.
-
-.TextLine inputs using all the shared settings
-[source,yaml]
-----
-form:
-  - type: "TextLine"
-    name: "textlineRequired"
-    label: "Required input with default" # <1>
-    helpText: "This text should provide additional information to the user." # <2>
-    occurrences: # <3>
-      min: 1
-      max: 1
-    default: "This is a required input with a default value." # <4>
-  - type: "TextLine"
-    name: "textlineOptional"
-    label: "Optional input"
-    occurrences: # <5>
-      min: 0
-      max: 1
-  - type: "TextLine"
-    name: "textlineList"
-    label: "Input list"
-    helpText: "This input can have as many values as you want."
-    occurrences: # <6>
-      min: 0
-      max: 0
-----
-
-<1> The label is shown above the input and provides context to the user.
-<2> The help text can provide extra context and information to the user. It's hidden by default, but can be shown by activating the help text button.
-<3> This instance of `occurrences` specifies that this is a _required_ input. It must have _at least_ one and _at most_ one value.
-<4> The default value gets added to the input by default. The user can manually override this.
-<5> When you specify `min: 0` and `max: 1`, that makes the input optional. This is the default.
-<6> When you set `max: 0`, the user can add as many values as they want to.
-
-This set of inputs would be rendered as in the following picture. As specified in the above configuration:
-
-// TODO(xp8-verify): recapture from Content Studio 6.1
-.TextLine inputs showing common configuration options
-image::input-type-common-configuration.png["Three TextLine inputs showing all the common configuration options: labels, help text, default text, and occurrences.", align=center]
-
-Note that:
-- The required input field has a red asterisk to signify that it must be filled out.
-- The required input field already has a value provided via the `default` setting.
-- The help texts for the required input field and for the input list are both visible
-- The input list has controls to add more inputs and remove existing inputs
-
-== The occurrences setting
-
-The occurrences setting decides how XP treats the value. Use occurrences to indicate whether a form item is expected to be a list or a single element and whether it is required or not.
-
-The setting has two required keys, `min` and `max`. Use these to control the number of instances the user can create.
-
-`min` specifies that the user must fill out _at least_ this many instances of the field. Usually it is set to `0` or `1`. A zero indicates that the field is optional and that the user does not need to fill it out. A one means the field is required.
-
-`max` tells XP how many instances the field can have _at most_. `0` is a special value here, indicating that the user can have _as many as they want_ (in other words: there is no maximum).
-
-A couple of common configuration tricks:
-
-=== Optional
-If you don't add an `occurrences` setting, XP uses the default, which is `min: 0`, `max: 1`.
-
-That means that the field is *optional* and can have at most *one entry*.
-
-=== Required
-To make the field required, set both `min` and `max` to `1`.
-
-That means that the field is *required*, and can have at most *one entry*.
-
-By keeping `min` at `1` and changing `max` to a number `n` above `1`, you'll be able to keep the field *required*, but make it able to have at most *n entries*.
-
-=== Unlimited
-By setting `max` to `0`, you allow the field to have an *unlimited amount of entries*.
-
-TIP: If `max` is greater than `0`, make sure that `min` is less than or equal to `max`. Otherwise, the field will never be considered valid according to XP.
-
-[TIP]
-.When to use it
-====
-Make a field required only when your front-end cannot render the item without it. A required field blocks editors from saving work in progress, and an invalid item cannot be published. Most fields are better optional, with the front-end handling an empty value.
-====
-
-== Common form items
-
-Apart from the form items we've already gotten familiar with, XP also has form items created for other kinds of data. You can always find the full list over https://developer.enonic.com/docs/cms/stable/schemas/form-items[at the form items reference docs], grouped by the kind of value they produce, but some useful and common ones are:
-
-https://developer.enonic.com/docs/cms/stable/schemas/form-items/combobox[ComboBox]:: A dropdown menu containing predefined options for the user to select from. Allows selection of one or more options.
-+
-.The ComboBox form item
-image::input-type-combo-box.webp["A standard select list / dropdown list / combo box with a few visible dummy options.", align=center]
-+
-https://developer.enonic.com/docs/cms/stable/schemas/form-items/date[Date], https://developer.enonic.com/docs/cms/stable/schemas/form-items/datetime[DateTime] and https://developer.enonic.com/docs/cms/stable/schemas/form-items/instant[Instant]:: Provide an interactive date picker (with a time component for DateTime and Instant) to save dates and times. The reference explains which of the two to pick for a date with a time.
-+
-.The DateTime form item
-image::input-type-date-time.webp["A calendar showing year and month with a time indicator to the side.", align=center]
-+
-https://developer.enonic.com/docs/cms/stable/schemas/form-items/geopoint[GeoPoint]:: Stores GPS coordinates.
-+
-.The GeoPoint form item
-image::input-type-geo-point.webp["A text line input with coordinates.", align=center]
-+
-https://developer.enonic.com/docs/cms/stable/schemas/form-items/htmlarea[HtmlArea]:: Provides a rich text, multi-line input. We'll discuss this in detail in <<rich-text#,the rich-text chapter>>.
-+
-.The HtmlArea form item
-image::input-type-html-area.png["A text area with a tools ribbon on the top. The ribbon provides rich text tools such as justification, macro insertion, text styles, etc.", align=center]
-
-Additionally, XP has form items that group other form items, called sets, which get <<sets#, a chapter of their own>>. First, let's look at the form items that reference other content.
-
-== ImageSelector
-
-.The ImageSelector form item
-image::input-type-image-selector.png[ImageSelector: An interactive image selection tool.]
-
-Images are a key part of many web experiences: they add color, break up the content, and give the reader something to rest their eyes on.
-
-XP's image selector allows you to select an image for a piece of content and also to upload new images.
-
-.A minimal ImageSelector configuration
-[source,yaml]
-----
-- type: "ImageSelector"
-  name: "myImage"
-  label: "My Image"
-----
-
-Read more about the https://developer.enonic.com/docs/cms/stable/schemas/form-items/imageselector[configuration of image selectors] in the reference docs.
-
-After you've added an image (or several), you can highlight it and click the edit button. This will take you to the image editing form. This is the same form as we saw in <<media#_image_form, the previous chapter>>.
-
-.The image selector with uploaded and selected images
-image::input-type-image-selector-highlighted-image.png["The image selector input field with two images of lions -- one male, one female - - below. Under the images, there's a set of buttons saying 'edit' and 'remove'."]
-
-== ContentSelector
-
-.The ContentSelector form item
-image::input-type-content-selector.png[ContentSelector: An interactive content selection tool.]
-
-The image selector we just saw is actually a specialized form of the more general ContentSelector.
-
-The ContentSelector allows you to reference other content. Let's say you have two content types: one of type person and one of type food. If you want to be able to specify which dishes the person likes, you could use a content selector to create a reference from the person to their favored dish.
-
-Because referencing other content types comes with a lot of variability, the ContentSelector has settings to support this. You can choose to allow only certain content types or only content that's available at a certain path. You can also change whether the selector should show content in a tree-style hierarchy or as a flat list of content.
-
-https://developer.enonic.com/docs/cms/stable/schemas/form-items/contentselector[The full list of ContentSelector settings] is available in the reference docs, including a number of examples to explain content inclusion and exclusion. However, a simple configuration could look like this:
-
-.A basic ContentSelector configuration that only allows one specific content type
-[source,yaml]
-----
-- type: "ContentSelector"
-  name: "myContentSelector"
-  label: "My ContentSelector"
-  allowContentType:
-    - "citation"
-----
-
-
-
-[TIP]
-.When to use it
-====
-Reference another content item when the thing has a life of its own: it is published, moved, reused from several places or edited by someone else. An artist's favorite animal is an animal that exists regardless of the artist, so it is a reference. When the data only makes sense inside the parent, such as an artist's filmography entries, embed it instead with the sets you will meet in the <<sets#, next chapter>>.
-====
-
-== AttachmentUploader
-
-XP also has a rather special form item named https://developer.enonic.com/docs/cms/stable/schemas/form-items/attachmentuploader[AttachmentUploader]. Unlike <<media#, media>> content, which creates an independent content item for each file you upload, AttachmentUploader lets you store one (or more) files within the specific content item. Under the hood, it uses the same `attachment` property structure as media when persisting the file.
-
-.The AttachmentUploader form item
-image::input-type-attachmentuploader.png[AttachmentUploader: Store any number of files within your content item, 651w]
-
-
-[TIP]
-.When to use it
-====
-Upload a file as media when it is an asset in its own right: an image used on several pages, a brochure linked from many places, anything editors should find, reuse and publish independently. Use an AttachmentUploader when the file belongs to exactly one item and should live and die with it, such as the attachments of an e-mail or the PDF version of a report. Media can be referenced from an ImageSelector or ContentSelector; attachments cannot.
-====
-
-.Here is what an AttachmentUploader definition looks like
-[source,yaml]
-----
-- type: "AttachmentUploader"
-  name: "attachments"
-  label: "Attachments"
-  occurrences: # <1>
-    min: 0
-    max: 0
-----
-
-<1> `min: 0` shows that this is not a required field, while `max: 0` shows that we can upload as many attachments as we want.
-
-
-=== attachmentUrl
-
-Remember how we used `mediaUrl` to get a link to a media item's file. `mediaUrl` is only available for media content. For attachments stored on any content item, use the `attachments` field and its `attachmentUrl` instead:
-
-[source,GraphQL]
-----
-{
-  guillotine {
-    queryDsl(
-      query: {
-        term: {
-          field: "type",
-          value: {
-            string: "media:image"
-          }
-        }
-      }
-    ) {
-      displayName
-      type
-      attachments {
-        name
-        attachmentUrl {
-          path
-          queryString
-        }
-      }
-    }
-  }
-}
-----
-
-And the result should look something like this:
-
-NOTE: If you have multiple attachments in your content, they will all be listed.
-
-// TODO(xp8-verify): recapture the response from Guillotine 9
-[source,json,{subs}]
-----
-{
-  "data": {
-    "guillotine": {
-      "queryDsl": [
-        {
-          "displayName": "lion",
-          "type": "media:image",
-          "attachments": [
-            {
-              "name": "lion.jpg",
-              "attachmentUrl": {
-                "path": "/media:attachment/{cms-project-id}:draft/f7efd6e4-9eed-45d2-83b6-d088a7bdc685:8652e625afe7bbda595a190a3b8624e322dc9f1a/lion.jpg",
-                "queryString": ""
-              }
-            }
-          ]
-        }
-      ]
-    }
-  }
-}
-----
-
-As with `mediaUrl` in the previous chapter, put your API base URL in front of `path` to get a working link - for your sandbox that is `{api-base-url}`.
-
-TIP: Under the hood, `attachmentUrl` uses the same logic as Enonic's portal library function https://developer.enonic.com/docs/code/stable/libraries/lib-portal#attachmenturlparts[attachmentUrlParts], so you can follow the link to better understand the arguments that you pass to this field when creating queries that use it.
-
-
-== Task: artist and animals
-
-Time for a little recap! We'll put together everything we've learned about content types and form items thus far to create a new data set.
-
-A solution is listed below, but try and see if you can solve it yourself first.
-
-TIP: If you're wondering how to achieve some of the goals, try consulting the documentation that's been linked to in this chapter.
-
-Your task is to create a new content type: `Animal` and to update the `Artist` content type with new constraints and fields. By the end of this chapter, you should have content types that look like this in Content Studio:
-
-// TODO(xp8-verify): recapture from Content Studio 6.1
-.The target for this task: animal and artist
-image::animal-and-artist-target.png["An animal content wizard next to an artist wizard"]
-
-=== Animal constraints
-
-* Make the display name use "Species" as its placeholder. _Hint: check out https://developer.enonic.com/docs/cms/stable/content/content-types#display-name[the display name section of the content type documentation] and look for something that allows you to do this._
-* An animal can also have alternative names for its species (for instance, the reindeer is also known as _caribou_). Allow the user to add as many alternative names as they want.
-* An image selector that accepts between 0 and 3 images.
-* Help text where you think it would be helpful.
-
-
-=== Artist constraints
-
-* Add a ContentSelector that allows only content of the "Animal" type and that must be nested under the "animals" folder. Call it `favoriteAnimal`.
-
-=== Querying
-
-* Create a GraphQL query that'll fetch all artists and list what their favorite animals are, as well their animals' other names.
-
-=== Check your work
-
-To verify that everything works, create some animals, create a content link between an artist and an animal and run your query to fetch some new data on this new structure.
-
-TIP: Don't worry if something did not work, we'll show the solutions in the next section.
-
-== Task solution
-
-=== Content types
-. Create the animal content type:
-+
 .{app-root}/cms/content-types/animal/animal.yaml
 [source,yaml]
 ----
-include::../{app-root}/cms/content-types/animal/animal.yaml[tags=header;basics]
+include::../{app-root}/cms/content-types/animal/animal.yaml[tags=header;otherNames]
 ----
-+
-As with Artist, `displayNamePlaceholder` tells editors what the display name holds, here the species.
 
-. Next, update the `Artist` content type.
-// TODO(xp8-verify): confirm the allowPath pattern matches the animals folder in a project without a site
-+
+As with Artist, `displayNamePlaceholder` tells editors what to enter in the display name, here the species.
+For the `otherNames` field:
+
+* `type` chooses the form item, in this case TextLine.
+* `name` is the property name used to store the value and expose it through GraphQL.
+* `label` and `helpText` guide the editor filling out the form.
+* `occurrences` allows the editor to add multiple values: `min: 0` makes the field optional, and `max: 0` means there is no upper limit.
+
+Without `occurrences`, a field is optional and accepts a single value (`min: 0`, `max: 1`).
+Setting both to `1` makes it required.
+Content Studio allows editors to save drafts with missing required values, but those items cannot be marked as ready or published.
+
+TIP: Choose field names that will last, and use `camelCase`, such as `otherNames`.
+Renaming a field does not migrate its stored values, and queries using its old name will need updating.
+You can change its label without changing the stored property or API field.
+
+== Select an image
+
+The lion image you uploaded in the <<media#, previous chapter>> is a separate content item.
+An ImageSelector stores a reference to it, so you can reuse the same image across several animals without uploading copies.
+
+=== Task: Add an image selector
+
+Append this form item to the Animal form, at the same indentation as `otherNames`:
+
+.{app-root}/cms/content-types/animal/animal.yaml
+[source,yaml]
+----
+include::../{app-root}/cms/content-types/animal/animal.yaml[tag=images]
+----
+
+Here, `min: 0` and `max: 3` allow up to three images, including none.
+ImageSelector lets editors select existing images or upload new ones.
+For this exercise, you'll select the existing lion image.
+
+=== Task: Create two animals
+
+. Save the schema file and let your running `enonic dev` watcher update the app.
+. In Content Studio, create a folder named "Animals" at the root of "{cms-project-displayname}", next to Artists and Images.
+Check that its path is `/animals`.
+. Select Animals, click btn:[New], and choose *Animal*.
+Enter "Lion" as the display name and select your uploaded `lion.jpg` in the Images field.
+Leave Other names empty and save the item.
+. Create another Animal named "Reindeer" in the same folder.
+Enter "Caribou" in Other names, leave Images empty, and save it.
+Notice that you can add another Other names entry because the field is repeatable.
+
+.The Animal form with a reference to the uploaded lion image
+image::form-animal.png["Animal form for Lion with an empty Other names field and the selected lion image", width=578]
+
+Both items are saved in Draft; keep using Draft in Query Playground for the exercises below.
+
+== Query the animal's fields
+
+Guillotine uses `occurrences` when generating the GraphQL fields.
+Both `otherNames` and `images` accept multiple values, so both become lists, even when an item has just one value.
+The names are strings; the images are content references whose fields you can select.
+
+=== Task: Fetch the lion and its image
+
+Open Query Playground for "{cms-project-displayname}", keep *Draft* selected, and run:
+
+[source,graphql,{subs}]
+----
+{
+  guillotine {
+    get(key: "/animals/lion") {
+      displayName
+      ... on {app-name-query}_Animal {
+        data {
+          otherNames
+          images {
+            displayName
+            ... on media_Image {
+              imageUrl(scale: "width(600)") {
+                path
+                queryString
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
+----
+
+The `get` result and the items in `images` use GraphQL's `Content` interface.
+As in the <<headless-api#, Headless API chapter>>, an inline fragment selects fields belonging to a more specific GraphQL type:
+
+* `+... on {app-name-query}_Animal+` gives you access to the Animal's `data`.
+* `+... on media_Image+` gives you access to the image's `imageUrl`.
+
+These are GraphQL type names; your CMS content types are `{app-name-full}:animal` and `media:image`.
+The image selector stores the image's ID, and Guillotine resolves that reference for you.
+
+The result contains an empty `otherNames` array and one entry in `images`.
+Build the image URL by joining `{api-base-url}`, `path` and `queryString`, as in the media chapter.
+Change the key to `/animals/reindeer` and run the query again: `otherNames` now contains `"Caribou"`, while `images` is empty.
+
+== Link artists to animals
+
+A ContentSelector can reference other kinds of content, just as ImageSelector references images.
+You'll use it to give each artist one optional favorite animal.
+
+=== Task: Add a favorite animal
+
+Append this field to the Artist form, after `birthday`:
+
 .{app-root}/cms/content-types/artist/artist.yaml
 [source,yaml]
 ----
-include::../{app-root}/cms/content-types/artist/artist.yaml[tags=header;basics;birthday;favoriteAnimal]
+include::../{app-root}/cms/content-types/artist/artist.yaml[tag=favoriteAnimal]
 ----
-+
-The new `favoriteAnimal` ContentSelector uses `allowContentType` and `allowPath` to narrow the possible content to only Animals in the animals folder
 
-. Create a folder called "animals" next to the "artists" folder, and create some animals in it. Either pick your favorites, or, if you're not feeling creative, add these (content from Wikipedia):
-- https://en.wikipedia.org/wiki/Lion[Wiki article for lion]
-- https://en.wikipedia.org/wiki/Reindeer[Wiki article for reindeer]
+The selector narrows the available choices in two ways:
 
+* `allowContentType` permits only the `animal` content type from this app.
+* `allowPath` restricts the choices to content below `/animals`.
 
-. Create some links using the ContentSelector from artists to animals to get familiar with linking content.
+There is no `occurrences` setting, so the editor can select at most one animal and can leave the field empty.
 
-=== GraphQL query
+Save the schema, let the watcher update the app, and reopen your artists in Content Studio.
+Use these selections as sample data for the exercise:
 
-Finally, it's time to introduce the query in GraphQL.
+[cols="1,1", options="header"]
+|===
+| Artist | Favorite animal
+| Cardi B | Lion
+| Missy Elliott | Reindeer
+| P!nk | Lion
+|===
 
-A ContentSelector will store a reference to the target content item. When using the Guillotine API, you may simply follow this reference to access the target content, and access its fields instantly.
+Save each artist after making the selection.
 
-Start with the type-filtered artist query from the Headless API chapter, and select `favoriteAnimal` to follow each artist's reference.
+.The Artist form with an animal selected
+image::form-artist-favorite-animal.png["Artist form for Missy Elliott with Reindeer selected as her favorite animal", width=548]
 
-.Fetch artists and their associated favorite animals
-[source,GraphQL,{subs}]
+TIP: Reference an item when it should be edited and reused independently.
+Two artists can reference the same Lion, and an edit to that animal is visible through both references.
+For data that only belongs to one item, such as an artist's filmography entries, you'll use sets in the next chapter.
+
+=== Task: Follow the reference in a query
+
+Start with the type-filtered artist query from the Headless API chapter and select `favoriteAnimal`:
+
+[source,graphql,{subs}]
 ----
 {
   guillotine {
@@ -378,15 +180,13 @@ Start with the type-filtered artist query from the Headless API chapter, and sel
           value: { string: "{app-name-full}:artist" }
         }
       }
-      first: 10
-      sort: [{ field: "displayName", direction: ASC }]
     ) {
       displayName
       ... on {app-name-query}_Artist {
         data {
-           favoriteAnimal {
+          favoriteAnimal {
             displayName
-            ... on {app-name-query}_Animal{
+            ... on {app-name-query}_Animal {
               data {
                 otherNames
               }
@@ -399,58 +199,63 @@ Start with the type-filtered artist query from the Headless API chapter, and sel
 }
 ----
 
-Depending on the links (and animals) you created, your result might look a little something like this:
+The `favoriteAnimal` field returns a single content item.
+You can read its `displayName` directly, then use an Animal fragment to select `data.otherNames`.
+There is no need for a separate query to fetch the referenced animal.
 
-.The list of artists with their favorite animals
+With the sample selections above, the `data.guillotine.queryDsl` array contains the following items; their order may differ:
+
 [source,json]
 ----
-{
-  "data": {
-    "guillotine": {
-      "queryDsl": [
-        {
-          "displayName": "Cardi B",
-          "data": {
-            "favoriteAnimal": {
-              "displayName": "Lion",
-              "data": {
-                "otherNames": []
-              }
-            }
-          }
-        },
-        {
-          "displayName": "Missy Elliott",
-          "data": {
-            "favoriteAnimal": {
-              "displayName": "Reindeer",
-              "data": {
-                "otherNames": [
-                  "Caribou"
-                ]
-              }
-            }
-          }
-        },
-        {
-          "displayName": "P!nk",
-          "data": {
-            "favoriteAnimal": {
-              "displayName": "Lion",
-              "data": {
-                "otherNames": []
-              }
-            }
-          }
+[
+  {
+    "displayName": "Cardi B",
+    "data": {
+      "favoriteAnimal": {
+        "displayName": "Lion",
+        "data": {
+          "otherNames": []
         }
-      ]
+      }
+    }
+  },
+  {
+    "displayName": "Missy Elliott",
+    "data": {
+      "favoriteAnimal": {
+        "displayName": "Reindeer",
+        "data": {
+          "otherNames": ["Caribou"]
+        }
+      }
+    }
+  },
+  {
+    "displayName": "P!nk",
+    "data": {
+      "favoriteAnimal": {
+        "displayName": "Lion",
+        "data": {
+          "otherNames": []
+        }
+      }
     }
   }
-}
+]
 ----
+
+If an artist has no selection, `favoriteAnimal` is `null`.
+Compare that with the empty lists for an animal's unused `otherNames` or `images` fields.
+
+== More form items
+
+You now have the basics for configuring fields and linking content.
+The https://developer.enonic.com/docs/cms/stable/schemas/form-items[CMS form items reference] covers the full range of form items and their settings, including https://developer.enonic.com/docs/cms/stable/schemas/form-items/imageselector[ImageSelector] and https://developer.enonic.com/docs/cms/stable/schemas/form-items/contentselector[ContentSelector].
+
+For a file that belongs directly to one content item, https://developer.enonic.com/docs/cms/stable/schemas/form-items/attachmentuploader[AttachmentUploader] stores it as an attachment on that item, instead of creating separate media content to reference.
+You can retrieve it through `attachments` and `attachmentUrl`, as you did in the <<media#, media chapter>>.
 
 == Coming up
 
-You have configured form items with occurrences, defaults and help text, linked content with selectors, and followed a reference through the API.
-
+You've created repeatable fields, selected an image, linked artists to animals, and followed those references through Guillotine.
 In the next chapter, you'll group and reuse form items with <<sets#, sets and form fragments>>.

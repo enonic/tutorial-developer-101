@@ -7,6 +7,7 @@ superType: "base:structured"
 form:
 # end::header[]
 # tag::basics[]
+# tag::otherNames[]
   - type: "TextLine"
     name: "otherNames"
     label: "Other names"
@@ -14,6 +15,8 @@ form:
     occurrences:
       min: 0
       max: 0
+# end::otherNames[]
+# tag::images[]
   - type: "ImageSelector"
     name: "images"
     label: "Images"
@@ -21,6 +24,7 @@ form:
     occurrences:
       min: 0
       max: 3
+# end::images[]
 # end::basics[]
 # tag::feedingBehavior[]
   - type: "OptionSet"
