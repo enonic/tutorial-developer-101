@@ -6,7 +6,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="generator" content="Asciidoctor 2.0.26">
 <meta name="application-name" content="dev101">
-<meta name="description" content="Mixins are a way for you to add extra fields to all your content types in a simple manner. This chapter covers what they are and how to use them.">
+<meta name="description" content="Add shared editorial notes to artists and animals with a mixin, then query their values through Guillotine.">
 <title>Mixins</title>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,300italic,400,400italic,600,600italic%7CNoto+Serif:400,400italic,700,700italic%7CDroid+Sans+Mono:400,700">
 <style>
@@ -443,10 +443,21 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <div id="toc" class="toc2">
 <div id="toctitle">Table of Contents</div>
 <ul class="sectlevel1">
-<li><a href="#your_first_mixin">Your first mixin</a></li>
-<li><a href="#headless">Headless</a></li>
+<li><a href="#add_editorial_notes_to_artists_and_animals">Add editorial notes to artists and animals</a>
+<ul class="sectlevel2">
+<li><a href="#task_create_the_mixin">Task: Create the mixin</a></li>
+<li><a href="#task_register_the_mixin">Task: Register the mixin</a></li>
+<li><a href="#task_add_notes_to_two_content_types">Task: Add notes to two content types</a></li>
+</ul>
+</li>
+<li><a href="#query_the_notes">Query the notes</a>
+<ul class="sectlevel2">
+<li><a href="#task_fetch_lynxs_notes">Task: Fetch Lynx&#8217;s notes</a></li>
+<li><a href="#task_inspect_the_json_representation">Task: Inspect the JSON representation</a></li>
+</ul>
+</li>
+<li><a href="#mixins_from_other_apps">Mixins from other apps</a></li>
 <li><a href="#choosing_the_right_tool">Choosing the right tool</a></li>
-<li><a href="#bonus_seo_metafields">Bonus: SEO Metafields</a></li>
 <li><a href="#coming_up">Coming up</a></li>
 </ul>
 </div>
@@ -455,58 +466,32 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <div id="preamble">
 <div class="sectionbody">
 <div class="paragraph">
-<p>In this chapter, you&#8217;ll extend existing content types with more fields, using a mixin.</p>
+<p>In this chapter, you&#8217;ll add an Editorial mixin to Artist and Animal, enter separate notes on each, and query them through Guillotine.</p>
 </div>
 <div class="paragraph">
-<p>The idea is to basically define new fields and decide what content types those fields should be applied to. If no content type is selected while registering a mixin, those fields will be enabled for all content types.</p>
-</div>
-<div class="paragraph">
-<p>In Content Studio, a mixin is visually displayed as a separate section of the form, listed below the content type&#8217;s standard fields.</p>
+<p>A <em>mixin</em> adds a group of fields to content types without editing each content type&#8217;s schema.
+Use one for fields such as editorial notes that apply across different kinds of content, or to extend built-in types such as folders and media.
+Unlike a <a href="sets.ahtml#_reuse_fields_across_options">form fragment</a>, which inserts fields into a schema&#8217;s form, a mixin keeps its values separately under <code>x</code>.</p>
 </div>
 </div>
 </div>
 <div class="sect1">
-<h2 id="your_first_mixin"><a class="link" href="#your_first_mixin">Your first mixin</a></h2>
+<h2 id="add_editorial_notes_to_artists_and_animals"><a class="link" href="#add_editorial_notes_to_artists_and_animals">Add editorial notes to artists and animals</a></h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>If your requirement is to add new fields to a specific content type, it doesn&#8217;t make sense to use a mixin, since you can directly update that content type.</p>
+<p>You&#8217;ll define the fields in a mixin schema, then register it in the app&#8217;s CMS descriptor to choose which content types receive them.
+Your app is already assigned to "My First Project", so the registration applies there.</p>
 </div>
+<div class="sect2">
+<h3 id="task_create_the_mixin"><a class="link" href="#task_create_the_mixin">Task: Create the mixin</a></h3>
 <div class="paragraph">
-<p>Now, if your requirement is to add new fields to multiple content types, that is when mixins come into place.</p>
+<p>Create this file in your app:</p>
 </div>
-<div class="paragraph">
-<p>The same behavior of extending multiple content types can be achieved through form fragments. You can create a form fragment and include it in the content types you want to extend. The difference is where the data in those fields is stored, and in the fact that mixins are easier to maintain when adding to a lot of content types - or to content types you don&#8217;t own, such as the built-in folders and media types.</p>
-</div>
-<div class="admonitionblock tip">
-<table>
-<tr>
-<td class="icon">
-<i class="fa icon-tip" title="Tip"></i>
-</td>
-<td class="content">
-<div class="title">When to use it</div>
-<div class="paragraph">
-<p>Use a mixin when the fields cut across content types rather than belong to one: SEO settings, editorial notes, tracking data. Mixins reach types you do not own, such as folders and media, can be made optional so editors switch them on per item, and keep their data apart from the type&#8217;s own fields under <code>x</code>. Use a form fragment when the fields are part of what the type <em>is</em>; they then land in <code>data</code> like any other field.</p>
-</div>
-</td>
-</tr>
-</table>
-</div>
-<div class="paragraph">
-<p>Let&#8217;s now add a "notes" mixin, which will extend both the Artist and Animal content types.</p>
-</div>
-<div class="paragraph">
-<p>Similar to content types, mixin schemas have a specific naming and placement convention within your app: <code>src/main/resources/cms/mixins/&lt;mixin-name&gt;/&lt;mixin-name&gt;.yaml</code>.</p>
-</div>
-<div class="olist arabic">
-<ol class="arabic">
-<li>
-<p>Create the "notes" mixin schema:</p>
 <div class="listingblock">
-<div class="title">src/main/resources/cms/mixins/notes/notes.yaml</div>
+<div class="title">src/main/resources/cms/mixins/editorial/editorial.yaml</div>
 <div class="content">
 <pre class="highlight"><code class="language-yaml" data-lang="yaml">kind: "Mixin"
-title: "Notes"
+title: "Editorial"
 form:
   - type: "TextLine"
     name: "notes"
@@ -516,89 +501,142 @@ form:
       max: 3</code></pre>
 </div>
 </div>
-</li>
-<li>
-<p>A mixin schema on its own is dormant. You also need to register it, and define which content types it applies to. This is done in your app&#8217;s CMS descriptor, <code>cms.yaml</code>, which the starter created as an empty file:</p>
+<div class="paragraph">
+<p>The folder and filename identify the mixin as <code>editorial</code>, and <code>title</code> gives its tab the label "Editorial" in Content Studio.
+The form contains one repeatable TextLine field named <code>notes</code>, allowing up to three notes per content item.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="task_register_the_mixin"><a class="link" href="#task_register_the_mixin">Task: Register the mixin</a></h3>
+<div class="paragraph">
+<p>Update your app&#8217;s existing CMS descriptor to include the registration:</p>
+</div>
 <div class="listingblock">
 <div class="title">src/main/resources/cms/cms.yaml</div>
 <div class="content">
 <pre class="highlight"><code class="language-yaml" data-lang="yaml">kind: "CMS"
 mixins:
-  - name: "notes"
+  - name: "editorial"
     allowContentTypes: "com.example.dev101:artist|com.example.dev101:animal"</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p><code>allowContentTypes</code> is a regular expression matched against the full content type name. Leave it out to apply the mixin to every content type in the project.</p>
+<p><code>name: "editorial"</code> selects the mixin from this app.
+<code>allowContentTypes</code> is a regular expression matched against the full content type name; this one selects Artist and Animal.
+If you chose a different app name, update the app key in the expression to match.
+Leaving out <code>allowContentTypes</code> makes the mixin available on all content types in the content project where the app is assigned.</p>
 </div>
+<div class="paragraph">
+<p>Save both files and let your running <code>enonic dev</code> watcher update the app.
+For other registration options, including mixins that editors enable per content item, see the <a href="https://developer.enonic.com/docs/cms/stable/schemas/cms-descriptor#mixin-registration">CMS descriptor reference</a>.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="task_add_notes_to_two_content_types"><a class="link" href="#task_add_notes_to_two_content_types">Task: Add notes to two content types</a></h3>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Open Lynx at <code>/animals/lynx</code> in Content Studio and select the <strong>Editorial</strong> tab beside Animal.</p>
 </li>
 <li>
-<p>Your app is redeployed, so open an Artist or an Animal content item. You should see the following section at the bottom of the form:</p>
-<div class="imageblock">
-<div class="content">
-<img src="images/notes-x-data.png" alt="Notes mixin fields showing at the bottom of an animal content item">
-</div>
-</div>
+<p>Enter "Review the habitat description." in the first Notes field.
+Click <b class="button">Add</b> and enter "Add a source for the diet information." in the second, then save Lynx.</p>
 </li>
 <li>
-<p>Finally, add some notes to some content.</p>
+<p>Open Cardi B at <code>/artists/cardi-b</code> and select its <strong>Editorial</strong> tab beside Artist.
+Enter "Check the filmography for new releases." and save.</p>
 </li>
 </ol>
 </div>
-<div class="admonitionblock note">
-<table>
-<tr>
-<td class="icon">
-<i class="fa icon-note" title="Note"></i>
-</td>
-<td class="content">
-For more details and configuration options for mixins, visit <a href="https://developer.enonic.com/docs/cms/stable/content/mixins">the mixins documentation</a> and the <a href="https://developer.enonic.com/docs/cms/stable/schemas/cms-descriptor">CMS descriptor documentation</a>.
-</td>
-</tr>
-</table>
+<div class="imageblock">
+<div class="content">
+<img src="images/mixins-editorial.png" alt="Editorial tab beside Animal, showing two separate notes on Lynx" width="527">
+</div>
+<div class="title">Figure 1. The Editorial mixin on Lynx</div>
+</div>
+<div class="paragraph">
+<p>Both content types now use the same mixin form, but each content item has its own values.
+You did not need to change either content type&#8217;s schema.</p>
+</div>
 </div>
 </div>
 </div>
 <div class="sect1">
-<h2 id="headless"><a class="link" href="#headless">Headless</a></h2>
+<h2 id="query_the_notes"><a class="link" href="#query_the_notes">Query the notes</a></h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>As you might expect, your mixin fields are also available via the Guillotine API.</p>
+<p>The content type&#8217;s own fields are under <code>data</code>; mixin fields are under <code>x</code>, grouped by app and mixin.
+The typed fields let your client request just the values it needs.</p>
 </div>
+<div class="sect2">
+<h3 id="task_fetch_lynxs_notes"><a class="link" href="#task_fetch_lynxs_notes">Task: Fetch Lynx&#8217;s notes</a></h3>
 <div class="paragraph">
-<p>Mixin data is stored separately from the content type&#8217;s own fields, under the key <code>x</code>, grouped by the app that provides the mixin. Use the following query to quickly access all mixin fields in your content.</p>
+<p>Open Query Playground for "My First Project", select <strong>Draft</strong>, and run:</p>
 </div>
 <div class="listingblock">
-<div class="title">Querying for mixins</div>
 <div class="content">
-<pre class="highlight"><code class="language-GraphQL" data-lang="GraphQL">{
+<pre class="highlight"><code class="language-graphql" data-lang="graphql">{
   guillotine {
-    queryDsl(
-      query: {
-        boolean: {
-          must: [
-            {
-              term: {
-                field: "type",
-                value: {
-                  string: "com.example.dev101:animal"
-                }
-              }
-            },
-            {
-              term: {
-                field: "displayName",
-                value: {
-                  string: "Lynx"
-                }
-              }
-            }
-          ]
-        }
-
-      }
-    ) {
+    get(key: "/animals/lynx") {
       displayName
+      x {
+        com_example_dev101 {
+          editorial {
+            notes
+          }
+        }
+      }
+    }
+  }
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The three levels inside <code>x</code> are the app (<code>{app-name-query}</code>), the mixin (<code>editorial</code>), and its field (<code>notes</code>).
+Dots in the app key become underscores in the GraphQL field name.
+Unlike the content type&#8217;s <code>data</code>, <code>x</code> is available on the shared <code>Content</code> interface, so this query needs no Animal inline fragment.</p>
+</div>
+<div class="paragraph">
+<p>The response contains:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-json" data-lang="json">{
+  "data": {
+    "guillotine": {
+      "get": {
+        "displayName": "Lynx",
+        "x": {
+          "com_example_dev101": {
+            "editorial": {
+              "notes": [
+                "Review the habitat description.",
+                "Add a source for the diet information."
+              ]
+            }
+          }
+        }
+      }
+    }
+  }
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Change <code>key</code> to <code>/artists/cardi-b</code> and run the same query to retrieve Cardi B&#8217;s note.
+The typed <code>notes</code> field returns a list, even when the content item has only one note.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="task_inspect_the_json_representation"><a class="link" href="#task_inspect_the_json_representation">Task: Inspect the JSON representation</a></h3>
+<div class="paragraph">
+<p>To inspect all mixin values without selecting their individual fields, query <code>xAsJson</code>:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-graphql" data-lang="graphql">{
+  guillotine {
+    get(key: "/animals/lynx") {
       xAsJson
     }
   }
@@ -606,29 +644,16 @@ For more details and configuration options for mixins, visit <a href="https://de
 </div>
 </div>
 <div class="paragraph">
-<p>If you&#8217;ve added any values to your Lynx&#8217;s Notes fields, this is what you might get.</p>
+<p>The <code>xAsJson</code> value contains:</p>
 </div>
 <div class="listingblock">
-<div class="title">Mixin results</div>
 <div class="content">
 <pre class="highlight"><code class="language-json" data-lang="json">{
-  "data": {
-    "guillotine": {
-      "queryDsl": [
-        {
-          "displayName": "Lynx",
-          "xAsJson": {
-            "com_example_dev101": {
-              "notes": {
-                "notes": [
-                  "Lynx note 1",
-                  "Lynx note 2",
-                  "Lynx note 3"
-                ]
-              }
-            }
-          }
-        }
+  "com-example-dev101": {
+    "editorial": {
+      "notes": [
+        "Review the habitat description.",
+        "Add a source for the diet information."
       ]
     }
   }
@@ -636,69 +661,21 @@ For more details and configuration options for mixins, visit <a href="https://de
 </div>
 </div>
 <div class="paragraph">
-<p>Should you require specific fields only, or wish to drill into more details, for instance by following a reference, use the typed GraphQL fields instead of <code>xAsJson</code>. For instance like this:</p>
-</div>
-<div class="listingblock">
-<div class="title">Typed mixin query</div>
-<div class="content">
-<pre class="highlight"><code class="language-GraphQL" data-lang="GraphQL">{
-  guillotine {
-    queryDsl(
-      query: {
-        boolean: {
-          must: [
-            {
-              term: {
-                field: "type",
-                value: {
-                  string: "com.example.dev101:animal"
-                }
-              }
-            },
-            {
-              term: {
-                field: "displayName",
-                value: {
-                  string: "Lynx"
-                }
-              }
-            }
-          ]
-        }
-
-      }
-    ) {
-      displayName
-      x {
-        com_example_dev101 { <i class="conum" data-value="1"></i><b>(1)</b>
-          notes { <i class="conum" data-value="2"></i><b>(2)</b>
-            notes <i class="conum" data-value="3"></i><b>(3)</b>
-          }
-        }
-      }
-    }
-  }
-}</code></pre>
+<p>Notice the app key: the JSON representation uses hyphens (<code>com-example-dev101</code>), while the typed GraphQL field uses underscores (<code>{app-name-query}</code>).
+The values are the same, but JSON does not apply the GraphQL field types: a single note appears as a string in <code>xAsJson</code>, while the typed field remains a list.
+Use the typed fields when your client needs a predictable shape and only selected values.
+The <a href="https://developer.enonic.com/docs/cms/stable/content/mixins">CMS mixins reference</a> covers the underlying storage in more detail.</p>
 </div>
 </div>
-<div class="colist arabic">
-<table>
-<tr>
-<td><i class="conum" data-value="1"></i><b>1</b></td>
-<td>The app providing the mixin. Dots in the app name become underscores in GraphQL field names.</td>
-</tr>
-<tr>
-<td><i class="conum" data-value="2"></i><b>2</b></td>
-<td>This is the name of the mixin. In this case, "notes" because we defined it to be like so in the <code>notes.yaml</code> file</td>
-</tr>
-<tr>
-<td><i class="conum" data-value="3"></i><b>3</b></td>
-<td>This is the "notes" field (TextLine form item) inside the "notes" mixin.</td>
-</tr>
-</table>
 </div>
+</div>
+<div class="sect1">
+<h2 id="mixins_from_other_apps"><a class="link" href="#mixins_from_other_apps">Mixins from other apps</a></h2>
+<div class="sectionbody">
 <div class="paragraph">
-<p>If you made it here - you are officially equipped with an essential overview of Enonic&#8217;s fundamental content modeling capabilities. 🙌</p>
+<p>Apps can provide mixins for content types they do not define.
+For example, the <a href="https://market.enonic.com/vendors/enonic/seo-metafields">SEO Meta Fields app</a> provides fields for search and social sharing metadata across content types and exposes them through Guillotine.
+The same registration mechanism lets an app add shared fields without changing your Artist or Animal schemas.</p>
 </div>
 </div>
 </div>
@@ -706,152 +683,85 @@ For more details and configuration options for mixins, visit <a href="https://de
 <h2 id="choosing_the_right_tool"><a class="link" href="#choosing_the_right_tool">Choosing the right tool</a></h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>Your content model is complete, so here is everything you have used, side by side. Come back to this table when you model something new.</p>
+<p>You&#8217;ve now used the main content modeling tools in this tutorial.
+Use this recap when deciding how to represent new content:</p>
 </div>
 <table class="tableblock frame-all grid-all stretch">
 <colgroup>
-<col style="width: 14.2857%;">
-<col style="width: 28.5714%;">
-<col style="width: 28.5714%;">
-<col style="width: 28.5715%;">
+<col style="width: 20%;">
+<col style="width: 40%;">
+<col style="width: 40%;">
 </colgroup>
 <thead>
 <tr>
 <th class="tableblock halign-left valign-top">Tool</th>
 <th class="tableblock halign-left valign-top">Use it for</th>
-<th class="tableblock halign-left valign-top">Where the data ends up</th>
-<th class="tableblock halign-left valign-top">Sign you picked the wrong one</th>
+<th class="tableblock halign-left valign-top">Result</th>
 </tr>
 </thead>
 <tbody>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Content type</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">A kind of item editors create, find and publish on its own</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">An item with its own path, status and permissions</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Items that are only ever edited together with one other item</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Display name</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">The item&#8217;s own title</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>displayName</code> on every item</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">A <code>title</code> field that always repeats it</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Folder</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Grouping items so paths stay meaningful</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">The path of every item beneath it</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Paths nobody can predict</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">A kind of content editors create and manage independently</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">A content item with its own path, lifecycle and form data</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Reference (ContentSelector, ImageSelector)</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Pointing at an item that exists on its own</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">The target&#8217;s ID; the item is reachable through the reference</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Copying the same text or image into many items</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Connecting content items that exist independently</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">A stored target ID that Guillotine can resolve to content</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Media</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Files that are assets in their own right</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">A content item of a media type, with an attachment</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Uploading the same file over and over</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">AttachmentUploader</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Files that belong to one item</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">An attachment on that item</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Wanting to link to the file from elsewhere</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Images and other uploaded files</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">A media content item with the uploaded file as an attachment</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">FieldSet</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">A tidier form</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Nothing; the fields inside are stored as usual</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Expecting it in the API</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Grouping related fields in the editor</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Fields stored at the same level, with no extra data wrapper</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">ItemSet</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Repeating structured data the item owns</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">An object, or a list of objects, under <code>data</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Needing to publish or reuse the entries separately</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Grouping fields into an object, optionally repeated</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">An object or a list of objects under the item&#8217;s data</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">OptionSet</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">A choice between variants with different fields</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">An object with <code>_selected</code> and one key per option</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Every option is empty; use a ComboBox</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Selecting options with their own fields</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">A structure recording the selected options and their values</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Form fragment</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">The same fields in several schemas of your app</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Exactly as if the fields were typed in place</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Needing the fields on types you do not own</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Reusing form items within schemas</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Fields inserted in place, with no wrapper named after the fragment</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">HtmlArea</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Free-form prose</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">One HTML string, with links, images and macros resolved by the API</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Parsing the HTML to find structure</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Formatted prose with links, images and macros</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Stored HTML; Guillotine exposes raw and processed HTML plus structured reference data</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Mixin</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Fields that cut across content types, including built-in ones</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Under <code>x</code>, grouped by app and mixin</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">The fields belong to one type only</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Adding shared fields across content types or to types you do not own</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Values under <code>x</code>, grouped by app and mixin</p></td>
 </tr>
 </tbody>
 </table>
 </div>
 </div>
 <div class="sect1">
-<h2 id="bonus_seo_metafields"><a class="link" href="#bonus_seo_metafields">Bonus: SEO Metafields</a></h2>
-<div class="sectionbody">
-<div class="paragraph">
-<p>There&#8217;s a well-known app on Enonic Market named <em>SEO Metafields</em>. Its main purpose is to provide SEO capabilities to your project, and for that purpose, it adds a mixin, which is then enabled for all content types in your project.</p>
-</div>
-<div class="paragraph">
-<p>This is a bonus section, so you&#8217;re not missing much if you skip it, but it&#8217;s worth installing it to better understand the capabilities of mixins.</p>
-</div>
-<div class="olist arabic">
-<ol class="arabic">
-<li>
-<p>Install the <a href="https://market.enonic.com/vendors/enonic/seo-metafields">SEO Metafields app</a> from <code>XP menu</code> &#8594; <code>Applications</code>.</p>
-<div class="imageblock">
-<div class="content">
-<img src="images/x-data-seo-app-install.png" alt="Install SEO Metafields app">
-</div>
-</div>
-</li>
-<li>
-<p>Edit your project in Settings and add the app to it.</p>
-</li>
-<li>
-<p>Immediately after adding the app, the form of every content item gets a new section with the SEO fields.</p>
-<div class="paragraph">
-<p>So, now you have some additional fields on all your content. If you check some of your content items, like an animal, you will see the fields are there as well.</p>
-</div>
-</li>
-</ol>
-</div>
-<div class="imageblock">
-<div class="content">
-<img src="images/x-data-seo-animal.png" alt="SEO fields available for the animals content type as well.">
-</div>
-</div>
-</div>
-</div>
-<div class="sect1">
 <h2 id="coming_up"><a class="link" href="#coming_up">Coming up</a></h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>Your content model is complete: content types, sets, references, rich text, media and mixins, all readable through the API.</p>
-</div>
-<div class="paragraph">
-<p>In the next chapter, you&#8217;ll fetch it all <a href="frontend.ahtml">from a front-end</a>.</p>
+<p>You&#8217;ve added and queried a mixin across two content types, completing the tutorial&#8217;s content model.
+In the next chapter, you&#8217;ll fetch content <a href="frontend.ahtml">from a front-end</a>.</p>
 </div>
 </div>
 </div>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2026-10-27 22:09:54 UTC
+Last updated 2026-10-27 23:21:28 UTC
 </div>
 </div>
 </body>
