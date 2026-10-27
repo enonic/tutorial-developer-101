@@ -1,0 +1,320 @@
+= Media - files are content too
+include::.variables.adoc[]
+// TODO(go-live): Add a developer portal rewrite from this tutorial edition's /files route to /media when the XP 8 edition goes live; leave the XP 7 edition's /files route unchanged.
+:description: Upload an image, inspect its content data and attachment, retrieve the original file, and request cropped and filtered versions with Guillotine.
+
+In this chapter, you'll upload an image, inspect how it is stored as content with an attachment, and use Guillotine to get URLs for its original file and for cropped and filtered versions.
+The media APIs deliver the files at those URLs.
+
+== Upload a file
+
+Start by uploading an image that you'll use throughout the chapter.
+
+=== Task: Upload an image
+
+. Download https://unsplash.com/photos/8oLnCRz7hwM[this lion photograph] by https://unsplash.com/@keyursphotography[Keyur Nandaniya], or choose a JPEG with its main subject away from the center.
+Save it as `lion.jpg` if you want the filename to match the examples.
+. In your "{cms-project-displayname}" content project, create a folder named "Images" at the root, with the path `/images`.
+. Select the Images folder, click btn:[New], and choose the *Media* tab.
+Check that the destination shown is `/images/`.
+. Click the upload area to select your file, or drag the file onto it.
++
+.The Media tab in the New Content dialog
+image::media-drag-and-drop.png["New Content dialog with the Media tab selected and /images/ as the upload destination", width=1440]
+
+The uploaded image now appears as a content item in the Images folder.
+It is saved in Draft and has not been published.
+
+== Inspect the uploaded content
+
+Your uploaded image is now a content item, just like the artists you created earlier.
+Let's inspect its data and find the file attached to it.
+
+=== Task: Find the image and its attachment
+
+Open Query Playground, select "{cms-project-displayname}" and keep *Draft* selected throughout this chapter.
+Run this query to find up to ten images anywhere in the project:
+
+[source,graphql]
+----
+{
+  guillotine {
+    queryDsl(
+      query: {
+        term: {
+          field: "type"
+          value: { string: "media:image" }
+        }
+      }
+    ) {
+      displayName
+      _path
+      type
+      dataAsJson
+      attachments {
+        name
+        label
+        mimeType
+        size
+      }
+    }
+  }
+}
+----
+
+The `dataAsJson` field shows the stored content data, as it did for your artists.
+The `attachments` field lists the attached files and their metadata.
+Both are common content fields, so this query does not need an inline fragment.
+
+Below is one item from the `data.guillotine.queryDsl` array.
+This example shows the image immediately after upload; your filename, dimensions, file size and additional metadata may differ:
+
+.The image content and its attachment
+[source,json]
+----
+{
+  "displayName": "lion",
+  "_path": "/images/lion.jpg",
+  "type": "media:image",
+  "dataAsJson": {
+    "media": {
+      "imageWidth": 2400,
+      "attachment": "lion.jpg",
+      "imageHeight": 1600
+    }
+  },
+  "attachments": [
+    {
+      "name": "lion.jpg",
+      "label": "source",
+      "mimeType": "image/jpeg",
+      "size": 550171
+    }
+  ]
+}
+----
+
+Notice how the content and file fit together:
+
+* `type` is `media:image`: XP detected the uploaded file and created an image content item.
+* `dataAsJson.media` holds image data, including dimensions and the name of the source attachment.
+* `attachments` contains an entry with that same name, `lion.jpg`.
+Its `label` is `source`, identifying it as the original uploaded file; `mimeType` and `size` describe its format and size in bytes.
+The file's binary data is stored as an attachment; it is not embedded in this JSON response.
+
+This upload-and-retrieve pattern is the same for any kind of file, including a PDF, an audio recording or a video.
+Each upload creates a media content item with the original file attached and labeled `source`.
+XP maps the file to the appropriate media content type: an image becomes `media:image`, while other files become types such as Audio, Video or Document.
+The type and its metadata fields vary, but the attachment structure and the `mediaUrl` field used to retrieve the original file work the same way.
+The https://developer.enonic.com/docs/cms/stable/media[CMS media reference] explains media structure, type mapping and file handling in more detail.
+
+XP automatically extracts readable text from known file formats, such as PDF, and indexes it for search.
+See https://developer.enonic.com/docs/cms/stable/media/media-indexing[Media indexing] for what becomes searchable and how to query it.
+You'll explore the underlying storage directly in the <<data-toolbox#, Data Toolbox chapter>>.
+
+Keep your image's `+_path+` for the following queries.
+
+== Retrieve the attached file
+
+You've found the attachment's metadata; now retrieve the file itself.
+For media content, `mediaUrl` gives you the URL components for its source attachment, `lion.jpg` in this example.
+The attachment API, `media:attachment`, delivers the file at that URL.
+Like Guillotine, it is a Universal API: on your sandbox, its address starts with `{api-base-url}/media:attachment`.
+
+=== Task: Open and download the attachment
+
+Use `get` with the content path from your response.
+Replace `/images/lion.jpg` if your image has a different path:
+
+[source,graphql]
+----
+{
+  guillotine {
+    get(key: "/images/lion.jpg") {
+      displayName
+      ... on media_Image {
+        mediaUrl {
+          path
+          queryString
+        }
+      }
+    }
+  }
+}
+----
+
+The CMS content type is `media:image`; its GraphQL object type is `+media_Image+`.
+As with Artist in the previous chapter, the inline fragment gives access to fields belonging to that GraphQL type.
+`mediaUrl` is available on all media types.
+
+The `data.guillotine.get` object looks like this, with your own content ID, fingerprint and filename:
+
+.The source attachment's URL components
+[source,json,{subs}]
+----
+{
+  "displayName": "lion",
+  "mediaUrl": {
+    "path": "/media:attachment/{cms-project-id}:draft/3cff3960-08e9-4c92-828e-917187c1dc20:927e557892810fabb5e2c76cd686a7e7/lion.jpg",
+    "queryString": ""
+  }
+}
+----
+
+Build the file's address from *your own response*: start with `{api-base-url}`, then append `mediaUrl.path` and `mediaUrl.queryString` exactly as returned.
+An empty `queryString` adds nothing.
+For the example above, the address would be:
+
+[{subs}]
+----
+{api-base-url}/media:attachment/{cms-project-id}:draft/3cff3960-08e9-4c92-828e-917187c1dc20:927e557892810fabb5e2c76cd686a7e7/lion.jpg
+----
+
+Open your assembled URL in a new tab in the same browser where you are logged in to Content Studio.
+It displays the original uploaded image.
+Draft media requires an authenticated request; copying the example URL above will not retrieve your own image.
+
+To download the file instead of displaying it, change `mediaUrl` to `mediaUrl(download: true)` and run the query again.
+Assemble and open the new URL, including its `queryString`; the browser will download the attachment.
+
+The content item's `+_path+`, such as `/images/lion.jpg`, identifies the item in queries.
+The media URL's `path` identifies the attached file through the attachment API.
+
+== Request a cropped image
+
+The `imageUrl` field returns a URL served by the image API, `media:image`.
+It can resize, crop and filter images when delivering them, while the original attachment remains unchanged.
+
+The `scale` argument controls resizing and cropping.
+For example, `width(600)` scales proportionally to a width of 600 pixels; `block(400,600)` fills a 400-by-600-pixel rectangle, cropping what does not fit.
+Omitting `scale` means no resizing, but other processing and saved image edits can still affect the result.
+Use `mediaUrl` when you need the original uploaded file.
+
+=== Task: Open a portrait crop
+
+Use `get` to retrieve the image whose content path you copied above.
+Replace `/images/lion.jpg` if your image has a different path:
+
+[source,graphql]
+----
+{
+  guillotine {
+    get(key: "/images/lion.jpg") {
+      displayName
+      ... on media_Image {
+        imageUrl(scale: "block(400,600)") {
+          path
+          queryString
+        }
+      }
+    }
+  }
+}
+----
+
+The `data.guillotine.get` object contains:
+
+.Image with a crop URL
+[source,json,{subs}]
+----
+{
+  "displayName": "lion",
+  "imageUrl": {
+    "path": "/media:image/{cms-project-id}:draft/3cff3960-08e9-4c92-828e-917187c1dc20:4f827305024b80384b0aa939496e4688/block-400-600/lion.jpg",
+    "queryString": ""
+  }
+}
+----
+
+Assemble the URL from `{api-base-url}` plus your returned `imageUrl.path` and `imageUrl.queryString`, then open it in your browser.
+Without a focal point, the crop is centered, which can cut off an off-center subject:
+
+.Portrait crop before setting a focal point
+image::image-cropped-unfocused.jpg["Portrait crop with part of the lion cut off at the left edge", width=400]
+
+== Guide cropping with a focal point
+
+A focal point identifies the subject to prioritize when the image API crops an image to a different aspect ratio.
+It guides the crop; it does not guarantee that the entire subject fits every shape.
+
+[#_image_form]
+=== Task: Set a focal point and compare
+
+. Return to Content Studio, select your image and click btn:[Edit].
+The content form contains fields such as Caption and Alternative text, and the image preview includes editing controls.
++
+.The image content form and preview
+image::image-content-form.jpg["Content Studio image editor showing the lion preview, editorial fields and image editing toolbar", width=1440]
+
+. In the toolbar above the image preview, click *Set Autofocus* to edit the focal point.
+Click the lion's face, or drag the marker onto the subject of your own image.
++
+.Positioning the focal point
+image::image-editing-focal-point.jpg["Image preview in focal-point mode with the marker on the lion's face and Apply and Cancel controls", width=1440]
+
+. Click btn:[Apply] to accept the position, then btn:[Save] in the Content Editor toolbar to save the content item.
+. Return to Query Playground and run the same portrait-crop query again.
+Assemble and open the *newly returned URL* so you see the saved change.
+
+The new crop prioritizes the selected subject:
+
+.The same portrait crop with a focal point
+image::image-cropped-focused.jpg["Portrait crop after setting the focal point, with the lion's face in view", width=400]
+
+Image edits are stored on the content item; they do not rewrite the original attachment.
+The https://developer.enonic.com/docs/content-studio/stable/content-types/image[Content Studio image documentation] covers cropping, rotation, resetting edits and image metadata.
+
+=== Task: Add a filter
+
+Keep the same image and scale, and add a `filter` argument:
+
+[source,graphql]
+----
+{
+  guillotine {
+    get(key: "/images/lion.jpg") {
+      displayName
+      ... on media_Image {
+        imageUrl(
+          scale: "block(400,600)"
+          filter: "grayscale(); border(10, 0x000000)"
+        ) {
+          path
+          queryString
+        }
+      }
+    }
+  }
+}
+----
+
+Use your image's content path if it differs from the example.
+The semicolon separates two filters: grayscale and a black border.
+Build and open the URL as before, including the complete `queryString` returned by Guillotine.
+
+.The cropped image with filters
+image::image-processed.jpg["Portrait crop of the lion in grayscale with a black border", width=400]
+
+The https://developer.enonic.com/docs/cms/stable/apis/image[Image API reference] describes the available scaling methods and filters.
+
+TIP: For presentation effects such as grayscale or borders, consider CSS or similar client-side styling.
+Use server-side filters when the effect needs to be part of the delivered image file, for example in a download or an email.
+
+== Media URLs and caching
+
+The returned paths identify the content project and branch.
+In these examples, `{cms-project-id}:draft` selects Draft; published content uses `{cms-project-id}` without a branch suffix.
+Let Guillotine generate these paths and query strings rather than constructing or editing their internal parts yourself.
+
+The fingerprint in a media URL identifies a version of the file or processed image and supports caching.
+After changing an image or its editing settings, query again for the current URL.
+Actual caching follows the response's `Cache-Control` header, with different settings for public and private content; a fingerprint does not make draft content public.
+
+Returning URL components also lets your front-end use a separate base URL for media, for example when serving published images and downloads through a content delivery network (CDN).
+GraphQL requests can still go directly to the Enonic server.
+The platform's https://developer.enonic.com/docs/platform/stable/config/vhosts[virtual host configuration reference] explains how to give the media APIs their own address.
+
+== Coming up
+
+You've uploaded an image, inspected its content data and attachment, downloaded the original file, and requested cropped and filtered versions that use a focal point.
+In the next chapter, you'll take a closer look at <<form-items#, form items>>, the building blocks of content forms.

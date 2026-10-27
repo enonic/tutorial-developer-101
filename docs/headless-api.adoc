@@ -92,7 +92,9 @@ Your content IDs will differ from these example values, and the paths depend on 
 
 Try changing `first` to `1` and `direction` to `DESC`, then run the query again.
 You should get only P!nk, the last artist alphabetically.
-Restore `first: 10` and `direction: ASC` before continuing.
+Now remove the `first` and `sort` arguments before continuing.
+Without `first`, `queryDsl` returns up to ten results; without `sort`, it uses relevance order.
+The remaining examples use these defaults, so results may appear in a different order from the sample responses.
 
 === Getting around
 
@@ -158,8 +160,6 @@ This gives you access to the Artist's `data` fields:
           value: { string: "{app-name-full}:artist" }
         }
       }
-      first: 10
-      sort: [{ field: "displayName", direction: ASC }]
     ) {
       ... on {app-name-query}_Artist {
         _id
@@ -287,8 +287,6 @@ Keep the Artist type filter and add a text search on `data.about`:
           ]
         }
       }
-      first: 10
-      sort: [{ field: "displayName", direction: ASC }]
     ) {
       displayName
       ... on {app-name-query}_Artist {
@@ -350,8 +348,6 @@ Find `+{app-name-query}_Artist_Data+` in the Docs panel and notice its new `birt
           value: { string: "{app-name-full}:artist" }
         }
       }
-      first: 10
-      sort: [{ field: "displayName", direction: ASC }]
     ) {
       displayName
       ... on {app-name-query}_Artist {
@@ -418,7 +414,7 @@ Use `branch: "master"` to read published content.
 
 Guillotine is a _Universal API_, served at `/api/<app>:<name>`.
 Its API name, `com.enonic.app.guillotine:graphql`, follows the API base URL, `{api-base-url}` on your sandbox.
-The media APIs you'll use in the <<files#, next chapter>> follow the same pattern.
+The media APIs you'll use in the <<media#, next chapter>> follow the same pattern.
 
 For browser requests from another origin, the server must allow that origin through CORS.
 The Guillotine documentation covers https://developer.enonic.com/docs/guillotine/stable/usage#curl[cURL requests], https://developer.enonic.com/docs/guillotine/stable/usage#third-party-clients[third-party GraphQL clients] and https://developer.enonic.com/docs/guillotine/stable/configuration#config_file[CORS configuration for browsers].
@@ -434,4 +430,4 @@ You'll fetch your published artists from code in the <<frontend#, front-end chap
 == Coming up
 
 You've found artists by type, selected their fields, retrieved a single item, searched descriptions and queried a new field from your content model.
-In the next chapter, you'll see <<files#, how XP deals with files and images>>.
+In the next chapter, you'll see <<media#, how XP deals with files and images>>.

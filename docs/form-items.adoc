@@ -160,7 +160,7 @@ XP's image selector allows you to select an image for a piece of content and als
 
 Read more about the https://developer.enonic.com/docs/cms/stable/schemas/form-items/imageselector[configuration of image selectors] in the reference docs.
 
-After you've added an image (or several), you can highlight it and click the edit button. This will take you to the image editing form. This is the same form as we saw in <<files#_image_form, the previous chapter>>.
+After you've added an image (or several), you can highlight it and click the edit button. This will take you to the image editing form. This is the same form as we saw in <<media#_image_form, the previous chapter>>.
 
 .The image selector with uploaded and selected images
 image::input-type-image-selector-highlighted-image.png["The image selector input field with two images of lions -- one male, one female - - below. Under the images, there's a set of buttons saying 'edit' and 'remove'."]
@@ -198,7 +198,7 @@ Reference another content item when the thing has a life of its own: it is publi
 
 == AttachmentUploader
 
-XP also has a rather special form item named https://developer.enonic.com/docs/cms/stable/schemas/form-items/attachmentuploader[AttachmentUploader]. Unlike <<files#, media>> content, which creates an independent content item for each file you upload, AttachmentUploader lets you store one (or more) files within the specific content item. Under the hood, it uses the same `attachment` property structure as media when persisting the file.
+XP also has a rather special form item named https://developer.enonic.com/docs/cms/stable/schemas/form-items/attachmentuploader[AttachmentUploader]. Unlike <<media#, media>> content, which creates an independent content item for each file you upload, AttachmentUploader lets you store one (or more) files within the specific content item. Under the hood, it uses the same `attachment` property structure as media when persisting the file.
 
 .The AttachmentUploader form item
 image::input-type-attachmentuploader.png[AttachmentUploader: Store any number of files within your content item, 651w]

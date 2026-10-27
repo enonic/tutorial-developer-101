@@ -126,7 +126,7 @@ The following options are available: Caption, alt text, change the image's justi
 
 Try out the image controls that Content Studio gives you by uploading a picture and seeing what you can do with it.
 
-We looked at <<files#_image_form, editing images in the media chapter>>, but when inserting images in the HtmlArea, you also have something called "image styles", which we'll have a look at now.
+We looked at <<media#_image_form, editing images in the media chapter>>, but when inserting images in the HtmlArea, you also have something called "image styles", which we'll have a look at now.
 
 Continue editing the "Lynx" content created in the previous task.
 
@@ -350,7 +350,7 @@ You now have access to the full name and type of the referenced item, and to the
 
 === Images
 
-Images work the same way: the `data-image-ref` attribute points to an entry in the `images` field, which holds the parts of every image URL. The default `src` is the media path, so the simplest fix is to prefix it with your media base URL - the same `{api-base-url}` you used in the <<files#, media chapter>>.
+Images work the same way: the `data-image-ref` attribute points to an entry in the `images` field, which holds the parts of every image URL. The default `src` is the media path, so the simplest fix is to prefix it with your media base URL - the same `{api-base-url}` you used in the <<media#, media chapter>>.
 
 If you want to optimize how fast images load on various devices, Guillotine can also return the image in multiple different sizes (using https://developer.mozilla.org/en-US/docs/Web/API/HTMLImageElement/srcset[the `srcset` attribute (MDN)]). This is achieved by adding an argument to the `description` field:
 
