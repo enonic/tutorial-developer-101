@@ -448,11 +448,6 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <li><a href="#task_export_the_animals_folder">Task: Export the Animals folder</a></li>
 </ul>
 </li>
-<li><a href="#prepare_another_project">Prepare another project</a>
-<ul class="sectlevel2">
-<li><a href="#task_create_the_destination_project">Task: Create the destination project</a></li>
-</ul>
-</li>
 <li><a href="#import_the_folder">Import the folder</a>
 <ul class="sectlevel2">
 <li><a href="#task_import_the_animals_folder">Task: Import the Animals folder</a></li>
@@ -533,35 +528,12 @@ For command-line export and import operations, see the <a href="https://develope
 </div>
 </div>
 <div class="sect1">
-<h2 id="prepare_another_project"><a class="link" href="#prepare_another_project">Prepare another project</a></h2>
+<h2 id="import_the_folder"><a class="link" href="#import_the_folder">Import the folder</a></h2>
 <div class="sectionbody">
 <div class="paragraph">
 <p>The export contains content data, while your app supplies the schemas that describe it.
 Assign the same app to the destination project so Content Studio can edit the imported animals and Guillotine can expose their fields.</p>
 </div>
-<div class="sect2">
-<h3 id="task_create_the_destination_project"><a class="link" href="#task_create_the_destination_project">Task: Create the destination project</a></h3>
-<div class="olist arabic">
-<ol class="arabic">
-<li>
-<p><strong>Start a separate project</strong> - Open <strong>Settings</strong> at the bottom of Content Studio&#8217;s menu bar and click <b class="button">New</b>.
-Leave <strong>Parent project</strong> empty and choose the same language as your original project.</p>
-</li>
-<li>
-<p><strong>Name the copy</strong> - Set <strong>Display Name</strong> to "Tutorial Copy" and check that <strong>Identifier</strong> is <code>tutorial-copy</code>.
-Choose <strong>Public</strong> access and continue without adding project roles.</p>
-</li>
-<li>
-<p><strong>Assign the schemas</strong> - Select the <strong>Developer 101</strong> app in the Applications step, review the summary, and click <b class="button">Create Project</b>.</p>
-</li>
-</ol>
-</div>
-</div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="import_the_folder"><a class="link" href="#import_the_folder">Import the folder</a></h2>
-<div class="sectionbody">
 <div class="paragraph">
 <p>Importing preserves content IDs, which lets references resolve when their targets are present in the destination project.
 An import can also update items with matching IDs, so importing again may replace edits made in the destination.
@@ -571,6 +543,10 @@ It does not delete other content.</p>
 <h3 id="task_import_the_animals_folder"><a class="link" href="#task_import_the_animals_folder">Task: Import the Animals folder</a></h3>
 <div class="olist arabic">
 <ol class="arabic">
+<li>
+<p><strong>Create another project</strong> - Open <strong>Settings</strong> and click <b class="button">New</b>, then follow the <a href="content-studio.ahtml#_task_your_first_project">earlier project-creation example</a>.
+Use the same settings, including the <strong>Developer 101</strong> app, but name the project "Tutorial Copy" with identifier <code>tutorial-copy</code>.</p>
+</li>
 <li>
 <p><strong>Open the destination</strong> - Return to <strong>Content</strong> and use the project selector in the top bar to switch to "Tutorial Copy".
 Show the Context Panel and choose <strong>Content Exports</strong>.</p>
@@ -674,7 +650,7 @@ Continue with these guides to use your content in an application or explore more
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2026-10-28 15:55:46 UTC
+Last updated 2026-10-28 21:00:58 UTC
 </div>
 </div>
 </body>

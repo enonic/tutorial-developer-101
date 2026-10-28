@@ -6,7 +6,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="generator" content="Asciidoctor 2.0.26">
 <meta name="application-name" content="dev101">
-<title>XP 8 - Content Modeling and the GraphQL API</title>
+<title>Developer 101 — Content Modeling and the GraphQL API</title>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,300italic,400,400italic,600,600italic%7CNoto+Serif:400,400italic,700,700italic%7CDroid+Sans+Mono:400,700">
 <style>
 /*! Asciidoctor default stylesheet | MIT License | https://asciidoctor.org */
@@ -438,7 +438,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 </head>
 <body class="article toc2 toc-right">
 <div id="header">
-<h1>XP 8 - Content Modeling and the GraphQL API</h1>
+<h1>Developer 101 — Content Modeling and the GraphQL API</h1>
 <div id="toc" class="toc2">
 <div id="toctitle">Table of Contents</div>
 <ul class="sectlevel1">
@@ -527,7 +527,7 @@ When we mention "XP", we are referring to "Enonic XP", the platform behind Enoni
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2026-10-28 15:55:46 UTC
+Last updated 2026-10-28 21:00:58 UTC
 </div>
 </div>
 </body>
