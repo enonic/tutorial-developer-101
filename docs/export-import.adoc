@@ -1,0 +1,173 @@
+= Exporting and importing content
+include::.variables.adoc[]
+:description: Export your tutorial content with Content Studio, import it into another project, and verify the result through Guillotine.
+:import-project-displayname: Tutorial Copy
+:import-project-id: tutorial-copy
+:management-url: http://localhost:4848
+:project-dump-name: {cms-project-id}-backup
+
+In this chapter, you'll export the Animals folder and import it into a second content project using Content Studio.
+You'll inspect the imported content and query the copy.
+
+== Export the content
+
+The *Content Exports* context panel exports a content item, its descendants and their attachments.
+It copies the current Draft content; it does not include the full version history or reproduce which items are published.
+Continue using your administrator session: the panel is available to Content Administrators and System Administrators.
+
+The Animals export includes its animals and the image stored beneath Lynx.
+References outside that tree, such as Lion's image in the Images folder, do not bring their targets into the export.
+
+=== Task: Export the Animals folder
+
+. *Open the exports panel* - In "{cms-project-displayname}", select Animals, show the Context Panel, and choose *Content Exports* from its selector.
+
+. *Name the export* - Click btn:[Export] and keep the suggested name `animals`.
++
+.Exporting Animals and its descendants
+image::export-options.png["Export options dialog with Animals selected and animals as the export name", width=480]
+
+. *Create the export* - Click btn:[Export] in the dialog and wait for the result.
+Content Studio adds the installation, project and timestamp to the name, so you can distinguish it from other exports.
+Close the dialog.
+
+The export stays on the sandbox's server; nothing is downloaded to your browser.
+It will be available in the panel when you switch projects on this sandbox.
+
+NOTE: To download an export for transfer to another installation, open the https://market.enonic.com/vendors/glenn-ricaud/data-toolbox[Data Toolbox] admin tool, select it under *Node exports*, and choose *Archive and download selected node exports*.
+Data Toolbox also lets you upload exports on the destination server.
+For command-line export and import operations, see the https://developer.enonic.com/docs/enonic-cli/stable/xp#export[Enonic CLI documentation]; these commands use exports stored on the server and do not download them to your computer.
+
+== Prepare another project
+
+The export contains content data, while your app supplies the schemas that describe it.
+Assign the same app to the destination project so Content Studio can edit the imported animals and Guillotine can expose their fields.
+
+=== Task: Create the destination project
+
+. *Start a separate project* - Open *Settings* at the bottom of Content Studio's menu bar and click btn:[New].
+Leave *Parent project* empty and choose the same language as your original project.
+
+. *Name the copy* - Set *Display Name* to "{import-project-displayname}" and check that *Identifier* is `{import-project-id}`.
+Choose *Public* access and continue without adding project roles.
+
+. *Assign the schemas* - Select the *Developer 101* app in the Applications step, review the summary, and click btn:[Create Project].
+
+== Import the folder
+
+Importing preserves content IDs, which lets references resolve when their targets are present in the destination project.
+An import can also update items with matching IDs, so importing again may replace edits made in the destination.
+It does not delete other content.
+
+=== Task: Import the Animals folder
+
+. *Open the destination* - Return to *Content* and use the project selector in the top bar to switch to "{import-project-displayname}".
+Show the Context Panel and choose *Content Exports*.
+
+. *Choose the Animals export* - Under *Imports*, select the export whose name contains `{cms-project-id}-animals-` and the timestamp from your export.
+Click btn:[Import].
+
+. *Import at the top level* - Check that *Import into* is *Project root*.
+Leave *Preserve original first-published timestamp* selected and click btn:[Import].
+Wait for the result, then close the dialog.
++
+.Importing Animals at the destination project's root
+image::import-options.png["Import options dialog showing the Animals export, Project root as the destination and Preserve original first-published timestamp selected", width=720]
+
+The imported content is in Draft, ready for review.
+Preserving its first-published timestamp retains metadata; it does not publish the imported items.
+
+== Verify the copy
+
+=== Task: Check the imported content
+
+. *Inspect the content and media* - In "{import-project-displayname}", open Lynx and check its rich text, linked Lion and inserted image.
+Check that `/animals/lynx/lynx.jpg` exists.
+Lion's selected image is unavailable in this project because it was outside the exported tree.
+
+. *Query the imported content* - Open Query Playground and run this query against the destination project's Draft branch:
++
+[source,graphql,{subs}]
+----
+{
+  guillotine(project: "{import-project-id}", branch: "draft") {
+    get(key: "/animals/lynx") {
+      displayName
+      _path
+    }
+  }
+}
+----
++
+The response should contain Lynx at `/animals/lynx` in "{import-project-displayname}".
+The copy remains in Draft; publishing is a separate action, as in the <<permissions#, permissions chapter>>.
+
+The two projects now hold separate copies of the content.
+Editing one does not update the other; importing is a one-time transfer, not ongoing synchronization.
+
+For the panel's other options and transferring exports between installations, see the https://developer.enonic.com/docs/content-studio/stable/contextpanel/export[Content Studio export documentation].
+
+////
+== Dump and load an entire project
+
+XP also supports dumping and loading a single content project's repository.
+A project dump contains all its content and attachments, all branches, project settings, issues and publish requests, and can include version history.
+This preserves the draft and published versions separately, including changes that have not yet been published.
+The app that supplies the schemas must still be installed separately.
+
+The following optional examples use cURL with XP's management API on port `4848`.
+They require an administrator account with a password; `--user su` prompts for the super user's configured password.
+The sandbox's *Log In as Guest* session alone does not supply credentials for these requests.
+See https://developer.enonic.com/docs/platform/stable/endpoints/management[Management API authentication] for authentication options.
+
+To dump only "{cms-project-displayname}", select its repository and include version history:
+
+[source,shell,{subs}]
+----
+curl --fail-with-body --user su '{management-url}/system/dump' \
+  -H 'Content-Type: application/json' \
+  --data-binary '{
+    "name": "{project-dump-name}",
+    "repositories": ["com.enonic.cms.{cms-project-id}"],
+    "includeVersions": true
+  }'
+----
+
+The dump is written to `data/dump/{project-dump-name}.zip` inside the server's XP home folder.
+The request returns a `taskId` before the dump finishes.
+Replace `+TASK_ID+` below with that value and check that the task's `state` is `FINISHED` before using the dump:
+
+[source,shell,{subs}]
+----
+curl --fail-with-body --user su '{management-url}/task/TASK_ID'
+----
+
+To restore that dump, use the same repository selection:
+
+[source,shell,{subs}]
+----
+curl --fail-with-body --user su '{management-url}/system/load' \
+  -H 'Content-Type: application/json' \
+  --data-binary '{
+    "name": "{project-dump-name}",
+    "repositories": ["com.enonic.cms.{cms-project-id}"]
+  }'
+----
+
+Loading replaces the selected repository's existing data with the dumped state, including all branches and the included version history.
+Keep `repositories` in both requests to scope the operation to this project.
+The load request also returns a `taskId`; check its status in the same way.
+////
+
+== Where to go next
+
+You've modeled content, queried it through Guillotine, controlled access, and copied it into another project.
+Continue with these guides to use your content in an application or explore more of Enonic:
+
+https://developer.enonic.com/docs/guillotine/stable/usage[Guillotine usage]:: Sending requests from cURL, JavaScript and other clients, authentication, CORS configuration, and further query examples.
+
+https://developer.enonic.com/learn/react-spa/stable[React SPA tutorial]:: Building a React application with content lists, detail views, routing, rich text, images and macros.
+
+https://developer.enonic.com/docs/next.xp[Building sites with Enonic and Next.js]:: Building Next.js sites with Enonic as your CMS, including visual editing.
+
+https://developer.enonic.com/docs/graphql-tutorial[Building a custom GraphQL API]:: Building your own GraphQL API on Enonic XP, with mutations and subscriptions.

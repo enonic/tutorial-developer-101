@@ -115,7 +115,6 @@ The https://developer.enonic.com/docs/cms/stable/media[CMS media reference] expl
 
 XP automatically extracts readable text from known file formats, such as PDF, and indexes it for search.
 See https://developer.enonic.com/docs/cms/stable/media/media-indexing[Media indexing] for what becomes searchable and how to query it.
-You'll explore the underlying storage directly in the <<data-toolbox#, Data Toolbox chapter>>.
 
 == Retrieve the attached file
 

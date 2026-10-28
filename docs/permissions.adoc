@@ -72,7 +72,7 @@ Lynx is returned:
 }
 ----
 
-The <<frontend#, next chapter>> explains the HTTP request format in more detail.
+The https://developer.enonic.com/docs/guillotine/stable/usage#request-format[Guillotine usage documentation] explains the HTTP request format in more detail.
 
 === Task: Restrict Lynx
 
@@ -135,7 +135,7 @@ Confirm that both items are visible to this administrator.
 
 . *Restore public access* - Reopen Lynx's permissions and change Access Mode back to *Public*.
 Choose *This item* as the scope, review the summary, and apply the changes.
-Run the two-item anonymous request again and confirm that both items are returned, ready for the front-end chapter.
+Run the two-item anonymous request again and confirm that both items are returned.
 
 Lynx remained published throughout this exercise; the results changed with the caller's read access.
 Permission changes take effect on draft and published content without republishing.
@@ -174,9 +174,8 @@ Marking an item ready changes its workflow status; it does not grant permission 
 Authors can https://developer.enonic.com/docs/content-studio/stable/workflow/issues#publish_requests[request publishing] from an authorized editor.
 
 The https://developer.enonic.com/docs/content-studio/stable/projects#project-roles[project roles reference] explains how to assign users and groups, along with the other available roles.
-Your tutorial content is now published and publicly readable, ready for the front-end examples.
 
 == Coming up
 
 You've published your content, compared public and restricted access, and learned how editorial roles separate editing from publishing.
-In the next chapter, you'll fetch the published content <<frontend#, from a front-end>>.
+In the next chapter, you'll <<export-import#, export your content and import it into another project>>.

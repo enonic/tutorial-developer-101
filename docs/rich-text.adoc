@@ -132,7 +132,7 @@ Match `data-link-ref` in the HTML with `ref` in the link data from the same resp
 Your content IDs and reference values will differ from this example.
 The default `href` is the target's content path; it is not a guarantee that your front-end serves content at that URL.
 Use the target and URL components to construct your own route, supplying your front-end's base when `baseUrl` is `null`, and append any `queryString` and `fragment`.
-The <<frontend#_building_urls, front-end chapter>> shows how to apply the resulting URL.
+The https://developer.enonic.com/docs/guillotine/stable/usage/rich-text#links[Guillotine rich-text examples] show how to apply the resulting URL.
 
 == Insert an image
 
@@ -402,7 +402,7 @@ The `images` entry now has an 800-pixel-wide `src` image, replacing the default 
 The Square grayscale style still applies, so the main image is 800 × 800 pixels and retains the grayscale filter.
 Build its URL from `{api-base-url}` + `src.path` + `src.queryString`.
 For each candidate, combine `{api-base-url}` with its `imageUrl.path` and `imageUrl.queryString`.
-The <<frontend#_building_urls, front-end chapter>> shows how to populate `src` and `srcset` from these components.
+The https://developer.enonic.com/docs/guillotine/stable/usage/rich-text#images[Guillotine image examples] show how to populate `src` and `srcset` from these components.
 Request sizes through Guillotine; do not construct them by editing the returned URL paths.
 
 == Coming up

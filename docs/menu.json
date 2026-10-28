@@ -41,12 +41,8 @@
       "document": "permissions"
     },
     {
-      "title": "10 - Front-end",
-      "document": "frontend"
-    },
-    {
-      "title": "11 - Under the hood",
-      "document": "data-toolbox"
+      "title": "10 - Export and import",
+      "document": "export-import"
     }
   ]
 }

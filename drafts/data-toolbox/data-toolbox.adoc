@@ -65,7 +65,11 @@ Inspecting content is only a fraction of what Data Toolbox can do: it's a versat
 
 == Where to go next
 
-Congrats! You've reached the end of this tutorial. You can model content, read it through the API and fetch it from a front-end. If you'd like to go further, try one of the following guides, which introduce additional aspects of the Enonic experience:
+You've reached the end of this tutorial. You can model content, query it through the API, and control who can read or publish it. To use that content in an application or explore more of Enonic, continue with these guides:
+
+https://developer.enonic.com/docs/guillotine/stable/usage[Guillotine usage]:: Sending requests from cURL, JavaScript and other clients, handling responses, and exploring more query examples.
+
+https://developer.enonic.com/learn/react-spa/stable[React SPA tutorial]:: Building a React application with content lists, detail views, routing, rich text, images and macros.
 
 https://developer.enonic.com/docs/intro[Introduction to Enonic]:: Building a website with the Enonic framework, no third-party framework required. This tutorial also introduces the concept of pages, and building blocks such as regions, parts, and page templates.
 

@@ -423,7 +423,7 @@ The media APIs you'll use in the <<media#, next chapter>> follow the same patter
 
 For browser requests from another origin, the server must allow that origin through CORS.
 The Guillotine documentation covers https://developer.enonic.com/docs/guillotine/stable/usage#curl[cURL requests], https://developer.enonic.com/docs/guillotine/stable/usage#third-party-clients[third-party GraphQL clients] and https://developer.enonic.com/docs/guillotine/stable/configuration#config_file[CORS configuration for browsers].
-You'll fetch your published artists from code in the <<frontend#, front-end chapter>>.
+For a complete JavaScript request, see the https://developer.enonic.com/docs/guillotine/stable/usage#javascript[Guillotine usage examples].
 
 == Dive deeper
 
