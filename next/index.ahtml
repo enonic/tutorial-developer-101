@@ -484,10 +484,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <p>publish your content and explore <a href="permissions.ahtml">read and editorial permissions</a></p>
 </li>
 <li>
-<p>fetch it all from a <a href="frontend.ahtml">front-end</a>, with routing, paging and URLs</p>
-</li>
-<li>
-<p>look <a href="data-toolbox.ahtml">under the hood</a> at how it is all stored</p>
+<p><a href="export-import.ahtml">export and import</a> your content into another project</p>
 </li>
 </ul>
 </div>
@@ -497,7 +494,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <div class="ulist">
 <ul>
 <li>
-<p><strong>No coding.</strong> You will not write application code. The schemas are YAML files, the queries are GraphQL, and the only JavaScript is a handful of <code>fetch</code> examples in the front-end chapter, which you can run as they are. There is nothing to compile or debug.</p>
+<p><strong>No coding.</strong> You will not write application code. You will edit YAML schemas, run GraphQL queries, and use ready-to-run cURL requests to test the API. There is nothing to compile or debug.</p>
 </li>
 <li>
 <p><strong>No pages.</strong> Sites, pages, layouts and parts - the whole page domain of Enonic - are left out entirely. To learn more about pages, check out the <a href="https://developer.enonic.com/docs/next.xp">Next.js tutorial</a>, the <a href="https://developer.enonic.com/learn/react4xp-tutorial/stable">React4XP tutorial</a>, or the <a href="https://developer.enonic.com/learn/building-enonic-sites/stable">My First Site</a> tutorials.</p>
@@ -530,7 +527,7 @@ When we mention "XP", we are referring to "Enonic XP", the platform behind Enoni
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2026-10-28 13:32:09 UTC
+Last updated 2026-10-28 15:48:46 UTC
 </div>
 </div>
 </body>

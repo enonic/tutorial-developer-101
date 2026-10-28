@@ -652,7 +652,7 @@ The HTML values are JSON strings; a JSON parser handles the escaped quotes and n
 Your content IDs and reference values will differ from this example.
 The default <code>href</code> is the target&#8217;s content path; it is not a guarantee that your front-end serves content at that URL.
 Use the target and URL components to construct your own route, supplying your front-end&#8217;s base when <code>baseUrl</code> is <code>null</code>, and append any <code>queryString</code> and <code>fragment</code>.
-The <a href="frontend.ahtml#_building_urls">front-end chapter</a> shows how to apply the resulting URL.</p>
+The <a href="https://developer.enonic.com/docs/guillotine/stable/usage/rich-text#links">Guillotine rich-text examples</a> show how to apply the resulting URL.</p>
 </div>
 </div>
 </div>
@@ -1005,7 +1005,7 @@ This example requests an 800-pixel main image and two responsive alternatives:</
 The Square grayscale style still applies, so the main image is 800 × 800 pixels and retains the grayscale filter.
 Build its URL from <code><a href="http://localhost:8080/api" class="bare">http://localhost:8080/api</a></code> + <code>src.path</code> + <code>src.queryString</code>.
 For each candidate, combine <code><a href="http://localhost:8080/api" class="bare">http://localhost:8080/api</a></code> with its <code>imageUrl.path</code> and <code>imageUrl.queryString</code>.
-The <a href="frontend.ahtml#_building_urls">front-end chapter</a> shows how to populate <code>src</code> and <code>srcset</code> from these components.
+The <a href="https://developer.enonic.com/docs/guillotine/stable/usage/rich-text#images">Guillotine image examples</a> show how to populate <code>src</code> and <code>srcset</code> from these components.
 Request sizes through Guillotine; do not construct them by editing the returned URL paths.</p>
 </div>
 </div>
@@ -1022,7 +1022,7 @@ In the next chapter, you&#8217;ll add fields across content types with <a href="
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2026-10-28 13:32:09 UTC
+Last updated 2026-10-28 15:48:46 UTC
 </div>
 </div>
 </body>

@@ -1064,7 +1064,7 @@ The media APIs you&#8217;ll use in the <a href="media.ahtml">next chapter</a> fo
 <div class="paragraph">
 <p>For browser requests from another origin, the server must allow that origin through CORS.
 The Guillotine documentation covers <a href="https://developer.enonic.com/docs/guillotine/stable/usage#curl">cURL requests</a>, <a href="https://developer.enonic.com/docs/guillotine/stable/usage#third-party-clients">third-party GraphQL clients</a> and <a href="https://developer.enonic.com/docs/guillotine/stable/configuration#config_file">CORS configuration for browsers</a>.
-You&#8217;ll fetch your published artists from code in the <a href="frontend.ahtml">front-end chapter</a>.</p>
+For a complete JavaScript request, see the <a href="https://developer.enonic.com/docs/guillotine/stable/usage#javascript">Guillotine usage examples</a>.</p>
 </div>
 </div>
 </div>
@@ -1098,7 +1098,7 @@ In the next chapter, you&#8217;ll see <a href="media.ahtml">how XP deals with fi
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2026-10-28 13:32:09 UTC
+Last updated 2026-10-28 15:48:46 UTC
 </div>
 </div>
 </body>

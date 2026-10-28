@@ -562,7 +562,7 @@ This gives its content public read access by default, represented by the <strong
 </ol>
 </div>
 <div class="paragraph">
-<p>The <a href="frontend.ahtml">next chapter</a> explains the HTTP request format in more detail.</p>
+<p>The <a href="https://developer.enonic.com/docs/guillotine/stable/usage#request-format">Guillotine usage documentation</a> explains the HTTP request format in more detail.</p>
 </div>
 </div>
 <div class="sect2">
@@ -641,7 +641,7 @@ Confirm that both items are visible to this administrator.</p>
 <li>
 <p><strong>Restore public access</strong> - Reopen Lynx&#8217;s permissions and change Access Mode back to <strong>Public</strong>.
 Choose <strong>This item</strong> as the scope, review the summary, and apply the changes.
-Run the two-item anonymous request again and confirm that both items are returned, ready for the front-end chapter.</p>
+Run the two-item anonymous request again and confirm that both items are returned.</p>
 </li>
 </ol>
 </div>
@@ -709,8 +709,7 @@ Marking an item ready changes its workflow status; it does not grant permission 
 Authors can <a href="https://developer.enonic.com/docs/content-studio/stable/workflow/issues#publish_requests">request publishing</a> from an authorized editor.</p>
 </div>
 <div class="paragraph">
-<p>The <a href="https://developer.enonic.com/docs/content-studio/stable/projects#project-roles">project roles reference</a> explains how to assign users and groups, along with the other available roles.
-Your tutorial content is now published and publicly readable, ready for the front-end examples.</p>
+<p>The <a href="https://developer.enonic.com/docs/content-studio/stable/projects#project-roles">project roles reference</a> explains how to assign users and groups, along with the other available roles.</p>
 </div>
 </div>
 </div>
@@ -719,14 +718,14 @@ Your tutorial content is now published and publicly readable, ready for the fron
 <div class="sectionbody">
 <div class="paragraph">
 <p>You&#8217;ve published your content, compared public and restricted access, and learned how editorial roles separate editing from publishing.
-In the next chapter, you&#8217;ll fetch the published content <a href="frontend.ahtml">from a front-end</a>.</p>
+In the next chapter, you&#8217;ll <a href="export-import.ahtml">export your content and import it into another project</a>.</p>
 </div>
 </div>
 </div>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2026-10-28 13:32:09 UTC
+Last updated 2026-10-28 15:48:46 UTC
 </div>
 </div>
 </body>

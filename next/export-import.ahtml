@@ -6,8 +6,8 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="generator" content="Asciidoctor 2.0.26">
 <meta name="application-name" content="dev101">
-<meta name="description" content="Call the API from cURL, Node and a browser. Configure CORS, resolve a route, page a list and build page and media URLs from their parts.">
-<title>Fetching content from a front-end</title>
+<meta name="description" content="Export your tutorial content with Content Studio, import it into another project, and verify the result through Guillotine.">
+<title>Exporting and importing content</title>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,300italic,400,400italic,600,600italic%7CNoto+Serif:400,400italic,700,700italic%7CDroid+Sans+Mono:400,700">
 <style>
 /*! Asciidoctor default stylesheet | MIT License | https://asciidoctor.org */
@@ -439,31 +439,31 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 </head>
 <body class="article toc2 toc-right">
 <div id="header">
-<h1>Fetching content from a front-end</h1>
+<h1>Exporting and importing content</h1>
 <div id="toc" class="toc2">
 <div id="toctitle">Table of Contents</div>
 <ul class="sectlevel1">
-<li><a href="#the_request">The request</a>
+<li><a href="#export_the_content">Export the content</a>
 <ul class="sectlevel2">
-<li><a href="#task_fetch_artists_with_curl">Task: Fetch artists with cURL</a></li>
+<li><a href="#task_export_the_animals_folder">Task: Export the Animals folder</a></li>
 </ul>
 </li>
-<li><a href="#from_javascript">From JavaScript</a>
+<li><a href="#prepare_another_project">Prepare another project</a>
 <ul class="sectlevel2">
-<li><a href="#task_fetch_artists_with_javascript">Task: Fetch artists with JavaScript</a></li>
+<li><a href="#task_create_the_destination_project">Task: Create the destination project</a></li>
 </ul>
 </li>
-<li><a href="#from_a_browser">From a browser</a>
+<li><a href="#import_the_folder">Import the folder</a>
 <ul class="sectlevel2">
-<li><a href="#task_allow_a_browser_origin">Task: Allow a browser origin</a></li>
-<li><a href="#draft_content">Draft content</a></li>
+<li><a href="#task_import_the_animals_folder">Task: Import the Animals folder</a></li>
 </ul>
 </li>
-<li><a href="#resolving_a_route">Resolving a route</a></li>
-<li><a href="#paging_a_list">Paging a list</a></li>
-<li><a href="#building_urls">Building URLs</a></li>
-<li><a href="#going_live">Going live</a></li>
-<li><a href="#coming_up">Coming up</a></li>
+<li><a href="#verify_the_copy">Verify the copy</a>
+<ul class="sectlevel2">
+<li><a href="#task_check_the_imported_content">Task: Check the imported content</a></li>
+</ul>
+</li>
+<li><a href="#where_to_go_next">Where to go next</a></li>
 </ul>
 </div>
 </div>
@@ -471,198 +471,49 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <div id="preamble">
 <div class="sectionbody">
 <div class="paragraph">
-<p>In this chapter, you&#8217;ll send your queries over HTTP, from the command line, from Node and from a browser.
-The <a href="permissions.ahtml">previous chapter</a> left your tutorial content published and publicly readable, and introduced an anonymous cURL request.
-You&#8217;ll now use the API from code, configure browser access, resolve routes, page lists and build media URLs.</p>
-</div>
-<div class="paragraph">
-<p>Query Playground sends your login with requests; the public front-end examples here use anonymous access to the <code>master</code> branch.</p>
+<p>In this chapter, you&#8217;ll export the Animals folder and import it into a second content project using Content Studio.
+You&#8217;ll inspect the imported content and query the copy.</p>
 </div>
 </div>
 </div>
 <div class="sect1">
-<h2 id="the_request"><a class="link" href="#the_request">The request</a></h2>
+<h2 id="export_the_content"><a class="link" href="#export_the_content">Export the content</a></h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>The endpoint is <code><a href="http://localhost:8080/api/com.enonic.app.guillotine:graphql" class="bare">http://localhost:8080/api/com.enonic.app.guillotine:graphql</a></code>, as you saw in the <a href="headless-api.ahtml#_other_clients">Headless API chapter</a>. It takes an HTTP POST with <code>Content-Type: application/json</code> and a JSON body with two properties:</p>
-</div>
-<table class="tableblock frame-all grid-all stretch">
-<colgroup>
-<col style="width: 16.6666%;">
-<col style="width: 16.6666%;">
-<col style="width: 66.6668%;">
-</colgroup>
-<thead>
-<tr>
-<th class="tableblock halign-left valign-top">Property</th>
-<th class="tableblock halign-left valign-top">Type</th>
-<th class="tableblock halign-left valign-top">Description</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">query</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">String</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">The GraphQL query to execute.</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">variables</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Object</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Optional. Values for variables declared by the query.</p></td>
-</tr>
-</tbody>
-</table>
-<div class="paragraph">
-<p>Outside Content Studio there is no selected project, so the query names the project and the branch as arguments on the <code>guillotine</code> field. Passing them as variables keeps the query reusable between environments.</p>
+<p>The <strong>Content Exports</strong> context panel exports a content item, its descendants and their attachments.
+It copies the current Draft content; it does not include the full version history or reproduce which items are published.
+Continue using your administrator session: the panel is available to Content Administrators and System Administrators.</p>
 </div>
 <div class="paragraph">
-<p>Use the same artist type filter and alphabetical sorting as in the Headless API chapter.</p>
+<p>The Animals export includes its animals and the image stored beneath Lynx.
+References outside that tree, such as Lion&#8217;s image in the Images folder, do not bring their targets into the export.</p>
 </div>
 <div class="sect2">
-<h3 id="task_fetch_artists_with_curl"><a class="link" href="#task_fetch_artists_with_curl">Task: Fetch artists with cURL</a></h3>
+<h3 id="task_export_the_animals_folder"><a class="link" href="#task_export_the_animals_folder">Task: Export the Animals folder</a></h3>
 <div class="olist arabic">
 <ol class="arabic">
 <li>
-<p><strong>Prepare the request body</strong> - Save this as <code>request.json</code>:</p>
-<div class="listingblock">
+<p><strong>Open the exports panel</strong> - In "My First Project", select Animals, show the Context Panel, and choose <strong>Content Exports</strong> from its selector.</p>
+</li>
+<li>
+<p><strong>Name the export</strong> - Click <b class="button">Export</b> and keep the suggested name <code>animals</code>.</p>
+<div class="imageblock">
 <div class="content">
-<pre class="highlight"><code class="language-json" data-lang="json">{
-  "query": "query Artists($project: String!, $branch: String!) { guillotine(project: $project, branch: $branch) { queryDsl(query: { term: { field: \"type\", value: { string: \"com.example.dev101:artist\" } } }, first: 10, sort: [{ field: \"displayName\", direction: ASC }]) { _id displayName } } }",
-  "variables": {
-    "project": "my-first-project",
-    "branch": "master"
-  }
-}</code></pre>
+<img src="images/export-options.png" alt="Export options dialog with Animals selected and animals as the export name" width="480">
 </div>
+<div class="title">Figure 1. Exporting Animals and its descendants</div>
 </div>
 </li>
 <li>
-<p><strong>Send the request</strong> - Run this cURL command from the folder containing <code>request.json</code>:</p>
-<div class="listingblock">
-<div class="content">
-<pre class="highlight"><code class="language-shell" data-lang="shell">curl "http://localhost:8080/api/com.enonic.app.guillotine:graphql" \
-  -H 'Content-Type: application/json' \
-  --data-binary @request.json</code></pre>
-</div>
-</div>
-<div class="paragraph">
-<p>You should get the three artists back as JSON, the same shape you saw in the playground&#8217;s response panel. If the list is empty, the content is not published, or you spelled the project name differently when you created it.</p>
-</div>
-</li>
-</ol>
-</div>
-</div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="from_javascript"><a class="link" href="#from_javascript">From JavaScript</a></h2>
-<div class="sectionbody">
-<div class="paragraph">
-<p>Node 18 or newer has <code>fetch</code> built in.</p>
-</div>
-<div class="sect2">
-<h3 id="task_fetch_artists_with_javascript"><a class="link" href="#task_fetch_artists_with_javascript">Task: Fetch artists with JavaScript</a></h3>
-<div class="olist arabic">
-<ol class="arabic">
-<li>
-<p><strong>Prepare the JavaScript client</strong> - Save the following example as <code>artists.mjs</code>.</p>
-<div class="paragraph">
-<p>Set <code>apiBaseUrl</code> to <code><a href="http://localhost:8080/api" class="bare">http://localhost:8080/api</a></code> for your sandbox, or to the live server&#8217;s address followed by <code>/api</code>.
-The API name stays the same; keeping the base URL in one place lets you switch servers without changing the query.</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="highlight"><code class="language-javascript" data-lang="javascript">const apiBaseUrl = 'http://localhost:8080/api';
-
-const query = `
-  query Artists($project: String!, $branch: String!) {
-    guillotine(project: $project, branch: $branch) {
-      queryDsl(
-        query: {
-          term: {
-            field: "type"
-            value: { string: "com.example.dev101:artist" }
-          }
-        }
-        first: 10
-        sort: [{ field: "displayName", direction: ASC }]
-      ) {
-        _id
-        displayName
-        ... on com_example_dev101_Artist {
-          data {
-            legalName
-            birthday
-          }
-        }
-      }
-    }
-  }
-`;
-
-async function getArtists() {
-  const response = await fetch(apiBaseUrl + '/com.enonic.app.guillotine:graphql', {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({
-      query,
-      variables: { project: 'my-first-project', branch: 'master' }
-    })
-  });
-
-  if (!response.ok) {
-    throw new Error(`HTTP ${response.status}`);
-  }
-
-  const result = await response.json();
-  if (result.errors?.length) {
-    throw new Error(result.errors.map((error) =&gt; error.message).join('\n'));
-  }
-
-  return result.data.guillotine.queryDsl;
-}
-
-getArtists().then(console.log).catch(console.error);</code></pre>
-</div>
-</div>
-</li>
-<li>
-<p><strong>Run the client</strong> - Run <code>node artists.mjs</code> and check the returned artists in your terminal.</p>
+<p><strong>Create the export</strong> - Click <b class="button">Export</b> in the dialog and wait for the result.
+Content Studio adds the installation, project and timestamp to the name, so you can distinguish it from other exports.
+Close the dialog.</p>
 </li>
 </ol>
 </div>
 <div class="paragraph">
-<p>A GraphQL response can be HTTP 200 and still carry errors, in the <code>errors</code> array next to <code>data</code>.
-Check both, as the example does.</p>
-</div>
-</div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="from_a_browser"><a class="link" href="#from_a_browser">From a browser</a></h2>
-<div class="sectionbody">
-<div class="paragraph">
-<p>Running the same code in a web page served from another origin, say a dev server on <code><a href="http://localhost:3000" class="bare">http://localhost:3000</a></code>, fails until XP is told to allow that origin. This is browser cross-origin protection, CORS, and Guillotine has a configuration file for it.</p>
-</div>
-<div class="sect2">
-<h3 id="task_allow_a_browser_origin"><a class="link" href="#task_allow_a_browser_origin">Task: Allow a browser origin</a></h3>
-<div class="olist arabic">
-<ol class="arabic">
-<li>
-<p><strong>Configure CORS</strong> - Create the file <code>com.enonic.app.guillotine.cfg</code> in your sandbox&#8217;s config directory, <code>~/.enonic/sandboxes/101tutorial/home/config/</code>:</p>
-<div class="listingblock">
-<div class="title">com.enonic.app.guillotine.cfg</div>
-<div class="content">
-<pre class="highlight"><code class="language-properties" data-lang="properties">cors.origin=http://localhost:3000
-cors.methods=POST, OPTIONS
-cors.allowedHeaders=Content-Type</code></pre>
-</div>
-</div>
-</li>
-</ol>
-</div>
-<div class="paragraph">
-<p>XP picks the file up without a restart. <code>cors.origin</code> takes a comma-separated list of origins, including scheme and port. The <a href="https://developer.enonic.com/docs/guillotine/stable/configuration">Guillotine configuration docs</a> cover the remaining options.</p>
+<p>The export stays on the sandbox&#8217;s server; nothing is downloaded to your browser.
+It will be available in the panel when you switch projects on this sandbox.</p>
 </div>
 <div class="admonitionblock note">
 <table>
@@ -671,178 +522,159 @@ cors.allowedHeaders=Content-Type</code></pre>
 <i class="fa icon-note" title="Note"></i>
 </td>
 <td class="content">
-CORS only controls which origins a browser lets read the response. It does not grant access to content: published content still needs public read permission for anonymous access, and draft content needs an authorized login.
+To download an export for transfer to another installation, open the <a href="https://market.enonic.com/vendors/glenn-ricaud/data-toolbox">Data Toolbox</a> admin tool, select it under <strong>Node exports</strong>, and choose <strong>Archive and download selected node exports</strong>.
+Data Toolbox also lets you upload exports on the destination server.
+For command-line export and import operations, see the <a href="https://developer.enonic.com/docs/enonic-cli/stable/xp#export">Enonic CLI documentation</a>; these commands use exports stored on the server and do not download them to your computer.
 </td>
 </tr>
 </table>
 </div>
 </div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="prepare_another_project"><a class="link" href="#prepare_another_project">Prepare another project</a></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>The export contains content data, while your app supplies the schemas that describe it.
+Assign the same app to the destination project so Content Studio can edit the imported animals and Guillotine can expose their fields.</p>
+</div>
 <div class="sect2">
-<h3 id="draft_content"><a class="link" href="#draft_content">Draft content</a></h3>
-<div class="paragraph">
-<p>A front-end that previews unpublished work, for instance a staging site for editors, queries the <code>draft</code> branch and must send the editor&#8217;s login with every request. With cookie-based login across origins that means <code>cors.credentials=true</code> in the file above, an explicit origin rather than <code>*</code>, and <code>credentials: 'include'</code> in the <code>fetch()</code> call. For a public front-end, stay on <code>master</code> and skip all of this.</p>
+<h3 id="task_create_the_destination_project"><a class="link" href="#task_create_the_destination_project">Task: Create the destination project</a></h3>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p><strong>Start a separate project</strong> - Open <strong>Settings</strong> at the bottom of Content Studio&#8217;s menu bar and click <b class="button">New</b>.
+Leave <strong>Parent project</strong> empty and choose the same language as your original project.</p>
+</li>
+<li>
+<p><strong>Name the copy</strong> - Set <strong>Display Name</strong> to "Tutorial Copy" and check that <strong>Identifier</strong> is <code>tutorial-copy</code>.
+Choose <strong>Public</strong> access and continue without adding project roles.</p>
+</li>
+<li>
+<p><strong>Assign the schemas</strong> - Select the <strong>Developer 101</strong> app in the Applications step, review the summary, and click <b class="button">Create Project</b>.</p>
+</li>
+</ol>
 </div>
 </div>
 </div>
 </div>
 <div class="sect1">
-<h2 id="resolving_a_route"><a class="link" href="#resolving_a_route">Resolving a route</a></h2>
+<h2 id="import_the_folder"><a class="link" href="#import_the_folder">Import the folder</a></h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>A front-end usually goes the other way from the queries so far: the visitor arrives at a URL, and the page needs the content behind it. The content path is the natural route. <code>get</code> accepts a path as its <code>key</code>, and returns <code>null</code> when nothing is there, which is your 404:</p>
+<p>Importing preserves content IDs, which lets references resolve when their targets are present in the destination project.
+An import can also update items with matching IDs, so importing again may replace edits made in the destination.
+It does not delete other content.</p>
 </div>
+<div class="sect2">
+<h3 id="task_import_the_animals_folder"><a class="link" href="#task_import_the_animals_folder">Task: Import the Animals folder</a></h3>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p><strong>Open the destination</strong> - Return to <strong>Content</strong> and use the project selector in the top bar to switch to "Tutorial Copy".
+Show the Context Panel and choose <strong>Content Exports</strong>.</p>
+</li>
+<li>
+<p><strong>Choose the Animals export</strong> - Under <strong>Imports</strong>, select the export whose name contains <code>my-first-project-animals-</code> and the timestamp from your export.
+Click <b class="button">Import</b>.</p>
+</li>
+<li>
+<p><strong>Import at the top level</strong> - Check that <strong>Import into</strong> is <strong>Project root</strong>.
+Leave <strong>Preserve original first-published timestamp</strong> selected and click <b class="button">Import</b>.
+Wait for the result, then close the dialog.</p>
+<div class="imageblock">
+<div class="content">
+<img src="images/import-options.png" alt="Import options dialog showing the Animals export, Project root as the destination and Preserve original first-published timestamp selected" width="720">
+</div>
+<div class="title">Figure 2. Importing Animals at the destination project&#8217;s root</div>
+</div>
+</li>
+</ol>
+</div>
+<div class="paragraph">
+<p>The imported content is in Draft, ready for review.
+Preserving its first-published timestamp retains metadata; it does not publish the imported items.</p>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="verify_the_copy"><a class="link" href="#verify_the_copy">Verify the copy</a></h2>
+<div class="sectionbody">
+<div class="sect2">
+<h3 id="task_check_the_imported_content"><a class="link" href="#task_check_the_imported_content">Task: Check the imported content</a></h3>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p><strong>Inspect the content and media</strong> - In "Tutorial Copy", open Lynx and check its rich text, linked Lion and inserted image.
+Check that <code>/animals/lynx/lynx.jpg</code> exists.
+Lion&#8217;s selected image is unavailable in this project because it was outside the exported tree.</p>
+</li>
+<li>
+<p><strong>Query the imported content</strong> - Open Query Playground and run this query against the destination project&#8217;s Draft branch:</p>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-GraphQL" data-lang="GraphQL">query AnimalPage($project: String!, $branch: String!, $path: ID!) {
-  guillotine(project: $project, branch: $branch) {
-    get(key: $path) {
+<pre class="highlight"><code class="language-graphql" data-lang="graphql">{
+  guillotine(project: "tutorial-copy", branch: "draft") {
+    get(key: "/animals/lynx") {
       displayName
-      ... on com_example_dev101_Animal {
-        data {
-          otherNames
-          description {
-            processedHtml
-          }
-        }
-      }
+      _path
     }
   }
 }</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>With <code>path</code> set to <code>/animals/lion</code>, this is everything the lion&#8217;s page needs. The route in your front-end can be the content path itself, or any mapping you prefer, as long as the front-end knows how to turn it back into a path.</p>
+<p>The response should contain Lynx at <code>/animals/lynx</code> in "Tutorial Copy".
+The copy remains in Draft; publishing is a separate action, as in the <a href="permissions.ahtml">permissions chapter</a>.</p>
+</div>
+</li>
+</ol>
+</div>
+<div class="paragraph">
+<p>The two projects now hold separate copies of the content.
+Editing one does not update the other; importing is a one-time transfer, not ongoing synchronization.</p>
+</div>
+<div class="paragraph">
+<p>For the panel&#8217;s other options and transferring exports between installations, see the <a href="https://developer.enonic.com/docs/content-studio/stable/contextpanel/export">Content Studio export documentation</a>.</p>
+</div>
 </div>
 </div>
 </div>
 <div class="sect1">
-<h2 id="paging_a_list"><a class="link" href="#paging_a_list">Paging a list</a></h2>
+<h2 id="where_to_go_next"><a class="link" href="#where_to_go_next">Where to go next</a></h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p><code>queryDsl</code> takes <code>first</code> and <code>offset</code>, which is enough for a short list.
-For a list of unknown length, use <code>queryDslConnection</code>, which returns a cursor for the next page and the total count.
-This query finds animals anywhere in the project and returns two at a time, sorted by display name:</p>
+<p>You&#8217;ve modeled content, queried it through Guillotine, controlled access, and copied it into another project.
+Continue with these guides to use your content in an application or explore more of Enonic:</p>
 </div>
-<div class="listingblock">
-<div class="content">
-<pre class="highlight"><code class="language-GraphQL" data-lang="GraphQL">query AnimalsPage($project: String!, $branch: String!, $after: String) {
-  guillotine(project: $project, branch: $branch) {
-    queryDslConnection(
-      query: {
-        term: {
-          field: "type"
-          value: { string: "com.example.dev101:animal" }
-        }
-      }
-      first: 2
-      after: $after
-      sort: [{ field: "displayName", direction: ASC }]
-    ) {
-      totalCount
-      edges {
-        node {
-          _id
-          displayName
-        }
-      }
-      pageInfo {
-        endCursor
-        hasNext
-      }
-    }
-  }
-}</code></pre>
-</div>
-</div>
-<div class="paragraph">
-<p>Send it with <code>after</code> set to <code>null</code> for the first page. The items are in <code>edges</code>, one <code>node</code> each. If <code>pageInfo.hasNext</code> is <code>true</code>, send the same query again with <code>after</code> set to <code>pageInfo.endCursor</code>, and repeat until <code>hasNext</code> is <code>false</code>:</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="highlight"><code class="language-javascript" data-lang="javascript">async function allAnimals() {
-  const animals = [];
-  let after = null;
-  do {
-    const page = await send(query, { project, branch, after });
-    const connection = page.guillotine.queryDslConnection;
-    animals.push(...connection.edges.map((edge) =&gt; edge.node));
-    after = connection.pageInfo.hasNext ? connection.pageInfo.endCursor : null;
-  } while (after);
-  return animals;
-}</code></pre>
-</div>
-</div>
-<div class="paragraph">
-<p>Treat the cursor as an opaque value, and keep the query filter and sorting the same while paging. With two animals per page and three animals, you get two requests.</p>
-</div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="building_urls"><a class="link" href="#building_urls">Building URLs</a></h2>
-<div class="sectionbody">
-<div class="paragraph">
-<p>Guillotine returns the parts of every URL, never a finished address, as you saw with media and rich text. Your front-end owns the base, so building the address is one line:</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="highlight"><code class="language-javascript" data-lang="javascript">const mediaBaseUrl = 'http://localhost:8080/api';
-const url = (parts) =&gt; mediaBaseUrl + parts.path + parts.queryString;
-
-// imageUrl(scale: "width(800)") { path queryString }
-img.src = url(animal.data.images[0].imageUrl);</code></pre>
-</div>
-</div>
-<div class="paragraph">
-<p>For rich text, the same function rewrites the defaults in <code>processedHtml</code>. Match each element on its reference attribute and set the attribute from the structured data:</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="highlight"><code class="language-javascript" data-lang="javascript">for (const link of description.links) {
-  const a = container.querySelector(`[data-link-ref="${link.ref}"]`);
-  if (a &amp;&amp; link.pageUrl) {
-    a.href = (link.pageUrl.baseUrl ?? frontendBaseUrl) + link.pageUrl.path + link.pageUrl.queryString + link.fragment;
-  }
-}
-
-for (const image of description.images) {
-  const img = container.querySelector(`[data-image-ref="${image.ref}"]`);
-  if (img &amp;&amp; image.src) {
-    img.src = url(image.src);
-    if (image.srcset.length) {
-      img.srcset = image.srcset.map((source) =&gt; `${url(source.imageUrl)} ${source.width}w`).join(', ');
-    }
-  }
-}</code></pre>
-</div>
-</div>
-<div class="paragraph">
-<p>Here <code>frontendBaseUrl</code> is wherever your front-end serves its pages. A link whose target does not resolve has a <code>null</code> <code>pageUrl</code>, so the guard leaves its text in place without a broken link.</p>
-</div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="going_live"><a class="link" href="#going_live">Going live</a></h2>
-<div class="sectionbody">
-<div class="paragraph">
-<p>Everything in this chapter ran against your sandbox, but there is no difference between the sandbox and a live Enonic server except the URL. The same request format, the same API names, the same paths in every response, the same CORS configuration file. When your app and content are on a server, point <code>apiBaseUrl</code> at that server&#8217;s <code>/api</code> and the front-end is live. Keep that base in one place, as the examples do, and going live is a configuration change rather than a code change.</p>
-</div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="coming_up"><a class="link" href="#coming_up">Coming up</a></h2>
-<div class="sectionbody">
-<div class="paragraph">
-<p>You have called the API from cURL, Node and a browser, resolved a route to a content item, paged a list, and built page and media URLs from their parts. That is the whole contract between Enonic and a front-end; everything else is your framework&#8217;s business.</p>
-</div>
-<div class="paragraph">
-<p>In the final chapter, you&#8217;ll look <a href="data-toolbox.ahtml">under the hood</a> at how XP actually stores all of this.</p>
+<div class="dlist">
+<dl>
+<dt class="hdlist1"><a href="https://developer.enonic.com/docs/guillotine/stable/usage">Guillotine usage</a></dt>
+<dd>
+<p>Sending requests from cURL, JavaScript and other clients, authentication, CORS configuration, and further query examples.</p>
+</dd>
+<dt class="hdlist1"><a href="https://developer.enonic.com/learn/react-spa/stable">React SPA tutorial</a></dt>
+<dd>
+<p>Building a React application with content lists, detail views, routing, rich text, images and macros.</p>
+</dd>
+<dt class="hdlist1"><a href="https://developer.enonic.com/docs/next.xp">Building sites with Enonic and Next.js</a></dt>
+<dd>
+<p>Building Next.js sites with Enonic as your CMS, including visual editing.</p>
+</dd>
+<dt class="hdlist1"><a href="https://developer.enonic.com/docs/graphql-tutorial">Building a custom GraphQL API</a></dt>
+<dd>
+<p>Building your own GraphQL API on Enonic XP, with mutations and subscriptions.</p>
+</dd>
+</dl>
 </div>
 </div>
 </div>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2026-10-28 13:32:09 UTC
+Last updated 2026-10-28 15:48:46 UTC
 </div>
 </div>
 </body>

@@ -630,8 +630,7 @@ The <a href="https://developer.enonic.com/docs/cms/stable/media">CMS media refer
 </div>
 <div class="paragraph">
 <p>XP automatically extracts readable text from known file formats, such as PDF, and indexes it for search.
-See <a href="https://developer.enonic.com/docs/cms/stable/media/media-indexing">Media indexing</a> for what becomes searchable and how to query it.
-You&#8217;ll explore the underlying storage directly in the <a href="data-toolbox.ahtml">Data Toolbox chapter</a>.</p>
+See <a href="https://developer.enonic.com/docs/cms/stable/media/media-indexing">Media indexing</a> for what becomes searchable and how to query it.</p>
 </div>
 </div>
 </div>
@@ -933,7 +932,7 @@ In the next chapter, you&#8217;ll take a closer look at <a href="form-items.ahtm
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2026-10-28 13:32:09 UTC
+Last updated 2026-10-28 15:48:46 UTC
 </div>
 </div>
 </body>
