@@ -14,23 +14,17 @@ These entries belong to the artist; they are not separate content items like the
 
 === Task: Add filmography to Artist
 
-Append this item set to the Artist form, after `favoriteAnimal`:
-
+. *Define filmography entries* - Append this item set to the Artist form, after `favoriteAnimal`:
++
 .{app-root}/cms/content-types/artist/artist.yaml
 [source,yaml]
 ----
 include::../{app-root}/cms/content-types/artist/artist.yaml[tag=filmography]
 ----
 
-* `items` contains the fields in each filmography entry.
-* The item set's `occurrences` allows any number of entries, including none.
-* Each entry requires both a `title` and a `year`.
-* `Long` stores the year as an integer.
-The `min: 0` directly on `year` limits its numeric value; `occurrences.min` controls whether a value is required.
-
-Save the schema and let your running `enonic dev` watcher update the app.
+. *Add Cardi B's films* - Save the schema and let your running `enonic dev` watcher update the app.
 Reopen Cardi B in Content Studio and add two Filmography entries:
-
++
 [cols="1,1", options="header"]
 |===
 | Title | Year
@@ -38,17 +32,25 @@ Reopen Cardi B in Content Studio and add two Filmography entries:
 | F9 | 2021
 |===
 
-Use *Expand all* if you want to view both entries together, then save the artist.
+. *Save the filmography* - Use *Expand all* if you want to view both entries together, then save the artist.
 The entries are part of the same draft as Cardi B's other fields.
-
++
 .Two filmography entries on Cardi B
 image::sets-filmography.png["Filmography item set with Hustlers from 2019 and F9 from 2021", width=527]
 
+The item set defines the structure and limits of each entry:
+
+* `items` contains the fields in each filmography entry.
+* The item set's `occurrences` allows any number of entries, including none.
+* Each entry requires both a `title` and a `year`.
+* `Long` stores the year as an integer.
+The `min: 0` directly on `year` limits its numeric value; `occurrences.min` controls whether a value is required.
+
 === Task: Query the filmography
 
-Open Query Playground for "{cms-project-displayname}" and keep *Draft* selected throughout this chapter.
+. *Fetch the filmography* - Open Query Playground for "{cms-project-displayname}" and keep *Draft* selected throughout this chapter.
 Fetch Cardi B by path and select the fields within `filmography`:
-
++
 [source,graphql,{subs}]
 ----
 {
@@ -67,9 +69,9 @@ Fetch Cardi B by path and select the fields within `filmography`:
   }
 }
 ----
-
++
 The `data.guillotine.get` object contains:
-
++
 [source,json]
 ----
 {
@@ -95,13 +97,24 @@ Only Carnivore needs a list of prey.
 
 === Task: Add feeding behavior to Animal
 
-Append this option set to the Animal form, after `images`:
-
+. *Define the feeding options* - Append this option set to the Animal form, after `images`:
++
 .{app-root}/cms/content-types/animal/animal.yaml
 [source,yaml]
 ----
 include::../{app-root}/cms/content-types/animal/animal.yaml[tag=feedingBehavior]
 ----
+
+. *Update the animal forms* - Save the schema and let the watcher update the app, then reopen your animals in Content Studio.
+
+. *Describe a carnivore* - For Lion, add Feeding behavior, select *Carnivore*, and enter "Zebra" and "Giraffe" as separate Prey values.
+Save the animal.
++
+.Lion's feeding behavior with two prey values
+image::sets-feeding-behavior.png["Feeding behavior option set with Carnivore selected and Zebra and Giraffe entered as prey", width=527]
+
+. *Describe a herbivore* - For Reindeer, select *Herbivore* and save.
+Notice that there is no Prey field for this option.
 
 There are two different limits to keep in mind:
 
@@ -113,20 +126,10 @@ Here both limits are `1`, so an editor adding feeding behavior must choose exact
 The `herbivore` option has no extra fields.
 The `carnivore` option contains a repeatable `prey` field.
 
-Save the schema and let the watcher update the app, then reopen your animals:
-
-. For Lion, add Feeding behavior, select *Carnivore*, and enter "Zebra" and "Giraffe" as separate Prey values.
-Save the animal.
-. For Reindeer, select *Herbivore* and save.
-Notice that there is no Prey field for this option.
-
-.Lion's feeding behavior with two prey values
-image::sets-feeding-behavior.png["Feeding behavior option set with Carnivore selected and Zebra and Giraffe entered as prey", width=527]
-
 === Task: Query the selected option
 
-Run this query for Lion:
-
+. *Fetch Lion's feeding behavior* - Run this query for Lion:
++
 [source,graphql,{subs}]
 ----
 {
@@ -147,9 +150,9 @@ Run this query for Lion:
   }
 }
 ----
-
++
 The `data.guillotine.get` object contains:
-
++
 [source,json]
 ----
 {
@@ -165,13 +168,13 @@ The `data.guillotine.get` object contains:
 }
 ----
 
+. *Compare the herbivore option* - Change the key to `/animals/reindeer` and run the query again.
+The selected option is now `"herbivore"`, and `carnivore` is `null`.
+Use `+_selected+` to identify the choice even when it has no extra fields, as with Herbivore.
+
 The `+_selected+` field tells you which option was chosen, using its schema name rather than its label.
 For this single selection, it is a string.
 The `carnivore` object contains that option's fields.
-
-Change the key to `/animals/reindeer` and run the query again.
-The selected option is now `"herbivore"`, and `carnivore` is `null`.
-Use `+_selected+` to identify the choice even when it has no extra fields, as with Herbivore.
 
 == Reuse fields across options
 
@@ -184,8 +187,8 @@ You'll use one here to give all seven continent options the same field definitio
 
 === Task: Create the distribution form fragment
 
-Create this file in your app:
-
+. *Define the shared Notes field* - Create this file in your app:
++
 .{app-root}/cms/form-fragments/distributionData/distributionData.yaml
 [source,yaml]
 ----
@@ -197,13 +200,28 @@ Its `form` contains the fields to insert wherever the fragment is included.
 
 === Task: Add distribution to Animal
 
-Append this option set to the Animal form, after `feedingBehavior`:
-
+. *Include the fragment for each continent* - Append this option set to the Animal form, after `feedingBehavior`:
++
 .{app-root}/cms/content-types/animal/animal.yaml
 [source,yaml]
 ----
 include::../{app-root}/cms/content-types/animal/animal.yaml[tag=distribution]
 ----
+
+. *Enter Lion's distribution* - Save both files, let the watcher update the app, and reopen Lion.
+In Distribution across continents, click btn:[Add], select Africa and Asia, and enter these notes:
++
+[cols="1,3", options="header"]
+|===
+| Continent | Notes
+| Africa | Found in parts of sub-Saharan Africa.
+| Asia | Found in Gujarat, India.
+|===
+
+. *Save the distribution* - Save the animal.
++
+.Lion's distribution with separate notes for each selected continent
+image::sets-distribution.png["Distribution option set with Africa and Asia selected, each showing its own Notes field", width=527]
 
 `selection.min: 0` and `selection.max: 7` allow any number of the seven continents to be selected.
 Each `include: "distributionData"` inserts the fragment's Notes field into that option.
@@ -212,25 +230,10 @@ The fragment shares the field definition, not its values: Africa and Asia each h
 Changing the fragment updates the form wherever it is included, and it adds no extra level to the stored data or GraphQL response.
 A CMS form fragment is also separate from a GraphQL fragment, which groups fields in a query.
 
-Save both files, let the watcher update the app, and reopen Lion.
-In Distribution across continents, click btn:[Add], select Africa and Asia, and enter these notes:
-
-[cols="1,3", options="header"]
-|===
-| Continent | Notes
-| Africa | Found in parts of sub-Saharan Africa.
-| Asia | Found in Gujarat, India.
-|===
-
-Save the animal.
-
-.Lion's distribution with separate notes for each selected continent
-image::sets-distribution.png["Distribution option set with Africa and Asia selected, each showing its own Notes field", width=527]
-
 === Task: Query the distribution
 
-Fetch both selected continents and their notes:
-
+. *Fetch the distribution notes* - Run this query to fetch both selected continents and their notes:
++
 [source,graphql,{subs}]
 ----
 {
@@ -254,9 +257,9 @@ Fetch both selected continents and their notes:
   }
 }
 ----
-
++
 The `data.guillotine.get` object contains:
-
++
 [source,json]
 ----
 {

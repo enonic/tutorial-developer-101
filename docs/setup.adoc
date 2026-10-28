@@ -9,16 +9,19 @@ It takes a few minutes, and everything you install here is used in every later c
 
 Enonic provides a Command Line Interface (CLI) for working with XP. It manages local XP instances, creates projects from starters, and builds and deploys your apps.
 
-If you have `npm` on your machine, install the CLI with:
+=== Task: Install the CLI
 
+. *Install the command-line tool* - If you have `npm` on your machine, run:
++
 [source,shell]
 ----
 npm install -g @enonic/cli
 ----
-
++
 If not, there are https://developer.enonic.com/start[alternative ways to install the Enonic CLI].
 
-Verify the installation by running `enonic -v`. This should print the version of the CLI. This tutorial expects version 4 or newer.
+. *Verify the installation* - Run `enonic -v`.
+This should print the version of the CLI; this tutorial expects version 4 or newer.
 
 NOTE: You do not need to install Java or Gradle. The sandbox you create next bundles the Java runtime, and the CLI uses it when building your app.
 
@@ -26,23 +29,29 @@ NOTE: You do not need to install Java or Gradle. The sandbox you create next bun
 
 A _sandbox_ is a local developer instance of Enonic XP, with its own data and configuration. You can have several, each on its own XP version.
 
-Create and start a sandbox called `{sandbox-name}` by running this command in your terminal:
+The `essentials` template installs a set of applications from Enonic Market, including Content Studio and Guillotine, which you will meet in the coming chapters. The `-f` flag accepts the default answer to every prompt, which selects the most recent release of Enonic XP, and starts the sandbox.
 
+NOTE: This tutorial is written for Enonic XP 8.1 and the versions of Content Studio and Guillotine that go with it. If the CLI offers you an older version, pick 8.1 or newer.
+
+=== Task: Start a sandbox
+
+. *Create and start the sandbox* - Run this command in your terminal:
++
 [source,shell,{subs}]
 ----
 enonic sandbox create {sandbox-name} -t essentials -f
 ----
 
-The `essentials` template installs a set of applications from Enonic Market, including Content Studio and Guillotine, which you will meet in the coming chapters. The `-f` flag accepts the default answer to every prompt, which selects the most recent release of Enonic XP, and starts the sandbox.
-
-NOTE: This tutorial is written for Enonic XP 8.1 and the versions of Content Studio and Guillotine that go with it. If the CLI offers you an older version, pick 8.1 or newer.
-
-The sandbox prints a fair amount of output while it downloads XP, installs the applications and starts up. Once you see a line saying that Enonic XP has started, open http://localhost:8080[http://localhost:8080] in your browser. You should see the Enonic SDK welcome page, listing the sandbox's installed applications:
-
+. *Open the sandbox welcome page* - Wait for the terminal to report that Enonic XP has started, then open http://localhost:8080[http://localhost:8080] in your browser.
+You should see the Enonic SDK welcome page, listing the sandbox's installed applications:
++
 image::setup-sdk.png["The Enonic SDK welcome page for XP 8.1.0, with the Admin, APIs and VHosts cards, the installed applications Content Studio, Data Toolbox and Guillotine, and the sandbox's configuration files", width=1001]
 
-Click btn:[Log In as Guest] to open the XP admin as the instance's super user. You should see something like this:
-
+. *Sign in to the admin interface* - Click btn:[Log In as Guest].
+This signs you in as the sandbox's built-in super user (`su`), with full administrator access.
+We'll call this your administrator session throughout the tutorial.
+You should see something like this:
++
 image::setup-home.jpg["The XP menu for the 101tutorial sandbox, with useful links on the left and tiles for Dashboard, Applications, Content Studio, Data toolbox and Users", width=1440]
 
 This is the _XP menu_, the start page of the XP admin.
@@ -60,8 +69,10 @@ Almost everything in Enonic is an application: Content Studio is an app, Guillot
 
 Creating an app from scratch can be daunting for any system you're not familiar with. To make things easier, Enonic provides https://market.enonic.com/starters[starters]. We'll use the "Vanilla" starter, which contains the bare minimum.
 
-*Open a new terminal window*, leaving the sandbox running in the first one, and run this command:
+=== Task: Create your app
 
+. *Create the app from a starter* - Open a new terminal window, leaving the sandbox running in the first one, and run this command:
++
 [source,shell,{subs}]
 ----
 enonic create {app-name-full} -r starter-vanilla -s {sandbox-name}
@@ -92,19 +103,21 @@ NOTE: The other files in the folder, such as `build.gradle` and `gradle.properti
 
 == Build and deploy
 
-Change to the app folder and start it in development mode:
+=== Task: Run the app
 
+. *Start the development watcher* - Change to the app folder and start it in development mode:
++
 [source,shell,{subs}]
 ----
 cd {app-name}
 enonic dev
 ----
-
++
 This builds the app, deploys it to the `{sandbox-name}` sandbox, and then keeps watching the folder. Every time you save a file, the app is rebuilt and redeployed. Keep this command running in its own terminal while you follow the tutorial.
-
 // TODO(xp8-verify): recapture from a vanilla starter build on XP 8.1
++
 The first build downloads a few things, so give it a moment. Look for lines like these to confirm it has completed:
-
++
 [source,shell,{subs}]
 ----
 Deploying '{app-name}.jar' to '/Users/you/.enonic/sandboxes/{sandbox-name}/home/deploy'
@@ -112,14 +125,15 @@ BUILD SUCCESSFUL
 Waiting for changes to input files...
 ----
 
-To confirm the app is running, open `XP menu` -> `Applications` in the XP admin. Your app is listed as "Vanilla Example":
-
+. *Verify the deployed app* - Open `XP menu` -> `Applications` in the XP admin.
+Your app is listed as "Vanilla Example":
++
 image::setup-app.png["The Applications tool listing Content Studio, Data Toolbox, Guillotine and Vanilla Example, with Vanilla Example selected and its key com.example.dev101 shown", width=1440]
 
-=== Change the app's title
+=== Task: Change the app's title
 
-Let's make a first change to the app, to see the development loop in action. Open the application descriptor, `enonic.yaml`, in your editor, and change the `title` and `description`:
-
+. *Update the app's identity* - Open the application descriptor, `enonic.yaml`, in your editor, and change the `title` and `description`:
++
 .{app-root}/enonic.yaml
 [source,yaml]
 ----
@@ -128,7 +142,8 @@ include::../{app-root}/enonic.yaml[]
 <1> The starter calls the app "Vanilla Example". Give it a more descriptive title.
 <2> Replace the stock description while you're at it.
 
-Save the file, and watch the `enonic dev` terminal rebuild and redeploy. Revisit the Applications tool and you should see your new title.
+. *Verify the update* - Save the file and watch the `enonic dev` terminal rebuild and redeploy.
+Revisit the Applications tool and confirm that it shows your new title.
 
 === Troubleshooting
 

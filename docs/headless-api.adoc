@@ -30,8 +30,9 @@ Keep Draft selected throughout this chapter so your queries include the changes 
 === Task: Query your artists
 
 Use `queryDsl` to find content by its type.
-Run this query to retrieve up to ten artists, sorted by display name:
 
+. *Find artists by content type* - Run this query to retrieve up to ten artists, sorted by display name:
++
 [source,GraphQL,{subs}]
 ----
 {
@@ -53,15 +54,11 @@ Run this query to retrieve up to ten artists, sorted by display name:
   }
 }
 ----
-
-The `term` matches the full content type name, including your app's namespace.
-The Artists folder keeps your content organized, but this query finds artists anywhere in the selected content project.
-`first` limits the number of results, and `sort` puts them in alphabetical order.
-
++
 You should get Cardi B, Missy Elliott and P!nk in the response panel, in that order.
 The response has this structure, with the results in the `data.guillotine.queryDsl` array.
 Your content IDs will differ from these example values, and the paths depend on the names you gave your items:
-
++
 .Example response
 [source,json]
 ----
@@ -90,11 +87,16 @@ Your content IDs will differ from these example values, and the paths depend on 
 }
 ----
 
-Try changing `first` to `1` and `direction` to `DESC`, then run the query again.
+. *Try sorting and limiting results* - Change `first` to `1` and `direction` to `DESC`, then run the query again.
 You should get only P!nk, the last artist alphabetically.
-Now remove the `first` and `sort` arguments before continuing.
+
+. *Return to the query defaults* - Remove the `first` and `sort` arguments before continuing.
 Without `first`, `queryDsl` returns up to ten results; without `sort`, it uses relevance order.
 The remaining examples use these defaults, so results may appear in a different order from the sample responses.
+
+The `term` matches the full content type name, including your app's namespace.
+The Artists folder keeps your content organized, but this query finds artists anywhere in the selected content project.
+`first` limits the number of results, and `sort` puts them in alphabetical order.
 
 === Getting around
 
@@ -115,19 +117,18 @@ Guillotine uses that definition to generate GraphQL types for querying your arti
 These types are part of the _GraphQL schema_: the API's description of the types, fields and operations available to query.
 The https://graphql.org/learn/schema/[GraphQL documentation] explains schemas and types in more detail.
 
-Open the Docs panel to explore those types.
+. *Find the Artist GraphQL type* - Open the Docs panel to explore those types.
 Search for `artist` and locate the `+{app-name-query}_Artist+` object type:
-
++
 .The Artist GraphQL type
 image::api-doc.png["Query Playground Docs panel showing the Artist GraphQL object type, its Content interface, and common fields", width=477]
+
+. *Find the form fields* - Follow the Artist object type's `data` field to `+{app-name-query}_Artist_Data+` in the Docs panel and find `legalName` and `about`.
+These are the fields you defined in your YAML form.
 
 Notice that the Artist object type _implements_ the `Content` interface.
 An interface defines fields shared by the object types that implement it.
 Here, `Content` defines common content fields such as `displayName`, `+_path+` and `+_id+`, so you can request them for any content item.
-
-The Artist object type also has a `data` field whose type is `+{app-name-query}_Artist_Data+`.
-Follow that type in the Docs panel and find `legalName` and `about`.
-These are the fields you defined in your YAML form.
 
 NOTE: Your CMS content type is named `{app-name-full}:artist`, and its generated GraphQL object type is `+{app-name-query}_Artist+`.
 The app namespace carries over to the API, keeping the types from different apps apart.
@@ -137,18 +138,13 @@ The app namespace carries over to the API, keeping the types from different apps
 You've inspected the Artist GraphQL type in the Docs panel.
 Now you'll query the fields from your content type's form.
 
-Close the Docs panel, head back to the editor and remove `displayName`, `+_path+` and `+_id+` from the query we introduced earlier.
+. *Prepare the result selection* - Close the Docs panel, head back to the editor and remove `displayName`, `+_path+` and `+_id+` from the query we introduced earlier.
 
-Now, put your cursor inside the result selection braces immediately after `queryDsl(...)`, and press kbd:[ctrl+space] to see which fields you can request.
+. *Explore the available fields* - Put your cursor inside the result selection braces immediately after `queryDsl(...)`, and press kbd:[ctrl+space] to see which fields you can request.
 Look for the common fields `displayName`, `+_path+` and `+_id+` in the suggestions.
 
-The artist's `legalName` and `about` fields are not available directly here.
-`queryDsl` returns the general `Content` interface, even when its filter selects only artists.
-The filter controls which items match; it does not change the query field's declared GraphQL return type.
-To select the Artist type's own fields, use an https://graphql.org/learn/queries/#inline-fragments[inline fragment].
-The syntax `+... on {app-name-query}_Artist { ... }+` means "for results whose GraphQL type is Artist, select the fields inside this block."
-This gives you access to the Artist's `data` fields:
-
+. *Query the Artist fields* - Run this query with an inline fragment to access the Artist's `data` fields:
++
 [source,GraphQL,{subs}]
 ----
 {
@@ -173,6 +169,12 @@ This gives you access to the Artist's `data` fields:
 }
 ----
 
+The autocomplete suggestions omit `legalName` and `about` because those fields belong to the Artist's `data` type.
+`queryDsl` returns the general `Content` interface, even when its filter selects only artists.
+The filter controls which items match; it does not change the query field's declared GraphQL return type.
+To select the Artist type's own fields, use an https://graphql.org/learn/queries/#inline-fragments[inline fragment].
+The syntax `+... on {app-name-query}_Artist { ... }+` means "for results whose GraphQL type is Artist, select the fields inside this block."
+
 The filter selects artists, and the inline fragment lets you request their `legalName` and `about` fields under `data`, along with the general content field `+_id+`.
 Below is one example item from the `data.guillotine.queryDsl` array.
 The field values depend on what you entered in Content Studio:
@@ -192,8 +194,9 @@ The field values depend on what you entered in Content Studio:
 === Task: Retrieve one artist
 
 When you know an item's path or ID, use `get` to retrieve it directly.
-Copy Cardi B's `+_path+` from the first response and use it as the `key` below:
 
+. *Fetch an artist by path* - Copy Cardi B's `+_path+` from the first response and use it as the `key` below:
++
 [source,GraphQL,{subs}]
 ----
 {
@@ -211,19 +214,21 @@ Copy Cardi B's `+_path+` from the first response and use it as the `key` below:
 }
 ----
 
-The result is one object under `data.guillotine.get`, rather than an array of results.
-Like `queryDsl`, `get` returns the `Content` interface, so you use an inline fragment to select the Artist fields.
-
-Try replacing the path with Cardi B's `+_id+` from your first response.
+. *Fetch the same artist by ID* - Replace the path with Cardi B's `+_id+` from your first response and run the query again.
 Both keys retrieve the same item.
+
 An ID stays the same when an item is renamed or moved; its path changes.
 If the key does not match an item in the selected project and branch, `get` returns `null`.
+
+The result is one object under `data.guillotine.get`, rather than an array of results.
+Like `queryDsl`, `get` returns the `Content` interface, so you use an inline fragment to select the Artist fields.
 
 === Task: Inspect the form data
 
 For a quick look at all stored form data, use `dataAsJson`.
-Update the single-artist query to:
 
+. *Fetch the stored form data* - Update the single-artist query to:
++
 [source,GraphQL]
 ----
 {
@@ -262,8 +267,8 @@ The "Dsl" stands for "Domain Specific Language": the structured query you pass t
 
 === Task: Find artists by their description
 
-Keep the Artist type filter and add a text search on `data.about`:
-
+. *Search the artist descriptions* - Keep the Artist type filter and add a text search on `data.about`:
++
 [source,GraphQL,{subs}]
 ----
 {
@@ -314,7 +319,7 @@ You'll add a birthday to the Artist content type and read it back through the AP
 
 === Task: Add and query birthdays
 
-. Update the Artist content type:
+. *Add the birthday field* - Update the Artist content type:
 +
 .{app-root}/cms/content-types/artist/artist.yaml
 [source,yaml]
@@ -325,17 +330,17 @@ include::../{app-root}/cms/content-types/artist/artist.yaml[tags=header;basics;b
 The new `birthday` field uses the Date form item.
 Save the file while `enonic dev` is running, as in the previous chapter, and wait for the app to redeploy.
 
-. Open each artist in Content Studio, enter the birthday below and save:
+. *Enter the birthdays* - Open each artist in Content Studio, enter the birthday below and save:
 +
 * Cardi B: `1992-10-11`
 * Missy Elliott: `1971-07-01`
 * P!nk: `1979-09-08`
 
-. Close and reopen Query Playground to reload the GraphQL schema.
+. *Reload the GraphQL schema* - Close and reopen Query Playground to reload the GraphQL schema.
 Keep the *Draft* branch selected: these edits have not been published.
 Find `+{app-name-query}_Artist_Data+` in the Docs panel and notice its new `birthday` field.
 
-. Run the artist query with `birthday` selected:
+. *Query the birthdays* - Run the artist query with `birthday` selected:
 +
 [source,GraphQL,{subs}]
 ----
@@ -359,9 +364,9 @@ Find `+{app-name-query}_Artist_Data+` in the Docs panel and notice its new `birt
   }
 }
 ----
-
++
 The `data.guillotine.queryDsl` array now contains:
-
++
 .Artists with birthdays
 [source,json]
 ----

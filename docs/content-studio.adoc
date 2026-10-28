@@ -22,15 +22,18 @@ Each project has its own permissions, languages and other settings, and its own 
 
 Click btn:[Start Project wizard] and follow the steps to create your first project:
 
-. Choose a default language, for instance `English`.
-. Give the project the display name "{cms-project-displayname}". The identifier is derived from it, and becomes `{cms-project-id}`.
+. *Choose the project language* - Choose a default language, for instance `English`.
+
+. *Name the content project* - Give the project the display name "{cms-project-displayname}". The identifier is derived from it, and becomes `{cms-project-id}`.
 +
 NOTE: The project identifier is important, and cannot be changed later. Later chapters refer to the project as `{cms-project-id}`, so stick with that name if you want to copy their examples verbatim.
 +
-. Choose the `Public` access mode. This lets anyone read published content, which is what you want for a public website, for instance.
-. No need to change the roles. You are the super user, so you already have access.
-. In the "Applications" step, select the `Developer 101` app you deployed earlier.
+. *Allow public reading* - Choose the `Public` access mode. This lets anyone read published content, which is what you want for a public website, for instance.
 
+. *Keep the default roles* - Continue without changing the roles; your administrator session already has access.
+
+. *Assign your app* - In the "Applications" step, select the `Developer 101` app you deployed earlier.
++
 .Project summary showing the values you have set in the wizard
 image::cs-project-summary.png["Content Studio project creation summary", width=910]
 
@@ -51,17 +54,20 @@ Your app does not define any content types yet, so start with a built-in one: cr
 
 TIP: Content can be organized as a tree, much like files and folders on your computer. Grouping content in logical folders provides several benefits, as you will see later in this tutorial.
 
-. In Content Studio, make sure your project is selected, and press btn:[New ...].
+. *Start a new content item* - In Content Studio, make sure your project is selected, and press btn:[New ...].
 The dialog lists only the built-in content types.
 +
 .The content creation dialog showing the built-in content types
 image::cs-folder-create.png["The Create content dialog, listing the built-in content types: Folder, Shortcut and Site", width=830]
-. Select btn:[Folder].
-. Give the folder the display name "Artists".
+
+. *Choose the folder type* - Select btn:[Folder].
+
+. *Name the folder* - Give the folder the display name "Artists".
 +
 .The folder form with its display name filled in
 image::cs-folder-form.png["The Folder form, with the display name Artists", width=546]
-. Save and close the tab.
+
+. *Save the folder* - Save and close the tab.
 
 === Task: your first content type
 
@@ -73,22 +79,24 @@ image::cs-artist-form.png["The Artist form, with a display name field showing th
 
 Content types live in `{app-root}/cms/content-types/`, which the starter created. XP expects each content type in a directory of its own, with a dedicated yaml descriptor file:
 
-. Add the following file to your app and save it:
+. *Define the Artist schema* - Add the following file to your app and save it:
 +
 .{app-root}/cms/content-types/artist/artist.yaml
 [source,yaml]
 ----
 include::../{app-root}/cms/content-types/artist/artist.yaml[tags=header;basics]
 ----
-+
+. *Deploy the schema* - Let the running `enonic dev` watcher redeploy your app.
+If you stopped it, run `enonic dev` in the app folder again.
+
+The schema defines the form and its labels:
+
 * `kind`: Every schema file starts by declaring what kind of schema it is.
 * `title`: The name editors see when they create content.
 * `description`: Optional, but it helps your editors.
 * `displayNamePlaceholder`: The hint shown in the built-in display name field, here telling editors it holds the artist's stage name.
 * `form`: The fields editors fill in.
 * `type` and `label`: The kind of input editors see, and its label.
-
-. `enonic dev` should still be running from the previous chapter. It redeploys your app automatically. If you stopped it, run `enonic dev` in the app folder again.
 
 NOTE: XP validates the schema when it deploys, and reports mistakes such as `helptext` instead of `helpText` in the sandbox log.
 
@@ -113,24 +121,27 @@ NOTE: Read more about https://developer.enonic.com/docs/cms/stable/schemas/names
 
 Now, using the brand new Artist content type, create three artists, starting with Cardi B:
 
-. In Content Studio, select the "Artists" folder, so the new content is created inside it.
-. Press btn:[New ...].
+. *Choose where to store artists* - In Content Studio, select the "Artists" folder, so the new content is created inside it.
+
+. *Start a new artist* - Press btn:[New ...].
 Since your app is assigned to the project, the dialog now lists Artist next to the built-in content types.
 +
 .The content creation dialog showing the Artist content type
 image::cs-artist-create.png["The Create content dialog, listing the available content types: Artist, Folder, Shortcut and Site", width=830]
-. Select btn:[Artist], and start filling in the form. Use details of https://en.wikipedia.org/wiki/Cardi_B[Cardi B on Wikipedia].
+
+. *Enter the artist details* - Select btn:[Artist], and start filling in the form. Use details of https://en.wikipedia.org/wiki/Cardi_B[Cardi B on Wikipedia].
 +
 .The content form filled out for the artist "Cardi B"
 image::cs-cardib-form.png["The Artist form filled out for Cardi B, with the legal name and the text about the artist", width=546]
-. Save and close the tab, then create the next two artists the same way.
+
+. *Create the remaining artists* - Save and close the tab, then create the next two artists the same way.
 Select the "Artists" folder each time: Content Studio nests new content under whatever item is selected.
 +
 * https://en.wikipedia.org/wiki/Missy_Elliott[Missy Elliott on Wikipedia]
 * https://en.wikipedia.org/wiki/Pink_(singer)[P!nk on Wikipedia]
-
++
 Content Studio should now list the "Artists" folder and the three artists.
-
++
 .The hierarchy as it should look after creating some content
 image::cs-hierarchy.png["The content hierarchy showing the Artists folder with P!nk, Missy Elliott and Cardi B listed directly underneath it", width=750]
 
@@ -146,16 +157,20 @@ During the editing process, Content Studio has different workflow statuses like 
 
 === Task: Publish all items
 
-. In our case, the content items should all be _Work in progress_. To publish all items at once, select the "Artists" folder, right-click, and choose btn:[Publish]. The publishing wizard will appear.
+. *Open the Publishing Wizard* - Select the "Artists" folder, right-click, and choose btn:[Publish].
+The content items should all be _Work in progress_.
 +
 .The publishing wizard
 image::cs-publish.png["The publishing wizard in Content Studio", width=910]
-. Click the btn:[include child items] checkbox, and then btn:[Apply]. The whole tree of content under the "Artists" folder will now be included in the publication.
+
+. *Include the artists* - Click the btn:[include child items] checkbox, and then btn:[Apply]. The whole tree of content under the "Artists" folder will now be included in the publication.
 +
 .The publishing wizard with child items included
 image::cs-include-children.png["Once the include child items checkbox is selected and Apply is clicked - all the unpublished child items are also listed", width=910]
-. The publish button is still disabled, because the items are not yet marked as ready for publishing. Click btn:[Mark as ready], and the publish button will become enabled.
-. Click btn:[Publish Now (4)] to publish all items in a single batch.
+
+. *Mark the content ready* - Click btn:[Mark as ready] to enable the publish button.
+
+. *Publish the selection* - Click btn:[Publish Now (4)] to publish all items in a single batch.
 
 After completing the publication, publishing state should have changed from Offline to Online.
 

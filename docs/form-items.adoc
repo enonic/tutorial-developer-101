@@ -15,8 +15,8 @@ Use the display name for the species and a repeatable TextLine for its other nam
 
 === Task: Add alternative names
 
-Create the Animal content type in your app:
-
+. *Define alternative names* - Create the Animal content type in your app:
++
 .{app-root}/cms/content-types/animal/animal.yaml
 [source,yaml]
 ----
@@ -46,8 +46,8 @@ An ImageSelector stores a reference to it, so you can reuse the same image acros
 
 === Task: Add an image selector
 
-Append this form item to the Animal form, at the same indentation as `otherNames`:
-
+. *Add image references* - Append this form item to the Animal form, at the same indentation as `otherNames`:
++
 .{app-root}/cms/content-types/animal/animal.yaml
 [source,yaml]
 ----
@@ -60,18 +60,22 @@ For this exercise, you'll select the existing lion image.
 
 === Task: Create two animals
 
-. Save the schema file and let your running `enonic dev` watcher update the app.
-. In Content Studio, create a folder named "Animals" at the root of "{cms-project-displayname}", next to Artists and Images.
+. *Deploy the Animal schema* - Save the schema file and let your running `enonic dev` watcher update the app.
+
+. *Create the Animals folder* - In Content Studio, create a folder named "Animals" at the root of "{cms-project-displayname}", next to Artists and Images.
 Check that its path is `/animals`.
-. Select Animals, click btn:[New], and choose *Animal*.
+
+. *Create Lion* - Select Animals, click btn:[New], and choose *Animal*.
 Enter "Lion" as the display name and select your uploaded `lion.jpg` in the Images field.
 Leave Other names empty and save the item.
-. Create another Animal named "Reindeer" in the same folder.
++
+.The Animal form with a reference to the uploaded lion image
+image::form-animal.png["Animal form for Lion with an empty Other names field and the selected lion image", width=578]
+
+. *Create Reindeer* - Create another Animal named "Reindeer" in the same folder.
 Enter "Caribou" in Other names, leave Images empty, and save it.
 Notice that you can add another Other names entry because the field is repeatable.
 
-.The Animal form with a reference to the uploaded lion image
-image::form-animal.png["Animal form for Lion with an empty Other names field and the selected lion image", width=578]
 
 Both items are saved in Draft; keep using Draft in Query Playground for the exercises below.
 
@@ -83,8 +87,8 @@ The names are strings; the images are content references whose fields you can se
 
 === Task: Fetch the lion and its image
 
-Open Query Playground for "{cms-project-displayname}", keep *Draft* selected, and run:
-
+. *Fetch Lion and its image* - Open Query Playground for "{cms-project-displayname}", keep *Draft* selected, and run:
++
 [source,graphql,{subs}]
 ----
 {
@@ -109,6 +113,12 @@ Open Query Playground for "{cms-project-displayname}", keep *Draft* selected, an
   }
 }
 ----
++
+The result contains an empty `otherNames` array and one entry in `images`.
+Build the image URL by joining `{api-base-url}`, `path` and `queryString`, as in the media chapter.
+
+. *Compare Reindeer* - Change the key to `/animals/reindeer` and run the query again.
+The `otherNames` list now contains `"Caribou"`, while `images` is empty.
 
 The `get` result and the items in `images` use GraphQL's `Content` interface.
 As in the <<headless-api#, Headless API chapter>>, an inline fragment selects fields belonging to a more specific GraphQL type:
@@ -119,10 +129,6 @@ As in the <<headless-api#, Headless API chapter>>, an inline fragment selects fi
 These are GraphQL type names; your CMS content types are `{app-name-full}:animal` and `media:image`.
 The image selector stores the image's ID, and Guillotine resolves that reference for you.
 
-The result contains an empty `otherNames` array and one entry in `images`.
-Build the image URL by joining `{api-base-url}`, `path` and `queryString`, as in the media chapter.
-Change the key to `/animals/reindeer` and run the query again: `otherNames` now contains `"Caribou"`, while `images` is empty.
-
 == Link artists to animals
 
 A ContentSelector can reference other kinds of content, just as ImageSelector references images.
@@ -130,13 +136,27 @@ You'll use it to give each artist one optional favorite animal.
 
 === Task: Add a favorite animal
 
-Append this field to the Artist form, after `birthday`:
-
+. *Define the favorite animal field* - Append this field to the Artist form, after `birthday`:
++
 .{app-root}/cms/content-types/artist/artist.yaml
 [source,yaml]
 ----
 include::../{app-root}/cms/content-types/artist/artist.yaml[tag=favoriteAnimal]
 ----
+
+. *Select each artist's favorite animal* - Save the schema, let the watcher update the app, and reopen your artists in Content Studio.
+Make these selections and save each artist:
++
+[cols="1,1", options="header"]
+|===
+| Artist | Favorite animal
+| Cardi B | Lion
+| Missy Elliott | Reindeer
+| P!nk | Lion
+|===
++
+.The Artist form with an animal selected
+image::form-artist-favorite-animal.png["Artist form for Missy Elliott with Reindeer selected as her favorite animal", width=548]
 
 The selector narrows the available choices in two ways:
 
@@ -145,30 +165,14 @@ The selector narrows the available choices in two ways:
 
 There is no `occurrences` setting, so the editor can select at most one animal and can leave the field empty.
 
-Save the schema, let the watcher update the app, and reopen your artists in Content Studio.
-Use these selections as sample data for the exercise:
-
-[cols="1,1", options="header"]
-|===
-| Artist | Favorite animal
-| Cardi B | Lion
-| Missy Elliott | Reindeer
-| P!nk | Lion
-|===
-
-Save each artist after making the selection.
-
-.The Artist form with an animal selected
-image::form-artist-favorite-animal.png["Artist form for Missy Elliott with Reindeer selected as her favorite animal", width=548]
-
 TIP: Reference an item when it should be edited and reused independently.
 Two artists can reference the same Lion, and an edit to that animal is visible through both references.
 For data that only belongs to one item, such as an artist's filmography entries, you'll use sets in the next chapter.
 
 === Task: Follow the reference in a query
 
-Start with the type-filtered artist query from the Headless API chapter and select `favoriteAnimal`:
-
+. *Fetch the referenced animals* - Start with the type-filtered artist query from the Headless API chapter and select `favoriteAnimal`:
++
 [source,graphql,{subs}]
 ----
 {

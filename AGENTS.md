@@ -4,7 +4,7 @@ This repository contains "Developer 101 - Content Modeling and the GraphQL API",
 
 ## Scope and Audience
 
-The tutorial is for developers who define content types and build front-ends against Enonic's GraphQL API. It walks a newcomer from installing the Enonic CLI to fetching content from a front-end: a sandbox and an app from a starter, Content Studio, content types, the Guillotine GraphQL API, media, form items, sets and form fragments, rich text, mixins, calling the API from code, and a look at the underlying storage. It should remain approachable for people who are not primarily back-end developers.
+The tutorial is for developers who define content types and build front-ends against Enonic's GraphQL API. It walks a newcomer from installing the Enonic CLI to fetching content from a front-end: a sandbox and an app from a starter, Content Studio, content types, the Guillotine GraphQL API, media, form items, sets and form fragments, rich text, mixins, permissions and publishing, calling the API from code, and a look at the underlying storage. It should remain approachable for people who are not primarily back-end developers.
 
 The scope is content modeling, schema management and the Guillotine API. Two boundaries are stated on the front page and must hold throughout: there is no coding, meaning no application code, build steps or debugging beyond YAML schemas, GraphQL queries and the ready-to-run `fetch` examples in the front-end chapter; and the page domain is left out entirely, meaning sites, pages, layouts, parts and page templates, whether rendered by Enonic or by an external front-end. Point readers to the Introduction to Enonic and the Next.js tutorial for pages.
 
@@ -79,6 +79,7 @@ Every chapter starts with its title, then `include::.variables.adoc[]`, then its
 * Use source blocks with the correct language (`xml`, `graphql`, `json`, `shell` or `bash`, `html`) and callouts when individual lines need explanation. Add `[{subs}]` when a block uses attributes.
 * Use `kbd:[]` for keystrokes and `menu:` or the existing backtick `XP menu` -> `Applications` style for navigation paths. Follow the surrounding chapter.
 * Mark hands-on sections with a `=== Task:` heading so readers can tell instructions from explanation.
+* Start each numbered task step with a short, bold description of its purpose, followed by a spaced hyphen and the instructions: `. *Restore public access* - Reopen Lynx's permissions ...`. Describe the intended result before the clicks or commands. Keep steps focused on actions and expected results; place broader explanations after the task. Use `+` continuation markers to attach supporting paragraphs, code blocks and screenshots to their step.
 * Do not use the `^` suffix in link labels. Readers should choose whether links open in a new tab.
 * Be careful with underscores in inline AsciiDoc. Outside source blocks, wrap identifiers, paths, or query names containing `_` in single-plus passthrough, for example `+com_example_myapp+`. Combine passthrough with monospace when needed: `` `+com_example_myapp+` ``.
 * Prefer one sentence per line in prose where practical. It makes reviews and future edits easier without affecting rendered output.

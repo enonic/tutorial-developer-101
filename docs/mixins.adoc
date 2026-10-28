@@ -15,8 +15,8 @@ Your app is already assigned to "{cms-project-displayname}", so the registration
 
 === Task: Create the mixin
 
-Create this file in your app:
-
+. *Define the Editorial mixin* - Create this file in your app:
++
 .{app-root}/cms/mixins/editorial/editorial.yaml
 [source,yaml]
 ----
@@ -28,32 +28,36 @@ The form contains one repeatable TextLine field named `notes`, allowing up to th
 
 === Task: Register the mixin
 
-Update your app's existing CMS descriptor to include the registration:
-
+. *Choose which content types get the mixin* - Update your app's existing CMS descriptor to include the registration:
++
 .{app-root}/cms/cms.yaml
 [source,yaml]
 ----
 include::../{app-root}/cms/cms.yaml[]
 ----
 
+. *Deploy the mixin* - Save both files and let your running `enonic dev` watcher update the app.
+
 `name: "editorial"` selects the mixin from this app.
 `allowContentTypes` is a regular expression matched against the full content type name; this one selects Artist and Animal.
 If you chose a different app name, update the app key in the expression to match.
 Leaving out `allowContentTypes` makes the mixin available on all content types in the content project where the app is assigned.
 
-Save both files and let your running `enonic dev` watcher update the app.
 For other registration options, including mixins that editors enable per content item, see the https://developer.enonic.com/docs/cms/stable/schemas/cms-descriptor#mixin-registration[CMS descriptor reference].
 
 === Task: Add notes to two content types
 
-. Open Lynx at `/animals/lynx` in Content Studio and select the *Editorial* tab beside Animal.
-. Enter "Review the habitat description." in the first Notes field.
-Click btn:[Add] and enter "Add a source for the diet information." in the second, then save Lynx.
-. Open Cardi B at `/artists/cardi-b` and select its *Editorial* tab beside Artist.
-Enter "Check the filmography for new releases." and save.
+. *Find Lynx's mixin fields* - Open Lynx at `/animals/lynx` in Content Studio and select the *Editorial* tab beside Animal.
 
+. *Add Lynx's notes* - Enter "Review the habitat description." in the first Notes field.
+Click btn:[Add] and enter "Add a source for the diet information." in the second, then save Lynx.
++
 .The Editorial mixin on Lynx
 image::mixins-editorial.png["Editorial tab beside Animal, showing two separate notes on Lynx", width=527]
+
+. *Add Cardi B's note* - Open Cardi B at `/artists/cardi-b` and select its *Editorial* tab beside Artist.
+Enter "Check the filmography for new releases." and save.
+
 
 Both content types now use the same mixin form, but each content item has its own values.
 You did not need to change either content type's schema.
@@ -65,8 +69,8 @@ The typed fields let your client request just the values it needs.
 
 === Task: Fetch Lynx's notes
 
-Open Query Playground for "{cms-project-displayname}", select *Draft*, and run:
-
+. *Fetch Lynx's mixin fields* - Open Query Playground for "{cms-project-displayname}", select *Draft*, and run:
++
 [source,graphql,{subs}]
 ----
 {
@@ -84,13 +88,9 @@ Open Query Playground for "{cms-project-displayname}", select *Draft*, and run:
   }
 }
 ----
-
-The three levels inside `x` are the app (`+{app-name-query}+`), the mixin (`editorial`), and its field (`notes`).
-Dots in the app key become underscores in the GraphQL field name.
-Unlike the content type's `data`, `x` is available on the shared `Content` interface, so this query needs no Animal inline fragment.
-
++
 The response contains:
-
++
 [source,json,{subs}]
 ----
 {
@@ -114,13 +114,17 @@ The response contains:
 }
 ----
 
-Change `key` to `/artists/cardi-b` and run the same query to retrieve Cardi B's note.
+. *Compare Cardi B's note* - Change `key` to `/artists/cardi-b` and run the same query.
 The typed `notes` field returns a list, even when the content item has only one note.
+
+The three levels inside `x` are the app (`+{app-name-query}+`), the mixin (`editorial`), and its field (`notes`).
+Dots in the app key become underscores in the GraphQL field name.
+Unlike the content type's `data`, `x` is available on the shared `Content` interface, so this query needs no Animal inline fragment.
 
 === Task: Inspect the JSON representation
 
-To inspect all mixin values without selecting their individual fields, query `xAsJson`:
-
+. *Fetch all stored mixin values* - Query `xAsJson` to inspect the values without selecting their individual fields:
++
 [source,graphql]
 ----
 {
@@ -131,9 +135,9 @@ To inspect all mixin values without selecting their individual fields, query `xA
   }
 }
 ----
-
++
 The `xAsJson` value contains:
-
++
 [source,json,{subs}]
 ----
 {
@@ -164,48 +168,50 @@ The same registration mechanism lets an app add shared fields without changing y
 You've now used the main content modeling tools in this tutorial.
 Use this recap when deciding how to represent new content:
 
-[%header,cols="1,2,2"]
+[%header,cols="3,2"]
 |===
-|Tool |Use it for |Result
+|What you want to build |Use
 
+|Content that editors manage and publish independently
 |Content type
-|A kind of content editors create and manage independently
-|A content item with its own path, lifecycle and form data
 
+|Relationships between independently managed content items
 |Reference (ContentSelector, ImageSelector)
-|Connecting content items that exist independently
-|A stored target ID that Guillotine can resolve to content
 
+|Images and other uploaded files, managed as content with a source attachment
 |Media
-|Images and other uploaded files
-|A media content item with the uploaded file as an attachment
 
+|Visual groups of fields without changing the data structure
 |FieldSet
-|Grouping related fields in the editor
-|Fields stored at the same level, with no extra data wrapper
 
+|Nested or repeatable groups of fields that belong to one content item
 |ItemSet
-|Grouping fields into an object, optionally repeated
-|An object or a list of objects under the item's data
 
-|OptionSet
-|Selecting options with their own fields
-|A structure recording the selected options and their values
+|A single selection, optionally with fields for the chosen option
+|OptionSet with one selection per occurrence
 
+|Multiple selections, optionally with separate fields for each chosen option
+|OptionSet allowing multiple selections per occurrence
+
+|Ordered lists of content blocks, such as text, images and quotes for a basic landing page
+|Repeatable OptionSet with one selection per occurrence
+
+|Reusable form definitions included in several schemas or options
 |Form fragment
-|Reusing form items within schemas
-|Fields inserted in place, with no wrapper named after the fragment
 
-|HtmlArea
 |Formatted prose with links, images and macros
-|Stored HTML; Guillotine exposes raw and processed HTML plus structured reference data
+|HtmlArea
 
+|Shared fields added across content types, including types provided by other apps
 |Mixin
-|Adding shared fields across content types or to types you do not own
-|Values under `x`, grouped by app and mixin
 |===
+
+An OptionSet can support multiple selections with separate fields for each selected option, as you did with continents and their notes in the <<sets#, sets chapter>>.
+A repeatable OptionSet with one selected option per occurrence lets editors build a sequence of blocks, such as text, images and quotes, for your front-end to render.
+See the https://developer.enonic.com/docs/cms/stable/schemas/form-items/option-set[OptionSet reference] for configuration examples.
+For visual editing or more advanced page composition, explore XP's https://developer.enonic.com/docs/cms/stable/pages[page model] in the https://developer.enonic.com/docs/intro[Introduction to Enonic] or the https://developer.enonic.com/docs/next.xp[Next.js tutorial].
 
 == Coming up
 
 You've added and queried a mixin across two content types, completing the tutorial's content model.
-In the next chapter, you'll fetch content <<frontend#, from a front-end>>.
+In the next chapter, you'll publish your content and explore <<permissions#, read and editorial permissions>>.

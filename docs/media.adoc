@@ -12,12 +12,15 @@ Start by uploading an image that you'll use throughout the chapter.
 
 === Task: Upload an image
 
-. Download https://unsplash.com/photos/8oLnCRz7hwM[this lion photograph] by https://unsplash.com/@keyursphotography[Keyur Nandaniya], or choose a JPEG with its main subject away from the center.
+. *Choose a photograph* - Download https://unsplash.com/photos/8oLnCRz7hwM[this lion photograph] by https://unsplash.com/@keyursphotography[Keyur Nandaniya], or choose a JPEG with its main subject away from the center.
 Save it as `lion.jpg` if you want the filename to match the examples.
-. In your "{cms-project-displayname}" content project, create a folder named "Images" at the root, with the path `/images`.
-. Select the Images folder, click btn:[New], and choose the *Media* tab.
+
+. *Create the Images folder* - In your "{cms-project-displayname}" content project, create a folder named "Images" at the root, with the path `/images`.
+
+. *Choose the upload destination* - Select the Images folder, click btn:[New], and choose the *Media* tab.
 Check that the destination shown is `/images/`.
-. Click the upload area to select your file, or drag the file onto it.
+
+. *Upload the file* - Click the upload area to select your file, or drag the file onto it.
 +
 .The Media tab in the New Content dialog
 image::media-upload.png["New Content dialog with the Media tab selected and /images/ as the upload destination", width=1440]
@@ -32,9 +35,9 @@ Let's inspect its data and find the file attached to it.
 
 === Task: Find the image and its attachment
 
-Open Query Playground, select "{cms-project-displayname}" and keep *Draft* selected throughout this chapter.
+. *Find the uploaded image* - Open Query Playground, select "{cms-project-displayname}" and keep *Draft* selected throughout this chapter.
 Run this query to find up to ten images anywhere in the project:
-
++
 [source,graphql]
 ----
 {
@@ -61,14 +64,10 @@ Run this query to find up to ten images anywhere in the project:
   }
 }
 ----
-
-The `dataAsJson` field shows the stored content data, as it did for your artists.
-The `attachments` field lists the attached files and their metadata.
-Both are common content fields, so this query does not need an inline fragment.
-
++
 Below is one item from the `data.guillotine.queryDsl` array.
 This example shows the image immediately after upload; your filename, dimensions, file size and additional metadata may differ:
-
++
 .The image content and its attachment
 [source,json]
 ----
@@ -94,6 +93,12 @@ This example shows the image immediately after upload; your filename, dimensions
 }
 ----
 
+. *Keep the content path* - Copy your image's `+_path+` for the following queries.
+
+The `dataAsJson` field shows the stored content data, as it did for your artists.
+The `attachments` field lists the attached files and their metadata.
+Both are common content fields, so this query does not need an inline fragment.
+
 Notice how the content and file fit together:
 
 * `type` is `media:image`: XP detected the uploaded file and created an image content item.
@@ -112,8 +117,6 @@ XP automatically extracts readable text from known file formats, such as PDF, an
 See https://developer.enonic.com/docs/cms/stable/media/media-indexing[Media indexing] for what becomes searchable and how to query it.
 You'll explore the underlying storage directly in the <<data-toolbox#, Data Toolbox chapter>>.
 
-Keep your image's `+_path+` for the following queries.
-
 == Retrieve the attached file
 
 You've found the attachment's metadata; now retrieve the file itself.
@@ -123,9 +126,9 @@ Like Guillotine, it is a Universal API: on your sandbox, its address starts with
 
 === Task: Open and download the attachment
 
-Use `get` with the content path from your response.
+. *Fetch the attachment URL* - Use `get` with the content path from your response.
 Replace `/images/lion.jpg` if your image has a different path:
-
++
 [source,graphql]
 ----
 {
@@ -142,13 +145,9 @@ Replace `/images/lion.jpg` if your image has a different path:
   }
 }
 ----
-
-The CMS content type is `media:image`; its GraphQL object type is `+media_Image+`.
-As with Artist in the previous chapter, the inline fragment gives access to fields belonging to that GraphQL type.
-`mediaUrl` is available on all media types.
-
++
 The `data.guillotine.get` object looks like this, with your own content ID, fingerprint and filename:
-
++
 .The source attachment's URL components
 [source,json,{subs}]
 ----
@@ -161,21 +160,25 @@ The `data.guillotine.get` object looks like this, with your own content ID, fing
 }
 ----
 
-Build the file's address from *your own response*: start with `{api-base-url}`, then append `mediaUrl.path` and `mediaUrl.queryString` exactly as returned.
+. *Build the attachment address* - Use *your own response*: start with `{api-base-url}`, then append `mediaUrl.path` and `mediaUrl.queryString` exactly as returned.
 An empty `queryString` adds nothing.
 For the example above, the address would be:
-
++
 [{subs}]
 ----
 {api-base-url}/media:attachment/{cms-project-id}:draft/3cff3960-08e9-4c92-828e-917187c1dc20:927e557892810fabb5e2c76cd686a7e7/lion.jpg
 ----
 
-Open your assembled URL in a new tab in the same browser where you are logged in to Content Studio.
+. *View the original file* - Open your assembled URL in a new tab in the same browser where you are logged in to Content Studio.
 It displays the original uploaded image.
 Draft media requires an authenticated request; copying the example URL above will not retrieve your own image.
 
-To download the file instead of displaying it, change `mediaUrl` to `mediaUrl(download: true)` and run the query again.
+. *Download the attachment* - Change `mediaUrl` to `mediaUrl(download: true)` and run the query again.
 Assemble and open the new URL, including its `queryString`; the browser will download the attachment.
+
+The CMS content type is `media:image`; its GraphQL object type is `+media_Image+`.
+As with Artist in the previous chapter, the inline fragment gives access to fields belonging to that GraphQL type.
+`mediaUrl` is available on all media types.
 
 The content item's `+_path+`, such as `/images/lion.jpg`, identifies the item in queries.
 The media URL's `path` identifies the attached file through the attachment API.
@@ -192,9 +195,9 @@ Use `mediaUrl` when you need the original uploaded file.
 
 === Task: Open a portrait crop
 
-Use `get` to retrieve the image whose content path you copied above.
+. *Request a portrait crop* - Use `get` to retrieve the image whose content path you copied above.
 Replace `/images/lion.jpg` if your image has a different path:
-
++
 [source,graphql]
 ----
 {
@@ -211,9 +214,9 @@ Replace `/images/lion.jpg` if your image has a different path:
   }
 }
 ----
-
++
 The `data.guillotine.get` object contains:
-
++
 .Image with a crop URL
 [source,json,{subs}]
 ----
@@ -226,9 +229,9 @@ The `data.guillotine.get` object contains:
 }
 ----
 
-Assemble the URL from `{api-base-url}` plus your returned `imageUrl.path` and `imageUrl.queryString`, then open it in your browser.
+. *View the crop* - Assemble the URL from `{api-base-url}` plus your returned `imageUrl.path` and `imageUrl.queryString`, then open it in your browser.
 Without a focal point, the crop is centered, which can cut off an off-center subject:
-
++
 .Portrait crop before setting a focal point
 image::image-cropped-unfocused.jpg["Portrait crop with part of the lion cut off at the left edge", width=400]
 
@@ -240,24 +243,25 @@ It guides the crop; it does not guarantee that the entire subject fits every sha
 [#_image_form]
 === Task: Set a focal point and compare
 
-. Return to Content Studio, select your image and click btn:[Edit].
+. *Open the image editor* - Return to Content Studio, select your image and click btn:[Edit].
 The content form contains fields such as Caption and Alternative text, and the image preview includes editing controls.
 +
 .The image content form and preview
 image::image-content-form.jpg["Content Studio image editor showing the lion preview, editorial fields and image editing toolbar", width=1440]
 
-. In the toolbar above the image preview, click *Set Autofocus* to edit the focal point.
+. *Position the focal point* - In the toolbar above the image preview, click *Set Autofocus* to edit the focal point.
 Click the lion's face, or drag the marker onto the subject of your own image.
 +
 .Positioning the focal point
 image::image-editing-focal-point.jpg["Image preview in focal-point mode with the marker on the lion's face and Apply and Cancel controls", width=1440]
 
-. Click btn:[Apply] to accept the position, then btn:[Save] in the Content Editor toolbar to save the content item.
-. Return to Query Playground and run the same portrait-crop query again.
+. *Save the focal point* - Click btn:[Apply] to accept the position, then btn:[Save] in the Content Editor toolbar to save the content item.
+
+. *Compare the new crop* - Return to Query Playground and run the same portrait-crop query again.
 Assemble and open the *newly returned URL* so you see the saved change.
-
++
 The new crop prioritizes the selected subject:
-
++
 .The same portrait crop with a focal point
 image::image-cropped-focused.jpg["Portrait crop after setting the focal point, with the lion's face in view", width=400]
 
@@ -266,8 +270,8 @@ The https://developer.enonic.com/docs/content-studio/stable/content-types/image[
 
 === Task: Add a filter
 
-Keep the same image and scale, and add a `filter` argument:
-
+. *Request image filters* - Keep the same image and scale, and add a `filter` argument:
++
 [source,graphql]
 ----
 {
@@ -287,11 +291,12 @@ Keep the same image and scale, and add a `filter` argument:
   }
 }
 ----
-
++
 Use your image's content path if it differs from the example.
 The semicolon separates two filters: grayscale and a black border.
-Build and open the URL as before, including the complete `queryString` returned by Guillotine.
 
+. *View the filtered image* - Build and open the URL as before, including the complete `queryString` returned by Guillotine.
++
 .The cropped image with filters
 image::image-processed.jpg["Portrait crop of the lion in grayscale with a black border", width=400]
 

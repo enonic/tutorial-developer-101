@@ -1,16 +1,12 @@
 = Fetching content from a front-end
 include::.variables.adoc[]
-:description: Call the API from cURL, Node and a browser. Publish content, configure CORS, resolve a route, page a list and build page and media URLs from their parts.
+:description: Call the API from cURL, Node and a browser. Configure CORS, resolve a route, page a list and build page and media URLs from their parts.
 
 In this chapter, you'll send your queries over HTTP, from the command line, from Node and from a browser.
-So far, Query Playground has quietly supplied the project, the branch and your login, and a front-end has none of that.
-You'll handle the four things every front-end on Enonic needs: the request format, published versus draft content, URLs for pages and media, and lists that page.
+The <<permissions#, previous chapter>> left your tutorial content published and publicly readable, and introduced an anonymous cURL request.
+You'll now use the API from code, configure browser access, resolve routes, page lists and build media URLs.
 
-== Publish first
-
-Everything you have created so far lives in the draft branch. Draft content is only readable by logged-in users with a role in the content project, which a front-end does not have. The master branch, on the other hand, is readable by anyone in a public project like yours.
-
-So before anything else, publish your content: in Content Studio, select the "artists", "animals" and "images" folders, choose btn:[Publish], and make sure the dialog includes their children. From now on, use the `master` branch in your queries.
+Query Playground sends your login with requests; the public front-end examples here use anonymous access to the `master` branch.
 
 == The request
 
@@ -27,8 +23,10 @@ Outside Content Studio there is no selected project, so the query names the proj
 
 Use the same artist type filter and alphabetical sorting as in the Headless API chapter.
 
-Save this as `request.json`:
+=== Task: Fetch artists with cURL
 
+. *Prepare the request body* - Save this as `request.json`:
++
 [source,json,{subs}]
 ----
 {
@@ -40,24 +38,28 @@ Save this as `request.json`:
 }
 ----
 
-And send it with cURL:
-
+. *Send the request* - Run this cURL command from the folder containing `request.json`:
++
 [source,shell,{subs}]
 ----
 curl "{graphql-url}" \
   -H 'Content-Type: application/json' \
   --data-binary @request.json
 ----
-
++
 You should get the three artists back as JSON, the same shape you saw in the playground's response panel. If the list is empty, the content is not published, or you spelled the project name differently when you created it.
 
 == From JavaScript
 
-The same request with `fetch()`. Save it as `artists.mjs` and run it with `node artists.mjs`. Node 18 or newer has `fetch` built in.
+Node 18 or newer has `fetch` built in.
 
+=== Task: Fetch artists with JavaScript
+
+. *Prepare the JavaScript client* - Save the following example as `artists.mjs`.
++
 Set `apiBaseUrl` to `{api-base-url}` for your sandbox, or to the live server's address followed by `/api`.
 The API name stays the same; keeping the base URL in one place lets you switch servers without changing the query.
-
++
 [source,javascript,{subs}]
 ----
 const apiBaseUrl = '{api-base-url}';
@@ -113,6 +115,8 @@ async function getArtists() {
 getArtists().then(console.log).catch(console.error);
 ----
 
+. *Run the client* - Run `node artists.mjs` and check the returned artists in your terminal.
+
 A GraphQL response can be HTTP 200 and still carry errors, in the `errors` array next to `data`.
 Check both, as the example does.
 
@@ -120,8 +124,10 @@ Check both, as the example does.
 
 Running the same code in a web page served from another origin, say a dev server on `http://localhost:3000`, fails until XP is told to allow that origin. This is browser cross-origin protection, CORS, and Guillotine has a configuration file for it.
 
-Create the file `com.enonic.app.guillotine.cfg` in your sandbox's config directory, `~/.enonic/sandboxes/{sandbox-name}/home/config/`:
+=== Task: Allow a browser origin
 
+. *Configure CORS* - Create the file `com.enonic.app.guillotine.cfg` in your sandbox's config directory, `~/.enonic/sandboxes/{sandbox-name}/home/config/`:
++
 .com.enonic.app.guillotine.cfg
 [source,properties]
 ----
@@ -132,7 +138,7 @@ cors.allowedHeaders=Content-Type
 
 XP picks the file up without a restart. `cors.origin` takes a comma-separated list of origins, including scheme and port. The https://developer.enonic.com/docs/guillotine/stable/configuration[Guillotine configuration docs] cover the remaining options.
 
-NOTE: CORS only controls which origins a browser lets read the response. It does not grant access to content: a public project's published content is readable by anyone, and draft content still needs a login.
+NOTE: CORS only controls which origins a browser lets read the response. It does not grant access to content: published content still needs public read permission for anonymous access, and draft content needs an authorized login.
 
 === Draft content
 
@@ -262,6 +268,6 @@ Everything in this chapter ran against your sandbox, but there is no difference 
 
 == Coming up
 
-You have called the API from cURL, Node and a browser, published content so a front-end can read it, resolved a route to a content item, paged a list, and built page and media URLs from their parts. That is the whole contract between Enonic and a front-end; everything else is your framework's business.
+You have called the API from cURL, Node and a browser, resolved a route to a content item, paged a list, and built page and media URLs from their parts. That is the whole contract between Enonic and a front-end; everything else is your framework's business.
 
 In the final chapter, you'll look <<data-toolbox#, under the hood>> at how XP actually stores all of this.

@@ -12,20 +12,20 @@ Use it for free-form prose; use the <<sets#, option sets from the previous chapt
 
 === Task: Add the field and create Lynx
 
-Append this field to the Animal form, after `distribution`:
-
+. *Define the rich text field* - Append this field to the Animal form, after `distribution`:
++
 .{app-root}/cms/content-types/animal/animal.yaml
 [source,yaml]
 ----
 include::../{app-root}/cms/content-types/animal/animal.yaml[tag=description]
 ----
 
+. *Create Lynx* - Save the schema and let your running `enonic dev` watcher update the app.
+In Content Studio, create an Animal named "Lynx" in the Animals folder, with the path `/animals/lynx`.
+
 `exclude: "*"` removes the default toolbar tools, and `include` adds the tools used in this chapter.
 The field is optional and accepts one value, since `occurrences` is omitted.
 Keep the toolbar focused on the formatting your front-end supports; the https://developer.enonic.com/docs/cms/stable/schemas/form-items/htmlarea[HtmlArea reference] covers the other settings.
-
-Save the schema and let your running `enonic dev` watcher update the app.
-In Content Studio, create an Animal named "Lynx" in the Animals folder, with the path `/animals/lynx`.
 
 == Link to another animal
 
@@ -34,26 +34,30 @@ Moving or renaming the target preserves that reference; your front-end still nee
 
 === Task: Link to Lion
 
-. In Lynx's Description, enter this text:
+. *Write the description* - In Lynx's Description, enter this text:
 +
 ----
 Lynx are cats, just like lions.
 ----
-. Select the word "lions" and click the *Link* toolbar button.
-. In the Content tab, search for and select Lion at `/animals/lion`.
-. Click btn:[Insert], then save Lynx.
 
+. *Choose the link text* - Select the word "lions" and click the *Link* toolbar button.
+
+. *Select the link target* - In the Content tab, search for and select Lion at `/animals/lion`.
++
 .Selecting Lion as the link target
 image::rich-text-link.png["Insert Link dialog with lions as the text and Lion at /animals/lion as the selected content", width=800]
+
+. *Save the link* - Click btn:[Insert], then save Lynx.
+
 
 === Task: Inspect the link
 
 Unlike TextArea, which returns a string, HtmlArea exposes a GraphQL object with several fields.
 `raw` is the stored markup; `processedHtml` is the result of processing it for delivery.
 
-Open Query Playground for "{cms-project-displayname}" and keep *Draft* selected throughout this chapter.
+. *Compare the raw and processed link* - Open Query Playground for "{cms-project-displayname}" and keep *Draft* selected throughout this chapter.
 Query both forms of the HTML together with the link's target and URL components:
-
++
 [source,graphql,{subs}]
 ----
 {
@@ -84,9 +88,9 @@ Query both forms of the HTML together with the link's target and URL components:
   }
 }
 ----
-
++
 The response shows how processing changes the internal link:
-
++
 [source,json]
 ----
 {
@@ -137,30 +141,36 @@ The caption and alternative text you enter here belong to this use of the image 
 
 === Task: Add a lynx photograph
 
-. Download https://unsplash.com/photos/lynx-walking-on-grass-field-Oko2E4kt2oU[this lynx photograph] by https://unsplash.com/@zmachacek[Zdeněk Macháček] and save it as `lynx.jpg`, or choose your own image.
-. Reopen Lynx and place the cursor in a new paragraph below its description.
+. *Choose a lynx photograph* - Download https://unsplash.com/photos/lynx-walking-on-grass-field-Oko2E4kt2oU[this lynx photograph] by https://unsplash.com/@zmachacek[Zdeněk Macháček] and save it as `lynx.jpg`, or choose your own image.
+
+. *Choose where to insert the image* - Reopen Lynx and place the cursor in a new paragraph below its description.
 Click the *Image* toolbar button.
-. Drop `lynx.jpg` onto the upload area in the Insert Image dialog, or click the upload area to choose the file.
+
+. *Upload the photograph* - Drop `lynx.jpg` onto the upload area in the Insert Image dialog, or click the upload area to choose the file.
 The uploaded image is selected automatically.
-. Leave the image style as *<None>* and Custom width unchecked.
+
+. *Set the presentation and caption* - Leave the image style as *<None>* and Custom width unchecked.
 For the supplied photograph, enter "Lynx in human care. Photo: Zdeněk Macháček." as the caption.
-. Under Accessibility, choose *Alternative text* and enter "Lynx walking through grass."
+
+. *Add alternative text and save* - Under Accessibility, choose *Alternative text* and enter "Lynx walking through grass."
 Click btn:[Insert], then save Lynx.
-. Return to the content tree and expand Lynx to find the new image at `/animals/lynx/lynx.jpg`.
++
+.Caption and alternative text for the inserted photograph
+image::rich-text-image-settings.jpg["Insert Image dialog showing /animals/lynx/lynx.jpg, its caption and Alternative text selection", width=880]
+
+. *Find the uploaded content* - Return to the content tree and expand Lynx to find the new image at `/animals/lynx/lynx.jpg`.
 
 Uploading through this dialog creates a separate media content item under the animal you're editing.
 The description references that image by ID, and the uploaded file is an attachment of the image content item, as explained in the <<media#, media chapter>>.
 
-.Caption and alternative text for the inserted photograph
-image::rich-text-image-settings.jpg["Insert Image dialog showing /animals/lynx/lynx.jpg, its caption and Alternative text selection", width=880]
 
 Use the Decorative image option only when an image adds no information beyond its surrounding content.
 For more editing controls, see the https://developer.enonic.com/docs/content-studio/stable/editor/rich-text-editor[Content Studio rich-text editor documentation].
 
 === Task: Inspect the image URL
 
-Query `images` alongside the processed HTML:
-
+. *Fetch the image URL components* - Query `images` alongside the processed HTML:
++
 [source,graphql,{subs}]
 ----
 {
@@ -184,18 +194,18 @@ Query `images` alongside the processed HTML:
   }
 }
 ----
-
++
 The inserted image appears in `processedHtml` as a `<figure>` with an `<img>` and a `<figcaption>`:
-
++
 [source,html,{subs}]
 ----
 <figure class="captioned editor-align-justify"><img alt="Lynx walking through grass." src="/media:image/{cms-project-id}:draft/304b9ac8-406e-4d05-80d7-86b868c225ed:2eb15046035b4e5f05e511c853da1216/width-768/lynx.jpg" style="width:100%" data-image-ref="52918d8b-9c15-49a2-9190-4b3249f90528">
 <figcaption>Lynx in human care. Photo: Zdeněk Macháček.</figcaption>
 </figure>
 ----
-
++
 Its `data-image-ref` matches this entry in the `images` array:
-
++
 [source,json,{subs}]
 ----
 {
@@ -218,29 +228,26 @@ You'll add a square crop with a grayscale filter.
 
 === Task: Create and apply the style
 
-Create this file in your app:
-
+. *Define the image style* - Create this file in your app:
++
 .{app-root}/cms/style/style.yaml
 [source,yaml]
 ----
 include::../{app-root}/cms/style/style.yaml[]
 ----
 
-`aspectRatio: "1:1"` requests a square crop, and `filter: "grayscale()"` removes color.
-Styles are available from apps assigned to the content project, including your app.
-For effects that only concern presentation, consider client-side CSS instead of server-side filters, as discussed in the media chapter.
-
-Save the file and let the watcher update the app.
+. *Apply the style to Lynx's image* - Save the file and let the watcher update the app.
 Reopen Lynx, double-click the image in Description, and choose *Square grayscale* from the style selector.
 Click btn:[Update] and save the animal.
-
++
 .Square grayscale selected for the Lynx image
 image::rich-text-image-style.jpg["Insert Image dialog with Square grayscale selected and a preview of the square, grayscale lynx photograph", width=880]
 
-Run the image query again.
+. *Inspect the styled image* - Run the image query again.
 The returned URL now includes the crop and filter instructions; use both its `path` and `queryString` without modifying them.
-You can also inspect the selected style by adding this field next to `src` inside `images`:
 
+. *Fetch the style settings* - Add this field next to `src` inside `images` and run the query:
++
 [source,graphql]
 ----
 style {
@@ -249,9 +256,9 @@ style {
   filter
 }
 ----
-
++
 The `style` object contains:
-
++
 [source,json]
 ----
 {
@@ -260,6 +267,10 @@ The `style` object contains:
   "filter": "grayscale()"
 }
 ----
+
+`aspectRatio: "1:1"` requests a square crop, and `filter: "grayscale()"` removes color.
+Styles are available from apps assigned to the content project, including your app.
+For effects that only concern presentation, consider client-side CSS instead of server-side filters, as discussed in the media chapter.
 
 The style is not a stylesheet for your whole front-end: captions, text and layout still use your front-end's own styling.
 See the https://developer.enonic.com/docs/cms/stable/richtext/styles[CMS styles reference] for more options.
@@ -272,24 +283,24 @@ In Guillotine, it becomes a placeholder plus configuration data for your client 
 
 === Task: Add an iframe embed
 
-In Lynx's Description, place the cursor in a new paragraph after the image and click *Insert macro*.
+. *Configure the video embed* - In Lynx's Description, place the cursor in a new paragraph after the image and click *Insert macro*.
 Choose *Embed IFrame* and enter:
-
++
 [source,html]
 ----
 <iframe src="https://www.youtube.com/embed/gr5EwZo_CHQ" title="Lynx video" width="560" height="315" allowfullscreen></iframe>
 ----
-
-Insert the macro and save Lynx.
-The macro stores the iframe configuration in the rich text.
-
++
 .Configuring the built-in Embed IFrame macro
 image::rich-text-macro.png["Insert Macro dialog with Embed IFrame selected and the lynx video iframe in IFrame HTML", width=880]
 
+. *Save the embed* - Insert the macro and save Lynx.
+The macro stores the iframe configuration in the rich text.
+
 === Task: Query the macro configuration
 
-Query the typed `macros` fields:
-
+. *Fetch the macro configuration* - Query the typed `macros` fields:
++
 [source,graphql,{subs}]
 ----
 {
@@ -316,16 +327,16 @@ Query the typed `macros` fields:
   }
 }
 ----
-
++
 The processed HTML contains this macro placeholder:
-
++
 [source,html]
 ----
 <editor-macro data-macro-name="embed" data-macro-ref="c0357643-ddda-4e54-a3d9-c3ea39d1ba2f">&lt;iframe src="https://www.youtube.com/embed/gr5EwZo_CHQ" title="Lynx video" width="560" height="315" allowfullscreen=""&gt;&lt;/iframe&gt;</editor-macro>
 ----
-
++
 The `macros` array contains its configuration:
-
++
 [source,json]
 ----
 {
