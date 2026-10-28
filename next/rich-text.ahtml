@@ -494,9 +494,10 @@ Use it for free-form prose; use the <a href="sets.ahtml">option sets from the pr
 </div>
 <div class="sect2">
 <h3 id="task_add_the_field_and_create_lynx"><a class="link" href="#task_add_the_field_and_create_lynx">Task: Add the field and create Lynx</a></h3>
-<div class="paragraph">
-<p>Append this field to the Animal form, after <code>distribution</code>:</p>
-</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p><strong>Define the rich text field</strong> - Append this field to the Animal form, after <code>distribution</code>:</p>
 <div class="listingblock">
 <div class="title">src/main/resources/cms/content-types/animal/animal.yaml</div>
 <div class="content">
@@ -508,14 +509,17 @@ Use it for free-form prose; use the <a href="sets.ahtml">option sets from the pr
     include: "Format Link Macro Image"</code></pre>
 </div>
 </div>
+</li>
+<li>
+<p><strong>Create Lynx</strong> - Save the schema and let your running <code>enonic dev</code> watcher update the app.
+In Content Studio, create an Animal named "Lynx" in the Animals folder, with the path <code>/animals/lynx</code>.</p>
+</li>
+</ol>
+</div>
 <div class="paragraph">
 <p><code>exclude: "*"</code> removes the default toolbar tools, and <code>include</code> adds the tools used in this chapter.
 The field is optional and accepts one value, since <code>occurrences</code> is omitted.
 Keep the toolbar focused on the formatting your front-end supports; the <a href="https://developer.enonic.com/docs/cms/stable/schemas/form-items/htmlarea">HtmlArea reference</a> covers the other settings.</p>
-</div>
-<div class="paragraph">
-<p>Save the schema and let your running <code>enonic dev</code> watcher update the app.
-In Content Studio, create an Animal named "Lynx" in the Animals folder, with the path <code>/animals/lynx</code>.</p>
 </div>
 </div>
 </div>
@@ -532,7 +536,7 @@ Moving or renaming the target preserves that reference; your front-end still nee
 <div class="olist arabic">
 <ol class="arabic">
 <li>
-<p>In Lynx&#8217;s Description, enter this text:</p>
+<p><strong>Write the description</strong> - In Lynx&#8217;s Description, enter this text:</p>
 <div class="listingblock">
 <div class="content">
 <pre>Lynx are cats, just like lions.</pre>
@@ -540,21 +544,21 @@ Moving or renaming the target preserves that reference; your front-end still nee
 </div>
 </li>
 <li>
-<p>Select the word "lions" and click the <strong>Link</strong> toolbar button.</p>
+<p><strong>Choose the link text</strong> - Select the word "lions" and click the <strong>Link</strong> toolbar button.</p>
 </li>
 <li>
-<p>In the Content tab, search for and select Lion at <code>/animals/lion</code>.</p>
-</li>
-<li>
-<p>Click <b class="button">Insert</b>, then save Lynx.</p>
-</li>
-</ol>
-</div>
+<p><strong>Select the link target</strong> - In the Content tab, search for and select Lion at <code>/animals/lion</code>.</p>
 <div class="imageblock">
 <div class="content">
 <img src="images/rich-text-link.png" alt="Insert Link dialog with lions as the text and Lion at /animals/lion as the selected content" width="800">
 </div>
 <div class="title">Figure 1. Selecting Lion as the link target</div>
+</div>
+</li>
+<li>
+<p><strong>Save the link</strong> - Click <b class="button">Insert</b>, then save Lynx.</p>
+</li>
+</ol>
 </div>
 </div>
 <div class="sect2">
@@ -563,10 +567,11 @@ Moving or renaming the target preserves that reference; your front-end still nee
 <p>Unlike TextArea, which returns a string, HtmlArea exposes a GraphQL object with several fields.
 <code>raw</code> is the stored markup; <code>processedHtml</code> is the result of processing it for delivery.</p>
 </div>
-<div class="paragraph">
-<p>Open Query Playground for "My First Project" and keep <strong>Draft</strong> selected throughout this chapter.
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p><strong>Compare the raw and processed link</strong> - Open Query Playground for "My First Project" and keep <strong>Draft</strong> selected throughout this chapter.
 Query both forms of the HTML together with the link&#8217;s target and URL components:</p>
-</div>
 <div class="listingblock">
 <div class="content">
 <pre class="highlight"><code class="language-graphql" data-lang="graphql">{
@@ -634,6 +639,9 @@ Query both forms of the HTML together with the link&#8217;s target and URL compo
 }</code></pre>
 </div>
 </div>
+</li>
+</ol>
+</div>
 <div class="paragraph">
 <p>In <code>raw</code>, the link&#8217;s <code>href</code> contains <code>content://</code> followed by Lion&#8217;s content ID.
 In <code>processedHtml</code>, it contains <code>/animals/lion</code> instead, and <code>data-link-ref</code> connects the HTML element to the structured <code>links</code> entry.
@@ -661,38 +669,38 @@ The caption and alternative text you enter here belong to this use of the image 
 <div class="olist arabic">
 <ol class="arabic">
 <li>
-<p>Download <a href="https://unsplash.com/photos/lynx-walking-on-grass-field-Oko2E4kt2oU">this lynx photograph</a> by <a href="https://unsplash.com/@zmachacek">Zdeněk Macháček</a> and save it as <code>lynx.jpg</code>, or choose your own image.</p>
+<p><strong>Choose a lynx photograph</strong> - Download <a href="https://unsplash.com/photos/lynx-walking-on-grass-field-Oko2E4kt2oU">this lynx photograph</a> by <a href="https://unsplash.com/@zmachacek">Zdeněk Macháček</a> and save it as <code>lynx.jpg</code>, or choose your own image.</p>
 </li>
 <li>
-<p>Reopen Lynx and place the cursor in a new paragraph below its description.
+<p><strong>Choose where to insert the image</strong> - Reopen Lynx and place the cursor in a new paragraph below its description.
 Click the <strong>Image</strong> toolbar button.</p>
 </li>
 <li>
-<p>Drop <code>lynx.jpg</code> onto the upload area in the Insert Image dialog, or click the upload area to choose the file.
+<p><strong>Upload the photograph</strong> - Drop <code>lynx.jpg</code> onto the upload area in the Insert Image dialog, or click the upload area to choose the file.
 The uploaded image is selected automatically.</p>
 </li>
 <li>
-<p>Leave the image style as <strong>&lt;None&gt;</strong> and Custom width unchecked.
+<p><strong>Set the presentation and caption</strong> - Leave the image style as <strong>&lt;None&gt;</strong> and Custom width unchecked.
 For the supplied photograph, enter "Lynx in human care. Photo: Zdeněk Macháček." as the caption.</p>
 </li>
 <li>
-<p>Under Accessibility, choose <strong>Alternative text</strong> and enter "Lynx walking through grass."
+<p><strong>Add alternative text and save</strong> - Under Accessibility, choose <strong>Alternative text</strong> and enter "Lynx walking through grass."
 Click <b class="button">Insert</b>, then save Lynx.</p>
+<div class="imageblock">
+<div class="content">
+<img src="images/rich-text-image-settings.jpg" alt="Insert Image dialog showing /animals/lynx/lynx.jpg, its caption and Alternative text selection" width="880">
+</div>
+<div class="title">Figure 2. Caption and alternative text for the inserted photograph</div>
+</div>
 </li>
 <li>
-<p>Return to the content tree and expand Lynx to find the new image at <code>/animals/lynx/lynx.jpg</code>.</p>
+<p><strong>Find the uploaded content</strong> - Return to the content tree and expand Lynx to find the new image at <code>/animals/lynx/lynx.jpg</code>.</p>
 </li>
 </ol>
 </div>
 <div class="paragraph">
 <p>Uploading through this dialog creates a separate media content item under the animal you&#8217;re editing.
 The description references that image by ID, and the uploaded file is an attachment of the image content item, as explained in the <a href="media.ahtml">media chapter</a>.</p>
-</div>
-<div class="imageblock">
-<div class="content">
-<img src="images/rich-text-image-settings.jpg" alt="Insert Image dialog showing /animals/lynx/lynx.jpg, its caption and Alternative text selection" width="880">
-</div>
-<div class="title">Figure 2. Caption and alternative text for the inserted photograph</div>
 </div>
 <div class="paragraph">
 <p>Use the Decorative image option only when an image adds no information beyond its surrounding content.
@@ -701,9 +709,10 @@ For more editing controls, see the <a href="https://developer.enonic.com/docs/co
 </div>
 <div class="sect2">
 <h3 id="task_inspect_the_image_url"><a class="link" href="#task_inspect_the_image_url">Task: Inspect the image URL</a></h3>
-<div class="paragraph">
-<p>Query <code>images</code> alongside the processed HTML:</p>
-</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p><strong>Fetch the image URL components</strong> - Query <code>images</code> alongside the processed HTML:</p>
 <div class="listingblock">
 <div class="content">
 <pre class="highlight"><code class="language-graphql" data-lang="graphql">{
@@ -752,6 +761,9 @@ For more editing controls, see the <a href="https://developer.enonic.com/docs/co
 }</code></pre>
 </div>
 </div>
+</li>
+</ol>
+</div>
 <div class="paragraph">
 <p>Build the image URL as <code><a href="http://localhost:8080/api" class="bare">http://localhost:8080/api</a></code> + <code>path</code> + <code>queryString</code>, just as in the media chapter.
 Use it for the matching image&#8217;s <code>src</code>; the relative media path alone will point at your front-end&#8217;s host when rendered there.
@@ -769,9 +781,10 @@ You&#8217;ll add a square crop with a grayscale filter.</p>
 </div>
 <div class="sect2">
 <h3 id="task_create_and_apply_the_style"><a class="link" href="#task_create_and_apply_the_style">Task: Create and apply the style</a></h3>
-<div class="paragraph">
-<p>Create this file in your app:</p>
-</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p><strong>Define the image style</strong> - Create this file in your app:</p>
 <div class="listingblock">
 <div class="title">src/main/resources/cms/style/style.yaml</div>
 <div class="content">
@@ -784,27 +797,24 @@ styles:
     filter: "grayscale()"</code></pre>
 </div>
 </div>
-<div class="paragraph">
-<p><code>aspectRatio: "1:1"</code> requests a square crop, and <code>filter: "grayscale()"</code> removes color.
-Styles are available from apps assigned to the content project, including your app.
-For effects that only concern presentation, consider client-side CSS instead of server-side filters, as discussed in the media chapter.</p>
-</div>
-<div class="paragraph">
-<p>Save the file and let the watcher update the app.
+</li>
+<li>
+<p><strong>Apply the style to Lynx&#8217;s image</strong> - Save the file and let the watcher update the app.
 Reopen Lynx, double-click the image in Description, and choose <strong>Square grayscale</strong> from the style selector.
 Click <b class="button">Update</b> and save the animal.</p>
-</div>
 <div class="imageblock">
 <div class="content">
 <img src="images/rich-text-image-style.jpg" alt="Insert Image dialog with Square grayscale selected and a preview of the square, grayscale lynx photograph" width="880">
 </div>
 <div class="title">Figure 3. Square grayscale selected for the Lynx image</div>
 </div>
-<div class="paragraph">
-<p>Run the image query again.
-The returned URL now includes the crop and filter instructions; use both its <code>path</code> and <code>queryString</code> without modifying them.
-You can also inspect the selected style by adding this field next to <code>src</code> inside <code>images</code>:</p>
-</div>
+</li>
+<li>
+<p><strong>Inspect the styled image</strong> - Run the image query again.
+The returned URL now includes the crop and filter instructions; use both its <code>path</code> and <code>queryString</code> without modifying them.</p>
+</li>
+<li>
+<p><strong>Fetch the style settings</strong> - Add this field next to <code>src</code> inside <code>images</code> and run the query:</p>
 <div class="listingblock">
 <div class="content">
 <pre class="highlight"><code class="language-graphql" data-lang="graphql">style {
@@ -826,6 +836,14 @@ You can also inspect the selected style by adding this field next to <code>src</
 }</code></pre>
 </div>
 </div>
+</li>
+</ol>
+</div>
+<div class="paragraph">
+<p><code>aspectRatio: "1:1"</code> requests a square crop, and <code>filter: "grayscale()"</code> removes color.
+Styles are available from apps assigned to the content project, including your app.
+For effects that only concern presentation, consider client-side CSS instead of server-side filters, as discussed in the media chapter.</p>
+</div>
 <div class="paragraph">
 <p>The style is not a stylesheet for your whole front-end: captions, text and layout still use your front-end&#8217;s own styling.
 See the <a href="https://developer.enonic.com/docs/cms/stable/richtext/styles">CMS styles reference</a> for more options.</p>
@@ -843,18 +861,15 @@ In Guillotine, it becomes a placeholder plus configuration data for your client 
 </div>
 <div class="sect2">
 <h3 id="task_add_an_iframe_embed"><a class="link" href="#task_add_an_iframe_embed">Task: Add an iframe embed</a></h3>
-<div class="paragraph">
-<p>In Lynx&#8217;s Description, place the cursor in a new paragraph after the image and click <strong>Insert macro</strong>.
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p><strong>Configure the video embed</strong> - In Lynx&#8217;s Description, place the cursor in a new paragraph after the image and click <strong>Insert macro</strong>.
 Choose <strong>Embed IFrame</strong> and enter:</p>
-</div>
 <div class="listingblock">
 <div class="content">
 <pre class="highlight"><code class="language-html" data-lang="html">&lt;iframe src="https://www.youtube.com/embed/gr5EwZo_CHQ" title="Lynx video" width="560" height="315" allowfullscreen&gt;&lt;/iframe&gt;</code></pre>
 </div>
-</div>
-<div class="paragraph">
-<p>Insert the macro and save Lynx.
-The macro stores the iframe configuration in the rich text.</p>
 </div>
 <div class="imageblock">
 <div class="content">
@@ -862,12 +877,20 @@ The macro stores the iframe configuration in the rich text.</p>
 </div>
 <div class="title">Figure 4. Configuring the built-in Embed IFrame macro</div>
 </div>
+</li>
+<li>
+<p><strong>Save the embed</strong> - Insert the macro and save Lynx.
+The macro stores the iframe configuration in the rich text.</p>
+</li>
+</ol>
+</div>
 </div>
 <div class="sect2">
 <h3 id="task_query_the_macro_configuration"><a class="link" href="#task_query_the_macro_configuration">Task: Query the macro configuration</a></h3>
-<div class="paragraph">
-<p>Query the typed <code>macros</code> fields:</p>
-</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p><strong>Fetch the macro configuration</strong> - Query the typed <code>macros</code> fields:</p>
 <div class="listingblock">
 <div class="content">
 <pre class="highlight"><code class="language-graphql" data-lang="graphql">{
@@ -919,6 +942,9 @@ The macro stores the iframe configuration in the rich text.</p>
   }
 }</code></pre>
 </div>
+</div>
+</li>
+</ol>
 </div>
 <div class="paragraph">
 <p>Match <code>data-macro-ref</code> with <code>ref</code>, then use the macro&#8217;s name and configuration to render it in your client.
@@ -996,7 +1022,7 @@ In the next chapter, you&#8217;ll add fields across content types with <a href="
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2026-10-27 23:21:28 UTC
+Last updated 2026-10-28 13:32:09 UTC
 </div>
 </div>
 </body>

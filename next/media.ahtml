@@ -494,18 +494,18 @@ The media APIs deliver the files at those URLs.</p>
 <div class="olist arabic">
 <ol class="arabic">
 <li>
-<p>Download <a href="https://unsplash.com/photos/8oLnCRz7hwM">this lion photograph</a> by <a href="https://unsplash.com/@keyursphotography">Keyur Nandaniya</a>, or choose a JPEG with its main subject away from the center.
+<p><strong>Choose a photograph</strong> - Download <a href="https://unsplash.com/photos/8oLnCRz7hwM">this lion photograph</a> by <a href="https://unsplash.com/@keyursphotography">Keyur Nandaniya</a>, or choose a JPEG with its main subject away from the center.
 Save it as <code>lion.jpg</code> if you want the filename to match the examples.</p>
 </li>
 <li>
-<p>In your "My First Project" content project, create a folder named "Images" at the root, with the path <code>/images</code>.</p>
+<p><strong>Create the Images folder</strong> - In your "My First Project" content project, create a folder named "Images" at the root, with the path <code>/images</code>.</p>
 </li>
 <li>
-<p>Select the Images folder, click <b class="button">New</b>, and choose the <strong>Media</strong> tab.
+<p><strong>Choose the upload destination</strong> - Select the Images folder, click <b class="button">New</b>, and choose the <strong>Media</strong> tab.
 Check that the destination shown is <code>/images/</code>.</p>
 </li>
 <li>
-<p>Click the upload area to select your file, or drag the file onto it.</p>
+<p><strong>Upload the file</strong> - Click the upload area to select your file, or drag the file onto it.</p>
 <div class="imageblock">
 <div class="content">
 <img src="images/media-upload.png" alt="New Content dialog with the Media tab selected and /images/ as the upload destination" width="1440">
@@ -531,10 +531,11 @@ Let&#8217;s inspect its data and find the file attached to it.</p>
 </div>
 <div class="sect2">
 <h3 id="task_find_the_image_and_its_attachment"><a class="link" href="#task_find_the_image_and_its_attachment">Task: Find the image and its attachment</a></h3>
-<div class="paragraph">
-<p>Open Query Playground, select "My First Project" and keep <strong>Draft</strong> selected throughout this chapter.
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p><strong>Find the uploaded image</strong> - Open Query Playground, select "My First Project" and keep <strong>Draft</strong> selected throughout this chapter.
 Run this query to find up to ten images anywhere in the project:</p>
-</div>
 <div class="listingblock">
 <div class="content">
 <pre class="highlight"><code class="language-graphql" data-lang="graphql">{
@@ -561,11 +562,6 @@ Run this query to find up to ten images anywhere in the project:</p>
   }
 }</code></pre>
 </div>
-</div>
-<div class="paragraph">
-<p>The <code>dataAsJson</code> field shows the stored content data, as it did for your artists.
-The <code>attachments</code> field lists the attached files and their metadata.
-Both are common content fields, so this query does not need an inline fragment.</p>
 </div>
 <div class="paragraph">
 <p>Below is one item from the <code>data.guillotine.queryDsl</code> array.
@@ -595,6 +591,17 @@ This example shows the image immediately after upload; your filename, dimensions
   ]
 }</code></pre>
 </div>
+</div>
+</li>
+<li>
+<p><strong>Keep the content path</strong> - Copy your image&#8217;s <code>_path</code> for the following queries.</p>
+</li>
+</ol>
+</div>
+<div class="paragraph">
+<p>The <code>dataAsJson</code> field shows the stored content data, as it did for your artists.
+The <code>attachments</code> field lists the attached files and their metadata.
+Both are common content fields, so this query does not need an inline fragment.</p>
 </div>
 <div class="paragraph">
 <p>Notice how the content and file fit together:</p>
@@ -626,9 +633,6 @@ The <a href="https://developer.enonic.com/docs/cms/stable/media">CMS media refer
 See <a href="https://developer.enonic.com/docs/cms/stable/media/media-indexing">Media indexing</a> for what becomes searchable and how to query it.
 You&#8217;ll explore the underlying storage directly in the <a href="data-toolbox.ahtml">Data Toolbox chapter</a>.</p>
 </div>
-<div class="paragraph">
-<p>Keep your image&#8217;s <code>_path</code> for the following queries.</p>
-</div>
 </div>
 </div>
 </div>
@@ -643,10 +647,11 @@ Like Guillotine, it is a Universal API: on your sandbox, its address starts with
 </div>
 <div class="sect2">
 <h3 id="task_open_and_download_the_attachment"><a class="link" href="#task_open_and_download_the_attachment">Task: Open and download the attachment</a></h3>
-<div class="paragraph">
-<p>Use <code>get</code> with the content path from your response.
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p><strong>Fetch the attachment URL</strong> - Use <code>get</code> with the content path from your response.
 Replace <code>/images/lion.jpg</code> if your image has a different path:</p>
-</div>
 <div class="listingblock">
 <div class="content">
 <pre class="highlight"><code class="language-graphql" data-lang="graphql">{
@@ -665,11 +670,6 @@ Replace <code>/images/lion.jpg</code> if your image has a different path:</p>
 </div>
 </div>
 <div class="paragraph">
-<p>The CMS content type is <code>media:image</code>; its GraphQL object type is <code>media_Image</code>.
-As with Artist in the previous chapter, the inline fragment gives access to fields belonging to that GraphQL type.
-<code>mediaUrl</code> is available on all media types.</p>
-</div>
-<div class="paragraph">
 <p>The <code>data.guillotine.get</code> object looks like this, with your own content ID, fingerprint and filename:</p>
 </div>
 <div class="listingblock">
@@ -684,24 +684,32 @@ As with Artist in the previous chapter, the inline fragment gives access to fiel
 }</code></pre>
 </div>
 </div>
-<div class="paragraph">
-<p>Build the file&#8217;s address from <strong>your own response</strong>: start with <code><a href="http://localhost:8080/api" class="bare">http://localhost:8080/api</a></code>, then append <code>mediaUrl.path</code> and <code>mediaUrl.queryString</code> exactly as returned.
+</li>
+<li>
+<p><strong>Build the attachment address</strong> - Use <strong>your own response</strong>: start with <code><a href="http://localhost:8080/api" class="bare">http://localhost:8080/api</a></code>, then append <code>mediaUrl.path</code> and <code>mediaUrl.queryString</code> exactly as returned.
 An empty <code>queryString</code> adds nothing.
 For the example above, the address would be:</p>
-</div>
 <div class="listingblock">
 <div class="content">
 <pre>http://localhost:8080/api/media:attachment/my-first-project:draft/3cff3960-08e9-4c92-828e-917187c1dc20:927e557892810fabb5e2c76cd686a7e7/lion.jpg</pre>
 </div>
 </div>
-<div class="paragraph">
-<p>Open your assembled URL in a new tab in the same browser where you are logged in to Content Studio.
+</li>
+<li>
+<p><strong>View the original file</strong> - Open your assembled URL in a new tab in the same browser where you are logged in to Content Studio.
 It displays the original uploaded image.
 Draft media requires an authenticated request; copying the example URL above will not retrieve your own image.</p>
+</li>
+<li>
+<p><strong>Download the attachment</strong> - Change <code>mediaUrl</code> to <code>mediaUrl(download: true)</code> and run the query again.
+Assemble and open the new URL, including its <code>queryString</code>; the browser will download the attachment.</p>
+</li>
+</ol>
 </div>
 <div class="paragraph">
-<p>To download the file instead of displaying it, change <code>mediaUrl</code> to <code>mediaUrl(download: true)</code> and run the query again.
-Assemble and open the new URL, including its <code>queryString</code>; the browser will download the attachment.</p>
+<p>The CMS content type is <code>media:image</code>; its GraphQL object type is <code>media_Image</code>.
+As with Artist in the previous chapter, the inline fragment gives access to fields belonging to that GraphQL type.
+<code>mediaUrl</code> is available on all media types.</p>
 </div>
 <div class="paragraph">
 <p>The content item&#8217;s <code>_path</code>, such as <code>/images/lion.jpg</code>, identifies the item in queries.
@@ -725,10 +733,11 @@ Use <code>mediaUrl</code> when you need the original uploaded file.</p>
 </div>
 <div class="sect2">
 <h3 id="task_open_a_portrait_crop"><a class="link" href="#task_open_a_portrait_crop">Task: Open a portrait crop</a></h3>
-<div class="paragraph">
-<p>Use <code>get</code> to retrieve the image whose content path you copied above.
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p><strong>Request a portrait crop</strong> - Use <code>get</code> to retrieve the image whose content path you copied above.
 Replace <code>/images/lion.jpg</code> if your image has a different path:</p>
-</div>
 <div class="listingblock">
 <div class="content">
 <pre class="highlight"><code class="language-graphql" data-lang="graphql">{
@@ -761,15 +770,18 @@ Replace <code>/images/lion.jpg</code> if your image has a different path:</p>
 }</code></pre>
 </div>
 </div>
-<div class="paragraph">
-<p>Assemble the URL from <code><a href="http://localhost:8080/api" class="bare">http://localhost:8080/api</a></code> plus your returned <code>imageUrl.path</code> and <code>imageUrl.queryString</code>, then open it in your browser.
+</li>
+<li>
+<p><strong>View the crop</strong> - Assemble the URL from <code><a href="http://localhost:8080/api" class="bare">http://localhost:8080/api</a></code> plus your returned <code>imageUrl.path</code> and <code>imageUrl.queryString</code>, then open it in your browser.
 Without a focal point, the crop is centered, which can cut off an off-center subject:</p>
-</div>
 <div class="imageblock">
 <div class="content">
 <img src="images/image-cropped-unfocused.jpg" alt="Portrait crop with part of the lion cut off at the left edge" width="400">
 </div>
 <div class="title">Figure 2. Portrait crop before setting a focal point</div>
+</div>
+</li>
+</ol>
 </div>
 </div>
 </div>
@@ -786,7 +798,7 @@ It guides the crop; it does not guarantee that the entire subject fits every sha
 <div class="olist arabic">
 <ol class="arabic">
 <li>
-<p>Return to Content Studio, select your image and click <b class="button">Edit</b>.
+<p><strong>Open the image editor</strong> - Return to Content Studio, select your image and click <b class="button">Edit</b>.
 The content form contains fields such as Caption and Alternative text, and the image preview includes editing controls.</p>
 <div class="imageblock">
 <div class="content">
@@ -796,7 +808,7 @@ The content form contains fields such as Caption and Alternative text, and the i
 </div>
 </li>
 <li>
-<p>In the toolbar above the image preview, click <strong>Set Autofocus</strong> to edit the focal point.
+<p><strong>Position the focal point</strong> - In the toolbar above the image preview, click <strong>Set Autofocus</strong> to edit the focal point.
 Click the lion&#8217;s face, or drag the marker onto the subject of your own image.</p>
 <div class="imageblock">
 <div class="content">
@@ -806,14 +818,11 @@ Click the lion&#8217;s face, or drag the marker onto the subject of your own ima
 </div>
 </li>
 <li>
-<p>Click <b class="button">Apply</b> to accept the position, then <b class="button">Save</b> in the Content Editor toolbar to save the content item.</p>
+<p><strong>Save the focal point</strong> - Click <b class="button">Apply</b> to accept the position, then <b class="button">Save</b> in the Content Editor toolbar to save the content item.</p>
 </li>
 <li>
-<p>Return to Query Playground and run the same portrait-crop query again.
+<p><strong>Compare the new crop</strong> - Return to Query Playground and run the same portrait-crop query again.
 Assemble and open the <strong>newly returned URL</strong> so you see the saved change.</p>
-</li>
-</ol>
-</div>
 <div class="paragraph">
 <p>The new crop prioritizes the selected subject:</p>
 </div>
@@ -823,6 +832,9 @@ Assemble and open the <strong>newly returned URL</strong> so you see the saved c
 </div>
 <div class="title">Figure 5. The same portrait crop with a focal point</div>
 </div>
+</li>
+</ol>
+</div>
 <div class="paragraph">
 <p>Image edits are stored on the content item; they do not rewrite the original attachment.
 The <a href="https://developer.enonic.com/docs/content-studio/stable/content-types/image">Content Studio image documentation</a> covers cropping, rotation, resetting edits and image metadata.</p>
@@ -830,9 +842,10 @@ The <a href="https://developer.enonic.com/docs/content-studio/stable/content-typ
 </div>
 <div class="sect2">
 <h3 id="task_add_a_filter"><a class="link" href="#task_add_a_filter">Task: Add a filter</a></h3>
-<div class="paragraph">
-<p>Keep the same image and scale, and add a <code>filter</code> argument:</p>
-</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p><strong>Request image filters</strong> - Keep the same image and scale, and add a <code>filter</code> argument:</p>
 <div class="listingblock">
 <div class="content">
 <pre class="highlight"><code class="language-graphql" data-lang="graphql">{
@@ -855,14 +868,19 @@ The <a href="https://developer.enonic.com/docs/content-studio/stable/content-typ
 </div>
 <div class="paragraph">
 <p>Use your image&#8217;s content path if it differs from the example.
-The semicolon separates two filters: grayscale and a black border.
-Build and open the URL as before, including the complete <code>queryString</code> returned by Guillotine.</p>
+The semicolon separates two filters: grayscale and a black border.</p>
 </div>
+</li>
+<li>
+<p><strong>View the filtered image</strong> - Build and open the URL as before, including the complete <code>queryString</code> returned by Guillotine.</p>
 <div class="imageblock">
 <div class="content">
 <img src="images/image-processed.jpg" alt="Portrait crop of the lion in grayscale with a black border" width="400">
 </div>
 <div class="title">Figure 6. The cropped image with filters</div>
+</div>
+</li>
+</ol>
 </div>
 <div class="paragraph">
 <p>The <a href="https://developer.enonic.com/docs/cms/stable/apis/image">Image API reference</a> describes the available scaling methods and filters.</p>
@@ -915,7 +933,7 @@ In the next chapter, you&#8217;ll take a closer look at <a href="form-items.ahtm
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2026-10-27 23:21:28 UTC
+Last updated 2026-10-28 13:32:09 UTC
 </div>
 </div>
 </body>

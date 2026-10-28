@@ -37,11 +37,15 @@
       "document": "mixins"
     },
     {
-      "title": "9 - Front-end",
+      "title": "9 - Permissions",
+      "document": "permissions"
+    },
+    {
+      "title": "10 - Front-end",
       "document": "frontend"
     },
     {
-      "title": "10 - Under the hood",
+      "title": "11 - Under the hood",
       "document": "data-toolbox"
     }
   ]

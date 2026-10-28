@@ -527,9 +527,12 @@ Keep Draft selected throughout this chapter so your queries include the changes 
 <div class="sect2">
 <h3 id="task_query_your_artists"><a class="link" href="#task_query_your_artists">Task: Query your artists</a></h3>
 <div class="paragraph">
-<p>Use <code>queryDsl</code> to find content by its type.
-Run this query to retrieve up to ten artists, sorted by display name:</p>
+<p>Use <code>queryDsl</code> to find content by its type.</p>
 </div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p><strong>Find artists by content type</strong> - Run this query to retrieve up to ten artists, sorted by display name:</p>
 <div class="listingblock">
 <div class="content">
 <pre class="highlight"><code class="language-GraphQL" data-lang="GraphQL">{
@@ -551,11 +554,6 @@ Run this query to retrieve up to ten artists, sorted by display name:</p>
   }
 }</code></pre>
 </div>
-</div>
-<div class="paragraph">
-<p>The <code>term</code> matches the full content type name, including your app&#8217;s namespace.
-The Artists folder keeps your content organized, but this query finds artists anywhere in the selected content project.
-<code>first</code> limits the number of results, and <code>sort</code> puts them in alphabetical order.</p>
 </div>
 <div class="paragraph">
 <p>You should get Cardi B, Missy Elliott and P!nk in the response panel, in that order.
@@ -590,12 +588,22 @@ Your content IDs will differ from these example values, and the paths depend on 
 }</code></pre>
 </div>
 </div>
-<div class="paragraph">
-<p>Try changing <code>first</code> to <code>1</code> and <code>direction</code> to <code>DESC</code>, then run the query again.
-You should get only P!nk, the last artist alphabetically.
-Now remove the <code>first</code> and <code>sort</code> arguments before continuing.
+</li>
+<li>
+<p><strong>Try sorting and limiting results</strong> - Change <code>first</code> to <code>1</code> and <code>direction</code> to <code>DESC</code>, then run the query again.
+You should get only P!nk, the last artist alphabetically.</p>
+</li>
+<li>
+<p><strong>Return to the query defaults</strong> - Remove the <code>first</code> and <code>sort</code> arguments before continuing.
 Without <code>first</code>, <code>queryDsl</code> returns up to ten results; without <code>sort</code>, it uses relevance order.
 The remaining examples use these defaults, so results may appear in a different order from the sample responses.</p>
+</li>
+</ol>
+</div>
+<div class="paragraph">
+<p>The <code>term</code> matches the full content type name, including your app&#8217;s namespace.
+The Artists folder keeps your content organized, but this query finds artists anywhere in the selected content project.
+<code>first</code> limits the number of results, and <code>sort</code> puts them in alphabetical order.</p>
 </div>
 </div>
 <div class="sect2">
@@ -639,25 +647,28 @@ Guillotine uses that definition to generate GraphQL types for querying your arti
 These types are part of the <em>GraphQL schema</em>: the API&#8217;s description of the types, fields and operations available to query.
 The <a href="https://graphql.org/learn/schema/">GraphQL documentation</a> explains schemas and types in more detail.</p>
 </div>
-<div class="paragraph">
-<p>Open the Docs panel to explore those types.
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p><strong>Find the Artist GraphQL type</strong> - Open the Docs panel to explore those types.
 Search for <code>artist</code> and locate the <code>{app-name-query}_Artist</code> object type:</p>
-</div>
 <div class="imageblock">
 <div class="content">
 <img src="images/api-doc.png" alt="Query Playground Docs panel showing the Artist GraphQL object type, its Content interface, and common fields" width="477">
 </div>
 <div class="title">Figure 1. The Artist GraphQL type</div>
 </div>
+</li>
+<li>
+<p><strong>Find the form fields</strong> - Follow the Artist object type&#8217;s <code>data</code> field to <code>{app-name-query}_Artist_Data</code> in the Docs panel and find <code>legalName</code> and <code>about</code>.
+These are the fields you defined in your YAML form.</p>
+</li>
+</ol>
+</div>
 <div class="paragraph">
 <p>Notice that the Artist object type <em>implements</em> the <code>Content</code> interface.
 An interface defines fields shared by the object types that implement it.
 Here, <code>Content</code> defines common content fields such as <code>displayName</code>, <code>_path</code> and <code>_id</code>, so you can request them for any content item.</p>
-</div>
-<div class="paragraph">
-<p>The Artist object type also has a <code>data</code> field whose type is <code>{app-name-query}_Artist_Data</code>.
-Follow that type in the Docs panel and find <code>legalName</code> and <code>about</code>.
-These are the fields you defined in your YAML form.</p>
 </div>
 <div class="admonitionblock note">
 <table>
@@ -679,21 +690,17 @@ The app namespace carries over to the API, keeping the types from different apps
 <p>You&#8217;ve inspected the Artist GraphQL type in the Docs panel.
 Now you&#8217;ll query the fields from your content type&#8217;s form.</p>
 </div>
-<div class="paragraph">
-<p>Close the Docs panel, head back to the editor and remove <code>displayName</code>, <code>_path</code> and <code>_id</code> from the query we introduced earlier.</p>
-</div>
-<div class="paragraph">
-<p>Now, put your cursor inside the result selection braces immediately after <code>queryDsl(&#8230;&#8203;)</code>, and press <span class="keyseq"><kbd>ctrl</kbd>+<kbd>space</kbd></span> to see which fields you can request.
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p><strong>Prepare the result selection</strong> - Close the Docs panel, head back to the editor and remove <code>displayName</code>, <code>_path</code> and <code>_id</code> from the query we introduced earlier.</p>
+</li>
+<li>
+<p><strong>Explore the available fields</strong> - Put your cursor inside the result selection braces immediately after <code>queryDsl(&#8230;&#8203;)</code>, and press <span class="keyseq"><kbd>ctrl</kbd>+<kbd>space</kbd></span> to see which fields you can request.
 Look for the common fields <code>displayName</code>, <code>_path</code> and <code>_id</code> in the suggestions.</p>
-</div>
-<div class="paragraph">
-<p>The artist&#8217;s <code>legalName</code> and <code>about</code> fields are not available directly here.
-<code>queryDsl</code> returns the general <code>Content</code> interface, even when its filter selects only artists.
-The filter controls which items match; it does not change the query field&#8217;s declared GraphQL return type.
-To select the Artist type&#8217;s own fields, use an <a href="https://graphql.org/learn/queries/#inline-fragments">inline fragment</a>.
-The syntax <code>... on {app-name-query}_Artist { ... }</code> means "for results whose GraphQL type is Artist, select the fields inside this block."
-This gives you access to the Artist&#8217;s <code>data</code> fields:</p>
-</div>
+</li>
+<li>
+<p><strong>Query the Artist fields</strong> - Run this query with an inline fragment to access the Artist&#8217;s <code>data</code> fields:</p>
 <div class="listingblock">
 <div class="content">
 <pre class="highlight"><code class="language-GraphQL" data-lang="GraphQL">{
@@ -718,6 +725,16 @@ This gives you access to the Artist&#8217;s <code>data</code> fields:</p>
 }</code></pre>
 </div>
 </div>
+</li>
+</ol>
+</div>
+<div class="paragraph">
+<p>The autocomplete suggestions omit <code>legalName</code> and <code>about</code> because those fields belong to the Artist&#8217;s <code>data</code> type.
+<code>queryDsl</code> returns the general <code>Content</code> interface, even when its filter selects only artists.
+The filter controls which items match; it does not change the query field&#8217;s declared GraphQL return type.
+To select the Artist type&#8217;s own fields, use an <a href="https://graphql.org/learn/queries/#inline-fragments">inline fragment</a>.
+The syntax <code>... on {app-name-query}_Artist { ... }</code> means "for results whose GraphQL type is Artist, select the fields inside this block."</p>
+</div>
 <div class="paragraph">
 <p>The filter selects artists, and the inline fragment lets you request their <code>legalName</code> and <code>about</code> fields under <code>data</code>, along with the general content field <code>_id</code>.
 Below is one example item from the <code>data.guillotine.queryDsl</code> array.
@@ -739,9 +756,12 @@ The field values depend on what you entered in Content Studio:</p>
 <div class="sect2">
 <h3 id="task_retrieve_one_artist"><a class="link" href="#task_retrieve_one_artist">Task: Retrieve one artist</a></h3>
 <div class="paragraph">
-<p>When you know an item&#8217;s path or ID, use <code>get</code> to retrieve it directly.
-Copy Cardi B&#8217;s <code>_path</code> from the first response and use it as the <code>key</code> below:</p>
+<p>When you know an item&#8217;s path or ID, use <code>get</code> to retrieve it directly.</p>
 </div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p><strong>Fetch an artist by path</strong> - Copy Cardi B&#8217;s <code>_path</code> from the first response and use it as the <code>key</code> below:</p>
 <div class="listingblock">
 <div class="content">
 <pre class="highlight"><code class="language-GraphQL" data-lang="GraphQL">{
@@ -759,23 +779,31 @@ Copy Cardi B&#8217;s <code>_path</code> from the first response and use it as th
 }</code></pre>
 </div>
 </div>
+</li>
+<li>
+<p><strong>Fetch the same artist by ID</strong> - Replace the path with Cardi B&#8217;s <code>_id</code> from your first response and run the query again.
+Both keys retrieve the same item.</p>
+</li>
+</ol>
+</div>
+<div class="paragraph">
+<p>An ID stays the same when an item is renamed or moved; its path changes.
+If the key does not match an item in the selected project and branch, <code>get</code> returns <code>null</code>.</p>
+</div>
 <div class="paragraph">
 <p>The result is one object under <code>data.guillotine.get</code>, rather than an array of results.
 Like <code>queryDsl</code>, <code>get</code> returns the <code>Content</code> interface, so you use an inline fragment to select the Artist fields.</p>
-</div>
-<div class="paragraph">
-<p>Try replacing the path with Cardi B&#8217;s <code>_id</code> from your first response.
-Both keys retrieve the same item.
-An ID stays the same when an item is renamed or moved; its path changes.
-If the key does not match an item in the selected project and branch, <code>get</code> returns <code>null</code>.</p>
 </div>
 </div>
 <div class="sect2">
 <h3 id="task_inspect_the_form_data"><a class="link" href="#task_inspect_the_form_data">Task: Inspect the form data</a></h3>
 <div class="paragraph">
-<p>For a quick look at all stored form data, use <code>dataAsJson</code>.
-Update the single-artist query to:</p>
+<p>For a quick look at all stored form data, use <code>dataAsJson</code>.</p>
 </div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p><strong>Fetch the stored form data</strong> - Update the single-artist query to:</p>
 <div class="listingblock">
 <div class="content">
 <pre class="highlight"><code class="language-GraphQL" data-lang="GraphQL">{
@@ -787,6 +815,9 @@ Update the single-artist query to:</p>
   }
 }</code></pre>
 </div>
+</div>
+</li>
+</ol>
 </div>
 <div class="paragraph">
 <p>This returns all stored form fields without selecting them individually.
@@ -821,9 +852,10 @@ The "Dsl" stands for "Domain Specific Language": the structured query you pass t
 </div>
 <div class="sect2">
 <h3 id="task_find_artists_by_their_description"><a class="link" href="#task_find_artists_by_their_description">Task: Find artists by their description</a></h3>
-<div class="paragraph">
-<p>Keep the Artist type filter and add a text search on <code>data.about</code>:</p>
-</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p><strong>Search the artist descriptions</strong> - Keep the Artist type filter and add a text search on <code>data.about</code>:</p>
 <div class="listingblock">
 <div class="content">
 <pre class="highlight"><code class="language-GraphQL" data-lang="GraphQL">{
@@ -859,6 +891,9 @@ The "Dsl" stands for "Domain Specific Language": the structured query you pass t
 }</code></pre>
 </div>
 </div>
+</li>
+</ol>
+</div>
 <div class="paragraph">
 <p>The <code>boolean.must</code> list requires both conditions to match: the item must be an Artist, and its <code>about</code> text must match <code>rap</code>.
 The <code>ngram</code> expression finds partial words, so it can match "rapper".
@@ -884,7 +919,7 @@ You&#8217;ll add a birthday to the Artist content type and read it back through 
 <div class="olist arabic">
 <ol class="arabic">
 <li>
-<p>Update the Artist content type:</p>
+<p><strong>Add the birthday field</strong> - Update the Artist content type:</p>
 <div class="listingblock">
 <div class="title">src/main/resources/cms/content-types/artist/artist.yaml</div>
 <div class="content">
@@ -912,7 +947,7 @@ Save the file while <code>enonic dev</code> is running, as in the previous chapt
 </div>
 </li>
 <li>
-<p>Open each artist in Content Studio, enter the birthday below and save:</p>
+<p><strong>Enter the birthdays</strong> - Open each artist in Content Studio, enter the birthday below and save:</p>
 <div class="ulist">
 <ul>
 <li>
@@ -928,12 +963,12 @@ Save the file while <code>enonic dev</code> is running, as in the previous chapt
 </div>
 </li>
 <li>
-<p>Close and reopen Query Playground to reload the GraphQL schema.
+<p><strong>Reload the GraphQL schema</strong> - Close and reopen Query Playground to reload the GraphQL schema.
 Keep the <strong>Draft</strong> branch selected: these edits have not been published.
 Find <code>{app-name-query}_Artist_Data</code> in the Docs panel and notice its new <code>birthday</code> field.</p>
 </li>
 <li>
-<p>Run the artist query with <code>birthday</code> selected:</p>
+<p><strong>Query the birthdays</strong> - Run the artist query with <code>birthday</code> selected:</p>
 <div class="listingblock">
 <div class="content">
 <pre class="highlight"><code class="language-GraphQL" data-lang="GraphQL">{
@@ -956,9 +991,6 @@ Find <code>{app-name-query}_Artist_Data</code> in the Docs panel and notice its 
   }
 }</code></pre>
 </div>
-</div>
-</li>
-</ol>
 </div>
 <div class="paragraph">
 <p>The <code>data.guillotine.queryDsl</code> array now contains:</p>
@@ -987,6 +1019,9 @@ Find <code>{app-name-query}_Artist_Data</code> in the Docs panel and notice its 
   }
 ]</code></pre>
 </div>
+</div>
+</li>
+</ol>
 </div>
 <div class="paragraph">
 <p>You changed the CMS schema and entered content; Guillotine made the new field available without any API code.</p>
@@ -1063,7 +1098,7 @@ In the next chapter, you&#8217;ll see <a href="media.ahtml">how XP deals with fi
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2026-10-27 23:21:28 UTC
+Last updated 2026-10-28 13:32:09 UTC
 </div>
 </div>
 </body>

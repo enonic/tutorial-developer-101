@@ -443,12 +443,25 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <div id="toc" class="toc2">
 <div id="toctitle">Table of Contents</div>
 <ul class="sectlevel1">
-<li><a href="#install_the_cli">Install the CLI</a></li>
-<li><a href="#create_a_sandbox">Create a sandbox</a></li>
-<li><a href="#create_an_app">Create an app</a></li>
+<li><a href="#install_the_cli">Install the CLI</a>
+<ul class="sectlevel2">
+<li><a href="#task_install_the_cli">Task: Install the CLI</a></li>
+</ul>
+</li>
+<li><a href="#create_a_sandbox">Create a sandbox</a>
+<ul class="sectlevel2">
+<li><a href="#task_start_a_sandbox">Task: Start a sandbox</a></li>
+</ul>
+</li>
+<li><a href="#create_an_app">Create an app</a>
+<ul class="sectlevel2">
+<li><a href="#task_create_your_app">Task: Create your app</a></li>
+</ul>
+</li>
 <li><a href="#build_and_deploy">Build and deploy</a>
 <ul class="sectlevel2">
-<li><a href="#change_the_apps_title">Change the app&#8217;s title</a></li>
+<li><a href="#task_run_the_app">Task: Run the app</a></li>
+<li><a href="#task_change_the_apps_title">Task: Change the app&#8217;s title</a></li>
 <li><a href="#troubleshooting">Troubleshooting</a></li>
 </ul>
 </li>
@@ -471,9 +484,12 @@ It takes a few minutes, and everything you install here is used in every later c
 <div class="paragraph">
 <p>Enonic provides a Command Line Interface (CLI) for working with XP. It manages local XP instances, creates projects from starters, and builds and deploys your apps.</p>
 </div>
-<div class="paragraph">
-<p>If you have <code>npm</code> on your machine, install the CLI with:</p>
-</div>
+<div class="sect2">
+<h3 id="task_install_the_cli"><a class="link" href="#task_install_the_cli">Task: Install the CLI</a></h3>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p><strong>Install the command-line tool</strong> - If you have <code>npm</code> on your machine, run:</p>
 <div class="listingblock">
 <div class="content">
 <pre class="highlight"><code class="language-shell" data-lang="shell">npm install -g @enonic/cli</code></pre>
@@ -482,8 +498,12 @@ It takes a few minutes, and everything you install here is used in every later c
 <div class="paragraph">
 <p>If not, there are <a href="https://developer.enonic.com/start">alternative ways to install the Enonic CLI</a>.</p>
 </div>
-<div class="paragraph">
-<p>Verify the installation by running <code>enonic -v</code>. This should print the version of the CLI. This tutorial expects version 4 or newer.</p>
+</li>
+<li>
+<p><strong>Verify the installation</strong> - Run <code>enonic -v</code>.
+This should print the version of the CLI; this tutorial expects version 4 or newer.</p>
+</li>
+</ol>
 </div>
 <div class="admonitionblock note">
 <table>
@@ -499,19 +519,12 @@ You do not need to install Java or Gradle. The sandbox you create next bundles t
 </div>
 </div>
 </div>
+</div>
 <div class="sect1">
 <h2 id="create_a_sandbox"><a class="link" href="#create_a_sandbox">Create a sandbox</a></h2>
 <div class="sectionbody">
 <div class="paragraph">
 <p>A <em>sandbox</em> is a local developer instance of Enonic XP, with its own data and configuration. You can have several, each on its own XP version.</p>
-</div>
-<div class="paragraph">
-<p>Create and start a sandbox called <code>101tutorial</code> by running this command in your terminal:</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="highlight"><code class="language-shell" data-lang="shell">enonic sandbox create 101tutorial -t essentials -f</code></pre>
-</div>
 </div>
 <div class="paragraph">
 <p>The <code>essentials</code> template installs a set of applications from Enonic Market, including Content Studio and Guillotine, which you will meet in the coming chapters. The <code>-f</code> flag accepts the default answer to every prompt, which selects the most recent release of Enonic XP, and starts the sandbox.</p>
@@ -528,21 +541,39 @@ This tutorial is written for Enonic XP 8.1 and the versions of Content Studio an
 </tr>
 </table>
 </div>
-<div class="paragraph">
-<p>The sandbox prints a fair amount of output while it downloads XP, installs the applications and starts up. Once you see a line saying that Enonic XP has started, open <a href="http://localhost:8080">http://localhost:8080</a> in your browser. You should see the Enonic SDK welcome page, listing the sandbox&#8217;s installed applications:</p>
+<div class="sect2">
+<h3 id="task_start_a_sandbox"><a class="link" href="#task_start_a_sandbox">Task: Start a sandbox</a></h3>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p><strong>Create and start the sandbox</strong> - Run this command in your terminal:</p>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-shell" data-lang="shell">enonic sandbox create 101tutorial -t essentials -f</code></pre>
 </div>
+</div>
+</li>
+<li>
+<p><strong>Open the sandbox welcome page</strong> - Wait for the terminal to report that Enonic XP has started, then open <a href="http://localhost:8080">http://localhost:8080</a> in your browser.
+You should see the Enonic SDK welcome page, listing the sandbox&#8217;s installed applications:</p>
 <div class="imageblock">
 <div class="content">
 <img src="images/setup-sdk.png" alt="The Enonic SDK welcome page for XP 8.1.0, with the Admin, APIs and VHosts cards, the installed applications Content Studio, Data Toolbox and Guillotine, and the sandbox&#8217;s configuration files" width="1001">
 </div>
 </div>
-<div class="paragraph">
-<p>Click <b class="button">Log In as Guest</b> to open the XP admin as the instance&#8217;s super user. You should see something like this:</p>
-</div>
+</li>
+<li>
+<p><strong>Sign in to the admin interface</strong> - Click <b class="button">Log In as Guest</b>.
+This signs you in as the sandbox&#8217;s built-in super user (<code>su</code>), with full administrator access.
+We&#8217;ll call this your administrator session throughout the tutorial.
+You should see something like this:</p>
 <div class="imageblock">
 <div class="content">
 <img src="images/setup-home.jpg" alt="The XP menu for the 101tutorial sandbox, with useful links on the left and tiles for Dashboard, Applications, Content Studio, Data toolbox and Users" width="1440">
 </div>
+</div>
+</li>
+</ol>
 </div>
 <div class="paragraph">
 <p>This is the <em>XP menu</em>, the start page of the XP admin.
@@ -567,6 +598,7 @@ To stop the sandbox, press <kbd>ctrl-c</kbd> in its terminal. To start it again,
 </div>
 </div>
 </div>
+</div>
 <div class="sect1">
 <h2 id="create_an_app"><a class="link" href="#create_an_app">Create an app</a></h2>
 <div class="sectionbody">
@@ -576,13 +608,19 @@ To stop the sandbox, press <kbd>ctrl-c</kbd> in its terminal. To start it again,
 <div class="paragraph">
 <p>Creating an app from scratch can be daunting for any system you&#8217;re not familiar with. To make things easier, Enonic provides <a href="https://market.enonic.com/starters">starters</a>. We&#8217;ll use the "Vanilla" starter, which contains the bare minimum.</p>
 </div>
-<div class="paragraph">
-<p><strong>Open a new terminal window</strong>, leaving the sandbox running in the first one, and run this command:</p>
-</div>
+<div class="sect2">
+<h3 id="task_create_your_app"><a class="link" href="#task_create_your_app">Task: Create your app</a></h3>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p><strong>Create the app from a starter</strong> - Open a new terminal window, leaving the sandbox running in the first one, and run this command:</p>
 <div class="listingblock">
 <div class="content">
 <pre class="highlight"><code class="language-shell" data-lang="shell">enonic create com.example.dev101 -r starter-vanilla -s 101tutorial</code></pre>
 </div>
+</div>
+</li>
+</ol>
 </div>
 <div class="paragraph">
 <p>This uses <code>starter-vanilla</code> as a template, gives the app the name <code>com.example.dev101</code>, places the code in the folder <code>dev101</code>, and links the app to the <code>101tutorial</code> sandbox.</p>
@@ -650,12 +688,16 @@ The other files in the folder, such as <code>build.gradle</code> and <code>gradl
 </div>
 </div>
 </div>
+</div>
 <div class="sect1">
 <h2 id="build_and_deploy"><a class="link" href="#build_and_deploy">Build and deploy</a></h2>
 <div class="sectionbody">
-<div class="paragraph">
-<p>Change to the app folder and start it in development mode:</p>
-</div>
+<div class="sect2">
+<h3 id="task_run_the_app"><a class="link" href="#task_run_the_app">Task: Run the app</a></h3>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p><strong>Start the development watcher</strong> - Change to the app folder and start it in development mode:</p>
 <div class="listingblock">
 <div class="content">
 <pre class="highlight"><code class="language-shell" data-lang="shell">cd dev101
@@ -675,19 +717,25 @@ BUILD SUCCESSFUL
 Waiting for changes to input files...</code></pre>
 </div>
 </div>
-<div class="paragraph">
-<p>To confirm the app is running, open <code>XP menu</code> &#8594; <code>Applications</code> in the XP admin. Your app is listed as "Vanilla Example":</p>
-</div>
+</li>
+<li>
+<p><strong>Verify the deployed app</strong> - Open <code>XP menu</code> &#8594; <code>Applications</code> in the XP admin.
+Your app is listed as "Vanilla Example":</p>
 <div class="imageblock">
 <div class="content">
 <img src="images/setup-app.png" alt="The Applications tool listing Content Studio, Data Toolbox, Guillotine and Vanilla Example, with Vanilla Example selected and its key com.example.dev101 shown" width="1440">
 </div>
 </div>
-<div class="sect2">
-<h3 id="change_the_apps_title"><a class="link" href="#change_the_apps_title">Change the app&#8217;s title</a></h3>
-<div class="paragraph">
-<p>Let&#8217;s make a first change to the app, to see the development loop in action. Open the application descriptor, <code>enonic.yaml</code>, in your editor, and change the <code>title</code> and <code>description</code>:</p>
+</li>
+</ol>
 </div>
+</div>
+<div class="sect2">
+<h3 id="task_change_the_apps_title"><a class="link" href="#task_change_the_apps_title">Task: Change the app&#8217;s title</a></h3>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p><strong>Update the app&#8217;s identity</strong> - Open the application descriptor, <code>enonic.yaml</code>, in your editor, and change the <code>title</code> and <code>description</code>:</p>
 <div class="listingblock">
 <div class="title">src/main/resources/enonic.yaml</div>
 <div class="content">
@@ -710,8 +758,12 @@ vendorUrl: "https://example.com"</code></pre>
 </tr>
 </table>
 </div>
-<div class="paragraph">
-<p>Save the file, and watch the <code>enonic dev</code> terminal rebuild and redeploy. Revisit the Applications tool and you should see your new title.</p>
+</li>
+<li>
+<p><strong>Verify the update</strong> - Save the file and watch the <code>enonic dev</code> terminal rebuild and redeploy.
+Revisit the Applications tool and confirm that it shows your new title.</p>
+</li>
+</ol>
 </div>
 </div>
 <div class="sect2">
@@ -745,7 +797,7 @@ In the next chapter, you&#8217;ll <a href="content-studio.ahtml">get familiar wi
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2026-10-27 23:21:28 UTC
+Last updated 2026-10-28 13:32:09 UTC
 </div>
 </div>
 </body>

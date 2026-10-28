@@ -504,10 +504,10 @@ Each project has its own permissions, languages and other settings, and its own 
 <div class="olist arabic">
 <ol class="arabic">
 <li>
-<p>Choose a default language, for instance <code>English</code>.</p>
+<p><strong>Choose the project language</strong> - Choose a default language, for instance <code>English</code>.</p>
 </li>
 <li>
-<p>Give the project the display name "My First Project". The identifier is derived from it, and becomes <code>my-first-project</code>.</p>
+<p><strong>Name the content project</strong> - Give the project the display name "My First Project". The identifier is derived from it, and becomes <code>my-first-project</code>.</p>
 <div class="admonitionblock note">
 <table>
 <tr>
@@ -522,21 +522,21 @@ The project identifier is important, and cannot be changed later. Later chapters
 </div>
 </li>
 <li>
-<p>Choose the <code>Public</code> access mode. This lets anyone read published content, which is what you want for a public website, for instance.</p>
+<p><strong>Allow public reading</strong> - Choose the <code>Public</code> access mode. This lets anyone read published content, which is what you want for a public website, for instance.</p>
 </li>
 <li>
-<p>No need to change the roles. You are the super user, so you already have access.</p>
+<p><strong>Keep the default roles</strong> - Continue without changing the roles; your administrator session already has access.</p>
 </li>
 <li>
-<p>In the "Applications" step, select the <code>Developer 101</code> app you deployed earlier.</p>
-</li>
-</ol>
-</div>
+<p><strong>Assign your app</strong> - In the "Applications" step, select the <code>Developer 101</code> app you deployed earlier.</p>
 <div class="imageblock">
 <div class="content">
 <img src="images/cs-project-summary.png" alt="Content Studio project creation summary" width="910">
 </div>
 <div class="title">Figure 2. Project summary showing the values you have set in the wizard</div>
+</div>
+</li>
+</ol>
 </div>
 <div class="admonitionblock tip">
 <table>
@@ -585,7 +585,7 @@ Content can be organized as a tree, much like files and folders on your computer
 <div class="olist arabic">
 <ol class="arabic">
 <li>
-<p>In Content Studio, make sure your project is selected, and press <b class="button">New &#8230;&#8203;</b>.
+<p><strong>Start a new content item</strong> - In Content Studio, make sure your project is selected, and press <b class="button">New &#8230;&#8203;</b>.
 The dialog lists only the built-in content types.</p>
 <div class="imageblock">
 <div class="content">
@@ -595,10 +595,10 @@ The dialog lists only the built-in content types.</p>
 </div>
 </li>
 <li>
-<p>Select <b class="button">Folder</b>.</p>
+<p><strong>Choose the folder type</strong> - Select <b class="button">Folder</b>.</p>
 </li>
 <li>
-<p>Give the folder the display name "Artists".</p>
+<p><strong>Name the folder</strong> - Give the folder the display name "Artists".</p>
 <div class="imageblock">
 <div class="content">
 <img src="images/cs-folder-form.png" alt="The Folder form, with the display name Artists" width="546">
@@ -607,7 +607,7 @@ The dialog lists only the built-in content types.</p>
 </div>
 </li>
 <li>
-<p>Save and close the tab.</p>
+<p><strong>Save the folder</strong> - Save and close the tab.</p>
 </li>
 </ol>
 </div>
@@ -629,7 +629,7 @@ The dialog lists only the built-in content types.</p>
 <div class="olist arabic">
 <ol class="arabic">
 <li>
-<p>Add the following file to your app and save it:</p>
+<p><strong>Define the Artist schema</strong> - Add the following file to your app and save it:</p>
 <div class="listingblock">
 <div class="title">src/main/resources/cms/content-types/artist/artist.yaml</div>
 <div class="content">
@@ -647,6 +647,16 @@ form:
     name: "about"
     label: "About the artist"</code></pre>
 </div>
+</div>
+</li>
+<li>
+<p><strong>Deploy the schema</strong> - Let the running <code>enonic dev</code> watcher redeploy your app.
+If you stopped it, run <code>enonic dev</code> in the app folder again.</p>
+</li>
+</ol>
+</div>
+<div class="paragraph">
+<p>The schema defines the form and its labels:</p>
 </div>
 <div class="ulist">
 <ul>
@@ -669,12 +679,6 @@ form:
 <p><code>type</code> and <code>label</code>: The kind of input editors see, and its label.</p>
 </li>
 </ul>
-</div>
-</li>
-<li>
-<p><code>enonic dev</code> should still be running from the previous chapter. It redeploys your app automatically. If you stopped it, run <code>enonic dev</code> in the app folder again.</p>
-</li>
-</ol>
 </div>
 <div class="admonitionblock note">
 <table>
@@ -738,10 +742,10 @@ Read more about <a href="https://developer.enonic.com/docs/cms/stable/schemas/na
 <div class="olist arabic">
 <ol class="arabic">
 <li>
-<p>In Content Studio, select the "Artists" folder, so the new content is created inside it.</p>
+<p><strong>Choose where to store artists</strong> - In Content Studio, select the "Artists" folder, so the new content is created inside it.</p>
 </li>
 <li>
-<p>Press <b class="button">New &#8230;&#8203;</b>.
+<p><strong>Start a new artist</strong> - Press <b class="button">New &#8230;&#8203;</b>.
 Since your app is assigned to the project, the dialog now lists Artist next to the built-in content types.</p>
 <div class="imageblock">
 <div class="content">
@@ -751,7 +755,7 @@ Since your app is assigned to the project, the dialog now lists Artist next to t
 </div>
 </li>
 <li>
-<p>Select <b class="button">Artist</b>, and start filling in the form. Use details of <a href="https://en.wikipedia.org/wiki/Cardi_B">Cardi B on Wikipedia</a>.</p>
+<p><strong>Enter the artist details</strong> - Select <b class="button">Artist</b>, and start filling in the form. Use details of <a href="https://en.wikipedia.org/wiki/Cardi_B">Cardi B on Wikipedia</a>.</p>
 <div class="imageblock">
 <div class="content">
 <img src="images/cs-cardib-form.png" alt="The Artist form filled out for Cardi B, with the legal name and the text about the artist" width="546">
@@ -760,7 +764,7 @@ Since your app is assigned to the project, the dialog now lists Artist next to t
 </div>
 </li>
 <li>
-<p>Save and close the tab, then create the next two artists the same way.
+<p><strong>Create the remaining artists</strong> - Save and close the tab, then create the next two artists the same way.
 Select the "Artists" folder each time: Content Studio nests new content under whatever item is selected.</p>
 <div class="ulist">
 <ul>
@@ -769,12 +773,6 @@ Select the "Artists" folder each time: Content Studio nests new content under wh
 </li>
 <li>
 <p><a href="https://en.wikipedia.org/wiki/Pink_(singer)">P!nk on Wikipedia</a></p>
-</li>
-</ul>
-</div>
-</li>
-</ol>
-</div>
 <div class="paragraph">
 <p>Content Studio should now list the "Artists" folder and the three artists.</p>
 </div>
@@ -783,6 +781,12 @@ Select the "Artists" folder each time: Content Studio nests new content under wh
 <img src="images/cs-hierarchy.png" alt="The content hierarchy showing the Artists folder with P!nk, Missy Elliott and Cardi B listed directly underneath it" width="750">
 </div>
 <div class="title">Figure 8. The hierarchy as it should look after creating some content</div>
+</div>
+</li>
+</ul>
+</div>
+</li>
+</ol>
 </div>
 </div>
 </div>
@@ -805,7 +809,8 @@ You create and edit content in the <em>draft</em> branch, and publishing copies 
 <div class="olist arabic">
 <ol class="arabic">
 <li>
-<p>In our case, the content items should all be <em>Work in progress</em>. To publish all items at once, select the "Artists" folder, right-click, and choose <b class="button">Publish</b>. The publishing wizard will appear.</p>
+<p><strong>Open the Publishing Wizard</strong> - Select the "Artists" folder, right-click, and choose <b class="button">Publish</b>.
+The content items should all be <em>Work in progress</em>.</p>
 <div class="imageblock">
 <div class="content">
 <img src="images/cs-publish.png" alt="The publishing wizard in Content Studio" width="910">
@@ -814,7 +819,7 @@ You create and edit content in the <em>draft</em> branch, and publishing copies 
 </div>
 </li>
 <li>
-<p>Click the <b class="button">include child items</b> checkbox, and then <b class="button">Apply</b>. The whole tree of content under the "Artists" folder will now be included in the publication.</p>
+<p><strong>Include the artists</strong> - Click the <b class="button">include child items</b> checkbox, and then <b class="button">Apply</b>. The whole tree of content under the "Artists" folder will now be included in the publication.</p>
 <div class="imageblock">
 <div class="content">
 <img src="images/cs-include-children.png" alt="Once the include child items checkbox is selected and Apply is clicked - all the unpublished child items are also listed" width="910">
@@ -823,10 +828,10 @@ You create and edit content in the <em>draft</em> branch, and publishing copies 
 </div>
 </li>
 <li>
-<p>The publish button is still disabled, because the items are not yet marked as ready for publishing. Click <b class="button">Mark as ready</b>, and the publish button will become enabled.</p>
+<p><strong>Mark the content ready</strong> - Click <b class="button">Mark as ready</b> to enable the publish button.</p>
 </li>
 <li>
-<p>Click <b class="button">Publish Now (4)</b> to publish all items in a single batch.</p>
+<p><strong>Publish the selection</strong> - Click <b class="button">Publish Now (4)</b> to publish all items in a single batch.</p>
 </li>
 </ol>
 </div>
@@ -859,7 +864,7 @@ You can also publish a piece of content by using the keyboard shortcut: Windows:
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2026-10-27 23:21:28 UTC
+Last updated 2026-10-28 13:32:09 UTC
 </div>
 </div>
 </body>

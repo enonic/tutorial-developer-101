@@ -6,7 +6,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="generator" content="Asciidoctor 2.0.26">
 <meta name="application-name" content="dev101">
-<meta name="description" content="Call the API from cURL, Node and a browser. Publish content, configure CORS, resolve a route, page a list and build page and media URLs from their parts.">
+<meta name="description" content="Call the API from cURL, Node and a browser. Configure CORS, resolve a route, page a list and build page and media URLs from their parts.">
 <title>Fetching content from a front-end</title>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,300italic,400,400italic,600,600italic%7CNoto+Serif:400,400italic,700,700italic%7CDroid+Sans+Mono:400,700">
 <style>
@@ -443,11 +443,19 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <div id="toc" class="toc2">
 <div id="toctitle">Table of Contents</div>
 <ul class="sectlevel1">
-<li><a href="#publish_first">Publish first</a></li>
-<li><a href="#the_request">The request</a></li>
-<li><a href="#from_javascript">From JavaScript</a></li>
+<li><a href="#the_request">The request</a>
+<ul class="sectlevel2">
+<li><a href="#task_fetch_artists_with_curl">Task: Fetch artists with cURL</a></li>
+</ul>
+</li>
+<li><a href="#from_javascript">From JavaScript</a>
+<ul class="sectlevel2">
+<li><a href="#task_fetch_artists_with_javascript">Task: Fetch artists with JavaScript</a></li>
+</ul>
+</li>
 <li><a href="#from_a_browser">From a browser</a>
 <ul class="sectlevel2">
+<li><a href="#task_allow_a_browser_origin">Task: Allow a browser origin</a></li>
 <li><a href="#draft_content">Draft content</a></li>
 </ul>
 </li>
@@ -464,19 +472,11 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <div class="sectionbody">
 <div class="paragraph">
 <p>In this chapter, you&#8217;ll send your queries over HTTP, from the command line, from Node and from a browser.
-So far, Query Playground has quietly supplied the project, the branch and your login, and a front-end has none of that.
-You&#8217;ll handle the four things every front-end on Enonic needs: the request format, published versus draft content, URLs for pages and media, and lists that page.</p>
-</div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="publish_first"><a class="link" href="#publish_first">Publish first</a></h2>
-<div class="sectionbody">
-<div class="paragraph">
-<p>Everything you have created so far lives in the draft branch. Draft content is only readable by logged-in users with a role in the content project, which a front-end does not have. The master branch, on the other hand, is readable by anyone in a public project like yours.</p>
+The <a href="permissions.ahtml">previous chapter</a> left your tutorial content published and publicly readable, and introduced an anonymous cURL request.
+You&#8217;ll now use the API from code, configure browser access, resolve routes, page lists and build media URLs.</p>
 </div>
 <div class="paragraph">
-<p>So before anything else, publish your content: in Content Studio, select the "artists", "animals" and "images" folders, choose <b class="button">Publish</b>, and make sure the dialog includes their children. From now on, use the <code>master</code> branch in your queries.</p>
+<p>Query Playground sends your login with requests; the public front-end examples here use anonymous access to the <code>master</code> branch.</p>
 </div>
 </div>
 </div>
@@ -518,9 +518,12 @@ You&#8217;ll handle the four things every front-end on Enonic needs: the request
 <div class="paragraph">
 <p>Use the same artist type filter and alphabetical sorting as in the Headless API chapter.</p>
 </div>
-<div class="paragraph">
-<p>Save this as <code>request.json</code>:</p>
-</div>
+<div class="sect2">
+<h3 id="task_fetch_artists_with_curl"><a class="link" href="#task_fetch_artists_with_curl">Task: Fetch artists with cURL</a></h3>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p><strong>Prepare the request body</strong> - Save this as <code>request.json</code>:</p>
 <div class="listingblock">
 <div class="content">
 <pre class="highlight"><code class="language-json" data-lang="json">{
@@ -532,9 +535,9 @@ You&#8217;ll handle the four things every front-end on Enonic needs: the request
 }</code></pre>
 </div>
 </div>
-<div class="paragraph">
-<p>And send it with cURL:</p>
-</div>
+</li>
+<li>
+<p><strong>Send the request</strong> - Run this cURL command from the folder containing <code>request.json</code>:</p>
 <div class="listingblock">
 <div class="content">
 <pre class="highlight"><code class="language-shell" data-lang="shell">curl "http://localhost:8080/api/com.enonic.app.guillotine:graphql" \
@@ -545,14 +548,24 @@ You&#8217;ll handle the four things every front-end on Enonic needs: the request
 <div class="paragraph">
 <p>You should get the three artists back as JSON, the same shape you saw in the playground&#8217;s response panel. If the list is empty, the content is not published, or you spelled the project name differently when you created it.</p>
 </div>
+</li>
+</ol>
+</div>
+</div>
 </div>
 </div>
 <div class="sect1">
 <h2 id="from_javascript"><a class="link" href="#from_javascript">From JavaScript</a></h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>The same request with <code>fetch()</code>. Save it as <code>artists.mjs</code> and run it with <code>node artists.mjs</code>. Node 18 or newer has <code>fetch</code> built in.</p>
+<p>Node 18 or newer has <code>fetch</code> built in.</p>
 </div>
+<div class="sect2">
+<h3 id="task_fetch_artists_with_javascript"><a class="link" href="#task_fetch_artists_with_javascript">Task: Fetch artists with JavaScript</a></h3>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p><strong>Prepare the JavaScript client</strong> - Save the following example as <code>artists.mjs</code>.</p>
 <div class="paragraph">
 <p>Set <code>apiBaseUrl</code> to <code><a href="http://localhost:8080/api" class="bare">http://localhost:8080/api</a></code> for your sandbox, or to the live server&#8217;s address followed by <code>/api</code>.
 The API name stays the same; keeping the base URL in one place lets you switch servers without changing the query.</p>
@@ -612,9 +625,16 @@ async function getArtists() {
 getArtists().then(console.log).catch(console.error);</code></pre>
 </div>
 </div>
+</li>
+<li>
+<p><strong>Run the client</strong> - Run <code>node artists.mjs</code> and check the returned artists in your terminal.</p>
+</li>
+</ol>
+</div>
 <div class="paragraph">
 <p>A GraphQL response can be HTTP 200 and still carry errors, in the <code>errors</code> array next to <code>data</code>.
 Check both, as the example does.</p>
+</div>
 </div>
 </div>
 </div>
@@ -624,9 +644,12 @@ Check both, as the example does.</p>
 <div class="paragraph">
 <p>Running the same code in a web page served from another origin, say a dev server on <code><a href="http://localhost:3000" class="bare">http://localhost:3000</a></code>, fails until XP is told to allow that origin. This is browser cross-origin protection, CORS, and Guillotine has a configuration file for it.</p>
 </div>
-<div class="paragraph">
-<p>Create the file <code>com.enonic.app.guillotine.cfg</code> in your sandbox&#8217;s config directory, <code>~/.enonic/sandboxes/101tutorial/home/config/</code>:</p>
-</div>
+<div class="sect2">
+<h3 id="task_allow_a_browser_origin"><a class="link" href="#task_allow_a_browser_origin">Task: Allow a browser origin</a></h3>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p><strong>Configure CORS</strong> - Create the file <code>com.enonic.app.guillotine.cfg</code> in your sandbox&#8217;s config directory, <code>~/.enonic/sandboxes/101tutorial/home/config/</code>:</p>
 <div class="listingblock">
 <div class="title">com.enonic.app.guillotine.cfg</div>
 <div class="content">
@@ -634,6 +657,9 @@ Check both, as the example does.</p>
 cors.methods=POST, OPTIONS
 cors.allowedHeaders=Content-Type</code></pre>
 </div>
+</div>
+</li>
+</ol>
 </div>
 <div class="paragraph">
 <p>XP picks the file up without a restart. <code>cors.origin</code> takes a comma-separated list of origins, including scheme and port. The <a href="https://developer.enonic.com/docs/guillotine/stable/configuration">Guillotine configuration docs</a> cover the remaining options.</p>
@@ -645,10 +671,11 @@ cors.allowedHeaders=Content-Type</code></pre>
 <i class="fa icon-note" title="Note"></i>
 </td>
 <td class="content">
-CORS only controls which origins a browser lets read the response. It does not grant access to content: a public project&#8217;s published content is readable by anyone, and draft content still needs a login.
+CORS only controls which origins a browser lets read the response. It does not grant access to content: published content still needs public read permission for anonymous access, and draft content needs an authorized login.
 </td>
 </tr>
 </table>
+</div>
 </div>
 <div class="sect2">
 <h3 id="draft_content"><a class="link" href="#draft_content">Draft content</a></h3>
@@ -805,7 +832,7 @@ for (const image of description.images) {
 <h2 id="coming_up"><a class="link" href="#coming_up">Coming up</a></h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>You have called the API from cURL, Node and a browser, published content so a front-end can read it, resolved a route to a content item, paged a list, and built page and media URLs from their parts. That is the whole contract between Enonic and a front-end; everything else is your framework&#8217;s business.</p>
+<p>You have called the API from cURL, Node and a browser, resolved a route to a content item, paged a list, and built page and media URLs from their parts. That is the whole contract between Enonic and a front-end; everything else is your framework&#8217;s business.</p>
 </div>
 <div class="paragraph">
 <p>In the final chapter, you&#8217;ll look <a href="data-toolbox.ahtml">under the hood</a> at how XP actually stores all of this.</p>
@@ -815,7 +842,7 @@ for (const image of description.images) {
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2026-10-27 23:21:28 UTC
+Last updated 2026-10-28 13:32:09 UTC
 </div>
 </div>
 </body>

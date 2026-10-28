@@ -481,6 +481,9 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <p>model richer content with <a href="form-items.ahtml">form items</a>, <a href="sets.ahtml">sets and form fragments</a>, <a href="rich-text.ahtml">rich text</a> and <a href="mixins.ahtml">mixins</a></p>
 </li>
 <li>
+<p>publish your content and explore <a href="permissions.ahtml">read and editorial permissions</a></p>
+</li>
+<li>
 <p>fetch it all from a <a href="frontend.ahtml">front-end</a>, with routing, paging and URLs</p>
 </li>
 <li>
@@ -527,7 +530,7 @@ When we mention "XP", we are referring to "Enonic XP", the platform behind Enoni
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2026-10-27 23:21:28 UTC
+Last updated 2026-10-28 13:32:09 UTC
 </div>
 </div>
 </body>

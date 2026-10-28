@@ -487,9 +487,10 @@ These entries belong to the artist; they are not separate content items like the
 </div>
 <div class="sect2">
 <h3 id="task_add_filmography_to_artist"><a class="link" href="#task_add_filmography_to_artist">Task: Add filmography to Artist</a></h3>
-<div class="paragraph">
-<p>Append this item set to the Artist form, after <code>favoriteAnimal</code>:</p>
-</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p><strong>Define filmography entries</strong> - Append this item set to the Artist form, after <code>favoriteAnimal</code>:</p>
 <div class="listingblock">
 <div class="title">src/main/resources/cms/content-types/artist/artist.yaml</div>
 <div class="content">
@@ -515,27 +516,10 @@ These entries belong to the artist; they are not separate content items like the
         min: 0</code></pre>
 </div>
 </div>
-<div class="ulist">
-<ul>
-<li>
-<p><code>items</code> contains the fields in each filmography entry.</p>
 </li>
 <li>
-<p>The item set&#8217;s <code>occurrences</code> allows any number of entries, including none.</p>
-</li>
-<li>
-<p>Each entry requires both a <code>title</code> and a <code>year</code>.</p>
-</li>
-<li>
-<p><code>Long</code> stores the year as an integer.
-The <code>min: 0</code> directly on <code>year</code> limits its numeric value; <code>occurrences.min</code> controls whether a value is required.</p>
-</li>
-</ul>
-</div>
-<div class="paragraph">
-<p>Save the schema and let your running <code>enonic dev</code> watcher update the app.
+<p><strong>Add Cardi B&#8217;s films</strong> - Save the schema and let your running <code>enonic dev</code> watcher update the app.
 Reopen Cardi B in Content Studio and add two Filmography entries:</p>
-</div>
 <table class="tableblock frame-all grid-all stretch">
 <colgroup>
 <col style="width: 50%;">
@@ -558,23 +542,47 @@ Reopen Cardi B in Content Studio and add two Filmography entries:</p>
 </tr>
 </tbody>
 </table>
-<div class="paragraph">
-<p>Use <strong>Expand all</strong> if you want to view both entries together, then save the artist.
+</li>
+<li>
+<p><strong>Save the filmography</strong> - Use <strong>Expand all</strong> if you want to view both entries together, then save the artist.
 The entries are part of the same draft as Cardi B&#8217;s other fields.</p>
-</div>
 <div class="imageblock">
 <div class="content">
 <img src="images/sets-filmography.png" alt="Filmography item set with Hustlers from 2019 and F9 from 2021" width="527">
 </div>
 <div class="title">Figure 1. Two filmography entries on Cardi B</div>
 </div>
+</li>
+</ol>
+</div>
+<div class="paragraph">
+<p>The item set defines the structure and limits of each entry:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>items</code> contains the fields in each filmography entry.</p>
+</li>
+<li>
+<p>The item set&#8217;s <code>occurrences</code> allows any number of entries, including none.</p>
+</li>
+<li>
+<p>Each entry requires both a <code>title</code> and a <code>year</code>.</p>
+</li>
+<li>
+<p><code>Long</code> stores the year as an integer.
+The <code>min: 0</code> directly on <code>year</code> limits its numeric value; <code>occurrences.min</code> controls whether a value is required.</p>
+</li>
+</ul>
+</div>
 </div>
 <div class="sect2">
 <h3 id="task_query_the_filmography"><a class="link" href="#task_query_the_filmography">Task: Query the filmography</a></h3>
-<div class="paragraph">
-<p>Open Query Playground for "My First Project" and keep <strong>Draft</strong> selected throughout this chapter.
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p><strong>Fetch the filmography</strong> - Open Query Playground for "My First Project" and keep <strong>Draft</strong> selected throughout this chapter.
 Fetch Cardi B by path and select the fields within <code>filmography</code>:</p>
-</div>
 <div class="listingblock">
 <div class="content">
 <pre class="highlight"><code class="language-graphql" data-lang="graphql">{
@@ -610,6 +618,9 @@ Fetch Cardi B by path and select the fields within <code>filmography</code>:</p>
 }</code></pre>
 </div>
 </div>
+</li>
+</ol>
+</div>
 <div class="paragraph">
 <p>Guillotine generates a GraphQL object type for the item set&#8217;s fields.
 Because <code>filmography</code> allows multiple occurrences, it returns a list of these objects, even when you enter just one film.
@@ -628,9 +639,10 @@ Only Carnivore needs a list of prey.</p>
 </div>
 <div class="sect2">
 <h3 id="task_add_feeding_behavior_to_animal"><a class="link" href="#task_add_feeding_behavior_to_animal">Task: Add feeding behavior to Animal</a></h3>
-<div class="paragraph">
-<p>Append this option set to the Animal form, after <code>images</code>:</p>
-</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p><strong>Define the feeding options</strong> - Append this option set to the Animal form, after <code>images</code>:</p>
 <div class="listingblock">
 <div class="title">src/main/resources/cms/content-types/animal/animal.yaml</div>
 <div class="content">
@@ -656,6 +668,26 @@ Only Carnivore needs a list of prey.</p>
               max: 0</code></pre>
 </div>
 </div>
+</li>
+<li>
+<p><strong>Update the animal forms</strong> - Save the schema and let the watcher update the app, then reopen your animals in Content Studio.</p>
+</li>
+<li>
+<p><strong>Describe a carnivore</strong> - For Lion, add Feeding behavior, select <strong>Carnivore</strong>, and enter "Zebra" and "Giraffe" as separate Prey values.
+Save the animal.</p>
+<div class="imageblock">
+<div class="content">
+<img src="images/sets-feeding-behavior.png" alt="Feeding behavior option set with Carnivore selected and Zebra and Giraffe entered as prey" width="527">
+</div>
+<div class="title">Figure 2. Lion&#8217;s feeding behavior with two prey values</div>
+</div>
+</li>
+<li>
+<p><strong>Describe a herbivore</strong> - For Reindeer, select <strong>Herbivore</strong> and save.
+Notice that there is no Prey field for this option.</p>
+</li>
+</ol>
+</div>
 <div class="paragraph">
 <p>There are two different limits to keep in mind:</p>
 </div>
@@ -675,33 +707,13 @@ Here both limits are <code>1</code>, so an editor adding feeding behavior must c
 <p>The <code>herbivore</code> option has no extra fields.
 The <code>carnivore</code> option contains a repeatable <code>prey</code> field.</p>
 </div>
-<div class="paragraph">
-<p>Save the schema and let the watcher update the app, then reopen your animals:</p>
-</div>
-<div class="olist arabic">
-<ol class="arabic">
-<li>
-<p>For Lion, add Feeding behavior, select <strong>Carnivore</strong>, and enter "Zebra" and "Giraffe" as separate Prey values.
-Save the animal.</p>
-</li>
-<li>
-<p>For Reindeer, select <strong>Herbivore</strong> and save.
-Notice that there is no Prey field for this option.</p>
-</li>
-</ol>
-</div>
-<div class="imageblock">
-<div class="content">
-<img src="images/sets-feeding-behavior.png" alt="Feeding behavior option set with Carnivore selected and Zebra and Giraffe entered as prey" width="527">
-</div>
-<div class="title">Figure 2. Lion&#8217;s feeding behavior with two prey values</div>
-</div>
 </div>
 <div class="sect2">
 <h3 id="task_query_the_selected_option"><a class="link" href="#task_query_the_selected_option">Task: Query the selected option</a></h3>
-<div class="paragraph">
-<p>Run this query for Lion:</p>
-</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p><strong>Fetch Lion&#8217;s feeding behavior</strong> - Run this query for Lion:</p>
 <div class="listingblock">
 <div class="content">
 <pre class="highlight"><code class="language-graphql" data-lang="graphql">{
@@ -741,15 +753,18 @@ Notice that there is no Prey field for this option.</p>
 }</code></pre>
 </div>
 </div>
+</li>
+<li>
+<p><strong>Compare the herbivore option</strong> - Change the key to <code>/animals/reindeer</code> and run the query again.
+The selected option is now <code>"herbivore"</code>, and <code>carnivore</code> is <code>null</code>.
+Use <code>_selected</code> to identify the choice even when it has no extra fields, as with Herbivore.</p>
+</li>
+</ol>
+</div>
 <div class="paragraph">
 <p>The <code>_selected</code> field tells you which option was chosen, using its schema name rather than its label.
 For this single selection, it is a string.
 The <code>carnivore</code> object contains that option&#8217;s fields.</p>
-</div>
-<div class="paragraph">
-<p>Change the key to <code>/animals/reindeer</code> and run the query again.
-The selected option is now <code>"herbivore"</code>, and <code>carnivore</code> is <code>null</code>.
-Use <code>_selected</code> to identify the choice even when it has no extra fields, as with Herbivore.</p>
 </div>
 </div>
 </div>
@@ -768,9 +783,10 @@ You&#8217;ll use one here to give all seven continent options the same field def
 </div>
 <div class="sect2">
 <h3 id="task_create_the_distribution_form_fragment"><a class="link" href="#task_create_the_distribution_form_fragment">Task: Create the distribution form fragment</a></h3>
-<div class="paragraph">
-<p>Create this file in your app:</p>
-</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p><strong>Define the shared Notes field</strong> - Create this file in your app:</p>
 <div class="listingblock">
 <div class="title">src/main/resources/cms/form-fragments/distributionData/distributionData.yaml</div>
 <div class="content">
@@ -782,6 +798,9 @@ form:
     label: "Notes"</code></pre>
 </div>
 </div>
+</li>
+</ol>
+</div>
 <div class="paragraph">
 <p>As with content types, the folder and filename match the schema name: <code>distributionData</code>.
 Its <code>form</code> contains the fields to insert wherever the fragment is included.</p>
@@ -789,9 +808,10 @@ Its <code>form</code> contains the fields to insert wherever the fragment is inc
 </div>
 <div class="sect2">
 <h3 id="task_add_distribution_to_animal"><a class="link" href="#task_add_distribution_to_animal">Task: Add distribution to Animal</a></h3>
-<div class="paragraph">
-<p>Append this option set to the Animal form, after <code>feedingBehavior</code>:</p>
-</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p><strong>Include the fragment for each continent</strong> - Append this option set to the Animal form, after <code>feedingBehavior</code>:</p>
 <div class="listingblock">
 <div class="title">src/main/resources/cms/content-types/animal/animal.yaml</div>
 <div class="content">
@@ -833,19 +853,10 @@ Its <code>form</code> contains the fields to insert wherever the fragment is inc
           - include: "distributionData"</code></pre>
 </div>
 </div>
-<div class="paragraph">
-<p><code>selection.min: 0</code> and <code>selection.max: 7</code> allow any number of the seven continents to be selected.
-Each <code>include: "distributionData"</code> inserts the fragment&#8217;s Notes field into that option.</p>
-</div>
-<div class="paragraph">
-<p>The fragment shares the field definition, not its values: Africa and Asia each have their own notes.
-Changing the fragment updates the form wherever it is included, and it adds no extra level to the stored data or GraphQL response.
-A CMS form fragment is also separate from a GraphQL fragment, which groups fields in a query.</p>
-</div>
-<div class="paragraph">
-<p>Save both files, let the watcher update the app, and reopen Lion.
+</li>
+<li>
+<p><strong>Enter Lion&#8217;s distribution</strong> - Save both files, let the watcher update the app, and reopen Lion.
 In Distribution across continents, click <b class="button">Add</b>, select Africa and Asia, and enter these notes:</p>
-</div>
 <table class="tableblock frame-all grid-all stretch">
 <colgroup>
 <col style="width: 25%;">
@@ -868,21 +879,34 @@ In Distribution across continents, click <b class="button">Add</b>, select Afric
 </tr>
 </tbody>
 </table>
-<div class="paragraph">
-<p>Save the animal.</p>
-</div>
+</li>
+<li>
+<p><strong>Save the distribution</strong> - Save the animal.</p>
 <div class="imageblock">
 <div class="content">
 <img src="images/sets-distribution.png" alt="Distribution option set with Africa and Asia selected, each showing its own Notes field" width="527">
 </div>
 <div class="title">Figure 3. Lion&#8217;s distribution with separate notes for each selected continent</div>
 </div>
+</li>
+</ol>
+</div>
+<div class="paragraph">
+<p><code>selection.min: 0</code> and <code>selection.max: 7</code> allow any number of the seven continents to be selected.
+Each <code>include: "distributionData"</code> inserts the fragment&#8217;s Notes field into that option.</p>
+</div>
+<div class="paragraph">
+<p>The fragment shares the field definition, not its values: Africa and Asia each have their own notes.
+Changing the fragment updates the form wherever it is included, and it adds no extra level to the stored data or GraphQL response.
+A CMS form fragment is also separate from a GraphQL fragment, which groups fields in a query.</p>
+</div>
 </div>
 <div class="sect2">
 <h3 id="task_query_the_distribution"><a class="link" href="#task_query_the_distribution">Task: Query the distribution</a></h3>
-<div class="paragraph">
-<p>Fetch both selected continents and their notes:</p>
-</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p><strong>Fetch the distribution notes</strong> - Run this query to fetch both selected continents and their notes:</p>
 <div class="listingblock">
 <div class="content">
 <pre class="highlight"><code class="language-graphql" data-lang="graphql">{
@@ -928,6 +952,9 @@ In Distribution across continents, click <b class="button">Add</b>, select Afric
 }</code></pre>
 </div>
 </div>
+</li>
+</ol>
+</div>
 <div class="paragraph">
 <p>This time, <code>_selected</code> is a list because the option set allows multiple selections.
 The whole <code>distribution</code> value is still one object: the number of selected options is independent of the number of occurrences of the set.
@@ -961,7 +988,7 @@ In the next chapter, you&#8217;ll add <a href="rich-text.ahtml">rich text</a>, i
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2026-10-27 23:21:28 UTC
+Last updated 2026-10-28 13:32:09 UTC
 </div>
 </div>
 </body>

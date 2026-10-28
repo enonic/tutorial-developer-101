@@ -484,9 +484,10 @@ Your app is already assigned to "My First Project", so the registration applies 
 </div>
 <div class="sect2">
 <h3 id="task_create_the_mixin"><a class="link" href="#task_create_the_mixin">Task: Create the mixin</a></h3>
-<div class="paragraph">
-<p>Create this file in your app:</p>
-</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p><strong>Define the Editorial mixin</strong> - Create this file in your app:</p>
 <div class="listingblock">
 <div class="title">src/main/resources/cms/mixins/editorial/editorial.yaml</div>
 <div class="content">
@@ -501,6 +502,9 @@ form:
       max: 3</code></pre>
 </div>
 </div>
+</li>
+</ol>
+</div>
 <div class="paragraph">
 <p>The folder and filename identify the mixin as <code>editorial</code>, and <code>title</code> gives its tab the label "Editorial" in Content Studio.
 The form contains one repeatable TextLine field named <code>notes</code>, allowing up to three notes per content item.</p>
@@ -508,9 +512,10 @@ The form contains one repeatable TextLine field named <code>notes</code>, allowi
 </div>
 <div class="sect2">
 <h3 id="task_register_the_mixin"><a class="link" href="#task_register_the_mixin">Task: Register the mixin</a></h3>
-<div class="paragraph">
-<p>Update your app&#8217;s existing CMS descriptor to include the registration:</p>
-</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p><strong>Choose which content types get the mixin</strong> - Update your app&#8217;s existing CMS descriptor to include the registration:</p>
 <div class="listingblock">
 <div class="title">src/main/resources/cms/cms.yaml</div>
 <div class="content">
@@ -520,6 +525,12 @@ mixins:
     allowContentTypes: "com.example.dev101:artist|com.example.dev101:animal"</code></pre>
 </div>
 </div>
+</li>
+<li>
+<p><strong>Deploy the mixin</strong> - Save both files and let your running <code>enonic dev</code> watcher update the app.</p>
+</li>
+</ol>
+</div>
 <div class="paragraph">
 <p><code>name: "editorial"</code> selects the mixin from this app.
 <code>allowContentTypes</code> is a regular expression matched against the full content type name; this one selects Artist and Animal.
@@ -527,8 +538,7 @@ If you chose a different app name, update the app key in the expression to match
 Leaving out <code>allowContentTypes</code> makes the mixin available on all content types in the content project where the app is assigned.</p>
 </div>
 <div class="paragraph">
-<p>Save both files and let your running <code>enonic dev</code> watcher update the app.
-For other registration options, including mixins that editors enable per content item, see the <a href="https://developer.enonic.com/docs/cms/stable/schemas/cms-descriptor#mixin-registration">CMS descriptor reference</a>.</p>
+<p>For other registration options, including mixins that editors enable per content item, see the <a href="https://developer.enonic.com/docs/cms/stable/schemas/cms-descriptor#mixin-registration">CMS descriptor reference</a>.</p>
 </div>
 </div>
 <div class="sect2">
@@ -536,23 +546,23 @@ For other registration options, including mixins that editors enable per content
 <div class="olist arabic">
 <ol class="arabic">
 <li>
-<p>Open Lynx at <code>/animals/lynx</code> in Content Studio and select the <strong>Editorial</strong> tab beside Animal.</p>
+<p><strong>Find Lynx&#8217;s mixin fields</strong> - Open Lynx at <code>/animals/lynx</code> in Content Studio and select the <strong>Editorial</strong> tab beside Animal.</p>
 </li>
 <li>
-<p>Enter "Review the habitat description." in the first Notes field.
+<p><strong>Add Lynx&#8217;s notes</strong> - Enter "Review the habitat description." in the first Notes field.
 Click <b class="button">Add</b> and enter "Add a source for the diet information." in the second, then save Lynx.</p>
-</li>
-<li>
-<p>Open Cardi B at <code>/artists/cardi-b</code> and select its <strong>Editorial</strong> tab beside Artist.
-Enter "Check the filmography for new releases." and save.</p>
-</li>
-</ol>
-</div>
 <div class="imageblock">
 <div class="content">
 <img src="images/mixins-editorial.png" alt="Editorial tab beside Animal, showing two separate notes on Lynx" width="527">
 </div>
 <div class="title">Figure 1. The Editorial mixin on Lynx</div>
+</div>
+</li>
+<li>
+<p><strong>Add Cardi B&#8217;s note</strong> - Open Cardi B at <code>/artists/cardi-b</code> and select its <strong>Editorial</strong> tab beside Artist.
+Enter "Check the filmography for new releases." and save.</p>
+</li>
+</ol>
 </div>
 <div class="paragraph">
 <p>Both content types now use the same mixin form, but each content item has its own values.
@@ -570,9 +580,10 @@ The typed fields let your client request just the values it needs.</p>
 </div>
 <div class="sect2">
 <h3 id="task_fetch_lynxs_notes"><a class="link" href="#task_fetch_lynxs_notes">Task: Fetch Lynx&#8217;s notes</a></h3>
-<div class="paragraph">
-<p>Open Query Playground for "My First Project", select <strong>Draft</strong>, and run:</p>
-</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p><strong>Fetch Lynx&#8217;s mixin fields</strong> - Open Query Playground for "My First Project", select <strong>Draft</strong>, and run:</p>
 <div class="listingblock">
 <div class="content">
 <pre class="highlight"><code class="language-graphql" data-lang="graphql">{
@@ -590,11 +601,6 @@ The typed fields let your client request just the values it needs.</p>
   }
 }</code></pre>
 </div>
-</div>
-<div class="paragraph">
-<p>The three levels inside <code>x</code> are the app (<code>{app-name-query}</code>), the mixin (<code>editorial</code>), and its field (<code>notes</code>).
-Dots in the app key become underscores in the GraphQL field name.
-Unlike the content type&#8217;s <code>data</code>, <code>x</code> is available on the shared <code>Content</code> interface, so this query needs no Animal inline fragment.</p>
 </div>
 <div class="paragraph">
 <p>The response contains:</p>
@@ -622,16 +628,25 @@ Unlike the content type&#8217;s <code>data</code>, <code>x</code> is available o
 }</code></pre>
 </div>
 </div>
-<div class="paragraph">
-<p>Change <code>key</code> to <code>/artists/cardi-b</code> and run the same query to retrieve Cardi B&#8217;s note.
+</li>
+<li>
+<p><strong>Compare Cardi B&#8217;s note</strong> - Change <code>key</code> to <code>/artists/cardi-b</code> and run the same query.
 The typed <code>notes</code> field returns a list, even when the content item has only one note.</p>
+</li>
+</ol>
+</div>
+<div class="paragraph">
+<p>The three levels inside <code>x</code> are the app (<code>{app-name-query}</code>), the mixin (<code>editorial</code>), and its field (<code>notes</code>).
+Dots in the app key become underscores in the GraphQL field name.
+Unlike the content type&#8217;s <code>data</code>, <code>x</code> is available on the shared <code>Content</code> interface, so this query needs no Animal inline fragment.</p>
 </div>
 </div>
 <div class="sect2">
 <h3 id="task_inspect_the_json_representation"><a class="link" href="#task_inspect_the_json_representation">Task: Inspect the JSON representation</a></h3>
-<div class="paragraph">
-<p>To inspect all mixin values without selecting their individual fields, query <code>xAsJson</code>:</p>
-</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p><strong>Fetch all stored mixin values</strong> - Query <code>xAsJson</code> to inspect the values without selecting their individual fields:</p>
 <div class="listingblock">
 <div class="content">
 <pre class="highlight"><code class="language-graphql" data-lang="graphql">{
@@ -659,6 +674,9 @@ The typed <code>notes</code> field returns a list, even when the content item ha
   }
 }</code></pre>
 </div>
+</div>
+</li>
+</ol>
 </div>
 <div class="paragraph">
 <p>Notice the app key: the JSON representation uses hyphens (<code>com-example-dev101</code>), while the typed GraphQL field uses underscores (<code>{app-name-query}</code>).
@@ -688,65 +706,68 @@ Use this recap when deciding how to represent new content:</p>
 </div>
 <table class="tableblock frame-all grid-all stretch">
 <colgroup>
-<col style="width: 20%;">
-<col style="width: 40%;">
+<col style="width: 60%;">
 <col style="width: 40%;">
 </colgroup>
 <thead>
 <tr>
-<th class="tableblock halign-left valign-top">Tool</th>
-<th class="tableblock halign-left valign-top">Use it for</th>
-<th class="tableblock halign-left valign-top">Result</th>
+<th class="tableblock halign-left valign-top">What you want to build</th>
+<th class="tableblock halign-left valign-top">Use</th>
 </tr>
 </thead>
 <tbody>
 <tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Content that editors manage and publish independently</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Content type</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">A kind of content editors create and manage independently</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">A content item with its own path, lifecycle and form data</p></td>
 </tr>
 <tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Relationships between independently managed content items</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Reference (ContentSelector, ImageSelector)</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Connecting content items that exist independently</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">A stored target ID that Guillotine can resolve to content</p></td>
 </tr>
 <tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Images and other uploaded files, managed as content with a source attachment</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Media</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Images and other uploaded files</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">A media content item with the uploaded file as an attachment</p></td>
 </tr>
 <tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Visual groups of fields without changing the data structure</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">FieldSet</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Grouping related fields in the editor</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Fields stored at the same level, with no extra data wrapper</p></td>
 </tr>
 <tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Nested or repeatable groups of fields that belong to one content item</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">ItemSet</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Grouping fields into an object, optionally repeated</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">An object or a list of objects under the item&#8217;s data</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">OptionSet</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Selecting options with their own fields</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">A structure recording the selected options and their values</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">A single selection, optionally with fields for the chosen option</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">OptionSet with one selection per occurrence</p></td>
 </tr>
 <tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Multiple selections, optionally with separate fields for each chosen option</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">OptionSet allowing multiple selections per occurrence</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Ordered lists of content blocks, such as text, images and quotes for a basic landing page</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Repeatable OptionSet with one selection per occurrence</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Reusable form definitions included in several schemas or options</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Form fragment</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Reusing form items within schemas</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Fields inserted in place, with no wrapper named after the fragment</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">HtmlArea</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Formatted prose with links, images and macros</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Stored HTML; Guillotine exposes raw and processed HTML plus structured reference data</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">HtmlArea</p></td>
 </tr>
 <tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Shared fields added across content types, including types provided by other apps</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Mixin</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Adding shared fields across content types or to types you do not own</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Values under <code>x</code>, grouped by app and mixin</p></td>
 </tr>
 </tbody>
 </table>
+<div class="paragraph">
+<p>An OptionSet can support multiple selections with separate fields for each selected option, as you did with continents and their notes in the <a href="sets.ahtml">sets chapter</a>.
+A repeatable OptionSet with one selected option per occurrence lets editors build a sequence of blocks, such as text, images and quotes, for your front-end to render.
+See the <a href="https://developer.enonic.com/docs/cms/stable/schemas/form-items/option-set">OptionSet reference</a> for configuration examples.
+For visual editing or more advanced page composition, explore XP&#8217;s <a href="https://developer.enonic.com/docs/cms/stable/pages">page model</a> in the <a href="https://developer.enonic.com/docs/intro">Introduction to Enonic</a> or the <a href="https://developer.enonic.com/docs/next.xp">Next.js tutorial</a>.</p>
+</div>
 </div>
 </div>
 <div class="sect1">
@@ -754,14 +775,14 @@ Use this recap when deciding how to represent new content:</p>
 <div class="sectionbody">
 <div class="paragraph">
 <p>You&#8217;ve added and queried a mixin across two content types, completing the tutorial&#8217;s content model.
-In the next chapter, you&#8217;ll fetch content <a href="frontend.ahtml">from a front-end</a>.</p>
+In the next chapter, you&#8217;ll publish your content and explore <a href="permissions.ahtml">read and editorial permissions</a>.</p>
 </div>
 </div>
 </div>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2026-10-27 23:21:28 UTC
+Last updated 2026-10-28 13:32:09 UTC
 </div>
 </div>
 </body>

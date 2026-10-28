@@ -444,7 +444,11 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <div id="toctitle">Table of Contents</div>
 <ul class="sectlevel1">
 <li><a href="#web_interface">Web interface</a></li>
-<li><a href="#examine_your_content">Examine your content</a></li>
+<li><a href="#examine_your_content">Examine your content</a>
+<ul class="sectlevel2">
+<li><a href="#task_inspect_the_stored_content">Task: Inspect the stored content</a></li>
+</ul>
+</li>
 <li><a href="#where_to_go_next">Where to go next</a></li>
 </ul>
 </div>
@@ -481,13 +485,15 @@ That includes content types with sets, option sets, references and rich text, me
 <div class="sect1">
 <h2 id="examine_your_content"><a class="link" href="#examine_your_content">Examine your content</a></h2>
 <div class="sectionbody">
+<div class="sect2">
+<h3 id="task_inspect_the_stored_content"><a class="link" href="#task_inspect_the_stored_content">Task: Inspect the stored content</a></h3>
 <div class="paragraph">
 <p>Follow these steps to find and examine what your content looks like from the low level storage perspective:</p>
 </div>
 <div class="olist arabic">
 <ol class="arabic">
 <li>
-<p>Navigate to the <code>Data Tree</code> in the menu. Here, the toolbox lists repositories within your XP instance, you should at least have the following:</p>
+<p><strong>Find the content repository</strong> - Navigate to the <code>Data Tree</code> in the menu. Here, the toolbox lists repositories within your XP instance, you should at least have the following:</p>
 <div class="dlist">
 <dl>
 <dt class="hdlist1">com.enonic.cms.my-first-project</dt>
@@ -510,13 +516,13 @@ That includes content types with sets, option sets, references and rich text, me
 </div>
 </li>
 <li>
-<p>Move into <code>com.enonic.cms.my-first-project</code>. Here you will see the two branches you met in the <a href="content-studio.ahtml#branches">Content Studio chapter</a>: <code>draft</code> and <code>master</code>. Everything you have published exists in both.</p>
+<p><strong>Inspect the branches</strong> - Move into <code>com.enonic.cms.my-first-project</code>. Here you will see the two branches you met in the <a href="content-studio.ahtml#branches">Content Studio chapter</a>: <code>draft</code> and <code>master</code>. Everything you have published exists in both.</p>
 </li>
 <li>
-<p>Keep navigating further down the tree: <code>root</code> &#8594; <code>content</code>. Now you should see all the content of your project listed, as a tree of <em>nodes</em> that mirrors the hierarchy in Content Studio. Navigate to <code>animals</code> to find your animals.</p>
+<p><strong>Find your animals</strong> - Keep navigating further down the tree: <code>root</code> &#8594; <code>content</code>. Now you should see all the content of your project listed, as a tree of <em>nodes</em> that mirrors the hierarchy in Content Studio. Navigate to <code>animals</code> to find your animals.</p>
 </li>
 <li>
-<p>Choose "Lion" and check out both the info view and the JSON view, available via the buttons in the table row.</p>
+<p><strong>Inspect the Lion node</strong> - Choose "Lion" and check out both the info view and the JSON view, available via the buttons in the table row.</p>
 <div class="imageblock">
 <div class="content">
 <img src="images/data-toolbox-info-view.png" alt="The Data Toolbox info view. the view contains options for exporting, moving, and deleting the node, as well as for displaying permissions for the node, versions of the node, and indexing data (and much more)." width="750w">
@@ -525,7 +531,7 @@ That includes content types with sets, option sets, references and rich text, me
 </div>
 </li>
 <li>
-<p>To inspect the data associated with the animal, you can select "Display properties", which will bring up data about the node, such as its display name, its owner, when it was created, etc.</p>
+<p><strong>View the node properties</strong> - To inspect the data associated with the animal, you can select "Display properties", which will bring up data about the node, such as its display name, its owner, when it was created, etc.</p>
 <div class="imageblock">
 <div class="content">
 <img src="images/data-toolbox-properties.png" alt="A table with columns 'name', 'index, 'value', and 'type' that describes the node. Example names are 'valid', 'type', 'displayName'." width="606w">
@@ -534,7 +540,7 @@ That includes content types with sets, option sets, references and rich text, me
 </div>
 </li>
 <li>
-<p>Navigate into the <code>data</code> property, where you&#8217;ll find the data stored for the animal. Compare it with the content type you wrote: every input you declared is a property with the same name, the option sets carry a <code>_selected</code> property next to the options, and the rich text description is stored as one HTML string.</p>
+<p><strong>Inspect the form data</strong> - Navigate into the <code>data</code> property, where you&#8217;ll find the data stored for the animal. Compare it with the content type you wrote: every input you declared is a property with the same name, the option sets carry a <code>_selected</code> property next to the options, and the rich text description is stored as one HTML string.</p>
 <div class="imageblock">
 <div class="content">
 <img src="images/data-toolbox-properties-data.png" alt="A table showing the data stored about the animal." width="606w">
@@ -543,10 +549,10 @@ That includes content types with sets, option sets, references and rich text, me
 </div>
 </li>
 <li>
-<p>Go back up one level and look at the <code>x</code> property. This is where the notes from your mixin live, grouped by the app that provides the mixin - exactly the structure you queried through <code>xAsJson</code>.</p>
+<p><strong>Inspect the mixin values</strong> - Go back up one level and look at the <code>x</code> property. This is where the notes from your mixin live, grouped by the app that provides the mixin - exactly the structure you queried through <code>xAsJson</code>.</p>
 </li>
 <li>
-<p>Finally, find one of your artists and look at its <code>favoriteAnimal</code> property. A reference is stored as the ID of the target content, not its path, which is why you can move and rename content without breaking links.</p>
+<p><strong>Inspect a content reference</strong> - Finally, find one of your artists and look at its <code>favoriteAnimal</code> property. A reference is stored as the ID of the target content, not its path, which is why you can move and rename content without breaking links.</p>
 </li>
 </ol>
 </div>
@@ -557,6 +563,7 @@ When a query returns something you did not expect, this is the place to check wh
 </div>
 <div class="paragraph">
 <p>Inspecting content is only a fraction of what Data Toolbox can do: it&#8217;s a versatile and powerful administrative tool. Among other things, it can export your content and import it on another instance, which is handy the day you move from your sandbox to a live server.</p>
+</div>
 </div>
 </div>
 </div>
@@ -587,7 +594,7 @@ When a query returns something you did not expect, this is the place to check wh
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2026-10-27 23:21:28 UTC
+Last updated 2026-10-28 13:32:09 UTC
 </div>
 </div>
 </body>

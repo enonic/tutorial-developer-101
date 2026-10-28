@@ -492,9 +492,10 @@ Use the display name for the species and a repeatable TextLine for its other nam
 </div>
 <div class="sect2">
 <h3 id="task_add_alternative_names"><a class="link" href="#task_add_alternative_names">Task: Add alternative names</a></h3>
-<div class="paragraph">
-<p>Create the Animal content type in your app:</p>
-</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p><strong>Define alternative names</strong> - Create the Animal content type in your app:</p>
 <div class="listingblock">
 <div class="title">src/main/resources/cms/content-types/animal/animal.yaml</div>
 <div class="content">
@@ -512,6 +513,9 @@ form:
       min: 0
       max: 0</code></pre>
 </div>
+</div>
+</li>
+</ol>
 </div>
 <div class="paragraph">
 <p>As with Artist, <code>displayNamePlaceholder</code> tells editors what to enter in the display name, here the species.
@@ -564,9 +568,10 @@ An ImageSelector stores a reference to it, so you can reuse the same image acros
 </div>
 <div class="sect2">
 <h3 id="task_add_an_image_selector"><a class="link" href="#task_add_an_image_selector">Task: Add an image selector</a></h3>
-<div class="paragraph">
-<p>Append this form item to the Animal form, at the same indentation as <code>otherNames</code>:</p>
-</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p><strong>Add image references</strong> - Append this form item to the Animal form, at the same indentation as <code>otherNames</code>:</p>
 <div class="listingblock">
 <div class="title">src/main/resources/cms/content-types/animal/animal.yaml</div>
 <div class="content">
@@ -579,6 +584,9 @@ An ImageSelector stores a reference to it, so you can reuse the same image acros
       max: 3</code></pre>
 </div>
 </div>
+</li>
+</ol>
+</div>
 <div class="paragraph">
 <p>Here, <code>min: 0</code> and <code>max: 3</code> allow up to three images, including none.
 ImageSelector lets editors select existing images or upload new ones.
@@ -590,29 +598,29 @@ For this exercise, you&#8217;ll select the existing lion image.</p>
 <div class="olist arabic">
 <ol class="arabic">
 <li>
-<p>Save the schema file and let your running <code>enonic dev</code> watcher update the app.</p>
+<p><strong>Deploy the Animal schema</strong> - Save the schema file and let your running <code>enonic dev</code> watcher update the app.</p>
 </li>
 <li>
-<p>In Content Studio, create a folder named "Animals" at the root of "My First Project", next to Artists and Images.
+<p><strong>Create the Animals folder</strong> - In Content Studio, create a folder named "Animals" at the root of "My First Project", next to Artists and Images.
 Check that its path is <code>/animals</code>.</p>
 </li>
 <li>
-<p>Select Animals, click <b class="button">New</b>, and choose <strong>Animal</strong>.
+<p><strong>Create Lion</strong> - Select Animals, click <b class="button">New</b>, and choose <strong>Animal</strong>.
 Enter "Lion" as the display name and select your uploaded <code>lion.jpg</code> in the Images field.
 Leave Other names empty and save the item.</p>
-</li>
-<li>
-<p>Create another Animal named "Reindeer" in the same folder.
-Enter "Caribou" in Other names, leave Images empty, and save it.
-Notice that you can add another Other names entry because the field is repeatable.</p>
-</li>
-</ol>
-</div>
 <div class="imageblock">
 <div class="content">
 <img src="images/form-animal.png" alt="Animal form for Lion with an empty Other names field and the selected lion image" width="578">
 </div>
 <div class="title">Figure 1. The Animal form with a reference to the uploaded lion image</div>
+</div>
+</li>
+<li>
+<p><strong>Create Reindeer</strong> - Create another Animal named "Reindeer" in the same folder.
+Enter "Caribou" in Other names, leave Images empty, and save it.
+Notice that you can add another Other names entry because the field is repeatable.</p>
+</li>
+</ol>
 </div>
 <div class="paragraph">
 <p>Both items are saved in Draft; keep using Draft in Query Playground for the exercises below.</p>
@@ -630,9 +638,10 @@ The names are strings; the images are content references whose fields you can se
 </div>
 <div class="sect2">
 <h3 id="task_fetch_the_lion_and_its_image"><a class="link" href="#task_fetch_the_lion_and_its_image">Task: Fetch the lion and its image</a></h3>
-<div class="paragraph">
-<p>Open Query Playground for "My First Project", keep <strong>Draft</strong> selected, and run:</p>
-</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p><strong>Fetch Lion and its image</strong> - Open Query Playground for "My First Project", keep <strong>Draft</strong> selected, and run:</p>
 <div class="listingblock">
 <div class="content">
 <pre class="highlight"><code class="language-graphql" data-lang="graphql">{
@@ -659,6 +668,17 @@ The names are strings; the images are content references whose fields you can se
 </div>
 </div>
 <div class="paragraph">
+<p>The result contains an empty <code>otherNames</code> array and one entry in <code>images</code>.
+Build the image URL by joining <code><a href="http://localhost:8080/api" class="bare">http://localhost:8080/api</a></code>, <code>path</code> and <code>queryString</code>, as in the media chapter.</p>
+</div>
+</li>
+<li>
+<p><strong>Compare Reindeer</strong> - Change the key to <code>/animals/reindeer</code> and run the query again.
+The <code>otherNames</code> list now contains <code>"Caribou"</code>, while <code>images</code> is empty.</p>
+</li>
+</ol>
+</div>
+<div class="paragraph">
 <p>The <code>get</code> result and the items in <code>images</code> use GraphQL&#8217;s <code>Content</code> interface.
 As in the <a href="headless-api.ahtml">Headless API chapter</a>, an inline fragment selects fields belonging to a more specific GraphQL type:</p>
 </div>
@@ -676,11 +696,6 @@ As in the <a href="headless-api.ahtml">Headless API chapter</a>, an inline fragm
 <p>These are GraphQL type names; your CMS content types are <code>com.example.dev101:animal</code> and <code>media:image</code>.
 The image selector stores the image&#8217;s ID, and Guillotine resolves that reference for you.</p>
 </div>
-<div class="paragraph">
-<p>The result contains an empty <code>otherNames</code> array and one entry in <code>images</code>.
-Build the image URL by joining <code><a href="http://localhost:8080/api" class="bare">http://localhost:8080/api</a></code>, <code>path</code> and <code>queryString</code>, as in the media chapter.
-Change the key to <code>/animals/reindeer</code> and run the query again: <code>otherNames</code> now contains <code>"Caribou"</code>, while <code>images</code> is empty.</p>
-</div>
 </div>
 </div>
 </div>
@@ -693,9 +708,10 @@ You&#8217;ll use it to give each artist one optional favorite animal.</p>
 </div>
 <div class="sect2">
 <h3 id="task_add_a_favorite_animal"><a class="link" href="#task_add_a_favorite_animal">Task: Add a favorite animal</a></h3>
-<div class="paragraph">
-<p>Append this field to the Artist form, after <code>birthday</code>:</p>
-</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p><strong>Define the favorite animal field</strong> - Append this field to the Artist form, after <code>birthday</code>:</p>
 <div class="listingblock">
 <div class="title">src/main/resources/cms/content-types/artist/artist.yaml</div>
 <div class="content">
@@ -708,26 +724,10 @@ You&#8217;ll use it to give each artist one optional favorite animal.</p>
       - "/animals/*"</code></pre>
 </div>
 </div>
-<div class="paragraph">
-<p>The selector narrows the available choices in two ways:</p>
-</div>
-<div class="ulist">
-<ul>
-<li>
-<p><code>allowContentType</code> permits only the <code>animal</code> content type from this app.</p>
 </li>
 <li>
-<p><code>allowPath</code> restricts the choices to content below <code>/animals</code>.</p>
-</li>
-</ul>
-</div>
-<div class="paragraph">
-<p>There is no <code>occurrences</code> setting, so the editor can select at most one animal and can leave the field empty.</p>
-</div>
-<div class="paragraph">
-<p>Save the schema, let the watcher update the app, and reopen your artists in Content Studio.
-Use these selections as sample data for the exercise:</p>
-</div>
+<p><strong>Select each artist&#8217;s favorite animal</strong> - Save the schema, let the watcher update the app, and reopen your artists in Content Studio.
+Make these selections and save each artist:</p>
 <table class="tableblock frame-all grid-all stretch">
 <colgroup>
 <col style="width: 50%;">
@@ -754,14 +754,30 @@ Use these selections as sample data for the exercise:</p>
 </tr>
 </tbody>
 </table>
-<div class="paragraph">
-<p>Save each artist after making the selection.</p>
-</div>
 <div class="imageblock">
 <div class="content">
 <img src="images/form-artist-favorite-animal.png" alt="Artist form for Missy Elliott with Reindeer selected as her favorite animal" width="548">
 </div>
 <div class="title">Figure 2. The Artist form with an animal selected</div>
+</div>
+</li>
+</ol>
+</div>
+<div class="paragraph">
+<p>The selector narrows the available choices in two ways:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>allowContentType</code> permits only the <code>animal</code> content type from this app.</p>
+</li>
+<li>
+<p><code>allowPath</code> restricts the choices to content below <code>/animals</code>.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>There is no <code>occurrences</code> setting, so the editor can select at most one animal and can leave the field empty.</p>
 </div>
 <div class="admonitionblock tip">
 <table>
@@ -780,9 +796,10 @@ For data that only belongs to one item, such as an artist&#8217;s filmography en
 </div>
 <div class="sect2">
 <h3 id="task_follow_the_reference_in_a_query"><a class="link" href="#task_follow_the_reference_in_a_query">Task: Follow the reference in a query</a></h3>
-<div class="paragraph">
-<p>Start with the type-filtered artist query from the Headless API chapter and select <code>favoriteAnimal</code>:</p>
-</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p><strong>Fetch the referenced animals</strong> - Start with the type-filtered artist query from the Headless API chapter and select <code>favoriteAnimal</code>:</p>
 <div class="listingblock">
 <div class="content">
 <pre class="highlight"><code class="language-graphql" data-lang="graphql">{
@@ -812,6 +829,9 @@ For data that only belongs to one item, such as an artist&#8217;s filmography en
   }
 }</code></pre>
 </div>
+</div>
+</li>
+</ol>
 </div>
 <div class="paragraph">
 <p>The <code>favoriteAnimal</code> field returns a single content item.
@@ -892,7 +912,7 @@ In the next chapter, you&#8217;ll group and reuse form items with <a href="sets.
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2026-10-27 23:21:28 UTC
+Last updated 2026-10-28 13:32:09 UTC
 </div>
 </div>
 </body>
