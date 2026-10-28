@@ -1,4 +1,4 @@
-= XP 8 - Content Modeling and the GraphQL API
+= Developer 101 — Content Modeling and the GraphQL API
 include::.variables.adoc[]
 
 Hands-on introduction to modeling content in Enonic and reading it through the Guillotine GraphQL API.

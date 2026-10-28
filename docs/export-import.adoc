@@ -38,28 +38,19 @@ NOTE: To download an export for transfer to another installation, open the https
 Data Toolbox also lets you upload exports on the destination server.
 For command-line export and import operations, see the https://developer.enonic.com/docs/enonic-cli/stable/xp#export[Enonic CLI documentation]; these commands use exports stored on the server and do not download them to your computer.
 
-== Prepare another project
+== Import the folder
 
 The export contains content data, while your app supplies the schemas that describe it.
 Assign the same app to the destination project so Content Studio can edit the imported animals and Guillotine can expose their fields.
-
-=== Task: Create the destination project
-
-. *Start a separate project* - Open *Settings* at the bottom of Content Studio's menu bar and click btn:[New].
-Leave *Parent project* empty and choose the same language as your original project.
-
-. *Name the copy* - Set *Display Name* to "{import-project-displayname}" and check that *Identifier* is `{import-project-id}`.
-Choose *Public* access and continue without adding project roles.
-
-. *Assign the schemas* - Select the *Developer 101* app in the Applications step, review the summary, and click btn:[Create Project].
-
-== Import the folder
 
 Importing preserves content IDs, which lets references resolve when their targets are present in the destination project.
 An import can also update items with matching IDs, so importing again may replace edits made in the destination.
 It does not delete other content.
 
 === Task: Import the Animals folder
+
+. *Create another project* - Open *Settings* and click btn:[New], then follow the <<content-studio#_task_your_first_project, earlier project-creation example>>.
+Use the same settings, including the *Developer 101* app, but name the project "{import-project-displayname}" with identifier `{import-project-id}`.
 
 . *Open the destination* - Return to *Content* and use the project selector in the top bar to switch to "{import-project-displayname}".
 Show the Context Panel and choose *Content Exports*.

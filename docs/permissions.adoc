@@ -175,6 +175,30 @@ Authors can https://developer.enonic.com/docs/content-studio/stable/workflow/iss
 
 The https://developer.enonic.com/docs/content-studio/stable/projects#project-roles[project roles reference] explains how to assign users and groups, along with the other available roles.
 
+=== Give teams access to specific content
+
+You can use groups to divide responsibility within a project.
+For example, an administrator could create an *Animals editors* group in the Users tool, add the people responsible for animals, and assign the group the project's *Contributor* role.
+This gives them access to the project in Content Studio with read access as their starting point.
+
+In the Animals folder's *Edit permissions* dialog, grant that group *Can Write* and apply the change to the folder and its existing child items.
+Members can then create, edit and delete content in the Animals subtree, including its media, while Artists and Images remain read-only.
+They can save drafts and request publishing, but cannot publish them.
+New items created beneath Animals receive a copy of their parent's permissions.
+
+Access combines all the permissions a user receives through their groups and roles.
+For this arrangement to limit editing to Animals, the members must not also have project-wide Author or Editor access, administrator access, or another grant that allows editing elsewhere.
+
+The same approach supports other responsibilities:
+
+* *Animal publishers* could have *Can Publish* on Animals and its children, allowing that team to review and publish the animal team's work.
+* *Image curators* could have *Can Write* on Images and its children, allowing them to manage shared media while leaving the animal and artist descriptions to other teams.
+* *Proofreaders* could have *Custom* access with only *Read* and *Modify* on selected items, allowing corrections to existing content without creating, deleting or publishing items.
+
+These examples build on the same Contributor baseline, with additional permissions granted where each team needs them.
+Managing group membership lets you change who belongs to a team without editing every content item's permissions.
+See the https://developer.enonic.com/docs/content-studio/stable/workbench/permissions#edit_permissions[content permissions reference] for the permission levels and options for applying changes to children.
+
 == Coming up
 
 You've published your content, compared public and restricted access, and learned how editorial roles separate editing from publishing.
