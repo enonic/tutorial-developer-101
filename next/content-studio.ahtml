@@ -737,8 +737,40 @@ Read more about <a href="https://developer.enonic.com/docs/cms/stable/schemas/na
 <div class="sect2">
 <h3 id="task_create_artists"><a class="link" href="#task_create_artists">Task: create artists</a></h3>
 <div class="paragraph">
-<p>Now, using the brand new Artist content type, create three artists, starting with Cardi B:</p>
+<p>Using the Artist content type, create these three artists, starting with Cardi B.
+Use the sample values below so your results match the queries in later chapters:</p>
 </div>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 14.2857%;">
+<col style="width: 28.5714%;">
+<col style="width: 57.1429%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Stage name</th>
+<th class="tableblock halign-left valign-top">Legal name</th>
+<th class="tableblock halign-left valign-top">About the artist</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Cardi B</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Belcalis Marlenis Almánzar</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Belcalis Marlenis Almánzar (born October 11, 1992), known professionally as Cardi B, is an American rapper and songwriter.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Missy Elliott</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Melissa Arnette Elliott</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Melissa Arnette Elliott (born July 1, 1971) is an American rapper, singer, songwriter, and record producer.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">P!nk</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Alecia Beth Moore</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Alecia Beth Moore (born September 8, 1979), known professionally as Pink (stylized as P!nk), is an American singer and songwriter.</p></td>
+</tr>
+</tbody>
+</table>
 <div class="olist arabic">
 <ol class="arabic">
 <li>
@@ -755,7 +787,8 @@ Since your app is assigned to the project, the dialog now lists Artist next to t
 </div>
 </li>
 <li>
-<p><strong>Enter the artist details</strong> - Select <b class="button">Artist</b>, and start filling in the form. Use details of <a href="https://en.wikipedia.org/wiki/Cardi_B">Cardi B on Wikipedia</a>.</p>
+<p><strong>Enter the artist details</strong> - Select <b class="button">Artist</b> and fill in the form using Cardi B&#8217;s values from the table.
+Enter the stage name in the built-in display name field.</p>
 <div class="imageblock">
 <div class="content">
 <img src="images/cs-cardib-form.png" alt="The Artist form filled out for Cardi B, with the legal name and the text about the artist" width="546">
@@ -764,15 +797,8 @@ Since your app is assigned to the project, the dialog now lists Artist next to t
 </div>
 </li>
 <li>
-<p><strong>Create the remaining artists</strong> - Save and close the tab, then create the next two artists the same way.
+<p><strong>Create the remaining artists</strong> - Save and close the tab, then create Missy Elliott and P!nk using the remaining rows of the table.
 Select the "Artists" folder each time: Content Studio nests new content under whatever item is selected.</p>
-<div class="ulist">
-<ul>
-<li>
-<p><a href="https://en.wikipedia.org/wiki/Missy_Elliott">Missy Elliott on Wikipedia</a></p>
-</li>
-<li>
-<p><a href="https://en.wikipedia.org/wiki/Pink_(singer)">P!nk on Wikipedia</a></p>
 <div class="paragraph">
 <p>Content Studio should now list the "Artists" folder and the three artists.</p>
 </div>
@@ -783,10 +809,10 @@ Select the "Artists" folder each time: Content Studio nests new content under wh
 <div class="title">Figure 8. The hierarchy as it should look after creating some content</div>
 </div>
 </li>
-</ul>
-</div>
-</li>
 </ol>
+</div>
+<div class="paragraph">
+<p>For more background, see the Wikipedia articles about <a href="https://en.wikipedia.org/wiki/Cardi_B">Cardi B</a>, <a href="https://en.wikipedia.org/wiki/Missy_Elliott">Missy Elliott</a> and <a href="https://en.wikipedia.org/wiki/Pink_(singer)">P!nk</a>.</p>
 </div>
 </div>
 </div>
@@ -864,7 +890,7 @@ You can also publish a piece of content by using the keyboard shortcut: Windows:
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2026-10-28 21:00:58 UTC
+Last updated 2026-10-29 08:36:45 UTC
 </div>
 </div>
 </body>

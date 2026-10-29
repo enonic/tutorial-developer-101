@@ -6,7 +6,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="generator" content="Asciidoctor 2.0.26">
 <meta name="application-name" content="dev101">
-<meta name="description" content="Install the Enonic CLI, start a local XP sandbox and create the app that will hold your content types. Three commands and you are ready.">
+<meta name="description" content="Install the Enonic CLI, start a local XP sandbox and create the app that will hold your content types.">
 <title>Setup</title>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,300italic,400,400italic,600,600italic%7CNoto+Serif:400,400italic,700,700italic%7CDroid+Sans+Mono:400,700">
 <style>
@@ -443,6 +443,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <div id="toc" class="toc2">
 <div id="toctitle">Table of Contents</div>
 <ul class="sectlevel1">
+<li><a href="#tested_versions">Tested versions</a></li>
 <li><a href="#install_the_cli">Install the CLI</a>
 <ul class="sectlevel2">
 <li><a href="#task_install_the_cli">Task: Install the CLI</a></li>
@@ -475,6 +476,49 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <div class="paragraph">
 <p>In this chapter, you&#8217;ll install the Enonic CLI, start a local XP sandbox, and create the app that will hold your content types.
 It takes a few minutes, and everything you install here is used in every later chapter.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="tested_versions"><a class="link" href="#tested_versions">Tested versions</a></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>This tutorial was produced and tested with the following stack:</p>
+</div>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 33.3333%;">
+<col style="width: 66.6667%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Component</th>
+<th class="tableblock halign-left valign-top">Version</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Enonic CLI</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">4.1.4</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Enonic XP</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">8.1.2</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Content Studio</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">6.1.0</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Guillotine</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">9.0.0</p></td>
+</tr>
+</tbody>
+</table>
+<div class="paragraph">
+<p>Some screenshots were captured on XP 8.1.0.
+The sandbox command below selects XP 8.1.2 to match the tested runtime.
+The Essentials template installs apps separately, so their versions may differ from those listed here.</p>
 </div>
 </div>
 </div>
@@ -527,19 +571,8 @@ You do not need to install Java or Gradle. The sandbox you create next bundles t
 <p>A <em>sandbox</em> is a local developer instance of Enonic XP, with its own data and configuration. You can have several, each on its own XP version.</p>
 </div>
 <div class="paragraph">
-<p>The <code>essentials</code> template installs a set of applications from Enonic Market, including Content Studio and Guillotine, which you will meet in the coming chapters. The <code>-f</code> flag accepts the default answer to every prompt, which selects the most recent release of Enonic XP, and starts the sandbox.</p>
-</div>
-<div class="admonitionblock note">
-<table>
-<tr>
-<td class="icon">
-<i class="fa icon-note" title="Note"></i>
-</td>
-<td class="content">
-This tutorial is written for Enonic XP 8.1 and the versions of Content Studio and Guillotine that go with it. If the CLI offers you an older version, pick 8.1 or newer.
-</td>
-</tr>
-</table>
+<p>The <code>essentials</code> template installs a set of applications from Enonic Market, including Content Studio and Guillotine, which you will meet in the coming chapters.
+The <code>-v</code> flag selects the XP version; <code>-f</code> accepts the defaults for the remaining prompts.</p>
 </div>
 <div class="sect2">
 <h3 id="task_start_a_sandbox"><a class="link" href="#task_start_a_sandbox">Task: Start a sandbox</a></h3>
@@ -549,7 +582,7 @@ This tutorial is written for Enonic XP 8.1 and the versions of Content Studio an
 <p><strong>Create and start the sandbox</strong> - Run this command in your terminal:</p>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-shell" data-lang="shell">enonic sandbox create 101tutorial -t essentials -f</code></pre>
+<pre class="highlight"><code class="language-shell" data-lang="shell">enonic sandbox create 101tutorial -v 8.1.2 -t essentials -f</code></pre>
 </div>
 </div>
 </li>
@@ -573,10 +606,14 @@ You should see something like this:</p>
 </div>
 </div>
 </li>
+<li>
+<p><strong>Check the installed app versions</strong> - Open <code>XP menu</code> &#8594; <code>Applications</code> and select Content Studio and Guillotine in turn to see their versions.
+The exercises use Content Studio 6.1 and Guillotine 9; earlier versions may differ from the examples.</p>
+</li>
 </ol>
 </div>
 <div class="paragraph">
-<p>This is the <em>XP menu</em>, the start page of the XP admin.
+<p>The <em>XP menu</em> is the start page of the XP admin.
 It lists the admin tools your user has access to.
 Dashboard, Applications and Users come with the platform, and applications such as Content Studio add their own.
 Once inside a tool, click the XP icon in the top right corner to return to the XP menu and switch to another tool.</p>
@@ -797,7 +834,7 @@ In the next chapter, you&#8217;ll <a href="content-studio.ahtml">get familiar wi
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2026-10-28 21:00:58 UTC
+Last updated 2026-10-29 08:36:45 UTC
 </div>
 </div>
 </body>

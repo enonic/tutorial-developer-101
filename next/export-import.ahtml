@@ -623,7 +623,11 @@ Editing one does not update the other; importing is a one-time transfer, not ong
 <div class="sectionbody">
 <div class="paragraph">
 <p>You&#8217;ve modeled content, queried it through Guillotine, controlled access, and copied it into another project.
-Continue with these guides to use your content in an application or explore more of Enonic:</p>
+Compare your schemas and sample content with the <a href="https://github.com/enonic/tutorial-developer-101/tree/master">completed example app on GitHub</a>.
+Its README explains how to build and install the finished result in a separate sandbox.</p>
+</div>
+<div class="paragraph">
+<p>Continue with these guides to use your content in an application or explore more of Enonic:</p>
 </div>
 <div class="dlist">
 <dl>
@@ -650,7 +654,7 @@ Continue with these guides to use your content in an application or explore more
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2026-10-28 21:00:58 UTC
+Last updated 2026-10-29 08:36:45 UTC
 </div>
 </div>
 </body>

@@ -896,7 +896,8 @@ The <a href="https://developer.enonic.com/docs/cms/stable/schemas/form-items">CM
 </div>
 <div class="paragraph">
 <p>For a file that belongs directly to one content item, <a href="https://developer.enonic.com/docs/cms/stable/schemas/form-items/attachmentuploader">AttachmentUploader</a> stores it as an attachment on that item, instead of creating separate media content to reference.
-You can retrieve it through <code>attachments</code> and <code>attachmentUrl</code>, as you did in the <a href="media.ahtml">media chapter</a>.</p>
+Query the content item&#8217;s <code>attachments</code> field and select <code>attachmentUrl</code> on each attachment to retrieve its URL components.
+See the <a href="https://developer.enonic.com/docs/guillotine/stable/api#attachment">Guillotine Attachment reference</a> for the available fields.</p>
 </div>
 </div>
 </div>
@@ -912,7 +913,7 @@ In the next chapter, you&#8217;ll group and reuse form items with <a href="sets.
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2026-10-28 21:00:58 UTC
+Last updated 2026-10-29 08:36:45 UTC
 </div>
 </div>
 </body>
