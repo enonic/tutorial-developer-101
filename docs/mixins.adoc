@@ -13,6 +13,9 @@ Unlike a <<sets#_reuse_fields_across_options, form fragment>>, which inserts fie
 You'll define the fields in a mixin schema, then register it in the app's CMS descriptor to choose which content types receive them.
 Your app is already assigned to "{cms-project-displayname}", so the registration applies there.
 
+These notes follow the content item's read permissions and can be queried through the API by anyone who can read that item.
+The name "Editorial" does not make them private; you'll explore read access in the <<permissions#, permissions chapter>>.
+
 === Task: Create the mixin
 
 . *Define the Editorial mixin* - Create this file in your app:

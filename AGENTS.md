@@ -12,7 +12,7 @@ This is a tutorial, not reference documentation. The CMS reference documentation
 
 ## Content Guidelines
 
-This repository is documentation only:
+This repository contains the documentation and a deployable copy of the completed tutorial app:
 
 * `docs/` contains the AsciiDoc tutorial published on Enonic's developer portal.
 * `drafts/` holds pages parked outside the build: the deployment chapter, which waits for the self-service cloud for XP 8, an unfinished IAM chapter that belongs in the 201 tutorial, and the former Data Toolbox chapter on low-level storage. Generally ignore `drafts/`: it only keeps a copy of files we may need later, so leave it out of searches, reviews and consistency changes unless a task is explicitly about a draft. Do not mention Enonic Cloud or deployment flows in `docs/` until the deployment chapter is back; the tutorial says only that a live server differs from the sandbox by its URL.
@@ -21,6 +21,8 @@ This repository is documentation only:
 * The `master` branch targets Enonic XP 8.1, Guillotine 9 and Content Studio 6.1, and is published as the `next` version. The `xp7` branch holds the XP 7 edition and is published as `stable` until the XP 8 edition is complete. All schemas are YAML, Guillotine URL fields return `path` and `queryString` components, and the API endpoint is `/api/com.enonic.app.guillotine:graphql`.
 * Statements that still need checking against a running sandbox are marked with an AsciiDoc comment starting with `// TODO(xp8-verify):` directly above the affected block. Comments are not rendered. Remove the comment once the content has been verified or the screenshot recaptured. Inside a list item, put the comment before the `+` continuation, never between the `+` and the block: a comment there detaches the block from the list and drops its title and source style.
 * `src/main/resources/` holds the finished tutorial app: the `enonic.yaml` application descriptor, and under `cms/` the complete schemas: the Artist and Animal content types, the `distributionData` form fragment, the `editorial` mixin, `cms.yaml` and `style.yaml`. Chapters show them with `include::../{app-root}/cms/...[]` instead of inline YAML, and title each block with the file's path, such as `.{app-root}/cms/content-types/artist/artist.yaml`, so the prose does not need to repeat it. Where a schema grows across chapters, each chapter's addition is wrapped in `# tag::<name>[]` and `# end::<name>[]` comments named after the field, and the chapter includes the tags for its step. In files included by several chapters, explain lines in prose or a bullet list naming the field, since `# <n>` callout markers in the file would clash between chapters; a file shown in a single block, such as `enonic.yaml`, may carry them. Illustrative snippets that are not part of the app, such as the form item and HtmlArea examples, stay inline. When the lightweight app layout ships, move `cms/` to the repository root and update `app-root`.
+
+The finished app uses plain modern JavaScript on GraalJS without transpilation. Its startup task creates `my-first-project`, assigns the app, imports the bundled content and publishes it only when the project does not already exist. Preserve existing projects and user edits on subsequent starts. Keep this maintainer implementation out of the reader's no-coding tutorial tasks.
 
 The tutorial is a sequential story. Navigation is defined by `docs/menu.json`, and `docs/index.adoc` groups the same chapters into themed sections. Keep both in the same order.
 
@@ -51,8 +53,9 @@ Do not force links to open in a new tab. Avoid the AsciiDoc `^` suffix on link l
 
 ## Build, Test, and Lint
 
-This project relies on GitHub Actions for building and publishing. There are no local build scripts in the repository root.
+The documentation uses GitHub Actions for publishing. The completed app has a Gradle build based on `starter-vanilla`.
 
+* **App build and tests:** Run `./gradlew build` with JDK 25. The output is `build/libs/dev101.jar`; initialization tests run on GraalJS. Verify imports in a fresh XP 8.1.2 sandbox, since an existing `my-first-project` is intentionally preserved.
 * **CI Build:** The documentation is generated and published via `.github/workflows/enonic-docgen.yml` using `enonic/release-tools/generate-docs`. It runs on pushes to `master` that touch `docs/`.
 * **Local Preview:** There is no local preview setup in the repo. Use an AsciiDoc-aware IDE preview or the AsciiDoctor browser extension.
 * **Validation:** Validation happens during the CI build. Before finishing a change, validate JSON files and inspect includes, cross-references, attribute names, and image paths by hand.

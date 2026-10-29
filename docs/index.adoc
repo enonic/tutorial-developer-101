@@ -24,6 +24,10 @@ Two things to know before you start:
 
 The https://developer.enonic.com/docs/cms[CMS reference documentation] covers every topic in this tutorial in depth, and is the place to go once you know what you are looking for.
 
+The {example-app-url}[completed example app on GitHub] contains the finished schemas and sample content for comparison as you work through the tutorial.
+To explore the finished result, follow its README to build and install it in a separate sandbox.
+It uses the same app key (`{app-name-full}`) and content project identifier (`{cms-project-id}`) as the exercises; installing it in your exercise sandbox would replace your app.
+
 NOTE: When we mention "XP", we are referring to "Enonic XP", the platform behind Enonic.
 
 If you have any questions, or just want to get in touch, visit the https://discuss.enonic.com[Forum] or join the https://slack.enonic.com/[Community Slack channel].

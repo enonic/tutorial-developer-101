@@ -119,7 +119,22 @@ NOTE: Read more about https://developer.enonic.com/docs/cms/stable/schemas/names
 
 === Task: create artists
 
-Now, using the brand new Artist content type, create three artists, starting with Cardi B:
+Using the Artist content type, create these three artists, starting with Cardi B.
+Use the sample values below so your results match the queries in later chapters:
+
+[cols="1,2,4", options="header"]
+|===
+| Stage name | Legal name | About the artist
+| Cardi B
+| Belcalis Marlenis Almánzar
+| Belcalis Marlenis Almánzar (born October 11, 1992), known professionally as Cardi B, is an American rapper and songwriter.
+| Missy Elliott
+| Melissa Arnette Elliott
+| Melissa Arnette Elliott (born July 1, 1971) is an American rapper, singer, songwriter, and record producer.
+| P!nk
+| Alecia Beth Moore
+| Alecia Beth Moore (born September 8, 1979), known professionally as Pink (stylized as P!nk), is an American singer and songwriter.
+|===
 
 . *Choose where to store artists* - In Content Studio, select the "Artists" folder, so the new content is created inside it.
 
@@ -129,21 +144,21 @@ Since your app is assigned to the project, the dialog now lists Artist next to t
 .The content creation dialog showing the Artist content type
 image::cs-artist-create.png["The Create content dialog, listing the available content types: Artist, Folder, Shortcut and Site", width=830]
 
-. *Enter the artist details* - Select btn:[Artist], and start filling in the form. Use details of https://en.wikipedia.org/wiki/Cardi_B[Cardi B on Wikipedia].
+. *Enter the artist details* - Select btn:[Artist] and fill in the form using Cardi B's values from the table.
+Enter the stage name in the built-in display name field.
 +
 .The content form filled out for the artist "Cardi B"
 image::cs-cardib-form.png["The Artist form filled out for Cardi B, with the legal name and the text about the artist", width=546]
 
-. *Create the remaining artists* - Save and close the tab, then create the next two artists the same way.
+. *Create the remaining artists* - Save and close the tab, then create Missy Elliott and P!nk using the remaining rows of the table.
 Select the "Artists" folder each time: Content Studio nests new content under whatever item is selected.
-+
-* https://en.wikipedia.org/wiki/Missy_Elliott[Missy Elliott on Wikipedia]
-* https://en.wikipedia.org/wiki/Pink_(singer)[P!nk on Wikipedia]
 +
 Content Studio should now list the "Artists" folder and the three artists.
 +
 .The hierarchy as it should look after creating some content
 image::cs-hierarchy.png["The content hierarchy showing the Artists folder with P!nk, Missy Elliott and Cardi B listed directly underneath it", width=750]
+
+For more background, see the Wikipedia articles about https://en.wikipedia.org/wiki/Cardi_B[Cardi B], https://en.wikipedia.org/wiki/Missy_Elliott[Missy Elliott] and https://en.wikipedia.org/wiki/Pink_(singer)[P!nk].
 
 [#branches]
 == Publishing

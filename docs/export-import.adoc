@@ -153,6 +153,9 @@ The load request also returns a `taskId`; check its status in the same way.
 == Where to go next
 
 You've modeled content, queried it through Guillotine, controlled access, and copied it into another project.
+Compare your schemas and sample content with the {example-app-url}[completed example app on GitHub].
+Its README explains how to build and install the finished result in a separate sandbox.
+
 Continue with these guides to use your content in an application or explore more of Enonic:
 
 https://developer.enonic.com/docs/guillotine/stable/usage[Guillotine usage]:: Sending requests from cURL, JavaScript and other clients, authentication, CORS configuration, and further query examples.

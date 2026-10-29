@@ -257,7 +257,8 @@ You now have the basics for configuring fields and linking content.
 The https://developer.enonic.com/docs/cms/stable/schemas/form-items[CMS form items reference] covers the full range of form items and their settings, including https://developer.enonic.com/docs/cms/stable/schemas/form-items/imageselector[ImageSelector] and https://developer.enonic.com/docs/cms/stable/schemas/form-items/contentselector[ContentSelector].
 
 For a file that belongs directly to one content item, https://developer.enonic.com/docs/cms/stable/schemas/form-items/attachmentuploader[AttachmentUploader] stores it as an attachment on that item, instead of creating separate media content to reference.
-You can retrieve it through `attachments` and `attachmentUrl`, as you did in the <<media#, media chapter>>.
+Query the content item's `attachments` field and select `attachmentUrl` on each attachment to retrieve its URL components.
+See the https://developer.enonic.com/docs/guillotine/stable/api#attachment[Guillotine Attachment reference] for the available fields.
 
 == Coming up
 

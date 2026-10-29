@@ -11,4 +11,5 @@
 :app-name-query: com_example_{app-name}
 :cms-project-displayname: My First Project
 :cms-project-id: my-first-project
+:example-app-url: https://github.com/enonic/tutorial-developer-101/tree/master
 :subs: subs="attributes+"

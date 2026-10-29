@@ -1,125 +1,70 @@
 # Developer 101 - Content Modeling and the GraphQL API
 
-A hands-on tutorial covering content modeling, schema management and the Guillotine GraphQL API on Enonic XP.
+This repository contains the Developer 101 tutorial and its completed Enonic application.
+The app uses the tutorial's identifiers, schemas, and sample content so its GraphQL examples work directly against the installed result.
+Readers still build their own app from `starter-vanilla`; this app provides the finished result for exploration and verification.
 
-These docs are written in asciidoc.
+## Build and install the finished app
 
-## 🖊️ Working on the docs
+Use JDK 25 and Enonic XP 8.1.2.
+The Gradle wrapper and build configuration are based on `starter-vanilla`.
 
-This section contains all you need to know to work on the project or
-to understand how it's structured.
-
-### 💻 Workflow
-
-To work on the documentation, find the file with the content you want
-to change and edit it. If you want to create a new chapter, just
-create a new file by following the below steps.
-
-#### 🆕 Creating new files / chapters
-
-When creating a new chapter, create a new file under the `docs`
-directory and give it a suitable name. The file name will be used in
-the chapter's final URL, so it should be related.
-
-Each file should start with its chapter title as required by the
-asciidoc standard. Next you should import the variables file (see the
-variables section) and then add any optional overrides.
-
-Next, you should update the `index.adoc` file (the documentation landing
-page) and the `menu.json` file (both are in the `docs` directory).
-Their processes are a little different.
-
-##### `index.adoc`
-
-In the index file, you should update the "Overview" section and the
-new chapter at an appropriate place. The chapter list should be in the
-same order as the chapters in `menu.json`.[^1]
-
-To keep the chapter titles and descriptions in sync, use variables for
-titles and descriptions (as described in the _variables_ section).
-
-##### `menu.json`
-
-The menu file should also be updated. This file lists the chapters in
-the intended reading order. At the time of writing, keeping this file
-in sync is entirely manual. That means that when adding a chapter you
-must:
-
-- manually input the right chapter number
-- make sure to update any other chapter numbers that may be affected
-  by the new chapter
-- make sure the chapter title is similar to what the chapter title
-  variable says*
-
-  * the chapter needn't match entirely. Because the menu bar is rather
-    narrow, it's preferable to have a short and snappy title in the
-    menu bar. The actual chapter title can be slightly longer
-
-#### 📷 Adding images/screenshots
-
-When adding screenshots, place them in the `docs/images` directory.
-Ideally, screenshots should be captured at the expected size and
-resolution. That means that in general, you should not adjust your
-zoom to 300% to get a larger image. Instead, try and capture images
-that have the same size as what the user might see.
-
-In the documents, at current, images are given one of a number of
-predefined sizes (defined in the variables file) to give a sense of
-consistency. This may change in the future.
-
-#### 📛 Variables and their use
-
-This guide makes extensive use of variables. Variables can either be
-chapter/document-specific and placed in the files or shared. Whenever
-you need to refer to the same thing in multiple documents, consider
-using shared variables. Shared variables are located in the
-`.variables.adoc` file.
-
-The naming scheme is a bit haphazard, but try and make the name unique
-and in line with other related variables if they exist.
-
-While many things can be stored in variables, chapter titles and
-descriptions should in particular be stored as shared variables so
-they can be used in both the index file and in the corresponding chapter.
-
-To include the variables file in a document, add the following line
-before your other variable declarations:
-
-``` asciidoc
-include::.variables.adoc[]
+```shell
+./gradlew build
 ```
 
-#### 👀 Previewing the content
+The build runs the initialization tests and produces `build/libs/dev101.jar`.
+Install this file through the Applications admin tool in a fresh sandbox, alongside Content Studio 6.1 and Guillotine 9.
+The app uses the same key as the reader's app, `com.example.dev101`, so installing it replaces any app already installed with that key.
 
-While working on the docs, you might want to see how it renders to
-make sure that your syntax is correct and to get a general sense of
-what it looks like. Your editor might have plugins that let you
-preview changes directly. You can also use the [asciidoc browser
-extension](https://github.com/asciidoctor/asciidoctor-browser-extension/).
-To use the extension, install it and open an asciidoc file (`.adoc`)
-in your browser. The extension should kick in automatically and
-render the document. When you make changes, this will (mostly) also get picked
-up by the extension.
+Application code is plain modern JavaScript running on GraalJS, selected in `build.gradle`.
+There is no transpilation or npm build step.
+XP's CommonJS `require` and `exports` provide module loading.
 
-### 📄 Source files
+### First startup
 
-#### 🗄 File organization
+On the cluster leader, `main.js` schedules the named `initialize` task.
+The task runs as the system administrator and:
 
-The documentation files should all be placed in the `docs` directory directly.
+1. Creates the public content project `my-first-project` (My First Project) and its repository.
+2. Assigns `com.example.dev101` to the project.
+3. Imports the bundled Artists, Animals, and Images folders into the draft branch, including image attachments and relationships.
+4. Publishes all 11 content items so anonymous Guillotine requests can read them from the master branch.
 
-#### 🖼️ Images
+The imported IDs are preserved so content links, image references, and relationships keep working.
+Permissions inherit from the newly created project rather than from the exported environment.
+Old publishing metadata is removed before publishing the imported content.
 
-Images go in the `images` subdirectory of the `docs` directory. That
-is: `docs/images`
+If `my-first-project` already exists, initialization leaves it unchanged, including its app assignments and content.
+Restarting or reinstalling the app does not reset edits or re-import content.
+The task checks again before creation to handle a project created after startup.
 
-#### 🤫 Hiding files from the build system
+Initialization failures are reported in the server log and the task fails.
+A partially initialized project remains available for inspection and is also preserved on subsequent starts.
+After correcting the cause, use a fresh sandbox to retry initialization, or complete the existing project manually.
 
-File names with a leading `.` will _not_ be picked up by the build system.
+## Maintaining the app and tutorial
 
-#### 🚢 Deploying
+- `src/main/resources/cms/` contains the completed schemas included by the tutorial chapters.
+- `src/main/resources/main.js` schedules initialization; `tasks/initialize/` implements it.
+- `src/main/resources/import/` contains the exported content, image binaries, and import transformation.
+- `src/test/` tests initialization, existing-project preservation, and failure handling on GraalJS.
+- `docs/` contains the published AsciiDoc tutorial; `drafts/` holds unpublished chapters.
 
-Changes to the master branch are automatically synced to the
-developer.enonic.com XP instance.
+Keep the app key, content project ID, content paths, and sample data aligned with the chapters and `docs/.variables.adoc`.
+When updating sample content, update its export and referenced binaries together, preserving the IDs used by relationships and rich text.
+Verify the result in a fresh sandbox: an existing project deliberately skips initialization.
 
-[^1]: At least that's the current state of things. It may make sense
-    to group chapters by content rather than by order in the future.
+### Working on the documentation
+
+Each chapter starts with its title and `include::.variables.adoc[]`.
+Keep chapter titles and descriptions in the chapter itself; shared setup values belong in `docs/.variables.adoc`.
+Add or reorder chapters in both `docs/menu.json` and `docs/index.adoc`, keeping their order consistent.
+
+Store screenshots in `docs/images/`, capture them at 2x resolution, and set their AsciiDoc `width` to half their pixel width.
+Use an AsciiDoc-aware editor or browser extension for local preview.
+Before finishing documentation changes, validate JSON, includes, links, attributes, and image paths.
+See [AGENTS.md](AGENTS.md) for the tutorial's writing and continuity conventions.
+
+The documentation workflow publishes changes under `docs/` pushed to `master`.
+The Gradle build packages and tests the app; it does not generate the documentation.
