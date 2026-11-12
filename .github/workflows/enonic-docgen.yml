@@ -4,7 +4,7 @@ on:
   push:
     branches:
       - "master"
-      - "xp7"
+      - "7.x"
     paths:
       - 'docs/**'
       - 'src/main/resources/**'
