@@ -5,9 +5,8 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="generator" content="Asciidoctor 2.0.26">
-<meta name="application-name" content="dev101">
-<meta name="description" content="Upload an image, inspect its content data and attachment, retrieve the original file, and request cropped and filtered versions with Guillotine.">
-<title>Media - files are content too</title>
+<meta name="description" content="X-data is a way for you to add extra data to all your content types in a simple manner. This chapter covers what it is and how to use it.">
+<title>X-data</title>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,300italic,400,400italic,600,600italic%7CNoto+Serif:400,400italic,700,700italic%7CDroid+Sans+Mono:400,700">
 <style>
 /*! Asciidoctor default stylesheet | MIT License | https://asciidoctor.org */
@@ -439,38 +438,13 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 </head>
 <body class="article toc2 toc-right">
 <div id="header">
-<h1>Media - files are content too</h1>
+<h1>X-data</h1>
 <div id="toc" class="toc2">
 <div id="toctitle">Table of Contents</div>
 <ul class="sectlevel1">
-<li><a href="#upload_a_file">Upload a file</a>
-<ul class="sectlevel2">
-<li><a href="#task_upload_an_image">Task: Upload an image</a></li>
-</ul>
-</li>
-<li><a href="#inspect_the_uploaded_content">Inspect the uploaded content</a>
-<ul class="sectlevel2">
-<li><a href="#task_find_the_image_and_its_attachment">Task: Find the image and its attachment</a></li>
-</ul>
-</li>
-<li><a href="#retrieve_the_attached_file">Retrieve the attached file</a>
-<ul class="sectlevel2">
-<li><a href="#task_open_and_download_the_attachment">Task: Open and download the attachment</a></li>
-</ul>
-</li>
-<li><a href="#request_a_cropped_image">Request a cropped image</a>
-<ul class="sectlevel2">
-<li><a href="#task_open_a_portrait_crop">Task: Open a portrait crop</a></li>
-</ul>
-</li>
-<li><a href="#guide_cropping_with_a_focal_point">Guide cropping with a focal point</a>
-<ul class="sectlevel2">
-<li><a href="#_image_form">Task: Set a focal point and compare</a></li>
-<li><a href="#task_add_a_filter">Task: Add a filter</a></li>
-</ul>
-</li>
-<li><a href="#media_urls_and_caching">Media URLs and caching</a></li>
-<li><a href="#coming_up">Coming up</a></li>
+<li><a href="#your_first_x_data">Your first X-data</a></li>
+<li><a href="#headless">Headless</a></li>
+<li><a href="#bonus_seo_metafields">Bonus: SEO Metafields</a></li>
 </ul>
 </div>
 </div>
@@ -478,461 +452,284 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <div id="preamble">
 <div class="sectionbody">
 <div class="paragraph">
-<p>In this chapter, you&#8217;ll upload an image, inspect how it is stored as content with an attachment, and use Guillotine to get URLs for its original file and for cropped and filtered versions.
-The media APIs deliver the files at those URLs.</p>
-</div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="upload_a_file"><a class="link" href="#upload_a_file">Upload a file</a></h2>
-<div class="sectionbody">
-<div class="paragraph">
-<p>Start by uploading an image that you&#8217;ll use throughout the chapter.</p>
-</div>
-<div class="sect2">
-<h3 id="task_upload_an_image"><a class="link" href="#task_upload_an_image">Task: Upload an image</a></h3>
-<div class="olist arabic">
-<ol class="arabic">
-<li>
-<p><strong>Choose a photograph</strong> - Download <a href="https://unsplash.com/photos/8oLnCRz7hwM">this lion photograph</a> by <a href="https://unsplash.com/@keyursphotography">Keyur Nandaniya</a>, or choose a JPEG with its main subject away from the center.
-Save it as <code>lion.jpg</code> if you want the filename to match the examples.</p>
-</li>
-<li>
-<p><strong>Create the Images folder</strong> - In your "My First Project" content project, create a folder named "Images" at the root, with the path <code>/images</code>.</p>
-</li>
-<li>
-<p><strong>Choose the upload destination</strong> - Select the Images folder, click <b class="button">New</b>, and choose the <strong>Media</strong> tab.
-Check that the destination shown is <code>/images/</code>.</p>
-</li>
-<li>
-<p><strong>Upload the file</strong> - Click the upload area to select your file, or drag the file onto it.</p>
-<div class="imageblock">
-<div class="content">
-<img src="images/media-upload.png" alt="New Content dialog with the Media tab selected and /images/ as the upload destination" width="1440">
-</div>
-<div class="title">Figure 1. The Media tab in the New Content dialog</div>
-</div>
-</li>
-</ol>
+<p>X-data (short for <em>eXtra-data</em>) is a smart way of dynamically extending existing content types with more fields.</p>
 </div>
 <div class="paragraph">
-<p>The uploaded image now appears as a content item in the Images folder.
-It is saved in Draft and has not been published.</p>
-</div>
-</div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="inspect_the_uploaded_content"><a class="link" href="#inspect_the_uploaded_content">Inspect the uploaded content</a></h2>
-<div class="sectionbody">
-<div class="paragraph">
-<p>Your uploaded image is now a content item, just like the artists you created earlier.
-Let&#8217;s inspect its data and find the file attached to it.</p>
-</div>
-<div class="sect2">
-<h3 id="task_find_the_image_and_its_attachment"><a class="link" href="#task_find_the_image_and_its_attachment">Task: Find the image and its attachment</a></h3>
-<div class="olist arabic">
-<ol class="arabic">
-<li>
-<p><strong>Find the uploaded image</strong> - Open Query Playground, select "My First Project" and keep <strong>Draft</strong> selected throughout this chapter.
-Run this query to find up to ten images anywhere in the project:</p>
-<div class="listingblock">
-<div class="content">
-<pre class="highlight"><code class="language-graphql" data-lang="graphql">{
-  guillotine {
-    queryDsl(
-      query: {
-        term: {
-          field: "type"
-          value: { string: "media:image" }
-        }
-      }
-    ) {
-      displayName
-      _path
-      type
-      dataAsJson
-      attachments {
-        name
-        label
-        mimeType
-        size
-      }
-    }
-  }
-}</code></pre>
-</div>
+<p>The idea is to basically define new fields and decide to what content type those fields should be applied to. If no content type is selected while creating an X-data, those fields will be enabled to all content types.</p>
 </div>
 <div class="paragraph">
-<p>Below is one item from the <code>data.guillotine.queryDsl</code> array.
-This example shows the image immediately after upload; your filename, dimensions, file size and additional metadata may differ:</p>
+<p>In Content Studio, X-data is visually displayed as a new step in the form, listed below the content type&#8217;s standard fields.</p>
 </div>
-<div class="listingblock">
-<div class="title">The image content and its attachment</div>
-<div class="content">
-<pre class="highlight"><code class="language-json" data-lang="json">{
-  "displayName": "lion",
-  "_path": "/images/lion.jpg",
-  "type": "media:image",
-  "dataAsJson": {
-    "media": {
-      "imageWidth": 2400,
-      "attachment": "lion.jpg",
-      "imageHeight": 1600
-    }
-  },
-  "attachments": [
-    {
-      "name": "lion.jpg",
-      "label": "source",
-      "mimeType": "image/jpeg",
-      "size": 550171
-    }
-  ]
-}</code></pre>
-</div>
-</div>
-</li>
-<li>
-<p><strong>Keep the content path</strong> - Copy your image&#8217;s <code>_path</code> for the following queries.</p>
-</li>
-</ol>
-</div>
-<div class="paragraph">
-<p>The <code>dataAsJson</code> field shows the stored content data, as it did for your artists.
-The <code>attachments</code> field lists the attached files and their metadata.
-Both are common content fields, so this query does not need an inline fragment.</p>
-</div>
-<div class="paragraph">
-<p>Notice how the content and file fit together:</p>
-</div>
-<div class="ulist">
-<ul>
-<li>
-<p><code>type</code> is <code>media:image</code>: XP detected the uploaded file and created an image content item.</p>
-</li>
-<li>
-<p><code>dataAsJson.media</code> holds image data, including dimensions and the name of the source attachment.</p>
-</li>
-<li>
-<p><code>attachments</code> contains an entry with that same name, <code>lion.jpg</code>.
-Its <code>label</code> is <code>source</code>, identifying it as the original uploaded file; <code>mimeType</code> and <code>size</code> describe its format and size in bytes.
-The file&#8217;s binary data is stored as an attachment; it is not embedded in this JSON response.</p>
-</li>
-</ul>
-</div>
-<div class="paragraph">
-<p>This upload-and-retrieve pattern is the same for any kind of file, including a PDF, an audio recording or a video.
-Each upload creates a media content item with the original file attached and labeled <code>source</code>.
-XP maps the file to the appropriate media content type: an image becomes <code>media:image</code>, while other files become types such as Audio, Video or Document.
-The type and its metadata fields vary, but the attachment structure and the <code>mediaUrl</code> field used to retrieve the original file work the same way.
-The <a href="https://developer.enonic.com/docs/cms/stable/media">CMS media reference</a> explains media structure, type mapping and file handling in more detail.</p>
-</div>
-<div class="paragraph">
-<p>XP automatically extracts readable text from known file formats, such as PDF, and indexes it for search.
-See <a href="https://developer.enonic.com/docs/cms/stable/media/media-indexing">Media indexing</a> for what becomes searchable and how to query it.</p>
-</div>
-</div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="retrieve_the_attached_file"><a class="link" href="#retrieve_the_attached_file">Retrieve the attached file</a></h2>
-<div class="sectionbody">
-<div class="paragraph">
-<p>You&#8217;ve found the attachment&#8217;s metadata; now retrieve the file itself.
-For media content, <code>mediaUrl</code> gives you the URL components for its source attachment, <code>lion.jpg</code> in this example.
-The attachment API, <code>media:attachment</code>, delivers the file at that URL.
-Like Guillotine, it is a Universal API: on your sandbox, its address starts with <code><a href="http://localhost:8080/api/media:attachment" class="bare">http://localhost:8080/api/media:attachment</a></code>.</p>
-</div>
-<div class="sect2">
-<h3 id="task_open_and_download_the_attachment"><a class="link" href="#task_open_and_download_the_attachment">Task: Open and download the attachment</a></h3>
-<div class="olist arabic">
-<ol class="arabic">
-<li>
-<p><strong>Fetch the attachment URL</strong> - Use <code>get</code> with the content path from your response.
-Replace <code>/images/lion.jpg</code> if your image has a different path:</p>
-<div class="listingblock">
-<div class="content">
-<pre class="highlight"><code class="language-graphql" data-lang="graphql">{
-  guillotine {
-    get(key: "/images/lion.jpg") {
-      displayName
-      ... on media_Image {
-        mediaUrl {
-          path
-          queryString
-        }
-      }
-    }
-  }
-}</code></pre>
-</div>
-</div>
-<div class="paragraph">
-<p>The <code>data.guillotine.get</code> object looks like this, with your own content ID, fingerprint and filename:</p>
-</div>
-<div class="listingblock">
-<div class="title">The source attachment&#8217;s URL components</div>
-<div class="content">
-<pre class="highlight"><code class="language-json" data-lang="json">{
-  "displayName": "lion",
-  "mediaUrl": {
-    "path": "/media:attachment/my-first-project:draft/3cff3960-08e9-4c92-828e-917187c1dc20:927e557892810fabb5e2c76cd686a7e7/lion.jpg",
-    "queryString": ""
-  }
-}</code></pre>
-</div>
-</div>
-</li>
-<li>
-<p><strong>Build the attachment address</strong> - Use <strong>your own response</strong>: start with <code><a href="http://localhost:8080/api" class="bare">http://localhost:8080/api</a></code>, then append <code>mediaUrl.path</code> and <code>mediaUrl.queryString</code> exactly as returned.
-An empty <code>queryString</code> adds nothing.
-For the example above, the address would be:</p>
-<div class="listingblock">
-<div class="content">
-<pre>http://localhost:8080/api/media:attachment/my-first-project:draft/3cff3960-08e9-4c92-828e-917187c1dc20:927e557892810fabb5e2c76cd686a7e7/lion.jpg</pre>
-</div>
-</div>
-</li>
-<li>
-<p><strong>View the original file</strong> - Open your assembled URL in a new tab in the same browser where you are logged in to Content Studio.
-It displays the original uploaded image.
-Draft media requires an authenticated request; copying the example URL above will not retrieve your own image.</p>
-</li>
-<li>
-<p><strong>Download the attachment</strong> - Change <code>mediaUrl</code> to <code>mediaUrl(download: true)</code> and run the query again.
-Assemble and open the new URL, including its <code>queryString</code>; the browser will download the attachment.</p>
-</li>
-</ol>
-</div>
-<div class="paragraph">
-<p>The CMS content type is <code>media:image</code>; its GraphQL object type is <code>media_Image</code>.
-As with Artist in the previous chapter, the inline fragment gives access to fields belonging to that GraphQL type.
-<code>mediaUrl</code> is available on all media types.</p>
-</div>
-<div class="paragraph">
-<p>The content item&#8217;s <code>_path</code>, such as <code>/images/lion.jpg</code>, identifies the item in queries.
-The media URL&#8217;s <code>path</code> identifies the attached file through the attachment API.</p>
-</div>
-</div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="request_a_cropped_image"><a class="link" href="#request_a_cropped_image">Request a cropped image</a></h2>
-<div class="sectionbody">
-<div class="paragraph">
-<p>The <code>imageUrl</code> field returns a URL served by the image API, <code>media:image</code>.
-It can resize, crop and filter images when delivering them, while the original attachment remains unchanged.</p>
-</div>
-<div class="paragraph">
-<p>The <code>scale</code> argument controls resizing and cropping.
-For example, <code>width(600)</code> scales proportionally to a width of 600 pixels; <code>block(400,600)</code> fills a 400-by-600-pixel rectangle, cropping what does not fit.
-Omitting <code>scale</code> means no resizing, but other processing and saved image edits can still affect the result.
-Use <code>mediaUrl</code> when you need the original uploaded file.</p>
-</div>
-<div class="sect2">
-<h3 id="task_open_a_portrait_crop"><a class="link" href="#task_open_a_portrait_crop">Task: Open a portrait crop</a></h3>
-<div class="olist arabic">
-<ol class="arabic">
-<li>
-<p><strong>Request a portrait crop</strong> - Use <code>get</code> to retrieve the image whose content path you copied above.
-Replace <code>/images/lion.jpg</code> if your image has a different path:</p>
-<div class="listingblock">
-<div class="content">
-<pre class="highlight"><code class="language-graphql" data-lang="graphql">{
-  guillotine {
-    get(key: "/images/lion.jpg") {
-      displayName
-      ... on media_Image {
-        imageUrl(scale: "block(400,600)") {
-          path
-          queryString
-        }
-      }
-    }
-  }
-}</code></pre>
-</div>
-</div>
-<div class="paragraph">
-<p>The <code>data.guillotine.get</code> object contains:</p>
-</div>
-<div class="listingblock">
-<div class="title">Image with a crop URL</div>
-<div class="content">
-<pre class="highlight"><code class="language-json" data-lang="json">{
-  "displayName": "lion",
-  "imageUrl": {
-    "path": "/media:image/my-first-project:draft/3cff3960-08e9-4c92-828e-917187c1dc20:4f827305024b80384b0aa939496e4688/block-400-600/lion.jpg",
-    "queryString": ""
-  }
-}</code></pre>
-</div>
-</div>
-</li>
-<li>
-<p><strong>View the crop</strong> - Assemble the URL from <code><a href="http://localhost:8080/api" class="bare">http://localhost:8080/api</a></code> plus your returned <code>imageUrl.path</code> and <code>imageUrl.queryString</code>, then open it in your browser.
-Without a focal point, the crop is centered, which can cut off an off-center subject:</p>
-<div class="imageblock">
-<div class="content">
-<img src="images/image-cropped-unfocused.jpg" alt="Portrait crop with part of the lion cut off at the left edge" width="400">
-</div>
-<div class="title">Figure 2. Portrait crop before setting a focal point</div>
-</div>
-</li>
-</ol>
-</div>
-</div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="guide_cropping_with_a_focal_point"><a class="link" href="#guide_cropping_with_a_focal_point">Guide cropping with a focal point</a></h2>
-<div class="sectionbody">
-<div class="paragraph">
-<p>A focal point identifies the subject to prioritize when the image API crops an image to a different aspect ratio.
-It guides the crop; it does not guarantee that the entire subject fits every shape.</p>
-</div>
-<div class="sect2">
-<h3 id="_image_form"><a class="link" href="#_image_form">Task: Set a focal point and compare</a></h3>
-<div class="olist arabic">
-<ol class="arabic">
-<li>
-<p><strong>Open the image editor</strong> - Return to Content Studio, select your image and click <b class="button">Edit</b>.
-The content form contains fields such as Caption and Alternative text, and the image preview includes editing controls.</p>
-<div class="imageblock">
-<div class="content">
-<img src="images/image-content-form.jpg" alt="Content Studio image editor showing the lion preview, editorial fields and image editing toolbar" width="1440">
-</div>
-<div class="title">Figure 3. The image content form and preview</div>
-</div>
-</li>
-<li>
-<p><strong>Position the focal point</strong> - In the toolbar above the image preview, click <strong>Set Autofocus</strong> to edit the focal point.
-Click the lion&#8217;s face, or drag the marker onto the subject of your own image.</p>
-<div class="imageblock">
-<div class="content">
-<img src="images/image-editing-focal-point.jpg" alt="Image preview in focal-point mode with the marker on the lion&#8217;s face and Apply and Cancel controls" width="1440">
-</div>
-<div class="title">Figure 4. Positioning the focal point</div>
-</div>
-</li>
-<li>
-<p><strong>Save the focal point</strong> - Click <b class="button">Apply</b> to accept the position, then <b class="button">Save</b> in the Content Editor toolbar to save the content item.</p>
-</li>
-<li>
-<p><strong>Compare the new crop</strong> - Return to Query Playground and run the same portrait-crop query again.
-Assemble and open the <strong>newly returned URL</strong> so you see the saved change.</p>
-<div class="paragraph">
-<p>The new crop prioritizes the selected subject:</p>
-</div>
-<div class="imageblock">
-<div class="content">
-<img src="images/image-cropped-focused.jpg" alt="Portrait crop after setting the focal point, with the lion&#8217;s face in view" width="400">
-</div>
-<div class="title">Figure 5. The same portrait crop with a focal point</div>
-</div>
-</li>
-</ol>
-</div>
-<div class="paragraph">
-<p>Image edits are stored on the content item; they do not rewrite the original attachment.
-The <a href="https://developer.enonic.com/docs/content-studio/stable/content-types/image">Content Studio image documentation</a> covers cropping, rotation, resetting edits and image metadata.</p>
-</div>
-</div>
-<div class="sect2">
-<h3 id="task_add_a_filter"><a class="link" href="#task_add_a_filter">Task: Add a filter</a></h3>
-<div class="olist arabic">
-<ol class="arabic">
-<li>
-<p><strong>Request image filters</strong> - Keep the same image and scale, and add a <code>filter</code> argument:</p>
-<div class="listingblock">
-<div class="content">
-<pre class="highlight"><code class="language-graphql" data-lang="graphql">{
-  guillotine {
-    get(key: "/images/lion.jpg") {
-      displayName
-      ... on media_Image {
-        imageUrl(
-          scale: "block(400,600)"
-          filter: "grayscale(); border(10, 0x000000)"
-        ) {
-          path
-          queryString
-        }
-      }
-    }
-  }
-}</code></pre>
-</div>
-</div>
-<div class="paragraph">
-<p>Use your image&#8217;s content path if it differs from the example.
-The semicolon separates two filters: grayscale and a black border.</p>
-</div>
-</li>
-<li>
-<p><strong>View the filtered image</strong> - Build and open the URL as before, including the complete <code>queryString</code> returned by Guillotine.</p>
-<div class="imageblock">
-<div class="content">
-<img src="images/image-processed.jpg" alt="Portrait crop of the lion in grayscale with a black border" width="400">
-</div>
-<div class="title">Figure 6. The cropped image with filters</div>
-</div>
-</li>
-</ol>
-</div>
-<div class="paragraph">
-<p>The <a href="https://developer.enonic.com/docs/cms/stable/apis/image">Image API reference</a> describes the available scaling methods and filters.</p>
-</div>
-<div class="admonitionblock tip">
+<div class="admonitionblock note">
 <table>
 <tr>
 <td class="icon">
-<i class="fa icon-tip" title="Tip"></i>
+<i class="fa icon-note" title="Note"></i>
 </td>
 <td class="content">
-For presentation effects such as grayscale or borders, consider CSS or similar client-side styling.
-Use server-side filters when the effect needs to be part of the delivered image file, for example in a download or an email.
+The tasks and examples in this chapter are based on work done in previous chapters (starting with <a href="sandbox.ahtml">the sandboxes chapter</a>). If you want to follow along with the examples, make sure you&#8217;re all caught up.
 </td>
 </tr>
 </table>
 </div>
 </div>
 </div>
-</div>
 <div class="sect1">
-<h2 id="media_urls_and_caching"><a class="link" href="#media_urls_and_caching">Media URLs and caching</a></h2>
+<h2 id="your_first_x_data"><a class="link" href="#your_first_x_data">Your first X-data</a></h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>The returned paths identify the content project and branch.
-In these examples, <code>my-first-project:draft</code> selects Draft; published content uses <code>my-first-project</code> without a branch suffix.
-Let Guillotine generate these paths and query strings rather than constructing or editing their internal parts yourself.</p>
+<p>If your requirement is to add new fields to a specific content type, it doesn&#8217;t make sense to use X-data, since you can directly update that content type.</p>
 </div>
 <div class="paragraph">
-<p>The fingerprint in a media URL identifies a version of the file or processed image and supports caching.
-After changing an image or its editing settings, query again for the current URL.
-Actual caching follows the response&#8217;s <code>Cache-Control</code> header, with different settings for public and private content; a fingerprint does not make draft content public.</p>
+<p>Now, if your requirement is to add new fields to multiple content types, that is when X-data comes into place.</p>
 </div>
 <div class="paragraph">
-<p>Returning URL components also lets your front-end use a separate base URL for media, for example when serving published images and downloads through a content delivery network (CDN).
-GraphQL requests can still go directly to the Enonic server.
-The platform&#8217;s <a href="https://developer.enonic.com/docs/platform/stable/config/vhosts">virtual host configuration reference</a> explains how to give the media APIs their own address.</p>
+<p>The same behaviour of extending multiple content types can be achieved through mixins. You can create a mixin and add it to the content types you want to extend the fields. The difference is where the data on those fields will be stored, and also in the fact that X-data are easier to maintain when adding to a lot of content types.</p>
+</div>
+<div class="paragraph">
+<p>Let&#8217;s now add a "notes" X-data, which will extend both Artist and Animal content types.</p>
+</div>
+<div class="paragraph">
+<p>Similar to content types, X-data schemas have a specific naming and placement convention within your app: <code>src/main/resources/site/x-data/&lt;xdata-name&gt;/&lt;xdata-name&gt;.xml</code>.</p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Create the "notes" X-data schema:</p>
+<div class="listingblock">
+<div class="title">site/x-data/notes/notes.xml</div>
+<div class="content">
+<pre class="highlight"><code class="language-xml" data-lang="xml">&lt;x-data&gt;
+  &lt;display-name&gt;Notes X-data&lt;/display-name&gt;
+  &lt;form&gt;
+    &lt;input name="notes" type="TextLine"&gt;
+      &lt;label&gt;Notes&lt;/label&gt;
+      &lt;occurrences minimum="0" maximum="3"/&gt;
+    &lt;/input&gt;
+  &lt;/form&gt;
+&lt;/x-data&gt;</code></pre>
+</div>
+</div>
+</li>
+<li>
+<p>Additionally, you need to define the injection rules for the X-data, and for that you need to edit the <code>site.xml</code> file:</p>
+<div class="listingblock">
+<div class="title">src/main/resources/site/site.xml</div>
+<div class="content">
+<pre class="highlight"><code class="language-xml" data-lang="xml">&lt;site&gt;
+  &lt;x-data name="notes" allowContentTypes="com.example.myapp:artist|com.example.myapp:animal"/&gt;
+  &lt;form/&gt;
+&lt;/site&gt;</code></pre>
+</div>
+</div>
+</li>
+<li>
+<p>Redeploy your app and access a Artist or an Animal content. You should see the following section in the bottom of the form:</p>
+<div class="imageblock">
+<div class="content">
+<img src="media/notes-x-data.png" alt="Notes x-data fields showing in the bottom of an animal content" width="1050">
+</div>
+</div>
+</li>
+<li>
+<p>Finally, add some notes to some content.</p>
+</li>
+</ol>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+For more details and configuration options for X-data, visit <a href="https://developer.enonic.com/docs/xp/stable/cms/x-data" target="_blank" rel="noopener">the X-data documentation</a>.
+</td>
+</tr>
+</table>
 </div>
 </div>
 </div>
 <div class="sect1">
-<h2 id="coming_up"><a class="link" href="#coming_up">Coming up</a></h2>
+<h2 id="headless"><a class="link" href="#headless">Headless</a></h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>You&#8217;ve uploaded an image, inspected its content data and attachment, downloaded the original file, and requested cropped and filtered versions that use a focal point.
-In the next chapter, you&#8217;ll take a closer look at <a href="form-items.ahtml">form items</a>, the building blocks of content forms.</p>
+<p>As you might expect, your x-data fields are also available via the Guillotine API.</p>
+</div>
+<div class="paragraph">
+<p>Use the following query to quickly access all x-data fields in your content.</p>
+</div>
+<div class="listingblock">
+<div class="title">Querying for X-data</div>
+<div class="content">
+<pre class="highlight"><code class="language-GraphQL" data-lang="GraphQL">{
+  guillotine {
+    queryDsl(
+      query: {
+        boolean: {
+          must: [
+            {
+              term: {
+                field: "type",
+                value: {
+                  string: "com.example.myapp:animal"
+                }
+              }
+            },
+            {
+              term: {
+                field: "displayName",
+                value: {
+                  string: "Lynx"
+                }
+              }
+            }
+          ]
+        }
+
+      }
+    ) {
+      displayName
+      xAsJson
+    }
+  }
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>If you&#8217;ve added any values to your Lynx&#8217;s Notes X-data fields, this is what you might get.</p>
+</div>
+<div class="listingblock">
+<div class="title">X-data results</div>
+<div class="content">
+<pre class="highlight"><code class="language-json" data-lang="json">{
+  "data": {
+    "guillotine": {
+      "queryDsl": [
+        {
+          "displayName": "Lynx",
+          "xAsJson": {
+            "com_example_myapp": {
+              "notes": {
+                "notes": [
+                  "Lynx note 1",
+                  "Lynx note 2",
+                  "Lynx note 3"
+                ]
+              }
+            }
+          }
+        }
+      ]
+    }
+  }
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Should you require specific fields only, or wish to drill into more details, for instance by following a reference, use the typed graphQL fields instead of xAsJson. For instance like this:</p>
+</div>
+<div class="listingblock">
+<div class="title">X-data seoTitle field query</div>
+<div class="content">
+<pre class="highlight"><code class="language-GraphQL" data-lang="GraphQL">{
+  guillotine {
+    queryDsl(
+      query: {
+        boolean: {
+          must: [
+            {
+              term: {
+                field: "type",
+                value: {
+                  string: "com.example.myapp:animal"
+                }
+              }
+            },
+            {
+              term: {
+                field: "displayName",
+                value: {
+                  string: "Lynx"
+                }
+              }
+            }
+          ]
+        }
+
+      }
+    ) {
+      displayName
+      x {
+        com_example_myapp {
+          notes { <i class="conum" data-value="1"></i><b>(1)</b>
+            notes <i class="conum" data-value="2"></i><b>(2)</b>
+          }
+        }
+      }
+    }
+  }
+}</code></pre>
+</div>
+</div>
+<div class="colist arabic">
+<table>
+<tr>
+<td><i class="conum" data-value="1"></i><b>1</b></td>
+<td>This is the name of the X-data. In this case, "notes" because we defined it to be like so in the <code>notes.xml</code> file</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="2"></i><b>2</b></td>
+<td>This is the "notes" field (TextLine input type) inside the "notes" X-data.</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>If you made it here - you are officially equipped with an essential overview of Enonic&#8217;s content fundamental content modelling capabilities. 🙌</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="bonus_seo_metafields"><a class="link" href="#bonus_seo_metafields">Bonus: SEO Metafields</a></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>There&#8217;s a known app on Enonic market named <em>SEO Metafields app</em>. Its main purpose is to provide SEO capabilities to your project, and for that purpose, it adds a new X-data named <code>meta_data</code>, which is then enabled to all content types in your project.</p>
+</div>
+<div class="paragraph">
+<p>This is a bonus section, so you&#8217;re not missing much to skip it, but it&#8217;s worth installing it to better understand capabilities of X-data.</p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Install the <a href="https://market.enonic.com/vendors/enonic/seo-metafields" target="_blank" rel="noopener">SEO Metafields app</a>.</p>
+<div class="imageblock">
+<div class="content">
+<img src="media/x-data-seo-app-install.png" alt="Install SEO Metafields app" width="1050">
+</div>
+</div>
+</li>
+<li>
+<p>Edit and add the app to your project.</p>
+</li>
+<li>
+<p>Immediately after adding the app to your site, the form should refresh - and add a new step "SEO Metafields":</p>
+<div class="paragraph">
+<p>So, now you have some additional fields for the site. If you check some of your other content items, like an animal. You will see the fields are there as well.</p>
+</div>
+</li>
+</ol>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="media/x-data-seo-animal.png" alt="SEO fields available for the animals content type as well." width="1200">
+</div>
 </div>
 </div>
 </div>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2026-11-12 10:20:17 UTC
+Last updated 2026-11-12 10:22:56 UTC
 </div>
 </div>
 </body>

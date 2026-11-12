@@ -5,9 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="generator" content="Asciidoctor 2.0.26">
-<meta name="application-name" content="dev101">
-<meta name="description" content="Install the Enonic CLI, start a local XP sandbox and create the app that will hold your content types.">
-<title>Setup</title>
+<title>Data toolbox</title>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,300italic,400,400italic,600,600italic%7CNoto+Serif:400,400italic,700,700italic%7CDroid+Sans+Mono:400,700">
 <style>
 /*! Asciidoctor default stylesheet | MIT License | https://asciidoctor.org */
@@ -439,34 +437,13 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 </head>
 <body class="article toc2 toc-right">
 <div id="header">
-<h1>Setup</h1>
+<h1>Data toolbox</h1>
 <div id="toc" class="toc2">
 <div id="toctitle">Table of Contents</div>
 <ul class="sectlevel1">
-<li><a href="#tested_versions">Tested versions</a></li>
-<li><a href="#install_the_cli">Install the CLI</a>
-<ul class="sectlevel2">
-<li><a href="#task_install_the_cli">Task: Install the CLI</a></li>
-</ul>
-</li>
-<li><a href="#create_a_sandbox">Create a sandbox</a>
-<ul class="sectlevel2">
-<li><a href="#task_start_a_sandbox">Task: Start a sandbox</a></li>
-</ul>
-</li>
-<li><a href="#create_an_app">Create an app</a>
-<ul class="sectlevel2">
-<li><a href="#task_create_your_app">Task: Create your app</a></li>
-</ul>
-</li>
-<li><a href="#build_and_deploy">Build and deploy</a>
-<ul class="sectlevel2">
-<li><a href="#task_run_the_app">Task: Run the app</a></li>
-<li><a href="#task_change_the_apps_title">Task: Change the app&#8217;s title</a></li>
-<li><a href="#troubleshooting">Troubleshooting</a></li>
-</ul>
-</li>
-<li><a href="#coming_up">Coming up</a></li>
+<li><a href="#web_interface">Web interface</a></li>
+<li><a href="#examine_your_content">Examine your content</a></li>
+<li><a href="#summary">Summary</a></li>
 </ul>
 </div>
 </div>
@@ -474,367 +451,117 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <div id="preamble">
 <div class="sectionbody">
 <div class="paragraph">
-<p>In this chapter, you&#8217;ll install the Enonic CLI, start a local XP sandbox, and create the app that will hold your content types.
-It takes a few minutes, and everything you install here is used in every later chapter.</p>
+<p>In this chapter, we&#8217;ll give a short introduction to a popular application called Data Toolbox, the developers best friend for playing around with the low level NoSQL storage in Enonic XP.</p>
 </div>
 </div>
 </div>
 <div class="sect1">
-<h2 id="tested_versions"><a class="link" href="#tested_versions">Tested versions</a></h2>
+<h2 id="web_interface"><a class="link" href="#web_interface">Web interface</a></h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>This tutorial was produced and tested with the following stack:</p>
-</div>
-<table class="tableblock frame-all grid-all stretch">
-<colgroup>
-<col style="width: 33.3333%;">
-<col style="width: 66.6667%;">
-</colgroup>
-<thead>
-<tr>
-<th class="tableblock halign-left valign-top">Component</th>
-<th class="tableblock halign-left valign-top">Version</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Enonic CLI</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">4.1.4</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Enonic XP</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">8.1.2</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Content Studio</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">6.1.0</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Guillotine</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">9.0.0</p></td>
-</tr>
-</tbody>
-</table>
-<div class="paragraph">
-<p>Some screenshots were captured on XP 8.1.0.
-The sandbox command below selects XP 8.1.2 to match the tested runtime.
-The Essentials template installs apps separately, so their versions may differ from those listed here.</p>
-</div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="install_the_cli"><a class="link" href="#install_the_cli">Install the CLI</a></h2>
-<div class="sectionbody">
-<div class="paragraph">
-<p>Enonic provides a Command Line Interface (CLI) for working with XP. It manages local XP instances, creates projects from starters, and builds and deploys your apps.</p>
-</div>
-<div class="sect2">
-<h3 id="task_install_the_cli"><a class="link" href="#task_install_the_cli">Task: Install the CLI</a></h3>
-<div class="olist arabic">
-<ol class="arabic">
-<li>
-<p><strong>Install the command-line tool</strong> - If you have <code>npm</code> on your machine, run:</p>
-<div class="listingblock">
-<div class="content">
-<pre class="highlight"><code class="language-shell" data-lang="shell">npm install -g @enonic/cli</code></pre>
-</div>
+<p>Data Toolbox provides you with a web interface to visualize and manipulate your XP data, as well as other system related information. We&#8217;ll now see how to inspect content using Data Toolbox.</p>
 </div>
 <div class="paragraph">
-<p>If not, there are <a href="https://developer.enonic.com/start">alternative ways to install the Enonic CLI</a>.</p>
-</div>
-</li>
-<li>
-<p><strong>Verify the installation</strong> - Run <code>enonic -v</code>.
-This should print the version of the CLI; this tutorial expects version 4 or newer.</p>
-</li>
-</ol>
-</div>
-<div class="admonitionblock note">
-<table>
-<tr>
-<td class="icon">
-<i class="fa icon-note" title="Note"></i>
-</td>
-<td class="content">
-You do not need to install Java or Gradle. The sandbox you create next bundles the Java runtime, and the CLI uses it when building your app.
-</td>
-</tr>
-</table>
-</div>
-</div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="create_a_sandbox"><a class="link" href="#create_a_sandbox">Create a sandbox</a></h2>
-<div class="sectionbody">
-<div class="paragraph">
-<p>A <em>sandbox</em> is a local developer instance of Enonic XP, with its own data and configuration. You can have several, each on its own XP version.</p>
+<p>Data Toolbox is <a href="https://market.enonic.com/vendors/glenn-ricaud/data-toolbox" target="_blank" rel="noopener">available on Enonic Market</a>.</p>
 </div>
 <div class="paragraph">
-<p>The <code>essentials</code> template installs a set of applications from Enonic Market, including Content Studio and Guillotine, which you will meet in the coming chapters.
-The <code>-v</code> flag selects the XP version; <code>-f</code> accepts the defaults for the remaining prompts.</p>
+<p>Just like Content Studio, Data toolbox should already have been installed, and can be launched from XP Admin: <code>XP menu</code> &#8594; <code>Data Toolbox</code>.</p>
 </div>
-<div class="sect2">
-<h3 id="task_start_a_sandbox"><a class="link" href="#task_start_a_sandbox">Task: Start a sandbox</a></h3>
-<div class="olist arabic">
-<ol class="arabic">
-<li>
-<p><strong>Create and start the sandbox</strong> - Run this command in your terminal:</p>
-<div class="listingblock">
-<div class="content">
-<pre class="highlight"><code class="language-shell" data-lang="shell">enonic sandbox create 101tutorial -v 8.1.2 -t essentials -f</code></pre>
-</div>
-</div>
-</li>
-<li>
-<p><strong>Open the sandbox welcome page</strong> - Wait for the terminal to report that Enonic XP has started, then open <a href="http://localhost:8080">http://localhost:8080</a> in your browser.
-You should see the Enonic SDK welcome page, listing the sandbox&#8217;s installed applications:</p>
 <div class="imageblock">
 <div class="content">
-<img src="images/setup-sdk.png" alt="The Enonic SDK welcome page for XP 8.1.0, with the Admin, APIs and VHosts cards, the installed applications Content Studio, Data Toolbox and Guillotine, and the sandbox&#8217;s configuration files" width="1001">
+<img src="media/data-toolbox-landing-page.png" alt="The Data Toolbox landing page: grid of icons for administrative actions and accompanying explanations. " width="639w">
 </div>
+<div class="title">Figure 1. Data Toolbox</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="examine_your_content"><a class="link" href="#examine_your_content">Examine your content</a></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Follow these steps to find and examine what your content looks like from the low level storage perspective:</p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Navigate to the <code>Data Tree</code> in the menu. Here, the toolbox lists repositories within your XP instance, you should at least have the following:</p>
+<div class="dlist">
+<dl>
+<dt class="hdlist1">com.enonic.cms.my-first-project</dt>
+<dd>
+<p>This is the current repository that holds your content.</p>
+</dd>
+<dt class="hdlist1">com.enonic.cms.default</dt>
+<dd>
+<p>This is the default repository.</p>
+</dd>
+<dt class="hdlist1">system.auditlog</dt>
+<dd>
+<p>This is where the <em>audit log</em> is stored. The audit log allows you to see a log of everything that&#8217;s been done in your XP instance, such as content creation, user administration, etc., and also tells you when it was done and by whom.</p>
+</dd>
+<dt class="hdlist1">system-repo</dt>
+<dd>
+<p>This is where XP stores core data about your system, such as installed applications and users.</p>
+</dd>
+<dt class="hdlist1">system.scheduler</dt>
+<dd>
+<p>This is a separate repository where scheduled jobs are stored.</p>
+</dd>
+</dl>
 </div>
 </li>
 <li>
-<p><strong>Sign in to the admin interface</strong> - Click <b class="button">Log In as Guest</b>.
-This signs you in as the sandbox&#8217;s built-in super user (<code>su</code>), with full administrator access.
-We&#8217;ll call this your administrator session throughout the tutorial.
-You should see something like this:</p>
+<p>Move into <code>com.enonic.cms.my-first-project</code>. Here you will see two branches (as discussed above). As long as you&#8217;ve published your content, you can choose either one of these.</p>
+</li>
+<li>
+<p>Keep navigating further down the tree: <code>root</code> &#8594; <code>content</code>. Now you should see all the content of your site listed. Navigate to <code>artists</code> to find actual pieces of content.</p>
+</li>
+<li>
+<p>Choose one of your artists and check out both the info view and the JSON view, available via the buttons in the table row.</p>
 <div class="imageblock">
 <div class="content">
-<img src="images/setup-home.jpg" alt="The XP menu for the 101tutorial sandbox, with useful links on the left and tiles for Dashboard, Applications, Content Studio, Data toolbox and Users" width="1440">
+<img src="media/data-toolbox-info-view.png" alt="The Data Toolbox info view. the view contains options for exporting, moving, and deleting the node, as well as for displaying permissions for the node, versions of the node, and indexing data (and much more)." width="750w">
 </div>
-</div>
-</li>
-<li>
-<p><strong>Check the installed app versions</strong> - Open <code>XP menu</code> &#8594; <code>Applications</code> and select Content Studio and Guillotine in turn to see their versions.
-The exercises use Content Studio 6.1 and Guillotine 9; earlier versions may differ from the examples.</p>
-</li>
-</ol>
-</div>
-<div class="paragraph">
-<p>The <em>XP menu</em> is the start page of the XP admin.
-It lists the admin tools your user has access to.
-Dashboard, Applications and Users come with the platform, and applications such as Content Studio add their own.
-Once inside a tool, click the XP icon in the top right corner to return to the XP menu and switch to another tool.</p>
-</div>
-<div class="paragraph">
-<p>In this tutorial, a path such as <code>XP menu</code> &#8594; <code>Applications</code> means: open the XP menu, then click the Applications tile.</p>
-</div>
-<div class="admonitionblock tip">
-<table>
-<tr>
-<td class="icon">
-<i class="fa icon-tip" title="Tip"></i>
-</td>
-<td class="content">
-To stop the sandbox, press <kbd>ctrl-c</kbd> in its terminal. To start it again, run <code>enonic sandbox start 101tutorial</code>.
-</td>
-</tr>
-</table>
-</div>
-</div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="create_an_app"><a class="link" href="#create_an_app">Create an app</a></h2>
-<div class="sectionbody">
-<div class="paragraph">
-<p>Almost everything in Enonic is an application: Content Studio is an app, Guillotine is an app, and the content types you are about to define live in an app of your own.</p>
-</div>
-<div class="paragraph">
-<p>Creating an app from scratch can be daunting for any system you&#8217;re not familiar with. To make things easier, Enonic provides <a href="https://market.enonic.com/starters">starters</a>. We&#8217;ll use the "Vanilla" starter, which contains the bare minimum.</p>
-</div>
-<div class="sect2">
-<h3 id="task_create_your_app"><a class="link" href="#task_create_your_app">Task: Create your app</a></h3>
-<div class="olist arabic">
-<ol class="arabic">
-<li>
-<p><strong>Create the app from a starter</strong> - Open a new terminal window, leaving the sandbox running in the first one, and run this command:</p>
-<div class="listingblock">
-<div class="content">
-<pre class="highlight"><code class="language-shell" data-lang="shell">enonic create com.example.dev101 -r starter-vanilla -s 101tutorial</code></pre>
-</div>
-</div>
-</li>
-</ol>
-</div>
-<div class="paragraph">
-<p>This uses <code>starter-vanilla</code> as a template, gives the app the name <code>com.example.dev101</code>, places the code in the folder <code>dev101</code>, and links the app to the <code>101tutorial</code> sandbox.</p>
-</div>
-<div class="admonitionblock tip">
-<table>
-<tr>
-<td class="icon">
-<i class="fa icon-tip" title="Tip"></i>
-</td>
-<td class="content">
-You don&#8217;t need to open the starter docs, so type <code>N</code> and press <kbd>Enter</kbd> if asked.
-</td>
-</tr>
-</table>
-</div>
-<div class="admonitionblock note">
-<table>
-<tr>
-<td class="icon">
-<i class="fa icon-note" title="Note"></i>
-</td>
-<td class="content">
-App names matter. XP does not run two apps with the same name in a single instance, and the name acts as a namespace for everything the app defines, so it becomes part of the content type and GraphQL type names you will see later in this tutorial. If you choose a different name, substitute it wherever <code>com.example.dev101</code> appears.
-</td>
-</tr>
-</table>
-</div>
-<div class="paragraph">
-<p>The app folder contains a minimal Enonic application. The parts you will touch in this tutorial are:</p>
-</div>
-<div class="listingblock">
-<div class="title">Essential app structure</div>
-<div class="content">
-<pre class="highlight"><code class="language-files" data-lang="files">src/
-  main/
-    resources/
-      enonic.yaml <i class="conum" data-value="1"></i><b>(1)</b>
-      cms/ <i class="conum" data-value="2"></i><b>(2)</b></code></pre>
-</div>
-</div>
-<div class="colist arabic">
-<table>
-<tr>
-<td><i class="conum" data-value="1"></i><b>1</b></td>
-<td>The application descriptor, holding the app&#8217;s title, description and vendor information.</td>
-</tr>
-<tr>
-<td><i class="conum" data-value="2"></i><b>2</b></td>
-<td>Where the content schemas you will create go.</td>
-</tr>
-</table>
-</div>
-<div class="admonitionblock note">
-<table>
-<tr>
-<td class="icon">
-<i class="fa icon-note" title="Note"></i>
-</td>
-<td class="content">
-The other files in the folder, such as <code>build.gradle</code> and <code>gradle.properties</code>, belong to the build. You will not need to edit them in this tutorial.
-</td>
-</tr>
-</table>
-</div>
-</div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="build_and_deploy"><a class="link" href="#build_and_deploy">Build and deploy</a></h2>
-<div class="sectionbody">
-<div class="sect2">
-<h3 id="task_run_the_app"><a class="link" href="#task_run_the_app">Task: Run the app</a></h3>
-<div class="olist arabic">
-<ol class="arabic">
-<li>
-<p><strong>Start the development watcher</strong> - Change to the app folder and start it in development mode:</p>
-<div class="listingblock">
-<div class="content">
-<pre class="highlight"><code class="language-shell" data-lang="shell">cd dev101
-enonic dev</code></pre>
-</div>
-</div>
-<div class="paragraph">
-<p>This builds the app, deploys it to the <code>101tutorial</code> sandbox, and then keeps watching the folder. Every time you save a file, the app is rebuilt and redeployed. Keep this command running in its own terminal while you follow the tutorial.</p>
-</div>
-<div class="paragraph">
-<p>The first build downloads a few things, so give it a moment. Look for lines like these to confirm it has completed:</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="highlight"><code class="language-shell" data-lang="shell">Deploying 'dev101.jar' to '/Users/you/.enonic/sandboxes/101tutorial/home/deploy'
-BUILD SUCCESSFUL
-Waiting for changes to input files...</code></pre>
-</div>
+<div class="title">Figure 2. The Data Toolbox node info view</div>
 </div>
 </li>
 <li>
-<p><strong>Verify the deployed app</strong> - Open <code>XP menu</code> &#8594; <code>Applications</code> in the XP admin.
-Your app is listed as "Vanilla Example":</p>
+<p>To inspect the data associated with the artist, you can select "Display properties", which will bring up data about the node, such as its display name, its owner, when it was created, etc.</p>
 <div class="imageblock">
 <div class="content">
-<img src="images/setup-app.png" alt="The Applications tool listing Content Studio, Data Toolbox, Guillotine and Vanilla Example, with Vanilla Example selected and its key com.example.dev101 shown" width="1440">
+<img src="media/data-toolbox-properties.png" alt="A table with columns 'name', 'index, 'value', and 'type' that describes the node. Example names are 'valid', 'type', 'displayName'." width="606w">
 </div>
-</div>
-</li>
-</ol>
-</div>
-</div>
-<div class="sect2">
-<h3 id="task_change_the_apps_title"><a class="link" href="#task_change_the_apps_title">Task: Change the app&#8217;s title</a></h3>
-<div class="olist arabic">
-<ol class="arabic">
-<li>
-<p><strong>Update the app&#8217;s identity</strong> - Open the application descriptor, <code>enonic.yaml</code>, in your editor, and change the <code>title</code> and <code>description</code>:</p>
-<div class="listingblock">
-<div class="title">src/main/resources/enonic.yaml</div>
-<div class="content">
-<pre class="highlight"><code class="language-yaml" data-lang="yaml">kind: "Application"
-title: "Developer 101" <i class="conum" data-value="1"></i><b>(1)</b>
-description: "Content types and schemas from the Developer 101 tutorial" <i class="conum" data-value="2"></i><b>(2)</b>
-vendorName: "Acme Inc"
-vendorUrl: "https://example.com"</code></pre>
-</div>
-</div>
-<div class="colist arabic">
-<table>
-<tr>
-<td><i class="conum" data-value="1"></i><b>1</b></td>
-<td>The starter calls the app "Vanilla Example". Give it a more descriptive title.</td>
-</tr>
-<tr>
-<td><i class="conum" data-value="2"></i><b>2</b></td>
-<td>Replace the stock description while you&#8217;re at it.</td>
-</tr>
-</table>
+<div class="title">Figure 3. The display properties view</div>
 </div>
 </li>
 <li>
-<p><strong>Verify the update</strong> - Save the file and watch the <code>enonic dev</code> terminal rebuild and redeploy.
-Revisit the Applications tool and confirm that it shows your new title.</p>
+<p>Finally, you can navigate to the <code>data</code> property, where you&#8217;ll find the data stored on the artist.</p>
+<div class="imageblock">
+<div class="content">
+<img src="media/data-toolbox-properties-data.png" alt="A table showing the data we stored about the artist previously." width="606w">
+</div>
+<div class="title">Figure 4. The properties.data view</div>
+</div>
 </li>
 </ol>
-</div>
-</div>
-<div class="sect2">
-<h3 id="troubleshooting"><a class="link" href="#troubleshooting">Troubleshooting</a></h3>
-<div class="paragraph">
-<p>If the app doesn&#8217;t show up in the Applications tool, check the terminal running <code>enonic dev</code> for build errors first, then the sandbox terminal for errors from XP.</p>
-</div>
-<div class="paragraph">
-<p>If the build works but nothing shows up, make sure the app is linked to the sandbox that is running. Run this command from the app folder and select <code>101tutorial</code>:</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="highlight"><code class="language-shell" data-lang="shell">enonic project sandbox</code></pre>
-</div>
-</div>
-<div class="paragraph">
-<p>For anything else, the <a href="https://developer.enonic.com/docs/enonic-cli">CLI documentation</a> covers every command and option, and the <a href="https://developer.enonic.com/docs/platform">platform documentation</a> covers the sandbox&#8217;s configuration and ports.</p>
-</div>
 </div>
 </div>
 </div>
 <div class="sect1">
-<h2 id="coming_up"><a class="link" href="#coming_up">Coming up</a></h2>
+<h2 id="summary"><a class="link" href="#summary">Summary</a></h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>You now have the CLI, a running sandbox with Content Studio and Guillotine, and your own app deployed to it.
-In the next chapter, you&#8217;ll <a href="content-studio.ahtml">get familiar with Content Studio and create your first content type</a>.</p>
+<p>Inspecting content is only a fraction of what Data Toolbox can do: it&#8217;s a versatile and powerful administrative tool, and we&#8217;ll see more of it in a later chapter.</p>
+</div>
+<div class="paragraph">
+<p>Now, let&#8217;s have a look at the <a href="headless-api.ahtml">cutting edge headless cms API - aka Guillotine</a>.</p>
 </div>
 </div>
 </div>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2026-11-12 10:20:17 UTC
+Last updated 2026-11-12 10:22:56 UTC
 </div>
 </div>
 </body>

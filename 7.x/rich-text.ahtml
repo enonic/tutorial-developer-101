@@ -5,8 +5,8 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="generator" content="Asciidoctor 2.0.26">
-<meta name="description" content="Learn how to create XP projects and how to build and deploy your apps to a XP instance.">
-<title>Application development</title>
+<meta name="description" content="Rich text is an incredibly powerful editing tool and an important part of the XP experience. Learn how to configure it here.">
+<title>Rich text</title>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,300italic,400,400italic,600,600italic%7CNoto+Serif:400,400italic,700,700italic%7CDroid+Sans+Mono:400,700">
 <style>
 /*! Asciidoctor default stylesheet | MIT License | https://asciidoctor.org */
@@ -438,19 +438,39 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 </head>
 <body class="article toc2 toc-right">
 <div id="header">
-<h1>Application development</h1>
+<h1>Rich text</h1>
 <div id="toc" class="toc2">
 <div id="toctitle">Table of Contents</div>
 <ul class="sectlevel1">
-<li><a href="#starters">Starters</a></li>
-<li><a href="#deploy_your_app">Deploy your app</a>
+<li><a href="#overview">Overview</a></li>
+<li><a href="#htmlarea_include_and_exclude">HtmlArea include and exclude</a>
 <ul class="sectlevel2">
-<li><a href="#changing_apps_display_name">Changing apps display name</a></li>
-<li><a href="#troubleshooting">Troubleshooting</a></li>
+<li><a href="#task_animal_description">Task: Animal description</a></li>
 </ul>
 </li>
-<li><a href="#manual_deployment">Manual deployment</a></li>
-<li><a href="#summary">Summary</a></li>
+<li><a href="#links">Links</a>
+<ul class="sectlevel2">
+<li><a href="#task_internal_link">Task: Internal link</a></li>
+</ul>
+</li>
+<li><a href="#images">Images</a>
+<ul class="sectlevel2">
+<li><a href="#task_animal_pictures">Task: Animal pictures</a></li>
+</ul>
+</li>
+<li><a href="#macros">Macros</a>
+<ul class="sectlevel2">
+<li><a href="#task_embed_iframe_macro">Task: Embed iframe macro</a></li>
+</ul>
+</li>
+<li><a href="#graphql_api">GraphQL API</a>
+<ul class="sectlevel2">
+<li><a href="#links_2">Links</a></li>
+<li><a href="#image_srcset">Image srcset</a></li>
+<li><a href="#image_details">Image details</a></li>
+<li><a href="#macros_2">Macros</a></li>
+</ul>
+</li>
 </ul>
 </div>
 </div>
@@ -458,10 +478,16 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <div id="preamble">
 <div class="sectionbody">
 <div class="paragraph">
-<p>An application is the defacto way of adding functionality Enonic XP. Almost everything you&#8217;ll be using and interacting with in Enonic is an app.</p>
+<p>If you want to work with rich text, HtmlArea is the input type to go.</p>
 </div>
 <div class="paragraph">
-<p>For instance, you already have several applications installed, some of them even accessible from the <code>XP menu</code>.</p>
+<p>This input type offers some very powerful editing capabilities and a lot of configuration options.</p>
+</div>
+<div class="paragraph">
+<p>This whole chapter is dedicated to the <a href="https://developer.enonic.com/docs/xp/stable/cms/schemas/input-types/htmlarea" target="_blank" rel="noopener">HtmlArea input type</a> and the editor used to define its data.</p>
+</div>
+<div class="paragraph">
+<p>The user-oriented documentation of the Rich text editor can be found in the <a href="https://developer.enonic.com/docs/content-studio/stable/editor/rich-text-editor" target="_blank" rel="noopener">Content Studio docs</a>.</p>
 </div>
 <div class="admonitionblock note">
 <table>
@@ -470,37 +496,157 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <i class="fa icon-note" title="Note"></i>
 </td>
 <td class="content">
-Not all installed apps will show on XP menu, this is something that is configured on app level.
+The tasks and examples in this chapter are based on work done in previous chapters (starting with <a href="sandbox.ahtml">the sandboxes chapter</a>). If you want to follow along with the examples, make sure you&#8217;re all caught up.
 </td>
 </tr>
 </table>
 </div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="overview"><a class="link" href="#overview">Overview</a></h2>
+<div class="sectionbody">
+<div class="imageblock text-center">
+<div class="content">
+<img src="media/input-type-html-area.png" alt="A text input field with a tools ribbon just above." width="750">
+</div>
+<div class="title">Figure 1. The HtmlArea input type with the default tools selection</div>
+</div>
 <div class="paragraph">
-<p>To clarify on the previous claims, here are some examples of XP apps that have already been installed on your sandbox:</p>
+<p>The HtmlArea input type gives you a multi-line input field with rich formatting options, much like what you&#8217;re used to from your favorite word processor. It supports text formatting and justification, lists, links, and even lets you insert images.</p>
+</div>
+<div class="paragraph">
+<p>You can configure the HtmlArea to be exactly what you want by dictating what formatting tools to include or exclude (the <code>include</code> and <code>exclude</code> attributes, respectively), by what heading levels are allowed (<code>allowedHeadings</code>), and by giving it a default value (<code>default</code>).</p>
+</div>
+<div class="paragraph">
+<p>Additionally, the HtmlArea supports the use of <em>macros</em>, giving you the ability to insert prefabricated rich components into your markup.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="htmlarea_include_and_exclude"><a class="link" href="#htmlarea_include_and_exclude">HtmlArea include and exclude</a></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>We can use the HtmlArea&#8217;s <code>config</code> section to specify which rich text controls should be available when editing. Using a combination of the <code>include</code> and <code>exclude</code> tags, we can customize the input&#8217;s appearance.</p>
+</div>
+<div class="paragraph">
+<p>By default, it includes a limited, but useful selection of tools at your disposal. Using <code>&lt;include&gt;*&lt;/include&gt;</code> as an option is the same as including the default tools.</p>
+</div>
+<div class="listingblock">
+<div class="title">The HtmlArea with default configuration</div>
+<div class="content">
+<pre class="highlight"><code class="language-xml" data-lang="xml">&lt;input type="HtmlArea" name="everything"&gt;
+  &lt;label&gt;HtmlArea&lt;/label&gt;
+&lt;/input&gt;</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>If you want to exclude all controls, use <code>&lt;exclude&gt;*&lt;/exclude&gt;</code>:</p>
+</div>
+<div class="listingblock">
+<div class="title">The HtmlArea configured to include nothing</div>
+<div class="content">
+<pre class="highlight"><code class="language-xml" data-lang="xml">&lt;input type="HtmlArea" name="nothing"&gt;
+  &lt;label&gt;HtmlArea with exclude: *&lt;/label&gt;
+  &lt;config&gt;
+    &lt;exclude&gt;*&lt;/exclude&gt;
+  &lt;/config&gt;
+&lt;/input&gt;</code></pre>
+</div>
+</div>
+<div class="imageblock text-center">
+<div class="content">
+<img src="media/input-type-html-area-no-controls.png" alt="An HtmlArea configured to exclude all editing tools" width="750">
+</div>
+<div class="title">Figure 2. An HtmlArea exput with <code>&lt;exclude&gt;*&lt;/exclude&gt;</code> and a selection of tools.</div>
+</div>
+<div class="paragraph">
+<p>Finally, if you want to exclude most tools, but not all, you can exclude all and then add back in the ones you want:</p>
+</div>
+<div class="listingblock">
+<div class="title">The HtmlArea configured to include a selection of controls</div>
+<div class="content">
+<pre class="highlight"><code class="language-xml" data-lang="xml">&lt;input type="HtmlArea" name="something"&gt;
+  &lt;label&gt;HtmlArea with some controls&lt;/label&gt;
+  &lt;config&gt;
+    &lt;exclude&gt;*&lt;/exclude&gt;
+    &lt;include&gt;Format | Bold Italic Underline | JustifyBlock
+    JustifyLeft JustifyCenter JustifyRight | HorizontalRule Blockquote&lt;/include&gt;
+  &lt;/config&gt;
+&lt;/input&gt;</code></pre>
+</div>
+</div>
+<div class="imageblock text-center">
+<div class="content">
+<img src="media/input-type-html-area-some-controls.png" alt="An HtmlArea configured to include a selection of editing tools" width="750">
+</div>
+<div class="title">Figure 3. An HtmlArea with a selection of tools and <code>&lt;exclude&gt;*&lt;/exclude&gt;</code></div>
+</div>
+<div class="paragraph">
+<p>As introduced in the beginning, for a full overview of the available text tools and HtmlArea configuration options, visit the <a href="https://developer.enonic.com/docs/xp/stable/cms/schemas/input-types/htmlarea" target="_blank" rel="noopener">HtmlArea input type reference docs</a>.</p>
+</div>
+<div class="sect2">
+<h3 id="task_animal_description"><a class="link" href="#task_animal_description">Task: Animal description</a></h3>
+<div class="paragraph">
+<p>Let&#8217;s add a rich-text description field to the animal content type. The input should be optional and have at most a single occurrence. You can include any editor tools you want, but it must at least have the <code>Link</code> ,<code>Image</code> and <code>Macro</code> tools, as we&#8217;ll be using these later. Otherwise, configure it as you want.</p>
+</div>
+<div class="paragraph">
+<p>Your content type should now look something like this:</p>
+</div>
+<div class="listingblock">
+<div class="title">Animal with an HtmlArea input type</div>
+<div class="content">
+<pre class="highlight"><code class="language-xml" data-lang="xml">&lt;?xml version="1.0" encoding="utf-8"?&gt;
+&lt;content-type&gt;
+  &lt;display-name&gt;Animal&lt;/display-name&gt;
+  &lt;description&gt;An animal that lives on planet Earth&lt;/description&gt;
+  &lt;super-type&gt;base:structured&lt;/super-type&gt;
+  &lt;form&gt;
+
+    &lt;!-- other fields elided for brevity --&gt;
+
+    &lt;input name="description" type="HtmlArea"&gt;
+      &lt;label&gt;Description&lt;/label&gt;
+      &lt;help-text&gt;
+        Describe the animal. Where its habitats are, what it eats, etc.
+      &lt;/help-text&gt;
+      &lt;config&gt;
+        &lt;exclude&gt;*&lt;/exclude&gt;
+        &lt;include&gt;Format Link Macro Image&lt;/include&gt;
+      &lt;/config&gt;
+    &lt;/input&gt;
+
+  &lt;/form&gt;
+&lt;/content-type&gt;</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>With the new content type deployed, you are ready to continue with further tasks we&#8217;ll introduce in next sections.</p>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="links"><a class="link" href="#links">Links</a></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>In addition to good old URLs, the Rich text editor provides a more powerful way of creating links, in which you can:</p>
 </div>
 <div class="ulist">
 <ul>
 <li>
-<p>Enonic&#8217;s content authoring interface - <a href="https://market.enonic.com/vendors/enonic/content-studio" target="_blank" rel="noopener">Content Studio</a> is an app</p>
+<p>Reference other content items (possbily passing query parameters);</p>
 </li>
 <li>
-<p>Enonic&#8217;s headless CMS GraphQL API - <a href="https://market.enonic.com/vendors/enonic/guillotine" target="_blank" rel="noopener">Guillotine</a> is also an app.</p>
+<p>If the referenced content is of type media, you can set a specific link to: open the file, directly download the file, or treat it as a regular content;</p>
 </li>
 <li>
-<p>Even your own project idea will most likely also be an app.</p>
+<p>Insert url links of type: https, http, ftp, cel or relative;</p>
 </li>
 </ul>
 </div>
 <div class="paragraph">
-<p>In the end, apps are compiled and then deployed to XP instances where they run.</p>
-</div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="starters"><a class="link" href="#starters">Starters</a></h2>
-<div class="sectionbody">
-<div class="paragraph">
-<p>Creating a project from scratch can be a daunting task for any system you&#8217;re not familiar with. To make things easier for you, Enonic provides a range of different templates (known as <em>starters</em>).</p>
+<p>An important feature, is that when creating internal links (content or media links), XP will save references to the target items, similar to how the ContentSelector works. This is useful when looking for usage and dependencies between content items later.</p>
 </div>
 <div class="admonitionblock note">
 <table>
@@ -509,247 +655,439 @@ Not all installed apps will show on XP menu, this is something that is configure
 <i class="fa icon-note" title="Note"></i>
 </td>
 <td class="content">
-The complete list of starters can be found on <a href="https://market.enonic.com/starters" target="_blank" rel="noopener">the Enonic Market</a>.
+Because links are created using the item&#8217;s unique id. It is perfectly safe to move items around in the tree structure, or change it&#8217;s path name. The links will not break.
 </td>
 </tr>
 </table>
 </div>
+<div class="sect2">
+<h3 id="task_internal_link"><a class="link" href="#task_internal_link">Task: Internal link</a></h3>
 <div class="paragraph">
-<p>For our first app, we&#8217;ll use the "Vanilla" starter. This starter contains the bare minimum. We&#8217;ll use this to familiarize ourselves with how an XP app is structured and how to deploy it on your sandbox.</p>
-</div>
-<div class="paragraph">
-<p>Run this command to create your application:</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="highlight"><code class="language-bash" data-lang="bash">enonic project create --sb tutorial -r starter-vanilla  -b 7.x -d tutorial101 -v 1.0.0 -n com.example.tutorial101</code></pre>
-</div>
+<p>In this task, you&#8217;ll create an internal link to another animal.</p>
 </div>
 <div class="paragraph">
-<p>This command links the app to the <code>tutorial</code> sandbox, uses <code>starter-vanilla</code> as a template, places the code in the folder <code>tutorial101</code>, sets version to <code>1.0.0</code>, and finally gives the app the name <code>com.example.tutorial101</code>. -b 7.x means that it will use the XP7 compatible version of the starter.</p>
-</div>
-<div class="admonitionblock tip">
-<table>
-<tr>
-<td class="icon">
-<i class="fa icon-tip" title="Tip"></i>
-</td>
-<td class="content">
-You don&#8217;t need to open the starter docs, so type <code>N</code> and press <kbd>Enter</kbd> if asked.
-</td>
-</tr>
-</table>
-</div>
-<div class="admonitionblock note">
-<table>
-<tr>
-<td class="icon">
-<i class="fa icon-note" title="Note"></i>
-</td>
-<td class="content">
-Project names matter. XP does not support running two apps with the same name within a single instance.
-</td>
-</tr>
-</table>
-</div>
-<div class="paragraph">
-<p>The project directory contains a fairly minimal XP application. The most relevant parts of the directory are:</p>
-</div>
-<div class="listingblock">
-<div class="title">Essential XP project structure</div>
-<div class="content">
-<pre class="highlight"><code class="language-files" data-lang="files">build.gradle <i class="conum" data-value="1"></i><b>(1)</b>
-gradle.properties <i class="conum" data-value="2"></i><b>(2)</b>
-src/
-  main/
-    resources/ <i class="conum" data-value="3"></i><b>(3)</b></code></pre>
-</div>
-</div>
-<div class="colist arabic">
-<table>
-<tr>
-<td><i class="conum" data-value="1"></i><b>1</b></td>
-<td>The main build file for defining dependencies and more build-related details.</td>
-</tr>
-<tr>
-<td><i class="conum" data-value="2"></i><b>2</b></td>
-<td>Contains the standard project settings, as defined by the CLI.</td>
-</tr>
-<tr>
-<td><i class="conum" data-value="3"></i><b>3</b></td>
-<td>The main project folder. JavaScript code and assets are placed here.</td>
-</tr>
-</table>
-</div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="deploy_your_app"><a class="link" href="#deploy_your_app">Deploy your app</a></h2>
-<div class="sectionbody">
-<div class="paragraph">
-<p>Now that we&#8217;ve set up a project, let&#8217;s see how we build (or <em>compile</em>) and deploy the project to the sandbox. Again, the CLI is key to making this process as smooth as possible.</p>
-</div>
-<div class="paragraph">
-<p>Here are the steps we need to take:</p>
+<p>Create a new animal, "Lynx".</p>
 </div>
 <div class="olist arabic">
 <ol class="arabic">
 <li>
-<p>Change to the project directory:</p>
-<div class="listingblock">
-<div class="content">
-<pre class="highlight"><code class="language-shell" data-lang="shell">cd myapp</code></pre>
-</div>
+<p>In the <code>Description</code> field, type some text, i.e. "Lynx are cats, just like lions". Select the "lions" text and click "insert link" in the toolbar.</p>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+You can also use <span class="keyseq"><kbd>ctrl</kbd>+<kbd>K</kbd></span> to insert the link.
+</td>
+</tr>
+</table>
 </div>
 </li>
 <li>
-<p>Start the deploying with Enonic CLI:</p>
-<div class="listingblock">
+<p>You&#8217;ll be greeted by the "Insert link" dialog:
+.Choose the content tab, and select the previously created "Lion" as the target item</p>
+<div class="imageblock">
 <div class="content">
-<pre class="highlight"><code class="language-shell" data-lang="shell">enonic project dev</code></pre>
+<img src="media/rich-text-insert-content-link.png" alt="Screenshot of the insert link dialog" width="1050">
 </div>
 </div>
 </li>
 </ol>
 </div>
 <div class="paragraph">
-<p>While deploying the project, the CLI will print what it&#8217;s doing to your terminal. It will look something like this:</p>
+<p>When done, save the item - but keep the tab open to complete the upcoming tasks.</p>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="images"><a class="link" href="#images">Images</a></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>With the image tool enabled, you insert an image anywhere within your document. During the insert process, you may customize the image further.</p>
+</div>
+<div class="paragraph">
+<p>The following options are available: Caption, alt text, change the image&#8217;s justification, and apply a predefined image styles.</p>
+</div>
+<div class="sect2">
+<h3 id="task_animal_pictures"><a class="link" href="#task_animal_pictures">Task: Animal pictures</a></h3>
+<div class="paragraph">
+<p>Try out the image controls that Content Studio give you by uploading a picture and seeing what you can do with it.</p>
+</div>
+<div class="paragraph">
+<p>We looked at <a href="input-types.ahtml#_working_with_images">editing images in the input types chapter</a>, but when inserting images in the HtmlArea, you also have something called "image styles", which we&#8217;ll have a look at now.</p>
+</div>
+<div class="paragraph">
+<p>Continue editing the "Lynx" content created in the previous task.</p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Insert an image below the existing text. Use the "insert image" button in the toolbar.</p>
+<div class="imageblock">
+<div class="content">
+<img src="media/rich-text-toolbar-image-highlight.png" alt="The rich text toolbar with the image tool circled by a blue circle" width="1050">
+</div>
+<div class="title">Figure 4. The toolbar with the image tool highlighted</div>
+</div>
+</li>
+<li>
+<p>You&#8217;ll be greeted by the "insert image" dialog:</p>
+<div class="imageblock">
+<div class="content">
+<img src="media/rich-text-insert-image.png" alt="The insert image dialog, showing the image, an image styles dropdown, caption, and alt text fields" width="1050">
+</div>
+<div class="title">Figure 5. The HtmlArea insert image dialog. Photo by <a href="https://unsplash.com/@zmachacek" target="_blank" rel="noopener">Zdeněk Macháček</a></div>
+</div>
+</li>
+<li>
+<p>When accessing the "image styles" dropdown, you&#8217;ll find that it&#8217;s only got two options and neither of them seem to do much. To make this more exciting, let&#8217;s also create a custom image style.</p>
+<div class="paragraph">
+<p>In your app, add a new file:</p>
 </div>
 <div class="listingblock">
-<div class="title">Sample output from build process</div>
+<div class="title">src/main/resources/site/styles.xml</div>
 <div class="content">
-<pre class="highlight"><code class="language-shell" data-lang="shell">Building in sandbox 'tutorial'...
-Starting a Gradle Daemon (subsequent builds will be faster)
+<pre class="highlight"><code class="language-xml" data-lang="xml">&lt;styles&gt;
+  &lt;image name="square-grayscale"&gt;
+    &lt;display-name&gt;Grayscale&lt;/display-name&gt;
+    &lt;aspect-ratio&gt;1:1&lt;/aspect-ratio&gt; <i class="conum" data-value="1"></i><b>(1)</b>
+    &lt;filter&gt;hsbcolorize(0x000000); grayscale(); border(6, 0x000000)&lt;/filter&gt; <i class="conum" data-value="2"></i><b>(2)</b>
+  &lt;/image&gt;
+&lt;/styles&gt;</code></pre>
+</div>
+</div>
+<div class="colist arabic">
+<table>
+<tr>
+<td><i class="conum" data-value="1"></i><b>1</b></td>
+<td>The aspect ratio controls how the image is displayed. 1:1 makes the image square.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="2"></i><b>2</b></td>
+<td>The filters add a grayscale effect and then a border
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+<a href="https://developer.enonic.com/docs/xp/stable/cms/styles" target="_blank" rel="noopener">The styles reference doc</a> has more information on how you can style your images, so go check it out for a deeper dive.
+</td>
+</tr>
+</table>
+</div></td>
+</tr>
+</table>
+</div>
+</li>
+<li>
+<p>With this style picked up by XP, you&#8217;ll have the "Grayscale" option available in the image styles dropdown. Select it to apply it to the image and update your image.</p>
+<div class="imageblock">
+<div class="content">
+<img src="media/rich-text-insert-image-styled.png" alt="The description rich text showing the results of applying the image styles to the image" width="1050">
+</div>
+<div class="title">Figure 6. Example of description with inserted image styled</div>
+</div>
+</li>
+</ol>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="macros"><a class="link" href="#macros">Macros</a></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Macros enable you to insert custom components within your rich text field</p>
+</div>
+<div class="paragraph">
+<p>When the content is rendered, the macro is replaced with the actual component implementation.</p>
+</div>
+<div class="paragraph">
+<p>Similar to content types, macros can define forms that help editors configure them.</p>
+</div>
+<div class="sect2">
+<h3 id="task_embed_iframe_macro"><a class="link" href="#task_embed_iframe_macro">Task: Embed iframe macro</a></h3>
+<div class="paragraph">
+<p>The embed macro enable you to insert iframes. In this context, we&#8217;ll embed this <a href="https://www.youtube.com/watch?v=gr5EwZo_CHQ" target="_blank" rel="noopener">Lynx youtube video</a>.</p>
+</div>
+<div class="paragraph">
+<p>Let&#8217;s add the macro to the "Lynx" content item.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="media/rich-text-toolbar-macro-highlight.png" alt="The rich text toolbar with the macro button circled by a blue circle" width="1050">
+</div>
+<div class="title">Figure 7. The toolbar with the macro button highlighted</div>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Click "insert macro".</p>
+</li>
+<li>
+<p>Select the "Embed iframe" macro</p>
+</li>
+<li>
+<p>Add the following iframe to it: <code>&lt;iframe width="560" height="315" src="https://www.youtube.com/embed/gr5EwZo_CHQ?si=IlkTGRuGVV7BxEOs" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen&gt;&lt;/iframe&gt;</code></p>
+</li>
+</ol>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+This macro can&#8217;t be previewed because the Embed iframe macro does not includes a standard preview.
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>As you&#8217;ll see in next section, when querying the description of an Animal content, you&#8217;ll be able to properly get the iframe we passed to "Embed iframe" macro and process it as you&#8217;d like in your front-end.</p>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+For more information on macros, including how to create your very own, visit to <a href="https://developer.enonic.com/docs/xp/stable/cms/macros" target="_blank" rel="noopener">the macro reference docs</a>.
+</td>
+</tr>
+</table>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="graphql_api"><a class="link" href="#graphql_api">GraphQL API</a></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>When fetching rich text via the API, the most commonly used output is "processed html". This is essentially unstyled, semantic HTML. It&#8217;s then up to you to style the content in your client.</p>
+</div>
+<div class="paragraph">
+<p>Links, images and macros will potentially require additional client-side processing.</p>
+</div>
+<div class="paragraph">
+<p>The following query returns the "Lynx" content, and the <code>description</code> field al processed HTML.</p>
+</div>
+<div class="listingblock">
+<div class="title">Fetching rich text via GraphQL API</div>
+<div class="content">
+<pre class="highlight"><code class="language-GraphQL" data-lang="GraphQL">{
+  guillotine {
+    queryDsl(
+      query: {
+        term: {
+          field: "displayName",
+          value: {
+            string: "Lynx"
+          }
+        }
+      }
+    ) {
+      ... on com_example_myapp_Animal {
+        data {
+          description {
+            processedHtml
+          }
+        }
+      }
+    }
+  }
+}</code></pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="title">The query result may look something like this</div>
+<div class="content">
+<pre class="highlight"><code class="language-json" data-lang="json">{
+  "data": {
+    "guillotine": {
+      "queryDsl": [
+        {
+          "data": {
+            "description": {
+              "processedHtml": "&lt;p&gt;Lynx are cats, just like &lt;a href=\"/admin/site/preview/my-first-project/draft/animals/lion\" data-link-ref=\"8cc82fd1-9063-4604-9f51-5f059d7a5d2e\"&gt;lions&lt;/a&gt;.&lt;/p&gt;\n\n&lt;figure class=\"captioned editor-align-justify square-grayscale\"&gt;&lt;img alt=\"lynx.jpg\" src=\"/admin/site/preview/my-first-project/draft/_/image/be6bb93a-7d99-4ed2-b424-4e435b89f392:6a1e144ef4ebab19e9071794ad753130d5bb5497/width-768/lynx.jpg\" style=\"width:100%\" data-image-ref=\"4dced964-cd1c-445d-bb9f-80387467e165\"&gt;\n\n&lt;/figure&gt;\n\n&lt;p&gt;&lt;editor-macro data-macro-name=\"embed\" data-macro-ref=\"a1490c65-3654-4b29-9b1a-eb3894b6f59f\"&gt;&amp;lt;iframe title=\"YouTube video player\" src=\"https://www.youtube.com/embed/gr5EwZo_CHQ?si=IlkTGRuGVV7BxEOs\" height=\"315\" width=\"560\"&amp;gt;&amp;lt;/iframe&amp;gt;&lt;/editor-macro&gt;&lt;/p&gt;\n"
+            }
+          }
+        }
+      ]
+    }
+  }
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>By unescaping the HTML, you will find the following:</p>
+</div>
+<div class="listingblock">
+<div class="title">Processed HTML output</div>
+<div class="content">
+<pre class="highlight"><code class="language-html" data-lang="html">&lt;p&gt;
+  Lynx are cats, just like &lt;a href="/admin/site/preview/my-first-project/draft/animals/lion" data-link-ref="8cc82fd1-9063-4604-9f51-5f059d7a5d2e"&gt;lions&lt;/a&gt;.
+&lt;/p&gt;
 
-BUILD SUCCESSFUL in 5s
-3 actionable tasks: 3 executed</code></pre>
-</div>
-</div>
-<div class="admonitionblock tip">
-<table>
-<tr>
-<td class="icon">
-<i class="fa icon-tip" title="Tip"></i>
-</td>
-<td class="content">
-<strong>Gradle got you worried?</strong> Enonic uses Gradle to support other programming languages and tools beyond JavaScript. Just stay calm and continue the journey!
-</td>
-</tr>
-</table>
-</div>
-<div class="paragraph">
-<p>This copies the application .jar file to your sandbox&#8217;s <code>home/deploy/</code> folder when changes are made. Since in this case we deployed <code>tutorial101.jar</code> into <code>tutorial</code> sandbox, we should expect that file to be on <code>~/.enonic/sandboxes/tutorial/home/deploy</code>.</p>
-</div>
-<div class="admonitionblock note">
-<table>
-<tr>
-<td class="icon">
-<i class="fa icon-note" title="Note"></i>
-</td>
-<td class="content">
-.enonic is the folder used by CLI to manage your sandboxes and Enonic XP distributions.
-</td>
-</tr>
-</table>
-</div>
-<div class="paragraph">
-<p>XP picks up on this automatically and starts the app for you. The <code>enonic project dev</code> command will automatically pick up changes and deploy your project.</p>
-</div>
-<div class="admonitionblock note">
-<table>
-<tr>
-<td class="icon">
-<i class="fa icon-note" title="Note"></i>
-</td>
-<td class="content">
-If you want to build or deploy your project manually, you can use the <code>enonic project build</code> and <code>enonic project deploy</code> commands.
-</td>
-</tr>
-</table>
-</div>
-<div class="paragraph">
-<p>To confirm that your application was started correctly, you can look at the logs in the sandbox&#8217;s terminal window. They should say something like this:</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="highlight"><code class="language-shell" data-lang="shell">[...] - Local application [com.example.tutorial101] installed successfully
-[...] - Application [com.example.tutorial101] started successfully</code></pre>
+&lt;figure class="captioned editor-align-justify square-grayscale"&gt;
+  &lt;img alt="lynx.jpg" src="/admin/site/preview/my-first-project/draft/_/image/be6bb93a-7d99-4ed2-b424-4e435b89f392:6a1e144ef4ebab19e9071794ad753130d5bb5497/width-768/lynx.jpg" style="width:100%" data-image-ref="4dced964-cd1c-445d-bb9f-80387467e165"&gt;
+&lt;/figure&gt;
+
+&lt;p&gt;
+  &lt;editor-macro data-macro-name="embed" data-macro-ref="a1490c65-3654-4b29-9b1a-eb3894b6f59f"&gt;
+    &amp;lt;iframe title=\"YouTube video player\" src=\"https://www.youtube.com/embed/gr5EwZo_CHQ?si=IlkTGRuGVV7BxEOs\" height=\"315\" width=\"560\"&amp;gt;&amp;lt;/iframe&amp;gt;
+  &lt;/editor-macro&gt;
+&lt;/p&gt;</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>You can also verify that the application was installed correctly from the welcome page <a href="http://localhost:8080" target="_blank" rel="noopener">http://localhost:8080</a>, or from the XP admin via <code>XP Menu</code> &#8594; <code>Applications</code>:</p>
-</div>
-<div class="imageblock">
-<div class="content">
-<img src="media/applications-vanilla.png" alt="The applications list with a few applications installed. Also shows application details, such as content install time, version, and required XP system version for the selected application." width="421w">
-</div>
-<div class="title">Figure 1. Your app should now be visible in the applications list</div>
-</div>
-<div class="paragraph">
-<p>You&#8217;ve now successfully built and deployed your first Enonic XP application!</p>
+<p>With the excepton of macro&#8217;s this is all valid HTML. Below, you&#8217;ll learn more about handling these elements.</p>
 </div>
 <div class="sect2">
-<h3 id="changing_apps_display_name"><a class="link" href="#changing_apps_display_name">Changing apps display name</a></h3>
+<h3 id="links_2"><a class="link" href="#links_2">Links</a></h3>
 <div class="paragraph">
-<p>You might have noticed that the application we created is listed as "Vanilla Example". What if you wanted to change that to something more descriptive? To do that, we can head to the <code>gradle.properties</code> file in the project&#8217;s root directory. Change the <code>appDisplayName</code> to whatever you want it to display.</p>
+<p>Looking specifically at the processed html link output above, the most interesting part is the <code>data-link-ref</code> attribute.</p>
 </div>
-<div class="paragraph">
-<p>Similarly, you can change your application&#8217;s description to something more appropriate at the file <code>src/main/resources/application.xml</code> by replacing the stock text inside of the <code>description</code> element.</p>
-</div>
-<div class="paragraph">
-<p>After those changes, redeploy your app and revisit your <a href="http://localhost:8080/admin/tool/com.enonic.xp.app.applications/main" target="_blank" rel="noopener">installed applications list</a>:</p>
-</div>
-</div>
-<div class="sect2">
-<h3 id="troubleshooting"><a class="link" href="#troubleshooting">Troubleshooting</a></h3>
-<div class="paragraph">
-<p>If the application doesn&#8217;t show up under the Applications tab in XP after you&#8217;ve run <code>enonic project deploy</code>, check the logs (for the build first, and then for XP) for errors. The build might have failed or something may have gone wrong when deploying.</p>
-</div>
-<div class="paragraph">
-<p>If the build works, but nothing shows up in the Applications tab, make sure you&#8217;re on the right sandbox. The CLI deploys to the sandbox specified during the project creation, and that&#8217;s stored in the project&#8217;s <code>.enonic</code> file, which is placed in the project directory root. This has to match the name of the sandbox that&#8217;s running:</p>
-</div>
-<div class="imageblock">
-<div class="content">
-<img src="media/project-dot-enonic-file.png" alt=".enonic file on the project root showing to which sandbox the project should be deployed to." width="380w">
-</div>
-</div>
-<div class="admonitionblock tip">
+<div class="admonitionblock note">
 <table>
 <tr>
 <td class="icon">
-<i class="fa icon-tip" title="Tip"></i>
+<i class="fa icon-note" title="Note"></i>
 </td>
 <td class="content">
-<div class="paragraph">
-<p>You may change the applications sandbox by running the following command from your project root:</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="highlight"><code class="language-shell" data-lang="shell">enonic project sandbox</code></pre>
-</div>
-</div>
-<div class="paragraph">
-<p>And then select the desired sandbox.</p>
-</div>
+Wondering why the href points to a location within the admin? No worries. Guillotine automatically generates contextual links. When deploying the API to production, you may customize the base url as needed.
 </td>
 </tr>
 </table>
 </div>
-</div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="manual_deployment"><a class="link" href="#manual_deployment">Manual deployment</a></h2>
-<div class="sectionbody">
 <div class="paragraph">
-<p>If you&#8217;ve checked that you&#8217;re running the right sandbox and that the deploy succeeded, but you&#8217;re still not seeing the application, you can do a manual deploy.</p>
+<p>This example is an internal link, you may want access more details about it, for instance to override the URL, optimize accessibility etc.</p>
 </div>
 <div class="paragraph">
-<p>The project build result is available in the <code>build/libs</code> directory of the project. You can copy this <code>.jar</code> file to the sandbox&#8217;s <code>home/deploy</code> directory. This will make XP pick it up. If you&#8217;ve used the suggested names in the steps above (and the default directories for XP configuration), this command will move the file for you on Unix systems when run from the project root:</p>
+<p>To acccess these details, you need to extend your query with the links field:</p>
 </div>
 <div class="listingblock">
+<div class="title">Query for link details</div>
 <div class="content">
-<pre class="highlight"><code class="language-shell" data-lang="shell">mv build/libs/tutorial101.jar ~/.enonic/sandboxes/tutorial/home/deploy/</code></pre>
+<pre class="highlight"><code class="language-GraphQL" data-lang="GraphQL">{
+  guillotine {
+    queryDsl(
+      query: {
+        term: {
+          field: "displayName",
+          value: {
+            string: "Lynx"
+          }
+        }
+      }
+    ) {
+      ... on com_example_myapp_Animal {
+        data {
+          description {
+            processedHtml
+            links {
+              ref
+              uri
+              content {
+                displayName
+                _path
+                type
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>By executing this query, you will get some more data. Specifically:</p>
+</div>
+<div class="listingblock">
+<div class="title">Link query result</div>
+<div class="content">
+<pre class="highlight"><code class="language-GraphQL" data-lang="GraphQL">...
+"links": [
+  {
+    "ref": "5c351456-b22f-4162-aad6-6d921c686544",
+    "uri": "content://89daa74e-1482-493d-9a22-8ec08acaf4f8",
+    "content": {
+      "displayName": "Lion",
+      "_path": "/animals/lion",
+      "type": "com.example.myproject:animal"
+    }
+  }
+]
+...</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>As you can see, you now have access to the full name of the referenced item, as well as it&#8217;s type. Use the ref values from the HTML link element to match it with the specific link data - as you may have more than one link.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="image_srcset"><a class="link" href="#image_srcset">Image srcset</a></h3>
+<div class="paragraph">
+<p>In the processed HTML, you can see the <code>&lt;img&gt;</code> element with style attributes. Additionally, by looking more closely at the <code>src</code> value, you will find that the style settings are applied in the image service URL.</p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>..../_/image/&lt;id&gt;:&lt;version&gt;/width-768/lynx.jpg</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>But wait, there&#8217;s more!</p>
+</div>
+<div class="paragraph">
+<p>If you want to optimize how fast images load on various devices, Guillotine can also return the image in multiple different sizes (using <a href="https://developer.mozilla.org/en-US/docs/Web/API/HTMLImageElement/srcset" target="_blank" rel="noopener">the <code>srcset</code> attribute (MDN)</a>). This is achieved by adding an argument to the <code>description</code> field:</p>
+</div>
+<div class="listingblock">
+<div class="title">Fetching rich text with <code>srcset</code></div>
+<div class="content">
+<pre class="highlight"><code class="language-GraphQL" data-lang="GraphQL">{
+  guillotine {
+    queryDsl(
+      query: {
+        term: {
+          field: "displayName",
+          value: {
+            string: "Lynx"
+          }
+        }
+      }
+    ) {
+      ... on {project-name-query}_{content-type-2-Capitalized} {
+        data {
+          description(processHtml: {imageWidths: [200, 500]}) {
+            processedHtml
+          }
+        }
+      }
+    }
+  }
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>This time, you should find the '&lt;img&gt;' element will include srcset with links to a 200w and 500w respectively.</p>
+</div>
+<div class="listingblock">
+<div class="title">Img tag, now with srcset</div>
+<div class="content">
+<pre class="highlight"><code class="language-Html" data-lang="Html">&lt;img alt="lynx.jpg"
+  src=".../width-768/lynx.jpg"
+  style="width:100%"
+  srcset=".../width-200/lynx jpg 200w,.../width-500/lynx.jpg 500w"
+  data-image-ref="c771dac7-8158-4791-92fb-18ebd5ef2fd3" /&gt;</code></pre>
 </div>
 </div>
 <div class="admonitionblock note">
@@ -759,25 +1097,209 @@ If you want to build or deploy your project manually, you can use the <code>enon
 <i class="fa icon-note" title="Note"></i>
 </td>
 <td class="content">
-If you had to deploy manually when going through this tutorial, please get in touch on <a href="https://slack.enonic.com" target="_blank" rel="noopener">the community slack</a> so we can improve the documentation and the process.
+URLs about above were shortened for readability
 </td>
 </tr>
 </table>
 </div>
 </div>
-</div>
-<div class="sect1">
-<h2 id="summary"><a class="link" href="#summary">Summary</a></h2>
-<div class="sectionbody">
+<div class="sect2">
+<h3 id="image_details"><a class="link" href="#image_details">Image details</a></h3>
 <div class="paragraph">
-<p>You have now created, built and deployed an application to your sandbox. Next up you&#8217;ll <a href="content-studio.ahtml">get familiar with Content Studio and content types</a>.</p>
+<p>If you prefer to handle all details related to images yourself, or optimize the markup further, you may access more details about the image - like you did for links.</p>
+</div>
+<div class="listingblock">
+<div class="title">Get description with image style details</div>
+<div class="content">
+<pre class="highlight"><code class="language-GraphQL" data-lang="GraphQL">{
+  guillotine {
+    queryDsl(
+      query: {
+        term: {
+          field: "displayName",
+          value: {
+            string: "Lynx"
+          }
+        }
+      }
+    ) {
+      ... on com_example_myapp_Animal {
+        data {
+          description {
+            images {
+              style {
+                name
+                aspectRatio
+                filter
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>You can extract the properties that you specified in your <code>styles.xml</code> previously:</p>
+</div>
+<div class="listingblock">
+<div class="title">Additional result of fetching image styles</div>
+<div class="content">
+<pre class="highlight"><code class="language-json" data-lang="json">...
+"images": [
+  {
+    "style": {
+      "name": "editor-style-grayscale",
+      "aspectRatio": "1:1",
+      "filter": "hsbcolorize(0x000000); grayscale(); border(6, 0x000000)"
+    }
+  }
+]
+...</code></pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="macros_2"><a class="link" href="#macros_2">Macros</a></h3>
+<div class="paragraph">
+<p>In the headless context, the client is responsible for rendering of your content. In the case of macros - this gets obvious.</p>
+</div>
+<div class="paragraph">
+<p>In the processed HTML, each macro is represented by an <code>&lt;editor-macro&gt;</code> element containing a unique reference key. As for links and images, this reference can be used to access detailed data fields for the macro.</p>
+</div>
+<div class="listingblock">
+<div class="title">Query that fetches all macro data</div>
+<div class="content">
+<pre class="highlight"><code class="language-GraphQL" data-lang="GraphQL">{
+  guillotine {
+    queryDsl(
+      query: {
+        term: {
+          field: "displayName",
+          value: {
+            string: "Lynx"
+          }
+        }
+      }
+    ) {
+      ... on com_example_myapp_Animal {
+        data {
+          description {
+            processedHtml
+            macrosAsJson
+          }
+        }
+      }
+    }
+  }
+}</code></pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="title">MacrosAsJson response (extract)</div>
+<div class="content">
+<pre class="highlight"><code class="language-json" data-lang="json">...
+"macrosAsJson": [
+  {
+    "ref": "1f8703bc-ee13-4871-89b3-937a7299abc4",
+    "name": "embed",
+    "descriptor": "system:embed",
+    "config": {
+      "embed": {
+        "body": "&amp;lt;iframe title=\"YouTube video player\" src=\"https://www.youtube.com/embed/gr5EwZo_CHQ?si=IlkTGRuGVV7BxEOs\" height=\"315\" width=\"560\"&amp;gt;&amp;lt;/iframe&amp;gt;"
+      }
+    }
+  }
+]
+...</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>To access specific macros and fields, like for content type may use the full GraphQL schema. Try the following:</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+If you used a different macro than the "Embed iframe" macro, the query must be updated to match the specific macro.
+</td>
+</tr>
+</table>
+</div>
+<div class="listingblock">
+<div class="title">Query that fetches the fields for the Embed iframe macro</div>
+<div class="content">
+<pre class="highlight"><code class="language-GraphQL" data-lang="GraphQL">{
+  guillotine {
+    queryDsl(
+      query: {
+        term: {
+          field: "displayName",
+          value: {
+            string: "Lynx"
+          }
+        }
+      }
+    ) {
+      ... on com_example_myapp_Animal {
+        data {
+          description {
+            processedHtml
+            macros {
+              ref
+              name
+              descriptor
+              config {
+                embed {
+                  body
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>This time, you only get the explicit fields you were looking for</p>
+</div>
+<div class="listingblock">
+<div class="title">Output from the field-based query</div>
+<div class="content">
+<pre class="highlight"><code class="language-json" data-lang="json">...
+"macros": [
+  {
+    "ref": "9918c7b2-c87d-4d0b-8d6c-56ab85805f3a",
+    "name": "embed",
+    "descriptor": "system:embed",
+    "config": {
+      "embed": {
+        "body": "&amp;lt;iframe title=\"YouTube video player\" src=\"https://www.youtube.com/embed/gr5EwZo_CHQ?si=IlkTGRuGVV7BxEOs\" height=\"315\" width=\"560\"&amp;gt;&amp;lt;/iframe&amp;gt;"
+      }
+    }
+  }
+]
+...</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>By accessing the macro config, you are able to down drill into every single field, accessing all the details you actually you need.</p>
+</div>
 </div>
 </div>
 </div>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2026-11-12 10:19:54 UTC
+Last updated 2026-11-12 10:22:56 UTC
 </div>
 </div>
 </body>

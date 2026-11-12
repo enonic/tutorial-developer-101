@@ -6,8 +6,8 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="generator" content="Asciidoctor 2.0.26">
 <meta name="application-name" content="dev101">
-<meta name="description" content="Add a filmography to artists, model animals with option sets, and reuse fields with a form fragment. Query each addition through Guillotine.">
-<title>Sets and form fragments</title>
+<meta name="description" content="Add shared editorial notes to artists and animals with a mixin, then query their values through Guillotine.">
+<title>Mixins</title>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,300italic,400,400italic,600,600italic%7CNoto+Serif:400,400italic,700,700italic%7CDroid+Sans+Mono:400,700">
 <style>
 /*! Asciidoctor default stylesheet | MIT License | https://asciidoctor.org */
@@ -439,30 +439,25 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 </head>
 <body class="article toc2 toc-right">
 <div id="header">
-<h1>Sets and form fragments</h1>
+<h1>Mixins</h1>
 <div id="toc" class="toc2">
 <div id="toctitle">Table of Contents</div>
 <ul class="sectlevel1">
-<li><a href="#repeat_a_group_of_fields">Repeat a group of fields</a>
+<li><a href="#add_editorial_notes_to_artists_and_animals">Add editorial notes to artists and animals</a>
 <ul class="sectlevel2">
-<li><a href="#task_add_filmography_to_artist">Task: Add filmography to Artist</a></li>
-<li><a href="#task_query_the_filmography">Task: Query the filmography</a></li>
+<li><a href="#task_create_the_mixin">Task: Create the mixin</a></li>
+<li><a href="#task_register_the_mixin">Task: Register the mixin</a></li>
+<li><a href="#task_add_notes_to_two_content_types">Task: Add notes to two content types</a></li>
 </ul>
 </li>
-<li><a href="#choose_an_option_with_its_own_fields">Choose an option with its own fields</a>
+<li><a href="#query_the_notes">Query the notes</a>
 <ul class="sectlevel2">
-<li><a href="#task_add_feeding_behavior_to_animal">Task: Add feeding behavior to Animal</a></li>
-<li><a href="#task_query_the_selected_option">Task: Query the selected option</a></li>
+<li><a href="#task_fetch_lynxs_notes">Task: Fetch Lynx&#8217;s notes</a></li>
+<li><a href="#task_inspect_the_json_representation">Task: Inspect the JSON representation</a></li>
 </ul>
 </li>
-<li><a href="#reuse_fields_across_options">Reuse fields across options</a>
-<ul class="sectlevel2">
-<li><a href="#task_create_the_distribution_form_fragment">Task: Create the distribution form fragment</a></li>
-<li><a href="#task_add_distribution_to_animal">Task: Add distribution to Animal</a></li>
-<li><a href="#task_query_the_distribution">Task: Query the distribution</a></li>
-</ul>
-</li>
-<li><a href="#visual_grouping_and_further_reading">Visual grouping and further reading</a></li>
+<li><a href="#mixins_from_other_apps">Mixins from other apps</a></li>
+<li><a href="#choosing_the_right_tool">Choosing the right tool</a></li>
 <li><a href="#coming_up">Coming up</a></li>
 </ul>
 </div>
@@ -471,508 +466,311 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <div id="preamble">
 <div class="sectionbody">
 <div class="paragraph">
-<p>In this chapter, you&#8217;ll add filmography entries to your artists, describe animals with selectable options, and reuse fields with a form fragment.
-After each addition, you&#8217;ll enter content and query it through Guillotine.</p>
+<p>In this chapter, you&#8217;ll add an Editorial mixin to Artist and Animal, enter separate notes on each, and query them through Guillotine.</p>
+</div>
+<div class="paragraph">
+<p>A <em>mixin</em> adds a group of fields to content types without editing each content type&#8217;s schema.
+Use one for fields such as editorial notes that apply across different kinds of content, or to extend built-in types such as folders and media.
+Unlike a <a href="sets.ahtml#_reuse_fields_across_options">form fragment</a>, which inserts fields into a schema&#8217;s form, a mixin keeps its values separately under <code>x</code>.</p>
 </div>
 </div>
 </div>
 <div class="sect1">
-<h2 id="repeat_a_group_of_fields"><a class="link" href="#repeat_a_group_of_fields">Repeat a group of fields</a></h2>
+<h2 id="add_editorial_notes_to_artists_and_animals"><a class="link" href="#add_editorial_notes_to_artists_and_animals">Add editorial notes to artists and animals</a></h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>In the previous chapter, <code>otherNames</code> repeated a single TextLine.
-An <em>item set</em> groups several fields into one object and can repeat that whole group.
-For an artist&#8217;s filmography, each entry will contain a title and a year.
-These entries belong to the artist; they are not separate content items like the referenced favorite animal.</p>
+<p>You&#8217;ll define the fields in a mixin schema, then register it in the app&#8217;s CMS descriptor to choose which content types receive them.
+Your app is already assigned to "My First Project", so the registration applies there.</p>
+</div>
+<div class="paragraph">
+<p>These notes follow the content item&#8217;s read permissions and can be queried through the API by anyone who can read that item.
+The name "Editorial" does not make them private; you&#8217;ll explore read access in the <a href="permissions.ahtml">permissions chapter</a>.</p>
 </div>
 <div class="sect2">
-<h3 id="task_add_filmography_to_artist"><a class="link" href="#task_add_filmography_to_artist">Task: Add filmography to Artist</a></h3>
+<h3 id="task_create_the_mixin"><a class="link" href="#task_create_the_mixin">Task: Create the mixin</a></h3>
 <div class="olist arabic">
 <ol class="arabic">
 <li>
-<p><strong>Define filmography entries</strong> - Append this item set to the Artist form, after <code>favoriteAnimal</code>:</p>
+<p><strong>Define the Editorial mixin</strong> - Create this file in your app:</p>
 <div class="listingblock">
-<div class="title">src/main/resources/cms/content-types/artist/artist.yaml</div>
+<div class="title">src/main/resources/cms/mixins/editorial/editorial.yaml</div>
 <div class="content">
-<pre class="highlight"><code class="language-yaml" data-lang="yaml">  - type: "ItemSet"
-    name: "filmography"
-    label: "Filmography"
+<pre class="highlight"><code class="language-yaml" data-lang="yaml">kind: "Mixin"
+title: "Editorial"
+form:
+  - type: "TextLine"
+    name: "notes"
+    label: "Notes"
     occurrences:
       min: 0
-      max: 0
-    items:
-      - type: "TextLine"
-        name: "title"
-        label: "Title"
-        occurrences:
-          min: 1
-          max: 1
-      - type: "Long"
-        name: "year"
-        label: "Year"
-        occurrences:
-          min: 1
-          max: 1
-        min: 0</code></pre>
+      max: 3</code></pre>
+</div>
+</div>
+</li>
+</ol>
+</div>
+<div class="paragraph">
+<p>The folder and filename identify the mixin as <code>editorial</code>, and <code>title</code> gives its tab the label "Editorial" in Content Studio.
+The form contains one repeatable TextLine field named <code>notes</code>, allowing up to three notes per content item.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="task_register_the_mixin"><a class="link" href="#task_register_the_mixin">Task: Register the mixin</a></h3>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p><strong>Choose which content types get the mixin</strong> - Update your app&#8217;s existing CMS descriptor to include the registration:</p>
+<div class="listingblock">
+<div class="title">src/main/resources/cms/cms.yaml</div>
+<div class="content">
+<pre class="highlight"><code class="language-yaml" data-lang="yaml">kind: "CMS"
+mixins:
+  - name: "editorial"
+    allowContentTypes: "com.example.dev101:artist|com.example.dev101:animal"</code></pre>
 </div>
 </div>
 </li>
 <li>
-<p><strong>Add Cardi B&#8217;s films</strong> - Save the schema and let your running <code>enonic dev</code> watcher update the app.
-Reopen Cardi B in Content Studio and add two Filmography entries:</p>
+<p><strong>Deploy the mixin</strong> - Save both files and let your running <code>enonic dev</code> watcher update the app.</p>
+</li>
+</ol>
+</div>
+<div class="paragraph">
+<p><code>name: "editorial"</code> selects the mixin from this app.
+<code>allowContentTypes</code> is a regular expression matched against the full content type name; this one selects Artist and Animal.
+If you chose a different app name, update the app key in the expression to match.
+Leaving out <code>allowContentTypes</code> makes the mixin available on all content types in the content project where the app is assigned.</p>
+</div>
+<div class="paragraph">
+<p>For other registration options, including mixins that editors enable per content item, see the <a href="https://developer.enonic.com/docs/cms/stable/schemas/cms-descriptor#mixin-registration">CMS descriptor reference</a>.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="task_add_notes_to_two_content_types"><a class="link" href="#task_add_notes_to_two_content_types">Task: Add notes to two content types</a></h3>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p><strong>Find Lynx&#8217;s mixin fields</strong> - Open Lynx at <code>/animals/lynx</code> in Content Studio and select the <strong>Editorial</strong> tab beside Animal.</p>
+</li>
+<li>
+<p><strong>Add Lynx&#8217;s notes</strong> - Enter "Review the habitat description." in the first Notes field.
+Click <b class="button">Add</b> and enter "Add a source for the diet information." in the second, then save Lynx.</p>
+<div class="imageblock">
+<div class="content">
+<img src="images/mixins-editorial.png" alt="Editorial tab beside Animal, showing two separate notes on Lynx" width="527">
+</div>
+<div class="title">Figure 1. The Editorial mixin on Lynx</div>
+</div>
+</li>
+<li>
+<p><strong>Add Cardi B&#8217;s note</strong> - Open Cardi B at <code>/artists/cardi-b</code> and select its <strong>Editorial</strong> tab beside Artist.
+Enter "Check the filmography for new releases." and save.</p>
+</li>
+</ol>
+</div>
+<div class="paragraph">
+<p>Both content types now use the same mixin form, but each content item has its own values.
+You did not need to change either content type&#8217;s schema.</p>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="query_the_notes"><a class="link" href="#query_the_notes">Query the notes</a></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>The content type&#8217;s own fields are under <code>data</code>; mixin fields are under <code>x</code>, grouped by app and mixin.
+The typed fields let your client request just the values it needs.</p>
+</div>
+<div class="sect2">
+<h3 id="task_fetch_lynxs_notes"><a class="link" href="#task_fetch_lynxs_notes">Task: Fetch Lynx&#8217;s notes</a></h3>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p><strong>Fetch Lynx&#8217;s mixin fields</strong> - Open Query Playground for "My First Project", select <strong>Draft</strong>, and run:</p>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-graphql" data-lang="graphql">{
+  guillotine {
+    get(key: "/animals/lynx") {
+      displayName
+      x {
+        com_example_dev101 {
+          editorial {
+            notes
+          }
+        }
+      }
+    }
+  }
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The response contains:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-json" data-lang="json">{
+  "data": {
+    "guillotine": {
+      "get": {
+        "displayName": "Lynx",
+        "x": {
+          "com_example_dev101": {
+            "editorial": {
+              "notes": [
+                "Review the habitat description.",
+                "Add a source for the diet information."
+              ]
+            }
+          }
+        }
+      }
+    }
+  }
+}</code></pre>
+</div>
+</div>
+</li>
+<li>
+<p><strong>Compare Cardi B&#8217;s note</strong> - Change <code>key</code> to <code>/artists/cardi-b</code> and run the same query.
+The typed <code>notes</code> field returns a list, even when the content item has only one note.</p>
+</li>
+</ol>
+</div>
+<div class="paragraph">
+<p>The three levels inside <code>x</code> are the app (<code>{app-name-query}</code>), the mixin (<code>editorial</code>), and its field (<code>notes</code>).
+Dots in the app key become underscores in the GraphQL field name.
+Unlike the content type&#8217;s <code>data</code>, <code>x</code> is available on the shared <code>Content</code> interface, so this query needs no Animal inline fragment.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="task_inspect_the_json_representation"><a class="link" href="#task_inspect_the_json_representation">Task: Inspect the JSON representation</a></h3>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p><strong>Fetch all stored mixin values</strong> - Query <code>xAsJson</code> to inspect the values without selecting their individual fields:</p>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-graphql" data-lang="graphql">{
+  guillotine {
+    get(key: "/animals/lynx") {
+      xAsJson
+    }
+  }
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The <code>xAsJson</code> value contains:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-json" data-lang="json">{
+  "com-example-dev101": {
+    "editorial": {
+      "notes": [
+        "Review the habitat description.",
+        "Add a source for the diet information."
+      ]
+    }
+  }
+}</code></pre>
+</div>
+</div>
+</li>
+</ol>
+</div>
+<div class="paragraph">
+<p>Notice the app key: the JSON representation uses hyphens (<code>com-example-dev101</code>), while the typed GraphQL field uses underscores (<code>{app-name-query}</code>).
+The values are the same, but JSON does not apply the GraphQL field types: a single note appears as a string in <code>xAsJson</code>, while the typed field remains a list.
+Use the typed fields when your client needs a predictable shape and only selected values.
+The <a href="https://developer.enonic.com/docs/cms/stable/content/mixins">CMS mixins reference</a> covers the underlying storage in more detail.</p>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="mixins_from_other_apps"><a class="link" href="#mixins_from_other_apps">Mixins from other apps</a></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Apps can provide mixins for content types they do not define.
+For example, the <a href="https://market.enonic.com/vendors/enonic/seo-metafields">SEO Meta Fields app</a> provides fields for search and social sharing metadata across content types and exposes them through Guillotine.
+The same registration mechanism lets an app add shared fields without changing your Artist or Animal schemas.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="choosing_the_right_tool"><a class="link" href="#choosing_the_right_tool">Choosing the right tool</a></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>You&#8217;ve now used the main content modeling tools in this tutorial.
+Use this recap when deciding how to represent new content:</p>
+</div>
 <table class="tableblock frame-all grid-all stretch">
 <colgroup>
-<col style="width: 50%;">
-<col style="width: 50%;">
+<col style="width: 60%;">
+<col style="width: 40%;">
 </colgroup>
 <thead>
 <tr>
-<th class="tableblock halign-left valign-top">Title</th>
-<th class="tableblock halign-left valign-top">Year</th>
+<th class="tableblock halign-left valign-top">What you want to build</th>
+<th class="tableblock halign-left valign-top">Use</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Hustlers</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">2019</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Content that editors manage and publish independently</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Content type</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">F9</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">2021</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Relationships between independently managed content items</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Reference (ContentSelector, ImageSelector)</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Images and other uploaded files, managed as content with a source attachment</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Media</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Visual groups of fields without changing the data structure</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">FieldSet</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Nested or repeatable groups of fields that belong to one content item</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">ItemSet</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">A single selection, optionally with fields for the chosen option</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">OptionSet with one selection per occurrence</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Multiple selections, optionally with separate fields for each chosen option</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">OptionSet allowing multiple selections per occurrence</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Ordered lists of content blocks, such as text, images and quotes for a basic landing page</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Repeatable OptionSet with one selection per occurrence</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Reusable form definitions included in several schemas or options</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Form fragment</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Formatted prose with links, images and macros</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">HtmlArea</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Shared fields added across content types, including types provided by other apps</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Mixin</p></td>
 </tr>
 </tbody>
 </table>
-</li>
-<li>
-<p><strong>Save the filmography</strong> - Use <strong>Expand all</strong> if you want to view both entries together, then save the artist.
-The entries are part of the same draft as Cardi B&#8217;s other fields.</p>
-<div class="imageblock">
-<div class="content">
-<img src="images/sets-filmography.png" alt="Filmography item set with Hustlers from 2019 and F9 from 2021" width="527">
-</div>
-<div class="title">Figure 1. Two filmography entries on Cardi B</div>
-</div>
-</li>
-</ol>
-</div>
 <div class="paragraph">
-<p>The item set defines the structure and limits of each entry:</p>
-</div>
-<div class="ulist">
-<ul>
-<li>
-<p><code>items</code> contains the fields in each filmography entry.</p>
-</li>
-<li>
-<p>The item set&#8217;s <code>occurrences</code> allows any number of entries, including none.</p>
-</li>
-<li>
-<p>Each entry requires both a <code>title</code> and a <code>year</code>.</p>
-</li>
-<li>
-<p><code>Long</code> stores the year as an integer.
-The <code>min: 0</code> directly on <code>year</code> limits its numeric value; <code>occurrences.min</code> controls whether a value is required.</p>
-</li>
-</ul>
-</div>
-</div>
-<div class="sect2">
-<h3 id="task_query_the_filmography"><a class="link" href="#task_query_the_filmography">Task: Query the filmography</a></h3>
-<div class="olist arabic">
-<ol class="arabic">
-<li>
-<p><strong>Fetch the filmography</strong> - Open Query Playground for "My First Project" and keep <strong>Draft</strong> selected throughout this chapter.
-Fetch Cardi B by path and select the fields within <code>filmography</code>:</p>
-<div class="listingblock">
-<div class="content">
-<pre class="highlight"><code class="language-graphql" data-lang="graphql">{
-  guillotine {
-    get(key: "/artists/cardi-b") {
-      displayName
-      ... on com_example_dev101_Artist {
-        data {
-          filmography {
-            title
-            year
-          }
-        }
-      }
-    }
-  }
-}</code></pre>
-</div>
-</div>
-<div class="paragraph">
-<p>The <code>data.guillotine.get</code> object contains:</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="highlight"><code class="language-json" data-lang="json">{
-  "displayName": "Cardi B",
-  "data": {
-    "filmography": [
-      { "title": "Hustlers", "year": 2019 },
-      { "title": "F9", "year": 2021 }
-    ]
-  }
-}</code></pre>
-</div>
-</div>
-</li>
-</ol>
-</div>
-<div class="paragraph">
-<p>Guillotine generates a GraphQL object type for the item set&#8217;s fields.
-Because <code>filmography</code> allows multiple occurrences, it returns a list of these objects, even when you enter just one film.
-You can select <code>title</code> and <code>year</code> directly inside each entry, without another inline fragment.</p>
-</div>
-</div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="choose_an_option_with_its_own_fields"><a class="link" href="#choose_an_option_with_its_own_fields">Choose an option with its own fields</a></h2>
-<div class="sectionbody">
-<div class="paragraph">
-<p>An <em>option set</em> lets editors choose from named options, each of which can contain its own form items.
-For a deliberately simplified animal diet, you&#8217;ll offer Herbivore and Carnivore.
-Only Carnivore needs a list of prey.</p>
-</div>
-<div class="sect2">
-<h3 id="task_add_feeding_behavior_to_animal"><a class="link" href="#task_add_feeding_behavior_to_animal">Task: Add feeding behavior to Animal</a></h3>
-<div class="olist arabic">
-<ol class="arabic">
-<li>
-<p><strong>Define the feeding options</strong> - Append this option set to the Animal form, after <code>images</code>:</p>
-<div class="listingblock">
-<div class="title">src/main/resources/cms/content-types/animal/animal.yaml</div>
-<div class="content">
-<pre class="highlight"><code class="language-yaml" data-lang="yaml">  - type: "OptionSet"
-    name: "feedingBehavior"
-    label: "Feeding behavior"
-    selection:
-      min: 1
-      max: 1
-    options:
-      - name: "herbivore"
-        label: "Herbivore"
-        helpText: "Subsists primarily on plant material."
-      - name: "carnivore"
-        label: "Carnivore"
-        helpText: "Subsists primarily on animal tissue and meat."
-        items:
-          - type: "TextLine"
-            name: "prey"
-            label: "Prey"
-            occurrences:
-              min: 0
-              max: 0</code></pre>
-</div>
-</div>
-</li>
-<li>
-<p><strong>Update the animal forms</strong> - Save the schema and let the watcher update the app, then reopen your animals in Content Studio.</p>
-</li>
-<li>
-<p><strong>Describe a carnivore</strong> - For Lion, add Feeding behavior, select <strong>Carnivore</strong>, and enter "Zebra" and "Giraffe" as separate Prey values.
-Save the animal.</p>
-<div class="imageblock">
-<div class="content">
-<img src="images/sets-feeding-behavior.png" alt="Feeding behavior option set with Carnivore selected and Zebra and Giraffe entered as prey" width="527">
-</div>
-<div class="title">Figure 2. Lion&#8217;s feeding behavior with two prey values</div>
-</div>
-</li>
-<li>
-<p><strong>Describe a herbivore</strong> - For Reindeer, select <strong>Herbivore</strong> and save.
-Notice that there is no Prey field for this option.</p>
-</li>
-</ol>
-</div>
-<div class="paragraph">
-<p>There are two different limits to keep in mind:</p>
-</div>
-<div class="ulist">
-<ul>
-<li>
-<p><code>occurrences</code> controls how many instances of the whole option set can exist.
-Here it is omitted, so feeding behavior is optional and can occur at most once.</p>
-</li>
-<li>
-<p><code>selection</code> controls how many options can be selected within an instance.
-Here both limits are <code>1</code>, so an editor adding feeding behavior must choose exactly one option.</p>
-</li>
-</ul>
-</div>
-<div class="paragraph">
-<p>The <code>herbivore</code> option has no extra fields.
-The <code>carnivore</code> option contains a repeatable <code>prey</code> field.</p>
-</div>
-</div>
-<div class="sect2">
-<h3 id="task_query_the_selected_option"><a class="link" href="#task_query_the_selected_option">Task: Query the selected option</a></h3>
-<div class="olist arabic">
-<ol class="arabic">
-<li>
-<p><strong>Fetch Lion&#8217;s feeding behavior</strong> - Run this query for Lion:</p>
-<div class="listingblock">
-<div class="content">
-<pre class="highlight"><code class="language-graphql" data-lang="graphql">{
-  guillotine {
-    get(key: "/animals/lion") {
-      displayName
-      ... on com_example_dev101_Animal {
-        data {
-          feedingBehavior {
-            _selected
-            carnivore {
-              prey
-            }
-          }
-        }
-      }
-    }
-  }
-}</code></pre>
-</div>
-</div>
-<div class="paragraph">
-<p>The <code>data.guillotine.get</code> object contains:</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="highlight"><code class="language-json" data-lang="json">{
-  "displayName": "Lion",
-  "data": {
-    "feedingBehavior": {
-      "_selected": "carnivore",
-      "carnivore": {
-        "prey": ["Zebra", "Giraffe"]
-      }
-    }
-  }
-}</code></pre>
-</div>
-</div>
-</li>
-<li>
-<p><strong>Compare the herbivore option</strong> - Change the key to <code>/animals/reindeer</code> and run the query again.
-The selected option is now <code>"herbivore"</code>, and <code>carnivore</code> is <code>null</code>.
-Use <code>_selected</code> to identify the choice even when it has no extra fields, as with Herbivore.</p>
-</li>
-</ol>
-</div>
-<div class="paragraph">
-<p>The <code>_selected</code> field tells you which option was chosen, using its schema name rather than its label.
-For this single selection, it is a string.
-The <code>carnivore</code> object contains that option&#8217;s fields.</p>
-</div>
-</div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="reuse_fields_across_options"><a class="link" href="#reuse_fields_across_options">Reuse fields across options</a></h2>
-<div class="sectionbody">
-<div class="paragraph">
-<p>Next, you&#8217;ll record where an animal lives.
-An animal may live on several continents, so this option set will allow multiple selections.
-Each selected continent needs its own Notes field.</p>
-</div>
-<div class="paragraph">
-<p>A <em>form fragment</em> defines form items once so you can include them in several places.
-You&#8217;ll use one here to give all seven continent options the same field definition.</p>
-</div>
-<div class="sect2">
-<h3 id="task_create_the_distribution_form_fragment"><a class="link" href="#task_create_the_distribution_form_fragment">Task: Create the distribution form fragment</a></h3>
-<div class="olist arabic">
-<ol class="arabic">
-<li>
-<p><strong>Define the shared Notes field</strong> - Create this file in your app:</p>
-<div class="listingblock">
-<div class="title">src/main/resources/cms/form-fragments/distributionData/distributionData.yaml</div>
-<div class="content">
-<pre class="highlight"><code class="language-yaml" data-lang="yaml">kind: "FormFragment"
-title: "Distribution data"
-form:
-  - type: "TextArea"
-    name: "notes"
-    label: "Notes"</code></pre>
-</div>
-</div>
-</li>
-</ol>
-</div>
-<div class="paragraph">
-<p>As with content types, the folder and filename match the schema name: <code>distributionData</code>.
-Its <code>form</code> contains the fields to insert wherever the fragment is included.</p>
-</div>
-</div>
-<div class="sect2">
-<h3 id="task_add_distribution_to_animal"><a class="link" href="#task_add_distribution_to_animal">Task: Add distribution to Animal</a></h3>
-<div class="olist arabic">
-<ol class="arabic">
-<li>
-<p><strong>Include the fragment for each continent</strong> - Append this option set to the Animal form, after <code>feedingBehavior</code>:</p>
-<div class="listingblock">
-<div class="title">src/main/resources/cms/content-types/animal/animal.yaml</div>
-<div class="content">
-<pre class="highlight"><code class="language-yaml" data-lang="yaml">  - type: "OptionSet"
-    name: "distribution"
-    label: "Distribution across continents"
-    helpText: "Continents where the animal can be found in the wild"
-    selection:
-      min: 0
-      max: 7
-    options:
-      - name: "africa"
-        label: "Africa"
-        items:
-          - include: "distributionData"
-      - name: "antarctica"
-        label: "Antarctica"
-        items:
-          - include: "distributionData"
-      - name: "asia"
-        label: "Asia"
-        items:
-          - include: "distributionData"
-      - name: "australia"
-        label: "Australia"
-        items:
-          - include: "distributionData"
-      - name: "europe"
-        label: "Europe"
-        items:
-          - include: "distributionData"
-      - name: "northAmerica"
-        label: "North America"
-        items:
-          - include: "distributionData"
-      - name: "southAmerica"
-        label: "South America"
-        items:
-          - include: "distributionData"</code></pre>
-</div>
-</div>
-</li>
-<li>
-<p><strong>Enter Lion&#8217;s distribution</strong> - Save both files, let the watcher update the app, and reopen Lion.
-In Distribution across continents, click <b class="button">Add</b>, select Africa and Asia, and enter these notes:</p>
-<table class="tableblock frame-all grid-all stretch">
-<colgroup>
-<col style="width: 25%;">
-<col style="width: 75%;">
-</colgroup>
-<thead>
-<tr>
-<th class="tableblock halign-left valign-top">Continent</th>
-<th class="tableblock halign-left valign-top">Notes</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Africa</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Found in parts of sub-Saharan Africa.</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Asia</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Found in Gujarat, India.</p></td>
-</tr>
-</tbody>
-</table>
-</li>
-<li>
-<p><strong>Save the distribution</strong> - Save the animal.</p>
-<div class="imageblock">
-<div class="content">
-<img src="images/sets-distribution.png" alt="Distribution option set with Africa and Asia selected, each showing its own Notes field" width="527">
-</div>
-<div class="title">Figure 3. Lion&#8217;s distribution with separate notes for each selected continent</div>
-</div>
-</li>
-</ol>
-</div>
-<div class="paragraph">
-<p><code>selection.min: 0</code> and <code>selection.max: 7</code> allow any number of the seven continents to be selected.
-Each <code>include: "distributionData"</code> inserts the fragment&#8217;s Notes field into that option.</p>
-</div>
-<div class="paragraph">
-<p>The fragment shares the field definition, not its values: Africa and Asia each have their own notes.
-Changing the fragment updates the form wherever it is included, and it adds no extra level to the stored data or GraphQL response.
-A CMS form fragment is also separate from a GraphQL fragment, which groups fields in a query.</p>
-</div>
-</div>
-<div class="sect2">
-<h3 id="task_query_the_distribution"><a class="link" href="#task_query_the_distribution">Task: Query the distribution</a></h3>
-<div class="olist arabic">
-<ol class="arabic">
-<li>
-<p><strong>Fetch the distribution notes</strong> - Run this query to fetch both selected continents and their notes:</p>
-<div class="listingblock">
-<div class="content">
-<pre class="highlight"><code class="language-graphql" data-lang="graphql">{
-  guillotine {
-    get(key: "/animals/lion") {
-      displayName
-      ... on com_example_dev101_Animal {
-        data {
-          distribution {
-            _selected
-            africa {
-              notes
-            }
-            asia {
-              notes
-            }
-          }
-        }
-      }
-    }
-  }
-}</code></pre>
-</div>
-</div>
-<div class="paragraph">
-<p>The <code>data.guillotine.get</code> object contains:</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="highlight"><code class="language-json" data-lang="json">{
-  "displayName": "Lion",
-  "data": {
-    "distribution": {
-      "_selected": ["africa", "asia"],
-      "africa": {
-        "notes": "Found in parts of sub-Saharan Africa."
-      },
-      "asia": {
-        "notes": "Found in Gujarat, India."
-      }
-    }
-  }
-}</code></pre>
-</div>
-</div>
-</li>
-</ol>
-</div>
-<div class="paragraph">
-<p>This time, <code>_selected</code> is a list because the option set allows multiple selections.
-The whole <code>distribution</code> value is still one object: the number of selected options is independent of the number of occurrences of the set.
-The fragment&#8217;s <code>notes</code> field appears directly inside each continent, with no <code>distributionData</code> wrapper.</p>
-</div>
-</div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="visual_grouping_and_further_reading"><a class="link" href="#visual_grouping_and_further_reading">Visual grouping and further reading</a></h2>
-<div class="sectionbody">
-<div class="paragraph">
-<p>If you only want to organize a form visually, a <em>field set</em> puts a heading around a group of form items without changing their data structure.
-It has a label and nested <code>items</code>, but no property name of its own.
-For example, grouping Artist&#8217;s existing fields in a field set would leave their GraphQL paths unchanged.</p>
-</div>
-<div class="paragraph">
-<p>The CMS reference covers the additional settings and nesting possibilities for <a href="https://developer.enonic.com/docs/cms/stable/schemas/form-items/field-set">field sets</a>, <a href="https://developer.enonic.com/docs/cms/stable/schemas/form-items/item-set">item sets</a>, <a href="https://developer.enonic.com/docs/cms/stable/schemas/form-items/option-set">option sets</a> and <a href="https://developer.enonic.com/docs/cms/stable/schemas/form-fragments">form fragments</a>.</p>
+<p>An OptionSet can support multiple selections with separate fields for each selected option, as you did with continents and their notes in the <a href="sets.ahtml">sets chapter</a>.
+A repeatable OptionSet with one selected option per occurrence lets editors build a sequence of blocks, such as text, images and quotes, for your front-end to render.
+See the <a href="https://developer.enonic.com/docs/cms/stable/schemas/form-items/option-set">OptionSet reference</a> for configuration examples.
+For visual editing or more advanced page composition, explore XP&#8217;s <a href="https://developer.enonic.com/docs/cms/stable/pages">page model</a> in the <a href="https://developer.enonic.com/docs/intro">Introduction to Enonic</a> or the <a href="https://developer.enonic.com/docs/next.xp">Next.js tutorial</a>.</p>
 </div>
 </div>
 </div>
@@ -980,15 +778,15 @@ For example, grouping Artist&#8217;s existing fields in a field set would leave 
 <h2 id="coming_up"><a class="link" href="#coming_up">Coming up</a></h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>You&#8217;ve repeated structured filmography entries, selected options with their own fields, reused a form fragment, and queried each addition through Guillotine.
-In the next chapter, you&#8217;ll add <a href="rich-text.ahtml">rich text</a>, including links, images and macros.</p>
+<p>You&#8217;ve added and queried a mixin across two content types, completing the tutorial&#8217;s content model.
+In the next chapter, you&#8217;ll publish your content and explore <a href="permissions.ahtml">read and editorial permissions</a>.</p>
 </div>
 </div>
 </div>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2026-11-12 10:20:17 UTC
+Last updated 2026-11-12 10:22:31 UTC
 </div>
 </div>
 </body>

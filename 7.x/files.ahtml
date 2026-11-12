@@ -5,9 +5,8 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="generator" content="Asciidoctor 2.0.26">
-<meta name="application-name" content="dev101">
-<meta name="description" content="Add a rich text description, insert links, images and a macro, and inspect how Guillotine returns each one for your front-end.">
-<title>Rich text</title>
+<meta name="description" content="How does XP deal with images and other media? This chapter covers XP media support, how to upload and query for media, how to work with images and attachments.">
+<title>Media - files are content too</title>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,300italic,400,400italic,600,600italic%7CNoto+Serif:400,400italic,700,700italic%7CDroid+Sans+Mono:400,700">
 <style>
 /*! Asciidoctor default stylesheet | MIT License | https://asciidoctor.org */
@@ -439,40 +438,36 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 </head>
 <body class="article toc2 toc-right">
 <div id="header">
-<h1>Rich text</h1>
+<h1>Media - files are content too</h1>
 <div id="toc" class="toc2">
 <div id="toctitle">Table of Contents</div>
 <ul class="sectlevel1">
-<li><a href="#add_a_description">Add a description</a>
+<li><a href="#media">Media</a>
 <ul class="sectlevel2">
-<li><a href="#task_add_the_field_and_create_lynx">Task: Add the field and create Lynx</a></li>
+<li><a href="#media_types">Media types</a></li>
+<li><a href="#uploading">Uploading</a></li>
+<li><a href="#data_toolbox">Data Toolbox</a></li>
 </ul>
 </li>
-<li><a href="#link_to_another_animal">Link to another animal</a>
+<li><a href="#attachment_service">Attachment service</a>
 <ul class="sectlevel2">
-<li><a href="#task_link_to_lion">Task: Link to Lion</a></li>
-<li><a href="#task_inspect_the_link">Task: Inspect the link</a></li>
+<li><a href="#mediaurl">mediaUrl</a></li>
 </ul>
 </li>
-<li><a href="#insert_an_image">Insert an image</a>
+<li><a href="#images">Images</a>
 <ul class="sectlevel2">
-<li><a href="#task_add_a_lynx_photograph">Task: Add a lynx photograph</a></li>
-<li><a href="#task_inspect_the_image_url">Task: Inspect the image URL</a></li>
+<li><a href="#image_service">Image service</a></li>
+<li><a href="#image_form">Image form</a></li>
+<li><a href="#autofocus">Autofocus</a></li>
 </ul>
 </li>
-<li><a href="#apply_an_image_style">Apply an image style</a>
+<li><a href="#graphql_api">GraphQL API</a>
 <ul class="sectlevel2">
-<li><a href="#task_create_and_apply_the_style">Task: Create and apply the style</a></li>
+<li><a href="#general_media_type">General media type</a></li>
+<li><a href="#image_media_type">Image media type</a></li>
 </ul>
 </li>
-<li><a href="#insert_a_macro">Insert a macro</a>
-<ul class="sectlevel2">
-<li><a href="#task_add_an_iframe_embed">Task: Add an iframe embed</a></li>
-<li><a href="#task_query_the_macro_configuration">Task: Query the macro configuration</a></li>
-</ul>
-</li>
-<li><a href="#optional_request_responsive_images">Optional: Request responsive images</a></li>
-<li><a href="#coming_up">Coming up</a></li>
+<li><a href="#summary">Summary</a></li>
 </ul>
 </div>
 </div>
@@ -480,123 +475,154 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <div id="preamble">
 <div class="sectionbody">
 <div class="paragraph">
-<p>In this chapter, you&#8217;ll add rich text to Animal, insert a link, an image and a macro, and query each addition through Guillotine.
-You&#8217;ll use a new animal, Lynx, for the exercises.</p>
+<p>Naturally, XP can store any file you would want to serve or associate with your content. This chapter explores how XP handles file uploads, and dives into the image handling specifically.</p>
+</div>
+<div class="paragraph">
+<p>At the end of the chapter we&#8217;ll walk through how to use images in a headless fashion.</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+The tasks and examples in this chapter are based on work done in previous chapters (starting with <a href="sandbox.ahtml">the sandboxes chapter</a>). If you want to follow along with the examples, make sure you&#8217;re all caught up. This chapter requires that you&#8217;ve got your site up and running.
+</td>
+</tr>
+</table>
 </div>
 </div>
 </div>
 <div class="sect1">
-<h2 id="add_a_description"><a class="link" href="#add_a_description">Add a description</a></h2>
+<h2 id="media"><a class="link" href="#media">Media</a></h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>The HtmlArea form item lets editors write formatted text with embedded content.
-Use it for free-form prose; use the <a href="sets.ahtml">option sets from the previous chapter</a> when your front-end needs separate, structured entries.</p>
+<p>A file may be uploaded to XP to become an individual piece of content. Similar to other content items.</p>
 </div>
 <div class="sect2">
-<h3 id="task_add_the_field_and_create_lynx"><a class="link" href="#task_add_the_field_and_create_lynx">Task: Add the field and create Lynx</a></h3>
-<div class="olist arabic">
-<ol class="arabic">
-<li>
-<p><strong>Define the rich text field</strong> - Append this field to the Animal form, after <code>distribution</code>:</p>
-<div class="listingblock">
-<div class="title">src/main/resources/cms/content-types/animal/animal.yaml</div>
-<div class="content">
-<pre class="highlight"><code class="language-yaml" data-lang="yaml">  - type: "HtmlArea"
-    name: "description"
-    label: "Description"
-    helpText: "Describe the animal. Where its habitats are, what it eats, etc."
-    exclude: "*"
-    include: "Format Link Macro Image"</code></pre>
-</div>
-</div>
-</li>
-<li>
-<p><strong>Create Lynx</strong> - Save the schema and let your running <code>enonic dev</code> watcher update the app.
-In Content Studio, create an Animal named "Lynx" in the Animals folder, with the path <code>/animals/lynx</code>.</p>
-</li>
-</ol>
+<h3 id="media_types"><a class="link" href="#media_types">Media types</a></h3>
+<div class="paragraph">
+<p>Media types are standard content types that ship with XP. When you upload a file to XP, XP will assign it one of these content types, also referred to as media types. The media type will be resoved from the file&#8217;s content. Some common media types are images, audio, video, and executables.</p>
 </div>
 <div class="paragraph">
-<p><code>exclude: "*"</code> removes the default toolbar tools, and <code>include</code> adds the tools used in this chapter.
-The field is optional and accepts one value, since <code>occurrences</code> is omitted.
-Keep the toolbar focused on the formatting your front-end supports; the <a href="https://developer.enonic.com/docs/cms/stable/schemas/form-items/htmlarea">HtmlArea reference</a> covers the other settings.</p>
+<p>For a full overview of all the media types baked into XP, see the <a href="https://developer.enonic.com/docs/xp/stable/cms/content-types#media" target="_blank" rel="noopener">reference docs for media content types</a>.</p>
 </div>
-</div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="link_to_another_animal"><a class="link" href="#link_to_another_animal">Link to another animal</a></h2>
-<div class="sectionbody">
-<div class="paragraph">
-<p>An internal link stores the target content item&#8217;s ID, just like a ContentSelector reference.
-Moving or renaming the target preserves that reference; your front-end still needs to resolve it to the appropriate URL.</p>
 </div>
 <div class="sect2">
-<h3 id="task_link_to_lion"><a class="link" href="#task_link_to_lion">Task: Link to Lion</a></h3>
-<div class="olist arabic">
-<ol class="arabic">
-<li>
-<p><strong>Write the description</strong> - In Lynx&#8217;s Description, enter this text:</p>
-<div class="listingblock">
-<div class="content">
-<pre>Lynx are cats, just like lions.</pre>
+<h3 id="uploading"><a class="link" href="#uploading">Uploading</a></h3>
+<div class="paragraph">
+<p>To upload files to Content Studio, simply click <b class="button">New &#8230;&#8203;</b> to use the content creation dialog. You may either click the "upload" icon in the dialog, or drag&#8217;n drop the files from your device - or even directly from another website.</p>
 </div>
-</div>
-</li>
-<li>
-<p><strong>Choose the link text</strong> - Select the word "lions" and click the <strong>Link</strong> toolbar button.</p>
-</li>
-<li>
-<p><strong>Select the link target</strong> - In the Content tab, search for and select Lion at <code>/animals/lion</code>.</p>
 <div class="imageblock">
 <div class="content">
-<img src="images/rich-text-link.png" alt="Insert Link dialog with lions as the text and Lion at /animals/lion as the selected content" width="800">
+<img src="media/media-drag-and-drop.png" alt="The drag and drop interface. Three file icons being dragged onto a large, blue, circular drop zone." width="960w">
 </div>
-<div class="title">Figure 1. Selecting Lion as the link target</div>
+<div class="title">Figure 1. Dragging and dropping files to the "create content dialog"</div>
 </div>
-</li>
-<li>
-<p><strong>Save the link</strong> - Click <b class="button">Insert</b>, then save Lynx.</p>
-</li>
-</ol>
-</div>
-</div>
-<div class="sect2">
-<h3 id="task_inspect_the_link"><a class="link" href="#task_inspect_the_link">Task: Inspect the link</a></h3>
 <div class="paragraph">
-<p>Unlike TextArea, which returns a string, HtmlArea exposes a GraphQL object with several fields.
-<code>raw</code> is the stored markup; <code>processedHtml</code> is the result of processing it for delivery.</p>
+<p>This process is the same for whatever media type you want to upload.</p>
+</div>
+<div class="paragraph">
+<p>To get familiar with uploading media to XP, let&#8217;s start with one of the most common media types on the web: images! As mentioned above, this process will also work for any other media type.</p>
 </div>
 <div class="olist arabic">
 <ol class="arabic">
 <li>
-<p><strong>Compare the raw and processed link</strong> - Open Query Playground for "My First Project" and keep <strong>Draft</strong> selected throughout this chapter.
-Query both forms of the HTML together with the link&#8217;s target and URL components:</p>
+<p>Find an image to upload. For the purposes of the tasks in this chapter, you should work with an image where the important part isn&#8217;t centered in the shot. If you have one yourself, feel free to use that. If not, how about using <a href="https://unsplash.com/photos/8oLnCRz7hwM" target="_blank" rel="noopener">this picture of a lion</a> by <a href="https://unsplash.com/@keyursphotography" target="_blank" rel="noopener">Keyur Nandaniya</a>?</p>
+</li>
+<li>
+<p>Create a folder for your images. Call it "images". Just like the "artist" folder we created previously, you may place the folder anywhere in your project structure.</p>
+</li>
+<li>
+<p>Open the "create content" dialog. Press the upload button to bring up your OS&#8217;s file browsing dialog and select your image. You can also drag and drop the image from your file system browser onto the dialog.</p>
+</li>
+</ol>
+</div>
+<div class="paragraph">
+<p>And that&#8217;s all it takes to upload files to Content Studio!</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="data_toolbox"><a class="link" href="#data_toolbox">Data Toolbox</a></h3>
+<div class="paragraph">
+<p>Like we saw in the chapter on content, Data Toolbox lets you view and edit your content. Images and other media are also available in Data Toolbox as content, but in addition to the same properties you saw previously, media also have a property called <code>attachment</code>. The attachment will essentially hold all the data from the file that you uploaded.</p>
+</div>
+<div class="paragraph">
+<p>For instance, if you have a look at the image you uploaded earlier, you should see that it points to the image file you uploaded.</p>
+</div>
+<div class="paragraph">
+<p>If you added a focal point, you&#8217;ll see that specified under the <code>media</code> property too.</p>
+</div>
+<div class="paragraph">
+<p>If you view the content as JSON, some relevant parts of the structure are the <code>data</code> and <code>attachment</code> properties:</p>
+</div>
+<div class="listingblock">
+<div class="title">An extract of the JSON representation of an image</div>
+<div class="content">
+<pre class="highlight"><code class="language-json" data-lang="json">// ....
+  "data": {
+    "media": {
+      "attachment": "lion.jpg", <i class="conum" data-value="1"></i><b>(1)</b>
+      "focalPoint": { <i class="conum" data-value="2"></i><b>(2)</b>
+        "x": 0.246875,
+        "y": 0.6653906106948853
+      }
+    }
+  },
+  "attachment": { <i class="conum" data-value="3"></i><b>(3)</b>
+    "name": "lion.jpg",
+    "label": "source",
+    "binary": "lion.jpg",
+    "mimeType": "image/jpeg",
+    "size": 256018,
+    "text": ""
+  }
+// ....</code></pre>
+</div>
+</div>
+<div class="colist arabic">
+<table>
+<tr>
+<td><i class="conum" data-value="1"></i><b>1</b></td>
+<td>References the name of the attachment specified in the <code>attachment</code> property.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="2"></i><b>2</b></td>
+<td>If you have set a focal point, its position will also show up here. See the next task for how to set one.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="3"></i><b>3</b></td>
+<td>The image attachment with data about the file, such as MIME type and size.</td>
+</tr>
+</table>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="attachment_service"><a class="link" href="#attachment_service">Attachment service</a></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Uploading a file is only half the job. XP also includes and Attachment Service that lets you download the same file (now stored as an attachment within the content) when you need it.</p>
+</div>
+<div class="paragraph">
+<p>Essentially, what you need is a URL to download the specific attachment stored within your media:</p>
+</div>
+<div class="sect2">
+<h3 id="mediaurl"><a class="link" href="#mediaurl">mediaUrl</a></h3>
+<div class="paragraph">
+<p>To get the URL you may use the following GraphQL query. The mediaUrl field will return a link to the original file you uploaded.</p>
+</div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-graphql" data-lang="graphql">{
+<pre class="highlight"><code class="language-GraphQL" data-lang="GraphQL">query {
   guillotine {
-    get(key: "/animals/lynx") {
-      ... on com_example_dev101_Animal {
-        data {
-          description {
-            raw
-            processedHtml
-            links {
-              ref
-              content {
-                displayName
-                _path
-              }
-              pageUrl {
-                baseUrl
-                path
-                queryString
-              }
-              fragment
-            }
-          }
-        }
+    get(key: "/developer/media/ready-set-code.png") {
+      displayName
+      type
+      ... on media_Image {
+        mediaUrl
       }
     }
   }
@@ -604,7 +630,7 @@ Query both forms of the HTML together with the link&#8217;s target and URL compo
 </div>
 </div>
 <div class="paragraph">
-<p>The response shows how processing changes the internal link:</p>
+<p>If everything went fine, you should expect a response that looks something like this:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -612,417 +638,343 @@ Query both forms of the HTML together with the link&#8217;s target and URL compo
   "data": {
     "guillotine": {
       "get": {
-        "data": {
-          "description": {
-            "raw": "&lt;p&gt;Lynx are cats, just like &lt;a href=\"content://95cd658d-a645-4f63-a3de-4601b06507bd\"&gt;lions&lt;/a&gt;.&lt;/p&gt;\n",
-            "processedHtml": "&lt;p&gt;Lynx are cats, just like &lt;a href=\"/animals/lion\" data-link-ref=\"8aafba0c-cb32-457c-86c8-3b7772ea4750\"&gt;lions&lt;/a&gt;.&lt;/p&gt;\n",
-            "links": [
-              {
-                "ref": "8aafba0c-cb32-457c-86c8-3b7772ea4750",
-                "content": {
-                  "displayName": "Lion",
-                  "_path": "/animals/lion"
-                },
-                "pageUrl": {
-                  "baseUrl": null,
-                  "path": "/animals/lion",
-                  "queryString": ""
-                },
-                "fragment": ""
-              }
-            ]
-          }
-        }
+        "displayName": "ready-set-code",
+        "type": "media:image",
+        "mediaUrl": "/site/preview/dev-portal/draft/_/attachment/inline/f7efd6e4-9eed-45d2-83b6-d088a7bdc685:8652e625afe7bbda595a190a3b8624e322dc9f1a/ready-set-code.png"
       }
     }
   }
 }</code></pre>
 </div>
 </div>
-</li>
-</ol>
-</div>
-<div class="paragraph">
-<p>In <code>raw</code>, the link&#8217;s <code>href</code> contains <code>content://</code> followed by Lion&#8217;s content ID.
-In <code>processedHtml</code>, it contains <code>/animals/lion</code> instead, and <code>data-link-ref</code> connects the HTML element to the structured <code>links</code> entry.
-The HTML values are JSON strings; a JSON parser handles the escaped quotes and newlines.</p>
-</div>
-<div class="paragraph">
-<p>Match <code>data-link-ref</code> in the HTML with <code>ref</code> in the link data from the same response.
-Your content IDs and reference values will differ from this example.
-The default <code>href</code> is the target&#8217;s content path; it is not a guarantee that your front-end serves content at that URL.
-Use the target and URL components to construct your own route, supplying your front-end&#8217;s base when <code>baseUrl</code> is <code>null</code>, and append any <code>queryString</code> and <code>fragment</code>.
-The <a href="https://developer.enonic.com/docs/guillotine/stable/usage/rich-text#links">Guillotine rich-text examples</a> show how to apply the resulting URL.</p>
-</div>
 </div>
 </div>
 </div>
 <div class="sect1">
-<h2 id="insert_an_image"><a class="link" href="#insert_an_image">Insert an image</a></h2>
+<h2 id="images"><a class="link" href="#images">Images</a></h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>Images inside rich text reference media content too.
-The caption and alternative text you enter here belong to this use of the image in the description.</p>
+<p>One of the standard media content types is <code>media:image</code>. Images are important in content management, and as such, XP and Content Studio provide some interesting features to help you make the most of your images.</p>
 </div>
 <div class="sect2">
-<h3 id="task_add_a_lynx_photograph"><a class="link" href="#task_add_a_lynx_photograph">Task: Add a lynx photograph</a></h3>
-<div class="olist arabic">
-<ol class="arabic">
-<li>
-<p><strong>Choose a lynx photograph</strong> - Download <a href="https://unsplash.com/photos/lynx-walking-on-grass-field-Oko2E4kt2oU">this lynx photograph</a> by <a href="https://unsplash.com/@zmachacek">Zdeněk Macháček</a> and save it as <code>lynx.jpg</code>, or choose your own image.</p>
-</li>
-<li>
-<p><strong>Choose where to insert the image</strong> - Reopen Lynx and place the cursor in a new paragraph below its description.
-Click the <strong>Image</strong> toolbar button.</p>
-</li>
-<li>
-<p><strong>Upload the photograph</strong> - Drop <code>lynx.jpg</code> onto the upload area in the Insert Image dialog, or click the upload area to choose the file.
-The uploaded image is selected automatically.</p>
-</li>
-<li>
-<p><strong>Set the presentation and caption</strong> - Leave the image style as <strong>&lt;None&gt;</strong> and Custom width unchecked.
-For the supplied photograph, enter "Lynx in human care. Photo: Zdeněk Macháček." as the caption.</p>
-</li>
-<li>
-<p><strong>Add alternative text and save</strong> - Under Accessibility, choose <strong>Alternative text</strong> and enter "Lynx walking through grass."
-Click <b class="button">Insert</b>, then save Lynx.</p>
-<div class="imageblock">
-<div class="content">
-<img src="images/rich-text-image-settings.jpg" alt="Insert Image dialog showing /animals/lynx/lynx.jpg, its caption and Alternative text selection" width="880">
-</div>
-<div class="title">Figure 2. Caption and alternative text for the inserted photograph</div>
-</div>
-</li>
-<li>
-<p><strong>Find the uploaded content</strong> - Return to the content tree and expand Lynx to find the new image at <code>/animals/lynx/lynx.jpg</code>.</p>
-</li>
-</ol>
+<h3 id="image_service"><a class="link" href="#image_service">Image service</a></h3>
+<div class="paragraph">
+<p>Whenever XP serves you an image, the image is delivered via <a href="https://developer.enonic.com/docs/xp/stable/runtime/engines/site-engine/image-service" target="_blank" rel="noopener">XP&#8217;s image service</a>.</p>
 </div>
 <div class="paragraph">
-<p>Uploading through this dialog creates a separate media content item under the animal you&#8217;re editing.
-The description references that image by ID, and the uploaded file is an attachment of the image content item, as explained in the <a href="media.ahtml">media chapter</a>.</p>
+<p>The image service takes care of scaling and applying filters to your images based on parameters you give it. For instance, it&#8217;s common to want to have all images in a section conform to the same dimensions. But because images are generally of different shapes and sizes, this might require cropping the image. The image service takes care of that for you as long as you specify what you want.</p>
 </div>
 <div class="paragraph">
-<p>Use the Decorative image option only when an image adds no information beyond its surrounding content.
-For more editing controls, see the <a href="https://developer.enonic.com/docs/content-studio/stable/editor/rich-text-editor">Content Studio rich-text editor documentation</a>.</p>
+<p>The image service works in tandem with Content Studio&#8217;s image editing tools, so it respects crops, flips, and focal points that you create.</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="task_inspect_the_image_url"><a class="link" href="#task_inspect_the_image_url">Task: Inspect the image URL</a></h3>
-<div class="olist arabic">
-<ol class="arabic">
-<li>
-<p><strong>Fetch the image URL components</strong> - Query <code>images</code> alongside the processed HTML:</p>
-<div class="listingblock">
-<div class="content">
-<pre class="highlight"><code class="language-graphql" data-lang="graphql">{
-  guillotine {
-    get(key: "/animals/lynx") {
-      ... on com_example_dev101_Animal {
-        data {
-          description {
-            processedHtml
-            images {
-              ref
-              src {
-                path
-                queryString
-              }
-            }
-          }
-        }
-      }
-    }
-  }
-}</code></pre>
-</div>
-</div>
+<h3 id="image_form"><a class="link" href="#image_form">Image form</a></h3>
 <div class="paragraph">
-<p>The inserted image appears in <code>processedHtml</code> as a <code>&lt;figure&gt;</code> with an <code>&lt;img&gt;</code> and a <code>&lt;figcaption&gt;</code>:</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="highlight"><code class="language-html" data-lang="html">&lt;figure class="captioned editor-align-justify"&gt;&lt;img alt="Lynx walking through grass." src="/media:image/my-first-project:draft/304b9ac8-406e-4d05-80d7-86b868c225ed:2eb15046035b4e5f05e511c853da1216/width-768/lynx.jpg" style="width:100%" data-image-ref="52918d8b-9c15-49a2-9190-4b3249f90528"&gt;
-&lt;figcaption&gt;Lynx in human care. Photo: Zdeněk Macháček.&lt;/figcaption&gt;
-&lt;/figure&gt;</code></pre>
-</div>
-</div>
-<div class="paragraph">
-<p>Its <code>data-image-ref</code> matches this entry in the <code>images</code> array:</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="highlight"><code class="language-json" data-lang="json">{
-  "ref": "52918d8b-9c15-49a2-9190-4b3249f90528",
-  "src": {
-    "path": "/media:image/my-first-project:draft/304b9ac8-406e-4d05-80d7-86b868c225ed:2eb15046035b4e5f05e511c853da1216/width-768/lynx.jpg",
-    "queryString": ""
-  }
-}</code></pre>
-</div>
-</div>
-</li>
-</ol>
-</div>
-<div class="paragraph">
-<p>Build the image URL as <code><a href="http://localhost:8080/api" class="bare">http://localhost:8080/api</a></code> + <code>path</code> + <code>queryString</code>, just as in the media chapter.
-Use it for the matching image&#8217;s <code>src</code>; the relative media path alone will point at your front-end&#8217;s host when rendered there.
-Your IDs and URL fingerprints will differ from this example.</p>
-</div>
-</div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="apply_an_image_style"><a class="link" href="#apply_an_image_style">Apply an image style</a></h2>
-<div class="sectionbody">
-<div class="paragraph">
-<p>A custom image style gives editors a named choice for cropping or filtering images.
-You&#8217;ll add a square crop with a grayscale filter.</p>
-</div>
-<div class="sect2">
-<h3 id="task_create_and_apply_the_style"><a class="link" href="#task_create_and_apply_the_style">Task: Create and apply the style</a></h3>
-<div class="olist arabic">
-<ol class="arabic">
-<li>
-<p><strong>Define the image style</strong> - Create this file in your app:</p>
-<div class="listingblock">
-<div class="title">src/main/resources/cms/style/style.yaml</div>
-<div class="content">
-<pre class="highlight"><code class="language-yaml" data-lang="yaml">kind: "Style"
-styles:
-  - type: "Image"
-    name: "square-grayscale"
-    label: "Square grayscale"
-    aspectRatio: "1:1"
-    filter: "grayscale()"</code></pre>
-</div>
-</div>
-</li>
-<li>
-<p><strong>Apply the style to Lynx&#8217;s image</strong> - Save the file and let the watcher update the app.
-Reopen Lynx, double-click the image in Description, and choose <strong>Square grayscale</strong> from the style selector.
-Click <b class="button">Update</b> and save the animal.</p>
-<div class="imageblock">
-<div class="content">
-<img src="images/rich-text-image-style.jpg" alt="Insert Image dialog with Square grayscale selected and a preview of the square, grayscale lynx photograph" width="880">
-</div>
-<div class="title">Figure 3. Square grayscale selected for the Lynx image</div>
-</div>
-</li>
-<li>
-<p><strong>Inspect the styled image</strong> - Run the image query again.
-The returned URL now includes the crop and filter instructions; use both its <code>path</code> and <code>queryString</code> without modifying them.</p>
-</li>
-<li>
-<p><strong>Fetch the style settings</strong> - Add this field next to <code>src</code> inside <code>images</code> and run the query:</p>
-<div class="listingblock">
-<div class="content">
-<pre class="highlight"><code class="language-graphql" data-lang="graphql">style {
-  name
-  aspectRatio
-  filter
-}</code></pre>
-</div>
-</div>
-<div class="paragraph">
-<p>The <code>style</code> object contains:</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="highlight"><code class="language-json" data-lang="json">{
-  "name": "square-grayscale",
-  "aspectRatio": "1:1",
-  "filter": "grayscale()"
-}</code></pre>
-</div>
-</div>
-</li>
-</ol>
-</div>
-<div class="paragraph">
-<p><code>aspectRatio: "1:1"</code> requests a square crop, and <code>filter: "grayscale()"</code> removes color.
-Styles are available from apps assigned to the content project, including your app.
-For effects that only concern presentation, consider client-side CSS instead of server-side filters, as discussed in the media chapter.</p>
-</div>
-<div class="paragraph">
-<p>The style is not a stylesheet for your whole front-end: captions, text and layout still use your front-end&#8217;s own styling.
-See the <a href="https://developer.enonic.com/docs/cms/stable/richtext/styles">CMS styles reference</a> for more options.</p>
-</div>
-</div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="insert_a_macro"><a class="link" href="#insert_a_macro">Insert a macro</a></h2>
-<div class="sectionbody">
-<div class="paragraph">
-<p>A <em>macro</em> embeds a configurable component in rich text.
-The built-in Embed IFrame macro lets editors provide an iframe, such as a video embed.
-In Guillotine, it becomes a placeholder plus configuration data for your client to render.</p>
-</div>
-<div class="sect2">
-<h3 id="task_add_an_iframe_embed"><a class="link" href="#task_add_an_iframe_embed">Task: Add an iframe embed</a></h3>
-<div class="olist arabic">
-<ol class="arabic">
-<li>
-<p><strong>Configure the video embed</strong> - In Lynx&#8217;s Description, place the cursor in a new paragraph after the image and click <strong>Insert macro</strong>.
-Choose <strong>Embed IFrame</strong> and enter:</p>
-<div class="listingblock">
-<div class="content">
-<pre class="highlight"><code class="language-html" data-lang="html">&lt;iframe src="https://www.youtube.com/embed/gr5EwZo_CHQ" title="Lynx video" width="560" height="315" allowfullscreen&gt;&lt;/iframe&gt;</code></pre>
-</div>
+<p>Content Studio comes with a suite of image editing tools built in. After uploading an image to Content Studio, you can find it in the content grid and edit it to bring up the image&#8217;s content form.</p>
 </div>
 <div class="imageblock">
 <div class="content">
-<img src="images/rich-text-macro.png" alt="Insert Macro dialog with Embed IFrame selected and the lynx video iframe in IFrame HTML" width="880">
+<img src="media/image-content-form.png" alt="A content form showing the image with image editing tools, inputs for caption, alternative text, copyright, and tags." width="621w}">
 </div>
-<div class="title">Figure 4. Configuring the built-in Embed IFrame macro</div>
+<div class="title">Figure 2. The image content form</div>
 </div>
-</li>
-<li>
-<p><strong>Save the embed</strong> - Insert the macro and save Lynx.
-The macro stores the iframe configuration in the rich text.</p>
-</li>
-</ol>
+<div class="paragraph">
+<p>The content form allows you to provide an image caption, alt text, copyright and tag info.</p>
+</div>
+<div class="paragraph">
+<p>You can also add image properties such as dimensions, and where the image was taken and with what gear.</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+Changing these properties, including size, width, height, etc, does not affect the image in any way.
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>The image editing tools allow you to crop, flip, and rotate the image as well as to set what&#8217;s known as <em>autofocus</em>.</p>
+</div>
+<div class="paragraph">
+<p>The autofocus control allows you to set an image focal point that XP will always keep in view, regardless of how the image is cropped.</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+Without setting a focal point, XP will focus around the center of the image when cropping.
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>You can always reset the edits you&#8217;ve made to an image by using the 'reset filters' button.</p>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+You can read more about <a href="https://enonic.com/blog/enonic-simplifies-image-problems" target="_blank" rel="noopener">how Enonic simplifies your everyday image problems</a> to get more info about how to use images in a traditional CMS model and for a quick overview of the autofocus feature.
+</td>
+</tr>
+</table>
 </div>
 </div>
 <div class="sect2">
-<h3 id="task_query_the_macro_configuration"><a class="link" href="#task_query_the_macro_configuration">Task: Query the macro configuration</a></h3>
+<h3 id="autofocus"><a class="link" href="#autofocus">Autofocus</a></h3>
+<div class="paragraph">
+<p>Because we chose an image with an off-center subject, the image might get cropped such that the lion disappears from the image. For instance, a small, square crop might turn out like this:</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="media/image-cropped-unfocused.jpg" alt="A crop of the lion in the savannah image. The image is square and the only part of the lion that is visible is part of its hind leg." width="500w">
+</div>
+<div class="title">Figure 3. Cropped image without focal point</div>
+</div>
+<div class="paragraph">
+<p>To get around this, try the autofocus tool.</p>
+</div>
 <div class="olist arabic">
 <ol class="arabic">
 <li>
-<p><strong>Fetch the macro configuration</strong> - Query the typed <code>macros</code> fields:</p>
-<div class="listingblock">
+<p>Click the autofocus tool. A red circle will show up over the image. This circle indicates where the focal point is.</p>
+</li>
+<li>
+<p>Move the circle onto the lion (or whatever your focal point is) and press "apply".</p>
+<div class="imageblock">
 <div class="content">
-<pre class="highlight"><code class="language-graphql" data-lang="graphql">{
-  guillotine {
-    get(key: "/animals/lynx") {
-      ... on com_example_dev101_Animal {
-        data {
-          description {
-            processedHtml
-            macros {
-              ref
-              name
-              descriptor
-              config {
-                embed {
-                  body
-                }
-              }
-            }
-          }
-        }
-      }
-    }
-  }
-}</code></pre>
+<img src="media/image-editing-focal-point.png" alt="The lion image with a red circle indicating the focal point around its head." width="626w">
 </div>
-</div>
-<div class="paragraph">
-<p>The processed HTML contains this macro placeholder:</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="highlight"><code class="language-html" data-lang="html">&lt;editor-macro data-macro-name="embed" data-macro-ref="c0357643-ddda-4e54-a3d9-c3ea39d1ba2f"&gt;&amp;lt;iframe src="https://www.youtube.com/embed/gr5EwZo_CHQ" title="Lynx video" width="560" height="315" allowfullscreen=""&amp;gt;&amp;lt;/iframe&amp;gt;&lt;/editor-macro&gt;</code></pre>
-</div>
-</div>
-<div class="paragraph">
-<p>The <code>macros</code> array contains its configuration:</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="highlight"><code class="language-json" data-lang="json">{
-  "ref": "c0357643-ddda-4e54-a3d9-c3ea39d1ba2f",
-  "name": "embed",
-  "descriptor": "system:embed",
-  "config": {
-    "embed": {
-      "body": "&amp;lt;iframe src=\"https://www.youtube.com/embed/gr5EwZo_CHQ\" title=\"Lynx video\" width=\"560\" height=\"315\" allowfullscreen=\"\"&amp;gt;&amp;lt;/iframe&amp;gt;"
-    }
-  }
-}</code></pre>
-</div>
+<div class="title">Figure 4. The focal point editor</div>
 </div>
 </li>
 </ol>
 </div>
 <div class="paragraph">
-<p>Match <code>data-macro-ref</code> with <code>ref</code>, then use the macro&#8217;s name and configuration to render it in your client.
-In this example, <code>config.embed.body</code> contains HTML entities such as <code>&lt;</code> and <code>&gt;</code>.
-These remain after parsing the JSON; a client rendering this iframe must decode them as part of handling the embed macro.
-Returning <code>processedHtml</code> does not execute the macro or automatically turn its placeholder into a working video.</p>
+<p>Now, when the image gets cropped, XP will take care of keeping the lion in focus, both in traditional CMS solutions and in headless modes:</p>
 </div>
-<div class="paragraph">
-<p>The <a href="https://developer.enonic.com/docs/guillotine/stable/api#richtext">Guillotine RichText reference</a> also describes <code>macrosAsJson</code> for inspecting all macro data as JSON.
-The <a href="https://developer.enonic.com/docs/cms/stable/richtext/macros">CMS macros reference</a> covers macro definitions and other built-in macros.</p>
+<div class="imageblock">
+<div class="content">
+<img src="media/image-cropped-focused.jpg" alt="A crop of the lion in the savannah. In this square image, the lion is in full view square in the center." width="500w">
+</div>
+<div class="title">Figure 5. The same image with the same crop, but with a focal point</div>
 </div>
 </div>
 </div>
 </div>
 <div class="sect1">
-<h2 id="optional_request_responsive_images"><a class="link" href="#optional_request_responsive_images">Optional: Request responsive images</a></h2>
+<h2 id="graphql_api"><a class="link" href="#graphql_api">GraphQL API</a></h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>Use <code>processHtml.imageSrcWidth</code> to change the default width of the main <code>src</code> image, and <code>imageWidths</code> to request additional sizes for <code>srcset</code>.
-This example requests an 800-pixel main image and two responsive alternatives:</p>
+<p>Guillotine makes it easy to fetch the data that you&#8217;ve uploaded.</p>
+</div>
+<div class="paragraph">
+<p>Some functionality is shared between all media types, while other queries only work on specific media types.</p>
+</div>
+<div class="paragraph">
+<p>We&#8217;ll look at how to fetch general media and then have a closer look at what we can do with images and attachments.</p>
+</div>
+<div class="sect2">
+<h3 id="general_media_type"><a class="link" href="#general_media_type">General media type</a></h3>
+<div class="paragraph">
+<p>To get the resource URL of media you have uploaded, use the <code>mediaUrl</code> property on any media type. For instance, to get the URL of the raw image you uploaded previously, you could use a query like this:</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-graphql" data-lang="graphql">{
+<pre class="highlight"><code class="language-GraphQL" data-lang="GraphQL">{
   guillotine {
-    get(key: "/animals/lynx") {
-      ... on com_example_dev101_Animal {
-        data {
-          description(processHtml: {
-            imageSrcWidth: 800
-            imageWidths: [320, 640]
-          }) {
-            processedHtml
-            images {
-              ref
-              src {
-                path
-                queryString
-              }
-              srcset {
-                width
-                imageUrl {
-                  path
-                  queryString
-                }
-              }
-            }
+    queryDsl(
+      query: {
+        term: {
+          field: "type",
+          value: {
+            string: "media:image"
           }
         }
+      }
+    ) {
+      displayName
+      ... on media_Image { <i class="conum" data-value="1"></i><b>(1)</b>
+        mediaUrl <i class="conum" data-value="2"></i><b>(2)</b>
       }
     }
   }
 }</code></pre>
 </div>
 </div>
+<div class="colist arabic">
+<table>
+<tr>
+<td><i class="conum" data-value="1"></i><b>1</b></td>
+<td>This allows us to query properties that belong to the <code>media:Image</code> GraphQL type.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="2"></i><b>2</b></td>
+<td>The <code>mediaUrl</code> property (also available on all other media types) gives you a URL from where the raw file can be downloaded.</td>
+</tr>
+</table>
+</div>
+<div class="listingblock">
+<div class="title">The response would look something like this:</div>
+<div class="content">
+<pre class="highlight"><code class="language-json" data-lang="json">{
+  "data": {
+    "guillotine": {
+      "queryDsl": [
+        {
+          "displayName": "keyur-nandaniya-8oLnCRz7hwM-unsplash",
+          "mediaUrl": "/admin/site/preview/my-first-project/draft/_/attachment/inline/21f827e0-ba57-4824-b3bc-f101ae08568b:9475135781b315daad078d91c27746bc3222d024/keyur-nandaniya-8oLnCRz7hwM-unsplash.jpg"
+        }
+      ]
+    }
+  }
+}</code></pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="image_media_type"><a class="link" href="#image_media_type">Image media type</a></h3>
 <div class="paragraph">
-<p>The <code>images</code> entry now has an 800-pixel-wide <code>src</code> image, replacing the default width of 768, and two <code>srcset</code> candidates with widths of 320 and 640.
-The Square grayscale style still applies, so the main image is 800 × 800 pixels and retains the grayscale filter.
-Build its URL from <code><a href="http://localhost:8080/api" class="bare">http://localhost:8080/api</a></code> + <code>src.path</code> + <code>src.queryString</code>.
-For each candidate, combine <code><a href="http://localhost:8080/api" class="bare">http://localhost:8080/api</a></code> with its <code>imageUrl.path</code> and <code>imageUrl.queryString</code>.
-The <a href="https://developer.enonic.com/docs/guillotine/stable/usage/rich-text#images">Guillotine image examples</a> show how to populate <code>src</code> and <code>srcset</code> from these components.
-Request sizes through Guillotine; do not construct them by editing the returned URL paths.</p>
+<p>XP supports a number of image manipulation functions on the fly. When querying for an image via the GraphQL API, you can use the <code>imageUrl</code> function to specify scale and filters for the result you want.</p>
+</div>
+<div class="paragraph">
+<p>The scale argument is <code>required</code> and allows you to specify how you want to crop the image. Common scaling functions include <em>block</em>, which allows you to specify width and height and <em>width</em> which scales the image proportionally to the specified width.</p>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+<a href="https://developer.enonic.com/docs/xp/stable/runtime/engines/site-engine/image-service#scaling_methods" target="_blank" rel="noopener">The scaling methods reference docs</a> show off all the available scaling functions with examples of how they affect the image.
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>As the name implies, the filters argument lets you apply filters to the image. Use filters to apply coloration functions and to rotate and flip images on the fly. To combine filters, separate them with a semicolon.</p>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+<a href="https://developer.enonic.com/docs/xp/stable/runtime/engines/site-engine/image-service#filters" target="_blank" rel="noopener">The filters documentation</a> has an exhaustive list of the available filters.
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>For instance, we could get all the images under the <code>images</code> folder, scaled to 600x700 pixels, in grayscale, with a query like this:</p>
+</div>
+<div class="listingblock">
+<div class="title">A GraphQL query that both scales and applies a filter to images in the <code>images</code> folder</div>
+<div class="content">
+<pre class="highlight"><code class="language-GraphQL" data-lang="GraphQL">{
+  guillotine {
+    queryDsl(
+      query: {
+        term: {
+          field: "type",
+          value: {
+            string: "media:image"
+          }
+        }
+      }
+    ) {
+      displayName
+      ... on media_Image {
+        imageUrl( <i class="conum" data-value="1"></i><b>(1)</b>
+          type: absolute, <i class="conum" data-value="2"></i><b>(2)</b>
+          scale: "block(600,700)", <i class="conum" data-value="3"></i><b>(3)</b>
+          filter: "grayscale(); border(10, 0x000000)") <i class="conum" data-value="4"></i><b>(4)</b>
+      }
+    }
+  }
+}</code></pre>
+</div>
+</div>
+<div class="colist arabic">
+<table>
+<tr>
+<td><i class="conum" data-value="1"></i><b>1</b></td>
+<td>The <code>imageUrl</code> function lets you specify how you want the images to look.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="2"></i><b>2</b></td>
+<td>The <code>type</code> argument specifies whether the URL should be absolute or relative to the server.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="3"></i><b>3</b></td>
+<td>The scale argument specifies the dimensions of the image.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="4"></i><b>4</b></td>
+<td>The filter argument lets you apply filters.</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>The above query should return a response that looks a little something like this:</p>
+</div>
+<div class="listingblock">
+<div class="title">A response with a cropped image with filters</div>
+<div class="content">
+<pre class="highlight"><code class="language-json" data-lang="json">{
+  "data": {
+    "guillotine": {
+      "queryDsl": [
+        {
+          "displayName": "keyur-nandaniya-8oLnCRz7hwM-unsplash",
+          "imageUrl": "http://localhost:8080/admin/site/preview/my-first-project/draft/_/image/21f827e0-ba57-4824-b3bc-f101ae08568b:6d89657e4bfae6eaa62de22bd6fb63b2697f091d/block-600-700/keyur-nandaniya-8oLnCRz7hwM-unsplash.jpg?filter=grayscale%28%29%3B+border%2810%2C+0x000000%29"
+        }
+      ]
+    }
+  }
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Which, if you have followed the steps in this chapter, should show you something like this if you try and navigate to the <code>imageUrl</code> property value:</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="media/image-processed.jpg" alt="The lion image, cropped, in black and white, and flipped upside down." width="600w">
+</div>
+<div class="title">Figure 6. The processed image</div>
+</div>
 </div>
 </div>
 </div>
 <div class="sect1">
-<h2 id="coming_up"><a class="link" href="#coming_up">Coming up</a></h2>
+<h2 id="summary"><a class="link" href="#summary">Summary</a></h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>You&#8217;ve added rich text with a link, an image style and a macro, and inspected the HTML and structured data your front-end uses to render them.
-In the next chapter, you&#8217;ll add fields across content types with <a href="mixins.ahtml">mixins</a>.</p>
+<p>You should now have a deep understanding of how media is stored, and accessed - as well as XP&#8217;s image handing and image service, including how to access it all from the GraphQL API.</p>
+</div>
+<div class="paragraph">
+<p>Pushing forward, it&#8217;s time to <a href="input-types.ahtml">have a closer look at the basic building blocks of the content forms; input types</a>.</p>
 </div>
 </div>
 </div>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2026-11-12 10:20:17 UTC
+Last updated 2026-11-12 10:22:56 UTC
 </div>
 </div>
 </body>

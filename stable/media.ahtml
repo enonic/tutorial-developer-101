@@ -5,8 +5,9 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="generator" content="Asciidoctor 2.0.26">
-<meta name="description" content="Take your content types to the next level with more advanced input types. Learn how to configure input types, what kinds there are, and how to link content together.">
-<title>Input types</title>
+<meta name="application-name" content="dev101">
+<meta name="description" content="Upload an image, inspect its content data and attachment, retrieve the original file, and request cropped and filtered versions with Guillotine.">
+<title>Media - files are content too</title>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,300italic,400,400italic,600,600italic%7CNoto+Serif:400,400italic,700,700italic%7CDroid+Sans+Mono:400,700">
 <style>
 /*! Asciidoctor default stylesheet | MIT License | https://asciidoctor.org */
@@ -438,40 +439,38 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 </head>
 <body class="article toc2 toc-right">
 <div id="header">
-<h1>Input types</h1>
+<h1>Media - files are content too</h1>
 <div id="toc" class="toc2">
 <div id="toctitle">Table of Contents</div>
 <ul class="sectlevel1">
-<li><a href="#general_config">General config</a></li>
-<li><a href="#the_ocurrences_config">The ocurrences config</a>
+<li><a href="#upload_a_file">Upload a file</a>
 <ul class="sectlevel2">
-<li><a href="#optional">Optional</a></li>
-<li><a href="#required">Required</a></li>
-<li><a href="#unlimited">Unlimited</a></li>
+<li><a href="#task_upload_an_image">Task: Upload an image</a></li>
 </ul>
 </li>
-<li><a href="#common_inputs">Common inputs</a></li>
-<li><a href="#imageselector">ImageSelector</a></li>
-<li><a href="#contentselector">ContentSelector</a></li>
-<li><a href="#attachmentuploader">AttachmentUploader</a>
+<li><a href="#inspect_the_uploaded_content">Inspect the uploaded content</a>
 <ul class="sectlevel2">
-<li><a href="#attachmenturl">attachmentUrl</a></li>
+<li><a href="#task_find_the_image_and_its_attachment">Task: Find the image and its attachment</a></li>
 </ul>
 </li>
-<li><a href="#task_artist_and_animals">Task: artist and animals</a>
+<li><a href="#retrieve_the_attached_file">Retrieve the attached file</a>
 <ul class="sectlevel2">
-<li><a href="#animal_constraints">Animal constraints</a></li>
-<li><a href="#artist_constraints">Artist constraints</a></li>
-<li><a href="#querying">Querying</a></li>
-<li><a href="#check_your_work">Check your work</a></li>
+<li><a href="#task_open_and_download_the_attachment">Task: Open and download the attachment</a></li>
 </ul>
 </li>
-<li><a href="#task_solution">Task solution</a>
+<li><a href="#request_a_cropped_image">Request a cropped image</a>
 <ul class="sectlevel2">
-<li><a href="#content_types">Content types</a></li>
-<li><a href="#graphql_query">GraphQL query</a></li>
+<li><a href="#task_open_a_portrait_crop">Task: Open a portrait crop</a></li>
 </ul>
 </li>
+<li><a href="#guide_cropping_with_a_focal_point">Guide cropping with a focal point</a>
+<ul class="sectlevel2">
+<li><a href="#_image_form">Task: Set a focal point and compare</a></li>
+<li><a href="#task_add_a_filter">Task: Add a filter</a></li>
+</ul>
+</li>
+<li><a href="#media_urls_and_caching">Media URLs and caching</a></li>
+<li><a href="#coming_up">Coming up</a></li>
 </ul>
 </div>
 </div>
@@ -479,674 +478,386 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <div id="preamble">
 <div class="sectionbody">
 <div class="paragraph">
-<p>The content types we&#8217;ve created previously in this guide have only used two basic input types: TextLine, TextArea, Date and AttachmentUploader.</p>
-</div>
-<div class="paragraph">
-<p>However, Content Studio has a lot more up its sleeve than that! Input types dictate what kind of data the user can or must add any piece of content.</p>
-</div>
-<div class="paragraph">
-<p>This chapter introduces more new types of inputs and explains how you can configure them to your liking.</p>
-</div>
-<div class="admonitionblock note">
-<table>
-<tr>
-<td class="icon">
-<i class="fa icon-note" title="Note"></i>
-</td>
-<td class="content">
-If you&#8217;re used to working with HTML, be aware that XP&#8217;s <code>input</code> elements are <em>not</em> the same as HTML <code>input</code> elements.
-</td>
-</tr>
-</table>
-</div>
-<div class="admonitionblock note">
-<table>
-<tr>
-<td class="icon">
-<i class="fa icon-note" title="Note"></i>
-</td>
-<td class="content">
-The tasks and examples in this chapter are based on work done in previous chapters (starting with <a href="sandbox.ahtml">the sandboxes chapter</a>). If you want to follow along with the examples, make sure you&#8217;re all caught up.
-</td>
-</tr>
-</table>
+<p>In this chapter, you&#8217;ll upload an image, inspect how it is stored as content with an attachment, and use Guillotine to get URLs for its original file and for cropped and filtered versions.
+The media APIs deliver the files at those URLs.</p>
 </div>
 </div>
 </div>
 <div class="sect1">
-<h2 id="general_config"><a class="link" href="#general_config">General config</a></h2>
+<h2 id="upload_a_file"><a class="link" href="#upload_a_file">Upload a file</a></h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>All input types share a number of options that affect how they act. These options are:</p>
-</div>
-<div class="dlist">
-<dl>
-<dt class="hdlist1"><code>label</code> (required)</dt>
-<dd>
-<p>What the input should be labeled as in the content form.</p>
-</dd>
-<dt class="hdlist1"><code>occurrences</code> (optional)</dt>
-<dd>
-<p>Specifies the minimum and maximum instances of this field. Defaults to "one optional".</p>
-</dd>
-<dt class="hdlist1"><code>default</code> (optional)</dt>
-<dd>
-<p>Gives a default value to the input.</p>
-</dd>
-<dt class="hdlist1"><code>help-text</code> (optional)</dt>
-<dd>
-<p>Lets you specify a description of the input field to show to the user.</p>
-</dd>
-<dt class="hdlist1"><code>config</code> (optional)</dt>
-<dd>
-<p>Input type-specific configuration.</p>
-<div class="paragraph">
-<p>The <code>config</code> element is for input-specific configuration. Because the input types are so different to each other, they all support different options. The <code>config</code> element allows us to use regex validation for TextLine inputs, configure formatting options for HtmlAreas, and to dictate what numeric values a Long or a Double input accepts.</p>
-</div>
-</dd>
-</dl>
-</div>
-<div class="admonitionblock note">
-<table>
-<tr>
-<td class="icon">
-<i class="fa icon-note" title="Note"></i>
-</td>
-<td class="content">
-All of the shared configuration options (<code>label</code>, <code>occurrences</code>, etc.), and the list of available input types are described in the <a href="https://developer.enonic.com/docs/xp/stable/cms/schemas/input-types" target="_blank" rel="noopener">input types documentation</a>.
-</td>
-</tr>
-</table>
-</div>
-<div class="paragraph">
-<p>To show an example of the configuration options work, let&#8217;s examine some TextLine inputs with different configurations.</p>
-</div>
-<div class="listingblock">
-<div class="title">TextLine inputs using all the shared configuration options</div>
-<div class="content">
-<pre class="highlight"><code class="language-xml" data-lang="xml">&lt;input type="TextLine" name="textlineRequired"&gt;
-  &lt;label&gt;Required input with default&lt;/label&gt; <i class="conum" data-value="1"></i><b>(1)</b>
-  &lt;help-text&gt;This text should provide additional information to the user.&lt;/help-text&gt; <i class="conum" data-value="2"></i><b>(2)</b>
-  &lt;occurrences minimum="1" maximum="1" /&gt; <i class="conum" data-value="3"></i><b>(3)</b>
-  &lt;default&gt;This is a required input with a default value.&lt;/default&gt; <i class="conum" data-value="4"></i><b>(4)</b>
-&lt;/input&gt;
-
-&lt;input type="TextLine" name="textlineOptional"&gt;
-  &lt;label&gt;Optional input&lt;/label&gt;
-  &lt;occurrences minimum="0" maximum="1" /&gt; <i class="conum" data-value="5"></i><b>(5)</b>
-&lt;/input&gt;
-
-&lt;input type="TextLine" name="textlineList"&gt;
-  &lt;label&gt;Input list&lt;/label&gt;
-  &lt;help-text&gt;This input can have as many values as you want.&lt;/help-text&gt;
-  &lt;occurrences minimum="0" maximum="0" /&gt; <i class="conum" data-value="6"></i><b>(6)</b>
-&lt;/input&gt;</code></pre>
-</div>
-</div>
-<div class="colist arabic">
-<table>
-<tr>
-<td><i class="conum" data-value="1"></i><b>1</b></td>
-<td>The label is shown above the input and provides context to the user.</td>
-</tr>
-<tr>
-<td><i class="conum" data-value="2"></i><b>2</b></td>
-<td>The help-text can provide extra context and information to the user. It&#8217;s hidden by default, but can be shown by activating the help text button.</td>
-</tr>
-<tr>
-<td><i class="conum" data-value="3"></i><b>3</b></td>
-<td>This instance of the <code>occurrences</code> element specifies that this is a <em>required</em> input. It must have <em>at least</em> one and <em>at most</em> one value.</td>
-</tr>
-<tr>
-<td><i class="conum" data-value="4"></i><b>4</b></td>
-<td>The default value gets added to the input by default. The user can manually override this.</td>
-</tr>
-<tr>
-<td><i class="conum" data-value="5"></i><b>5</b></td>
-<td>When you specify <code>minimum="0"</code> and <code>maximum="1"</code> on an <code>occurrences</code> element, that makes the input optional. This is the default.</td>
-</tr>
-<tr>
-<td><i class="conum" data-value="6"></i><b>6</b></td>
-<td>When you set <code>maximum="0"</code> on an <code>occurrences</code> element, the user can add as many values as they want to.</td>
-</tr>
-</table>
-</div>
-<div class="paragraph">
-<p>This set of inputs would be rendered as in the following picture. As specified in the above configuration:</p>
-</div>
-<div class="imageblock text-center">
-<div class="content">
-<img src="media/input-type-common-configuration.png" alt="Three TextLine inputs showing all the common configuration options: labels, help text, default text, and occurrences." width="750">
-</div>
-<div class="title">Figure 1. TextLine inputs showing common configuration options</div>
-</div>
-<div class="paragraph">
-<p>Note that:
-- The required input field has a red asterisk to signify that it must be filled out.
-- The required input field already has a value provided via the <code>default</code> configuration option.
-- The help texts for the required input field and for the input list are both visible
-- The input list has controls to add more inputs and remove existing inputs</p>
-</div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="the_ocurrences_config"><a class="link" href="#the_ocurrences_config">The ocurrences config</a></h2>
-<div class="sectionbody">
-<div class="paragraph">
-<p>The occurrences configuration option decides how XP treats the input value. Use occurrences to indicate whether an input is expected to be a list or a single element and whether the input is required or not.</p>
-</div>
-<div class="paragraph">
-<p>The occurrences element has two required attributes, <code>minimum</code> and <code>maximum</code>. Use these to control the number of instances the user can create.</p>
-</div>
-<div class="paragraph">
-<p>The <code>minimum</code> attribute specifies that the user must fill out <em>at least</em> this many instances of the field. Usually it is set to <code>0</code> or <code>1</code>. A zero indicates that the field is optional and that the user does not need to fill it out. A one means the field is required.</p>
-</div>
-<div class="paragraph">
-<p>The <code>maximum</code> attribute tells XP how many instances the input field can have <em>at most</em>. <code>0</code> is a special value here, indicating that the user can have <em>as many as they want</em> (in other words: there is no maximum).</p>
-</div>
-<div class="paragraph">
-<p>A couple of common configuration tricks:</p>
+<p>Start by uploading an image that you&#8217;ll use throughout the chapter.</p>
 </div>
 <div class="sect2">
-<h3 id="optional"><a class="link" href="#optional">Optional</a></h3>
-<div class="paragraph">
-<p>If you don&#8217;t add an <code>occurrences</code> element, XP uses the default, which is <code>minimum="0"</code>, <code>maximum="1"</code>.</p>
-</div>
-<div class="paragraph">
-<p>That means that the input is <strong>optional</strong> and can have at most <strong>one entry</strong>.</p>
-</div>
-</div>
-<div class="sect2">
-<h3 id="required"><a class="link" href="#required">Required</a></h3>
-<div class="paragraph">
-<p>To make the input required, set both <code>minimum</code> and <code>maximum</code> to <code>1</code>.</p>
-</div>
-<div class="paragraph">
-<p>That means that the input is <strong>required</strong>, and can have at most <strong>one entry</strong>.</p>
-</div>
-<div class="paragraph">
-<p>By keeping the minimum at <code>1</code> and changing the maximum to a number <code>n</code> above <code>1</code>, you&#8217;ll be able to keep the field <strong>required</strong>, but make it able to have at most <strong>n entries</strong>.</p>
-</div>
-</div>
-<div class="sect2">
-<h3 id="unlimited"><a class="link" href="#unlimited">Unlimited</a></h3>
-<div class="paragraph">
-<p>By seeting <code>maximum</code> to <code>0</code>, you allow the input to have an <strong>unilimited amount of entries</strong>.</p>
-</div>
-<div class="admonitionblock tip">
-<table>
-<tr>
-<td class="icon">
-<i class="fa icon-tip" title="Tip"></i>
-</td>
-<td class="content">
-If <code>maximum</code> is greater than <code>0</code>, make sure that <code>minimum</code> is less than or equal to <code>maximum</code>. Otherwise, the input will never be considered valid according to XP.
-</td>
-</tr>
-</table>
-</div>
-</div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="common_inputs"><a class="link" href="#common_inputs">Common inputs</a></h2>
-<div class="sectionbody">
-<div class="paragraph">
-<p>Apart from the input types we&#8217;ve already gotten familiar with, XP also has input types created for other kinds of data. You can always find the full list over <a href="https://developer.enonic.com/docs/xp/stable/cms/schemas/input-types" target="_blank" rel="noopener">at the input types reference docs</a>, but some useful and common ones are:</p>
-</div>
-<div class="dlist">
-<dl>
-<dt class="hdlist1"><a href="https://developer.enonic.com/docs/xp/stable/cms/schemas/input-types/combobox">ComboBox</a></dt>
-<dd>
-<p>A dropdown menu containing predefined options for the user to select from. Allows selection of one or more options.</p>
-<div class="imageblock text-center">
-<div class="content">
-<img src="media/input-type-combo-box.webp" alt="A standard select list / dropdown list / combo box input type with a few visible dummy options." width="750">
-</div>
-<div class="title">Figure 2. The ComboBox input type</div>
-</div>
-</dd>
-<dt class="hdlist1"><a href="https://developer.enonic.com/docs/xp/stable/cms/schemas/input-types/date">Date</a> and <a href="https://developer.enonic.com/docs/xp/stable/cms/schemas/input-types/datetime">DateTime</a></dt>
-<dd>
-<p>Provides an interactive date picker (with a time component in DateTime&#8217;s case) to save date and times.</p>
-<div class="imageblock text-center">
-<div class="content">
-<img src="media/input-type-date-time.webp" alt="A calendar showing year and month with a time indicator to the side." width="750">
-</div>
-<div class="title">Figure 3. The DateTime input type</div>
-</div>
-</dd>
-<dt class="hdlist1"><a href="https://developer.enonic.com/docs/xp/stable/cms/schemas/input-types/geopoint">GeoPoint</a></dt>
-<dd>
-<p>Stores GPS coordinates.</p>
-<div class="imageblock text-center">
-<div class="content">
-<img src="media/input-type-geo-point.webp" alt="A text line input with coordinates." width="750">
-</div>
-<div class="title">Figure 4. The GeoPoint input type</div>
-</div>
-</dd>
-<dt class="hdlist1"><a href="https://developer.enonic.com/docs/xp/stable/cms/schemas/input-types/htmlarea">HtmlArea</a></dt>
-<dd>
-<p>Provides a rich text, multi-line input. We&#8217;ll discuss this in detail in <a href="rich-text.ahtml">the rich-text chapter</a>.</p>
-<div class="imageblock text-center">
-<div class="content">
-<img src="media/input-type-html-area.png" alt="A text area with a tools ribbon on the top. The ribbon provides rich text tools such as justification, macro insertion, text styles, etc." width="750">
-</div>
-<div class="title">Figure 5. The HtmlArea input type</div>
-</div>
-</dd>
-</dl>
-</div>
-<div class="paragraph">
-<p>Additionally, XP has more complex input types, which we&#8217;ll look at next.</p>
-</div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="imageselector"><a class="link" href="#imageselector">ImageSelector</a></h2>
-<div class="sectionbody">
-<div class="imageblock">
-<div class="content">
-<img src="media/input-type-image-selector.png" alt="ImageSelector: An interactive image selection tool." width="1200">
-</div>
-<div class="title">Figure 6. The ImageSelector input type</div>
-</div>
-<div class="paragraph">
-<p>Images are a key part of many web experiences: they add color, break up the content, and gives the reader something to rest their eyes on.</p>
-</div>
-<div class="paragraph">
-<p>XP&#8217;s image selector allows you to select an image for a piece of content and also to upload new images.</p>
-</div>
-<div class="listingblock">
-<div class="title">An minimal ImageSelector configuration</div>
-<div class="content">
-<pre class="highlight"><code class="language-xml" data-lang="xml">&lt;input name="myimage" type="ImageSelector"&gt;
-  &lt;label&gt;My Image&lt;/label&gt;
-&lt;/input&gt;</code></pre>
-</div>
-</div>
-<div class="paragraph">
-<p>Read more about the <a href="https://developer.enonic.com/docs/xp/stable/cms/schemas/input-types/imageselector" target="_blank" rel="noopener">configuration of image selectors</a> in the reference docs.</p>
-</div>
-<div class="paragraph">
-<p>After you&#8217;ve added an image (or several), you can highlight it and click the edit button. This will take you to the image editing form. This is the same form as we saw in <a href="files.ahtml#_editing_images">the previous chapter</a>.</p>
-</div>
-<div class="imageblock">
-<div class="content">
-<img src="media/input-type-image-selector-highlighted-image.png" alt="The image selector input field with two images of lions&#8201;&#8212;&#8201;one male, one female - - below. Under the images, there&#8217;s a set of buttons saying 'edit' and 'remove'." width="1200">
-</div>
-<div class="title">Figure 7. The image selector with uploaded and selected images</div>
-</div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="contentselector"><a class="link" href="#contentselector">ContentSelector</a></h2>
-<div class="sectionbody">
-<div class="imageblock">
-<div class="content">
-<img src="media/input-type-content-selector.png" alt="ContentSelector: An interactive content selection tool." width="1200">
-</div>
-<div class="title">Figure 8. The ContentSelector input type</div>
-</div>
-<div class="paragraph">
-<p>The image selector we just saw is actually a specialized form of the more complex ContentSelector input type.</p>
-</div>
-<div class="paragraph">
-<p>The ContentSelector input type allows you to reference other content. Let&#8217;s say you have two content types: one of type person and one of type food. If you want to be able to specify which dishes the person likes, you could use a content type to create a reference from the person to their favored dish.</p>
-</div>
-<div class="paragraph">
-<p>Because referencing other content types comes with a lot of variability, the ContentSelector type has configuration options to support this. You can choose to allow only certain content types or only content that&#8217;s available at a certain path. You can also change whether the selector should show content in a tree-style hierarchy or as a flat list of content.</p>
-</div>
-<div class="paragraph">
-<p><a href="https://developer.enonic.com/docs/xp/stable/cms/schemas/input-types/contentselector" target="_blank" rel="noopener">The full list of ContentSelector configuration options</a> is available in the reference docs, including a number of examples to explain content inclusion and exclusion. However, a simple configuration could look like this:</p>
-</div>
-<div class="listingblock">
-<div class="title">A basic ContentSelector configuration that only allows one specific content type</div>
-<div class="content">
-<pre class="highlight"><code class="language-xml" data-lang="xml">&lt;input name="mycontentselector" type="ContentSelector"&gt;
-  &lt;label&gt;My ContentSelector&lt;/label&gt;
-  &lt;config&gt;
-    &lt;allowContentType&gt;citation&lt;/allowContentType&gt;
-  &lt;/config&gt;
-&lt;/input&gt;</code></pre>
-</div>
-</div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="attachmentuploader"><a class="link" href="#attachmentuploader">AttachmentUploader</a></h2>
-<div class="sectionbody">
-<div class="paragraph">
-<p>XP also has a rather special input type named <a href="https://developer.enonic.com/docs/xp/stable/cms/schemas/input-types/attachmentuploader" target="_blank" rel="noopener">AttachmentUploader</a>. Unlike <a href="files.ahtml">media</a> content, which creates an independent content item for each file you upload, attachmentUploader lets you store one (or more) files within the specific content content item. Under the hood, it uses the same <code>attachment</code> property structure as media when persisting the file.</p>
-</div>
-<div class="imageblock">
-<div class="content">
-<img src="media/input-type-attachmentuploader.png" alt="AttachmentUploader: Store any number of files within your content item" width="651w">
-</div>
-<div class="title">Figure 9. The AttachmentUploader input type</div>
-</div>
-<div class="admonitionblock note">
-<table>
-<tr>
-<td class="icon">
-<i class="fa icon-note" title="Note"></i>
-</td>
-<td class="content">
-Imagine creating a content type for e-mail, you would probably use an AttachmentUploader field to store the file attachments. This is because you really don&#8217;t need each file to be independently referenced, published and managed - right.
-</td>
-</tr>
-</table>
-</div>
-<div class="listingblock">
-<div class="title">Here is what an AttachmentUploader definition looks like</div>
-<div class="content">
-<pre class="highlight"><code class="language-xml" data-lang="xml">&lt;input type="AttachmentUploader" name="attachments"&gt;
-  &lt;label&gt;Attachments&lt;/label&gt;
-  &lt;occurrences minimum="0" maximum="0"/&gt; <i class="conum" data-value="1"></i><b>(1)</b>
-&lt;/input&gt;</code></pre>
-</div>
-</div>
-<div class="colist arabic">
-<table>
-<tr>
-<td><i class="conum" data-value="1"></i><b>1</b></td>
-<td><em>minimum="0"</em> shows that this is not a required field, while <em>maxiumum="0"</em> shows that we can upload as many attachments as we want.</td>
-</tr>
-</table>
-</div>
-<div class="sect2">
-<h3 id="attachmenturl"><a class="link" href="#attachmenturl">attachmentUrl</a></h3>
-<div class="paragraph">
-<p>Remember how we used <code>mediaUrl</code> to get a link to the media&#8217;s attachment. MediaUrl is only available for "media" content, for other content types using attachmentUrl we have to use a different approach: <code>attachmentUrl</code> to the rescue:</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="highlight"><code class="language-GraphQL" data-lang="GraphQL">query {
-  guillotine {
-    get(key: "/developer/media/ready-set-code.png") {
-      displayName
-      type
-      attachments{
-        name
-        attachmentUrl
-      }
-    }
-  }
-}</code></pre>
-</div>
-</div>
-<div class="paragraph">
-<p>And the result should look something like this:</p>
-</div>
-<div class="admonitionblock note">
-<table>
-<tr>
-<td class="icon">
-<i class="fa icon-note" title="Note"></i>
-</td>
-<td class="content">
-If you have multiple attachments in your content, they will all be listed.
-</td>
-</tr>
-</table>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="highlight"><code class="language-json" data-lang="json">{
-  "data": {
-    "guillotine": {
-      "get": {
-        "displayName": "ready-set-code",
-        "type": "media:image",
-        "attachments": [
-          {
-            "name": "ready-set-code.png",
-            "attachmentUrl": "/site/preview/dev-portal/draft/_/attachment/inline/f7efd6e4-9eed-45d2-83b6-d088a7bdc685:8652e625afe7bbda595a190a3b8624e322dc9f1a/ready-set-code.png"
-          }
-        ]
-      }
-    }
-  }
-}</code></pre>
-</div>
-</div>
-<div class="admonitionblock tip">
-<table>
-<tr>
-<td class="icon">
-<i class="fa icon-tip" title="Tip"></i>
-</td>
-<td class="content">
-Under the hood, the <em>attachment</em> field argument <em>attachmentUrl</em> uses Enonic&#8217;s javascript lib portal <a href="https://developer.enonic.com/docs/xp/stable/api/lib-portal#attachmenturl">attachmentUrl</a> function, so you can follow the link to better understand the arguments that you pass to this field when creating queries that uses it.
-</td>
-</tr>
-</table>
-</div>
-</div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="task_artist_and_animals"><a class="link" href="#task_artist_and_animals">Task: artist and animals</a></h2>
-<div class="sectionbody">
-<div class="paragraph">
-<p>Time for a little recap! We&#8217;ll put together everything we&#8217;ve learned about content types and input types thus far to create a new data set.</p>
-</div>
-<div class="paragraph">
-<p>A solution is listed below, but try and see if you can solve it yourself first.</p>
-</div>
-<div class="admonitionblock tip">
-<table>
-<tr>
-<td class="icon">
-<i class="fa icon-tip" title="Tip"></i>
-</td>
-<td class="content">
-If you&#8217;re wondering how to achieve some of the goals, try consulting the documentation that&#8217;s been linked to in this chapter.
-</td>
-</tr>
-</table>
-</div>
-<div class="paragraph">
-<p>Your task is to create a new content type: <code>Animal</code> and to update the <code>Artist</code> content type with new constraints and fields. By the end of this chapter, you should have content types that look like this in Content Studio:</p>
-</div>
-<div class="imageblock">
-<div class="content">
-<img src="media/animal-and-artist-target.png" alt="An animal content wizard next to an artist wizard" width="1200">
-</div>
-<div class="title">Figure 10. The target for this task: animal and artist</div>
-</div>
-<div class="sect2">
-<h3 id="animal_constraints"><a class="link" href="#animal_constraints">Animal constraints</a></h3>
-<div class="ulist">
-<ul>
-<li>
-<p>Make the display name use "species" as its label. <em>Hint: check out <a href="https://developer.enonic.com/docs/xp/stable/cms/content-types#form_definition" target="_blank" rel="noopener">the content type form definition</a> and look for something that allows you to do this.</em></p>
-</li>
-<li>
-<p>An animal can also have alternative names for its species (for instance, the reindeer is also known as <em>caribou</em>). Allow the user to add as many alternative names as they want.</p>
-</li>
-<li>
-<p>An image selector that accepts between 0 and 3 images.</p>
-</li>
-<li>
-<p>Help text where you think it would be helpful.</p>
-</li>
-</ul>
-</div>
-</div>
-<div class="sect2">
-<h3 id="artist_constraints"><a class="link" href="#artist_constraints">Artist constraints</a></h3>
-<div class="ulist">
-<ul>
-<li>
-<p>Add a ContentSelector input that allows only content of the "Animal" type and that must be nested under the site&#8217;s "animals" folder. Call it <code>favoriteAnimal</code>.</p>
-</li>
-</ul>
-</div>
-</div>
-<div class="sect2">
-<h3 id="querying"><a class="link" href="#querying">Querying</a></h3>
-<div class="ulist">
-<ul>
-<li>
-<p>Create a GraphQL query that&#8217;ll fetch all artists and list what their favorite animals are, as well their animals' descriptions.</p>
-</li>
-</ul>
-</div>
-</div>
-<div class="sect2">
-<h3 id="check_your_work"><a class="link" href="#check_your_work">Check your work</a></h3>
-<div class="paragraph">
-<p>To verify that everything works, create some animals, create a content link between a artist and an animal and run your query to fetch some new data on this new structure.</p>
-</div>
-<div class="admonitionblock tip">
-<table>
-<tr>
-<td class="icon">
-<i class="fa icon-tip" title="Tip"></i>
-</td>
-<td class="content">
-Don&#8217;t worry if something did not work, we&#8217;ll show the solutions on the next section.
-</td>
-</tr>
-</table>
-</div>
-</div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="task_solution"><a class="link" href="#task_solution">Task solution</a></h2>
-<div class="sectionbody">
-<div class="sect2">
-<h3 id="content_types"><a class="link" href="#content_types">Content types</a></h3>
+<h3 id="task_upload_an_image"><a class="link" href="#task_upload_an_image">Task: Upload an image</a></h3>
 <div class="olist arabic">
 <ol class="arabic">
 <li>
-<p>Create the animal content type. In <code>src/main/resources/site/content-types/animal/animal.xml</code>, place the following content:</p>
-<div class="listingblock">
-<div class="title">The animal content type</div>
+<p><strong>Choose a photograph</strong> - Download <a href="https://unsplash.com/photos/8oLnCRz7hwM">this lion photograph</a> by <a href="https://unsplash.com/@keyursphotography">Keyur Nandaniya</a>, or choose a JPEG with its main subject away from the center.
+Save it as <code>lion.jpg</code> if you want the filename to match the examples.</p>
+</li>
+<li>
+<p><strong>Create the Images folder</strong> - In your "My First Project" content project, create a folder named "Images" at the root, with the path <code>/images</code>.</p>
+</li>
+<li>
+<p><strong>Choose the upload destination</strong> - Select the Images folder, click <b class="button">New</b>, and choose the <strong>Media</strong> tab.
+Check that the destination shown is <code>/images/</code>.</p>
+</li>
+<li>
+<p><strong>Upload the file</strong> - Click the upload area to select your file, or drag the file onto it.</p>
+<div class="imageblock">
 <div class="content">
-<pre class="highlight"><code class="language-xml" data-lang="xml">&lt;content-type&gt;
-  &lt;display-name&gt;Animal&lt;/display-name&gt;
-  &lt;description&gt;An animal that lives on planet Earth&lt;/description&gt;
-  &lt;display-name-label&gt;Species&lt;/display-name-label&gt; <i class="conum" data-value="1"></i><b>(1)</b>
-  &lt;super-type&gt;base:structured&lt;/super-type&gt;
-  &lt;form&gt;
-
-    &lt;input type="TextLine" name="otherNames"&gt;
-      &lt;label&gt;Other names&lt;/label&gt;
-      &lt;help-text&gt;Other names for this species.&lt;/help-text&gt;
-      &lt;occurrences minimum="0" maximum="0" /&gt;
-    &lt;/input&gt;
-
-    &lt;input name="images" type="ImageSelector"&gt;
-      &lt;label&gt;Images&lt;/label&gt;
-      &lt;help-text&gt;Images of the animal&lt;/help-text&gt;
-      &lt;occurrences minimum="0" maximum="3" /&gt;
-    &lt;/input&gt;
-
-  &lt;/form&gt;
-&lt;/content-type&gt;</code></pre>
+<img src="images/media-upload.png" alt="New Content dialog with the Media tab selected and /images/ as the upload destination" width="1440">
+</div>
+<div class="title">Figure 1. The Media tab in the New Content dialog</div>
+</div>
+</li>
+</ol>
+</div>
+<div class="paragraph">
+<p>The uploaded image now appears as a content item in the Images folder.
+It is saved in Draft and has not been published.</p>
 </div>
 </div>
-<div class="colist arabic">
-<table>
-<tr>
-<td><i class="conum" data-value="1"></i><b>1</b></td>
-<td>This field lets you customize what Content Studio calls the "display name" field and what it puts in the placeholder text.</td>
-</tr>
-</table>
+</div>
+</div>
+<div class="sect1">
+<h2 id="inspect_the_uploaded_content"><a class="link" href="#inspect_the_uploaded_content">Inspect the uploaded content</a></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Your uploaded image is now a content item, just like the artists you created earlier.
+Let&#8217;s inspect its data and find the file attached to it.</p>
+</div>
+<div class="sect2">
+<h3 id="task_find_the_image_and_its_attachment"><a class="link" href="#task_find_the_image_and_its_attachment">Task: Find the image and its attachment</a></h3>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p><strong>Find the uploaded image</strong> - Open Query Playground, select "My First Project" and keep <strong>Draft</strong> selected throughout this chapter.
+Run this query to find up to ten images anywhere in the project:</p>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-graphql" data-lang="graphql">{
+  guillotine {
+    queryDsl(
+      query: {
+        term: {
+          field: "type"
+          value: { string: "media:image" }
+        }
+      }
+    ) {
+      displayName
+      _path
+      type
+      dataAsJson
+      attachments {
+        name
+        label
+        mimeType
+        size
+      }
+    }
+  }
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Below is one item from the <code>data.guillotine.queryDsl</code> array.
+This example shows the image immediately after upload; your filename, dimensions, file size and additional metadata may differ:</p>
+</div>
+<div class="listingblock">
+<div class="title">The image content and its attachment</div>
+<div class="content">
+<pre class="highlight"><code class="language-json" data-lang="json">{
+  "displayName": "lion",
+  "_path": "/images/lion.jpg",
+  "type": "media:image",
+  "dataAsJson": {
+    "media": {
+      "imageWidth": 2400,
+      "attachment": "lion.jpg",
+      "imageHeight": 1600
+    }
+  },
+  "attachments": [
+    {
+      "name": "lion.jpg",
+      "label": "source",
+      "mimeType": "image/jpeg",
+      "size": 550171
+    }
+  ]
+}</code></pre>
+</div>
 </div>
 </li>
 <li>
-<p>Next, update the <code>Artist</code> content type.</p>
-<div class="listingblock">
-<div class="title">An updated artist</div>
-<div class="content">
-<pre class="highlight"><code class="language-xml" data-lang="xml">&lt;content-type&gt;
-  &lt;display-name&gt;Artist&lt;/display-name&gt;
-  &lt;description&gt;Information about an artist&lt;/description&gt;
-  &lt;super-type&gt;base:structured&lt;/super-type&gt;
-  &lt;form&gt;
-
-    &lt;input name="name" type="TextLine"&gt;
-      &lt;label&gt;Name&lt;/label&gt;
-      &lt;help-text&gt;
-        The artist's name (if different from their professional moniker).
-      &lt;/help-text&gt;
-    &lt;/input&gt;
-
-    &lt;input type="TextArea" name="about"&gt;
-      &lt;label&gt;About the artist&lt;/label&gt;
-    &lt;/input&gt;
-
-    &lt;input name="favoriteAnimal" type="ContentSelector"&gt; <i class="conum" data-value="1"></i><b>(1)</b>
-      &lt;label&gt;Favorite animal&lt;/label&gt;
-      &lt;config&gt;
-        &lt;allowContentType&gt;animal&lt;/allowContentType&gt;
-        &lt;allowPath&gt;${site}/animals/&lt;/allowPath&gt;
-      &lt;/config&gt;
-    &lt;/input&gt;
-
-  &lt;/form&gt;
-&lt;/content-type&gt;</code></pre>
-</div>
-</div>
-<div class="colist arabic">
-<table>
-<tr>
-<td><i class="conum" data-value="1"></i><b>1</b></td>
-<td>This ContentSelector uses the <code>config</code> section to narrow the possible types of content to only be <code>Animal</code></td>
-</tr>
-</table>
-</div>
+<p><strong>Keep the content path</strong> - Copy your image&#8217;s <code>_path</code> for the following queries.</p>
 </li>
-<li>
-<p>Create some animals. Either pick your favorites, or, if you&#8217;re not feeling creative, add these (content from Wikipedia), :</p>
+</ol>
+</div>
+<div class="paragraph">
+<p>The <code>dataAsJson</code> field shows the stored content data, as it did for your artists.
+The <code>attachments</code> field lists the attached files and their metadata.
+Both are common content fields, so this query does not need an inline fragment.</p>
+</div>
+<div class="paragraph">
+<p>Notice how the content and file fit together:</p>
+</div>
 <div class="ulist">
 <ul>
 <li>
-<p><a href="https://en.wikipedia.org/wiki/Lion" target="_blank" rel="noopener">Wiki article for lion</a></p>
+<p><code>type</code> is <code>media:image</code>: XP detected the uploaded file and created an image content item.</p>
 </li>
 <li>
-<p><a href="https://en.wikipedia.org/wiki/Reindeer">Wiki article for reindeer</a></p>
+<p><code>dataAsJson.media</code> holds image data, including dimensions and the name of the source attachment.</p>
+</li>
+<li>
+<p><code>attachments</code> contains an entry with that same name, <code>lion.jpg</code>.
+Its <code>label</code> is <code>source</code>, identifying it as the original uploaded file; <code>mimeType</code> and <code>size</code> describe its format and size in bytes.
+The file&#8217;s binary data is stored as an attachment; it is not embedded in this JSON response.</p>
 </li>
 </ul>
 </div>
+<div class="paragraph">
+<p>This upload-and-retrieve pattern is the same for any kind of file, including a PDF, an audio recording or a video.
+Each upload creates a media content item with the original file attached and labeled <code>source</code>.
+XP maps the file to the appropriate media content type: an image becomes <code>media:image</code>, while other files become types such as Audio, Video or Document.
+The type and its metadata fields vary, but the attachment structure and the <code>mediaUrl</code> field used to retrieve the original file work the same way.
+The <a href="https://developer.enonic.com/docs/cms/stable/media">CMS media reference</a> explains media structure, type mapping and file handling in more detail.</p>
+</div>
+<div class="paragraph">
+<p>XP automatically extracts readable text from known file formats, such as PDF, and indexes it for search.
+See <a href="https://developer.enonic.com/docs/cms/stable/media/media-indexing">Media indexing</a> for what becomes searchable and how to query it.</p>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="retrieve_the_attached_file"><a class="link" href="#retrieve_the_attached_file">Retrieve the attached file</a></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>You&#8217;ve found the attachment&#8217;s metadata; now retrieve the file itself.
+For media content, <code>mediaUrl</code> gives you the URL components for its source attachment, <code>lion.jpg</code> in this example.
+The attachment API, <code>media:attachment</code>, delivers the file at that URL.
+Like Guillotine, it is a Universal API: on your sandbox, its address starts with <code><a href="http://localhost:8080/api/media:attachment" class="bare">http://localhost:8080/api/media:attachment</a></code>.</p>
+</div>
+<div class="sect2">
+<h3 id="task_open_and_download_the_attachment"><a class="link" href="#task_open_and_download_the_attachment">Task: Open and download the attachment</a></h3>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p><strong>Fetch the attachment URL</strong> - Use <code>get</code> with the content path from your response.
+Replace <code>/images/lion.jpg</code> if your image has a different path:</p>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-graphql" data-lang="graphql">{
+  guillotine {
+    get(key: "/images/lion.jpg") {
+      displayName
+      ... on media_Image {
+        mediaUrl {
+          path
+          queryString
+        }
+      }
+    }
+  }
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The <code>data.guillotine.get</code> object looks like this, with your own content ID, fingerprint and filename:</p>
+</div>
+<div class="listingblock">
+<div class="title">The source attachment&#8217;s URL components</div>
+<div class="content">
+<pre class="highlight"><code class="language-json" data-lang="json">{
+  "displayName": "lion",
+  "mediaUrl": {
+    "path": "/media:attachment/my-first-project:draft/3cff3960-08e9-4c92-828e-917187c1dc20:927e557892810fabb5e2c76cd686a7e7/lion.jpg",
+    "queryString": ""
+  }
+}</code></pre>
+</div>
+</div>
 </li>
 <li>
-<p>Create some links using ContentSelector from artists to animals to get familiar with linking content.</p>
+<p><strong>Build the attachment address</strong> - Use <strong>your own response</strong>: start with <code><a href="http://localhost:8080/api" class="bare">http://localhost:8080/api</a></code>, then append <code>mediaUrl.path</code> and <code>mediaUrl.queryString</code> exactly as returned.
+An empty <code>queryString</code> adds nothing.
+For the example above, the address would be:</p>
+<div class="listingblock">
+<div class="content">
+<pre>http://localhost:8080/api/media:attachment/my-first-project:draft/3cff3960-08e9-4c92-828e-917187c1dc20:927e557892810fabb5e2c76cd686a7e7/lion.jpg</pre>
+</div>
+</div>
+</li>
+<li>
+<p><strong>View the original file</strong> - Open your assembled URL in a new tab in the same browser where you are logged in to Content Studio.
+It displays the original uploaded image.
+Draft media requires an authenticated request; copying the example URL above will not retrieve your own image.</p>
+</li>
+<li>
+<p><strong>Download the attachment</strong> - Change <code>mediaUrl</code> to <code>mediaUrl(download: true)</code> and run the query again.
+Assemble and open the new URL, including its <code>queryString</code>; the browser will download the attachment.</p>
+</li>
+</ol>
+</div>
+<div class="paragraph">
+<p>The CMS content type is <code>media:image</code>; its GraphQL object type is <code>media_Image</code>.
+As with Artist in the previous chapter, the inline fragment gives access to fields belonging to that GraphQL type.
+<code>mediaUrl</code> is available on all media types.</p>
+</div>
+<div class="paragraph">
+<p>The content item&#8217;s <code>_path</code>, such as <code>/images/lion.jpg</code>, identifies the item in queries.
+The media URL&#8217;s <code>path</code> identifies the attached file through the attachment API.</p>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="request_a_cropped_image"><a class="link" href="#request_a_cropped_image">Request a cropped image</a></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>The <code>imageUrl</code> field returns a URL served by the image API, <code>media:image</code>.
+It can resize, crop and filter images when delivering them, while the original attachment remains unchanged.</p>
+</div>
+<div class="paragraph">
+<p>The <code>scale</code> argument controls resizing and cropping.
+For example, <code>width(600)</code> scales proportionally to a width of 600 pixels; <code>block(400,600)</code> fills a 400-by-600-pixel rectangle, cropping what does not fit.
+Omitting <code>scale</code> means no resizing, but other processing and saved image edits can still affect the result.
+Use <code>mediaUrl</code> when you need the original uploaded file.</p>
+</div>
+<div class="sect2">
+<h3 id="task_open_a_portrait_crop"><a class="link" href="#task_open_a_portrait_crop">Task: Open a portrait crop</a></h3>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p><strong>Request a portrait crop</strong> - Use <code>get</code> to retrieve the image whose content path you copied above.
+Replace <code>/images/lion.jpg</code> if your image has a different path:</p>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-graphql" data-lang="graphql">{
+  guillotine {
+    get(key: "/images/lion.jpg") {
+      displayName
+      ... on media_Image {
+        imageUrl(scale: "block(400,600)") {
+          path
+          queryString
+        }
+      }
+    }
+  }
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The <code>data.guillotine.get</code> object contains:</p>
+</div>
+<div class="listingblock">
+<div class="title">Image with a crop URL</div>
+<div class="content">
+<pre class="highlight"><code class="language-json" data-lang="json">{
+  "displayName": "lion",
+  "imageUrl": {
+    "path": "/media:image/my-first-project:draft/3cff3960-08e9-4c92-828e-917187c1dc20:4f827305024b80384b0aa939496e4688/block-400-600/lion.jpg",
+    "queryString": ""
+  }
+}</code></pre>
+</div>
+</div>
+</li>
+<li>
+<p><strong>View the crop</strong> - Assemble the URL from <code><a href="http://localhost:8080/api" class="bare">http://localhost:8080/api</a></code> plus your returned <code>imageUrl.path</code> and <code>imageUrl.queryString</code>, then open it in your browser.
+Without a focal point, the crop is centered, which can cut off an off-center subject:</p>
+<div class="imageblock">
+<div class="content">
+<img src="images/image-cropped-unfocused.jpg" alt="Portrait crop with part of the lion cut off at the left edge" width="400">
+</div>
+<div class="title">Figure 2. Portrait crop before setting a focal point</div>
+</div>
 </li>
 </ol>
 </div>
 </div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="guide_cropping_with_a_focal_point"><a class="link" href="#guide_cropping_with_a_focal_point">Guide cropping with a focal point</a></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>A focal point identifies the subject to prioritize when the image API crops an image to a different aspect ratio.
+It guides the crop; it does not guarantee that the entire subject fits every shape.</p>
+</div>
 <div class="sect2">
-<h3 id="graphql_query"><a class="link" href="#graphql_query">GraphQL query</a></h3>
-<div class="paragraph">
-<p>Finally, it&#8217;s time to introduce the query in GraphQL.</p>
-</div>
-<div class="paragraph">
-<p>A ContentSelector input will store a reference to the target content item. When using the Guillotine API, you may simply follow this reference to access the target content, and access it&#8217;s fields instantly.</p>
-</div>
-<div class="listingblock">
-<div class="title">Fetch artists and their associated favorite animals</div>
+<h3 id="_image_form"><a class="link" href="#_image_form">Task: Set a focal point and compare</a></h3>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p><strong>Open the image editor</strong> - Return to Content Studio, select your image and click <b class="button">Edit</b>.
+The content form contains fields such as Caption and Alternative text, and the image preview includes editing controls.</p>
+<div class="imageblock">
 <div class="content">
-<pre class="highlight"><code class="language-GraphQL" data-lang="GraphQL">{
+<img src="images/image-content-form.jpg" alt="Content Studio image editor showing the lion preview, editorial fields and image editing toolbar" width="1440">
+</div>
+<div class="title">Figure 3. The image content form and preview</div>
+</div>
+</li>
+<li>
+<p><strong>Position the focal point</strong> - In the toolbar above the image preview, click <strong>Set Autofocus</strong> to edit the focal point.
+Click the lion&#8217;s face, or drag the marker onto the subject of your own image.</p>
+<div class="imageblock">
+<div class="content">
+<img src="images/image-editing-focal-point.jpg" alt="Image preview in focal-point mode with the marker on the lion&#8217;s face and Apply and Cancel controls" width="1440">
+</div>
+<div class="title">Figure 4. Positioning the focal point</div>
+</div>
+</li>
+<li>
+<p><strong>Save the focal point</strong> - Click <b class="button">Apply</b> to accept the position, then <b class="button">Save</b> in the Content Editor toolbar to save the content item.</p>
+</li>
+<li>
+<p><strong>Compare the new crop</strong> - Return to Query Playground and run the same portrait-crop query again.
+Assemble and open the <strong>newly returned URL</strong> so you see the saved change.</p>
+<div class="paragraph">
+<p>The new crop prioritizes the selected subject:</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/image-cropped-focused.jpg" alt="Portrait crop after setting the focal point, with the lion&#8217;s face in view" width="400">
+</div>
+<div class="title">Figure 5. The same portrait crop with a focal point</div>
+</div>
+</li>
+</ol>
+</div>
+<div class="paragraph">
+<p>Image edits are stored on the content item; they do not rewrite the original attachment.
+The <a href="https://developer.enonic.com/docs/content-studio/stable/content-types/image">Content Studio image documentation</a> covers cropping, rotation, resetting edits and image metadata.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="task_add_a_filter"><a class="link" href="#task_add_a_filter">Task: Add a filter</a></h3>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p><strong>Request image filters</strong> - Keep the same image and scale, and add a <code>filter</code> argument:</p>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-graphql" data-lang="graphql">{
   guillotine {
-    getChildren(key: "/artists") {
+    get(key: "/images/lion.jpg") {
       displayName
-      ... on com_example_myapp_Artist {
-        _id
-        data {
-           favoriteAnimal {
-            displayName
-            ... on com_example_myapp_Animal{
-              data {
-                otherNames
-              }
-            }
-          }
+      ... on media_Image {
+        imageUrl(
+          scale: "block(400,600)"
+          filter: "grayscale(); border(10, 0x000000)"
+        ) {
+          path
+          queryString
         }
       }
     }
@@ -1155,63 +866,73 @@ Don&#8217;t worry if something did not work, we&#8217;ll show the solutions on t
 </div>
 </div>
 <div class="paragraph">
-<p>Depending on the links (and animals) you created, your result might look a little something like this:</p>
+<p>Use your image&#8217;s content path if it differs from the example.
+The semicolon separates two filters: grayscale and a black border.</p>
 </div>
-<div class="listingblock">
-<div class="title">The list of artists with their favorite animals</div>
+</li>
+<li>
+<p><strong>View the filtered image</strong> - Build and open the URL as before, including the complete <code>queryString</code> returned by Guillotine.</p>
+<div class="imageblock">
 <div class="content">
-<pre class="highlight"><code class="language-json" data-lang="json">{
-  "data": {
-    "guillotine": {
-      "getChildren": [
-        {
-          "displayName": "Cardi B",
-          "data": {
-            "favoriteAnimal": {
-              "displayName": "Lion",
-              "data": {
-                "otherNames": []
-              }
-            }
-          }
-        },
-        {
-          "displayName": "Missy Elliott",
-          "data": {
-            "favoriteAnimal": {
-              "displayName": "Reindeer",
-              "data": {
-                "otherNames": [
-                  "Caribou"
-                ]
-              }
-            }
-          }
-        },
-        {
-          "displayName": "P!nk",
-          "data": {
-            "favoriteAnimal": {
-              "displayName": "Lion",
-              "data": {
-                "otherNames": []
-              }
-            }
-          }
-        }
-      ]
-    }
-  }
-}</code></pre>
+<img src="images/image-processed.jpg" alt="Portrait crop of the lion in grayscale with a black border" width="400">
+</div>
+<div class="title">Figure 6. The cropped image with filters</div>
+</div>
+</li>
+</ol>
+</div>
+<div class="paragraph">
+<p>The <a href="https://developer.enonic.com/docs/cms/stable/apis/image">Image API reference</a> describes the available scaling methods and filters.</p>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+For presentation effects such as grayscale or borders, consider CSS or similar client-side styling.
+Use server-side filters when the effect needs to be part of the delivered image file, for example in a download or an email.
+</td>
+</tr>
+</table>
 </div>
 </div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="media_urls_and_caching"><a class="link" href="#media_urls_and_caching">Media URLs and caching</a></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>The returned paths identify the content project and branch.
+In these examples, <code>my-first-project:draft</code> selects Draft; published content uses <code>my-first-project</code> without a branch suffix.
+Let Guillotine generate these paths and query strings rather than constructing or editing their internal parts yourself.</p>
+</div>
+<div class="paragraph">
+<p>The fingerprint in a media URL identifies a version of the file or processed image and supports caching.
+After changing an image or its editing settings, query again for the current URL.
+Actual caching follows the response&#8217;s <code>Cache-Control</code> header, with different settings for public and private content; a fingerprint does not make draft content public.</p>
+</div>
+<div class="paragraph">
+<p>Returning URL components also lets your front-end use a separate base URL for media, for example when serving published images and downloads through a content delivery network (CDN).
+GraphQL requests can still go directly to the Enonic server.
+The platform&#8217;s <a href="https://developer.enonic.com/docs/platform/stable/config/vhosts">virtual host configuration reference</a> explains how to give the media APIs their own address.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="coming_up"><a class="link" href="#coming_up">Coming up</a></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>You&#8217;ve uploaded an image, inspected its content data and attachment, downloaded the original file, and requested cropped and filtered versions that use a focal point.
+In the next chapter, you&#8217;ll take a closer look at <a href="form-items.ahtml">form items</a>, the building blocks of content forms.</p>
 </div>
 </div>
 </div>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2026-11-12 10:19:54 UTC
+Last updated 2026-11-12 10:22:31 UTC
 </div>
 </div>
 </body>

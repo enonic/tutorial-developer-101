@@ -5,9 +5,8 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="generator" content="Asciidoctor 2.0.26">
-<meta name="application-name" content="dev101">
-<meta name="description" content="Create an Animal content type, configure repeatable fields, select images, and link artists to animals through the GraphQL API.">
-<title>Form items</title>
+<meta name="description" content="What is a headless CMS without an API? Learn about the Guillotine library and the powers it unlocks here.">
+<title>GraphQL API</title>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,300italic,400,400italic,600,600italic%7CNoto+Serif:400,400italic,700,700italic%7CDroid+Sans+Mono:400,700">
 <style>
 /*! Asciidoctor default stylesheet | MIT License | https://asciidoctor.org */
@@ -439,34 +438,27 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 </head>
 <body class="article toc2 toc-right">
 <div id="header">
-<h1>Form items</h1>
+<h1>GraphQL API</h1>
 <div id="toc" class="toc2">
 <div id="toctitle">Table of Contents</div>
 <ul class="sectlevel1">
-<li><a href="#create_the_animal_form">Create the Animal form</a>
+<li><a href="#guillotine">Guillotine</a></li>
+<li><a href="#query_playground">Query playground</a>
 <ul class="sectlevel2">
-<li><a href="#task_add_alternative_names">Task: Add alternative names</a></li>
+<li><a href="#buttons">Buttons</a></li>
+<li><a href="#schemas">Schemas</a></li>
+<li><a href="#querying_with_inline_fragments">Querying with inline fragments</a></li>
+<li><a href="#query_with_dataasjson">Query with dataAsJson</a></li>
 </ul>
 </li>
-<li><a href="#select_an_image">Select an image</a>
+<li><a href="#advanced_queries">Advanced queries</a>
 <ul class="sectlevel2">
-<li><a href="#task_add_an_image_selector">Task: Add an image selector</a></li>
-<li><a href="#task_create_two_animals">Task: Create two animals</a></li>
+<li><a href="#querydsl">QueryDsl</a></li>
+<li><a href="#querydslconnection">QueryDslConnection</a></li>
 </ul>
 </li>
-<li><a href="#query_the_animals_fields">Query the animal&#8217;s fields</a>
-<ul class="sectlevel2">
-<li><a href="#task_fetch_the_lion_and_its_image">Task: Fetch the lion and its image</a></li>
-</ul>
-</li>
-<li><a href="#link_artists_to_animals">Link artists to animals</a>
-<ul class="sectlevel2">
-<li><a href="#task_add_a_favorite_animal">Task: Add a favorite animal</a></li>
-<li><a href="#task_follow_the_reference_in_a_query">Task: Follow the reference in a query</a></li>
-</ul>
-</li>
-<li><a href="#more_form_items">More form items</a></li>
-<li><a href="#coming_up">Coming up</a></li>
+<li><a href="#dive_deeper">Dive deeper</a></li>
+<li><a href="#summary">Summary</a></li>
 </ul>
 </div>
 </div>
@@ -474,310 +466,455 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <div id="preamble">
 <div class="sectionbody">
 <div class="paragraph">
-<p>In this chapter, you&#8217;ll create an Animal content type, give it alternative names and images, and link your artists to their favorite animals.
-You&#8217;ll then follow those relationships in Guillotine.</p>
+<p>Enonic is a highly flexible CMS, capable of delivering content in many ways. In this chapter we will focus on delivery via the out-of-the-box GraphQL API.</p>
 </div>
 <div class="paragraph">
-<p><em>Form items</em> are the building blocks of content forms.
-You&#8217;ve already used TextLine, TextArea and Date; now you&#8217;ll make a field repeatable and use selectors to reference other content.</p>
+<p>Now that we&#8217;ve created some content, let&#8217;s see how we can access and use it in via API - headless style.</p>
 </div>
 </div>
 </div>
 <div class="sect1">
-<h2 id="create_the_animal_form"><a class="link" href="#create_the_animal_form">Create the Animal form</a></h2>
+<h2 id="guillotine"><a class="link" href="#guillotine">Guillotine</a></h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>An animal needs a species name and may have other names, such as "Caribou" for a reindeer.
-Use the display name for the species and a repeatable TextLine for its other names.</p>
-</div>
-<div class="sect2">
-<h3 id="task_add_alternative_names"><a class="link" href="#task_add_alternative_names">Task: Add alternative names</a></h3>
-<div class="olist arabic">
-<ol class="arabic">
-<li>
-<p><strong>Define alternative names</strong> - Create the Animal content type in your app:</p>
-<div class="listingblock">
-<div class="title">src/main/resources/cms/content-types/animal/animal.yaml</div>
-<div class="content">
-<pre class="highlight"><code class="language-yaml" data-lang="yaml">kind: "ContentType"
-title: "Animal"
-description: "An animal that lives on planet Earth"
-displayNamePlaceholder: "Species"
-superType: "base:structured"
-form:
-  - type: "TextLine"
-    name: "otherNames"
-    label: "Other names"
-    helpText: "Other names for this species."
-    occurrences:
-      min: 0
-      max: 0</code></pre>
-</div>
-</div>
-</li>
-</ol>
+<p>Introducing <em>Guillotine</em>, the app that&#8217;s responsible for automatically generating a GraphQL APIs for your content.</p>
 </div>
 <div class="paragraph">
-<p>As with Artist, <code>displayNamePlaceholder</code> tells editors what to enter in the display name, here the species.
-For the <code>otherNames</code> field:</p>
-</div>
-<div class="ulist">
-<ul>
-<li>
-<p><code>type</code> chooses the form item, in this case TextLine.</p>
-</li>
-<li>
-<p><code>name</code> is the property name used to store the value and expose it through GraphQL.</p>
-</li>
-<li>
-<p><code>label</code> and <code>helpText</code> guide the editor filling out the form.</p>
-</li>
-<li>
-<p><code>occurrences</code> allows the editor to add multiple values: <code>min: 0</code> makes the field optional, and <code>max: 0</code> means there is no upper limit.</p>
-</li>
-</ul>
-</div>
-<div class="paragraph">
-<p>Without <code>occurrences</code>, a field is optional and accepts a single value (<code>min: 0</code>, <code>max: 1</code>).
-Setting both to <code>1</code> makes it required.
-Content Studio allows editors to save drafts with missing required values, but those items cannot be marked as ready or published.</p>
-</div>
-<div class="admonitionblock tip">
-<table>
-<tr>
-<td class="icon">
-<i class="fa icon-tip" title="Tip"></i>
-</td>
-<td class="content">
-Choose field names that will last, and use <code>camelCase</code>, such as <code>otherNames</code>.
-Renaming a field does not migrate its stored values, and queries using its old name will need updating.
-You can change its label without changing the stored property or API field.
-</td>
-</tr>
-</table>
-</div>
+<p>Guillotine should be pre-installed based on the <code>Essentials</code> template you used when setting up your sandbox. It is available on <a href="https://market.enonic.com/vendors/enonic/guillotine" target="_blank" rel="noopener">Enonic Market</a>, and may also be installed manually.</p>
 </div>
 </div>
 </div>
 <div class="sect1">
-<h2 id="select_an_image"><a class="link" href="#select_an_image">Select an image</a></h2>
+<h2 id="query_playground"><a class="link" href="#query_playground">Query playground</a></h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>The lion image you uploaded in the <a href="media.ahtml">previous chapter</a> is a separate content item.
-An ImageSelector stores a reference to it, so you can reuse the same image across several animals without uploading copies.</p>
+<p>Back in Content Studio, you should now have access to a new item called <code>Query Playground</code> in the left green widget sidebar. Open it, and you should see this:</p>
 </div>
-<div class="sect2">
-<h3 id="task_add_an_image_selector"><a class="link" href="#task_add_an_image_selector">Task: Add an image selector</a></h3>
-<div class="olist arabic">
-<ol class="arabic">
-<li>
-<p><strong>Add image references</strong> - Append this form item to the Animal form, at the same indentation as <code>otherNames</code>:</p>
-<div class="listingblock">
-<div class="title">src/main/resources/cms/content-types/animal/animal.yaml</div>
-<div class="content">
-<pre class="highlight"><code class="language-yaml" data-lang="yaml">  - type: "ImageSelector"
-    name: "images"
-    label: "Images"
-    helpText: "Images of the animal"
-    occurrences:
-      min: 0
-      max: 3</code></pre>
-</div>
-</div>
-</li>
-</ol>
-</div>
-<div class="paragraph">
-<p>Here, <code>min: 0</code> and <code>max: 3</code> allow up to three images, including none.
-ImageSelector lets editors select existing images or upload new ones.
-For this exercise, you&#8217;ll select the existing lion image.</p>
-</div>
-</div>
-<div class="sect2">
-<h3 id="task_create_two_animals"><a class="link" href="#task_create_two_animals">Task: Create two animals</a></h3>
-<div class="olist arabic">
-<ol class="arabic">
-<li>
-<p><strong>Deploy the Animal schema</strong> - Save the schema file and let your running <code>enonic dev</code> watcher update the app.</p>
-</li>
-<li>
-<p><strong>Create the Animals folder</strong> - In Content Studio, create a folder named "Animals" at the root of "My First Project", next to Artists and Images.
-Check that its path is <code>/animals</code>.</p>
-</li>
-<li>
-<p><strong>Create Lion</strong> - Select Animals, click <b class="button">New</b>, and choose <strong>Animal</strong>.
-Enter "Lion" as the display name and select your uploaded <code>lion.jpg</code> in the Images field.
-Leave Other names empty and save the item.</p>
 <div class="imageblock">
 <div class="content">
-<img src="images/form-animal.png" alt="Animal form for Lion with an empty Other names field and the selected lion image" width="578">
+<img src="media/query-playground-empty.png" alt="API browser integrated in Content Studio" width="602w">
 </div>
-<div class="title">Figure 1. The Animal form with a reference to the uploaded lion image</div>
-</div>
-</li>
-<li>
-<p><strong>Create Reindeer</strong> - Create another Animal named "Reindeer" in the same folder.
-Enter "Caribou" in Other names, leave Images empty, and save it.
-Notice that you can add another Other names entry because the field is repeatable.</p>
-</li>
-</ol>
 </div>
 <div class="paragraph">
-<p>Both items are saved in Draft; keep using Draft in Query Playground for the exercises below.</p>
+<p>Query playground is an interactive GraphQL API explorer. You enter your query in the text area to your left and when you execute it, you&#8217;ll get the results of the query on the other side of the screen.</p>
 </div>
-</div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="query_the_animals_fields"><a class="link" href="#query_the_animals_fields">Query the animal&#8217;s fields</a></h2>
-<div class="sectionbody">
 <div class="paragraph">
-<p>Guillotine uses <code>occurrences</code> when generating the GraphQL fields.
-Both <code>otherNames</code> and <code>images</code> accept multiple values, so both become lists, even when an item has just one value.
-The names are strings; the images are content references whose fields you can select.</p>
+<p>GraphQL is a graph "query language". It allows you to create highly specific queries for exactly the content that you need (visit the <a href="https://graphql.org/learn/" target="_blank" rel="noopener">official GraphQL docs to learn more</a>).</p>
 </div>
-<div class="sect2">
-<h3 id="task_fetch_the_lion_and_its_image"><a class="link" href="#task_fetch_the_lion_and_its_image">Task: Fetch the lion and its image</a></h3>
-<div class="olist arabic">
-<ol class="arabic">
-<li>
-<p><strong>Fetch Lion and its image</strong> - Open Query Playground for "My First Project", keep <strong>Draft</strong> selected, and run:</p>
+<div class="paragraph">
+<p>As an example on how to retrieve some minimal info about your previously created artists, run the following query:</p>
+</div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-graphql" data-lang="graphql">{
+<pre class="highlight"><code class="language-GraphQL" data-lang="GraphQL">{
   guillotine {
-    get(key: "/animals/lion") {
+    getChildren(key:"/artists") {
       displayName
-      ... on com_example_dev101_Animal {
-        data {
-          otherNames
-          images {
-            displayName
-            ... on media_Image {
-              imageUrl(scale: "width(600)") {
-                path
-                queryString
-              }
-            }
-          }
-        }
-      }
+      _path
+      _id
     }
   }
 }</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>The result contains an empty <code>otherNames</code> array and one entry in <code>images</code>.
-Build the image URL by joining <code><a href="http://localhost:8080/api" class="bare">http://localhost:8080/api</a></code>, <code>path</code> and <code>queryString</code>, as in the media chapter.</p>
+<p>After running, you should get something like this on the right area:</p>
 </div>
-</li>
-<li>
-<p><strong>Compare Reindeer</strong> - Change the key to <code>/animals/reindeer</code> and run the query again.
-The <code>otherNames</code> list now contains <code>"Caribou"</code>, while <code>images</code> is empty.</p>
-</li>
-</ol>
+<div class="imageblock">
+<div class="content">
+<img src="media/query-playground-artists-minimal.png" alt="Query playground response of running mimimal query to retrieve artists" width="1073w">
 </div>
-<div class="paragraph">
-<p>The <code>get</code> result and the items in <code>images</code> use GraphQL&#8217;s <code>Content</code> interface.
-As in the <a href="headless-api.ahtml">Headless API chapter</a>, an inline fragment selects fields belonging to a more specific GraphQL type:</p>
-</div>
-<div class="ulist">
-<ul>
-<li>
-<p><code>... on {app-name-query}_Animal</code> gives you access to the Animal&#8217;s <code>data</code>.</p>
-</li>
-<li>
-<p><code>... on media_Image</code> gives you access to the image&#8217;s <code>imageUrl</code>.</p>
-</li>
-</ul>
-</div>
-<div class="paragraph">
-<p>These are GraphQL type names; your CMS content types are <code>com.example.dev101:animal</code> and <code>media:image</code>.
-The image selector stores the image&#8217;s ID, and Guillotine resolves that reference for you.</p>
-</div>
-</div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="link_artists_to_animals"><a class="link" href="#link_artists_to_animals">Link artists to animals</a></h2>
-<div class="sectionbody">
-<div class="paragraph">
-<p>A ContentSelector can reference other kinds of content, just as ImageSelector references images.
-You&#8217;ll use it to give each artist one optional favorite animal.</p>
+<div class="title">Figure 1. Results of running the suggested query</div>
 </div>
 <div class="sect2">
-<h3 id="task_add_a_favorite_animal"><a class="link" href="#task_add_a_favorite_animal">Task: Add a favorite animal</a></h3>
-<div class="olist arabic">
-<ol class="arabic">
-<li>
-<p><strong>Define the favorite animal field</strong> - Append this field to the Artist form, after <code>birthday</code>:</p>
-<div class="listingblock">
-<div class="title">src/main/resources/cms/content-types/artist/artist.yaml</div>
-<div class="content">
-<pre class="highlight"><code class="language-yaml" data-lang="yaml">  - type: "ContentSelector"
-    name: "favoriteAnimal"
-    label: "Favorite animal"
-    allowContentType:
-      - "animal"
-    allowPath:
-      - "/animals/*"</code></pre>
+<h3 id="buttons"><a class="link" href="#buttons">Buttons</a></h3>
+<div class="paragraph">
+<p>Before trying to come up with complex queries, let&#8217;s make familiarize ourselves with Query Playground.</p>
 </div>
-</div>
-</li>
-<li>
-<p><strong>Select each artist&#8217;s favorite animal</strong> - Save the schema, let the watcher update the app, and reopen your artists in Content Studio.
-Make these selections and save each artist:</p>
 <table class="tableblock frame-all grid-all stretch">
 <colgroup>
-<col style="width: 50%;">
-<col style="width: 50%;">
+<col style="width: 16.6666%;">
+<col style="width: 58.3333%;">
+<col style="width: 25.0001%;">
 </colgroup>
 <thead>
 <tr>
-<th class="tableblock halign-left valign-top">Artist</th>
-<th class="tableblock halign-left valign-top">Favorite animal</th>
+<th class="tableblock halign-left valign-top">Icon</th>
+<th class="tableblock halign-left valign-top">Description</th>
+<th class="tableblock halign-left valign-top">Shortcuts</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Cardi B</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Lion</p></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="imageblock">
+<div class="content">
+<img src="media/query-playground-button-1.png" alt="Query playground play button" width="50w">
+</div>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>Play</em> - Execute your query</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><span class="keyseq"><kbd>ctrl</kbd>+<kbd>enter</kbd></span></p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Missy Elliott</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Reindeer</p></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="imageblock">
+<div class="content">
+<img src="media/query-playground-button-2.png" alt="Query playground prettify button" width="50">
+</div>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>Prettify</em> - Format your query, removing comments and unecessary spaces / indentation</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><span class="keyseq"><kbd>ctl</kbd>+<kbd>shift</kbd>+<kbd>p</kbd></span></p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">P!nk</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Lion</p></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="imageblock">
+<div class="content">
+<img src="media/query-playground-button-3.png" alt="Query playground merge button" width="50">
+</div>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>Merge fragments</em> - Rewrites your query based on the declared <a href="https://graphql.org/learn/queries/#fragments">fragments</a></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><span class="keyseq"><kbd>ctl</kbd>+<kbd>shift</kbd>+<kbd>m</kbd></span></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="imageblock">
+<div class="content">
+<img src="media/query-playground-button-4.png" alt="Query playground copy button" width="50">
+</div>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>Copy</em> - Copy your query to your clipboard.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><span class="keyseq"><kbd>ctl</kbd>+<kbd>shift</kbd>+<kbd>c</kbd></span></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="imageblock">
+<div class="content">
+<img src="media/query-playground-button-5.png" alt="Query playground docs button" width="50">
+</div>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>Docs</em> - Show the API documentation</p></td>
+<td class="tableblock halign-left valign-top"></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="imageblock">
+<div class="content">
+<img src="media/query-playground-button-6.png" alt="Query playground history button" width="50">
+</div>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>History</em> - Shows all previously executed queries</p></td>
+<td class="tableblock halign-left valign-top"></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="imageblock">
+<div class="content">
+<img src="media/query-playground-button-7.png" alt="Query playground tab button" width="50">
+</div>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>Tab</em> - Creates new tabs for you to manage testing multiple queries</p></td>
+<td class="tableblock halign-left valign-top"></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="imageblock">
+<div class="content">
+<img src="media/query-playground-button-9.png" alt="Query playground re-fetch button" width="50">
+</div>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>Re-fetch schema</em> - Reloads your GraphQL schemas based on recent changes</p></td>
+<td class="tableblock halign-left valign-top"></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="imageblock">
+<div class="content">
+<img src="media/query-playground-button-10.png" alt="Query playground shortkeys button" width="50">
+</div>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>Shortkeys</em> - Displays all short keys that can be used in Query Playground</p></td>
+<td class="tableblock halign-left valign-top"></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="imageblock">
+<div class="content">
+<img src="media/query-playground-button-11.png" alt="Query playground settings button" width="50">
+</div>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>Settings</em> -  Opens settings dialog</p></td>
+<td class="tableblock halign-left valign-top"></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="imageblock">
+<div class="content">
+<img src="media/query-playground-button-8.png" alt="Query playground draft and master buttons" width="100">
+</div>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Draft / master toggle_ - Switch between querying draft or master branch (published items)</p></td>
+<td class="tableblock halign-left valign-top"></td>
 </tr>
 </tbody>
 </table>
+</div>
+<div class="sect2">
+<h3 id="schemas"><a class="link" href="#schemas">Schemas</a></h3>
+<div class="paragraph">
+<p>Now, locate and click on the docs button. On this opened section you have detailed info about all <a href="https://graphql.org/learn/schema/" target="_blank" rel="noopener">schemas</a> available on your project.</p>
+</div>
+<div class="paragraph">
+<p>On the top search bar in the docs section, search for <code>artist</code> and locate the <code>com_example_myproject_Artist</code> schema:</p>
+</div>
 <div class="imageblock">
 <div class="content">
-<img src="images/form-artist-favorite-animal.png" alt="Artist form for Missy Elliott with Reindeer selected as her favorite animal" width="548">
+<img src="media/query-playground-artist-schema.png" alt="Query playground docs section showing the details of com_example_myproject_Artist schema" width="777w">
 </div>
-<div class="title">Figure 2. The Artist form with an animal selected</div>
-</div>
-</li>
-</ol>
+<div class="title">Figure 2. The Artist schema</div>
 </div>
 <div class="paragraph">
-<p>The selector narrows the available choices in two ways:</p>
+<p>Note that it&#8217;s said that the <code>Artist</code> schema <em>implements</em> the <code>Content</code> schema. This basically means that the <code>Artist</code> schema will have the structure defined by the <code>Content</code> schema, together with possibly some additional structure&#8230;&#8203; in this case, that additional structure is a <code>data</code> field, defined by <code>com_example_myproject_Artist_Data</code> schema:</p>
 </div>
-<div class="ulist">
-<ul>
-<li>
-<p><code>allowContentType</code> permits only the <code>animal</code> content type from this app.</p>
-</li>
-<li>
-<p><code>allowPath</code> restricts the choices to content below <code>/animals</code>.</p>
-</li>
-</ul>
+<div class="imageblock">
+<div class="content">
+<img src="media/query-playground-artist-data-schema.png" alt="Query playground docs sections showing the details of com_example_myproject_Artist_Data schema" width="777w">
+</div>
+<div class="title">Figure 3. The Artist data schema</div>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+Note that this matches the structure defined by the Artist content type, which is a natural thing to expect.
+</td>
+</tr>
+</table>
+</div>
+</div>
+<div class="sect2">
+<h3 id="querying_with_inline_fragments"><a class="link" href="#querying_with_inline_fragments">Querying with inline fragments</a></h3>
+<div class="paragraph">
+<p>We&#8217;ve used the Docs section to inspect the structure of the <code>Artist</code> schema. Let&#8217;s now, based on a broader understanding of this schema, we&#8217;ll query to get proper data from artists.</p>
 </div>
 <div class="paragraph">
-<p>There is no <code>occurrences</code> setting, so the editor can select at most one animal and can leave the field empty.</p>
+<p>Close the docs section, head back to the text area to edit your query and remove <code>displayName</code>, <code>_path</code> and <code>_id</code> from the query we introduced earlier.</p>
+</div>
+<div class="paragraph">
+<p>Now, with your cursor on the inner curly braces of the query, press <span class="keyseq"><kbd>ctrl</kbd>+<kbd>space</kbd></span> to get a list of suggestions about what fields you can request on your query:</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="media/query-playground-artist-query-inspection.gif" alt="Query playground query section showing suggested fields for content schema" width="654w">
+</div>
+</div>
+<div class="paragraph">
+<p>As can be seen, we do not have the artist <code>name</code> and <code>about</code> fields available, and the reason for that is because the <code>getChildren</code> field can return any content that implements the <code>Content</code> schema, but it can&#8217;t directly infer what schema that is, which in this case is the <code>com_example_myproject_Artist</code> schema:</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="media/query-playground-getChildren-infer.png" alt="Query playground getChildren can&#8217;t directly infer what schema is implementing Content schema" width="331w">
+</div>
+<div class="title">Figure 4. getChildren can&#8217;t directly infer what schema is implementing Content schema</div>
+</div>
+<div class="paragraph">
+<p>So to proceed, we use <a href="https://graphql.org/learn/queries/#inline-fragments" target="_blank" rel="noopener">inline fragments</a>:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-GraphQL" data-lang="GraphQL">{
+  guillotine {
+    getChildren(key: "/artists") {
+      ... on com_example_myproject_Artist {
+        _id
+        data {
+          name
+          about
+        }
+      }
+    }
+  }
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>With this, we basically built a query that understands that under <code>"/artists"</code> path we have content types of <code>Artist</code>, and based on this we can request general content data, such as <code>_id</code>, but also specific content data, such as the artist name and about:</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="media/query-playground-artists-data.png" alt="Query playground query returning artists content together with its name and about data" width="945w">
+</div>
+<div class="title">Figure 5. Getting specific data of artists</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="query_with_dataasjson"><a class="link" href="#query_with_dataasjson">Query with dataAsJson</a></h3>
+<div class="paragraph">
+<p>If you don&#8217;t need or care about types when creating your queries, you can ignore the previously presented inline fragment approach and use the field <code>dataAsJson</code>:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-GraphQL" data-lang="GraphQL">{
+  guillotine {
+    getChildren(key: "/artists") {
+      _id
+      dataAsJson
+    }
+  }
+}</code></pre>
+</div>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="media/query-playground-artists-dataAsJson.png" alt="Query playground query returning artists content together with is name and about data - using dataAsJson field" width="945w">
+</div>
+<div class="title">Figure 6. Getting all data using dataAsJson</div>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="advanced_queries"><a class="link" href="#advanced_queries">Advanced queries</a></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>We&#8217;ll now introduce and show examples of usages of different fields underneath the <code>guillotine</code> field, that allow us to search the system for specific data.</p>
+</div>
+<div class="sect2">
+<h3 id="querydsl"><a class="link" href="#querydsl">QueryDsl</a></h3>
+<div class="paragraph">
+<p>There is a <code>queryDsl</code> field underneath <code>guillotine</code> which allows you to search the system for what you want (the "Dsl" stands for "Domain Specific Language").</p>
+</div>
+<div class="paragraph">
+<p>The syntax is based on two types of operators: <code>Expressions</code> and <code>Compound</code>.</p>
+</div>
+<div class="dlist">
+<dl>
+<dt class="hdlist1"><code>Expression</code></dt>
+<dd>
+<p>Used to check particular fields for various native and analysed values.</p>
+</dd>
+<dt class="hdlist1"><code>Compound</code></dt>
+<dd>
+<p>Used to logically combine various expressions and compounds to fetch nodes based on complex conditions.</p>
+</dd>
+</dl>
+</div>
+<div class="paragraph">
+<p>In order to exemplify this field usage on some queries, we&#8217;ll query on the data set we&#8217;ve created so far on in this guide:</p>
+</div>
+<div class="listingblock">
+<div class="title">A Guillotine query using some of the arguments mentioned.</div>
+<div class="content">
+<pre class="highlight"><code class="language-GraphQL" data-lang="GraphQL">{
+  guillotine {
+    queryDsl(
+      query: {
+        term: {
+          field: "type",
+          value: {
+            string: "com.example.myapp:artist"
+          }
+        }
+      },
+      first: 1,
+      sort: {
+        field: "displayName",
+        direction: DESC
+      }
+    ) {
+      _id
+      displayName
+    }
+  }
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Note that this query is getting the last artist that is alphabetically sorted by name, regardless of where the content type is located in the tree structure.</p>
+</div>
+<div class="paragraph">
+<p>The following GraphQL query uses the <a href="https://developer.enonic.com/docs/xp/stable/storage/dsl#ngram" target="_blank" rel="noopener">n-gram functionality</a> to find all the artists that have a term (part of a text) that starts with <code>rap</code> somewhere in their data:</p>
+</div>
+<div class="listingblock">
+<div class="title">A Guillotine query using <em>nGram</em> search functionality</div>
+<div class="content">
+<pre class="highlight"><code class="language-GraphQL" data-lang="GraphQL">{
+  guillotine {
+    queryDsl(
+      query: {
+        boolean: {
+          must: [
+            {
+              term: {
+                field: "type",
+                value: {
+                  string: "com.example.myapp:artist"
+                }
+              },
+              ngram: {
+                fields: ["_allText"],
+                query: "rap"
+              }
+            }
+          ]
+        }
+      },
+      sort: {
+        field: "displayName",
+        direction: DESC
+      }
+    ) {
+      _id
+      displayName
+    }
+  }
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Naturally, you can also use the standard boolean operators to combine or negate clauses. If you wanted to find all artists that mention both rapping and singing, you could try a query like this:</p>
+</div>
+<div class="listingblock">
+<div class="title">Querying for artists who both rap and sing</div>
+<div class="content">
+<pre class="highlight"><code class="language-GraphQL" data-lang="GraphQL">{
+  guillotine {
+    queryDsl(
+      query: {
+        boolean: {
+          must: [
+            {
+              term: {
+                field: "type",
+                value: {
+                  string: "com.example.myapp:artist"
+                }
+              }
+            },
+            {
+              ngram: {
+                fields: "data.about"
+                query: "rap sing"
+                operator: AND
+              }
+            }
+          ]
+        }
+      },
+      sort: {
+        field: "displayName",
+        direction: DESC
+      }
+    ) {
+      _id
+      displayName
+    }
+  }
+}</code></pre>
+</div>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+If you&#8217;ve previously used Elasticsearch API to query data, you&#8217;ll be quite familiar with how <code>queryDsl</code> works!
+</td>
+</tr>
+</table>
 </div>
 <div class="admonitionblock tip">
 <table>
@@ -786,45 +923,158 @@ Make these selections and save each artist:</p>
 <i class="fa icon-tip" title="Tip"></i>
 </td>
 <td class="content">
-Reference an item when it should be edited and reused independently.
-Two artists can reference the same Lion, and an edit to that animal is visible through both references.
-For data that only belongs to one item, such as an artist&#8217;s filmography entries, you&#8217;ll use sets in the next chapter.
+To learn more about queryDSL capabilities, visit the <a href="https://developer.enonic.com/docs/xp/stable/storage/dsl" target="_blank" rel="noopener">DSL reference</a>
 </td>
 </tr>
 </table>
 </div>
 </div>
 <div class="sect2">
-<h3 id="task_follow_the_reference_in_a_query"><a class="link" href="#task_follow_the_reference_in_a_query">Task: Follow the reference in a query</a></h3>
+<h3 id="querydslconnection"><a class="link" href="#querydslconnection">QueryDslConnection</a></h3>
+<div class="paragraph">
+<p>Just like there is a <code>queryDsl</code> field underneath <code>guillotine</code>, the API also provides other fields such as <code>queryDslConnection</code>.</p>
+</div>
+<div class="paragraph">
+<p>We&#8217;ll not go into much details, but basically, the fields with <em>connection</em> in their name have new parameters for aggregating and paginating data.</p>
+</div>
+<div class="paragraph">
+<p>To finish this chapter, we&#8217;ll add a new <em>birthyear</em> field to the artist content type, update all artist to have data on this field, and then use <code>queryDslConnection</code> field to get aggregated data. Let&#8217;s get to work!</p>
+</div>
 <div class="olist arabic">
 <ol class="arabic">
 <li>
-<p><strong>Fetch the referenced animals</strong> - Start with the type-filtered artist query from the Headless API chapter and select <code>favoriteAnimal</code>:</p>
+<p>Start by updating the Artist content type to the following structure:</p>
+</li>
+</ol>
+</div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-graphql" data-lang="graphql">{
+<pre class="highlight"><code class="language-xml" data-lang="xml">&lt;content-type&gt;
+  &lt;display-name&gt;Artist&lt;/display-name&gt;
+  &lt;description&gt;Information about an artist&lt;/description&gt;
+  &lt;super-type&gt;base:structured&lt;/super-type&gt;
+  &lt;form&gt;
+
+    &lt;input name="name" type="TextLine"&gt;
+      &lt;label&gt;Name&lt;/label&gt;
+      &lt;help-text&gt;
+        The artist's name (if different from their professional moniker).
+      &lt;/help-text&gt;
+    &lt;/input&gt;
+
+    &lt;input type="TextArea" name="about"&gt;
+      &lt;label&gt;About the artist&lt;/label&gt;
+    &lt;/input&gt;
+
+    &lt;input type="Date" name="birthday" &gt;
+      &lt;label&gt;Birthday&lt;/label&gt;
+    &lt;/input&gt;
+
+  &lt;/form&gt;
+&lt;/content-type&gt;</code></pre>
+</div>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+If are not running the project in dev mode (<code>enonic project dev</code> introduced in the previous $chapter), make sure to run <code>enonic project deploy</code> in the terminal on the project&#8217;s root directory
+</td>
+</tr>
+</table>
+</div>
+<div class="olist arabic">
+<ol class="arabic" start="2">
+<li>
+<p>Update each of the previously created artists with the following dates:</p>
+<div class="ulist">
+<ul>
+<li>
+<p>P!nk: 1979-09-08</p>
+</li>
+<li>
+<p>Missy Elliot: 1971-07-01</p>
+</li>
+<li>
+<p>Cardi B: 1992-10-11</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Go back to Query playground and click on the <em>re-fetch schema button</em>. This will update the Artist data schema to contain the birthday structure, which is in sync with the Artist content type structure</p>
+</li>
+<li>
+<p>Run the following query on the playground:</p>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-GraphQL" data-lang="GraphQL">{
   guillotine {
-    queryDsl(
+    queryDslConnection(
       query: {
-        term: {
-          field: "type"
-          value: { string: "com.example.dev101:artist" }
-        }
-      }
-    ) {
-      displayName
-      ... on com_example_dev101_Artist {
-        data {
-          favoriteAnimal {
-            displayName
-            ... on com_example_dev101_Animal {
-              data {
-                otherNames
+        boolean: {
+          must: {
+            term: {
+              field: "type"
+              value: {
+                string: "com.example.myapp:artist"
               }
+            }
+            exists: {
+              field: "data.birthday"
             }
           }
         }
       }
+      aggregations: {
+        name: "generationsAggregation"
+        dateRange: {
+          field: "data.birthday"
+          ranges: [
+            {
+              key: "The Greatest Generation"
+              from: "1901"
+              to: "1927"
+          	}
+            {
+              key: "The Silent Generation"
+              from: "1928"
+              to: "1945"
+          	}
+            {
+              key: "The Baby Boomer Generation"
+              from: "1946"
+              to: "1964"
+          	}
+            {
+              key: "Generation X"
+              from: "1965"
+              to: "1980"
+          	}
+            {
+              key: "Millennials"
+              from: "1981"
+              to: "1996"
+          	}
+            {
+              key: "Generation Z"
+              from: "1997"
+              to: "2012"
+          	}
+            {
+              key: "Gen Alpha"
+              from: "2013"
+              to: "2025"
+          	}
+          ]
+          }
+        }
+    )
+    {
+      aggregationsAsJson
     }
   }
 }</code></pre>
@@ -834,86 +1084,104 @@ For data that only belongs to one item, such as an artist&#8217;s filmography en
 </ol>
 </div>
 <div class="paragraph">
-<p>The <code>favoriteAnimal</code> field returns a single content item.
-You can read its <code>displayName</code> directly, then use an Animal fragment to select <code>data.otherNames</code>.
-There is no need for a separate query to fetch the referenced animal.</p>
-</div>
-<div class="paragraph">
-<p>With the sample selections above, the <code>data.guillotine.queryDsl</code> array contains the following items; their order may differ:</p>
+<p>And this are the results</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-json" data-lang="json">[
-  {
-    "displayName": "Cardi B",
-    "data": {
-      "favoriteAnimal": {
-        "displayName": "Lion",
-        "data": {
-          "otherNames": []
-        }
-      }
-    }
-  },
-  {
-    "displayName": "Missy Elliott",
-    "data": {
-      "favoriteAnimal": {
-        "displayName": "Reindeer",
-        "data": {
-          "otherNames": ["Caribou"]
-        }
-      }
-    }
-  },
-  {
-    "displayName": "P!nk",
-    "data": {
-      "favoriteAnimal": {
-        "displayName": "Lion",
-        "data": {
-          "otherNames": []
+<pre class="highlight"><code class="language-json" data-lang="json">{
+  "data": {
+    "guillotine": {
+      "queryDslConnection": {
+        "aggregationsAsJson": {
+          "generationsAggregation": {
+            "buckets": [
+              {
+                "key": "The Greatest Generation",
+                "docCount": 0,
+                "from": "1901-01-01T00:00:00Z",
+                "to": "1927-01-01T00:00:00Z"
+              },
+              {
+                "key": "The Silent Generation",
+                "docCount": 0,
+                "from": "1928-01-01T00:00:00Z",
+                "to": "1945-01-01T00:00:00Z"
+              },
+              {
+                "key": "The Baby Boomer Generation",
+                "docCount": 0,
+                "from": "1946-01-01T00:00:00Z",
+                "to": "1964-01-01T00:00:00Z"
+              },
+              {
+                "key": "Generation X",
+                "docCount": 2,
+                "from": "1965-01-01T00:00:00Z",
+                "to": "1980-01-01T00:00:00Z"
+              },
+              {
+                "key": "Millennials",
+                "docCount": 1,
+                "from": "1981-01-01T00:00:00Z",
+                "to": "1996-01-01T00:00:00Z"
+              },
+              {
+                "key": "Generation Z",
+                "docCount": 0,
+                "from": "1997-01-01T00:00:00Z",
+                "to": "2012-01-01T00:00:00Z"
+              },
+              {
+                "key": "Gen Alpha",
+                "docCount": 0,
+                "from": "2013-01-01T00:00:00Z",
+                "to": "2025-01-01T00:00:00Z"
+              }
+            ]
+          }
         }
       }
     }
   }
-]</code></pre>
+}</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>If an artist has no selection, <code>favoriteAnimal</code> is <code>null</code>.
-Compare that with the empty lists for an animal&#8217;s unused <code>otherNames</code> or <code>images</code> fields.</p>
+<p>Which shows that two of those artists are from Generation X, and one of them is a Millenial.</p>
 </div>
 </div>
 </div>
 </div>
 <div class="sect1">
-<h2 id="more_form_items"><a class="link" href="#more_form_items">More form items</a></h2>
+<h2 id="dive_deeper"><a class="link" href="#dive_deeper">Dive deeper</a></h2>
 <div class="sectionbody">
-<div class="paragraph">
-<p>You now have the basics for configuring fields and linking content.
-The <a href="https://developer.enonic.com/docs/cms/stable/schemas/form-items">CMS form items reference</a> covers the full range of form items and their settings, including <a href="https://developer.enonic.com/docs/cms/stable/schemas/form-items/imageselector">ImageSelector</a> and <a href="https://developer.enonic.com/docs/cms/stable/schemas/form-items/contentselector">ContentSelector</a>.</p>
-</div>
-<div class="paragraph">
-<p>For a file that belongs directly to one content item, <a href="https://developer.enonic.com/docs/cms/stable/schemas/form-items/attachmentuploader">AttachmentUploader</a> stores it as an attachment on that item, instead of creating separate media content to reference.
-Query the content item&#8217;s <code>attachments</code> field and select <code>attachmentUrl</code> on each attachment to retrieve its URL components.
-See the <a href="https://developer.enonic.com/docs/guillotine/stable/api#attachment">Guillotine Attachment reference</a> for the available fields.</p>
+<div class="ulist">
+<ul>
+<li>
+<p>For more query examples and information about how to get up and running with Guillotine, you can check out <a href="https://developer.enonic.com/docs/intro" target="_blank" rel="noopener">Quick introduction guide</a> or the <a href="https://developer.enonic.com/docs/guillotine" target="_blank" rel="noopener">Guillotine docs</a></p>
+</li>
+<li>
+<p>If you want to understand how to extend available schemas on the GraphQL Api, you can head to <a href="https://developer.enonic.com/docs/guillotine/stable/extending" target="_blank" rel="noopener">Extending section on Guillotine docs</a> or check some examples on this <a href="https://developer.enonic.com/docs/build-a-custom-selector#customizing_with_guilliotine_lib_optional" target="_blank" rel="noopener">guide</a></p>
+</li>
+<li>
+<p>If you want to learn more about GraphQL in general, the <a href="https://graphql.org/learn/" target="_blank" rel="noopener"><em>Introduction to GraphQL</em> documentation</a> is a good place to start</p>
+</li>
+</ul>
 </div>
 </div>
 </div>
 <div class="sect1">
-<h2 id="coming_up"><a class="link" href="#coming_up">Coming up</a></h2>
+<h2 id="summary"><a class="link" href="#summary">Summary</a></h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>You&#8217;ve created repeatable fields, selected an image, linked artists to animals, and followed those references through Guillotine.
-In the next chapter, you&#8217;ll group and reuse form items with <a href="sets.ahtml">sets and form fragments</a>.</p>
+<p>In this chapter you&#8217;ve learned about the Guillotine app and its API. Next up let&#8217;s have a look at <a href="files.ahtml">how XP deals with files (aka media)</a>.</p>
 </div>
 </div>
 </div>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2026-11-12 10:20:17 UTC
+Last updated 2026-11-12 10:22:56 UTC
 </div>
 </div>
 </body>

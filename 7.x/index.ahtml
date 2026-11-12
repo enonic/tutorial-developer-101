@@ -5,9 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="generator" content="Asciidoctor 2.0.26">
-<meta name="application-name" content="dev101">
-<meta name="description" content="Query your artists with Guillotine, explore GraphQL types, search content and see how a new form field becomes available in the API.">
-<title>Headless API</title>
+<title>XP7 - Developer 101 - CMS fundamentals</title>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,300italic,400,400italic,600,600italic%7CNoto+Serif:400,400italic,700,700italic%7CDroid+Sans+Mono:400,700">
 <style>
 /*! Asciidoctor default stylesheet | MIT License | https://asciidoctor.org */
@@ -439,34 +437,11 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 </head>
 <body class="article toc2 toc-right">
 <div id="header">
-<h1>Headless API</h1>
+<h1>XP7 - Developer 101 - CMS fundamentals</h1>
 <div id="toc" class="toc2">
 <div id="toctitle">Table of Contents</div>
 <ul class="sectlevel1">
-<li><a href="#guillotine">Guillotine</a></li>
-<li><a href="#query_playground">Query Playground</a>
-<ul class="sectlevel2">
-<li><a href="#task_query_your_artists">Task: Query your artists</a></li>
-<li><a href="#getting_around">Getting around</a></li>
-<li><a href="#task_explore_the_graphql_types">Task: Explore the GraphQL types</a></li>
-<li><a href="#task_select_the_artist_fields">Task: Select the Artist fields</a></li>
-<li><a href="#task_retrieve_one_artist">Task: Retrieve one artist</a></li>
-<li><a href="#task_inspect_the_form_data">Task: Inspect the form data</a></li>
-</ul>
-</li>
-<li><a href="#search_your_content">Search your content</a>
-<ul class="sectlevel2">
-<li><a href="#task_find_artists_by_their_description">Task: Find artists by their description</a></li>
-</ul>
-</li>
-<li><a href="#extend_the_content_model">Extend the content model</a>
-<ul class="sectlevel2">
-<li><a href="#task_add_and_query_birthdays">Task: Add and query birthdays</a></li>
-</ul>
-</li>
-<li><a href="#other_clients">Other clients</a></li>
-<li><a href="#dive_deeper">Dive deeper</a></li>
-<li><a href="#coming_up">Coming up</a></li>
+<li><a href="#overview">Overview</a></li>
 </ul>
 </div>
 </div>
@@ -474,19 +449,13 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <div id="preamble">
 <div class="sectionbody">
 <div class="paragraph">
-<p>In this chapter, you&#8217;ll query your artists through Guillotine, Enonic&#8217;s GraphQL API, and see how changes to your content model appear in the API.</p>
-</div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="guillotine"><a class="link" href="#guillotine">Guillotine</a></h2>
-<div class="sectionbody">
-<div class="paragraph">
-<p>Guillotine generates a GraphQL API from your content types, letting you query both common content fields and the fields you define in YAML.</p>
+<p>Welcome to this in-depth tutorial to get familiar with Enonic. The guide is aimed at people new to Enonic, covering the essentials of content modelling and accessing content via the GraphQL API.</p>
 </div>
 <div class="paragraph">
-<p>It was installed with the <code>Essentials</code> sandbox template.
-You&#8217;ll explore it through Content Studio&#8217;s Query Playground.</p>
+<p>If you have any questions, or just want to get in touch - visit the <a href="https://discuss.enonic.com" target="_blank" rel="noopener">Forum</a> or join the <a href="https://slack.enonic.com/" target="_blank" rel="noopener">Community Slack channel</a></p>
+</div>
+<div class="paragraph">
+<p>Good luck! 🙌</p>
 </div>
 <div class="admonitionblock note">
 <table>
@@ -495,7 +464,7 @@ You&#8217;ll explore it through Content Studio&#8217;s Query Playground.</p>
 <i class="fa icon-note" title="Note"></i>
 </td>
 <td class="content">
-This tutorial is written for Guillotine 9, which requires XP 8.1 or newer. Check the version in <code>XP menu</code> &#8594; <code>Applications</code> if your queries do not behave as described.
+<strong>In a hurry?</strong> If you just want to get up and running as fast as possible, check out the <a href="https://developer.enonic.com/start">quick start docs</a> instead 🚀
 </td>
 </tr>
 </table>
@@ -503,602 +472,109 @@ This tutorial is written for Guillotine 9, which requires XP 8.1 or newer. Check
 </div>
 </div>
 <div class="sect1">
-<h2 id="query_playground"><a class="link" href="#query_playground">Query Playground</a></h2>
+<h2 id="overview"><a class="link" href="#overview">Overview</a></h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>Back in Content Studio, click the GraphQL icon in the menu bar on the left to open Query Playground:</p>
+<p>Below is an overview of the various chapters in this guide.</p>
 </div>
-<div class="imageblock">
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+When we mention "XP", we are referring to "Enonic XP", the hybrid CMS you&#8217;re starting to learn!
+</td>
+</tr>
+</table>
+</div>
+<div class="sidebarblock">
 <div class="content">
-<img src="images/api-playground.png" alt="Query Playground in Content Studio, with the query editor on the left, response panel on the right, and Draft selected" width="1440">
-</div>
-</div>
-<div class="paragraph">
-<p>Query Playground is an interactive GraphQL API explorer. You enter your query in the editor in the middle and when you execute it, you&#8217;ll get the results of the query in the panel on the right.</p>
-</div>
-<div class="paragraph">
-<p>GraphQL lets you request exactly the fields you need from an API.
-The <a href="https://graphql.org/learn/">official GraphQL documentation</a> explains the query language in more detail.</p>
-</div>
-<div class="paragraph">
-<p>Select your "My First Project" project and the <strong>Draft</strong> branch in Query Playground.
-Keep Draft selected throughout this chapter so your queries include the changes you make in Content Studio.</p>
-</div>
-<div class="sect2">
-<h3 id="task_query_your_artists"><a class="link" href="#task_query_your_artists">Task: Query your artists</a></h3>
-<div class="paragraph">
-<p>Use <code>queryDsl</code> to find content by its type.</p>
-</div>
-<div class="olist arabic">
-<ol class="arabic">
-<li>
-<p><strong>Find artists by content type</strong> - Run this query to retrieve up to ten artists, sorted by display name:</p>
-<div class="listingblock">
-<div class="content">
-<pre class="highlight"><code class="language-GraphQL" data-lang="GraphQL">{
-  guillotine {
-    queryDsl(
-      query: {
-        term: {
-          field: "type"
-          value: { string: "com.example.dev101:artist" }
-        }
-      }
-      first: 10
-      sort: [{ field: "displayName", direction: ASC }]
-    ) {
-      displayName
-      _path
-      _id
-    }
-  }
-}</code></pre>
-</div>
-</div>
-<div class="paragraph">
-<p>You should get Cardi B, Missy Elliott and P!nk in the response panel, in that order.
-The response has this structure, with the results in the <code>data.guillotine.queryDsl</code> array.
-Your content IDs will differ from these example values, and the paths depend on the names you gave your items:</p>
-</div>
-<div class="listingblock">
-<div class="title">Example response</div>
-<div class="content">
-<pre class="highlight"><code class="language-json" data-lang="json">{
-  "data": {
-    "guillotine": {
-      "queryDsl": [
-        {
-          "displayName": "Cardi B",
-          "_path": "/artists/cardi-b",
-          "_id": "a0d019c7-b37a-4eaa-a2d0-96a005dc33ff"
-        },
-        {
-          "displayName": "Missy Elliott",
-          "_path": "/artists/missy-elliott",
-          "_id": "3caace62-9527-4174-8024-939a91945a07"
-        },
-        {
-          "displayName": "P!nk",
-          "_path": "/artists/pnk",
-          "_id": "e079cf41-527a-474f-8a9f-89a1826f14d8"
-        }
-      ]
-    }
-  }
-}</code></pre>
-</div>
-</div>
-</li>
-<li>
-<p><strong>Try sorting and limiting results</strong> - Change <code>first</code> to <code>1</code> and <code>direction</code> to <code>DESC</code>, then run the query again.
-You should get only P!nk, the last artist alphabetically.</p>
-</li>
-<li>
-<p><strong>Return to the query defaults</strong> - Remove the <code>first</code> and <code>sort</code> arguments before continuing.
-Without <code>first</code>, <code>queryDsl</code> returns up to ten results; without <code>sort</code>, it uses relevance order.
-The remaining examples use these defaults, so results may appear in a different order from the sample responses.</p>
-</li>
-</ol>
-</div>
-<div class="paragraph">
-<p>The <code>term</code> matches the full content type name, including your app&#8217;s namespace.
-The Artists folder keeps your content organized, but this query finds artists anywhere in the selected content project.
-<code>first</code> limits the number of results, and <code>sort</code> puts them in alphabetical order.</p>
-</div>
-</div>
-<div class="sect2">
-<h3 id="getting_around"><a class="link" href="#getting_around">Getting around</a></h3>
-<div class="paragraph">
-<p>Before trying to come up with complex queries, let&#8217;s familiarize ourselves with Query Playground. It consists of a few panels:</p>
-</div>
+<div class="title">Installing tools and initial setup</div>
 <div class="dlist">
 <dl>
-<dt class="hdlist1">Docs</dt>
+<dt class="hdlist1"><a href="setup.ahtml">Setting up your development environment</a></dt>
 <dd>
-<p>Opens on the left, and lets you browse every type and field in the API. We&#8217;ll use it in a moment.</p>
+<p>Starting from scratch, this chapter takes you through how to install all the necessary tools to get started with Enonic XP development.</p>
 </dd>
-<dt class="hdlist1">Query</dt>
+<dt class="hdlist1"><a href="sandbox.ahtml">Sandbox</a></dt>
 <dd>
-<p>The editor in the middle, where you write your query. Press the play button, or <span class="keyseq"><kbd>ctrl</kbd>+<kbd>enter</kbd></span>, to run it.</p>
+<p>Introducing a fundamental concept of Enonic XP development: sandboxes.</p>
 </dd>
-<dt class="hdlist1">Response</dt>
+<dt class="hdlist1"><a href="apps.ahtml">My first App</a></dt>
 <dd>
-<p>The panel on the right, showing the result of the query, or any errors.</p>
-</dd>
-<dt class="hdlist1">Variables</dt>
-<dd>
-<p>Expands below the query editor, and lets you supply query variables as a JSON object.</p>
-</dd>
-<dt class="hdlist1">Draft / Master</dt>
-<dd>
-<p>The buttons above the response panel select which branch to query. Draft is your work in progress, Master is what has been published.</p>
+<p>Learn how to create XP projects and how to build and deploy your apps to a XP instance.</p>
 </dd>
 </dl>
 </div>
-<div class="paragraph">
-<p>Queries run in the project currently selected in Content Studio&#8217;s top bar, so you never have to tell Query Playground which project to use.</p>
 </div>
 </div>
-<div class="sect2">
-<h3 id="task_explore_the_graphql_types"><a class="link" href="#task_explore_the_graphql_types">Task: Explore the GraphQL types</a></h3>
-<div class="paragraph">
-<p>The YAML content type schema you wrote defines the Artist form and its data in the CMS.
-Guillotine uses that definition to generate GraphQL types for querying your artists.
-These types are part of the <em>GraphQL schema</em>: the API&#8217;s description of the types, fields and operations available to query.
-The <a href="https://graphql.org/learn/schema/">GraphQL documentation</a> explains schemas and types in more detail.</p>
-</div>
-<div class="olist arabic">
-<ol class="arabic">
-<li>
-<p><strong>Find the Artist GraphQL type</strong> - Open the Docs panel to explore those types.
-Search for <code>artist</code> and locate the <code>{app-name-query}_Artist</code> object type:</p>
-<div class="imageblock">
+<div class="sidebarblock">
 <div class="content">
-<img src="images/api-doc.png" alt="Query Playground Docs panel showing the Artist GraphQL object type, its Content interface, and common fields" width="477">
-</div>
-<div class="title">Figure 1. The Artist GraphQL type</div>
-</div>
-</li>
-<li>
-<p><strong>Find the form fields</strong> - Follow the Artist object type&#8217;s <code>data</code> field to <code>{app-name-query}_Artist_Data</code> in the Docs panel and find <code>legalName</code> and <code>about</code>.
-These are the fields you defined in your YAML form.</p>
-</li>
-</ol>
-</div>
-<div class="paragraph">
-<p>Notice that the Artist object type <em>implements</em> the <code>Content</code> interface.
-An interface defines fields shared by the object types that implement it.
-Here, <code>Content</code> defines common content fields such as <code>displayName</code>, <code>_path</code> and <code>_id</code>, so you can request them for any content item.</p>
-</div>
-<div class="admonitionblock note">
-<table>
-<tr>
-<td class="icon">
-<i class="fa icon-note" title="Note"></i>
-</td>
-<td class="content">
-Your CMS content type is named <code>com.example.dev101:artist</code>, and its generated GraphQL object type is <code>{app-name-query}_Artist</code>.
-The app namespace carries over to the API, keeping the types from different apps apart.
-</td>
-</tr>
-</table>
+<div class="title">Working with content</div>
+<div class="dlist">
+<dl>
+<dt class="hdlist1"><a href="content-studio.ahtml">Content studio and content creation</a></dt>
+<dd>
+<p>Get familiar with Content Studio and Content types, and start creating some content.</p>
+</dd>
+<dt class="hdlist1"><a href="headless-api.ahtml">GraphQL API</a></dt>
+<dd>
+<p>What is a headless CMS without an API? Learn about the Guillotine library and the powers it unlocks here.</p>
+</dd>
+<dt class="hdlist1"><a href="files.ahtml">{title-medias-and-attachments}</a></dt>
+<dd>
+<p>{description-medias-and-attachments}</p>
+</dd>
+<dt class="hdlist1"><a href="input-types.ahtml">Input types</a></dt>
+<dd>
+<p>Take your content types to the next level with more advanced input types. Learn how to configure input types, what kinds there are, and how to link content together.</p>
+</dd>
+</dl>
 </div>
 </div>
-<div class="sect2">
-<h3 id="task_select_the_artist_fields"><a class="link" href="#task_select_the_artist_fields">Task: Select the Artist fields</a></h3>
-<div class="paragraph">
-<p>You&#8217;ve inspected the Artist GraphQL type in the Docs panel.
-Now you&#8217;ll query the fields from your content type&#8217;s form.</p>
 </div>
-<div class="olist arabic">
-<ol class="arabic">
-<li>
-<p><strong>Prepare the result selection</strong> - Close the Docs panel, head back to the editor and remove <code>displayName</code>, <code>_path</code> and <code>_id</code> from the query we introduced earlier.</p>
-</li>
-<li>
-<p><strong>Explore the available fields</strong> - Put your cursor inside the result selection braces immediately after <code>queryDsl(&#8230;&#8203;)</code>, and press <span class="keyseq"><kbd>ctrl</kbd>+<kbd>space</kbd></span> to see which fields you can request.
-Look for the common fields <code>displayName</code>, <code>_path</code> and <code>_id</code> in the suggestions.</p>
-</li>
-<li>
-<p><strong>Query the Artist fields</strong> - Run this query with an inline fragment to access the Artist&#8217;s <code>data</code> fields:</p>
-<div class="listingblock">
+<div class="sidebarblock">
 <div class="content">
-<pre class="highlight"><code class="language-GraphQL" data-lang="GraphQL">{
-  guillotine {
-    queryDsl(
-      query: {
-        term: {
-          field: "type"
-          value: { string: "com.example.dev101:artist" }
-        }
-      }
-    ) {
-      ... on com_example_dev101_Artist {
-        _id
-        data {
-          legalName
-          about
-        }
-      }
-    }
-  }
-}</code></pre>
+<div class="title">Advanced content modelling</div>
+<div class="dlist">
+<dl>
+<dt class="hdlist1"><a href="sets.ahtml">Sets</a></dt>
+<dd>
+<p>XP has a number of ways to group inputs together. Learn all about them in this chapter.</p>
+</dd>
+<dt class="hdlist1"><a href="rich-text.ahtml">Rich text</a></dt>
+<dd>
+<p>Rich text is an incredibly powerful editing tool and an important part of the XP experience. Learn how to configure it here.</p>
+</dd>
+<dt class="hdlist1"><a href="x-data.ahtml">X-data</a></dt>
+<dd>
+<p>X-data is a way for you to add extra data to all your content types in a simple manner. This chapter covers what it is and how to use it.</p>
+</dd>
+</dl>
 </div>
 </div>
-</li>
-</ol>
 </div>
-<div class="paragraph">
-<p>The autocomplete suggestions omit <code>legalName</code> and <code>about</code> because those fields belong to the Artist&#8217;s <code>data</code> type.
-<code>queryDsl</code> returns the general <code>Content</code> interface, even when its filter selects only artists.
-The filter controls which items match; it does not change the query field&#8217;s declared GraphQL return type.
-To select the Artist type&#8217;s own fields, use an <a href="https://graphql.org/learn/queries/#inline-fragments">inline fragment</a>.
-The syntax <code>... on {app-name-query}_Artist { ... }</code> means "for results whose GraphQL type is Artist, select the fields inside this block."</p>
-</div>
-<div class="paragraph">
-<p>The filter selects artists, and the inline fragment lets you request their <code>legalName</code> and <code>about</code> fields under <code>data</code>, along with the general content field <code>_id</code>.
-Below is one example item from the <code>data.guillotine.queryDsl</code> array.
-The field values depend on what you entered in Content Studio:</p>
-</div>
-<div class="listingblock">
-<div class="title">One artist result</div>
+<div class="sidebarblock">
 <div class="content">
-<pre class="highlight"><code class="language-json" data-lang="json">{
-  "_id": "a0d019c7-b37a-4eaa-a2d0-96a005dc33ff",
-  "data": {
-    "legalName": "Belcalis Marlenis Almánzar",
-    "about": "Belcalis Marlenis Almánzar (born October 11, 1992), known professionally as Cardi B, is an American rapper and songwriter."
-  }
-}</code></pre>
+<div class="title">Deployment and next steps</div>
+<div class="dlist">
+<dl>
+<dt class="hdlist1"><a href="deployment.ahtml">Deployment and next steps</a></dt>
+<dd>
+<p>How do you actually deploy Enonic XP and use it for more than local development? And where do you go from here to learn more?</p>
+</dd>
+</dl>
 </div>
 </div>
-</div>
-<div class="sect2">
-<h3 id="task_retrieve_one_artist"><a class="link" href="#task_retrieve_one_artist">Task: Retrieve one artist</a></h3>
-<div class="paragraph">
-<p>When you know an item&#8217;s path or ID, use <code>get</code> to retrieve it directly.</p>
-</div>
-<div class="olist arabic">
-<ol class="arabic">
-<li>
-<p><strong>Fetch an artist by path</strong> - Copy Cardi B&#8217;s <code>_path</code> from the first response and use it as the <code>key</code> below:</p>
-<div class="listingblock">
-<div class="content">
-<pre class="highlight"><code class="language-GraphQL" data-lang="GraphQL">{
-  guillotine {
-    get(key: "/artists/cardi-b") {
-      displayName
-      ... on com_example_dev101_Artist {
-        data {
-          legalName
-          about
-        }
-      }
-    }
-  }
-}</code></pre>
-</div>
-</div>
-</li>
-<li>
-<p><strong>Fetch the same artist by ID</strong> - Replace the path with Cardi B&#8217;s <code>_id</code> from your first response and run the query again.
-Both keys retrieve the same item.</p>
-</li>
-</ol>
-</div>
-<div class="paragraph">
-<p>An ID stays the same when an item is renamed or moved; its path changes.
-If the key does not match an item in the selected project and branch, <code>get</code> returns <code>null</code>.</p>
-</div>
-<div class="paragraph">
-<p>The result is one object under <code>data.guillotine.get</code>, rather than an array of results.
-Like <code>queryDsl</code>, <code>get</code> returns the <code>Content</code> interface, so you use an inline fragment to select the Artist fields.</p>
-</div>
-</div>
-<div class="sect2">
-<h3 id="task_inspect_the_form_data"><a class="link" href="#task_inspect_the_form_data">Task: Inspect the form data</a></h3>
-<div class="paragraph">
-<p>For a quick look at all stored form data, use <code>dataAsJson</code>.</p>
-</div>
-<div class="olist arabic">
-<ol class="arabic">
-<li>
-<p><strong>Fetch the stored form data</strong> - Update the single-artist query to:</p>
-<div class="listingblock">
-<div class="content">
-<pre class="highlight"><code class="language-GraphQL" data-lang="GraphQL">{
-  guillotine {
-    get(key: "/artists/cardi-b") {
-      displayName
-      dataAsJson
-    }
-  }
-}</code></pre>
-</div>
-</div>
-</li>
-</ol>
-</div>
-<div class="paragraph">
-<p>This returns all stored form fields without selecting them individually.
-At this point, your Artist form has only <code>legalName</code> and <code>about</code>.
-The object under <code>data.guillotine.get</code> looks like this, with the values you entered in Content Studio:</p>
-</div>
-<div class="listingblock">
-<div class="title">Cardi B&#8217;s form data</div>
-<div class="content">
-<pre class="highlight"><code class="language-json" data-lang="json">{
-  "displayName": "Cardi B",
-  "dataAsJson": {
-    "legalName": "Belcalis Marlenis Almánzar",
-    "about": "Belcalis Marlenis Almánzar (born October 11, 1992), known professionally as Cardi B, is an American rapper and songwriter."
-  }
-}</code></pre>
-</div>
-</div>
-<div class="paragraph">
-<p>Use <code>dataAsJson</code> to inspect stored values.
-Use typed fields when you want to select specific fields or follow references, which you&#8217;ll try in a later chapter.</p>
-</div>
-</div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="search_your_content"><a class="link" href="#search_your_content">Search your content</a></h2>
-<div class="sectionbody">
-<div class="paragraph">
-<p>The <code>queryDsl</code> field also supports text searches.
-The "Dsl" stands for "Domain Specific Language": the structured query you pass to it describes which content to find.</p>
-</div>
-<div class="sect2">
-<h3 id="task_find_artists_by_their_description"><a class="link" href="#task_find_artists_by_their_description">Task: Find artists by their description</a></h3>
-<div class="olist arabic">
-<ol class="arabic">
-<li>
-<p><strong>Search the artist descriptions</strong> - Keep the Artist type filter and add a text search on <code>data.about</code>:</p>
-<div class="listingblock">
-<div class="content">
-<pre class="highlight"><code class="language-GraphQL" data-lang="GraphQL">{
-  guillotine {
-    queryDsl(
-      query: {
-        boolean: {
-          must: [
-            {
-              term: {
-                field: "type"
-                value: { string: "com.example.dev101:artist" }
-              }
-            }
-            {
-              ngram: {
-                fields: ["data.about"]
-                query: "rap"
-              }
-            }
-          ]
-        }
-      }
-    ) {
-      displayName
-      ... on com_example_dev101_Artist {
-        data {
-          about
-        }
-      }
-    }
-  }
-}</code></pre>
-</div>
-</div>
-</li>
-</ol>
-</div>
-<div class="paragraph">
-<p>The <code>boolean.must</code> list requires both conditions to match: the item must be an Artist, and its <code>about</code> text must match <code>rap</code>.
-The <code>ngram</code> expression finds partial words, so it can match "rapper".
-With the example descriptions, you should get Cardi B and Missy Elliott.
-The query returns each description so you can see why it matched.</p>
-</div>
-<div class="paragraph">
-<p>If your descriptions use different words, change <code>rap</code> to part of a word you entered, or edit a description in Content Studio, save it and run the query again.
-The <a href="https://developer.enonic.com/docs/code/stable/storage/querying">Query DSL reference</a> covers more search expressions and combinations.</p>
-</div>
-</div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="extend_the_content_model"><a class="link" href="#extend_the_content_model">Extend the content model</a></h2>
-<div class="sectionbody">
-<div class="paragraph">
-<p>Adding a form field also makes it available through GraphQL.
-You&#8217;ll add a birthday to the Artist content type and read it back through the API.</p>
-</div>
-<div class="sect2">
-<h3 id="task_add_and_query_birthdays"><a class="link" href="#task_add_and_query_birthdays">Task: Add and query birthdays</a></h3>
-<div class="olist arabic">
-<ol class="arabic">
-<li>
-<p><strong>Add the birthday field</strong> - Update the Artist content type:</p>
-<div class="listingblock">
-<div class="title">src/main/resources/cms/content-types/artist/artist.yaml</div>
-<div class="content">
-<pre class="highlight"><code class="language-yaml" data-lang="yaml">kind: "ContentType"
-title: "Artist"
-description: "Information about an artist"
-displayNamePlaceholder: "Stage name"
-superType: "base:structured"
-form:
-  - type: "TextLine"
-    name: "legalName"
-    label: "Legal name"
-    helpText: "The artist's name on official documents, if different from their stage name."
-  - type: "TextArea"
-    name: "about"
-    label: "About the artist"
-  - type: "Date"
-    name: "birthday"
-    label: "Birthday"</code></pre>
-</div>
-</div>
-<div class="paragraph">
-<p>The new <code>birthday</code> field uses the Date form item.
-Save the file while <code>enonic dev</code> is running, as in the previous chapter, and wait for the app to redeploy.</p>
-</div>
-</li>
-<li>
-<p><strong>Enter the birthdays</strong> - Open each artist in Content Studio, enter the birthday below and save:</p>
-<div class="ulist">
-<ul>
-<li>
-<p>Cardi B: <code>1992-10-11</code></p>
-</li>
-<li>
-<p>Missy Elliott: <code>1971-07-01</code></p>
-</li>
-<li>
-<p>P!nk: <code>1979-09-08</code></p>
-</li>
-</ul>
-</div>
-</li>
-<li>
-<p><strong>Reload the GraphQL schema</strong> - Close and reopen Query Playground to reload the GraphQL schema.
-Keep the <strong>Draft</strong> branch selected: these edits have not been published.
-Find <code>{app-name-query}_Artist_Data</code> in the Docs panel and notice its new <code>birthday</code> field.</p>
-</li>
-<li>
-<p><strong>Query the birthdays</strong> - Run the artist query with <code>birthday</code> selected:</p>
-<div class="listingblock">
-<div class="content">
-<pre class="highlight"><code class="language-GraphQL" data-lang="GraphQL">{
-  guillotine {
-    queryDsl(
-      query: {
-        term: {
-          field: "type"
-          value: { string: "com.example.dev101:artist" }
-        }
-      }
-    ) {
-      displayName
-      ... on com_example_dev101_Artist {
-        data {
-          birthday
-        }
-      }
-    }
-  }
-}</code></pre>
-</div>
-</div>
-<div class="paragraph">
-<p>The <code>data.guillotine.queryDsl</code> array now contains:</p>
-</div>
-<div class="listingblock">
-<div class="title">Artists with birthdays</div>
-<div class="content">
-<pre class="highlight"><code class="language-json" data-lang="json">[
-  {
-    "displayName": "Cardi B",
-    "data": {
-      "birthday": "1992-10-11"
-    }
-  },
-  {
-    "displayName": "Missy Elliott",
-    "data": {
-      "birthday": "1971-07-01"
-    }
-  },
-  {
-    "displayName": "P!nk",
-    "data": {
-      "birthday": "1979-09-08"
-    }
-  }
-]</code></pre>
-</div>
-</div>
-</li>
-</ol>
-</div>
-<div class="paragraph">
-<p>You changed the CMS schema and entered content; Guillotine made the new field available without any API code.</p>
-</div>
-</div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="other_clients"><a class="link" href="#other_clients">Other clients</a></h2>
-<div class="sectionbody">
-<div class="paragraph">
-<p>From outside Content Studio, send these same queries to <code><a href="http://localhost:8080/api/com.enonic.app.guillotine:graphql" class="bare">http://localhost:8080/api/com.enonic.app.guillotine:graphql</a></code>.
-This endpoint is shared by all content projects.
-An external client must specify the content project and branch, and authenticate to read drafts; Query Playground supplies that context for you.</p>
-</div>
-<div class="paragraph">
-<p>For example, the single-artist query with explicit project and branch arguments looks like this:</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="highlight"><code class="language-GraphQL" data-lang="GraphQL">{
-  guillotine(project: "my-first-project", branch: "draft") {
-    get(key: "/artists/cardi-b") {
-      displayName
-    }
-  }
-}</code></pre>
-</div>
-</div>
-<div class="paragraph">
-<p>The <code>project</code> argument is the content project&#8217;s identifier, <code>my-first-project</code>, rather than its display name, "My First Project".
-Setting <code>branch: "draft"</code> selects unpublished work; it does not authenticate the request.
-Use <code>branch: "master"</code> to read published content.</p>
-</div>
-<div class="paragraph">
-<p>Guillotine is a <em>Universal API</em>, served at <code>/api/&lt;app&gt;:&lt;name&gt;</code>.
-Its API name, <code>com.enonic.app.guillotine:graphql</code>, follows the API base URL, <code><a href="http://localhost:8080/api" class="bare">http://localhost:8080/api</a></code> on your sandbox.
-The media APIs you&#8217;ll use in the <a href="media.ahtml">next chapter</a> follow the same pattern.</p>
-</div>
-<div class="paragraph">
-<p>For browser requests from another origin, the server must allow that origin through CORS.
-The Guillotine documentation covers <a href="https://developer.enonic.com/docs/guillotine/stable/usage#curl">cURL requests</a>, <a href="https://developer.enonic.com/docs/guillotine/stable/usage#third-party-clients">third-party GraphQL clients</a> and <a href="https://developer.enonic.com/docs/guillotine/stable/configuration#config_file">CORS configuration for browsers</a>.
-For a complete JavaScript request, see the <a href="https://developer.enonic.com/docs/guillotine/stable/usage#javascript">Guillotine usage examples</a>.</p>
-</div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="dive_deeper"><a class="link" href="#dive_deeper">Dive deeper</a></h2>
-<div class="sectionbody">
-<div class="ulist">
-<ul>
-<li>
-<p>For more query examples and information about how to get up and running with Guillotine, check out the <a href="https://developer.enonic.com/docs/guillotine">Guillotine docs</a></p>
-</li>
-<li>
-<p>For pagination and aggregations, see the <a href="https://developer.enonic.com/docs/guillotine/stable/api#querydslcontentconnection">queryDslConnection reference</a>.</p>
-</li>
-<li>
-<p>If you want to learn more about GraphQL in general, the <a href="https://graphql.org/learn/"><em>Introduction to GraphQL</em> documentation</a> is a good place to start</p>
-</li>
-</ul>
-</div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="coming_up"><a class="link" href="#coming_up">Coming up</a></h2>
-<div class="sectionbody">
-<div class="paragraph">
-<p>You&#8217;ve found artists by type, selected their fields, retrieved a single item, searched descriptions and queried a new field from your content model.
-In the next chapter, you&#8217;ll see <a href="media.ahtml">how XP deals with files and images</a>.</p>
 </div>
 </div>
 </div>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2026-11-12 10:20:17 UTC
+Last updated 2026-11-12 10:22:56 UTC
 </div>
 </div>
 </body>

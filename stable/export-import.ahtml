@@ -5,7 +5,9 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="generator" content="Asciidoctor 2.0.26">
-<title>Data toolbox</title>
+<meta name="application-name" content="dev101">
+<meta name="description" content="Export your tutorial content with Content Studio, import it into another project, and verify the result through Guillotine.">
+<title>Exporting and importing content</title>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,300italic,400,400italic,600,600italic%7CNoto+Serif:400,400italic,700,700italic%7CDroid+Sans+Mono:400,700">
 <style>
 /*! Asciidoctor default stylesheet | MIT License | https://asciidoctor.org */
@@ -437,13 +439,26 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 </head>
 <body class="article toc2 toc-right">
 <div id="header">
-<h1>Data toolbox</h1>
+<h1>Exporting and importing content</h1>
 <div id="toc" class="toc2">
 <div id="toctitle">Table of Contents</div>
 <ul class="sectlevel1">
-<li><a href="#web_interface">Web interface</a></li>
-<li><a href="#examine_your_content">Examine your content</a></li>
-<li><a href="#summary">Summary</a></li>
+<li><a href="#export_the_content">Export the content</a>
+<ul class="sectlevel2">
+<li><a href="#task_export_the_animals_folder">Task: Export the Animals folder</a></li>
+</ul>
+</li>
+<li><a href="#import_the_folder">Import the folder</a>
+<ul class="sectlevel2">
+<li><a href="#task_import_the_animals_folder">Task: Import the Animals folder</a></li>
+</ul>
+</li>
+<li><a href="#verify_the_copy">Verify the copy</a>
+<ul class="sectlevel2">
+<li><a href="#task_check_the_imported_content">Task: Check the imported content</a></li>
+</ul>
+</li>
+<li><a href="#where_to_go_next">Where to go next</a></li>
 </ul>
 </div>
 </div>
@@ -451,117 +466,195 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <div id="preamble">
 <div class="sectionbody">
 <div class="paragraph">
-<p>In this chapter, we&#8217;ll give a short introduction to a popular application called Data Toolbox, the developers best friend for playing around with the low level NoSQL storage in Enonic XP.</p>
+<p>In this chapter, you&#8217;ll export the Animals folder and import it into a second content project using Content Studio.
+You&#8217;ll inspect the imported content and query the copy.</p>
 </div>
 </div>
 </div>
 <div class="sect1">
-<h2 id="web_interface"><a class="link" href="#web_interface">Web interface</a></h2>
+<h2 id="export_the_content"><a class="link" href="#export_the_content">Export the content</a></h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>Data Toolbox provides you with a web interface to visualize and manipulate your XP data, as well as other system related information. We&#8217;ll now see how to inspect content using Data Toolbox.</p>
+<p>The <strong>Content Exports</strong> context panel exports a content item, its descendants and their attachments.
+It copies the current Draft content; it does not include the full version history or reproduce which items are published.
+Continue using your administrator session: the panel is available to Content Administrators and System Administrators.</p>
 </div>
 <div class="paragraph">
-<p>Data Toolbox is <a href="https://market.enonic.com/vendors/glenn-ricaud/data-toolbox" target="_blank" rel="noopener">available on Enonic Market</a>.</p>
+<p>The Animals export includes its animals and the image stored beneath Lynx.
+References outside that tree, such as Lion&#8217;s image in the Images folder, do not bring their targets into the export.</p>
 </div>
-<div class="paragraph">
-<p>Just like Content Studio, Data toolbox should already have been installed, and can be launched from XP Admin: <code>XP menu</code> &#8594; <code>Data Toolbox</code>.</p>
-</div>
-<div class="imageblock">
-<div class="content">
-<img src="media/data-toolbox-landing-page.png" alt="The Data Toolbox landing page: grid of icons for administrative actions and accompanying explanations. " width="639w">
-</div>
-<div class="title">Figure 1. Data Toolbox</div>
-</div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="examine_your_content"><a class="link" href="#examine_your_content">Examine your content</a></h2>
-<div class="sectionbody">
-<div class="paragraph">
-<p>Follow these steps to find and examine what your content looks like from the low level storage perspective:</p>
-</div>
+<div class="sect2">
+<h3 id="task_export_the_animals_folder"><a class="link" href="#task_export_the_animals_folder">Task: Export the Animals folder</a></h3>
 <div class="olist arabic">
 <ol class="arabic">
 <li>
-<p>Navigate to the <code>Data Tree</code> in the menu. Here, the toolbox lists repositories within your XP instance, you should at least have the following:</p>
-<div class="dlist">
-<dl>
-<dt class="hdlist1">com.enonic.cms.my-first-project</dt>
-<dd>
-<p>This is the current repository that holds your content.</p>
-</dd>
-<dt class="hdlist1">com.enonic.cms.default</dt>
-<dd>
-<p>This is the default repository.</p>
-</dd>
-<dt class="hdlist1">system.auditlog</dt>
-<dd>
-<p>This is where the <em>audit log</em> is stored. The audit log allows you to see a log of everything that&#8217;s been done in your XP instance, such as content creation, user administration, etc., and also tells you when it was done and by whom.</p>
-</dd>
-<dt class="hdlist1">system-repo</dt>
-<dd>
-<p>This is where XP stores core data about your system, such as installed applications and users.</p>
-</dd>
-<dt class="hdlist1">system.scheduler</dt>
-<dd>
-<p>This is a separate repository where scheduled jobs are stored.</p>
-</dd>
-</dl>
-</div>
+<p><strong>Open the exports panel</strong> - In "My First Project", select Animals, show the Context Panel, and choose <strong>Content Exports</strong> from its selector.</p>
 </li>
 <li>
-<p>Move into <code>com.enonic.cms.my-first-project</code>. Here you will see two branches (as discussed above). As long as you&#8217;ve published your content, you can choose either one of these.</p>
-</li>
-<li>
-<p>Keep navigating further down the tree: <code>root</code> &#8594; <code>content</code>. Now you should see all the content of your site listed. Navigate to <code>artists</code> to find actual pieces of content.</p>
-</li>
-<li>
-<p>Choose one of your artists and check out both the info view and the JSON view, available via the buttons in the table row.</p>
+<p><strong>Name the export</strong> - Click <b class="button">Export</b> and keep the suggested name <code>animals</code>.</p>
 <div class="imageblock">
 <div class="content">
-<img src="media/data-toolbox-info-view.png" alt="The Data Toolbox info view. the view contains options for exporting, moving, and deleting the node, as well as for displaying permissions for the node, versions of the node, and indexing data (and much more)." width="750w">
+<img src="images/export-options.png" alt="Export options dialog with Animals selected and animals as the export name" width="480">
 </div>
-<div class="title">Figure 2. The Data Toolbox node info view</div>
-</div>
-</li>
-<li>
-<p>To inspect the data associated with the artist, you can select "Display properties", which will bring up data about the node, such as its display name, its owner, when it was created, etc.</p>
-<div class="imageblock">
-<div class="content">
-<img src="media/data-toolbox-properties.png" alt="A table with columns 'name', 'index, 'value', and 'type' that describes the node. Example names are 'valid', 'type', 'displayName'." width="606w">
-</div>
-<div class="title">Figure 3. The display properties view</div>
+<div class="title">Figure 1. Exporting Animals and its descendants</div>
 </div>
 </li>
 <li>
-<p>Finally, you can navigate to the <code>data</code> property, where you&#8217;ll find the data stored on the artist.</p>
+<p><strong>Create the export</strong> - Click <b class="button">Export</b> in the dialog and wait for the result.
+Content Studio adds the installation, project and timestamp to the name, so you can distinguish it from other exports.
+Close the dialog.</p>
+</li>
+</ol>
+</div>
+<div class="paragraph">
+<p>The export stays on the sandbox&#8217;s server; nothing is downloaded to your browser.
+It will be available in the panel when you switch projects on this sandbox.</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+To download an export for transfer to another installation, open the <a href="https://market.enonic.com/vendors/glenn-ricaud/data-toolbox">Data Toolbox</a> admin tool, select it under <strong>Node exports</strong>, and choose <strong>Archive and download selected node exports</strong>.
+Data Toolbox also lets you upload exports on the destination server.
+For command-line export and import operations, see the <a href="https://developer.enonic.com/docs/enonic-cli/stable/xp#export">Enonic CLI documentation</a>; these commands use exports stored on the server and do not download them to your computer.
+</td>
+</tr>
+</table>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="import_the_folder"><a class="link" href="#import_the_folder">Import the folder</a></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>The export contains content data, while your app supplies the schemas that describe it.
+Assign the same app to the destination project so Content Studio can edit the imported animals and Guillotine can expose their fields.</p>
+</div>
+<div class="paragraph">
+<p>Importing preserves content IDs, which lets references resolve when their targets are present in the destination project.
+An import can also update items with matching IDs, so importing again may replace edits made in the destination.
+It does not delete other content.</p>
+</div>
+<div class="sect2">
+<h3 id="task_import_the_animals_folder"><a class="link" href="#task_import_the_animals_folder">Task: Import the Animals folder</a></h3>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p><strong>Create another project</strong> - Open <strong>Settings</strong> and click <b class="button">New</b>, then follow the <a href="content-studio.ahtml#_task_your_first_project">earlier project-creation example</a>.
+Use the same settings, including the <strong>Developer 101</strong> app, but name the project "Tutorial Copy" with identifier <code>tutorial-copy</code>.</p>
+</li>
+<li>
+<p><strong>Open the destination</strong> - Return to <strong>Content</strong> and use the project selector in the top bar to switch to "Tutorial Copy".
+Show the Context Panel and choose <strong>Content Exports</strong>.</p>
+</li>
+<li>
+<p><strong>Choose the Animals export</strong> - Under <strong>Imports</strong>, select the export whose name contains <code>my-first-project-animals-</code> and the timestamp from your export.
+Click <b class="button">Import</b>.</p>
+</li>
+<li>
+<p><strong>Import at the top level</strong> - Check that <strong>Import into</strong> is <strong>Project root</strong>.
+Leave <strong>Preserve original first-published timestamp</strong> selected and click <b class="button">Import</b>.
+Wait for the result, then close the dialog.</p>
 <div class="imageblock">
 <div class="content">
-<img src="media/data-toolbox-properties-data.png" alt="A table showing the data we stored about the artist previously." width="606w">
+<img src="images/import-options.png" alt="Import options dialog showing the Animals export, Project root as the destination and Preserve original first-published timestamp selected" width="720">
 </div>
-<div class="title">Figure 4. The properties.data view</div>
+<div class="title">Figure 2. Importing Animals at the destination project&#8217;s root</div>
 </div>
 </li>
 </ol>
 </div>
+<div class="paragraph">
+<p>The imported content is in Draft, ready for review.
+Preserving its first-published timestamp retains metadata; it does not publish the imported items.</p>
+</div>
+</div>
 </div>
 </div>
 <div class="sect1">
-<h2 id="summary"><a class="link" href="#summary">Summary</a></h2>
+<h2 id="verify_the_copy"><a class="link" href="#verify_the_copy">Verify the copy</a></h2>
 <div class="sectionbody">
-<div class="paragraph">
-<p>Inspecting content is only a fraction of what Data Toolbox can do: it&#8217;s a versatile and powerful administrative tool, and we&#8217;ll see more of it in a later chapter.</p>
+<div class="sect2">
+<h3 id="task_check_the_imported_content"><a class="link" href="#task_check_the_imported_content">Task: Check the imported content</a></h3>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p><strong>Inspect the content and media</strong> - In "Tutorial Copy", open Lynx and check its rich text, linked Lion and inserted image.
+Check that <code>/animals/lynx/lynx.jpg</code> exists.
+Lion&#8217;s selected image is unavailable in this project because it was outside the exported tree.</p>
+</li>
+<li>
+<p><strong>Query the imported content</strong> - Open Query Playground and run this query against the destination project&#8217;s Draft branch:</p>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-graphql" data-lang="graphql">{
+  guillotine(project: "tutorial-copy", branch: "draft") {
+    get(key: "/animals/lynx") {
+      displayName
+      _path
+    }
+  }
+}</code></pre>
+</div>
 </div>
 <div class="paragraph">
-<p>Now, let&#8217;s have a look at the <a href="headless-api.ahtml">cutting edge headless cms API - aka Guillotine</a>.</p>
+<p>The response should contain Lynx at <code>/animals/lynx</code> in "Tutorial Copy".
+The copy remains in Draft; publishing is a separate action, as in the <a href="permissions.ahtml">permissions chapter</a>.</p>
+</div>
+</li>
+</ol>
+</div>
+<div class="paragraph">
+<p>The two projects now hold separate copies of the content.
+Editing one does not update the other; importing is a one-time transfer, not ongoing synchronization.</p>
+</div>
+<div class="paragraph">
+<p>For the panel&#8217;s other options and transferring exports between installations, see the <a href="https://developer.enonic.com/docs/content-studio/stable/contextpanel/export">Content Studio export documentation</a>.</p>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="where_to_go_next"><a class="link" href="#where_to_go_next">Where to go next</a></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>You&#8217;ve modeled content, queried it through Guillotine, controlled access, and copied it into another project.
+Compare your schemas and sample content with the <a href="https://github.com/enonic/tutorial-developer-101/tree/master">completed example app on GitHub</a>.
+Its README explains how to build and install the finished result in a separate sandbox.</p>
+</div>
+<div class="paragraph">
+<p>Continue with these guides to use your content in an application or explore more of Enonic:</p>
+</div>
+<div class="dlist">
+<dl>
+<dt class="hdlist1"><a href="https://developer.enonic.com/docs/guillotine/stable/usage">Guillotine usage</a></dt>
+<dd>
+<p>Sending requests from cURL, JavaScript and other clients, authentication, CORS configuration, and further query examples.</p>
+</dd>
+<dt class="hdlist1"><a href="https://developer.enonic.com/learn/react-spa/stable">React SPA tutorial</a></dt>
+<dd>
+<p>Building a React application with content lists, detail views, routing, rich text, images and macros.</p>
+</dd>
+<dt class="hdlist1"><a href="https://developer.enonic.com/docs/next.xp">Building sites with Enonic and Next.js</a></dt>
+<dd>
+<p>Building Next.js sites with Enonic as your CMS, including visual editing.</p>
+</dd>
+<dt class="hdlist1"><a href="https://developer.enonic.com/docs/graphql-tutorial">Building a custom GraphQL API</a></dt>
+<dd>
+<p>Building your own GraphQL API on Enonic XP, with mutations and subscriptions.</p>
+</dd>
+</dl>
 </div>
 </div>
 </div>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2026-11-12 10:19:54 UTC
+Last updated 2026-11-12 10:22:31 UTC
 </div>
 </div>
 </body>

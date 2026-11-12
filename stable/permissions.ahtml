@@ -6,7 +6,8 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="generator" content="Asciidoctor 2.0.26">
 <meta name="application-name" content="dev101">
-<title>Developer 101 — Content Modeling and the GraphQL API</title>
+<meta name="description" content="Publish your tutorial content, test public and restricted access, and understand how editorial roles separate editing from publishing.">
+<title>Permissions and publishing</title>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,300italic,400,400italic,600,600italic%7CNoto+Serif:400,400italic,700,700italic%7CDroid+Sans+Mono:400,700">
 <style>
 /*! Asciidoctor default stylesheet | MIT License | https://asciidoctor.org */
@@ -438,11 +439,27 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 </head>
 <body class="article toc2 toc-right">
 <div id="header">
-<h1>Developer 101 — Content Modeling and the GraphQL API</h1>
+<h1>Permissions and publishing</h1>
 <div id="toc" class="toc2">
 <div id="toctitle">Table of Contents</div>
 <ul class="sectlevel1">
-<li><a href="#introduction">Introduction</a></li>
+<li><a href="#publish_the_tutorial_content">Publish the tutorial content</a>
+<ul class="sectlevel2">
+<li><a href="#task_publish_the_folders_and_their_contents">Task: Publish the folders and their contents</a></li>
+</ul>
+</li>
+<li><a href="#public_and_restricted_access">Public and restricted access</a>
+<ul class="sectlevel2">
+<li><a href="#task_read_the_published_content_anonymously">Task: Read the published content anonymously</a></li>
+<li><a href="#task_restrict_lynx">Task: Restrict Lynx</a></li>
+</ul>
+</li>
+<li><a href="#who_can_edit_and_publish">Who can edit and publish?</a>
+<ul class="sectlevel2">
+<li><a href="#give_teams_access_to_specific_content">Give teams access to specific content</a></li>
+</ul>
+</li>
+<li><a href="#coming_up">Coming up</a></li>
 </ul>
 </div>
 </div>
@@ -450,89 +467,308 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <div id="preamble">
 <div class="sectionbody">
 <div class="paragraph">
-<p>Hands-on introduction to modeling content in Enonic and reading it through the Guillotine GraphQL API.</p>
+<p>In this chapter, you&#8217;ll publish the content you&#8217;ve created, control who can read it, and learn how editorial permissions separate editing from publishing.</p>
+</div>
+<div class="paragraph">
+<p>Publishing copies the current draft to the <code>master</code> branch.
+Permissions determine who can read that version, and who can edit or publish the content.
+You&#8217;ll explore reading access first, then editorial permissions.</p>
 </div>
 </div>
 </div>
 <div class="sect1">
-<h2 id="introduction"><a class="link" href="#introduction">Introduction</a></h2>
+<h2 id="publish_the_tutorial_content"><a class="link" href="#publish_the_tutorial_content">Publish the tutorial content</a></h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>This tutorial is for developers who define content types and build front-ends against Enonic&#8217;s GraphQL API. It covers content modeling, schema management and the Guillotine API, using the Enonic CLI, Content Studio and a local sandbox. Every chapter builds on the previous one, so you gain understanding incrementally while building a small content model of your own.</p>
+<p>Some artists were published earlier, but the later chapters added content and changed existing items.
+Start by publishing all those additions and changes using your administrator session from the <a href="setup.ahtml">setup chapter</a>.</p>
+</div>
+<div class="sect2">
+<h3 id="task_publish_the_folders_and_their_contents"><a class="link" href="#task_publish_the_folders_and_their_contents">Task: Publish the folders and their contents</a></h3>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p><strong>Select the tutorial content</strong> - In Content Studio, open "My First Project" and select the Animals, Artists and Images folders together.</p>
+</li>
+<li>
+<p><strong>Include the folders' contents</strong> - Open the publishing action&#8217;s dropdown and choose <b class="button">Publish tree</b>.
+This opens the Publishing Wizard with <strong>Include child items</strong> selected automatically for each folder.</p>
+</li>
+<li>
+<p><strong>Review the selection</strong> - Review the wizard to ensure that the content includes <code>/animals/lynx/lynx.jpg</code>. If the wizard reports items are in progress, click <b class="button">Mark as ready</b>.</p>
+</li>
+<li>
+<p><strong>Publish the content</strong> - Once the content is valid and ready, click <b class="button">Publish now</b> and verify that the content is Online with no pending changes.</p>
+</li>
+</ol>
 </div>
 <div class="paragraph">
-<p>Along the way you will:</p>
+<p>The <a href="https://developer.enonic.com/docs/content-studio/stable/actions/publish">Content Studio publishing documentation</a> explains the wizard&#8217;s other options.</p>
 </div>
-<div class="ulist">
-<ul>
-<li>
-<p><a href="setup.ahtml">set up</a> the CLI, a local sandbox and your own app</p>
-</li>
-<li>
-<p>create content types and content in <a href="content-studio.ahtml">Content Studio</a></p>
-</li>
-<li>
-<p>query your content through the <a href="headless-api.ahtml">Headless API</a></p>
-</li>
-<li>
-<p>upload <a href="media.ahtml">images and other media</a>, and serve them scaled and cropped</p>
-</li>
-<li>
-<p>model richer content with <a href="form-items.ahtml">form items</a>, <a href="sets.ahtml">sets and form fragments</a>, <a href="rich-text.ahtml">rich text</a> and <a href="mixins.ahtml">mixins</a></p>
-</li>
-<li>
-<p>publish your content and explore <a href="permissions.ahtml">read and editorial permissions</a></p>
-</li>
-<li>
-<p><a href="export-import.ahtml">export and import</a> your content into another project</p>
-</li>
-</ul>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="public_and_restricted_access"><a class="link" href="#public_and_restricted_access">Public and restricted access</a></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>You chose <strong>Public</strong> when creating the content project.
+This gives its content public read access by default, represented by the <strong>Everyone</strong> role, which includes anonymous callers.</p>
 </div>
 <div class="paragraph">
-<p>Two things to know before you start:</p>
+<p>Even if your project is <strong>Public</strong>, published items can still be restricted. Regardless of the project&#8217;s or item&#8217;s access mode, draft items are never accessible to anonymous callers.</p>
 </div>
-<div class="ulist">
-<ul>
-<li>
-<p><strong>No coding.</strong> You will not write application code. You will edit YAML schemas, run GraphQL queries, and use ready-to-run cURL requests to test the API. There is nothing to compile or debug.</p>
-</li>
-<li>
-<p><strong>No pages.</strong> Sites, pages, layouts and parts - the whole page domain of Enonic - are left out entirely. To learn more about pages, check out the <a href="https://developer.enonic.com/docs/next.xp">Next.js tutorial</a>, the <a href="https://developer.enonic.com/learn/react4xp-tutorial/stable">React4XP tutorial</a>, or the <a href="https://developer.enonic.com/learn/building-enonic-sites/stable">My First Site</a> tutorials.</p>
-</li>
-</ul>
+<div class="sect2">
+<h3 id="task_read_the_published_content_anonymously"><a class="link" href="#task_read_the_published_content_anonymously">Task: Read the published content anonymously</a></h3>
+<div class="paragraph">
+<p>This query fetches the published Lynx:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-graphql" data-lang="graphql">{
+  guillotine(project: "my-first-project", branch: "master") {
+    get(key: "/animals/lynx") {
+      displayName
+    }
+  }
+}</code></pre>
+</div>
 </div>
 <div class="paragraph">
-<p>The <a href="https://developer.enonic.com/docs/cms">CMS reference documentation</a> covers every topic in this tutorial in depth, and is the place to go once you know what you are looking for.</p>
+<p>Query Playground supplies your login, so it cannot demonstrate anonymous access from your administrator session.</p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p><strong>Fetch Lynx anonymously</strong> - Run the same query from a terminal with this ready-to-run cURL command, which sends no login credentials or browser cookies:</p>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-shell" data-lang="shell">curl 'http://localhost:8080/api/com.enonic.app.guillotine:graphql' \
+  -H 'Content-Type: application/json' \
+  --data-binary '{"query":"{ guillotine(project: \"my-first-project\", branch: \"master\") { get(key: \"/animals/lynx\") { displayName } } }"}'</code></pre>
+</div>
 </div>
 <div class="paragraph">
-<p>The <a href="https://github.com/enonic/tutorial-developer-101/tree/master">completed example app on GitHub</a> contains the finished schemas and sample content for comparison as you work through the tutorial.
-To explore the finished result, follow its README to build and install it in a separate sandbox.
-It uses the same app key (<code>com.example.dev101</code>) and content project identifier (<code>my-first-project</code>) as the exercises; installing it in your exercise sandbox would replace your app.</p>
+<p>Lynx is returned:</p>
 </div>
-<div class="admonitionblock note">
-<table>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-json" data-lang="json">{
+  "data": {
+    "guillotine": {
+      "get": { "displayName": "Lynx" }
+    }
+  }
+}</code></pre>
+</div>
+</div>
+</li>
+</ol>
+</div>
+<div class="paragraph">
+<p>The <a href="https://developer.enonic.com/docs/guillotine/stable/usage#request-format">Guillotine usage documentation</a> explains the HTTP request format in more detail.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="task_restrict_lynx"><a class="link" href="#task_restrict_lynx">Task: Restrict Lynx</a></h3>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p><strong>Find Lynx&#8217;s access settings</strong> - Open Lynx in Content Studio, show the Context Panel, and select <strong>Details</strong> if another panel is active.</p>
+</li>
+<li>
+<p><strong>Restrict public access</strong> - Click <b class="button">Edit permissions</b>.
+Under Access Mode, choose <strong>Restricted</strong>, leaving the listed users and roles unchanged.</p>
+<div class="imageblock">
+<div class="content">
+<img src="images/permissions-access.png" alt="Permissions wizard for Lynx showing the project roles and Restricted access selected" width="880">
+</div>
+<div class="title">Figure 1. Restricting Lynx while preserving access for its project roles</div>
+</div>
+</li>
+<li>
+<p><strong>Apply the restriction to Lynx only</strong> - Click <b class="button">Next</b> and choose <strong>This item</strong> as the scope.
+Continue to the summary and click <b class="button">Apply changes</b>.</p>
+</li>
+<li>
+<p><strong>Test anonymous access</strong> - Fetch Lynx and its still-public child image with this expanded query:</p>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-graphql" data-lang="graphql">{
+  guillotine(project: "my-first-project", branch: "master") {
+    animal: get(key: "/animals/lynx") {
+      displayName
+    }
+    image: get(key: "/animals/lynx/lynx.jpg") {
+      displayName
+    }
+  }
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p><code>animal</code> and <code>image</code> are GraphQL aliases: they name the two results so the query can call <code>get</code> twice.</p>
+</div>
+<div class="paragraph">
+<p>Run this updated anonymous cURL request:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-shell" data-lang="shell">curl 'http://localhost:8080/api/com.enonic.app.guillotine:graphql' \
+  -H 'Content-Type: application/json' \
+  --data-binary '{"query":"{ guillotine(project: \"my-first-project\", branch: \"master\") { animal: get(key: \"/animals/lynx\") { displayName } image: get(key: \"/animals/lynx/lynx.jpg\") { displayName } } }"}'</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The restricted animal is hidden, but the public image is returned:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-json" data-lang="json">{
+  "data": {
+    "guillotine": {
+      "animal": null,
+      "image": { "displayName": "lynx" }
+    }
+  }
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Your image&#8217;s display name may differ if you chose another photograph.</p>
+</div>
+</li>
+<li>
+<p><strong>Test administrator access</strong> - In Content Studio&#8217;s Query Playground, run the expanded GraphQL query using your administrator session.
+Confirm that both items are visible to this administrator.</p>
+</li>
+<li>
+<p><strong>Restore public access</strong> - Reopen Lynx&#8217;s permissions and change Access Mode back to <strong>Public</strong>.
+Choose <strong>This item</strong> as the scope, review the summary, and apply the changes.
+Run the two-item anonymous request again and confirm that both items are returned.</p>
+</li>
+</ol>
+</div>
+<div class="paragraph">
+<p>Lynx remained published throughout this exercise; the results changed with the caller&#8217;s read access.
+Permission changes take effect on draft and published content without republishing.</p>
+</div>
+<div class="paragraph">
+<p>The image stayed public because it has its own permissions, copied from its parent when created.
+Changing the parent&#8217;s permissions later only affects existing children if you explicitly include them.</p>
+</div>
+<div class="paragraph">
+<p>Read permissions cover the entire content item, including mixin values: naming a mixin "Editorial" does not make its Notes field private.
+See the <a href="https://developer.enonic.com/docs/content-studio/stable/workbench/permissions">Content Studio permissions documentation</a> for more on access levels and available operations.</p>
+</div>
+<div class="paragraph">
+<p>XP can grant read access to individual users, groups, or roles on each content item.
+Restricted content can therefore be available to selected customers, partners, or employees.
+Guillotine applies those permissions to the authenticated caller, so different users can receive different results from the same query.</p>
+</div>
+<div class="paragraph">
+<p>Users can sign in through an organization&#8217;s existing identity provider, such as Microsoft Entra ID, using an appropriate XP ID provider integration.
+Authentication establishes who the user is; content permissions determine what they can read or manage.
+The <a href="https://developer.enonic.com/docs/platform/stable/security/idproviders">ID provider documentation</a> explains how XP connects to external identity systems.</p>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="who_can_edit_and_publish"><a class="link" href="#who_can_edit_and_publish">Who can edit and publish?</a></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>You&#8217;ve used your administrator session so far, with full access to the content.
+An ordinary content author has a different set of permissions.
+Project roles provide the usual access levels, and content permissions control the operations allowed on individual items.</p>
+</div>
+<div class="paragraph">
+<p>Two common project roles separate editing from publishing:</p>
+</div>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 25%;">
+<col style="width: 75%;">
+</colgroup>
+<thead>
 <tr>
-<td class="icon">
-<i class="fa icon-note" title="Note"></i>
-</td>
-<td class="content">
-When we mention "XP", we are referring to "Enonic XP", the platform behind Enonic.
-</td>
+<th class="tableblock halign-left valign-top">Project role</th>
+<th class="tableblock halign-left valign-top">Default content access</th>
 </tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Author</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Read, create, edit and delete content, without publishing it</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Editor</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Author access plus publishing and changing content permissions</p></td>
+</tr>
+</tbody>
 </table>
+<div class="paragraph">
+<p>An Author can save changes in Draft and mark the content ready, but publishing requires an Editor or another account with publishing permission.
+Marking an item ready changes its workflow status; it does not grant permission or update the published version.
+Authors can <a href="https://developer.enonic.com/docs/content-studio/stable/workflow/issues#publish_requests">request publishing</a> from an authorized editor.</p>
 </div>
 <div class="paragraph">
-<p>If you have any questions, or just want to get in touch, visit the <a href="https://discuss.enonic.com">Forum</a> or join the <a href="https://slack.enonic.com/">Community Slack channel</a>.</p>
+<p>The <a href="https://developer.enonic.com/docs/content-studio/stable/projects#project-roles">project roles reference</a> explains how to assign users and groups, along with the other available roles.</p>
+</div>
+<div class="sect2">
+<h3 id="give_teams_access_to_specific_content"><a class="link" href="#give_teams_access_to_specific_content">Give teams access to specific content</a></h3>
+<div class="paragraph">
+<p>You can use groups to divide responsibility within a project.
+For example, an administrator could create an <strong>Animals editors</strong> group in the Users tool, add the people responsible for animals, and assign the group the project&#8217;s <strong>Contributor</strong> role.
+This gives them access to the project in Content Studio with read access as their starting point.</p>
 </div>
 <div class="paragraph">
-<p>The first step is to <a href="setup.ahtml">get your tools in place</a>. Good luck! 🙌</p>
+<p>In the Animals folder&#8217;s <strong>Edit permissions</strong> dialog, grant that group <strong>Can Write</strong> and apply the change to the folder and its existing child items.
+Members can then create, edit and delete content in the Animals subtree, including its media, while Artists and Images remain read-only.
+They can save drafts and request publishing, but cannot publish them.
+New items created beneath Animals receive a copy of their parent&#8217;s permissions.</p>
+</div>
+<div class="paragraph">
+<p>Access combines all the permissions a user receives through their groups and roles.
+For this arrangement to limit editing to Animals, the members must not also have project-wide Author or Editor access, administrator access, or another grant that allows editing elsewhere.</p>
+</div>
+<div class="paragraph">
+<p>The same approach supports other responsibilities:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Animal publishers</strong> could have <strong>Can Publish</strong> on Animals and its children, allowing that team to review and publish the animal team&#8217;s work.</p>
+</li>
+<li>
+<p><strong>Image curators</strong> could have <strong>Can Write</strong> on Images and its children, allowing them to manage shared media while leaving the animal and artist descriptions to other teams.</p>
+</li>
+<li>
+<p><strong>Proofreaders</strong> could have <strong>Custom</strong> access with only <strong>Read</strong> and <strong>Modify</strong> on selected items, allowing corrections to existing content without creating, deleting or publishing items.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>These examples build on the same Contributor baseline, with additional permissions granted where each team needs them.
+Managing group membership lets you change who belongs to a team without editing every content item&#8217;s permissions.
+See the <a href="https://developer.enonic.com/docs/content-studio/stable/workbench/permissions#edit_permissions">content permissions reference</a> for the permission levels and options for applying changes to children.</p>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="coming_up"><a class="link" href="#coming_up">Coming up</a></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>You&#8217;ve published your content, compared public and restricted access, and learned how editorial roles separate editing from publishing.
+In the next chapter, you&#8217;ll <a href="export-import.ahtml">export your content and import it into another project</a>.</p>
 </div>
 </div>
 </div>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2026-11-12 10:20:17 UTC
+Last updated 2026-11-12 10:22:31 UTC
 </div>
 </div>
 </body>

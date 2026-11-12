@@ -5,8 +5,8 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="generator" content="Asciidoctor 2.0.26">
-<meta name="description" content="Introducing a fundamental concept of Enonic XP development: sandboxes.">
-<title>Sandbox</title>
+<meta name="description" content="Starting from scratch, this chapter takes you through how to install all the necessary tools to get started with Enonic XP development.">
+<title>Setting up your development environment</title>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,300italic,400,400italic,600,600italic%7CNoto+Serif:400,400italic,700,700italic%7CDroid+Sans+Mono:400,700">
 <style>
 /*! Asciidoctor default stylesheet | MIT License | https://asciidoctor.org */
@@ -438,15 +438,28 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 </head>
 <body class="article toc2 toc-right">
 <div id="header">
-<h1>Sandbox</h1>
+<h1>Setting up your development environment</h1>
 <div id="toc" class="toc2">
 <div id="toctitle">Table of Contents</div>
 <ul class="sectlevel1">
-<li><a href="#what_is_a_sandbox">What is a sandbox?</a></li>
-<li><a href="#your_first_sandbox">Your first sandbox</a></li>
-<li><a href="#stopping_and_starting">Stopping and starting</a></li>
-<li><a href="#xp_admin">XP Admin</a></li>
-<li><a href="#troubleshooting">Troubleshooting</a></li>
+<li><a href="#enonic_cli">Enonic CLI</a>
+<ul class="sectlevel2">
+<li><a href="#installation">Installation</a></li>
+<li><a href="#verification">Verification</a></li>
+<li><a href="#commands">Commands</a></li>
+</ul>
+</li>
+<li><a href="#git">Git</a>
+<ul class="sectlevel2">
+<li><a href="#installation_2">Installation</a></li>
+<li><a href="#verification_2">Verification</a></li>
+</ul>
+</li>
+<li><a href="#editor">Editor</a>
+<ul class="sectlevel2">
+<li><a href="#download_visual_studio_code">Download Visual Studio Code</a></li>
+</ul>
+</li>
 <li><a href="#summary">Summary</a></li>
 </ul>
 </div>
@@ -455,122 +468,23 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <div id="preamble">
 <div class="sectionbody">
 <div class="paragraph">
-<p>In this chapter we&#8217;ll introduce a fundamental concept to start developing with Enonic XP - <strong>Sandboxes</strong></p>
+<p>The purpose of this chapter is to ensure you have the necessary tools to start developing efficiently with XP.</p>
 </div>
 <div class="paragraph">
-<p>By the end, you&#8217;ll have created and started a sandbox using the CLI, understanding what it is and what is their purpose.</p>
-</div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="what_is_a_sandbox"><a class="link" href="#what_is_a_sandbox">What is a sandbox?</a></h2>
-<div class="sectionbody">
-<div class="paragraph">
-<p>A <em>sandbox</em> is basically a local developer instance of Enonic XP. Each sandbox may have different versions of XP, different data and configuration.</p>
-</div>
-<div class="paragraph">
-<p>Having a local (and running) instance of XP is essential for developing apps on Enonic XP.</p>
-</div>
-<div class="paragraph">
-<p>It is possible to setup multiple sandboxes on your machine, each one of them using XP on a specific version.</p>
-</div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="your_first_sandbox"><a class="link" href="#your_first_sandbox">Your first sandbox</a></h2>
-<div class="sectionbody">
-<div class="paragraph">
-<p>To create a sandbox using the CLI, start by running the following command:</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="highlight"><code class="language-shell" data-lang="shell">enonic enonic sandbox create tutorial -t essentials -v 7.16.4</code></pre>
-</div>
-</div>
-<div class="paragraph">
-<p>This creates a sandbox called <code>tutorial</code> based on the <code>essentials</code> templat (a set of applications on Enonic Market), and starts it. The <code>-v</code> forces the use of an XP7 version.</p>
-</div>
-<div class="paragraph">
-<p>You will now see a fair amount of output in your terminal, here are the most notable parts:</p>
-</div>
-<div class="listingblock">
-<div class="title">Creating the sandbox</div>
-<div class="content">
-<pre class="highlight"><code class="language-shell" data-lang="shell">Loading templates from Enonic Market...Done.
-Using template 'Essentials'
-Loading...Done
-Downloading distro [=======================================================] 100.00%
-Unzipping distro...Done
-
-Sandbox 'tutorial' created with distro 'enonic-xp-mac-sdk-7.16.4'.</code></pre>
-</div>
-</div>
-<div class="listingblock">
-<div class="title">Starting the sandbox</div>
-<div class="content">
-<pre class="highlight"><code class="language-shell" data-lang="shell">____________________________(_)______   ____  _________
-_  _ \_  __ \  __ \_  __ \_  /_  ___/   __  |/_/__  __ \
-/  __/  / / / /_/ /  / / /  / / /__     __&gt;  &lt; __  /_/ /
-\___//_/ /_/\____//_/ /_//_/  \___/     /_/|_| _  .___/
-                                               /_/
-
-# Enonic XP 7.16.4
-# Built on 2023-07-26T12:31:19Z (hash = d5bf8d725738b778e153d839f16cdaa9e4641444, branch = d5bf8d725738b778e153d839f16cdaa9e4641444)
-# OpenJDK 64-Bit Server VM 17.0.7 (GraalVM Community)
-# Linux 5.19.0-50-generic (amd64)
-# Install directory is /home/username/.enonic/distributions/enonic-xp-linux-sdk-7.16.4
-# Home directory is /home/username/.enonic/sandboxes/tutorial/home
-
-*
-* DEV mode is ON. This will slow down the system and should NOT BE used in production.
-*
-[...]</code></pre>
-</div>
-</div>
-<div class="paragraph">
-<p>This gives you some useful information about this sandbox, including its XP version, and the Home directory.</p>
-</div>
-<div class="listingblock">
-<div class="title">Reserved ports</div>
-<div class="content">
-<pre class="highlight"><code class="language-shell" data-lang="shell">[...] - Started xp@523d2774{HTTP/1.1,[http/1.1]}{0.0.0.0:8080}
-[...] - Started api@22bce39c{HTTP/1.1,[http/1.1]}{0.0.0.0:4848}
-[...] - Started status@37f8a3e8{HTTP/1.1,[http/1.1]}{0.0.0.0:2609}
-[...] - Started @12314ms
-[...] - Started Jetty
-[...] - Listening on ports [8080](xp), [4848](management) and [2609](monitoring)
-[...] - Searching for installed applications
-[...] - Found [0] installed applications
-[...] - Started Enonic XP in 11207 ms
-[...]</code></pre>
-</div>
-</div>
-<div class="paragraph">
-<p>This means that your local XP instance is up and running and ready to serve requests. The instance exposes the following ports:</p>
+<p>In general, the bare minimum you&#8217;ll need is:</p>
 </div>
 <div class="ulist">
 <ul>
 <li>
-<p><strong>8080</strong>: Web</p>
+<p>Enonic CLI &#8594; <em>managing your XP projects</em></p>
 </li>
 <li>
-<p><strong>4848</strong>: Management API (Used by the CLI when running commands against this XP instance)</p>
+<p>Git / Github &#8594; <em>versioning your XP projects</em></p>
 </li>
 <li>
-<p><strong>2609</strong>: Monitoring API (Used for metrics and instance info)</p>
+<p>Editor / IDE (Integrated Development Environment) &#8594; <em>coding your ideas into XP projects</em></p>
 </li>
 </ul>
-</div>
-<div class="listingblock">
-<div class="title">Installing and starting applications</div>
-<div class="content">
-<pre class="highlight"><code class="language-shell" data-lang="shell">[...] - Installed application com.enonic.app.contentstudio bundle 101
-[...] - Registering application com.enonic.app.contentstudio bundle 101
-[...] - Global Application [com.enonic.app.contentstudio] installed successfully</code></pre>
-</div>
-</div>
-<div class="paragraph">
-<p>The sandbox will download and install the applications from the <code>essentials</code> template, producing logs like you see above. Applications may also produces logs when it is started.</p>
 </div>
 <div class="admonitionblock tip">
 <table>
@@ -579,7 +493,7 @@ _  _ \_  __ \  __ \_  __ \_  /_  ___/   __  |/_/__  __ \
 <i class="fa icon-tip" title="Tip"></i>
 </td>
 <td class="content">
-If you experience problems starting the sandbox, check the Troubleshooting section at the end of this chapter.
+If you&#8217;ve already got this configured and installed, feel free to skip to the next chapter.
 </td>
 </tr>
 </table>
@@ -587,124 +501,45 @@ If you experience problems starting the sandbox, check the Troubleshooting secti
 </div>
 </div>
 <div class="sect1">
-<h2 id="stopping_and_starting"><a class="link" href="#stopping_and_starting">Stopping and starting</a></h2>
+<h2 id="enonic_cli"><a class="link" href="#enonic_cli">Enonic CLI</a></h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>To stop your sandbox, press <kbd>ctrl-c</kbd> in the terminal hosting the process. You can also run <code>enonic sandbox stop</code> in a different terminal instance.</p>
+<p>Enonic provides a Command Line Interface (CLI) for working with XP.</p>
 </div>
 <div class="paragraph">
-<p>To start your sandbox, use the following command:</p>
-</div>
-<div class="literalblock">
-<div class="content">
-<pre>enonic sandbox start tutorial</pre>
-</div>
-</div>
-<div class="admonitionblock note">
-<table>
-<tr>
-<td class="icon">
-<i class="fa icon-note" title="Note"></i>
-</td>
-<td class="content">
-The sandbox starts in development (aka dev) mode by default. To run the sandbox in production mode simply add <code>--prod</code> to the start command
-</td>
-</tr>
-</table>
-</div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="xp_admin"><a class="link" href="#xp_admin">XP Admin</a></h2>
-<div class="sectionbody">
-<div class="paragraph">
-<p>Let&#8217;s have a look at the Sandbox' web interface. Open <a href="http://localhost:8080" target="_blank" rel="noopener">http://localhost:8080</a> in your browser (or just click this link).</p>
+<p>If the concept of CLI is new to you, you can imagine it as an interactive terminal program that will listen for some specific inputs (usually as text), and based on them, execute specific tasks on your machine.</p>
 </div>
 <div class="paragraph">
-<p>You should now see the XP boot page:</p>
+<p>The goal of the CLI is to improve the development workflow, and, by using it, you&#8217;ll have an easy and quick way to manage your XP apps.</p>
 </div>
-<div class="imageblock">
-<div class="content">
-<img src="media/xp-boot.png" alt="The XP boot page" width="1085w">
-</div>
-</div>
+<div class="sect2">
+<h3 id="installation"><a class="link" href="#installation">Installation</a></h3>
 <div class="paragraph">
-<p>The boot page provides an overview of the sandbox, including installed application, as well as the <a href="https://developer.enonic.com/docs/xp/stable/deployment/config" target="_blank" rel="noopener">default configuration files</a>.</p>
+<p>The easiest and fastest way to install the CLI is by using Node Package Manager (NPM):</p>
 </div>
-<div class="admonitionblock note">
-<table>
-<tr>
-<td class="icon">
-<i class="fa icon-note" title="Note"></i>
-</td>
-<td class="content">
-Thanks to the <code>Essentials</code> template, several useful XP apps, including Content Studio, were automatically downloaded and installed.
-</td>
-</tr>
-</table>
-</div>
-<div class="paragraph">
-<p>Click <b class="button">Log In as Guest</b> to open the XP admin dashboard. What this actually does is log you in as the XP instance&#8217;s Super User. After logging in you should see something like this:</p>
-</div>
-<div class="imageblock">
-<div class="content">
-<img src="media/xp-dashboard.png" alt="The XP admin dashboard" width="1727w">
-</div>
-</div>
-<div class="paragraph">
-<p>You are now on the Admin Dashboard. The right hand menu (aka <code>XP menu</code>) enables navigation between admin tools. More admin tools may be injected as extensions via applications.</p>
-</div>
-<div class="admonitionblock note">
-<table>
-<tr>
-<td class="icon">
-<i class="fa icon-note" title="Note"></i>
-</td>
-<td class="content">
-If things don&#8217;t look exactly the same, don&#8217;t worry. In every new version of XP the background picture gets updated. Also, admin dashboard is automatically localized - based on your browsers preferred language.
-</td>
-</tr>
-</table>
-</div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="troubleshooting"><a class="link" href="#troubleshooting">Troubleshooting</a></h2>
-<div class="sectionbody">
-<div class="paragraph">
-<p>If you have problems booting the sandbox, it may be that one or more of the ports used by XP are already in use. The command should warn you if something doesn&#8217;t work right. It&#8217;ll do this in one of two ways:</p>
-</div>
-<div class="olist arabic">
-<ol class="arabic">
-<li>
-<p>If the CLI checks for the availability of some ports when starting up. If one of these ports isn&#8217;t available, the CLI will abort with a message like this:</p>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-shell" data-lang="shell">Port 8080 is not available, stop the app using it first!</code></pre>
+<pre class="highlight"><code class="language-shell" data-lang="shell">npm install -g @enonic/cli</code></pre>
 </div>
 </div>
-</li>
-<li>
-<p>For ports where the CLI doesn&#8217;t check for availability before starting, you might get an exception in the boot log. This is usually identifiable by a printed stack trace in your logs. Here&#8217;s an example from what happens if port 4848 isn&#8217;t available.</p>
+<div class="paragraph">
+<p>Note that to run the npm install command you need to make sure that you have both Node and NPM installed on your machine. You can quickly check if they are installed by running the following commands on your terminal:</p>
+</div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-shell" data-lang="shell">2021-04-06 11:24:01,168 ERROR c.e.xp.web.jetty.impl.JettyActivator - bundle com.enonic.xp.web.jetty:7.6.1 (80)[com.enonic.xp.web.jetty.impl.JettyActivator(171)] : The activate method has thrown an exception
-org.apache.felix.log.LogException: java.io.IOException: Failed to bind to 0.0.0.0/0.0.0.0:4848
-	at org.eclipse.jetty.server.ServerConnector.openAcceptChannel(ServerConnector.java:349)
-	at org.eclipse.jetty.server.ServerConnector.open(ServerConnector.java:310)
-[...]
-Caused by: java.net.BindException: Address already in use
-	at java.base/sun.nio.ch.Net.bind0(Native Method)
-	at java.base/sun.nio.ch.Net.bind(Net.java:455)
-	at java.base/sun.nio.ch.Net.bind(Net.java:447)
-	at java.base/sun.nio.ch.ServerSocketChannelImpl.bind(ServerSocketChannelImpl.java:227)
-	at java.base/sun.nio.ch.ServerSocketAdaptor.bind(ServerSocketAdaptor.java:80)
-	at org.eclipse.jetty.server.ServerConnector.openAcceptChannel(ServerConnector.java:345)
-	... 78 common frames omitted</code></pre>
+<pre class="highlight"><code class="language-shell" data-lang="shell">node -v</code></pre>
 </div>
 </div>
-</li>
-</ol>
+<div class="paragraph">
+<p>to check the version of Node you have installed locally. Same for NPM:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-shell" data-lang="shell">npm -v</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>If they are not installed, you can head to <a href="https://nodejs.org/" target="_blank" rel="noopener">nodejs.org</a> to proceed installing them.</p>
 </div>
 <div class="admonitionblock note">
 <table>
@@ -713,29 +548,227 @@ Caused by: java.net.BindException: Address already in use
 <i class="fa icon-note" title="Note"></i>
 </td>
 <td class="content">
-The <code>[&#8230;&#8203;]</code> replaces most of the stack trace for legibility reasons.
+<div class="paragraph">
+<p>Enonic CLI is also available on other package managers, such as <a href="https://developer.enonic.com/start#brew" target="_blank" rel="noopener">brew</a> for MacOS, <a href="https://developer.enonic.com/start#scoop" target="_blank" rel="noopener">scoop</a> for Windows and <a href="https://developer.enonic.com/start#curl" target="_blank" rel="noopener">Snapcraft</a> on Linux.</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+</div>
+<div class="sect2">
+<h3 id="verification"><a class="link" href="#verification">Verification</a></h3>
+<div class="paragraph">
+<p>After running the installation command above, you can check if the Enonic CLI was properly installed by running</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-shell" data-lang="shell">enonic -v</code></pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="commands"><a class="link" href="#commands">Commands</a></h3>
+<div class="paragraph">
+<p>Let&#8217;s first list some commands&#8230;&#8203; run the following command in your terminal:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-shell" data-lang="shell">enonic</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>It should output something that looks a bit like this:</p>
+</div>
+<div class="listingblock">
+<div class="title">Main help page</div>
+<div class="content">
+<pre class="highlight"><code class="language-shell" data-lang="shell">Enonic CLI 2.6.1
+Manage XP instances, home folders and projects
+USAGE:
+   enonic [global options] [command] [command options] [arguments...]
+
+COMMANDS:
+     create     Create a new Enonic project
+     snapshot   Create and restore snapshots
+     dump       Dump and load complete repositories
+     export     Export data from a given repository, branch and content path.
+     import     Import data from a named export.
+     app        Install, stop and start applications
+     repo       Tune and manage repositories
+     cms        CMS commands
+     system     System commands
+     auditlog   Manage audit log repository
+     latest     Check for latest version
+     upgrade    Upgrade to the latest version
+     uninstall  Uninstall Enonic CLI
+     vacuum     Removes old version history and segments from content storage
+     help, h    Shows a list of commands or help for one command
+
+CLOUD COMMANDS:
+     cloud  Manage Enonic cloud
+
+PROJECT COMMANDS:
+     sandbox  Manage Enonic instances
+     project  Manage Enonic projects
+
+GLOBAL OPTIONS:
+   --help, -h     show help
+   --version, -v  print the version</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>If you want to know more about how to use one of the subcommands, you can use the <code>help</code> subcommand. For instance, if you want to know more about the <code>sandbox</code> subcommand, you can run:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-shell" data-lang="shell">enonic sandbox help</code></pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="title">Sandbox help page</div>
+<div class="content">
+<pre class="highlight"><code class="language-shell" data-lang="shell">NAME:
+   enonic sandbox - Manage Enonic instances
+
+USAGE:
+   enonic sandbox [global options] command [command options] [arguments...]
+
+VERSION:
+   2.6.1
+
+COMMANDS:
+   list, ls         List all sandboxes
+   start            Start the sandbox.
+   stop             Stop the sandbox started in detached mode.
+   create           Create a new sandbox.
+   delete, del, rm  Delete a sandbox
+   upgrade, up      Upgrades the distribution version.
+
+GLOBAL OPTIONS:
+   --help, -h  show help</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>As can be seen, there are a lot of commands and their subcommands to help you. On this guide, we&#8217;ll only cover the necessary ones to be able to start developing on XP.</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+Consider checking the <a href="https://developer.enonic.com/docs/enonic-cli" target="_blank" rel="noopener">CLI documentation</a> to further investigate its capabilities.
+</td>
+</tr>
+</table>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="git"><a class="link" href="#git">Git</a></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Git is a free and open source <em>distributed version control system</em>. Later on in this tutorial, we will create new Enonic development projects using <em>starters</em>. The Enonic CLI uses Git to download these starters and to prepare the files for your project locally.</p>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+Want to learn more about Git? Check out <a href="https://guides.github.com/introduction/git-handbook/" target="_blank" rel="noopener">this useful Git handbook by Github</a>.
+</td>
+</tr>
+</table>
+</div>
+<div class="sect2">
+<h3 id="installation_2"><a class="link" href="#installation_2">Installation</a></h3>
+<div class="paragraph">
+<p>To install Git, follow the notes for your operating system below.</p>
+</div>
+<div class="sect3">
+<h4 id="macos"><a class="link" href="#macos">macOS</a></h4>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+Apple maintains its own fork of Git. If you have XCode installed, you already have Git installed too.
 </td>
 </tr>
 </table>
 </div>
 <div class="paragraph">
-<p>If some ports are unavailable, you&#8217;ll have to find out what programs are using those ports and then shut those programs down.</p>
+<p>To install Git via Homebrew, run this command:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-shell" data-lang="shell">brew install git</code></pre>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="windows"><a class="link" href="#windows">Windows</a></h4>
+<div class="paragraph">
+<p>To install Git using Scoop, run the following command from Powershell:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-shell" data-lang="shell">scoop install git</code></pre>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="linux"><a class="link" href="#linux">Linux</a></h4>
+<div class="paragraph">
+<p>To install Git with Snapcraft, run the following command:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-shell" data-lang="shell">sudo snap install git</code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="verification_2"><a class="link" href="#verification_2">Verification</a></h3>
+<div class="paragraph">
+<p>Once you have installed Git, you can verify that it&#8217;s working correctly by running the following command:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-shell" data-lang="shell">git version</code></pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="editor"><a class="link" href="#editor">Editor</a></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Source-code editors (also known as <em>text editors</em> or just <em>editors</em> for short) are applications designed primarily for editing plain text and often specifically for working with code. They are therefore commonly used for programming.</p>
 </div>
 <div class="paragraph">
-<p>How you find open ports varies from operating system to operating system, but if you&#8217;re unsure about how to do it on your OS, check out the appropriate guide for:</p>
+<p>If you do not yet have an editor you like, follow the steps below to get started with one.</p>
 </div>
-<div class="ulist">
-<ul>
-<li>
-<p><a href="https://www.cyberciti.biz/faq/unix-linux-check-if-port-is-in-use-command/" target="_blank" rel="noopener">Linux</a></p>
-</li>
-<li>
-<p><a href="https://www.micahsmith.com/blog/2019/09/find-ports-in-use-on-macos/" target="_blank" rel="noopener">macOS</a></p>
-</li>
-<li>
-<p><a href="https://www.howtogeek.com/28609/how-can-i-tell-what-is-listening-on-a-tcpip-port-in-windows/" target="_blank" rel="noopener">Windows</a></p>
-</li>
-</ul>
+<div class="sect2">
+<h3 id="download_visual_studio_code"><a class="link" href="#download_visual_studio_code">Download Visual Studio Code</a></h3>
+<div class="paragraph">
+<p><a href="https://code.visualstudio.com/" target="_blank" rel="noopener">Visual Studio Code</a> (often shortened to <em>VS Code</em> or simply <em>Code</em>) is one of the most popular source-code editors around at the moment. It&#8217;s free, open source, and available on all major platforms.</p>
+</div>
+<div class="paragraph">
+<p>You can navigate to their <a href="https://code.visualstudio.com/Download" target="_blank" rel="noopener">download page</a> and install the version matching your operating system.</p>
+</div>
+<div class="paragraph">
+<p>If you opt to move forward with VS code as your editor, its worth checking some of the <a href="https://marketplace.visualstudio.com/" target="_blank" rel="noopener">powerful extensions</a> available on their marketplace.</p>
+</div>
 </div>
 </div>
 </div>
@@ -743,17 +776,17 @@ The <code>[&#8230;&#8203;]</code> replaces most of the stack trace for legibilit
 <h2 id="summary"><a class="link" href="#summary">Summary</a></h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>Congrats! Now you know what a <em>sandbox</em> is, got more familiar with the CLI, and also visited the admin dashboard page for the first time.</p>
+<p>Congrats! You&#8217;ve installed the Enonic CLI, Git, and an editor. You&#8217;re now set up to start working with Enonic XP 🚀. Keep your new tools at hand; we&#8217;ll be using them heavily throughout this guide, so you&#8217;ll have lots of time to get to know them better.</p>
 </div>
 <div class="paragraph">
-<p>You&#8217;re now ready to move forward by <a href="apps.ahtml">creating your own app</a>.</p>
+<p>Next up, you will <a href="sandbox.ahtml">get familiar with sandboxes</a>.</p>
 </div>
 </div>
 </div>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2026-11-12 10:19:54 UTC
+Last updated 2026-11-12 10:22:56 UTC
 </div>
 </div>
 </body>

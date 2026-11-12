@@ -5,9 +5,8 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="generator" content="Asciidoctor 2.0.26">
-<meta name="application-name" content="dev101">
-<meta name="description" content="Add shared editorial notes to artists and animals with a mixin, then query their values through Guillotine.">
-<title>Mixins</title>
+<meta name="description" content="Get familiar with Content Studio and Content types, and start creating some content.">
+<title>Content studio and content creation</title>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,300italic,400,400italic,600,600italic%7CNoto+Serif:400,400italic,700,700italic%7CDroid+Sans+Mono:400,700">
 <style>
 /*! Asciidoctor default stylesheet | MIT License | https://asciidoctor.org */
@@ -439,26 +438,30 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 </head>
 <body class="article toc2 toc-right">
 <div id="header">
-<h1>Mixins</h1>
+<h1>Content studio and content creation</h1>
 <div id="toc" class="toc2">
 <div id="toctitle">Table of Contents</div>
 <ul class="sectlevel1">
-<li><a href="#add_editorial_notes_to_artists_and_animals">Add editorial notes to artists and animals</a>
+<li><a href="#content_studio">Content Studio</a>
 <ul class="sectlevel2">
-<li><a href="#task_create_the_mixin">Task: Create the mixin</a></li>
-<li><a href="#task_register_the_mixin">Task: Register the mixin</a></li>
-<li><a href="#task_add_notes_to_two_content_types">Task: Add notes to two content types</a></li>
+<li><a href="#task_your_first_project">Task: your first project</a></li>
+<li><a href="#assiging_an_app_to_a_project">Assiging an app to a project</a></li>
 </ul>
 </li>
-<li><a href="#query_the_notes">Query the notes</a>
+<li><a href="#apps_vs_projects">Apps vs projects</a></li>
+<li><a href="#what_are_content_types">What are content types?</a>
 <ul class="sectlevel2">
-<li><a href="#task_fetch_lynxs_notes">Task: Fetch Lynx&#8217;s notes</a></li>
-<li><a href="#task_inspect_the_json_representation">Task: Inspect the JSON representation</a></li>
+<li><a href="#task_your_first_content_type">Task: your first content type</a></li>
+<li><a href="#task_your_first_content_creation">Task: your first content creation</a></li>
+<li><a href="#content_type_validation">Content type validation</a></li>
 </ul>
 </li>
-<li><a href="#mixins_from_other_apps">Mixins from other apps</a></li>
-<li><a href="#choosing_the_right_tool">Choosing the right tool</a></li>
-<li><a href="#coming_up">Coming up</a></li>
+<li><a href="#publishing_your_content">Publishing your content</a>
+<ul class="sectlevel2">
+<li><a href="#branches">Branches</a></li>
+</ul>
+</li>
+<li><a href="#summary">Summary</a></li>
 </ul>
 </div>
 </div>
@@ -466,327 +469,553 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <div id="preamble">
 <div class="sectionbody">
 <div class="paragraph">
-<p>In this chapter, you&#8217;ll add an Editorial mixin to Artist and Animal, enter separate notes on each, and query them through Guillotine.</p>
+<p>In this chapter, we&#8217;ll give a short introduction to Content Studio, an app that serves as the main content management interface for XP, providing editors an efficient way of creating, and curating content without technical skills.</p>
 </div>
 <div class="paragraph">
-<p>A <em>mixin</em> adds a group of fields to content types without editing each content type&#8217;s schema.
-Use one for fields such as editorial notes that apply across different kinds of content, or to extend built-in types such as folders and media.
-Unlike a <a href="sets.ahtml#_reuse_fields_across_options">form fragment</a>, which inserts fields into a schema&#8217;s form, a mixin keeps its values separately under <code>x</code>.</p>
+<p>For a more comprehensive overview, watch <a href="https://www.youtube.com/watch?v=tR9KHOcZOs0" target="_blank" rel="noopener">this short video on Content Studio basics</a> or head to the <a href="https://developer.enonic.com/docs/content-studio" target="_blank" rel="noopener">Content Studio reference documentation</a>.</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+The tasks and examples in this chapter are based on work done in previous chapters (starting with <a href="sandbox.ahtml">the sandboxes chapter</a>). If you want to follow along with the examples, make sure you&#8217;re all caught up.
+</td>
+</tr>
+</table>
 </div>
 </div>
 </div>
 <div class="sect1">
-<h2 id="add_editorial_notes_to_artists_and_animals"><a class="link" href="#add_editorial_notes_to_artists_and_animals">Add editorial notes to artists and animals</a></h2>
+<h2 id="content_studio"><a class="link" href="#content_studio">Content Studio</a></h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>You&#8217;ll define the fields in a mixin schema, then register it in the app&#8217;s CMS descriptor to choose which content types receive them.
-Your app is already assigned to "My First Project", so the registration applies there.</p>
+<p>Content Studio should already have been installed, and can be launched from XP Admin: <code>XP menu</code> &#8594; <code>Content Studio</code>.</p>
 </div>
-<div class="paragraph">
-<p>These notes follow the content item&#8217;s read permissions and can be queried through the API by anyone who can read that item.
-The name "Editorial" does not make them private; you&#8217;ll explore read access in the <a href="permissions.ahtml">permissions chapter</a>.</p>
-</div>
-<div class="sect2">
-<h3 id="task_create_the_mixin"><a class="link" href="#task_create_the_mixin">Task: Create the mixin</a></h3>
-<div class="olist arabic">
-<ol class="arabic">
-<li>
-<p><strong>Define the Editorial mixin</strong> - Create this file in your app:</p>
-<div class="listingblock">
-<div class="title">src/main/resources/cms/mixins/editorial/editorial.yaml</div>
-<div class="content">
-<pre class="highlight"><code class="language-yaml" data-lang="yaml">kind: "Mixin"
-title: "Editorial"
-form:
-  - type: "TextLine"
-    name: "notes"
-    label: "Notes"
-    occurrences:
-      min: 0
-      max: 3</code></pre>
-</div>
-</div>
-</li>
-</ol>
-</div>
-<div class="paragraph">
-<p>The folder and filename identify the mixin as <code>editorial</code>, and <code>title</code> gives its tab the label "Editorial" in Content Studio.
-The form contains one repeatable TextLine field named <code>notes</code>, allowing up to three notes per content item.</p>
-</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+If you wish to install or update an application, this can be done from <code>XP menu</code> &#8594; <code>Applications</code>.
+</td>
+</tr>
+</table>
 </div>
 <div class="sect2">
-<h3 id="task_register_the_mixin"><a class="link" href="#task_register_the_mixin">Task: Register the mixin</a></h3>
-<div class="olist arabic">
-<ol class="arabic">
-<li>
-<p><strong>Choose which content types get the mixin</strong> - Update your app&#8217;s existing CMS descriptor to include the registration:</p>
-<div class="listingblock">
-<div class="title">src/main/resources/cms/cms.yaml</div>
-<div class="content">
-<pre class="highlight"><code class="language-yaml" data-lang="yaml">kind: "CMS"
-mixins:
-  - name: "editorial"
-    allowContentTypes: "com.example.dev101:artist|com.example.dev101:animal"</code></pre>
-</div>
-</div>
-</li>
-<li>
-<p><strong>Deploy the mixin</strong> - Save both files and let your running <code>enonic dev</code> watcher update the app.</p>
-</li>
-</ol>
-</div>
+<h3 id="task_your_first_project"><a class="link" href="#task_your_first_project">Task: your first project</a></h3>
 <div class="paragraph">
-<p><code>name: "editorial"</code> selects the mixin from this app.
-<code>allowContentTypes</code> is a regular expression matched against the full content type name; this one selects Artist and Animal.
-If you chose a different app name, update the app key in the expression to match.
-Leaving out <code>allowContentTypes</code> makes the mixin available on all content types in the content project where the app is assigned.</p>
+<p>When visiting Content Studio for the first time, you&#8217;ll be welcomed with the following dialog:</p>
 </div>
-<div class="paragraph">
-<p>For other registration options, including mixins that editors enable per content item, see the <a href="https://developer.enonic.com/docs/cms/stable/schemas/cms-descriptor#mixin-registration">CMS descriptor reference</a>.</p>
-</div>
-</div>
-<div class="sect2">
-<h3 id="task_add_notes_to_two_content_types"><a class="link" href="#task_add_notes_to_two_content_types">Task: Add notes to two content types</a></h3>
-<div class="olist arabic">
-<ol class="arabic">
-<li>
-<p><strong>Find Lynx&#8217;s mixin fields</strong> - Open Lynx at <code>/animals/lynx</code> in Content Studio and select the <strong>Editorial</strong> tab beside Animal.</p>
-</li>
-<li>
-<p><strong>Add Lynx&#8217;s notes</strong> - Enter "Review the habitat description." in the first Notes field.
-Click <b class="button">Add</b> and enter "Add a source for the diet information." in the second, then save Lynx.</p>
 <div class="imageblock">
 <div class="content">
-<img src="images/mixins-editorial.png" alt="Editorial tab beside Animal, showing two separate notes on Lynx" width="527">
+<img src="media/content-studio-no-available-projects-found-dialog.png" alt="Content studio no available projects found dialog" width="816w">
 </div>
-<div class="title">Figure 1. The Editorial mixin on Lynx</div>
-</div>
-</li>
-<li>
-<p><strong>Add Cardi B&#8217;s note</strong> - Open Cardi B at <code>/artists/cardi-b</code> and select its <strong>Editorial</strong> tab beside Artist.
-Enter "Check the filmography for new releases." and save.</p>
-</li>
-</ol>
+<div class="title">Figure 1. No available projects found dialog</div>
 </div>
 <div class="paragraph">
-<p>Both content types now use the same mixin form, but each content item has its own values.
-You did not need to change either content type&#8217;s schema.</p>
-</div>
-</div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="query_the_notes"><a class="link" href="#query_the_notes">Query the notes</a></h2>
-<div class="sectionbody">
-<div class="paragraph">
-<p>The content type&#8217;s own fields are under <code>data</code>; mixin fields are under <code>x</code>, grouped by app and mixin.
-The typed fields let your client request just the values it needs.</p>
-</div>
-<div class="sect2">
-<h3 id="task_fetch_lynxs_notes"><a class="link" href="#task_fetch_lynxs_notes">Task: Fetch Lynx&#8217;s notes</a></h3>
-<div class="olist arabic">
-<ol class="arabic">
-<li>
-<p><strong>Fetch Lynx&#8217;s mixin fields</strong> - Open Query Playground for "My First Project", select <strong>Draft</strong>, and run:</p>
-<div class="listingblock">
-<div class="content">
-<pre class="highlight"><code class="language-graphql" data-lang="graphql">{
-  guillotine {
-    get(key: "/animals/lynx") {
-      displayName
-      x {
-        com_example_dev101 {
-          editorial {
-            notes
-          }
-        }
-      }
-    }
-  }
-}</code></pre>
-</div>
+<p>Content Studio manages content, and content is organized in independent repositories, which are called <em>content projects</em>, or simply as <em>projects</em>.</p>
 </div>
 <div class="paragraph">
-<p>The response contains:</p>
+<p>A project offer individual access control and permissions, as well as other settings to toggle features and language(s).</p>
 </div>
-<div class="listingblock">
-<div class="content">
-<pre class="highlight"><code class="language-json" data-lang="json">{
-  "data": {
-    "guillotine": {
-      "get": {
-        "displayName": "Lynx",
-        "x": {
-          "com_example_dev101": {
-            "editorial": {
-              "notes": [
-                "Review the habitat description.",
-                "Add a source for the diet information."
-              ]
-            }
-          }
-        }
-      }
-    }
-  }
-}</code></pre>
-</div>
-</div>
-</li>
-<li>
-<p><strong>Compare Cardi B&#8217;s note</strong> - Change <code>key</code> to <code>/artists/cardi-b</code> and run the same query.
-The typed <code>notes</code> field returns a list, even when the content item has only one note.</p>
-</li>
-</ol>
-</div>
-<div class="paragraph">
-<p>The three levels inside <code>x</code> are the app (<code>{app-name-query}</code>), the mixin (<code>editorial</code>), and its field (<code>notes</code>).
-Dots in the app key become underscores in the GraphQL field name.
-Unlike the content type&#8217;s <code>data</code>, <code>x</code> is available on the shared <code>Content</code> interface, so this query needs no Animal inline fragment.</p>
-</div>
-</div>
-<div class="sect2">
-<h3 id="task_inspect_the_json_representation"><a class="link" href="#task_inspect_the_json_representation">Task: Inspect the JSON representation</a></h3>
-<div class="olist arabic">
-<ol class="arabic">
-<li>
-<p><strong>Fetch all stored mixin values</strong> - Query <code>xAsJson</code> to inspect the values without selecting their individual fields:</p>
-<div class="listingblock">
-<div class="content">
-<pre class="highlight"><code class="language-graphql" data-lang="graphql">{
-  guillotine {
-    get(key: "/animals/lynx") {
-      xAsJson
-    }
-  }
-}</code></pre>
-</div>
-</div>
-<div class="paragraph">
-<p>The <code>xAsJson</code> value contains:</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="highlight"><code class="language-json" data-lang="json">{
-  "com-example-dev101": {
-    "editorial": {
-      "notes": [
-        "Review the habitat description.",
-        "Add a source for the diet information."
-      ]
-    }
-  }
-}</code></pre>
-</div>
-</div>
-</li>
-</ol>
-</div>
-<div class="paragraph">
-<p>Notice the app key: the JSON representation uses hyphens (<code>com-example-dev101</code>), while the typed GraphQL field uses underscores (<code>{app-name-query}</code>).
-The values are the same, but JSON does not apply the GraphQL field types: a single note appears as a string in <code>xAsJson</code>, while the typed field remains a list.
-Use the typed fields when your client needs a predictable shape and only selected values.
-The <a href="https://developer.enonic.com/docs/cms/stable/content/mixins">CMS mixins reference</a> covers the underlying storage in more detail.</p>
-</div>
-</div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="mixins_from_other_apps"><a class="link" href="#mixins_from_other_apps">Mixins from other apps</a></h2>
-<div class="sectionbody">
-<div class="paragraph">
-<p>Apps can provide mixins for content types they do not define.
-For example, the <a href="https://market.enonic.com/vendors/enonic/seo-metafields">SEO Meta Fields app</a> provides fields for search and social sharing metadata across content types and exposes them through Guillotine.
-The same registration mechanism lets an app add shared fields without changing your Artist or Animal schemas.</p>
-</div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="choosing_the_right_tool"><a class="link" href="#choosing_the_right_tool">Choosing the right tool</a></h2>
-<div class="sectionbody">
-<div class="paragraph">
-<p>You&#8217;ve now used the main content modeling tools in this tutorial.
-Use this recap when deciding how to represent new content:</p>
-</div>
-<table class="tableblock frame-all grid-all stretch">
-<colgroup>
-<col style="width: 60%;">
-<col style="width: 40%;">
-</colgroup>
-<thead>
+<div class="admonitionblock tip">
+<table>
 <tr>
-<th class="tableblock halign-left valign-top">What you want to build</th>
-<th class="tableblock halign-left valign-top">Use</th>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+Privileged users can manage projects via Content Studio settings.
+</td>
 </tr>
-</thead>
-<tbody>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Content that editors manage and publish independently</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Content type</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Relationships between independently managed content items</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Reference (ContentSelector, ImageSelector)</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Images and other uploaded files, managed as content with a source attachment</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Media</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Visual groups of fields without changing the data structure</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">FieldSet</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Nested or repeatable groups of fields that belong to one content item</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">ItemSet</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">A single selection, optionally with fields for the chosen option</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">OptionSet with one selection per occurrence</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Multiple selections, optionally with separate fields for each chosen option</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">OptionSet allowing multiple selections per occurrence</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Ordered lists of content blocks, such as text, images and quotes for a basic landing page</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Repeatable OptionSet with one selection per occurrence</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Reusable form definitions included in several schemas or options</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Form fragment</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Formatted prose with links, images and macros</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">HtmlArea</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Shared fields added across content types, including types provided by other apps</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Mixin</p></td>
-</tr>
-</tbody>
 </table>
+</div>
 <div class="paragraph">
-<p>An OptionSet can support multiple selections with separate fields for each selected option, as you did with continents and their notes in the <a href="sets.ahtml">sets chapter</a>.
-A repeatable OptionSet with one selected option per occurrence lets editors build a sequence of blocks, such as text, images and quotes, for your front-end to render.
-See the <a href="https://developer.enonic.com/docs/cms/stable/schemas/form-items/option-set">OptionSet reference</a> for configuration examples.
-For visual editing or more advanced page composition, explore XP&#8217;s <a href="https://developer.enonic.com/docs/cms/stable/pages">page model</a> in the <a href="https://developer.enonic.com/docs/intro">Introduction to Enonic</a> or the <a href="https://developer.enonic.com/docs/next.xp">Next.js tutorial</a>.</p>
+<p>Now, head back to the project wizard dialog to create your first project:</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="media/content-studio-my-first-project.gif" alt="Content studio project creation wizard walkthrough." width="964w">
+</div>
+<div class="title">Figure 2. Creating your first project</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="assiging_an_app_to_a_project"><a class="link" href="#assiging_an_app_to_a_project">Assiging an app to a project</a></h3>
+<div class="paragraph">
+<p>Content Studio is a powerful app with a lot of features, and one of its main goal is to provide an awesome user experience for creating and curating content.</p>
+</div>
+<div class="paragraph">
+<p>Content is defined through content types (a concept we&#8217;ll introduce in the next section), which are defined and installed via applications.</p>
+</div>
+<div class="paragraph">
+<p>Therefore, if we want to enable Content Studio to manage a specific type of content, we need to access content studio in a project which has an app assigned to it, and in this app, this specific content should defined via a content type.</p>
+</div>
+<div class="paragraph">
+<p>With all this in mind, note that one of the last steps on the previous creation wizard was to assign your app to the project. If you followed along, you should have your app assigned to the your first project, and in case you missed it, no worries, let&#8217;s assign it to the created project:</p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>On the green widget sidebar, click on settings</p>
+</li>
+<li>
+<p>Double click on the project you just created to edit it</p>
+</li>
+<li>
+<p>Scroll down and on the "Applications" section, select the application you&#8217;ve previously deployed to this sandbox</p>
+</li>
+</ol>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="media/content-studio-project-app-assignment.png" alt="Content studio assigning apps to projects walkthrough." width="547w">
+</div>
+<div class="title">Figure 3. Assigning your first app to your first project</div>
+</div>
 </div>
 </div>
 </div>
 <div class="sect1">
-<h2 id="coming_up"><a class="link" href="#coming_up">Coming up</a></h2>
+<h2 id="apps_vs_projects"><a class="link" href="#apps_vs_projects">Apps vs projects</a></h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>You&#8217;ve added and queried a mixin across two content types, completing the tutorial&#8217;s content model.
-In the next chapter, you&#8217;ll publish your content and explore <a href="permissions.ahtml">read and editorial permissions</a>.</p>
+<p>We&#8217;ve reached a certain point in this guide where its worth giving a section to reiterate the differences between:</p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>XP project (app folder and files)</p>
+</li>
+<li>
+<p>XP app</p>
+</li>
+<li>
+<p>Content Studio project</p>
+</li>
+</ol>
+</div>
+<div class="paragraph">
+<p>An <code>XP project folder</code> is the folder containing the files needed in order to create an <code>XP app</code>. The folder was automatically generated from the Vanilla starter when we ran the command: <code>enonic project create</code>.</p>
+</div>
+<div class="paragraph">
+<p>The <code>XP app</code> is the compiled file that is generated when you run the command <code>enonic project build</code> on the project root folder.</p>
+</div>
+<div class="paragraph">
+<p>A <code>Content Project</code>, as explained above, is a place you can store content. Content can be created based on the apps you assign to a project.</p>
+</div>
+<div class="paragraph">
+<p>In summary, you can have the following flow in mind:</p>
+</div>
+<div class="imageblock text-center">
+<div class="content">
+<img src="media/app-vs-projects-flow.png" alt="Simplied flow explaining the difference between an Enonic XP project folder and its files" width="300" height="and a Content Studio project">
+</div>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+This flow is super simplified and there are a lot of details to each one of those boxes, but it should be sufficient to explain the main difference between those ideas and how they connect to eachother.
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>From now on, we&#8217;ll use the term "project" to refer to both <code>XP app project</code> and <code>Content projects</code>, as they can be easily distinguished based on the context.</p>
+</div>
+<div class="paragraph">
+<p>We believe that this will help to avoid any confusion from your side. Now, back to work!</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="what_are_content_types"><a class="link" href="#what_are_content_types">What are content types?</a></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Every content item created in Enonic has a specific content type. The content type defines the data fields (aka properties) that piece of content can and must have.</p>
+</div>
+<div class="paragraph">
+<p>A JavaScript analogy: If a content type is a JSON schema, then the content item is a JSON that matches the schema. Actually, this is not so far from how things actually work - as you will see later!</p>
+</div>
+<div class="admonitionblock important">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-important" title="Important"></i>
+</td>
+<td class="content">
+As mentioned before, content types are defined and installed via applications. If you unassign an application from the project you&#8217;re currently working on, you&#8217;ll no longer be able to create or edit content of that type.
+</td>
+</tr>
+</table>
+</div>
+<div class="sect2">
+<h3 id="task_your_first_content_type"><a class="link" href="#task_your_first_content_type">Task: your first content type</a></h3>
+<div class="paragraph">
+<p>Now that we know what a content type is, let&#8217;s look at how we create them.</p>
+</div>
+<div class="paragraph">
+<p>We&#8217;ll create a content type that contains two input fields. When shown in Content Studio, it will look like this:</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="media/content-type-target.png" alt="A content creation form with name and biography fields" width="1200">
+</div>
+<div class="title">Figure 4. The target for your first content type</div>
+</div>
+<div class="paragraph">
+<p>Back to your preferred editor, make sure you&#8217;re in the project folder (<code>myapp/</code>) that you created in a previous chapter. All paths will be relative to this root folder.</p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Create a directory for content types: <code>src/main/resources/site/content-types/</code>. XP is quite particular about project folder structure, so you need to put content types right where it expects to find them.</p>
+</li>
+<li>
+<p>Create a directory called <code>artist</code> in the newly created <code>content-types/</code> directory. XP expects all content types to have their own directories.</p>
+</li>
+<li>
+<p>Within the <code>artist</code> directory, create a file called <code>artist.xml</code>. The file name must match the directory name  (except for the file extension). The full path to the content type from the project root should be <code>src/main/resources/site/content-types/artist/artist.xml</code>.</p>
+</li>
+<li>
+<p>In the <code>artist.xml</code> file, place the following content:</p>
+<div class="listingblock">
+<div class="title">The 'Artist' content type</div>
+<div class="content">
+<pre class="highlight"><code class="language-xml" data-lang="xml">&lt;content-type&gt;
+  &lt;display-name&gt;Artist&lt;/display-name&gt; <i class="conum" data-value="1"></i><b>(1)</b>
+  &lt;description&gt;Information about an artist&lt;/description&gt; <i class="conum" data-value="2"></i><b>(2)</b>
+  &lt;super-type&gt;base:structured&lt;/super-type&gt;
+  &lt;form&gt; <i class="conum" data-value="3"></i><b>(3)</b>
+
+    &lt;input name="name" type="TextLine"&gt; <i class="conum" data-value="4"></i><b>(4)</b>
+      &lt;label&gt;Name&lt;/label&gt;
+      &lt;help-text&gt;
+        The artist's name (if different from their professional moniker).
+      &lt;/help-text&gt;
+    &lt;/input&gt;
+
+    &lt;input type="TextArea" name="about"&gt;
+      &lt;label&gt;About the artist&lt;/label&gt;
+    &lt;/input&gt;
+
+  &lt;/form&gt;
+&lt;/content-type&gt;</code></pre>
+</div>
+</div>
+<div class="colist arabic">
+<table>
+<tr>
+<td><i class="conum" data-value="1"></i><b>1</b></td>
+<td>This is what will be displayed in Content Studio when creating new content.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="2"></i><b>2</b></td>
+<td>This is an optional description, but it is still recommended to add, as it will make life easier for your editors.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="3"></i><b>3</b></td>
+<td>This is where we specify which fields (aka inputs) this content type shall have, basically the form, as seen in Content Studio.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="4"></i><b>4</b></td>
+<td>The <code>type</code> attribute specifies what kind of input input the user will see in Content Studio, and the <code>label</code> specifies how the input will be labeled.
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+Content types also have a large number of other, optional fields that we won&#8217;t get into here. If you&#8217;d like to learn more about this, consult <a href="https://developer.enonic.com/docs/xp/stable/cms/content-types" target="_blank" rel="noopener">the reference documentation</a>.
+</td>
+</tr>
+</table>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+XP&#8217;s <code>input</code> elements are <em>not</em> the same as HTML <code>input</code> elements. To read more about it, <a href="input-types.ahtml">see the chapter on input types</a>
+.
+</td>
+</tr>
+</table>
+</div></td>
+</tr>
+</table>
+</div>
+</li>
+<li>
+<p>Now run:</p>
+</li>
+</ol>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-shell" data-lang="shell">  enonic project dev</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>This command will watch for changes under <code>myapp/</code> and redeploy as needed.</p>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+Make sure you&#8217;re already running your sandbox with the <code>--dev</code> flag in another terminal, otherwise the sandbox will be started in detached mode, so you&#8217;ll lose logs. More on CLI&#8217;s dev command <a href="https://developer.enonic.com/docs/enonic-cli/stable/dev#dev" target="_blank" rel="noopener">here</a>.
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>If everything goes well, you should see your sandbox logs update now. And that&#8217;s the basics of creating new content types.</p>
+</div>
+<div class="paragraph">
+<p>Next, let&#8217;s go back to Content Studio and create some actual content!</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="task_your_first_content_creation"><a class="link" href="#task_your_first_content_creation">Task: your first content creation</a></h3>
+<div class="paragraph">
+<p>Go back to content studio and make sure you are on the project you&#8217;ve created on the beginning of this chapter.</p>
+</div>
+<div class="paragraph">
+<p>Press <b class="button">New &#8230;&#8203;</b> to open a new dialog. You should see a content type called <code>Artist</code>.</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+This content type is only visible there because of the update we did to the app, i.e, your app is responsible to be delivering the artist definition which content studio can use to actually create content.
+</td>
+</tr>
+</table>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="media/content-studio-new-content.png" alt="The &quot;Create Content&quot; dialog when creating content under the created project. It contains elements, including the &quot;Artist&quot; content type that we created earlier." width="819w">
+</div>
+<div class="title">Figure 5. The content creation dialog with the artist content type</div>
+</div>
+<div class="paragraph">
+<p>However, before we start creating artists, let&#8217;s create a folder.</p>
+</div>
+<div class="paragraph">
+<p>Since we&#8217;ll be using this project in the coming chapters with more content types, having some hierarchy will make things easier. Create a new folder and call it "artists".</p>
+</div>
+<div class="paragraph">
+<p>Next, let&#8217;s create a few artists to get used to the workflow. We&#8217;ll start with Cardi B.</p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Select the artists folder (make sure it&#8217;s highlighted).</p>
+</li>
+<li>
+<p>Create a new artist.</p>
+</li>
+<li>
+<p>Give it the display name "Cardi B".</p>
+</li>
+<li>
+<p>Use these details to fill in the form:</p>
+<div class="dlist">
+<div class="title">Artist details (<a href="https://en.wikipedia.org/wiki/Cardi_B" target="_blank" rel="noopener">Cardi B on Wikipedia</a>)</div>
+<dl>
+<dt class="hdlist1">Name</dt>
+<dd>
+<p>Belcalis Marlenis Almánzar</p>
+</dd>
+<dt class="hdlist1">About</dt>
+<dd>
+<p>Belcalis Marlenis Almánzar (born October 11, 1992), known professionally as Cardi B, is an American rapper and songwriter.</p>
+</dd>
+</dl>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="media/content-type-filled-out.png" alt="The form for &quot;artist&quot; fully filled out." width="748w">
+</div>
+<div class="title">Figure 6. The content form filled out for the artist "Cardi B"</div>
+</div>
+</li>
+<li>
+<p>Again, save and close the tab. Now repeat this process for these next two entries. Be aware that Content Studio lets you nest content, so if you try and create new content when "Cardi B" is selected in the hierarchy, it&#8217;ll nest the new content under "Cardi B". In this case, though, we want the artists to be nested directly under the current folder, so make sure "artists" folder is selected when you create new content.</p>
+<div class="dlist">
+<div class="title">Missy Elliott (<a href="https://en.wikipedia.org/wiki/Missy_Elliott" target="_blank" rel="noopener">Missy Elliott on Wikipedia</a>)</div>
+<dl>
+<dt class="hdlist1">Name</dt>
+<dd>
+<p>Melissa Arnette Elliott</p>
+</dd>
+<dt class="hdlist1">About</dt>
+<dd>
+<p>Melissa Arnette Elliott (born July 1, 1971) is an American rapper, singer, songwriter, and record producer.</p>
+</dd>
+</dl>
+</div>
+<div class="dlist">
+<div class="title">P!nk (<a href="https://en.wikipedia.org/wiki/Pink_(singer)" target="_blank" rel="noopener">P!nk on Wikipedia</a>)</div>
+<dl>
+<dt class="hdlist1">Name</dt>
+<dd>
+<p>Alecia Beth Moore</p>
+</dd>
+<dt class="hdlist1">About</dt>
+<dd>
+<p>Alecia Beth Moore (born September 8, 1979), known professionally as Pink (stylized as P!nk), is an American singer and songwriter.</p>
+</dd>
+</dl>
+</div>
+</li>
+</ol>
+</div>
+<div class="paragraph">
+<p>With these artists created, your content hierarchy should now list the artists folder and the three artists.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="media/content-studio-with-artists.png" alt="The content hierarchy showing artists folder with &quot;Cardi B&quot;, &quot;Missy Elliot&quot; and &quot;P!nk&quot; listed directly underneath it." width="527w">
+</div>
+<div class="title">Figure 7. The hierarchy as it should look after creating some content</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="content_type_validation"><a class="link" href="#content_type_validation">Content type validation</a></h3>
+<div class="paragraph">
+<p>Enonic provides XML Schema Definitions (XSDs) for text editor integration and validation of your XML schemas. To use it, add the attribute <code>xmlns</code>, <code>xmlns:xsi</code>, and <code>xsi:schemaLocation</code> to your content types as shown below:</p>
+</div>
+<div class="listingblock">
+<div class="title">Using XSDs for schema validation of a content type definition.</div>
+<div class="content">
+<pre class="highlight"><code class="language-xml" data-lang="xml">&lt;?xml version="1.0" encoding="utf-8"?&gt;
+&lt;content-type
+    xmlns="urn:enonic:xp:model:1.0"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="urn:enonic:xp:model:1.0 https://raw.githubusercontent.com/enonic/xp/master/modules/core/core-api/src/main/resources/META-INF/xsd/model.xsd"&gt;
+  &lt;display-name&gt;Content type display name&lt;/display-name&gt;
+
+  &lt;!-- rest of content elided for brevity --&gt;
+
+&lt;/content-type&gt;</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Note that in-editor schema validation depends on whether your text editor supports validating against XSD schemas or not. If your editor doesn&#8217;t support it out of the box, it may be available via a Language Server Protocol (LSP) client.</p>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="publishing_your_content"><a class="link" href="#publishing_your_content">Publishing your content</a></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>You might have noticed the yellow circles with exclamation marks displayed on all the content we&#8217;ve been working on, both in the wizard and in the content grid. This is how Content Studio indicates whether something is published or not and whether there are any errors with it. There are four states:</p>
+</div>
+<div class="dlist">
+<dl>
+<dt class="hdlist1">Error (red circle with a cross)</dt>
+<dd>
+<p>This indicates that there is something wrong with your content. Because XP uses structured content it can also validate content as it is created. If something doesn&#8217;t conform to the specified schema (for example: a required field has no value), it will fail to validate and be marked with this symbol.</p>
+</dd>
+<dt class="hdlist1">Work in progress (yellow circle with exclamation mark)</dt>
+<dd>
+<p>This symbol indicates that this piece of content has unpublished changes. That could be either because this is new content that has never been published, or it could be because there have been changes to this piece of content since it was last published.</p>
+</dd>
+<dt class="hdlist1">Ready for publishing (green circle with a check mark)</dt>
+<dd>
+<p>This piece of content is marked as ready to be published.</p>
+</dd>
+<dt class="hdlist1">Published (no icon)</dt>
+<dd>
+<p>This piece of content is published and has not been modified since.</p>
+</dd>
+</dl>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="media/content-studio-content-status.png" alt="Three pieces of content displaying the three statuses that a piece of content can have" width="270w">
+</div>
+</div>
+<div class="paragraph">
+<p>So what does it mean for content to be published? It doesn&#8217;t make much of a difference to us at this stage of the tutorial, but when you&#8217;re working on production systems, it&#8217;s very important. So let&#8217;s talk briefly about Content Studio&#8217;s branching and publishing system.</p>
+</div>
+<div class="sect2">
+<h3 id="branches"><a class="link" href="#branches">Branches</a></h3>
+<div class="paragraph">
+<p>Content Studio operates with two branches:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><em>draft branch</em>, where you work and edit;</p>
+</li>
+<li>
+<p><em>master branch</em>, holds the published content.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>When you work on something in Content Studio, you&#8217;re working on the <strong>draft branch</strong>.</p>
+</div>
+<div class="paragraph">
+<p>When you publish something, the <strong>master branch</strong> gets updated with the new content.</p>
+</div>
+<div class="paragraph">
+<p>When you edit that same piece of content in Content Studio again, you&#8217;re back to working on the <strong>draft</strong>, and you have to publish it to see changes to the published content.</p>
+</div>
+<div class="paragraph">
+<p>To publish a piece of content, right click it and select "Publish".</p>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+You can also publish a piece of content by using the keyboard shortcut <span class="keyseq"><kbd>Ctrl</kbd>+<kbd>Alt</kbd>+<kbd>P</kbd></span>/<span class="keyseq"><kbd>control</kbd>+<kbd>option</kbd>+<kbd>P</kbd></span>.
+</td>
+</tr>
+</table>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="summary"><a class="link" href="#summary">Summary</a></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>You&#8217;ve been introduced to Content Studio, content projects and content types, and how to create and publish content.</p>
+</div>
+<div class="paragraph">
+<p>Next up, we&#8217;ll have a look at <a href="data-toolbox.ahtml">what is going on under the hood</a>.</p>
 </div>
 </div>
 </div>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2026-11-12 10:20:17 UTC
+Last updated 2026-11-12 10:22:56 UTC
 </div>
 </div>
 </body>

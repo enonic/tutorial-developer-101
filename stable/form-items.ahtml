@@ -6,8 +6,8 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="generator" content="Asciidoctor 2.0.26">
 <meta name="application-name" content="dev101">
-<meta name="description" content="Publish your tutorial content, test public and restricted access, and understand how editorial roles separate editing from publishing.">
-<title>Permissions and publishing</title>
+<meta name="description" content="Create an Animal content type, configure repeatable fields, select images, and link artists to animals through the GraphQL API.">
+<title>Form items</title>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,300italic,400,400italic,600,600italic%7CNoto+Serif:400,400italic,700,700italic%7CDroid+Sans+Mono:400,700">
 <style>
 /*! Asciidoctor default stylesheet | MIT License | https://asciidoctor.org */
@@ -439,26 +439,33 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 </head>
 <body class="article toc2 toc-right">
 <div id="header">
-<h1>Permissions and publishing</h1>
+<h1>Form items</h1>
 <div id="toc" class="toc2">
 <div id="toctitle">Table of Contents</div>
 <ul class="sectlevel1">
-<li><a href="#publish_the_tutorial_content">Publish the tutorial content</a>
+<li><a href="#create_the_animal_form">Create the Animal form</a>
 <ul class="sectlevel2">
-<li><a href="#task_publish_the_folders_and_their_contents">Task: Publish the folders and their contents</a></li>
+<li><a href="#task_add_alternative_names">Task: Add alternative names</a></li>
 </ul>
 </li>
-<li><a href="#public_and_restricted_access">Public and restricted access</a>
+<li><a href="#select_an_image">Select an image</a>
 <ul class="sectlevel2">
-<li><a href="#task_read_the_published_content_anonymously">Task: Read the published content anonymously</a></li>
-<li><a href="#task_restrict_lynx">Task: Restrict Lynx</a></li>
+<li><a href="#task_add_an_image_selector">Task: Add an image selector</a></li>
+<li><a href="#task_create_two_animals">Task: Create two animals</a></li>
 </ul>
 </li>
-<li><a href="#who_can_edit_and_publish">Who can edit and publish?</a>
+<li><a href="#query_the_animals_fields">Query the animal&#8217;s fields</a>
 <ul class="sectlevel2">
-<li><a href="#give_teams_access_to_specific_content">Give teams access to specific content</a></li>
+<li><a href="#task_fetch_the_lion_and_its_image">Task: Fetch the lion and its image</a></li>
 </ul>
 </li>
+<li><a href="#link_artists_to_animals">Link artists to animals</a>
+<ul class="sectlevel2">
+<li><a href="#task_add_a_favorite_animal">Task: Add a favorite animal</a></li>
+<li><a href="#task_follow_the_reference_in_a_query">Task: Follow the reference in a query</a></li>
+</ul>
+</li>
+<li><a href="#more_form_items">More form items</a></li>
 <li><a href="#coming_up">Coming up</a></li>
 </ul>
 </div>
@@ -467,292 +474,430 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <div id="preamble">
 <div class="sectionbody">
 <div class="paragraph">
-<p>In this chapter, you&#8217;ll publish the content you&#8217;ve created, control who can read it, and learn how editorial permissions separate editing from publishing.</p>
+<p>In this chapter, you&#8217;ll create an Animal content type, give it alternative names and images, and link your artists to their favorite animals.
+You&#8217;ll then follow those relationships in Guillotine.</p>
 </div>
 <div class="paragraph">
-<p>Publishing copies the current draft to the <code>master</code> branch.
-Permissions determine who can read that version, and who can edit or publish the content.
-You&#8217;ll explore reading access first, then editorial permissions.</p>
+<p><em>Form items</em> are the building blocks of content forms.
+You&#8217;ve already used TextLine, TextArea and Date; now you&#8217;ll make a field repeatable and use selectors to reference other content.</p>
 </div>
 </div>
 </div>
 <div class="sect1">
-<h2 id="publish_the_tutorial_content"><a class="link" href="#publish_the_tutorial_content">Publish the tutorial content</a></h2>
+<h2 id="create_the_animal_form"><a class="link" href="#create_the_animal_form">Create the Animal form</a></h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>Some artists were published earlier, but the later chapters added content and changed existing items.
-Start by publishing all those additions and changes using your administrator session from the <a href="setup.ahtml">setup chapter</a>.</p>
+<p>An animal needs a species name and may have other names, such as "Caribou" for a reindeer.
+Use the display name for the species and a repeatable TextLine for its other names.</p>
 </div>
 <div class="sect2">
-<h3 id="task_publish_the_folders_and_their_contents"><a class="link" href="#task_publish_the_folders_and_their_contents">Task: Publish the folders and their contents</a></h3>
+<h3 id="task_add_alternative_names"><a class="link" href="#task_add_alternative_names">Task: Add alternative names</a></h3>
 <div class="olist arabic">
 <ol class="arabic">
 <li>
-<p><strong>Select the tutorial content</strong> - In Content Studio, open "My First Project" and select the Animals, Artists and Images folders together.</p>
-</li>
-<li>
-<p><strong>Include the folders' contents</strong> - Open the publishing action&#8217;s dropdown and choose <b class="button">Publish tree</b>.
-This opens the Publishing Wizard with <strong>Include child items</strong> selected automatically for each folder.</p>
-</li>
-<li>
-<p><strong>Review the selection</strong> - Review the wizard to ensure that the content includes <code>/animals/lynx/lynx.jpg</code>. If the wizard reports items are in progress, click <b class="button">Mark as ready</b>.</p>
-</li>
-<li>
-<p><strong>Publish the content</strong> - Once the content is valid and ready, click <b class="button">Publish now</b> and verify that the content is Online with no pending changes.</p>
-</li>
-</ol>
-</div>
-<div class="paragraph">
-<p>The <a href="https://developer.enonic.com/docs/content-studio/stable/actions/publish">Content Studio publishing documentation</a> explains the wizard&#8217;s other options.</p>
-</div>
-</div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="public_and_restricted_access"><a class="link" href="#public_and_restricted_access">Public and restricted access</a></h2>
-<div class="sectionbody">
-<div class="paragraph">
-<p>You chose <strong>Public</strong> when creating the content project.
-This gives its content public read access by default, represented by the <strong>Everyone</strong> role, which includes anonymous callers.</p>
-</div>
-<div class="paragraph">
-<p>Even if your project is <strong>Public</strong>, published items can still be restricted. Regardless of the project&#8217;s or item&#8217;s access mode, draft items are never accessible to anonymous callers.</p>
-</div>
-<div class="sect2">
-<h3 id="task_read_the_published_content_anonymously"><a class="link" href="#task_read_the_published_content_anonymously">Task: Read the published content anonymously</a></h3>
-<div class="paragraph">
-<p>This query fetches the published Lynx:</p>
-</div>
+<p><strong>Define alternative names</strong> - Create the Animal content type in your app:</p>
 <div class="listingblock">
+<div class="title">src/main/resources/cms/content-types/animal/animal.yaml</div>
 <div class="content">
-<pre class="highlight"><code class="language-graphql" data-lang="graphql">{
-  guillotine(project: "my-first-project", branch: "master") {
-    get(key: "/animals/lynx") {
-      displayName
-    }
-  }
-}</code></pre>
-</div>
-</div>
-<div class="paragraph">
-<p>Query Playground supplies your login, so it cannot demonstrate anonymous access from your administrator session.</p>
-</div>
-<div class="olist arabic">
-<ol class="arabic">
-<li>
-<p><strong>Fetch Lynx anonymously</strong> - Run the same query from a terminal with this ready-to-run cURL command, which sends no login credentials or browser cookies:</p>
-<div class="listingblock">
-<div class="content">
-<pre class="highlight"><code class="language-shell" data-lang="shell">curl 'http://localhost:8080/api/com.enonic.app.guillotine:graphql' \
-  -H 'Content-Type: application/json' \
-  --data-binary '{"query":"{ guillotine(project: \"my-first-project\", branch: \"master\") { get(key: \"/animals/lynx\") { displayName } } }"}'</code></pre>
-</div>
-</div>
-<div class="paragraph">
-<p>Lynx is returned:</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="highlight"><code class="language-json" data-lang="json">{
-  "data": {
-    "guillotine": {
-      "get": { "displayName": "Lynx" }
-    }
-  }
-}</code></pre>
+<pre class="highlight"><code class="language-yaml" data-lang="yaml">kind: "ContentType"
+title: "Animal"
+description: "An animal that lives on planet Earth"
+displayNamePlaceholder: "Species"
+superType: "base:structured"
+form:
+  - type: "TextLine"
+    name: "otherNames"
+    label: "Other names"
+    helpText: "Other names for this species."
+    occurrences:
+      min: 0
+      max: 0</code></pre>
 </div>
 </div>
 </li>
 </ol>
 </div>
 <div class="paragraph">
-<p>The <a href="https://developer.enonic.com/docs/guillotine/stable/usage#request-format">Guillotine usage documentation</a> explains the HTTP request format in more detail.</p>
-</div>
-</div>
-<div class="sect2">
-<h3 id="task_restrict_lynx"><a class="link" href="#task_restrict_lynx">Task: Restrict Lynx</a></h3>
-<div class="olist arabic">
-<ol class="arabic">
-<li>
-<p><strong>Find Lynx&#8217;s access settings</strong> - Open Lynx in Content Studio, show the Context Panel, and select <strong>Details</strong> if another panel is active.</p>
-</li>
-<li>
-<p><strong>Restrict public access</strong> - Click <b class="button">Edit permissions</b>.
-Under Access Mode, choose <strong>Restricted</strong>, leaving the listed users and roles unchanged.</p>
-<div class="imageblock">
-<div class="content">
-<img src="images/permissions-access.png" alt="Permissions wizard for Lynx showing the project roles and Restricted access selected" width="880">
-</div>
-<div class="title">Figure 1. Restricting Lynx while preserving access for its project roles</div>
-</div>
-</li>
-<li>
-<p><strong>Apply the restriction to Lynx only</strong> - Click <b class="button">Next</b> and choose <strong>This item</strong> as the scope.
-Continue to the summary and click <b class="button">Apply changes</b>.</p>
-</li>
-<li>
-<p><strong>Test anonymous access</strong> - Fetch Lynx and its still-public child image with this expanded query:</p>
-<div class="listingblock">
-<div class="content">
-<pre class="highlight"><code class="language-graphql" data-lang="graphql">{
-  guillotine(project: "my-first-project", branch: "master") {
-    animal: get(key: "/animals/lynx") {
-      displayName
-    }
-    image: get(key: "/animals/lynx/lynx.jpg") {
-      displayName
-    }
-  }
-}</code></pre>
-</div>
-</div>
-<div class="paragraph">
-<p><code>animal</code> and <code>image</code> are GraphQL aliases: they name the two results so the query can call <code>get</code> twice.</p>
-</div>
-<div class="paragraph">
-<p>Run this updated anonymous cURL request:</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="highlight"><code class="language-shell" data-lang="shell">curl 'http://localhost:8080/api/com.enonic.app.guillotine:graphql' \
-  -H 'Content-Type: application/json' \
-  --data-binary '{"query":"{ guillotine(project: \"my-first-project\", branch: \"master\") { animal: get(key: \"/animals/lynx\") { displayName } image: get(key: \"/animals/lynx/lynx.jpg\") { displayName } } }"}'</code></pre>
-</div>
-</div>
-<div class="paragraph">
-<p>The restricted animal is hidden, but the public image is returned:</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="highlight"><code class="language-json" data-lang="json">{
-  "data": {
-    "guillotine": {
-      "animal": null,
-      "image": { "displayName": "lynx" }
-    }
-  }
-}</code></pre>
-</div>
-</div>
-<div class="paragraph">
-<p>Your image&#8217;s display name may differ if you chose another photograph.</p>
-</div>
-</li>
-<li>
-<p><strong>Test administrator access</strong> - In Content Studio&#8217;s Query Playground, run the expanded GraphQL query using your administrator session.
-Confirm that both items are visible to this administrator.</p>
-</li>
-<li>
-<p><strong>Restore public access</strong> - Reopen Lynx&#8217;s permissions and change Access Mode back to <strong>Public</strong>.
-Choose <strong>This item</strong> as the scope, review the summary, and apply the changes.
-Run the two-item anonymous request again and confirm that both items are returned.</p>
-</li>
-</ol>
-</div>
-<div class="paragraph">
-<p>Lynx remained published throughout this exercise; the results changed with the caller&#8217;s read access.
-Permission changes take effect on draft and published content without republishing.</p>
-</div>
-<div class="paragraph">
-<p>The image stayed public because it has its own permissions, copied from its parent when created.
-Changing the parent&#8217;s permissions later only affects existing children if you explicitly include them.</p>
-</div>
-<div class="paragraph">
-<p>Read permissions cover the entire content item, including mixin values: naming a mixin "Editorial" does not make its Notes field private.
-See the <a href="https://developer.enonic.com/docs/content-studio/stable/workbench/permissions">Content Studio permissions documentation</a> for more on access levels and available operations.</p>
-</div>
-<div class="paragraph">
-<p>XP can grant read access to individual users, groups, or roles on each content item.
-Restricted content can therefore be available to selected customers, partners, or employees.
-Guillotine applies those permissions to the authenticated caller, so different users can receive different results from the same query.</p>
-</div>
-<div class="paragraph">
-<p>Users can sign in through an organization&#8217;s existing identity provider, such as Microsoft Entra ID, using an appropriate XP ID provider integration.
-Authentication establishes who the user is; content permissions determine what they can read or manage.
-The <a href="https://developer.enonic.com/docs/platform/stable/security/idproviders">ID provider documentation</a> explains how XP connects to external identity systems.</p>
-</div>
-</div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="who_can_edit_and_publish"><a class="link" href="#who_can_edit_and_publish">Who can edit and publish?</a></h2>
-<div class="sectionbody">
-<div class="paragraph">
-<p>You&#8217;ve used your administrator session so far, with full access to the content.
-An ordinary content author has a different set of permissions.
-Project roles provide the usual access levels, and content permissions control the operations allowed on individual items.</p>
-</div>
-<div class="paragraph">
-<p>Two common project roles separate editing from publishing:</p>
-</div>
-<table class="tableblock frame-all grid-all stretch">
-<colgroup>
-<col style="width: 25%;">
-<col style="width: 75%;">
-</colgroup>
-<thead>
-<tr>
-<th class="tableblock halign-left valign-top">Project role</th>
-<th class="tableblock halign-left valign-top">Default content access</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Author</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Read, create, edit and delete content, without publishing it</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Editor</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Author access plus publishing and changing content permissions</p></td>
-</tr>
-</tbody>
-</table>
-<div class="paragraph">
-<p>An Author can save changes in Draft and mark the content ready, but publishing requires an Editor or another account with publishing permission.
-Marking an item ready changes its workflow status; it does not grant permission or update the published version.
-Authors can <a href="https://developer.enonic.com/docs/content-studio/stable/workflow/issues#publish_requests">request publishing</a> from an authorized editor.</p>
-</div>
-<div class="paragraph">
-<p>The <a href="https://developer.enonic.com/docs/content-studio/stable/projects#project-roles">project roles reference</a> explains how to assign users and groups, along with the other available roles.</p>
-</div>
-<div class="sect2">
-<h3 id="give_teams_access_to_specific_content"><a class="link" href="#give_teams_access_to_specific_content">Give teams access to specific content</a></h3>
-<div class="paragraph">
-<p>You can use groups to divide responsibility within a project.
-For example, an administrator could create an <strong>Animals editors</strong> group in the Users tool, add the people responsible for animals, and assign the group the project&#8217;s <strong>Contributor</strong> role.
-This gives them access to the project in Content Studio with read access as their starting point.</p>
-</div>
-<div class="paragraph">
-<p>In the Animals folder&#8217;s <strong>Edit permissions</strong> dialog, grant that group <strong>Can Write</strong> and apply the change to the folder and its existing child items.
-Members can then create, edit and delete content in the Animals subtree, including its media, while Artists and Images remain read-only.
-They can save drafts and request publishing, but cannot publish them.
-New items created beneath Animals receive a copy of their parent&#8217;s permissions.</p>
-</div>
-<div class="paragraph">
-<p>Access combines all the permissions a user receives through their groups and roles.
-For this arrangement to limit editing to Animals, the members must not also have project-wide Author or Editor access, administrator access, or another grant that allows editing elsewhere.</p>
-</div>
-<div class="paragraph">
-<p>The same approach supports other responsibilities:</p>
+<p>As with Artist, <code>displayNamePlaceholder</code> tells editors what to enter in the display name, here the species.
+For the <code>otherNames</code> field:</p>
 </div>
 <div class="ulist">
 <ul>
 <li>
-<p><strong>Animal publishers</strong> could have <strong>Can Publish</strong> on Animals and its children, allowing that team to review and publish the animal team&#8217;s work.</p>
+<p><code>type</code> chooses the form item, in this case TextLine.</p>
 </li>
 <li>
-<p><strong>Image curators</strong> could have <strong>Can Write</strong> on Images and its children, allowing them to manage shared media while leaving the animal and artist descriptions to other teams.</p>
+<p><code>name</code> is the property name used to store the value and expose it through GraphQL.</p>
 </li>
 <li>
-<p><strong>Proofreaders</strong> could have <strong>Custom</strong> access with only <strong>Read</strong> and <strong>Modify</strong> on selected items, allowing corrections to existing content without creating, deleting or publishing items.</p>
+<p><code>label</code> and <code>helpText</code> guide the editor filling out the form.</p>
+</li>
+<li>
+<p><code>occurrences</code> allows the editor to add multiple values: <code>min: 0</code> makes the field optional, and <code>max: 0</code> means there is no upper limit.</p>
 </li>
 </ul>
 </div>
 <div class="paragraph">
-<p>These examples build on the same Contributor baseline, with additional permissions granted where each team needs them.
-Managing group membership lets you change who belongs to a team without editing every content item&#8217;s permissions.
-See the <a href="https://developer.enonic.com/docs/content-studio/stable/workbench/permissions#edit_permissions">content permissions reference</a> for the permission levels and options for applying changes to children.</p>
+<p>Without <code>occurrences</code>, a field is optional and accepts a single value (<code>min: 0</code>, <code>max: 1</code>).
+Setting both to <code>1</code> makes it required.
+Content Studio allows editors to save drafts with missing required values, but those items cannot be marked as ready or published.</p>
 </div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+Choose field names that will last, and use <code>camelCase</code>, such as <code>otherNames</code>.
+Renaming a field does not migrate its stored values, and queries using its old name will need updating.
+You can change its label without changing the stored property or API field.
+</td>
+</tr>
+</table>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="select_an_image"><a class="link" href="#select_an_image">Select an image</a></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>The lion image you uploaded in the <a href="media.ahtml">previous chapter</a> is a separate content item.
+An ImageSelector stores a reference to it, so you can reuse the same image across several animals without uploading copies.</p>
+</div>
+<div class="sect2">
+<h3 id="task_add_an_image_selector"><a class="link" href="#task_add_an_image_selector">Task: Add an image selector</a></h3>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p><strong>Add image references</strong> - Append this form item to the Animal form, at the same indentation as <code>otherNames</code>:</p>
+<div class="listingblock">
+<div class="title">src/main/resources/cms/content-types/animal/animal.yaml</div>
+<div class="content">
+<pre class="highlight"><code class="language-yaml" data-lang="yaml">  - type: "ImageSelector"
+    name: "images"
+    label: "Images"
+    helpText: "Images of the animal"
+    occurrences:
+      min: 0
+      max: 3</code></pre>
+</div>
+</div>
+</li>
+</ol>
+</div>
+<div class="paragraph">
+<p>Here, <code>min: 0</code> and <code>max: 3</code> allow up to three images, including none.
+ImageSelector lets editors select existing images or upload new ones.
+For this exercise, you&#8217;ll select the existing lion image.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="task_create_two_animals"><a class="link" href="#task_create_two_animals">Task: Create two animals</a></h3>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p><strong>Deploy the Animal schema</strong> - Save the schema file and let your running <code>enonic dev</code> watcher update the app.</p>
+</li>
+<li>
+<p><strong>Create the Animals folder</strong> - In Content Studio, create a folder named "Animals" at the root of "My First Project", next to Artists and Images.
+Check that its path is <code>/animals</code>.</p>
+</li>
+<li>
+<p><strong>Create Lion</strong> - Select Animals, click <b class="button">New</b>, and choose <strong>Animal</strong>.
+Enter "Lion" as the display name and select your uploaded <code>lion.jpg</code> in the Images field.
+Leave Other names empty and save the item.</p>
+<div class="imageblock">
+<div class="content">
+<img src="images/form-animal.png" alt="Animal form for Lion with an empty Other names field and the selected lion image" width="578">
+</div>
+<div class="title">Figure 1. The Animal form with a reference to the uploaded lion image</div>
+</div>
+</li>
+<li>
+<p><strong>Create Reindeer</strong> - Create another Animal named "Reindeer" in the same folder.
+Enter "Caribou" in Other names, leave Images empty, and save it.
+Notice that you can add another Other names entry because the field is repeatable.</p>
+</li>
+</ol>
+</div>
+<div class="paragraph">
+<p>Both items are saved in Draft; keep using Draft in Query Playground for the exercises below.</p>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="query_the_animals_fields"><a class="link" href="#query_the_animals_fields">Query the animal&#8217;s fields</a></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Guillotine uses <code>occurrences</code> when generating the GraphQL fields.
+Both <code>otherNames</code> and <code>images</code> accept multiple values, so both become lists, even when an item has just one value.
+The names are strings; the images are content references whose fields you can select.</p>
+</div>
+<div class="sect2">
+<h3 id="task_fetch_the_lion_and_its_image"><a class="link" href="#task_fetch_the_lion_and_its_image">Task: Fetch the lion and its image</a></h3>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p><strong>Fetch Lion and its image</strong> - Open Query Playground for "My First Project", keep <strong>Draft</strong> selected, and run:</p>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-graphql" data-lang="graphql">{
+  guillotine {
+    get(key: "/animals/lion") {
+      displayName
+      ... on com_example_dev101_Animal {
+        data {
+          otherNames
+          images {
+            displayName
+            ... on media_Image {
+              imageUrl(scale: "width(600)") {
+                path
+                queryString
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The result contains an empty <code>otherNames</code> array and one entry in <code>images</code>.
+Build the image URL by joining <code><a href="http://localhost:8080/api" class="bare">http://localhost:8080/api</a></code>, <code>path</code> and <code>queryString</code>, as in the media chapter.</p>
+</div>
+</li>
+<li>
+<p><strong>Compare Reindeer</strong> - Change the key to <code>/animals/reindeer</code> and run the query again.
+The <code>otherNames</code> list now contains <code>"Caribou"</code>, while <code>images</code> is empty.</p>
+</li>
+</ol>
+</div>
+<div class="paragraph">
+<p>The <code>get</code> result and the items in <code>images</code> use GraphQL&#8217;s <code>Content</code> interface.
+As in the <a href="headless-api.ahtml">Headless API chapter</a>, an inline fragment selects fields belonging to a more specific GraphQL type:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>... on {app-name-query}_Animal</code> gives you access to the Animal&#8217;s <code>data</code>.</p>
+</li>
+<li>
+<p><code>... on media_Image</code> gives you access to the image&#8217;s <code>imageUrl</code>.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>These are GraphQL type names; your CMS content types are <code>com.example.dev101:animal</code> and <code>media:image</code>.
+The image selector stores the image&#8217;s ID, and Guillotine resolves that reference for you.</p>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="link_artists_to_animals"><a class="link" href="#link_artists_to_animals">Link artists to animals</a></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>A ContentSelector can reference other kinds of content, just as ImageSelector references images.
+You&#8217;ll use it to give each artist one optional favorite animal.</p>
+</div>
+<div class="sect2">
+<h3 id="task_add_a_favorite_animal"><a class="link" href="#task_add_a_favorite_animal">Task: Add a favorite animal</a></h3>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p><strong>Define the favorite animal field</strong> - Append this field to the Artist form, after <code>birthday</code>:</p>
+<div class="listingblock">
+<div class="title">src/main/resources/cms/content-types/artist/artist.yaml</div>
+<div class="content">
+<pre class="highlight"><code class="language-yaml" data-lang="yaml">  - type: "ContentSelector"
+    name: "favoriteAnimal"
+    label: "Favorite animal"
+    allowContentType:
+      - "animal"
+    allowPath:
+      - "/animals/*"</code></pre>
+</div>
+</div>
+</li>
+<li>
+<p><strong>Select each artist&#8217;s favorite animal</strong> - Save the schema, let the watcher update the app, and reopen your artists in Content Studio.
+Make these selections and save each artist:</p>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 50%;">
+<col style="width: 50%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Artist</th>
+<th class="tableblock halign-left valign-top">Favorite animal</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Cardi B</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Lion</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Missy Elliott</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Reindeer</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">P!nk</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Lion</p></td>
+</tr>
+</tbody>
+</table>
+<div class="imageblock">
+<div class="content">
+<img src="images/form-artist-favorite-animal.png" alt="Artist form for Missy Elliott with Reindeer selected as her favorite animal" width="548">
+</div>
+<div class="title">Figure 2. The Artist form with an animal selected</div>
+</div>
+</li>
+</ol>
+</div>
+<div class="paragraph">
+<p>The selector narrows the available choices in two ways:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>allowContentType</code> permits only the <code>animal</code> content type from this app.</p>
+</li>
+<li>
+<p><code>allowPath</code> restricts the choices to content below <code>/animals</code>.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>There is no <code>occurrences</code> setting, so the editor can select at most one animal and can leave the field empty.</p>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+Reference an item when it should be edited and reused independently.
+Two artists can reference the same Lion, and an edit to that animal is visible through both references.
+For data that only belongs to one item, such as an artist&#8217;s filmography entries, you&#8217;ll use sets in the next chapter.
+</td>
+</tr>
+</table>
+</div>
+</div>
+<div class="sect2">
+<h3 id="task_follow_the_reference_in_a_query"><a class="link" href="#task_follow_the_reference_in_a_query">Task: Follow the reference in a query</a></h3>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p><strong>Fetch the referenced animals</strong> - Start with the type-filtered artist query from the Headless API chapter and select <code>favoriteAnimal</code>:</p>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-graphql" data-lang="graphql">{
+  guillotine {
+    queryDsl(
+      query: {
+        term: {
+          field: "type"
+          value: { string: "com.example.dev101:artist" }
+        }
+      }
+    ) {
+      displayName
+      ... on com_example_dev101_Artist {
+        data {
+          favoriteAnimal {
+            displayName
+            ... on com_example_dev101_Animal {
+              data {
+                otherNames
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}</code></pre>
+</div>
+</div>
+</li>
+</ol>
+</div>
+<div class="paragraph">
+<p>The <code>favoriteAnimal</code> field returns a single content item.
+You can read its <code>displayName</code> directly, then use an Animal fragment to select <code>data.otherNames</code>.
+There is no need for a separate query to fetch the referenced animal.</p>
+</div>
+<div class="paragraph">
+<p>With the sample selections above, the <code>data.guillotine.queryDsl</code> array contains the following items; their order may differ:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-json" data-lang="json">[
+  {
+    "displayName": "Cardi B",
+    "data": {
+      "favoriteAnimal": {
+        "displayName": "Lion",
+        "data": {
+          "otherNames": []
+        }
+      }
+    }
+  },
+  {
+    "displayName": "Missy Elliott",
+    "data": {
+      "favoriteAnimal": {
+        "displayName": "Reindeer",
+        "data": {
+          "otherNames": ["Caribou"]
+        }
+      }
+    }
+  },
+  {
+    "displayName": "P!nk",
+    "data": {
+      "favoriteAnimal": {
+        "displayName": "Lion",
+        "data": {
+          "otherNames": []
+        }
+      }
+    }
+  }
+]</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>If an artist has no selection, <code>favoriteAnimal</code> is <code>null</code>.
+Compare that with the empty lists for an animal&#8217;s unused <code>otherNames</code> or <code>images</code> fields.</p>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="more_form_items"><a class="link" href="#more_form_items">More form items</a></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>You now have the basics for configuring fields and linking content.
+The <a href="https://developer.enonic.com/docs/cms/stable/schemas/form-items">CMS form items reference</a> covers the full range of form items and their settings, including <a href="https://developer.enonic.com/docs/cms/stable/schemas/form-items/imageselector">ImageSelector</a> and <a href="https://developer.enonic.com/docs/cms/stable/schemas/form-items/contentselector">ContentSelector</a>.</p>
+</div>
+<div class="paragraph">
+<p>For a file that belongs directly to one content item, <a href="https://developer.enonic.com/docs/cms/stable/schemas/form-items/attachmentuploader">AttachmentUploader</a> stores it as an attachment on that item, instead of creating separate media content to reference.
+Query the content item&#8217;s <code>attachments</code> field and select <code>attachmentUrl</code> on each attachment to retrieve its URL components.
+See the <a href="https://developer.enonic.com/docs/guillotine/stable/api#attachment">Guillotine Attachment reference</a> for the available fields.</p>
 </div>
 </div>
 </div>
@@ -760,15 +905,15 @@ See the <a href="https://developer.enonic.com/docs/content-studio/stable/workben
 <h2 id="coming_up"><a class="link" href="#coming_up">Coming up</a></h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>You&#8217;ve published your content, compared public and restricted access, and learned how editorial roles separate editing from publishing.
-In the next chapter, you&#8217;ll <a href="export-import.ahtml">export your content and import it into another project</a>.</p>
+<p>You&#8217;ve created repeatable fields, selected an image, linked artists to animals, and followed those references through Guillotine.
+In the next chapter, you&#8217;ll group and reuse form items with <a href="sets.ahtml">sets and form fragments</a>.</p>
 </div>
 </div>
 </div>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2026-11-12 10:20:17 UTC
+Last updated 2026-11-12 10:22:31 UTC
 </div>
 </div>
 </body>

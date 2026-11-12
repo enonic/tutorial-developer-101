@@ -5,8 +5,8 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="generator" content="Asciidoctor 2.0.26">
-<meta name="description" content="How does XP deal with images and other media? This chapter covers XP media support, how to upload and query for media, how to work with images and attachments.">
-<title>Media - files are content too</title>
+<meta name="description" content="Introducing a fundamental concept of Enonic XP development: sandboxes.">
+<title>Sandbox</title>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,300italic,400,400italic,600,600italic%7CNoto+Serif:400,400italic,700,700italic%7CDroid+Sans+Mono:400,700">
 <style>
 /*! Asciidoctor default stylesheet | MIT License | https://asciidoctor.org */
@@ -438,35 +438,15 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 </head>
 <body class="article toc2 toc-right">
 <div id="header">
-<h1>Media - files are content too</h1>
+<h1>Sandbox</h1>
 <div id="toc" class="toc2">
 <div id="toctitle">Table of Contents</div>
 <ul class="sectlevel1">
-<li><a href="#media">Media</a>
-<ul class="sectlevel2">
-<li><a href="#media_types">Media types</a></li>
-<li><a href="#uploading">Uploading</a></li>
-<li><a href="#data_toolbox">Data Toolbox</a></li>
-</ul>
-</li>
-<li><a href="#attachment_service">Attachment service</a>
-<ul class="sectlevel2">
-<li><a href="#mediaurl">mediaUrl</a></li>
-</ul>
-</li>
-<li><a href="#images">Images</a>
-<ul class="sectlevel2">
-<li><a href="#image_service">Image service</a></li>
-<li><a href="#image_form">Image form</a></li>
-<li><a href="#autofocus">Autofocus</a></li>
-</ul>
-</li>
-<li><a href="#graphql_api">GraphQL API</a>
-<ul class="sectlevel2">
-<li><a href="#general_media_type">General media type</a></li>
-<li><a href="#image_media_type">Image media type</a></li>
-</ul>
-</li>
+<li><a href="#what_is_a_sandbox">What is a sandbox?</a></li>
+<li><a href="#your_first_sandbox">Your first sandbox</a></li>
+<li><a href="#stopping_and_starting">Stopping and starting</a></li>
+<li><a href="#xp_admin">XP Admin</a></li>
+<li><a href="#troubleshooting">Troubleshooting</a></li>
 <li><a href="#summary">Summary</a></li>
 </ul>
 </div>
@@ -475,10 +455,150 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <div id="preamble">
 <div class="sectionbody">
 <div class="paragraph">
-<p>Naturally, XP can store any file you would want to serve or associate with your content. This chapter explores how XP handles file uploads, and dives into the image handling specifically.</p>
+<p>In this chapter we&#8217;ll introduce a fundamental concept to start developing with Enonic XP - <strong>Sandboxes</strong></p>
 </div>
 <div class="paragraph">
-<p>At the end of the chapter we&#8217;ll walk through how to use images in a headless fashion.</p>
+<p>By the end, you&#8217;ll have created and started a sandbox using the CLI, understanding what it is and what is their purpose.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="what_is_a_sandbox"><a class="link" href="#what_is_a_sandbox">What is a sandbox?</a></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>A <em>sandbox</em> is basically a local developer instance of Enonic XP. Each sandbox may have different versions of XP, different data and configuration.</p>
+</div>
+<div class="paragraph">
+<p>Having a local (and running) instance of XP is essential for developing apps on Enonic XP.</p>
+</div>
+<div class="paragraph">
+<p>It is possible to setup multiple sandboxes on your machine, each one of them using XP on a specific version.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="your_first_sandbox"><a class="link" href="#your_first_sandbox">Your first sandbox</a></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>To create a sandbox using the CLI, start by running the following command:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-shell" data-lang="shell">enonic enonic sandbox create tutorial -t essentials -v 7.16.4</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>This creates a sandbox called <code>tutorial</code> based on the <code>essentials</code> templat (a set of applications on Enonic Market), and starts it. The <code>-v</code> forces the use of an XP7 version.</p>
+</div>
+<div class="paragraph">
+<p>You will now see a fair amount of output in your terminal, here are the most notable parts:</p>
+</div>
+<div class="listingblock">
+<div class="title">Creating the sandbox</div>
+<div class="content">
+<pre class="highlight"><code class="language-shell" data-lang="shell">Loading templates from Enonic Market...Done.
+Using template 'Essentials'
+Loading...Done
+Downloading distro [=======================================================] 100.00%
+Unzipping distro...Done
+
+Sandbox 'tutorial' created with distro 'enonic-xp-mac-sdk-7.16.4'.</code></pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="title">Starting the sandbox</div>
+<div class="content">
+<pre class="highlight"><code class="language-shell" data-lang="shell">____________________________(_)______   ____  _________
+_  _ \_  __ \  __ \_  __ \_  /_  ___/   __  |/_/__  __ \
+/  __/  / / / /_/ /  / / /  / / /__     __&gt;  &lt; __  /_/ /
+\___//_/ /_/\____//_/ /_//_/  \___/     /_/|_| _  .___/
+                                               /_/
+
+# Enonic XP 7.16.4
+# Built on 2023-07-26T12:31:19Z (hash = d5bf8d725738b778e153d839f16cdaa9e4641444, branch = d5bf8d725738b778e153d839f16cdaa9e4641444)
+# OpenJDK 64-Bit Server VM 17.0.7 (GraalVM Community)
+# Linux 5.19.0-50-generic (amd64)
+# Install directory is /home/username/.enonic/distributions/enonic-xp-linux-sdk-7.16.4
+# Home directory is /home/username/.enonic/sandboxes/tutorial/home
+
+*
+* DEV mode is ON. This will slow down the system and should NOT BE used in production.
+*
+[...]</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>This gives you some useful information about this sandbox, including its XP version, and the Home directory.</p>
+</div>
+<div class="listingblock">
+<div class="title">Reserved ports</div>
+<div class="content">
+<pre class="highlight"><code class="language-shell" data-lang="shell">[...] - Started xp@523d2774{HTTP/1.1,[http/1.1]}{0.0.0.0:8080}
+[...] - Started api@22bce39c{HTTP/1.1,[http/1.1]}{0.0.0.0:4848}
+[...] - Started status@37f8a3e8{HTTP/1.1,[http/1.1]}{0.0.0.0:2609}
+[...] - Started @12314ms
+[...] - Started Jetty
+[...] - Listening on ports [8080](xp), [4848](management) and [2609](monitoring)
+[...] - Searching for installed applications
+[...] - Found [0] installed applications
+[...] - Started Enonic XP in 11207 ms
+[...]</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>This means that your local XP instance is up and running and ready to serve requests. The instance exposes the following ports:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>8080</strong>: Web</p>
+</li>
+<li>
+<p><strong>4848</strong>: Management API (Used by the CLI when running commands against this XP instance)</p>
+</li>
+<li>
+<p><strong>2609</strong>: Monitoring API (Used for metrics and instance info)</p>
+</li>
+</ul>
+</div>
+<div class="listingblock">
+<div class="title">Installing and starting applications</div>
+<div class="content">
+<pre class="highlight"><code class="language-shell" data-lang="shell">[...] - Installed application com.enonic.app.contentstudio bundle 101
+[...] - Registering application com.enonic.app.contentstudio bundle 101
+[...] - Global Application [com.enonic.app.contentstudio] installed successfully</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The sandbox will download and install the applications from the <code>essentials</code> template, producing logs like you see above. Applications may also produces logs when it is started.</p>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+If you experience problems starting the sandbox, check the Troubleshooting section at the end of this chapter.
+</td>
+</tr>
+</table>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="stopping_and_starting"><a class="link" href="#stopping_and_starting">Stopping and starting</a></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>To stop your sandbox, press <kbd>ctrl-c</kbd> in the terminal hosting the process. You can also run <code>enonic sandbox stop</code> in a different terminal instance.</p>
+</div>
+<div class="paragraph">
+<p>To start your sandbox, use the following command:</p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>enonic sandbox start tutorial</pre>
+</div>
 </div>
 <div class="admonitionblock note">
 <table>
@@ -487,7 +607,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <i class="fa icon-note" title="Note"></i>
 </td>
 <td class="content">
-The tasks and examples in this chapter are based on work done in previous chapters (starting with <a href="sandbox.ahtml">the sandboxes chapter</a>). If you want to follow along with the examples, make sure you&#8217;re all caught up. This chapter requires that you&#8217;ve got your site up and running.
+The sandbox starts in development (aka dev) mode by default. To run the sandbox in production mode simply add <code>--prod</code> to the start command
 </td>
 </tr>
 </table>
@@ -495,195 +615,96 @@ The tasks and examples in this chapter are based on work done in previous chapte
 </div>
 </div>
 <div class="sect1">
-<h2 id="media"><a class="link" href="#media">Media</a></h2>
+<h2 id="xp_admin"><a class="link" href="#xp_admin">XP Admin</a></h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>A file may be uploaded to XP to become an individual piece of content. Similar to other content items.</p>
-</div>
-<div class="sect2">
-<h3 id="media_types"><a class="link" href="#media_types">Media types</a></h3>
-<div class="paragraph">
-<p>Media types are standard content types that ship with XP. When you upload a file to XP, XP will assign it one of these content types, also referred to as media types. The media type will be resoved from the file&#8217;s content. Some common media types are images, audio, video, and executables.</p>
+<p>Let&#8217;s have a look at the Sandbox' web interface. Open <a href="http://localhost:8080" target="_blank" rel="noopener">http://localhost:8080</a> in your browser (or just click this link).</p>
 </div>
 <div class="paragraph">
-<p>For a full overview of all the media types baked into XP, see the <a href="https://developer.enonic.com/docs/xp/stable/cms/content-types#media" target="_blank" rel="noopener">reference docs for media content types</a>.</p>
-</div>
-</div>
-<div class="sect2">
-<h3 id="uploading"><a class="link" href="#uploading">Uploading</a></h3>
-<div class="paragraph">
-<p>To upload files to Content Studio, simply click <b class="button">New &#8230;&#8203;</b> to use the content creation dialog. You may either click the "upload" icon in the dialog, or drag&#8217;n drop the files from your device - or even directly from another website.</p>
+<p>You should now see the XP boot page:</p>
 </div>
 <div class="imageblock">
 <div class="content">
-<img src="media/media-drag-and-drop.png" alt="The drag and drop interface. Three file icons being dragged onto a large, blue, circular drop zone." width="960w">
+<img src="media/xp-boot.png" alt="The XP boot page" width="1085w">
 </div>
-<div class="title">Figure 1. Dragging and dropping files to the "create content dialog"</div>
-</div>
-<div class="paragraph">
-<p>This process is the same for whatever media type you want to upload.</p>
 </div>
 <div class="paragraph">
-<p>To get familiar with uploading media to XP, let&#8217;s start with one of the most common media types on the web: images! As mentioned above, this process will also work for any other media type.</p>
+<p>The boot page provides an overview of the sandbox, including installed application, as well as the <a href="https://developer.enonic.com/docs/xp/stable/deployment/config" target="_blank" rel="noopener">default configuration files</a>.</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+Thanks to the <code>Essentials</code> template, several useful XP apps, including Content Studio, were automatically downloaded and installed.
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>Click <b class="button">Log In as Guest</b> to open the XP admin dashboard. What this actually does is log you in as the XP instance&#8217;s Super User. After logging in you should see something like this:</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="media/xp-dashboard.png" alt="The XP admin dashboard" width="1727w">
+</div>
+</div>
+<div class="paragraph">
+<p>You are now on the Admin Dashboard. The right hand menu (aka <code>XP menu</code>) enables navigation between admin tools. More admin tools may be injected as extensions via applications.</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+If things don&#8217;t look exactly the same, don&#8217;t worry. In every new version of XP the background picture gets updated. Also, admin dashboard is automatically localized - based on your browsers preferred language.
+</td>
+</tr>
+</table>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="troubleshooting"><a class="link" href="#troubleshooting">Troubleshooting</a></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>If you have problems booting the sandbox, it may be that one or more of the ports used by XP are already in use. The command should warn you if something doesn&#8217;t work right. It&#8217;ll do this in one of two ways:</p>
 </div>
 <div class="olist arabic">
 <ol class="arabic">
 <li>
-<p>Find an image to upload. For the purposes of the tasks in this chapter, you should work with an image where the important part isn&#8217;t centered in the shot. If you have one yourself, feel free to use that. If not, how about using <a href="https://unsplash.com/photos/8oLnCRz7hwM" target="_blank" rel="noopener">this picture of a lion</a> by <a href="https://unsplash.com/@keyursphotography" target="_blank" rel="noopener">Keyur Nandaniya</a>?</p>
+<p>If the CLI checks for the availability of some ports when starting up. If one of these ports isn&#8217;t available, the CLI will abort with a message like this:</p>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-shell" data-lang="shell">Port 8080 is not available, stop the app using it first!</code></pre>
+</div>
+</div>
 </li>
 <li>
-<p>Create a folder for your images. Call it "images". Just like the "artist" folder we created previously, you may place the folder anywhere in your project structure.</p>
-</li>
-<li>
-<p>Open the "create content" dialog. Press the upload button to bring up your OS&#8217;s file browsing dialog and select your image. You can also drag and drop the image from your file system browser onto the dialog.</p>
+<p>For ports where the CLI doesn&#8217;t check for availability before starting, you might get an exception in the boot log. This is usually identifiable by a printed stack trace in your logs. Here&#8217;s an example from what happens if port 4848 isn&#8217;t available.</p>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-shell" data-lang="shell">2021-04-06 11:24:01,168 ERROR c.e.xp.web.jetty.impl.JettyActivator - bundle com.enonic.xp.web.jetty:7.6.1 (80)[com.enonic.xp.web.jetty.impl.JettyActivator(171)] : The activate method has thrown an exception
+org.apache.felix.log.LogException: java.io.IOException: Failed to bind to 0.0.0.0/0.0.0.0:4848
+	at org.eclipse.jetty.server.ServerConnector.openAcceptChannel(ServerConnector.java:349)
+	at org.eclipse.jetty.server.ServerConnector.open(ServerConnector.java:310)
+[...]
+Caused by: java.net.BindException: Address already in use
+	at java.base/sun.nio.ch.Net.bind0(Native Method)
+	at java.base/sun.nio.ch.Net.bind(Net.java:455)
+	at java.base/sun.nio.ch.Net.bind(Net.java:447)
+	at java.base/sun.nio.ch.ServerSocketChannelImpl.bind(ServerSocketChannelImpl.java:227)
+	at java.base/sun.nio.ch.ServerSocketAdaptor.bind(ServerSocketAdaptor.java:80)
+	at org.eclipse.jetty.server.ServerConnector.openAcceptChannel(ServerConnector.java:345)
+	... 78 common frames omitted</code></pre>
+</div>
+</div>
 </li>
 </ol>
-</div>
-<div class="paragraph">
-<p>And that&#8217;s all it takes to upload files to Content Studio!</p>
-</div>
-</div>
-<div class="sect2">
-<h3 id="data_toolbox"><a class="link" href="#data_toolbox">Data Toolbox</a></h3>
-<div class="paragraph">
-<p>Like we saw in the chapter on content, Data Toolbox lets you view and edit your content. Images and other media are also available in Data Toolbox as content, but in addition to the same properties you saw previously, media also have a property called <code>attachment</code>. The attachment will essentially hold all the data from the file that you uploaded.</p>
-</div>
-<div class="paragraph">
-<p>For instance, if you have a look at the image you uploaded earlier, you should see that it points to the image file you uploaded.</p>
-</div>
-<div class="paragraph">
-<p>If you added a focal point, you&#8217;ll see that specified under the <code>media</code> property too.</p>
-</div>
-<div class="paragraph">
-<p>If you view the content as JSON, some relevant parts of the structure are the <code>data</code> and <code>attachment</code> properties:</p>
-</div>
-<div class="listingblock">
-<div class="title">An extract of the JSON representation of an image</div>
-<div class="content">
-<pre class="highlight"><code class="language-json" data-lang="json">// ....
-  "data": {
-    "media": {
-      "attachment": "lion.jpg", <i class="conum" data-value="1"></i><b>(1)</b>
-      "focalPoint": { <i class="conum" data-value="2"></i><b>(2)</b>
-        "x": 0.246875,
-        "y": 0.6653906106948853
-      }
-    }
-  },
-  "attachment": { <i class="conum" data-value="3"></i><b>(3)</b>
-    "name": "lion.jpg",
-    "label": "source",
-    "binary": "lion.jpg",
-    "mimeType": "image/jpeg",
-    "size": 256018,
-    "text": ""
-  }
-// ....</code></pre>
-</div>
-</div>
-<div class="colist arabic">
-<table>
-<tr>
-<td><i class="conum" data-value="1"></i><b>1</b></td>
-<td>References the name of the attachment specified in the <code>attachment</code> property.</td>
-</tr>
-<tr>
-<td><i class="conum" data-value="2"></i><b>2</b></td>
-<td>If you have set a focal point, its position will also show up here. See the next task for how to set one.</td>
-</tr>
-<tr>
-<td><i class="conum" data-value="3"></i><b>3</b></td>
-<td>The image attachment with data about the file, such as MIME type and size.</td>
-</tr>
-</table>
-</div>
-</div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="attachment_service"><a class="link" href="#attachment_service">Attachment service</a></h2>
-<div class="sectionbody">
-<div class="paragraph">
-<p>Uploading a file is only half the job. XP also includes and Attachment Service that lets you download the same file (now stored as an attachment within the content) when you need it.</p>
-</div>
-<div class="paragraph">
-<p>Essentially, what you need is a URL to download the specific attachment stored within your media:</p>
-</div>
-<div class="sect2">
-<h3 id="mediaurl"><a class="link" href="#mediaurl">mediaUrl</a></h3>
-<div class="paragraph">
-<p>To get the URL you may use the following GraphQL query. The mediaUrl field will return a link to the original file you uploaded.</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="highlight"><code class="language-GraphQL" data-lang="GraphQL">query {
-  guillotine {
-    get(key: "/developer/media/ready-set-code.png") {
-      displayName
-      type
-      ... on media_Image {
-        mediaUrl
-      }
-    }
-  }
-}</code></pre>
-</div>
-</div>
-<div class="paragraph">
-<p>If everything went fine, you should expect a response that looks something like this:</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="highlight"><code class="language-json" data-lang="json">{
-  "data": {
-    "guillotine": {
-      "get": {
-        "displayName": "ready-set-code",
-        "type": "media:image",
-        "mediaUrl": "/site/preview/dev-portal/draft/_/attachment/inline/f7efd6e4-9eed-45d2-83b6-d088a7bdc685:8652e625afe7bbda595a190a3b8624e322dc9f1a/ready-set-code.png"
-      }
-    }
-  }
-}</code></pre>
-</div>
-</div>
-</div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="images"><a class="link" href="#images">Images</a></h2>
-<div class="sectionbody">
-<div class="paragraph">
-<p>One of the standard media content types is <code>media:image</code>. Images are important in content management, and as such, XP and Content Studio provide some interesting features to help you make the most of your images.</p>
-</div>
-<div class="sect2">
-<h3 id="image_service"><a class="link" href="#image_service">Image service</a></h3>
-<div class="paragraph">
-<p>Whenever XP serves you an image, the image is delivered via <a href="https://developer.enonic.com/docs/xp/stable/runtime/engines/site-engine/image-service" target="_blank" rel="noopener">XP&#8217;s image service</a>.</p>
-</div>
-<div class="paragraph">
-<p>The image service takes care of scaling and applying filters to your images based on parameters you give it. For instance, it&#8217;s common to want to have all images in a section conform to the same dimensions. But because images are generally of different shapes and sizes, this might require cropping the image. The image service takes care of that for you as long as you specify what you want.</p>
-</div>
-<div class="paragraph">
-<p>The image service works in tandem with Content Studio&#8217;s image editing tools, so it respects crops, flips, and focal points that you create.</p>
-</div>
-</div>
-<div class="sect2">
-<h3 id="image_form"><a class="link" href="#image_form">Image form</a></h3>
-<div class="paragraph">
-<p>Content Studio comes with a suite of image editing tools built in. After uploading an image to Content Studio, you can find it in the content grid and edit it to bring up the image&#8217;s content form.</p>
-</div>
-<div class="imageblock">
-<div class="content">
-<img src="media/image-content-form.png" alt="A content form showing the image with image editing tools, inputs for caption, alternative text, copyright, and tags." width="621w}">
-</div>
-<div class="title">Figure 2. The image content form</div>
-</div>
-<div class="paragraph">
-<p>The content form allows you to provide an image caption, alt text, copyright and tag info.</p>
-</div>
-<div class="paragraph">
-<p>You can also add image properties such as dimensions, and where the image was taken and with what gear.</p>
 </div>
 <div class="admonitionblock note">
 <table>
@@ -692,271 +713,29 @@ The tasks and examples in this chapter are based on work done in previous chapte
 <i class="fa icon-note" title="Note"></i>
 </td>
 <td class="content">
-Changing these properties, including size, width, height, etc, does not affect the image in any way.
+The <code>[&#8230;&#8203;]</code> replaces most of the stack trace for legibility reasons.
 </td>
 </tr>
 </table>
 </div>
 <div class="paragraph">
-<p>The image editing tools allow you to crop, flip, and rotate the image as well as to set what&#8217;s known as <em>autofocus</em>.</p>
+<p>If some ports are unavailable, you&#8217;ll have to find out what programs are using those ports and then shut those programs down.</p>
 </div>
 <div class="paragraph">
-<p>The autofocus control allows you to set an image focal point that XP will always keep in view, regardless of how the image is cropped.</p>
+<p>How you find open ports varies from operating system to operating system, but if you&#8217;re unsure about how to do it on your OS, check out the appropriate guide for:</p>
 </div>
-<div class="admonitionblock note">
-<table>
-<tr>
-<td class="icon">
-<i class="fa icon-note" title="Note"></i>
-</td>
-<td class="content">
-Without setting a focal point, XP will focus around the center of the image when cropping.
-</td>
-</tr>
-</table>
-</div>
-<div class="paragraph">
-<p>You can always reset the edits you&#8217;ve made to an image by using the 'reset filters' button.</p>
-</div>
-<div class="admonitionblock tip">
-<table>
-<tr>
-<td class="icon">
-<i class="fa icon-tip" title="Tip"></i>
-</td>
-<td class="content">
-You can read more about <a href="https://enonic.com/blog/enonic-simplifies-image-problems" target="_blank" rel="noopener">how Enonic simplifies your everyday image problems</a> to get more info about how to use images in a traditional CMS model and for a quick overview of the autofocus feature.
-</td>
-</tr>
-</table>
-</div>
-</div>
-<div class="sect2">
-<h3 id="autofocus"><a class="link" href="#autofocus">Autofocus</a></h3>
-<div class="paragraph">
-<p>Because we chose an image with an off-center subject, the image might get cropped such that the lion disappears from the image. For instance, a small, square crop might turn out like this:</p>
-</div>
-<div class="imageblock">
-<div class="content">
-<img src="media/image-cropped-unfocused.jpg" alt="A crop of the lion in the savannah image. The image is square and the only part of the lion that is visible is part of its hind leg." width="500w">
-</div>
-<div class="title">Figure 3. Cropped image without focal point</div>
-</div>
-<div class="paragraph">
-<p>To get around this, try the autofocus tool.</p>
-</div>
-<div class="olist arabic">
-<ol class="arabic">
+<div class="ulist">
+<ul>
 <li>
-<p>Click the autofocus tool. A red circle will show up over the image. This circle indicates where the focal point is.</p>
+<p><a href="https://www.cyberciti.biz/faq/unix-linux-check-if-port-is-in-use-command/" target="_blank" rel="noopener">Linux</a></p>
 </li>
 <li>
-<p>Move the circle onto the lion (or whatever your focal point is) and press "apply".</p>
-<div class="imageblock">
-<div class="content">
-<img src="media/image-editing-focal-point.png" alt="The lion image with a red circle indicating the focal point around its head." width="626w">
-</div>
-<div class="title">Figure 4. The focal point editor</div>
-</div>
+<p><a href="https://www.micahsmith.com/blog/2019/09/find-ports-in-use-on-macos/" target="_blank" rel="noopener">macOS</a></p>
 </li>
-</ol>
-</div>
-<div class="paragraph">
-<p>Now, when the image gets cropped, XP will take care of keeping the lion in focus, both in traditional CMS solutions and in headless modes:</p>
-</div>
-<div class="imageblock">
-<div class="content">
-<img src="media/image-cropped-focused.jpg" alt="A crop of the lion in the savannah. In this square image, the lion is in full view square in the center." width="500w">
-</div>
-<div class="title">Figure 5. The same image with the same crop, but with a focal point</div>
-</div>
-</div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="graphql_api"><a class="link" href="#graphql_api">GraphQL API</a></h2>
-<div class="sectionbody">
-<div class="paragraph">
-<p>Guillotine makes it easy to fetch the data that you&#8217;ve uploaded.</p>
-</div>
-<div class="paragraph">
-<p>Some functionality is shared between all media types, while other queries only work on specific media types.</p>
-</div>
-<div class="paragraph">
-<p>We&#8217;ll look at how to fetch general media and then have a closer look at what we can do with images and attachments.</p>
-</div>
-<div class="sect2">
-<h3 id="general_media_type"><a class="link" href="#general_media_type">General media type</a></h3>
-<div class="paragraph">
-<p>To get the resource URL of media you have uploaded, use the <code>mediaUrl</code> property on any media type. For instance, to get the URL of the raw image you uploaded previously, you could use a query like this:</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="highlight"><code class="language-GraphQL" data-lang="GraphQL">{
-  guillotine {
-    queryDsl(
-      query: {
-        term: {
-          field: "type",
-          value: {
-            string: "media:image"
-          }
-        }
-      }
-    ) {
-      displayName
-      ... on media_Image { <i class="conum" data-value="1"></i><b>(1)</b>
-        mediaUrl <i class="conum" data-value="2"></i><b>(2)</b>
-      }
-    }
-  }
-}</code></pre>
-</div>
-</div>
-<div class="colist arabic">
-<table>
-<tr>
-<td><i class="conum" data-value="1"></i><b>1</b></td>
-<td>This allows us to query properties that belong to the <code>media:Image</code> GraphQL type.</td>
-</tr>
-<tr>
-<td><i class="conum" data-value="2"></i><b>2</b></td>
-<td>The <code>mediaUrl</code> property (also available on all other media types) gives you a URL from where the raw file can be downloaded.</td>
-</tr>
-</table>
-</div>
-<div class="listingblock">
-<div class="title">The response would look something like this:</div>
-<div class="content">
-<pre class="highlight"><code class="language-json" data-lang="json">{
-  "data": {
-    "guillotine": {
-      "queryDsl": [
-        {
-          "displayName": "keyur-nandaniya-8oLnCRz7hwM-unsplash",
-          "mediaUrl": "/admin/site/preview/my-first-project/draft/_/attachment/inline/21f827e0-ba57-4824-b3bc-f101ae08568b:9475135781b315daad078d91c27746bc3222d024/keyur-nandaniya-8oLnCRz7hwM-unsplash.jpg"
-        }
-      ]
-    }
-  }
-}</code></pre>
-</div>
-</div>
-</div>
-<div class="sect2">
-<h3 id="image_media_type"><a class="link" href="#image_media_type">Image media type</a></h3>
-<div class="paragraph">
-<p>XP supports a number of image manipulation functions on the fly. When querying for an image via the GraphQL API, you can use the <code>imageUrl</code> function to specify scale and filters for the result you want.</p>
-</div>
-<div class="paragraph">
-<p>The scale argument is <code>required</code> and allows you to specify how you want to crop the image. Common scaling functions include <em>block</em>, which allows you to specify width and height and <em>width</em> which scales the image proportionally to the specified width.</p>
-</div>
-<div class="admonitionblock tip">
-<table>
-<tr>
-<td class="icon">
-<i class="fa icon-tip" title="Tip"></i>
-</td>
-<td class="content">
-<a href="https://developer.enonic.com/docs/xp/stable/runtime/engines/site-engine/image-service#scaling_methods" target="_blank" rel="noopener">The scaling methods reference docs</a> show off all the available scaling functions with examples of how they affect the image.
-</td>
-</tr>
-</table>
-</div>
-<div class="paragraph">
-<p>As the name implies, the filters argument lets you apply filters to the image. Use filters to apply coloration functions and to rotate and flip images on the fly. To combine filters, separate them with a semicolon.</p>
-</div>
-<div class="admonitionblock tip">
-<table>
-<tr>
-<td class="icon">
-<i class="fa icon-tip" title="Tip"></i>
-</td>
-<td class="content">
-<a href="https://developer.enonic.com/docs/xp/stable/runtime/engines/site-engine/image-service#filters" target="_blank" rel="noopener">The filters documentation</a> has an exhaustive list of the available filters.
-</td>
-</tr>
-</table>
-</div>
-<div class="paragraph">
-<p>For instance, we could get all the images under the <code>images</code> folder, scaled to 600x700 pixels, in grayscale, with a query like this:</p>
-</div>
-<div class="listingblock">
-<div class="title">A GraphQL query that both scales and applies a filter to images in the <code>images</code> folder</div>
-<div class="content">
-<pre class="highlight"><code class="language-GraphQL" data-lang="GraphQL">{
-  guillotine {
-    queryDsl(
-      query: {
-        term: {
-          field: "type",
-          value: {
-            string: "media:image"
-          }
-        }
-      }
-    ) {
-      displayName
-      ... on media_Image {
-        imageUrl( <i class="conum" data-value="1"></i><b>(1)</b>
-          type: absolute, <i class="conum" data-value="2"></i><b>(2)</b>
-          scale: "block(600,700)", <i class="conum" data-value="3"></i><b>(3)</b>
-          filter: "grayscale(); border(10, 0x000000)") <i class="conum" data-value="4"></i><b>(4)</b>
-      }
-    }
-  }
-}</code></pre>
-</div>
-</div>
-<div class="colist arabic">
-<table>
-<tr>
-<td><i class="conum" data-value="1"></i><b>1</b></td>
-<td>The <code>imageUrl</code> function lets you specify how you want the images to look.</td>
-</tr>
-<tr>
-<td><i class="conum" data-value="2"></i><b>2</b></td>
-<td>The <code>type</code> argument specifies whether the URL should be absolute or relative to the server.</td>
-</tr>
-<tr>
-<td><i class="conum" data-value="3"></i><b>3</b></td>
-<td>The scale argument specifies the dimensions of the image.</td>
-</tr>
-<tr>
-<td><i class="conum" data-value="4"></i><b>4</b></td>
-<td>The filter argument lets you apply filters.</td>
-</tr>
-</table>
-</div>
-<div class="paragraph">
-<p>The above query should return a response that looks a little something like this:</p>
-</div>
-<div class="listingblock">
-<div class="title">A response with a cropped image with filters</div>
-<div class="content">
-<pre class="highlight"><code class="language-json" data-lang="json">{
-  "data": {
-    "guillotine": {
-      "queryDsl": [
-        {
-          "displayName": "keyur-nandaniya-8oLnCRz7hwM-unsplash",
-          "imageUrl": "http://localhost:8080/admin/site/preview/my-first-project/draft/_/image/21f827e0-ba57-4824-b3bc-f101ae08568b:6d89657e4bfae6eaa62de22bd6fb63b2697f091d/block-600-700/keyur-nandaniya-8oLnCRz7hwM-unsplash.jpg?filter=grayscale%28%29%3B+border%2810%2C+0x000000%29"
-        }
-      ]
-    }
-  }
-}</code></pre>
-</div>
-</div>
-<div class="paragraph">
-<p>Which, if you have followed the steps in this chapter, should show you something like this if you try and navigate to the <code>imageUrl</code> property value:</p>
-</div>
-<div class="imageblock">
-<div class="content">
-<img src="media/image-processed.jpg" alt="The lion image, cropped, in black and white, and flipped upside down." width="600w">
-</div>
-<div class="title">Figure 6. The processed image</div>
-</div>
+<li>
+<p><a href="https://www.howtogeek.com/28609/how-can-i-tell-what-is-listening-on-a-tcpip-port-in-windows/" target="_blank" rel="noopener">Windows</a></p>
+</li>
+</ul>
 </div>
 </div>
 </div>
@@ -964,17 +743,17 @@ You can read more about <a href="https://enonic.com/blog/enonic-simplifies-image
 <h2 id="summary"><a class="link" href="#summary">Summary</a></h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>You should now have a deep understanding of how media is stored, and accessed - as well as XP&#8217;s image handing and image service, including how to access it all from the GraphQL API.</p>
+<p>Congrats! Now you know what a <em>sandbox</em> is, got more familiar with the CLI, and also visited the admin dashboard page for the first time.</p>
 </div>
 <div class="paragraph">
-<p>Pushing forward, it&#8217;s time to <a href="input-types.ahtml">have a closer look at the basic building blocks of the content forms; input types</a>.</p>
+<p>You&#8217;re now ready to move forward by <a href="apps.ahtml">creating your own app</a>.</p>
 </div>
 </div>
 </div>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2026-11-12 10:19:54 UTC
+Last updated 2026-11-12 10:22:56 UTC
 </div>
 </div>
 </body>

@@ -5,8 +5,8 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="generator" content="Asciidoctor 2.0.26">
-<meta name="description" content="X-data is a way for you to add extra data to all your content types in a simple manner. This chapter covers what it is and how to use it.">
-<title>X-data</title>
+<meta name="description" content="XP has a number of ways to group inputs together. Learn all about them in this chapter.">
+<title>Sets</title>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,300italic,400,400italic,600,600italic%7CNoto+Serif:400,400italic,700,700italic%7CDroid+Sans+Mono:400,700">
 <style>
 /*! Asciidoctor default stylesheet | MIT License | https://asciidoctor.org */
@@ -438,13 +438,27 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 </head>
 <body class="article toc2 toc-right">
 <div id="header">
-<h1>X-data</h1>
+<h1>Sets</h1>
 <div id="toc" class="toc2">
 <div id="toctitle">Table of Contents</div>
 <ul class="sectlevel1">
-<li><a href="#your_first_x_data">Your first X-data</a></li>
-<li><a href="#headless">Headless</a></li>
-<li><a href="#bonus_seo_metafields">Bonus: SEO Metafields</a></li>
+<li><a href="#field_sets">Field sets</a></li>
+<li><a href="#item_sets">Item sets</a></li>
+<li><a href="#option_sets">Option sets</a></li>
+<li><a href="#mixins">Mixins</a></li>
+<li><a href="#tasks">Tasks</a>
+<ul class="sectlevel2">
+<li><a href="#adding_an_item_set_to_artist">Adding an item set to Artist</a></li>
+<li><a href="#adding_an_option_set_to_animal">Adding an option set to Animal</a></li>
+<li><a href="#result">Result</a></li>
+</ul>
+</li>
+<li><a href="#querying_item_sets_and_option_sets">Querying item sets and option sets</a>
+<ul class="sectlevel2">
+<li><a href="#item_sets_2">Item sets</a></li>
+<li><a href="#option_sets_2">Option sets</a></li>
+</ul>
+</li>
 </ul>
 </div>
 </div>
@@ -452,13 +466,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <div id="preamble">
 <div class="sectionbody">
 <div class="paragraph">
-<p>X-data (short for <em>eXtra-data</em>) is a smart way of dynamically extending existing content types with more fields.</p>
-</div>
-<div class="paragraph">
-<p>The idea is to basically define new fields and decide to what content type those fields should be applied to. If no content type is selected while creating an X-data, those fields will be enabled to all content types.</p>
-</div>
-<div class="paragraph">
-<p>In Content Studio, X-data is visually displayed as a new step in the form, listed below the content type&#8217;s standard fields.</p>
+<p>XP also offers ways for you to group inputs, both visually and structurally. Collectively, these are known as sets. This chapter explains what they are and how to use them.</p>
 </div>
 <div class="admonitionblock note">
 <table>
@@ -475,66 +483,369 @@ The tasks and examples in this chapter are based on work done in previous chapte
 </div>
 </div>
 <div class="sect1">
-<h2 id="your_first_x_data"><a class="link" href="#your_first_x_data">Your first X-data</a></h2>
+<h2 id="field_sets"><a class="link" href="#field_sets">Field sets</a></h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>If your requirement is to add new fields to a specific content type, it doesn&#8217;t make sense to use X-data, since you can directly update that content type.</p>
+<p>Field sets are the simplest form of sets XP offers&#8230;&#8203; they group inputs visually and have no effect on the data model.</p>
 </div>
 <div class="paragraph">
-<p>Now, if your requirement is to add new fields to multiple content types, that is when X-data comes into place.</p>
+<p>In a schema, the field set element wraps the input elements it should contain.</p>
 </div>
 <div class="paragraph">
-<p>The same behaviour of extending multiple content types can be achieved through mixins. You can create a mixin and add it to the content types you want to extend the fields. The difference is where the data on those fields will be stored, and also in the fact that X-data are easier to maintain when adding to a lot of content types.</p>
+<p>To create a field set that contains a TextLine and a TextArea, the markup would look like this:</p>
+</div>
+<div class="listingblock">
+<div class="title">A field set</div>
+<div class="content">
+<pre class="highlight"><code class="language-xml" data-lang="xml">&lt;field-set&gt;
+  &lt;label&gt;FieldSet&lt;/label&gt;
+  &lt;items&gt; <i class="conum" data-value="1"></i><b>(1)</b>
+    &lt;input type="TextLine" name="fieldSetTextLine"&gt;
+      &lt;label&gt;Heading&lt;/label&gt;
+    &lt;/input&gt;
+    &lt;input type="TextArea" name="fieldSetTextArea"&gt;
+      &lt;label&gt;Text&lt;/label&gt;
+      &lt;help-text&gt;Write something? 🖊️&lt;/help-text&gt;
+    &lt;/input&gt;
+  &lt;/items&gt;
+&lt;/field-set&gt;</code></pre>
+</div>
+</div>
+<div class="colist arabic">
+<table>
+<tr>
+<td><i class="conum" data-value="1"></i><b>1</b></td>
+<td>Use the <code>items</code> element place other inputs inside the field set.</td>
+</tr>
+</table>
+</div>
+<div class="imageblock text-center">
+<div class="content">
+<img src="media/field-set.png" alt="A field set containing TextLine and TextArea inputs. The field set groups them visually and adds a shared heading." width="750">
+</div>
+<div class="title">Figure 1. A field set grouping</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="item_sets"><a class="link" href="#item_sets">Item sets</a></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Item sets also allow you to group input fields, but as opposed to field sets, item sets group values <em>both</em> visually <em>and</em> on a structural level. Item sets can be arbitrarily nested.</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>The <a href="https://developer.enonic.com/docs/xp/stable/cms/schemas/item-set" target="_blank" rel="noopener">item set documentation</a> does a standout job of explaining exactly how they work, so check that out for an overview.</p>
+</li>
+</ul>
+</div>
+<div class="imageblock text-center">
+<div class="content">
+<img src="media/item-set-sample.png" alt="A pair of visually grouped inputs on a card element. The card has a header that says 'contact info'. There is also a button to add more contact info forms." width="750">
+</div>
+<div class="title">Figure 2. An item set containing contact info</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="option_sets"><a class="link" href="#option_sets">Option sets</a></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Option sets enable editors (working in Content Studio) to choose from a set of predefined options. This is similar to the ComboBox element, but option sets also allow options to carry extra data.</p>
 </div>
 <div class="paragraph">
-<p>Let&#8217;s now add a "notes" X-data, which will extend both Artist and Animal content types.</p>
+<p>Option sets where users can select only one of a number of options are known as <em>single-select</em> option sets. You can also use a <em>multi-select</em> option set if the user should be able to select multiple options simultaneously. We&#8217;ll look at this too in a task.</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>The <a href="https://developer.enonic.com/docs/xp/stable/cms/schemas/option-set" target="_blank" rel="noopener">option set reference documentation</a> provides a good overview (with accompanying pictures) of how option sets work.</p>
+</li>
+</ul>
+</div>
+<div class="imageblock text-center">
+<div class="content">
+<img src="media/option-set-sample.png" alt="An input form labelled 'multi-selection'. The user has selected one out of four options. Some options contain extra data such as an image selector or other input fields." width="750">
+</div>
+<div class="title">Figure 3. A multi-select option set</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="mixins"><a class="link" href="#mixins">Mixins</a></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p><em>Mixins</em> facilitate a form of reuse in XP. They allow you to reuse fields across several content types.</p>
 </div>
 <div class="paragraph">
-<p>Similar to content types, X-data schemas have a specific naming and placement convention within your app: <code>src/main/resources/site/x-data/&lt;xdata-name&gt;/&lt;xdata-name&gt;.xml</code>.</p>
+<p>They won&#8217;t look or behave any different from if you manually typed the same fields into multiple content types, but it lets you keep them in sync.</p>
 </div>
+<div class="paragraph">
+<p>Mixins go in the <code>/src/main/resources/site/mixins</code> directory, following the same naming pattern as the other schemas we&#8217;ve seen (<code>&lt;mixin-name&gt;/&lt;mixin-name&gt;.xml</code>).</p>
+</div>
+<div class="paragraph">
+<p>We&#8217;ll see them in the upcoming task, but if you want to learn more about them, consult <a href="https://developer.enonic.com/docs/xp/stable/cms/schemas/mixins">the mixins reference documentation</a>.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="tasks"><a class="link" href="#tasks">Tasks</a></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>So far we&#8217;ve theoretically presented sets. For a proper understanding of those concepts, we&#8217;ll introduce some tasks. Make sure to follow along in order to strengthen your knowledge on this subject.</p>
+</div>
+<div class="sect2">
+<h3 id="adding_an_item_set_to_artist"><a class="link" href="#adding_an_item_set_to_artist">Adding an item set to Artist</a></h3>
+<div class="paragraph">
+<p>Let&#8217;s add an item set to the <code>Artist</code>. The goal will be to add a Filmography item set, featuring where and when a specific artist was featured in a movie.</p>
+</div>
+<div class="paragraph">
+<p>To add an item set, use it as you would any other input type: place it within the <code>form</code> element of a content type.</p>
+</div>
+<div class="paragraph">
+<p>If we add it to the <code>Artist</code> content type, it&#8217;d look something like this:</p>
+</div>
+<div class="listingblock">
+<div class="title">Artist with an added Item Set</div>
+<div class="content">
+<pre class="highlight"><code class="language-xml" data-lang="xml">&lt;content-type&gt;
+  &lt;display-name&gt;Artist&lt;/display-name&gt;
+  &lt;description&gt;A description of an artist&lt;/description&gt;
+  &lt;super-type&gt;base:structured&lt;/super-type&gt;
+  &lt;form&gt;
+
+    &lt;!-- Other fields elided for brevity --&gt;
+
+    &lt;item-set name="filmography"&gt;
+      &lt;label&gt;Filmography&lt;/label&gt;
+      &lt;occurrences minimum="0" maximum="0" /&gt;
+      &lt;items&gt; <i class="conum" data-value="1"></i><b>(1)</b>
+        &lt;input name="title" type="TextLine"&gt;
+          &lt;label&gt;Title&lt;/label&gt;
+          &lt;occurrences minimum="1" maximum="1" /&gt;
+        &lt;/input&gt;
+        &lt;input name="year" type="Double"&gt;
+            &lt;label&gt;Year&lt;/label&gt;
+            &lt;occurrences minimum="1" maximum="1" /&gt;
+            &lt;config&gt;
+              &lt;min&gt;0&lt;/min&gt;
+            &lt;/config&gt;
+        &lt;/input&gt;
+      &lt;/items&gt;
+    &lt;/item-set&gt;
+
+  &lt;/form&gt;
+&lt;/content-type&gt;</code></pre>
+</div>
+</div>
+<div class="colist arabic">
+<table>
+<tr>
+<td><i class="conum" data-value="1"></i><b>1</b></td>
+<td>Much like with field sets, use the <code>items</code> element to nest inputs within the item set.</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>Note that the remaining fields of the form have been left out in the above example.</p>
+</div>
+<div class="paragraph">
+<p>With this new item set added to the Artist content type, make sure to add some data:</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="media/artist-filmography-item-set.png" alt="An example of using the Filmography item set." width="1050">
+</div>
+<div class="title">Figure 4. Item set for filmography</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="adding_an_option_set_to_animal"><a class="link" href="#adding_an_option_set_to_animal">Adding an option set to Animal</a></h3>
+<div class="paragraph">
+<p>In this section, we&#8217;ll use option sets to add some extra data to <code>Animal</code> data type. The goal is:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Add an option set for feeding behavior. Intentionally simplified, this option set should indicate whether the animal is an herbivore or a carnivore. If it is a carnivore, it should also let the user add a list of prey.</p>
+</li>
+<li>
+<p>Create a mixin for distribution options. Because each distribution option should have the same fields, create a <em>mixin</em> to reuse it.</p>
+</li>
+<li>
+<p>Add an option for distribution across continents. The user should be able to select as many as they want from the 7 continents to indicate where the animal lives. Each option should have an associated <code>TextArea</code> called "notes", where the user can add more data for each option.</p>
+</li>
+</ul>
+</div>
+<div class="sect3">
+<h4 id="single_select_dietary_data"><a class="link" href="#single_select_dietary_data">Single-select: dietary data</a></h4>
+<div class="paragraph">
+<p>Open your animal content type and add a single-select option set.  As before, we use option sets as we would any other input type.</p>
+</div>
+<div class="listingblock">
+<div class="title">The <code>Animal</code> content type with feeding behavior</div>
+<div class="content">
+<pre class="highlight"><code class="language-xml" data-lang="xml">&lt;?xml version="1.0" encoding="utf-8"?&gt;
+&lt;content-type&gt;
+  &lt;display-name&gt;Animal&lt;/display-name&gt;
+  &lt;description&gt;An animal that lives on planet Earth&lt;/description&gt;
+  &lt;super-type&gt;base:structured&lt;/super-type&gt;
+  &lt;form&gt;
+
+    &lt;!-- other fields elided for brevity --&gt;
+
+    &lt;option-set name="feedingBehavior"&gt;
+      &lt;label&gt;Feeding behavior&lt;/label&gt;
+      &lt;options minimum="1" maximum="1"&gt; <i class="conum" data-value="1"></i><b>(1)</b>
+
+        &lt;option name="herbivore"&gt; <i class="conum" data-value="2"></i><b>(2)</b>
+          &lt;help-text&gt;Subsists primarily on plant material.&lt;/help-text&gt;
+          &lt;label&gt;Herbivore&lt;/label&gt;
+        &lt;/option&gt;
+
+        &lt;option name="carnivore"&gt; <i class="conum" data-value="3"></i><b>(3)</b>
+          &lt;label&gt;Carnivore&lt;/label&gt;
+          &lt;help-text&gt;Subsists primarily on animal tissue and meat.&lt;/help-text&gt;
+          &lt;items&gt;
+            &lt;input name="prey" type="TextLine"&gt;
+              &lt;label&gt;Prey&lt;/label&gt;
+              &lt;occurrences minimum="0" maximum="0" /&gt;
+            &lt;/input&gt;
+          &lt;/items&gt;
+        &lt;/option&gt;
+
+      &lt;/options&gt;
+    &lt;/option-set&gt;
+
+  &lt;/form&gt;
+&lt;/content-type&gt;</code></pre>
+</div>
+</div>
+<div class="colist arabic">
+<table>
+<tr>
+<td><i class="conum" data-value="1"></i><b>1</b></td>
+<td>This specifies that if you add feeding behavior, you must select one of the options, and you can not select more than one.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="2"></i><b>2</b></td>
+<td>The herbivore option has no associated data, so it consists solely of a label.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="3"></i><b>3</b></td>
+<td>The carnivore option allows you to optionally specify prey for the animal.</td>
+</tr>
+</table>
+</div>
+</div>
+<div class="sect3">
+<h4 id="multi_select_distribution"><a class="link" href="#multi_select_distribution">Multi-select: distribution</a></h4>
 <div class="olist arabic">
 <ol class="arabic">
 <li>
-<p>Create the "notes" X-data schema:</p>
+<p>Start by creating the mixin. Call it <code>distributionData</code> and place it in <code>src/main/resources/site/mixins/distributionData/distributionData.xml</code>. It only contains a text area:</p>
 <div class="listingblock">
-<div class="title">site/x-data/notes/notes.xml</div>
+<div class="title">The <code>distributionData</code> mixin</div>
 <div class="content">
-<pre class="highlight"><code class="language-xml" data-lang="xml">&lt;x-data&gt;
-  &lt;display-name&gt;Notes X-data&lt;/display-name&gt;
+<pre class="highlight"><code class="language-xml" data-lang="xml">&lt;mixin&gt;
+  &lt;display-name&gt;Distribution data&lt;/display-name&gt;
   &lt;form&gt;
-    &lt;input name="notes" type="TextLine"&gt;
+
+    &lt;input type="TextArea" name="notes"&gt;
       &lt;label&gt;Notes&lt;/label&gt;
-      &lt;occurrences minimum="0" maximum="3"/&gt;
     &lt;/input&gt;
+
   &lt;/form&gt;
-&lt;/x-data&gt;</code></pre>
+&lt;/mixin&gt;</code></pre>
 </div>
 </div>
 </li>
 <li>
-<p>Additionally, you need to define the injection rules for the X-data, and for that you need to edit the <code>site.xml</code> file:</p>
+<p>Moving onto animals, add the multi-select option set.</p>
 <div class="listingblock">
-<div class="title">src/main/resources/site/site.xml</div>
+<div class="title">The <code>Animal</code> content type with distribution data</div>
 <div class="content">
-<pre class="highlight"><code class="language-xml" data-lang="xml">&lt;site&gt;
-  &lt;x-data name="notes" allowContentTypes="com.example.myapp:artist|com.example.myapp:animal"/&gt;
-  &lt;form/&gt;
-&lt;/site&gt;</code></pre>
+<pre class="highlight"><code class="language-xml" data-lang="xml">&lt;?xml version="1.0" encoding="utf-8"?&gt;
+&lt;content-type&gt;
+  &lt;display-name&gt;Animal&lt;/display-name&gt;
+  &lt;description&gt;An animal that lives on planet Earth&lt;/description&gt;
+  &lt;super-type&gt;base:structured&lt;/super-type&gt;
+  &lt;form&gt;
+
+    &lt;!-- other fields elided for brevity --&gt;
+
+    &lt;option-set name="distribution"&gt;
+      &lt;label&gt;Distribution across continents&lt;/label&gt;
+      &lt;help-text&gt;Continents where the animal can be found in the wild&lt;/help-text&gt;
+      &lt;options minimum="0" maximum="0"&gt; <i class="conum" data-value="1"></i><b>(1)</b>
+
+        &lt;option name="africa"&gt;
+          &lt;label&gt;Africa&lt;/label&gt;
+          &lt;items&gt;
+            &lt;mixin name="distributionData" /&gt;
+          &lt;/items&gt;
+        &lt;/option&gt;
+
+        &lt;option name="antarctica"&gt;
+          &lt;label&gt;Antarctica&lt;/label&gt;
+          &lt;items&gt;
+            &lt;mixin name="distributionData" /&gt;
+          &lt;/items&gt;
+        &lt;/option&gt;
+
+        &lt;option name="asia"&gt;
+          &lt;label&gt;Asia&lt;/label&gt;
+          &lt;items&gt;
+            &lt;mixin name="distributionData" /&gt;
+          &lt;/items&gt;
+        &lt;/option&gt;
+
+        &lt;option name="australia"&gt;
+          &lt;label&gt;Australia&lt;/label&gt;
+          &lt;items&gt;
+            &lt;mixin name="distributionData" /&gt;
+          &lt;/items&gt;
+        &lt;/option&gt;
+
+        &lt;option name="europe"&gt;
+          &lt;label&gt;Europe&lt;/label&gt;
+          &lt;items&gt;
+            &lt;mixin name="distributionData" /&gt;
+          &lt;/items&gt;
+        &lt;/option&gt;
+
+        &lt;option name="northAmerica"&gt;
+          &lt;label&gt;North America&lt;/label&gt;
+          &lt;items&gt;
+            &lt;mixin name="distributionData" /&gt;
+          &lt;/items&gt;
+        &lt;/option&gt;
+
+        &lt;option name="southAmerica"&gt;
+          &lt;label&gt;South America&lt;/label&gt;
+          &lt;items&gt;
+            &lt;mixin name="distributionData" /&gt;
+          &lt;/items&gt;
+        &lt;/option&gt;
+
+      &lt;/options&gt;
+    &lt;/option-set&gt;
+
+  &lt;/form&gt;
+&lt;/content-type&gt;</code></pre>
 </div>
 </div>
-</li>
-<li>
-<p>Redeploy your app and access a Artist or an Animal content. You should see the following section in the bottom of the form:</p>
-<div class="imageblock">
-<div class="content">
-<img src="media/notes-x-data.png" alt="Notes x-data fields showing in the bottom of an animal content" width="1050">
-</div>
-</div>
-</li>
-<li>
-<p>Finally, add some notes to some content.</p>
 </li>
 </ol>
+</div>
+<div class="colist arabic">
+<table>
+<tr>
+<td><i class="conum" data-value="1"></i><b>1</b></td>
+<td>This specifies that you can add as many distributions as you want.</td>
+</tr>
+</table>
 </div>
 <div class="admonitionblock note">
 <table>
@@ -543,24 +854,40 @@ The tasks and examples in this chapter are based on work done in previous chapte
 <i class="fa icon-note" title="Note"></i>
 </td>
 <td class="content">
-For more details and configuration options for X-data, visit <a href="https://developer.enonic.com/docs/xp/stable/cms/x-data" target="_blank" rel="noopener">the X-data documentation</a>.
+The use of the <code>mixin</code> helps us both reduce duplication and keep all options in sync. If we wanted to add more data, such as current population, we would only have to add it to the <code>mixin</code> to have it duplicate to all distributions.
 </td>
 </tr>
 </table>
 </div>
 </div>
 </div>
+<div class="sect2">
+<h3 id="result"><a class="link" href="#result">Result</a></h3>
+<div class="paragraph">
+<p>With the new option sets and added, the Lion entry could look something like this:</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="media/option-sets.png" alt="Diet and distribution data filled out for lion. The feeding behaviour selected is 'Carnivore' and the list of prey includes zebras and giraffes. For the distribution data, Africa and Asia is selected, with a short text about how Lions live in these areas today." width="1200">
+</div>
+<div class="title">Figure 5. Distribution and feeding behavior for Lion</div>
+</div>
+</div>
+</div>
+</div>
 <div class="sect1">
-<h2 id="headless"><a class="link" href="#headless">Headless</a></h2>
+<h2 id="querying_item_sets_and_option_sets"><a class="link" href="#querying_item_sets_and_option_sets">Querying item sets and option sets</a></h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>As you might expect, your x-data fields are also available via the Guillotine API.</p>
+<p>Let&#8217;s look at how option and item sets work in headless contexts.</p>
 </div>
+<div class="sect2">
+<h3 id="item_sets_2"><a class="link" href="#item_sets_2">Item sets</a></h3>
 <div class="paragraph">
-<p>Use the following query to quickly access all x-data fields in your content.</p>
+<p>Getting item sets via GraphQL is not much different than anything else we&#8217;ve seen:</p>
 </div>
 <div class="listingblock">
-<div class="title">Querying for X-data</div>
+<div class="title">Fetching an Artist filmography</div>
 <div class="content">
 <pre class="highlight"><code class="language-GraphQL" data-lang="GraphQL">{
   guillotine {
@@ -572,7 +899,7 @@ For more details and configuration options for X-data, visit <a href="https://de
               term: {
                 field: "type",
                 value: {
-                  string: "com.example.myapp:animal"
+                  string: "com.example.myapp:artist"
                 }
               }
             },
@@ -580,7 +907,7 @@ For more details and configuration options for X-data, visit <a href="https://de
               term: {
                 field: "displayName",
                 value: {
-                  string: "Lynx"
+                  string: "Cardi B"
                 }
               }
             }
@@ -590,34 +917,62 @@ For more details and configuration options for X-data, visit <a href="https://de
       }
     ) {
       displayName
-      xAsJson
+      ... on com_example_myapp_Artist {
+        data {
+          filmography {
+            title
+            year
+          }
+        }
+      }
     }
   }
 }</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>If you&#8217;ve added any values to your Lynx&#8217;s Notes X-data fields, this is what you might get.</p>
+<p>With some data added for Cardi B, you&#8217;d get a result like this:</p>
 </div>
 <div class="listingblock">
-<div class="title">X-data results</div>
+<div class="title">Album data</div>
 <div class="content">
 <pre class="highlight"><code class="language-json" data-lang="json">{
   "data": {
     "guillotine": {
       "queryDsl": [
         {
-          "displayName": "Lynx",
-          "xAsJson": {
-            "com_example_myapp": {
-              "notes": {
-                "notes": [
-                  "Lynx note 1",
-                  "Lynx note 2",
-                  "Lynx note 3"
-                ]
+          "displayName": "Cardi B",
+          "data": {
+            "filmography": [
+              {
+                "title": "Love &amp; Hip Hop: New York",
+                "year": 2015
+              },
+              {
+                "title": "Being Mary Jane",
+                "year": 2017
+              },
+              {
+                "title": "Hip Hop Squares",
+                "year": 2017
+              },
+              {
+                "title": "Saturday Night Live",
+                "year": 2018
+              },
+              {
+                "title": "The Tonight Show Starring Jimmy Fallon",
+                "year": 2018
+              },
+              {
+                "title": "Untold Stories of Hip Hop",
+                "year": 2019
+              },
+              {
+                "title": "Rhythm + Flow",
+                "year": 2019
               }
-            }
+            ]
           }
         }
       ]
@@ -626,11 +981,14 @@ For more details and configuration options for X-data, visit <a href="https://de
 }</code></pre>
 </div>
 </div>
+</div>
+<div class="sect2">
+<h3 id="option_sets_2"><a class="link" href="#option_sets_2">Option sets</a></h3>
 <div class="paragraph">
-<p>Should you require specific fields only, or wish to drill into more details, for instance by following a reference, use the typed graphQL fields instead of xAsJson. For instance like this:</p>
+<p>When fetching option set data, you can get the list of currently selected items and each item separately.</p>
 </div>
 <div class="listingblock">
-<div class="title">X-data seoTitle field query</div>
+<div class="title">Querying for feeding behavior and distribution</div>
 <div class="content">
 <pre class="highlight"><code class="language-GraphQL" data-lang="GraphQL">{
   guillotine {
@@ -650,7 +1008,7 @@ For more details and configuration options for X-data, visit <a href="https://de
               term: {
                 field: "displayName",
                 value: {
-                  string: "Lynx"
+                  string: "Lion"
                 }
               }
             }
@@ -660,10 +1018,19 @@ For more details and configuration options for X-data, visit <a href="https://de
       }
     ) {
       displayName
-      x {
-        com_example_myapp {
-          notes { <i class="conum" data-value="1"></i><b>(1)</b>
-            notes <i class="conum" data-value="2"></i><b>(2)</b>
+      ... on com_example_myapp_Animal {
+        data {
+          feedingBehavior {
+            _selected <i class="conum" data-value="1"></i><b>(1)</b>
+            carnivore { <i class="conum" data-value="2"></i><b>(2)</b>
+              prey
+            }
+          }
+          distribution {
+            _selected
+            africa {
+              notes
+            }
           }
         }
       }
@@ -676,52 +1043,49 @@ For more details and configuration options for X-data, visit <a href="https://de
 <table>
 <tr>
 <td><i class="conum" data-value="1"></i><b>1</b></td>
-<td>This is the name of the X-data. In this case, "notes" because we defined it to be like so in the <code>notes.xml</code> file</td>
+<td>This provides data about what the animals selected feeding behavior is.</td>
 </tr>
 <tr>
 <td><i class="conum" data-value="2"></i><b>2</b></td>
-<td>This is the "notes" field (TextLine input type) inside the "notes" X-data.</td>
+<td>This gives more data about a particular option</td>
 </tr>
 </table>
 </div>
-<div class="paragraph">
-<p>If you made it here - you are officially equipped with an essential overview of Enonic&#8217;s content fundamental content modelling capabilities. 🙌</p>
-</div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="bonus_seo_metafields"><a class="link" href="#bonus_seo_metafields">Bonus: SEO Metafields</a></h2>
-<div class="sectionbody">
-<div class="paragraph">
-<p>There&#8217;s a known app on Enonic market named <em>SEO Metafields app</em>. Its main purpose is to provide SEO capabilities to your project, and for that purpose, it adds a new X-data named <code>meta_data</code>, which is then enabled to all content types in your project.</p>
-</div>
-<div class="paragraph">
-<p>This is a bonus section, so you&#8217;re not missing much to skip it, but it&#8217;s worth installing it to better understand capabilities of X-data.</p>
-</div>
-<div class="olist arabic">
-<ol class="arabic">
-<li>
-<p>Install the <a href="https://market.enonic.com/vendors/enonic/seo-metafields" target="_blank" rel="noopener">SEO Metafields app</a>.</p>
-<div class="imageblock">
+<div class="listingblock">
+<div class="title">Query result</div>
 <div class="content">
-<img src="media/x-data-seo-app-install.png" alt="Install SEO Metafields app" width="1050">
+<pre class="highlight"><code class="language-json" data-lang="json">{
+  "data": {
+    "guillotine": {
+      "queryDsl": [
+        {
+          "displayName": "Lion",
+          "data": {
+            "feedingBehavior": {
+              "_selected": "carnivore",
+              "carnivore": {
+                "prey": [
+                  "Zebra",
+                  "Giraffe"
+                ]
+              }
+            },
+            "distribution": {
+              "_selected": [
+                "africa",
+                "asia"
+              ],
+              "africa": {
+                "notes": "African lions live in scattered populations across Sub-Saharan Africa. The lion prefers grassy plains and savannahs, scrub bordering rivers and open woodland with bushes. It is absent from rainforests and rarely enters closed forests."
+              }
+            }
+          }
+        }
+      ]
+    }
+  }
+}</code></pre>
 </div>
-</div>
-</li>
-<li>
-<p>Edit and add the app to your project.</p>
-</li>
-<li>
-<p>Immediately after adding the app to your site, the form should refresh - and add a new step "SEO Metafields":</p>
-<div class="paragraph">
-<p>So, now you have some additional fields for the site. If you check some of your other content items, like an animal. You will see the fields are there as well.</p>
-</div>
-</li>
-</ol>
-</div>
-<div class="imageblock">
-<div class="content">
-<img src="media/x-data-seo-animal.png" alt="SEO fields available for the animals content type as well." width="1200">
 </div>
 </div>
 </div>
@@ -729,7 +1093,7 @@ For more details and configuration options for X-data, visit <a href="https://de
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2026-11-12 10:19:54 UTC
+Last updated 2026-11-12 10:22:56 UTC
 </div>
 </div>
 </body>
