@@ -1,5 +1,5 @@
 kind: "Application"
 title: "Content Modeling" # <1>
-description: "Content types and schemas from the Content Modeling and GraphQL tutorial" # <2>
+description: "Content types and schemas from the Content Modeling and Querying tutorial" # <2>
 vendorName: "Acme Inc"
 vendorUrl: "https://example.com"

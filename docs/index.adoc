@@ -1,4 +1,4 @@
-= Modeling and Querying Content in Enonic
+= Modeling Content for the Enonic GraphQL API
 include::.variables.adoc[]
 
 This step-by-step tutorial introduces content modeling in Enonic XP and querying structured content and media through {guillotine-docs}[Guillotine], Enonic's GraphQL API.

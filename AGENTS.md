@@ -1,6 +1,6 @@
-# Agent instructions for the Content Modeling and GraphQL tutorial
+# Agent instructions for the Content Modeling and Querying tutorial
 
-This repository contains **Content Modeling and GraphQL**, the hands-on Enonic tutorial written in AsciiDoc under `docs/` and published to https://developer.enonic.com/learn/content-modeling, together with a deployable copy of the completed tutorial app.
+This repository contains **Content Modeling and Querying**, the hands-on Enonic tutorial written in AsciiDoc under `docs/` and published to https://developer.enonic.com/learn/content-modeling, together with a deployable copy of the completed tutorial app.
 
 Shared conventions for Enonic documentation and tutorials (language and tone, workspace isolation, tasks and steps, summaries, publishing, and AsciiDoc) are in the `enonic-docs` skill from the `enonic-contrib` plugin of https://github.com/enonic/agent-toolkit. Follow it for every change under `docs/`. The rules below cover what is specific to this tutorial, plus the core rules that must hold even without the skill.
 

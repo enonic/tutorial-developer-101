@@ -1,6 +1,6 @@
-# Content Modeling and GraphQL
+# Content Modeling and Querying
 
-This repository contains the Content Modeling and GraphQL tutorial and its completed Enonic application.
+This repository contains the Content Modeling and Querying tutorial and its completed Enonic application.
 The app uses the tutorial's identifiers, schemas, and sample content so its GraphQL examples work directly against the installed result.
 Readers still build their own app from `starter-vanilla`; this app provides the finished result for exploration and verification.
 

@@ -28,8 +28,7 @@ This should print the version of the CLI; this tutorial expects version 4 or new
 A _sandbox_ is a local developer instance of Enonic XP, with its own data and configuration. You can have several, each on its own XP version.
 
 The `essentials` template installs a set of applications from Enonic Market, including Content Studio and Guillotine, which you will meet in the coming chapters.
-Because Market apps are installed separately, their exact patch versions may be newer than those listed on the <<index#,Introduction>> page.
-The `-v` flag selects the XP version; `-f` accepts the defaults for the remaining prompts.
+The `-f` flag accepts the defaults for the remaining prompts, including the latest version of Enonic XP, and starts the sandbox.
 
 === Task: Start a sandbox
 
@@ -37,7 +36,7 @@ The `-v` flag selects the XP version; `-f` accepts the defaults for the remainin
 +
 [source,shell,{subs}]
 ----
-enonic sandbox create {sandbox-name} -v {xp-version} -t essentials -f
+enonic sandbox create {sandbox-name} -t essentials -f
 ----
 
 . *Open the sandbox welcome page* - Wait for the terminal to report that Enonic XP has started, then open http://localhost:8080[http://localhost:8080] in your browser.

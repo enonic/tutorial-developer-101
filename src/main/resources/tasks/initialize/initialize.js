@@ -15,7 +15,7 @@ exports.run = () => context.run(administrator, () => {
         project.create({
             id: projectId,
             displayName: 'My First Project',
-            description: 'The completed Content Modeling and GraphQL tutorial',
+            description: 'The completed Content Modeling and Querying tutorial',
             language: 'en',
             publicRead: true,
             siteConfig: [{applicationKey: app.name}]

@@ -1,6 +1,6 @@
 = Running the demo
 include::.variables.adoc[]
-:description: Run the finished Content Modeling and GraphQL application locally, explore its content in Content Studio, and query it through Guillotine.
+:description: Run the finished Content Modeling and Querying application locally, explore its content in Content Studio, and query it through Guillotine.
 :demo-sandbox-name: demo_{app-name}
 
 On this page, you'll run the finished application from this tutorial without going through the chapters.
@@ -18,10 +18,10 @@ The demo runs in its own sandbox, a local instance of Enonic XP.
 +
 [source,shell,{subs}]
 ----
-enonic sandbox create {demo-sandbox-name} -v {xp-version} -t essentials -f
+enonic sandbox create {demo-sandbox-name} -t essentials -f
 ----
 +
-The `essentials` template installs Content Studio and the Guillotine GraphQL API. The `-v` flag selects the tested XP version, and `-f` accepts the defaults for the remaining prompts and starts the sandbox.
+The `essentials` template installs Content Studio and the Guillotine GraphQL API. The `-f` flag accepts the defaults for the remaining prompts, including the latest version of Enonic XP, and starts the sandbox.
 +
 NOTE: The demo uses its own sandbox (`{demo-sandbox-name}`), separate from the `{sandbox-name}` sandbox used in the chapters. All sandboxes share port `8080` by default, so stop any other running sandbox before starting this one.
 
@@ -35,7 +35,7 @@ Leave the sandbox running in this terminal window. To stop it, press kbd:[ctrl-c
 +
 [source,shell]
 ----
-git clone --branch master https://github.com/enonic/tutorial-content-modeling.git
+git clone https://github.com/enonic/tutorial-content-modeling.git
 ----
 +
 This creates a `tutorial-content-modeling/` folder containing the finished `{app-name-full}` application and its sample content.

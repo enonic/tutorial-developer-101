@@ -16,7 +16,7 @@
 :app-name-query: com_example_tutorial_{app-name}
 :cms-project-displayname: My First Project
 :cms-project-id: my-first-project
-:example-app-url: https://github.com/enonic/tutorial-content-modeling/tree/master
+:example-app-url: https://github.com/enonic/tutorial-content-modeling
 :docs-version: stable
 :cms-docs: https://developer.enonic.com/docs/cms
 :cs-docs: https://developer.enonic.com/docs/content-studio
