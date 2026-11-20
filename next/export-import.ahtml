@@ -629,7 +629,7 @@ Editing one does not update the other; importing is a one-time transfer, not ong
 <p>You did it! 🎉 You&#8217;ve modeled content with references, sets, rich text and mixins, queried it through Guillotine, controlled read and editorial access, and copied content into another project.</p>
 </div>
 <div class="paragraph">
-<p>Compare your schemas and sample content with the <a href="https://github.com/enonic/tutorial-content-modeling/tree/master">completed example app on GitHub</a>, or <a href="demo.ahtml">run the demo</a> in a separate sandbox to inspect the finished result.</p>
+<p>Compare your schemas and sample content with the <a href="https://github.com/enonic/tutorial-content-modeling">completed example app on GitHub</a>, or <a href="demo.ahtml">run the demo</a> in a separate sandbox to inspect the finished result.</p>
 </div>
 <div class="sect2">
 <h3 id="where_to_go_next"><a class="link" href="#where_to_go_next">Where to go next</a></h3>
@@ -662,7 +662,7 @@ Editing one does not update the other; importing is a one-time transfer, not ong
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2026-11-20 14:22:10 UTC
+Last updated 2026-11-20 14:52:44 UTC
 </div>
 </div>
 </body>

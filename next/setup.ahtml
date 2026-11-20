@@ -516,8 +516,7 @@ This should print the version of the CLI; this tutorial expects version 4 or new
 </div>
 <div class="paragraph">
 <p>The <code>essentials</code> template installs a set of applications from Enonic Market, including Content Studio and Guillotine, which you will meet in the coming chapters.
-Because Market apps are installed separately, their exact patch versions may be newer than those listed on the <a href="index.ahtml">Introduction</a> page.
-The <code>-v</code> flag selects the XP version; <code>-f</code> accepts the defaults for the remaining prompts.</p>
+The <code>-f</code> flag accepts the defaults for the remaining prompts, including the latest version of Enonic XP, and starts the sandbox.</p>
 </div>
 <div class="sect2">
 <h3 id="task_start_a_sandbox"><a class="link" href="#task_start_a_sandbox">Task: Start a sandbox</a></h3>
@@ -527,7 +526,7 @@ The <code>-v</code> flag selects the XP version; <code>-f</code> accepts the def
 <p><strong>Create and start the sandbox</strong> - Run this command in your terminal:</p>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-shell" data-lang="shell">enonic sandbox create tutorial_modeling -v 8.1.2 -t essentials -f</code></pre>
+<pre class="highlight"><code class="language-shell" data-lang="shell">enonic sandbox create tutorial_modeling -t essentials -f</code></pre>
 </div>
 </div>
 </li>
@@ -730,7 +729,7 @@ Your app is listed as "Vanilla Example":</p>
 <div class="content">
 <pre class="highlight"><code class="language-yaml" data-lang="yaml">kind: "Application"
 title: "Content Modeling" <i class="conum" data-value="1"></i><b>(1)</b>
-description: "Content types and schemas from the Content Modeling and GraphQL tutorial" <i class="conum" data-value="2"></i><b>(2)</b>
+description: "Content types and schemas from the Content Modeling and Querying tutorial" <i class="conum" data-value="2"></i><b>(2)</b>
 vendorName: "Acme Inc"
 vendorUrl: "https://example.com"</code></pre>
 </div>
@@ -786,7 +785,7 @@ Next, you&#8217;ll <a href="content-studio.ahtml">get familiar with Content Stud
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2026-11-20 14:22:10 UTC
+Last updated 2026-11-20 14:52:44 UTC
 </div>
 </div>
 </body>
