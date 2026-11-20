@@ -6,7 +6,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="generator" content="Asciidoctor 2.0.26">
 <meta name="application-name" content="modeling">
-<title>Modeling Content for the Enonic GraphQL API</title>
+<title>Model content in Enonic and query it with GraphQL</title>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,300italic,400,400italic,600,600italic%7CNoto+Serif:400,400italic,700,700italic%7CDroid+Sans+Mono:400,700">
 <style>
 /*! Asciidoctor default stylesheet | MIT License | https://asciidoctor.org */
@@ -438,7 +438,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 </head>
 <body class="article toc2 toc-right">
 <div id="header">
-<h1>Modeling Content for the Enonic GraphQL API</h1>
+<h1>Model content in Enonic and query it with GraphQL</h1>
 <div id="toc" class="toc2">
 <div id="toctitle">Table of Contents</div>
 <ul class="sectlevel1">
@@ -472,11 +472,11 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <h2 id="intro"><a class="link" href="#intro">Intro</a></h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>This tutorial is for developers who define content types and build front-ends against Enonic&#8217;s GraphQL API.
-Every chapter builds on the previous one, using the Enonic CLI, Content Studio and a local sandbox to assemble and query a content model of your own.</p>
+<p>This tutorial teaches Enonic&#8217;s core content concepts and schemas — content types, media, form items, references, sets, form fragments, rich text, mixins and permissions — and when to use each one.
+Every chapter builds on the previous one in a local sandbox: you define schemas, create content in Content Studio, and run GraphQL queries to see directly how your modeled content is structured and accessed.</p>
 </div>
 <div class="paragraph">
-<p>When your schemas and content are in place, editors manage structured items and media in Content Studio while you query them through GraphQL:</p>
+<p>Once your schemas and content are in place, editors manage structured items and media in Content Studio, and Guillotine exposes them automatically through GraphQL:</p>
 </div>
 <div class="imageblock">
 <div class="content">
@@ -619,7 +619,7 @@ Throughout this tutorial, "XP" refers to "Enonic XP", the platform behind Enonic
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2026-11-20 14:52:44 UTC
+Last updated 2026-11-20 15:08:40 UTC
 </div>
 </div>
 </body>

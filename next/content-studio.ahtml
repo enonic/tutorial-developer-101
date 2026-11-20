@@ -495,7 +495,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <div class="title">Figure 1. No projects found dialog</div>
 </div>
 <div class="paragraph">
-<p>Content in Enonic is stored in <em>content projects</em>, or simply <em>projects</em>.
+<p>Content in Enonic is stored in <em>content projects</em>, often shortened to <em>projects</em>.
 Each project has its own permissions, languages and other settings, and its own selection of apps.</p>
 </div>
 <div class="paragraph">
@@ -891,7 +891,7 @@ Next, you&#8217;ll <a href="headless-api.ahtml">read that content back through t
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2026-11-20 14:52:44 UTC
+Last updated 2026-11-20 15:08:40 UTC
 </div>
 </div>
 </body>

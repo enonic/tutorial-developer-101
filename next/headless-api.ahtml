@@ -1074,13 +1074,13 @@ For a complete JavaScript request, see the <a href="https://developer.enonic.com
 <div class="ulist">
 <ul>
 <li>
-<p>For more query examples and information about how to get up and running with Guillotine, check out the <a href="https://developer.enonic.com/docs/guillotine">Guillotine docs</a></p>
+<p>For more query examples and information about getting started with Guillotine, check out the <a href="https://developer.enonic.com/docs/guillotine">Guillotine docs</a>.</p>
 </li>
 <li>
 <p>For pagination and aggregations, see the <a href="https://developer.enonic.com/docs/guillotine/stable/api#querydslcontentconnection">queryDslConnection reference</a>.</p>
 </li>
 <li>
-<p>If you want to learn more about GraphQL in general, the <a href="https://graphql.org/learn/"><em>Introduction to GraphQL</em> documentation</a> is a good place to start</p>
+<p>If you want to learn more about GraphQL in general, the <a href="https://graphql.org/learn/"><em>Introduction to GraphQL</em> documentation</a> is a good place to start.</p>
 </li>
 </ul>
 </div>
@@ -1098,7 +1098,7 @@ Next, you&#8217;ll <a href="media.ahtml">upload files and serve processed images
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2026-11-20 14:52:44 UTC
+Last updated 2026-11-20 15:08:40 UTC
 </div>
 </div>
 </body>
