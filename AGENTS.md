@@ -6,7 +6,9 @@ Shared conventions for Enonic documentation and tutorials (language and tone, wo
 
 ## Scope and audience
 
-The tutorial is for developers who define content types and build front-ends against Enonic's GraphQL API, including readers who are not primarily back-end developers. It walks a newcomer incrementally from installing the Enonic CLI to modeling, querying, and controlling access to content.
+The main goal of this tutorial is to help readers understand Enonic's content modeling concepts and schemas — content types, media, form items, references, sets, form fragments, rich text, styles, macros, mixins, permissions, and content export/import — and when and how to use each one. Guillotine GraphQL queries accompany each modeling step to show clearly how the modeled content is structured and accessed once created.
+
+The audience is developers (including front-end developers and newcomers to Enonic XP) who design content models or consume Enonic content. Each chapter builds incrementally on the previous one in a local sandbox.
 
 Two boundaries stated on the front page must hold throughout:
 

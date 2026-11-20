@@ -1,4 +1,4 @@
-= Modeling Content for the Enonic GraphQL API
+= Model content in Enonic and query it with GraphQL
 include::.variables.adoc[]
 
 This step-by-step tutorial introduces content modeling in Enonic XP and querying structured content and media through {guillotine-docs}[Guillotine], Enonic's GraphQL API.
@@ -7,10 +7,10 @@ TIP: *Just want to see the result?* <<demo#,Run the demo>> to deploy the finishe
 
 == Intro
 
-This tutorial is for developers who define content types and build front-ends against Enonic's GraphQL API.
-Every chapter builds on the previous one, using the Enonic CLI, Content Studio and a local sandbox to assemble and query a content model of your own.
+This tutorial teaches Enonic's core content concepts and schemas — content types, media, form items, references, sets, form fragments, rich text, mixins and permissions — and when to use each one.
+Every chapter builds on the previous one in a local sandbox: you define schemas, create content in Content Studio, and run GraphQL queries to see directly how your modeled content is structured and accessed.
 
-When your schemas and content are in place, editors manage structured items and media in Content Studio while you query them through GraphQL:
+Once your schemas and content are in place, editors manage structured items and media in Content Studio, and Guillotine exposes them automatically through GraphQL:
 
 .Querying modeled content through Query Playground in Content Studio
 image::api-playground.png["Query Playground in Content Studio showing a GraphQL query on the left and structured JSON results on the right", width=1440]

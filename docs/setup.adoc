@@ -144,6 +144,7 @@ image::setup-app.png["Applications tool listing Content Studio, Data Toolbox, Gu
 ----
 include::../{app-root}/enonic.yaml[]
 ----
++
 <1> The starter calls the app "Vanilla Example". Give it a more descriptive title.
 <2> Replace the stock description while you're at it.
 

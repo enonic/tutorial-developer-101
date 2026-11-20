@@ -427,9 +427,9 @@ For a complete JavaScript request, see the {guillotine-docs}/{docs-version}/usag
 
 == Dive deeper
 
-- For more query examples and information about how to get up and running with Guillotine, check out the {guillotine-docs}[Guillotine docs]
-- For pagination and aggregations, see the {guillotine-docs}/{docs-version}/api#querydslcontentconnection[queryDslConnection reference].
-- If you want to learn more about GraphQL in general, the https://graphql.org/learn/[_Introduction to GraphQL_ documentation] is a good place to start
+* For more query examples and information about getting started with Guillotine, check out the {guillotine-docs}[Guillotine docs].
+* For pagination and aggregations, see the {guillotine-docs}/{docs-version}/api#querydslcontentconnection[queryDslConnection reference].
+* If you want to learn more about GraphQL in general, the https://graphql.org/learn/[_Introduction to GraphQL_ documentation] is a good place to start.
 
 
 == Summary

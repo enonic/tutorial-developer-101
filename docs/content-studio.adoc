@@ -18,7 +18,7 @@ When you open Content Studio for the first time, it offers to create a project:
 .No projects found dialog
 image::cs-project-create.png["Content Studio dialog offering to start the project wizard", width=660]
 
-Content in Enonic is stored in _content projects_, or simply _projects_.
+Content in Enonic is stored in _content projects_, often shortened to _projects_.
 Each project has its own permissions, languages and other settings, and its own selection of apps.
 
 Click btn:[Start Project wizard] and follow the steps to create your first project:
