@@ -629,8 +629,7 @@ Editing one does not update the other; importing is a one-time transfer, not ong
 <p>You did it! 🎉 You&#8217;ve modeled content with references, sets, rich text and mixins, queried it through Guillotine, controlled read and editorial access, and copied content into another project.</p>
 </div>
 <div class="paragraph">
-<p>Compare your schemas and sample content with the <a href="https://github.com/enonic/tutorial-content-modeling/tree/master">completed example app on GitHub</a>.
-Its README explains how to build and install the finished result in a separate sandbox.</p>
+<p>Compare your schemas and sample content with the <a href="https://github.com/enonic/tutorial-content-modeling/tree/master">completed example app on GitHub</a>, or <a href="demo.ahtml">run the demo</a> in a separate sandbox to inspect the finished result.</p>
 </div>
 <div class="sect2">
 <h3 id="where_to_go_next"><a class="link" href="#where_to_go_next">Where to go next</a></h3>
@@ -647,7 +646,7 @@ Its README explains how to build and install the finished result in a separate s
 <dd>
 <p>Building a React application with content lists, detail views, routing, rich text, images and macros.</p>
 </dd>
-<dt class="hdlist1"><a href="https://developer.enonic.com/docs/next.xp">Building sites with Enonic and Next.js</a></dt>
+<dt class="hdlist1"><a href="https://developer.enonic.com/learn/nextjs">Building sites with Enonic and Next.js</a></dt>
 <dd>
 <p>Building Next.js sites with Enonic as your CMS, including visual editing.</p>
 </dd>
@@ -663,7 +662,7 @@ Its README explains how to build and install the finished result in a separate s
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2026-11-20 12:51:51 UTC
+Last updated 2026-11-20 14:02:36 UTC
 </div>
 </div>
 </body>

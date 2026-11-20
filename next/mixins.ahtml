@@ -770,7 +770,7 @@ Use this recap when deciding how to represent new content:</p>
 <p>An OptionSet can support multiple selections with separate fields for each selected option, as you did with continents and their notes in the <a href="sets.ahtml">sets chapter</a>.
 A repeatable OptionSet with one selected option per occurrence lets editors build a sequence of blocks, such as text, images and quotes, for your front-end to render.
 See the <a href="https://developer.enonic.com/docs/cms/stable/schemas/form-items/option-set">OptionSet reference</a> for configuration examples.
-For visual editing or more advanced page composition, explore XP&#8217;s <a href="https://developer.enonic.com/docs/cms/stable/pages">page model</a> in the <a href="https://developer.enonic.com/docs/intro">Introduction to Enonic</a> or the <a href="https://developer.enonic.com/docs/next.xp">Next.js tutorial</a>.</p>
+For visual editing or more advanced page composition, explore XP&#8217;s <a href="https://developer.enonic.com/docs/cms/stable/pages">page model</a> in the <a href="https://developer.enonic.com/learn/intro">Introduction to Enonic</a> or the <a href="https://developer.enonic.com/learn/nextjs">Next.js tutorial</a>.</p>
 </div>
 </div>
 </div>
@@ -786,7 +786,7 @@ Next, you&#8217;ll <a href="permissions.ahtml">publish your content and explore 
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2026-11-20 12:51:51 UTC
+Last updated 2026-11-20 14:02:36 UTC
 </div>
 </div>
 </body>

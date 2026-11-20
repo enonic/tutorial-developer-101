@@ -443,7 +443,6 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <div id="toc" class="toc2">
 <div id="toctitle">Table of Contents</div>
 <ul class="sectlevel1">
-<li><a href="#tested_versions">Tested versions</a></li>
 <li><a href="#install_the_cli">Install the CLI</a>
 <ul class="sectlevel2">
 <li><a href="#task_install_the_cli">Task: Install the CLI</a></li>
@@ -476,49 +475,6 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <div class="paragraph">
 <p>In this chapter, you&#8217;ll install the Enonic CLI, start a local XP sandbox, and create the app that will hold your content types.
 It takes a few minutes, and everything you install here is used in every later chapter.</p>
-</div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="tested_versions"><a class="link" href="#tested_versions">Tested versions</a></h2>
-<div class="sectionbody">
-<div class="paragraph">
-<p>This tutorial was produced and tested with the following stack:</p>
-</div>
-<table class="tableblock frame-all grid-all stretch">
-<colgroup>
-<col style="width: 33.3333%;">
-<col style="width: 66.6667%;">
-</colgroup>
-<thead>
-<tr>
-<th class="tableblock halign-left valign-top">Component</th>
-<th class="tableblock halign-left valign-top">Version</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Enonic CLI</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">4.1.4</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Enonic XP</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">8.1.2</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Content Studio</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">6.1.0</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Guillotine</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">9.0.0</p></td>
-</tr>
-</tbody>
-</table>
-<div class="paragraph">
-<p>Some screenshots were captured on XP 8.1.0.
-The sandbox command below selects XP 8.1.2 to match the tested runtime.
-The Essentials template installs apps separately, so their versions may differ from those listed here.</p>
 </div>
 </div>
 </div>
@@ -572,6 +528,7 @@ You do not need to install Java or Gradle. The sandbox you create next bundles t
 </div>
 <div class="paragraph">
 <p>The <code>essentials</code> template installs a set of applications from Enonic Market, including Content Studio and Guillotine, which you will meet in the coming chapters.
+Because Market apps are installed separately, their exact patch versions may be newer than those listed on the <a href="index.ahtml">Introduction</a> page.
 The <code>-v</code> flag selects the XP version; <code>-f</code> accepts the defaults for the remaining prompts.</p>
 </div>
 <div class="sect2">
@@ -841,7 +798,7 @@ Next, you&#8217;ll <a href="content-studio.ahtml">get familiar with Content Stud
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2026-11-20 12:51:51 UTC
+Last updated 2026-11-20 14:02:36 UTC
 </div>
 </div>
 </body>

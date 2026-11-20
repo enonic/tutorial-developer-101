@@ -6,7 +6,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="generator" content="Asciidoctor 2.0.26">
 <meta name="application-name" content="modeling">
-<title>Content Modeling and GraphQL</title>
+<title>Modeling and Querying Content in Enonic</title>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,300italic,400,400italic,600,600italic%7CNoto+Serif:400,400italic,700,700italic%7CDroid+Sans+Mono:400,700">
 <style>
 /*! Asciidoctor default stylesheet | MIT License | https://asciidoctor.org */
@@ -438,11 +438,13 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 </head>
 <body class="article toc2 toc-right">
 <div id="header">
-<h1>Content Modeling and GraphQL</h1>
+<h1>Modeling and Querying Content in Enonic</h1>
 <div id="toc" class="toc2">
 <div id="toctitle">Table of Contents</div>
 <ul class="sectlevel1">
-<li><a href="#introduction">Introduction</a></li>
+<li><a href="#intro">Intro</a></li>
+<li><a href="#prerequisites">Prerequisites</a></li>
+<li><a href="#tested_versions">Tested versions</a></li>
 </ul>
 </div>
 </div>
@@ -450,46 +452,68 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <div id="preamble">
 <div class="sectionbody">
 <div class="paragraph">
-<p>Hands-on introduction to modeling content in Enonic and reading it through the Guillotine GraphQL API.</p>
+<p>This step-by-step tutorial introduces content modeling in Enonic XP and querying structured content and media through <a href="https://developer.enonic.com/docs/guillotine">Guillotine</a>, Enonic&#8217;s GraphQL API.</p>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+<strong>Just want to see the result?</strong> <a href="demo.ahtml">Run the demo</a> to deploy the finished schemas and sample content locally without going through the chapters.
+</td>
+</tr>
+</table>
 </div>
 </div>
 </div>
 <div class="sect1">
-<h2 id="introduction"><a class="link" href="#introduction">Introduction</a></h2>
+<h2 id="intro"><a class="link" href="#intro">Intro</a></h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>This tutorial is for developers who define content types and build front-ends against Enonic&#8217;s GraphQL API. It covers content modeling, schema management and the Guillotine API, using the Enonic CLI, Content Studio and a local sandbox. Every chapter builds on the previous one, so you gain understanding incrementally while building a small content model of your own.</p>
+<p>This tutorial is for developers who define content types and build front-ends against Enonic&#8217;s GraphQL API.
+Every chapter builds on the previous one, using the Enonic CLI, Content Studio and a local sandbox to assemble and query a content model of your own.</p>
 </div>
 <div class="paragraph">
-<p>Along the way you will:</p>
+<p>When your schemas and content are in place, editors manage structured items and media in Content Studio while you query them through GraphQL:</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/api-playground.png" alt="Query Playground in Content Studio showing a GraphQL query on the left and structured JSON results on the right" width="1440">
+</div>
+<div class="title">Figure 1. Querying modeled content through Query Playground in Content Studio</div>
+</div>
+<div class="paragraph">
+<p>You will complete the following steps:</p>
 </div>
 <div class="ulist">
 <ul>
 <li>
-<p><a href="setup.ahtml">set up</a> the CLI, a local sandbox and your own app</p>
+<p><a href="setup.ahtml">Set up</a> the CLI, a local sandbox and your own app</p>
 </li>
 <li>
-<p>create content types and content in <a href="content-studio.ahtml">Content Studio</a></p>
+<p>Create content types and content in <a href="content-studio.ahtml">Content Studio</a></p>
 </li>
 <li>
-<p>query your content through the <a href="headless-api.ahtml">Headless API</a></p>
+<p>Query your content through the <a href="headless-api.ahtml">Headless API</a></p>
 </li>
 <li>
-<p>upload <a href="media.ahtml">images and other media</a>, and serve them scaled and cropped</p>
+<p>Upload <a href="media.ahtml">images and other media</a>, and serve them scaled and cropped</p>
 </li>
 <li>
-<p>model richer content with <a href="form-items.ahtml">form items</a>, <a href="sets.ahtml">sets and form fragments</a>, <a href="rich-text.ahtml">rich text</a> and <a href="mixins.ahtml">mixins</a></p>
+<p>Model richer content with <a href="form-items.ahtml">form items</a>, <a href="sets.ahtml">sets and form fragments</a>, <a href="rich-text.ahtml">rich text</a> and <a href="mixins.ahtml">mixins</a></p>
 </li>
 <li>
-<p>publish your content and explore <a href="permissions.ahtml">read and editorial permissions</a></p>
+<p>Publish your content and explore <a href="permissions.ahtml">read and editorial permissions</a></p>
 </li>
 <li>
-<p><a href="export-import.ahtml">export and import</a> your content into another project</p>
+<p><a href="export-import.ahtml">Export and import</a> your content into another project</p>
 </li>
 </ul>
 </div>
 <div class="paragraph">
-<p>Two things to know before you start:</p>
+<p>Two things to know about scope:</p>
 </div>
 <div class="ulist">
 <ul>
@@ -497,17 +521,12 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <p><strong>No coding.</strong> You will not write application code. You will edit YAML schemas, run GraphQL queries, and use ready-to-run cURL requests to test the API. There is nothing to compile or debug.</p>
 </li>
 <li>
-<p><strong>No pages.</strong> Sites, pages, layouts and parts - the whole page domain of Enonic - are left out entirely. To learn more about pages, check out the <a href="https://developer.enonic.com/docs/intro">Introduction to Enonic</a> or the <a href="https://developer.enonic.com/docs/next.xp">Next.js tutorial</a>.</p>
+<p><strong>No pages.</strong> Sites, pages, layouts and parts - the whole page domain of Enonic - are left out entirely. To learn more about pages, check out the <a href="https://developer.enonic.com/learn/intro">Introduction to Enonic</a> or the <a href="https://developer.enonic.com/learn/nextjs">Next.js tutorial</a>.</p>
 </li>
 </ul>
 </div>
 <div class="paragraph">
 <p>The <a href="https://developer.enonic.com/docs/cms">CMS reference documentation</a> covers every topic in this tutorial in depth, and is the place to go once you know what you are looking for.</p>
-</div>
-<div class="paragraph">
-<p>The <a href="https://github.com/enonic/tutorial-content-modeling/tree/master">completed example app on GitHub</a> contains the finished schemas and sample content for comparison as you work through the tutorial.
-To explore the finished result, follow its README to build and install it in a separate sandbox.
-It uses the same app key (<code>com.example.tutorial.modeling</code>) and content project identifier (<code>my-first-project</code>) as the exercises; installing it in your exercise sandbox would replace your app.</p>
 </div>
 <div class="admonitionblock note">
 <table>
@@ -521,18 +540,86 @@ Throughout this tutorial, "XP" refers to "Enonic XP", the platform behind Enonic
 </tr>
 </table>
 </div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="prerequisites"><a class="link" href="#prerequisites">Prerequisites</a></h2>
+<div class="sectionbody">
 <div class="paragraph">
-<p>If you have any questions, or just want to get in touch, visit the <a href="https://discuss.enonic.com">Forum</a> or join the <a href="https://slack.enonic.com/">Community Slack channel</a>.</p>
+<p>No prior Enonic experience is required. Basic familiarity with YAML and JSON is helpful, and GraphQL concepts are introduced as you go.</p>
 </div>
 <div class="paragraph">
-<p>The first step is to <a href="setup.ahtml">get your tools in place</a>. Good luck! 🙌</p>
+<p>To follow this tutorial you will need:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>A terminal, with <code>curl</code> available for testing anonymous HTTP requests in <a href="permissions.ahtml">chapter 9</a></p>
+</li>
+<li>
+<p>Your favorite text or code editor</p>
+</li>
+<li>
+<p><a href="https://nodejs.org/">Node.js</a> with <code>npm</code> if you want to install the Enonic CLI via <code>npm</code> (other installers are also available)</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>You do not need to install Java or Gradle — the local sandbox bundles a Java runtime. You will install the Enonic CLI in the first chapter.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="tested_versions"><a class="link" href="#tested_versions">Tested versions</a></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>This version of the tutorial was produced and tested with the following stack:</p>
+</div>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 66.6666%;">
+<col style="width: 33.3334%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Component</th>
+<th class="tableblock halign-left valign-top">Version</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Enonic CLI</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">4.1.4</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Enonic XP</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">8.1.2</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Content Studio</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">6.1.0</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Guillotine</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">9.0.0</p></td>
+</tr>
+</tbody>
+</table>
+<div class="paragraph">
+<p>Using Enonic XP 7? Select <code>7.x</code> from the version menu on this page.</p>
+</div>
+<div class="paragraph">
+<p>If you have any questions, or want to get in touch, visit the <a href="https://discuss.enonic.com">Forum</a> or join the <a href="https://slack.enonic.com/">Community Slack channel</a>.</p>
+</div>
+<div class="paragraph">
+<p>Get started by <a href="setup.ahtml">setting up your local environment</a>. 🙌</p>
 </div>
 </div>
 </div>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2026-11-20 12:51:51 UTC
+Last updated 2026-11-20 14:02:36 UTC
 </div>
 </div>
 </body>
