@@ -49,7 +49,7 @@ enonic project sandbox {demo-sandbox-name} -f
 enonic project deploy -f
 ----
 +
-The CLI builds `{app-name}.jar` using the sandbox's bundled Java runtime and deploys it to `{demo-sandbox-name}`.
+The CLI builds the app and deploys it to `{demo-sandbox-name}`.
 On first startup, the app creates the `{cms-project-displayname}` (`{cms-project-id}`) content project, imports the sample artists, animals and images, and publishes them.
 
 == Task: Explore the content and GraphQL API

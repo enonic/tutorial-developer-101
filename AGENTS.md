@@ -10,7 +10,7 @@ The tutorial is for developers who define content types and build front-ends aga
 
 Two boundaries stated on the front page must hold throughout:
 
-- **No coding:** No application code, build configuration, or debugging beyond YAML schemas, GraphQL queries, and ready-to-run cURL requests. Point readers to Guillotine usage for API clients and the React SPA tutorial for building a front-end.
+- **No coding:** No application code, build configuration, or debugging beyond YAML schemas, GraphQL queries, and ready-to-run cURL requests. Do not mention Java or Gradle anywhere under `docs/`. Point readers to Guillotine usage for API clients and the React SPA tutorial for building a front-end.
 - **No pages:** Leave out sites, pages, layouts, parts, and page templates entirely. Point readers to Introduction to Enonic and the Next.js tutorial for pages.
 
 Explain enough locally to complete each task, then link to the authoritative reference documentation rather than restating reference tables.

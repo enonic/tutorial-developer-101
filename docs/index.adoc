@@ -45,7 +45,7 @@ To follow this tutorial you will need:
 * Your favorite text or code editor
 * https://nodejs.org/[Node.js] with `npm` if you want to install the Enonic CLI via `npm` (other installers are also available)
 
-You do not need to install Java or Gradle — the local sandbox bundles a Java runtime. You will install the Enonic CLI in the first chapter.
+You will install the Enonic CLI in the first chapter.
 
 == Tested versions
 

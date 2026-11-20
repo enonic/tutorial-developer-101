@@ -23,8 +23,6 @@ If not, there are https://developer.enonic.com/start[alternative ways to install
 . *Verify the installation* - Run `enonic -v`.
 This should print the version of the CLI; this tutorial expects version 4 or newer.
 
-NOTE: You do not need to install Java or Gradle. The sandbox you create next bundles the Java runtime, and the CLI uses it when building your app.
-
 == Create a sandbox
 
 A _sandbox_ is a local developer instance of Enonic XP, with its own data and configuration. You can have several, each on its own XP version.
@@ -106,7 +104,7 @@ src/
 <1> The application descriptor, holding the app's title, description and vendor information.
 <2> Where the content schemas you will create go.
 
-NOTE: The other files in the folder, such as `build.gradle` and `gradle.properties`, belong to the build. You will not need to edit them in this tutorial.
+NOTE: You can ignore the other files in the folder — you will not need to edit them in this tutorial.
 
 == Build and deploy
 
