@@ -1,0 +1,995 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="generator" content="Asciidoctor 2.0.26">
+<meta name="application-name" content="modeling">
+<meta name="description" content="Add a filmography to artists, model animals with option sets, and reuse fields with a form fragment. Query each addition through Guillotine.">
+<title>Sets and form fragments</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,300italic,400,400italic,600,600italic%7CNoto+Serif:400,400italic,700,700italic%7CDroid+Sans+Mono:400,700">
+<style>
+/*! Asciidoctor default stylesheet | MIT License | https://asciidoctor.org */
+/* Uncomment the following line when using as a custom stylesheet */
+/* @import "https://fonts.googleapis.com/css?family=Open+Sans:300,300italic,400,400italic,600,600italic%7CNoto+Serif:400,400italic,700,700italic%7CDroid+Sans+Mono:400,700"; */
+html{font-family:sans-serif;-webkit-text-size-adjust:100%}
+a{background:none}
+a:focus{outline:thin dotted}
+a:active,a:hover{outline:0}
+h1{font-size:2em;margin:.67em 0}
+b,strong{font-weight:bold}
+abbr{font-size:.9em}
+abbr[title]{cursor:help;border-bottom:1px dotted #dddddf;text-decoration:none}
+dfn{font-style:italic}
+hr{height:0}
+mark{background:#ff0;color:#000}
+code,kbd,pre,samp{font-family:monospace;font-size:1em}
+pre{white-space:pre-wrap}
+q{quotes:"\201C" "\201D" "\2018" "\2019"}
+small{font-size:80%}
+sub,sup{font-size:75%;line-height:0;position:relative;vertical-align:baseline}
+sup{top:-.5em}
+sub{bottom:-.25em}
+img{border:0}
+svg:not(:root){overflow:hidden}
+figure{margin:0}
+audio,video{display:inline-block}
+audio:not([controls]){display:none;height:0}
+fieldset{border:1px solid silver;margin:0 2px;padding:.35em .625em .75em}
+legend{border:0;padding:0}
+button,input,select,textarea{font-family:inherit;font-size:100%;margin:0}
+button,input{line-height:normal}
+button,select{text-transform:none}
+button,html input[type=button],input[type=reset],input[type=submit]{-webkit-appearance:button;cursor:pointer}
+button[disabled],html input[disabled]{cursor:default}
+input[type=checkbox],input[type=radio]{padding:0}
+button::-moz-focus-inner,input::-moz-focus-inner{border:0;padding:0}
+textarea{overflow:auto;vertical-align:top}
+table{border-collapse:collapse;border-spacing:0}
+*,::before,::after{box-sizing:border-box}
+html,body{font-size:100%}
+body{background:#fff;color:rgba(0,0,0,.8);padding:0;margin:0;font-family:"Noto Serif","DejaVu Serif",serif;line-height:1;position:relative;cursor:auto;-moz-tab-size:4;-o-tab-size:4;tab-size:4;word-wrap:anywhere;-moz-osx-font-smoothing:grayscale;-webkit-font-smoothing:antialiased}
+a:hover{cursor:pointer}
+img,object,embed{max-width:100%;height:auto}
+object,embed{height:100%}
+img{-ms-interpolation-mode:bicubic}
+.left{float:left!important}
+.right{float:right!important}
+.text-left{text-align:left!important}
+.text-right{text-align:right!important}
+.text-center{text-align:center!important}
+.text-justify{text-align:justify!important}
+.hide{display:none}
+img,object,svg{display:inline-block;vertical-align:middle}
+textarea{height:auto;min-height:50px}
+select{width:100%}
+.subheader,.admonitionblock td.content>.title,.audioblock>.title,.exampleblock>.title,.imageblock>.title,.listingblock>.title,.literalblock>.title,.stemblock>.title,.openblock>.title,.paragraph>.title,.quoteblock>.title,table.tableblock>.title,.verseblock>.title,.videoblock>.title,.dlist>.title,.olist>.title,.ulist>.title,.qlist>.title,.hdlist>.title{line-height:1.45;color:#7a2518;font-weight:400;margin-top:0;margin-bottom:.25em}
+div,dl,dt,dd,ul,ol,li,h1,h2,h3,#toctitle,.sidebarblock>.content>.title,h4,h5,h6,pre,form,p,blockquote,th,td{margin:0;padding:0}
+a{color:#2156a5;text-decoration:underline;line-height:inherit}
+a:hover,a:focus{color:#1d4b8f}
+a img{border:0}
+p{line-height:1.6;margin-bottom:1.25em;text-rendering:optimizeLegibility}
+p aside{font-size:.875em;line-height:1.35;font-style:italic}
+h1,h2,h3,#toctitle,.sidebarblock>.content>.title,h4,h5,h6{font-family:"Open Sans","DejaVu Sans",sans-serif;font-weight:300;font-style:normal;color:#ba3925;text-rendering:optimizeLegibility;margin-top:1em;margin-bottom:.5em;line-height:1.0125em}
+h1 small,h2 small,h3 small,#toctitle small,.sidebarblock>.content>.title small,h4 small,h5 small,h6 small{font-size:60%;color:#e99b8f;line-height:0}
+h1{font-size:2.125em}
+h2{font-size:1.6875em}
+h3,#toctitle,.sidebarblock>.content>.title{font-size:1.375em}
+h4,h5{font-size:1.125em}
+h6{font-size:1em}
+hr{border:solid #dddddf;border-width:1px 0 0;clear:both;margin:1.25em 0 1.1875em}
+em,i{font-style:italic;line-height:inherit}
+strong,b{font-weight:bold;line-height:inherit}
+small{font-size:60%;line-height:inherit}
+code{font-family:"Droid Sans Mono","DejaVu Sans Mono",monospace;font-weight:400;color:rgba(0,0,0,.9)}
+ul,ol,dl{line-height:1.6;margin-bottom:1.25em;list-style-position:outside;font-family:inherit}
+ul,ol{margin-left:1.5em}
+ul li ul,ul li ol{margin-left:1.25em;margin-bottom:0}
+ul.circle{list-style-type:circle}
+ul.disc{list-style-type:disc}
+ul.square{list-style-type:square}
+ul.circle ul:not([class]),ul.disc ul:not([class]),ul.square ul:not([class]){list-style:inherit}
+ol li ul,ol li ol{margin-left:1.25em;margin-bottom:0}
+dl dt{margin-bottom:.3125em;font-weight:bold}
+dl dd{margin-bottom:1.25em}
+blockquote{margin:0 0 1.25em;padding:.5625em 1.25em 0 1.1875em;border-left:1px solid #ddd}
+blockquote,blockquote p{line-height:1.6;color:rgba(0,0,0,.85)}
+@media screen and (min-width:768px){h1,h2,h3,#toctitle,.sidebarblock>.content>.title,h4,h5,h6{line-height:1.2}
+h1{font-size:2.75em}
+h2{font-size:2.3125em}
+h3,#toctitle,.sidebarblock>.content>.title{font-size:1.6875em}
+h4{font-size:1.4375em}}
+table{background:#fff;margin-bottom:1.25em;border:1px solid #dedede;word-wrap:normal}
+table thead,table tfoot{background:#f7f8f7}
+table thead tr th,table thead tr td,table tfoot tr th,table tfoot tr td{padding:.5em .625em .625em;font-size:inherit;color:rgba(0,0,0,.8);text-align:left}
+table tr th,table tr td{padding:.5625em .625em;font-size:inherit;color:rgba(0,0,0,.8)}
+table tr.even,table tr.alt{background:#f8f8f7}
+table thead tr th,table tfoot tr th,table tbody tr td,table tr td,table tfoot tr td{line-height:1.6}
+h1,h2,h3,#toctitle,.sidebarblock>.content>.title,h4,h5,h6{line-height:1.2;word-spacing:-.05em}
+h1 strong,h2 strong,h3 strong,#toctitle strong,.sidebarblock>.content>.title strong,h4 strong,h5 strong,h6 strong{font-weight:400}
+.center{margin-left:auto;margin-right:auto}
+.stretch{width:100%}
+.clearfix::before,.clearfix::after,.float-group::before,.float-group::after{content:" ";display:table}
+.clearfix::after,.float-group::after{clear:both}
+:not(pre).nobreak{word-wrap:normal}
+:not(pre).nowrap{white-space:nowrap}
+:not(pre).pre-wrap{white-space:pre-wrap}
+:not(pre):not([class^=L])>code{font-size:.9375em;font-style:normal!important;letter-spacing:0;padding:.1em .5ex;word-spacing:-.15em;background:#f7f7f8;border-radius:4px;line-height:1.45;text-rendering:optimizeSpeed}
+pre{color:rgba(0,0,0,.9);font-family:"Droid Sans Mono","DejaVu Sans Mono",monospace;line-height:1.45;text-rendering:optimizeSpeed}
+pre code,pre pre{color:inherit;font-size:inherit;line-height:inherit}
+pre.nowrap,pre.nowrap pre{white-space:pre;word-wrap:normal}
+em em{font-style:normal}
+strong strong{font-weight:400}
+.keyseq{color:rgba(51,51,51,.8)}
+kbd{font-family:"Droid Sans Mono","DejaVu Sans Mono",monospace;display:inline-block;color:rgba(0,0,0,.8);font-size:.65em;line-height:1.45;background:#f7f7f7;border:1px solid #ccc;border-radius:3px;box-shadow:0 1px 0 rgba(0,0,0,.2),inset 0 0 0 .1em #fff;margin:0 .15em;padding:.2em .5em;vertical-align:middle;position:relative;top:-.1em;white-space:nowrap}
+.keyseq kbd:first-child{margin-left:0}
+.keyseq kbd:last-child{margin-right:0}
+.menuseq,.menuref{color:#000}
+.menuseq b:not(.caret),.menuref{font-weight:inherit}
+.menuseq{word-spacing:-.02em}
+.menuseq b.caret{font-size:1.25em;line-height:.8}
+.menuseq i.caret{font-weight:bold;text-align:center;width:.45em}
+b.button::before,b.button::after{position:relative;top:-1px;font-weight:400}
+b.button::before{content:"[";padding:0 3px 0 2px}
+b.button::after{content:"]";padding:0 2px 0 3px}
+p a>code:hover{color:rgba(0,0,0,.9)}
+#header,#content,#footnotes,#footer{width:100%;margin:0 auto;max-width:62.5em;*zoom:1;position:relative;padding-left:.9375em;padding-right:.9375em}
+#header::before,#header::after,#content::before,#content::after,#footnotes::before,#footnotes::after,#footer::before,#footer::after{content:" ";display:table}
+#header::after,#content::after,#footnotes::after,#footer::after{clear:both}
+#content{margin-top:1.25em}
+#content::before{content:none}
+#header>h1:first-child{color:rgba(0,0,0,.85);margin-top:2.25rem;margin-bottom:0}
+#header>h1:first-child+#toc{margin-top:8px;border-top:1px solid #dddddf}
+#header>h1:only-child{border-bottom:1px solid #dddddf;padding-bottom:8px}
+#header .details{border-bottom:1px solid #dddddf;line-height:1.45;padding-top:.25em;padding-bottom:.25em;padding-left:.25em;color:rgba(0,0,0,.6);display:flex;flex-flow:row wrap}
+#header .details span:first-child{margin-left:-.125em}
+#header .details span.email a{color:rgba(0,0,0,.85)}
+#header .details br{display:none}
+#header .details br+span::before{content:"\00a0\2013\00a0"}
+#header .details br+span.author::before{content:"\00a0\22c5\00a0";color:rgba(0,0,0,.85)}
+#header .details br+span#revremark::before{content:"\00a0|\00a0"}
+#header #revnumber{text-transform:capitalize}
+#header #revnumber::after{content:"\00a0"}
+#content>h1:first-child:not([class]){color:rgba(0,0,0,.85);border-bottom:1px solid #dddddf;padding-bottom:8px;margin-top:0;padding-top:1rem;margin-bottom:1.25rem}
+#toc{border-bottom:1px solid #e7e7e9;padding-bottom:.5em}
+#toc>ul{margin-left:.125em}
+#toc ul.sectlevel0>li>a{font-style:italic}
+#toc ul.sectlevel0 ul.sectlevel1{margin:.5em 0}
+#toc ul{font-family:"Open Sans","DejaVu Sans",sans-serif;list-style-type:none}
+#toc li{line-height:1.3334;margin-top:.3334em}
+#toc a{text-decoration:none}
+#toc a:active{text-decoration:underline}
+#toctitle{color:#7a2518;font-size:1.2em}
+@media screen and (min-width:768px){#toctitle{font-size:1.375em}
+body.toc2{padding-left:15em;padding-right:0}
+body.toc2 #header>h1:nth-last-child(2){border-bottom:1px solid #dddddf;padding-bottom:8px}
+#toc.toc2{margin-top:0!important;background:#f8f8f7;position:fixed;width:15em;left:0;top:0;border-right:1px solid #e7e7e9;border-top-width:0!important;border-bottom-width:0!important;z-index:1000;padding:1.25em 1em;height:100%;overflow:auto}
+#toc.toc2 #toctitle{margin-top:0;margin-bottom:.8rem;font-size:1.2em}
+#toc.toc2>ul{font-size:.9em;margin-bottom:0}
+#toc.toc2 ul ul{margin-left:0;padding-left:1em}
+#toc.toc2 ul.sectlevel0 ul.sectlevel1{padding-left:0;margin-top:.5em;margin-bottom:.5em}
+body.toc2.toc-right{padding-left:0;padding-right:15em}
+body.toc2.toc-right #toc.toc2{border-right-width:0;border-left:1px solid #e7e7e9;left:auto;right:0}}
+@media screen and (min-width:1280px){body.toc2{padding-left:20em;padding-right:0}
+#toc.toc2{width:20em}
+#toc.toc2 #toctitle{font-size:1.375em}
+#toc.toc2>ul{font-size:.95em}
+#toc.toc2 ul ul{padding-left:1.25em}
+body.toc2.toc-right{padding-left:0;padding-right:20em}}
+#content #toc{border:1px solid #e0e0dc;margin-bottom:1.25em;padding:1.25em;background:#f8f8f7;border-radius:4px}
+#content #toc>:first-child{margin-top:0}
+#content #toc>:last-child{margin-bottom:0}
+#footer{max-width:none;background:rgba(0,0,0,.8);padding:1.25em}
+#footer-text{color:hsla(0,0%,100%,.8);line-height:1.44}
+#content{margin-bottom:.625em}
+.sect1{padding-bottom:.625em}
+@media screen and (min-width:768px){#content{margin-bottom:1.25em}
+.sect1{padding-bottom:1.25em}}
+.sect1:last-child{padding-bottom:0}
+.sect1+.sect1{border-top:1px solid #e7e7e9}
+#content h1>a.anchor,h2>a.anchor,h3>a.anchor,#toctitle>a.anchor,.sidebarblock>.content>.title>a.anchor,h4>a.anchor,h5>a.anchor,h6>a.anchor{position:absolute;z-index:1001;width:1.5ex;margin-left:-1.5ex;display:block;text-decoration:none!important;visibility:hidden;text-align:center;font-weight:400}
+#content h1>a.anchor::before,h2>a.anchor::before,h3>a.anchor::before,#toctitle>a.anchor::before,.sidebarblock>.content>.title>a.anchor::before,h4>a.anchor::before,h5>a.anchor::before,h6>a.anchor::before{content:"\00A7";font-size:.85em;display:block;padding-top:.1em}
+#content h1:hover>a.anchor,#content h1>a.anchor:hover,h2:hover>a.anchor,h2>a.anchor:hover,h3:hover>a.anchor,#toctitle:hover>a.anchor,.sidebarblock>.content>.title:hover>a.anchor,h3>a.anchor:hover,#toctitle>a.anchor:hover,.sidebarblock>.content>.title>a.anchor:hover,h4:hover>a.anchor,h4>a.anchor:hover,h5:hover>a.anchor,h5>a.anchor:hover,h6:hover>a.anchor,h6>a.anchor:hover{visibility:visible}
+#content h1>a.link,h2>a.link,h3>a.link,#toctitle>a.link,.sidebarblock>.content>.title>a.link,h4>a.link,h5>a.link,h6>a.link{color:#ba3925;text-decoration:none}
+#content h1>a.link:hover,h2>a.link:hover,h3>a.link:hover,#toctitle>a.link:hover,.sidebarblock>.content>.title>a.link:hover,h4>a.link:hover,h5>a.link:hover,h6>a.link:hover{color:#a53221}
+details,.audioblock,.imageblock,.literalblock,.listingblock,.stemblock,.videoblock{margin-bottom:1.25em}
+details{margin-left:1.25rem}
+details>summary{cursor:pointer;display:block;position:relative;line-height:1.6;margin-bottom:.625rem;outline:none;-webkit-tap-highlight-color:transparent}
+details>summary::-webkit-details-marker{display:none}
+details>summary::before{content:"";border:solid transparent;border-left:solid;border-width:.3em 0 .3em .5em;position:absolute;top:.5em;left:-1.25rem;transform:translateX(15%)}
+details[open]>summary::before{border:solid transparent;border-top:solid;border-width:.5em .3em 0;transform:translateY(15%)}
+details>summary::after{content:"";width:1.25rem;height:1em;position:absolute;top:.3em;left:-1.25rem}
+.admonitionblock td.content>.title,.audioblock>.title,.exampleblock>.title,.imageblock>.title,.listingblock>.title,.literalblock>.title,.stemblock>.title,.openblock>.title,.paragraph>.title,.quoteblock>.title,table.tableblock>.title,.verseblock>.title,.videoblock>.title,.dlist>.title,.olist>.title,.ulist>.title,.qlist>.title,.hdlist>.title{text-rendering:optimizeLegibility;text-align:left;font-family:"Noto Serif","DejaVu Serif",serif;font-size:1rem;font-style:italic}
+table.tableblock.fit-content>caption.title{white-space:nowrap;width:0}
+.paragraph.lead>p,#preamble>.sectionbody>[class=paragraph]:first-of-type p{font-size:1.21875em;line-height:1.6;color:rgba(0,0,0,.85)}
+.admonitionblock>table{border-collapse:separate;border:0;background:none;width:100%}
+.admonitionblock>table td.icon{text-align:center;width:80px}
+.admonitionblock>table td.icon img{max-width:none}
+.admonitionblock>table td.icon .title{font-weight:bold;font-family:"Open Sans","DejaVu Sans",sans-serif;text-transform:uppercase}
+.admonitionblock>table td.content{padding-left:1.125em;padding-right:1.25em;border-left:1px solid #dddddf;color:rgba(0,0,0,.6);word-wrap:anywhere}
+.admonitionblock>table td.content>:last-child>:last-child{margin-bottom:0}
+.exampleblock>.content{border:1px solid #e6e6e6;margin-bottom:1.25em;padding:1.25em;background:#fff;border-radius:4px}
+.sidebarblock{border:1px solid #dbdbd6;margin-bottom:1.25em;padding:1.25em;background:#f3f3f2;border-radius:4px}
+.sidebarblock>.content>.title{color:#7a2518;margin-top:0;text-align:center}
+.exampleblock>.content>:first-child,.sidebarblock>.content>:first-child{margin-top:0}
+.exampleblock>.content>:last-child,.exampleblock>.content>:last-child>:last-child,.exampleblock>.content .olist>ol>li:last-child>:last-child,.exampleblock>.content .ulist>ul>li:last-child>:last-child,.exampleblock>.content .qlist>ol>li:last-child>:last-child,.sidebarblock>.content>:last-child,.sidebarblock>.content>:last-child>:last-child,.sidebarblock>.content .olist>ol>li:last-child>:last-child,.sidebarblock>.content .ulist>ul>li:last-child>:last-child,.sidebarblock>.content .qlist>ol>li:last-child>:last-child{margin-bottom:0}
+.literalblock pre,.listingblock>.content>pre{border-radius:4px;overflow-x:auto;padding:1em;font-size:.8125em}
+@media screen and (min-width:768px){.literalblock pre,.listingblock>.content>pre{font-size:.90625em}}
+@media screen and (min-width:1280px){.literalblock pre,.listingblock>.content>pre{font-size:1em}}
+.literalblock pre,.listingblock>.content>pre:not(.highlight),.listingblock>.content>pre[class=highlight],.listingblock>.content>pre[class^="highlight "]{background:#f7f7f8}
+.literalblock.output pre{color:#f7f7f8;background:rgba(0,0,0,.9)}
+.listingblock>.content{position:relative}
+.listingblock pre>code{display:block}
+.listingblock code[data-lang]::before{display:none;content:attr(data-lang);position:absolute;font-size:.75em;top:.425rem;right:.5rem;line-height:1;text-transform:uppercase;color:inherit;opacity:.5}
+.listingblock:hover code[data-lang]::before{display:block}
+.listingblock.terminal pre .command::before{content:attr(data-prompt);padding-right:.5em;color:inherit;opacity:.5}
+.listingblock.terminal pre .command:not([data-prompt])::before{content:"$"}
+.listingblock pre.highlightjs{padding:0}
+.listingblock pre.highlightjs>code{padding:1em;border-radius:4px}
+.listingblock pre.prettyprint{border-width:0}
+.prettyprint{background:#f7f7f8}
+pre.prettyprint .linenums{line-height:1.45;margin-left:2em}
+pre.prettyprint li{background:none;list-style-type:inherit;padding-left:0}
+pre.prettyprint li code[data-lang]::before{opacity:1}
+pre.prettyprint li:not(:first-child) code[data-lang]::before{display:none}
+table.linenotable{border-collapse:separate;border:0;margin-bottom:0;background:none}
+table.linenotable td[class]{color:inherit;vertical-align:top;padding:0;line-height:inherit;white-space:normal}
+table.linenotable td.code{padding-left:.75em}
+table.linenotable td.linenos,pre.pygments .linenos{border-right:1px solid;opacity:.35;padding-right:.5em;-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none}
+pre.pygments span.linenos{display:inline-block;margin-right:.75em}
+.quoteblock{margin:0 1em 1.25em 1.5em;display:table}
+.quoteblock:not(.excerpt)>.title{margin-left:-1.5em;margin-bottom:.75em}
+.quoteblock blockquote,.quoteblock p{color:rgba(0,0,0,.85);font-size:1.15rem;line-height:1.75;word-spacing:.1em;letter-spacing:0;font-style:italic;text-align:justify}
+.quoteblock blockquote{margin:0;padding:0;border:0}
+.quoteblock blockquote::before{content:"\201c";float:left;font-size:2.75em;font-weight:bold;line-height:.6em;margin-left:-.6em;color:#7a2518;text-shadow:0 1px 2px rgba(0,0,0,.1)}
+.quoteblock blockquote>.paragraph:last-child p{margin-bottom:0}
+.quoteblock .attribution{margin-top:.75em;margin-right:.5ex;text-align:right}
+.verseblock{margin:0 1em 1.25em}
+.verseblock pre{font-family:"Open Sans","DejaVu Sans",sans-serif;font-size:1.15rem;color:rgba(0,0,0,.85);font-weight:300;text-rendering:optimizeLegibility}
+.verseblock pre strong{font-weight:400}
+.verseblock .attribution{margin-top:1.25rem;margin-left:.5ex}
+.quoteblock .attribution,.verseblock .attribution{font-size:.9375em;line-height:1.45;font-style:italic}
+.quoteblock .attribution br,.verseblock .attribution br{display:none}
+.quoteblock .attribution cite,.verseblock .attribution cite{display:block;letter-spacing:-.025em;color:rgba(0,0,0,.6)}
+.quoteblock.abstract blockquote::before,.quoteblock.excerpt blockquote::before,.quoteblock .quoteblock blockquote::before{display:none}
+.quoteblock.abstract blockquote,.quoteblock.abstract p,.quoteblock.excerpt blockquote,.quoteblock.excerpt p,.quoteblock .quoteblock blockquote,.quoteblock .quoteblock p{line-height:1.6;word-spacing:0}
+.quoteblock.abstract{margin:0 1em 1.25em;display:block}
+.quoteblock.abstract>.title{margin:0 0 .375em;font-size:1.15em;text-align:center}
+.quoteblock.excerpt>blockquote,.quoteblock .quoteblock{padding:0 0 .25em 1em;border-left:.25em solid #dddddf}
+.quoteblock.excerpt,.quoteblock .quoteblock{margin-left:0}
+.quoteblock.excerpt blockquote,.quoteblock.excerpt p,.quoteblock .quoteblock blockquote,.quoteblock .quoteblock p{color:inherit;font-size:1.0625rem}
+.quoteblock.excerpt .attribution,.quoteblock .quoteblock .attribution{color:inherit;font-size:.85rem;text-align:left;margin-right:0}
+p.tableblock:last-child{margin-bottom:0}
+td.tableblock>.content{margin-bottom:1.25em;word-wrap:anywhere}
+td.tableblock>.content>:last-child{margin-bottom:-1.25em}
+table.tableblock,th.tableblock,td.tableblock{border:0 solid #dedede}
+table.grid-all>*>tr>*{border-width:1px}
+table.grid-cols>*>tr>*{border-width:0 1px}
+table.grid-rows>*>tr>*{border-width:1px 0}
+table.frame-all{border-width:1px}
+table.frame-ends{border-width:1px 0}
+table.frame-sides{border-width:0 1px}
+table.frame-none>colgroup+*>:first-child>*,table.frame-sides>colgroup+*>:first-child>*{border-top-width:0}
+table.frame-none>:last-child>:last-child>*,table.frame-sides>:last-child>:last-child>*{border-bottom-width:0}
+table.frame-none>*>tr>:first-child,table.frame-ends>*>tr>:first-child{border-left-width:0}
+table.frame-none>*>tr>:last-child,table.frame-ends>*>tr>:last-child{border-right-width:0}
+table.stripes-all>*>tr,table.stripes-odd>*>tr:nth-of-type(odd),table.stripes-even>*>tr:nth-of-type(even),table.stripes-hover>*>tr:hover{background:#f8f8f7}
+th.halign-left,td.halign-left{text-align:left}
+th.halign-right,td.halign-right{text-align:right}
+th.halign-center,td.halign-center{text-align:center}
+th.valign-top,td.valign-top{vertical-align:top}
+th.valign-bottom,td.valign-bottom{vertical-align:bottom}
+th.valign-middle,td.valign-middle{vertical-align:middle}
+table thead th,table tfoot th{font-weight:bold}
+tbody tr th{background:#f7f8f7}
+tbody tr th,tbody tr th p,tfoot tr th,tfoot tr th p{color:rgba(0,0,0,.8);font-weight:bold}
+p.tableblock>code:only-child{background:none;padding:0}
+p.tableblock{font-size:1em}
+ol{margin-left:1.75em}
+ul li ol{margin-left:1.5em}
+dl dd{margin-left:1.125em}
+dl dd:last-child,dl dd:last-child>:last-child{margin-bottom:0}
+li p,ul dd,ol dd,.olist .olist,.ulist .ulist,.ulist .olist,.olist .ulist{margin-bottom:.625em}
+ul.checklist,ul.none,ol.none,ul.no-bullet,ol.no-bullet,ol.unnumbered,ul.unstyled,ol.unstyled{list-style-type:none}
+ul.no-bullet,ol.no-bullet,ol.unnumbered{margin-left:.625em}
+ul.unstyled,ol.unstyled{margin-left:0}
+li>p:empty:only-child::before{content:"";display:inline-block}
+ul.checklist>li>p:first-child{margin-left:-1em}
+ul.checklist>li>p:first-child>.fa-square-o:first-child,ul.checklist>li>p:first-child>.fa-check-square-o:first-child{width:1.25em;font-size:.8em;position:relative;bottom:.125em}
+ul.checklist>li>p:first-child>input[type=checkbox]:first-child{margin-right:.25em}
+ul.inline{display:flex;flex-flow:row wrap;list-style:none;margin:0 0 .625em -1.25em}
+ul.inline>li{margin-left:1.25em}
+.unstyled dl dt{font-weight:400;font-style:normal}
+ol.arabic{list-style-type:decimal}
+ol.decimal{list-style-type:decimal-leading-zero}
+ol.loweralpha{list-style-type:lower-alpha}
+ol.upperalpha{list-style-type:upper-alpha}
+ol.lowerroman{list-style-type:lower-roman}
+ol.upperroman{list-style-type:upper-roman}
+ol.lowergreek{list-style-type:lower-greek}
+.hdlist>table,.colist>table{border:0;background:none}
+.hdlist>table>tbody>tr,.colist>table>tbody>tr{background:none}
+td.hdlist1,td.hdlist2{vertical-align:top;padding:0 .625em}
+td.hdlist1{font-weight:bold;padding-bottom:1.25em}
+td.hdlist2{word-wrap:anywhere}
+.literalblock+.colist,.listingblock+.colist{margin-top:-.5em}
+.colist td:not([class]):first-child{padding:.4em .75em 0;line-height:1;vertical-align:top}
+.colist td:not([class]):first-child img{max-width:none}
+.colist td:not([class]):last-child{padding:.25em 0}
+.thumb,.th{line-height:0;display:inline-block;border:4px solid #fff;box-shadow:0 0 0 1px #ddd}
+.imageblock.left{margin:.25em .625em 1.25em 0}
+.imageblock.right{margin:.25em 0 1.25em .625em}
+.imageblock>.title{margin-bottom:0}
+.imageblock.thumb,.imageblock.th{border-width:6px}
+.imageblock.thumb>.title,.imageblock.th>.title{padding:0 .125em}
+.image.left,.image.right{margin-top:.25em;margin-bottom:.25em;display:inline-block;line-height:0}
+.image.left{margin-right:.625em}
+.image.right{margin-left:.625em}
+a.image{text-decoration:none;display:inline-block}
+a.image object{pointer-events:none}
+sup.footnote,sup.footnoteref{font-size:.875em;position:static;vertical-align:super}
+sup.footnote a,sup.footnoteref a{text-decoration:none}
+sup.footnote a:active,sup.footnoteref a:active,#footnotes .footnote a:first-of-type:active{text-decoration:underline}
+#footnotes{padding-top:.75em;padding-bottom:.75em;margin-bottom:.625em}
+#footnotes hr{width:20%;min-width:6.25em;margin:-.25em 0 .75em;border-width:1px 0 0}
+#footnotes .footnote{padding:0 .375em 0 .225em;line-height:1.3334;font-size:.875em;margin-left:1.2em;margin-bottom:.2em}
+#footnotes .footnote a:first-of-type{font-weight:bold;text-decoration:none;margin-left:-1.05em}
+#footnotes .footnote:last-of-type{margin-bottom:0}
+#content #footnotes{margin-top:-.625em;margin-bottom:0;padding:.75em 0}
+div.unbreakable{page-break-inside:avoid}
+.big{font-size:larger}
+.small{font-size:smaller}
+.underline{text-decoration:underline}
+.overline{text-decoration:overline}
+.line-through{text-decoration:line-through}
+.aqua{color:#00bfbf}
+.aqua-background{background:#00fafa}
+.black{color:#000}
+.black-background{background:#000}
+.blue{color:#0000bf}
+.blue-background{background:#0000fa}
+.fuchsia{color:#bf00bf}
+.fuchsia-background{background:#fa00fa}
+.gray{color:#606060}
+.gray-background{background:#7d7d7d}
+.green{color:#006000}
+.green-background{background:#007d00}
+.lime{color:#00bf00}
+.lime-background{background:#00fa00}
+.maroon{color:#600000}
+.maroon-background{background:#7d0000}
+.navy{color:#000060}
+.navy-background{background:#00007d}
+.olive{color:#606000}
+.olive-background{background:#7d7d00}
+.purple{color:#600060}
+.purple-background{background:#7d007d}
+.red{color:#bf0000}
+.red-background{background:#fa0000}
+.silver{color:#909090}
+.silver-background{background:#bcbcbc}
+.teal{color:#006060}
+.teal-background{background:#007d7d}
+.white{color:#bfbfbf}
+.white-background{background:#fafafa}
+.yellow{color:#bfbf00}
+.yellow-background{background:#fafa00}
+span.icon>.fa{cursor:default}
+a span.icon>.fa{cursor:inherit}
+.admonitionblock td.icon [class^="fa icon-"]{font-size:2.5em;text-shadow:1px 1px 2px rgba(0,0,0,.5);cursor:default}
+.admonitionblock td.icon .icon-note::before{content:"\f05a";color:#19407c}
+.admonitionblock td.icon .icon-tip::before{content:"\f0eb";text-shadow:1px 1px 2px rgba(155,155,0,.8);color:#111}
+.admonitionblock td.icon .icon-warning::before{content:"\f071";color:#bf6900}
+.admonitionblock td.icon .icon-caution::before{content:"\f06d";color:#bf3400}
+.admonitionblock td.icon .icon-important::before{content:"\f06a";color:#bf0000}
+.conum[data-value]{display:inline-block;color:#fff!important;background:rgba(0,0,0,.8);border-radius:50%;text-align:center;font-size:.75em;width:1.67em;height:1.67em;line-height:1.67em;font-family:"Open Sans","DejaVu Sans",sans-serif;font-style:normal;font-weight:bold}
+.conum[data-value] *{color:#fff!important}
+.conum[data-value]+b{display:none}
+.conum[data-value]::after{content:attr(data-value)}
+pre .conum[data-value]{position:relative;top:-.125em}
+b.conum *{color:inherit!important}
+.conum:not([data-value]):empty{display:none}
+dt,th.tableblock,td.content,div.footnote{text-rendering:optimizeLegibility}
+h1,h2,p,td.content,span.alt,summary{letter-spacing:-.01em}
+p strong,td.content strong,div.footnote strong{letter-spacing:-.005em}
+p,blockquote,dt,td.content,td.hdlist1,span.alt,summary{font-size:1.0625rem}
+p{margin-bottom:1.25rem}
+.sidebarblock p,.sidebarblock dt,.sidebarblock td.content,p.tableblock{font-size:1em}
+.exampleblock>.content{background:#fffef7;border-color:#e0e0dc;box-shadow:0 1px 4px #e0e0dc}
+.print-only{display:none!important}
+@page{margin:1.25cm .75cm}
+@media print{*{box-shadow:none!important;text-shadow:none!important}
+html{font-size:80%}
+a{color:inherit!important;text-decoration:underline!important}
+a.bare,a[href^="#"],a[href^="mailto:"]{text-decoration:none!important}
+a[href^="http:"]:not(.bare)::after,a[href^="https:"]:not(.bare)::after{content:"(" attr(href) ")";display:inline-block;font-size:.875em;padding-left:.25em}
+abbr[title]{border-bottom:1px dotted}
+abbr[title]::after{content:" (" attr(title) ")"}
+pre,blockquote,tr,img,object,svg{page-break-inside:avoid}
+thead{display:table-header-group}
+svg{max-width:100%}
+p,blockquote,dt,td.content{font-size:1em;orphans:3;widows:3}
+h2,h3,#toctitle,.sidebarblock>.content>.title{page-break-after:avoid}
+#header,#content,#footnotes,#footer{max-width:none}
+#toc,.sidebarblock,.exampleblock>.content{background:none!important}
+#toc{border-bottom:1px solid #dddddf!important;padding-bottom:0!important}
+body.book #header{text-align:center}
+body.book #header>h1:first-child{border:0!important;margin:2.5em 0 1em}
+body.book #header .details{border:0!important;display:block;padding:0!important}
+body.book #header .details span:first-child{margin-left:0!important}
+body.book #header .details br{display:block}
+body.book #header .details br+span::before{content:none!important}
+body.book #toc{border:0!important;text-align:left!important;padding:0!important;margin:0!important}
+body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-break-before:always}
+.listingblock code[data-lang]::before{display:block}
+#footer{padding:0 .9375em}
+.hide-on-print{display:none!important}
+.print-only{display:block!important}
+.hide-for-print{display:none!important}
+.show-for-print{display:inherit!important}}
+@media amzn-kf8,print{#header>h1:first-child{margin-top:1.25rem}
+.sect1{padding:0!important}
+.sect1+.sect1{border:0}
+#footer{background:none}
+#footer-text{color:rgba(0,0,0,.6);font-size:.9em}}
+@media amzn-kf8{#header,#content,#footnotes,#footer{padding:0}}
+</style>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
+<body class="article toc2 toc-right">
+<div id="header">
+<h1>Sets and form fragments</h1>
+<div id="toc" class="toc2">
+<div id="toctitle">Table of Contents</div>
+<ul class="sectlevel1">
+<li><a href="#repeat_a_group_of_fields">Repeat a group of fields</a>
+<ul class="sectlevel2">
+<li><a href="#task_add_filmography_to_artist">Task: Add filmography to Artist</a></li>
+<li><a href="#task_query_the_filmography">Task: Query the filmography</a></li>
+</ul>
+</li>
+<li><a href="#choose_an_option_with_its_own_fields">Choose an option with its own fields</a>
+<ul class="sectlevel2">
+<li><a href="#task_add_feeding_behavior_to_animal">Task: Add feeding behavior to Animal</a></li>
+<li><a href="#task_query_the_selected_option">Task: Query the selected option</a></li>
+</ul>
+</li>
+<li><a href="#form-fragments">Reuse fields across options</a>
+<ul class="sectlevel2">
+<li><a href="#task_create_the_distribution_form_fragment">Task: Create the distribution form fragment</a></li>
+<li><a href="#task_add_distribution_to_animal">Task: Add distribution to Animal</a></li>
+<li><a href="#task_query_the_distribution">Task: Query the distribution</a></li>
+</ul>
+</li>
+<li><a href="#visual_grouping_and_further_reading">Visual grouping and further reading</a></li>
+<li><a href="#summary">Summary</a></li>
+</ul>
+</div>
+</div>
+<div id="content">
+<div id="preamble">
+<div class="sectionbody">
+<div class="paragraph">
+<p>In this chapter, you&#8217;ll add filmography entries to your artists, describe animals with selectable options, and reuse fields with a form fragment.
+After each addition, you&#8217;ll enter content and query it through Guillotine.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="repeat_a_group_of_fields"><a class="link" href="#repeat_a_group_of_fields">Repeat a group of fields</a></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>In the previous chapter, <code>otherNames</code> repeated a single TextLine.
+An <em>item set</em> groups several fields into one object and can repeat that whole group.
+For an artist&#8217;s filmography, each entry will contain a title and a year.
+These entries belong to the artist; they are not separate content items like the referenced favorite animal.</p>
+</div>
+<div class="sect2">
+<h3 id="task_add_filmography_to_artist"><a class="link" href="#task_add_filmography_to_artist">Task: Add filmography to Artist</a></h3>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p><strong>Define filmography entries</strong> - Append this item set to the Artist form, after <code>favoriteAnimal</code>:</p>
+<div class="listingblock">
+<div class="title">src/main/resources/cms/content-types/artist/artist.yaml</div>
+<div class="content">
+<pre class="highlight"><code class="language-yaml" data-lang="yaml">  - type: "ItemSet"
+    name: "filmography"
+    label: "Filmography"
+    occurrences:
+      min: 0
+      max: 0
+    items:
+      - type: "TextLine"
+        name: "title"
+        label: "Title"
+        occurrences:
+          min: 1
+          max: 1
+      - type: "Long"
+        name: "year"
+        label: "Year"
+        occurrences:
+          min: 1
+          max: 1
+        min: 0</code></pre>
+</div>
+</div>
+</li>
+<li>
+<p><strong>Add Cardi B&#8217;s films</strong> - Save the schema and let your running <code>enonic dev</code> watcher update the app.
+Reopen Cardi B in Content Studio and add two Filmography entries:</p>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 50%;">
+<col style="width: 50%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Title</th>
+<th class="tableblock halign-left valign-top">Year</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Hustlers</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">2019</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">F9</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">2021</p></td>
+</tr>
+</tbody>
+</table>
+</li>
+<li>
+<p><strong>Save the filmography</strong> - Use <strong>Expand all</strong> if you want to view both entries together, then save the artist.
+The entries are part of the same draft as Cardi B&#8217;s other fields.</p>
+<div class="imageblock">
+<div class="content">
+<img src="images/sets-filmography.png" alt="Filmography item set with Hustlers from 2019 and F9 from 2021" width="527">
+</div>
+<div class="title">Figure 1. Two filmography entries on Cardi B</div>
+</div>
+</li>
+</ol>
+</div>
+<div class="paragraph">
+<p>The item set defines the structure and limits of each entry:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>items</code> contains the fields in each filmography entry.</p>
+</li>
+<li>
+<p>The item set&#8217;s <code>occurrences</code> allows any number of entries, including none.</p>
+</li>
+<li>
+<p>Each entry requires both a <code>title</code> and a <code>year</code>.</p>
+</li>
+<li>
+<p><code>Long</code> stores the year as an integer.
+The <code>min: 0</code> directly on <code>year</code> limits its numeric value; <code>occurrences.min</code> controls whether a value is required.</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect2">
+<h3 id="task_query_the_filmography"><a class="link" href="#task_query_the_filmography">Task: Query the filmography</a></h3>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p><strong>Fetch the filmography</strong> - Open Query Playground for "My First Project" and keep <strong>Draft</strong> selected throughout this chapter.
+Fetch Cardi B by path and select the fields within <code>filmography</code>:</p>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-graphql" data-lang="graphql">{
+  guillotine {
+    get(key: "/artists/cardi-b") {
+      displayName
+      ... on com_example_tutorial_modeling_Artist {
+        data {
+          filmography {
+            title
+            year
+          }
+        }
+      }
+    }
+  }
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The <code>data.guillotine.get</code> object contains:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-json" data-lang="json">{
+  "displayName": "Cardi B",
+  "data": {
+    "filmography": [
+      { "title": "Hustlers", "year": 2019 },
+      { "title": "F9", "year": 2021 }
+    ]
+  }
+}</code></pre>
+</div>
+</div>
+</li>
+</ol>
+</div>
+<div class="paragraph">
+<p>Guillotine generates a GraphQL object type for the item set&#8217;s fields.
+Because <code>filmography</code> allows multiple occurrences, it returns a list of these objects, even when you enter just one film.
+You can select <code>title</code> and <code>year</code> directly inside each entry, without another inline fragment.</p>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="choose_an_option_with_its_own_fields"><a class="link" href="#choose_an_option_with_its_own_fields">Choose an option with its own fields</a></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>An <em>option set</em> lets editors choose from named options, each of which can contain its own form items.
+For a deliberately simplified animal diet, you&#8217;ll offer Herbivore and Carnivore.
+Only Carnivore needs a list of prey.</p>
+</div>
+<div class="sect2">
+<h3 id="task_add_feeding_behavior_to_animal"><a class="link" href="#task_add_feeding_behavior_to_animal">Task: Add feeding behavior to Animal</a></h3>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p><strong>Define the feeding options</strong> - Append this option set to the Animal form, after <code>images</code>:</p>
+<div class="listingblock">
+<div class="title">src/main/resources/cms/content-types/animal/animal.yaml</div>
+<div class="content">
+<pre class="highlight"><code class="language-yaml" data-lang="yaml">  - type: "OptionSet"
+    name: "feedingBehavior"
+    label: "Feeding behavior"
+    selection:
+      min: 1
+      max: 1
+    options:
+      - name: "herbivore"
+        label: "Herbivore"
+        helpText: "Subsists primarily on plant material."
+      - name: "carnivore"
+        label: "Carnivore"
+        helpText: "Subsists primarily on animal tissue and meat."
+        items:
+          - type: "TextLine"
+            name: "prey"
+            label: "Prey"
+            occurrences:
+              min: 0
+              max: 0</code></pre>
+</div>
+</div>
+</li>
+<li>
+<p><strong>Update the animal forms</strong> - Save the schema and let the watcher update the app, then reopen your animals in Content Studio.</p>
+</li>
+<li>
+<p><strong>Describe a carnivore</strong> - For Lion, add Feeding behavior, select <strong>Carnivore</strong>, and enter "Zebra" and "Giraffe" as separate Prey values.
+Save the animal.</p>
+<div class="imageblock">
+<div class="content">
+<img src="images/sets-feeding-behavior.png" alt="Feeding behavior option set with Carnivore selected and Zebra and Giraffe entered as prey" width="527">
+</div>
+<div class="title">Figure 2. Lion&#8217;s feeding behavior with two prey values</div>
+</div>
+</li>
+<li>
+<p><strong>Describe a herbivore</strong> - For Reindeer, select <strong>Herbivore</strong> and save.
+Notice that there is no Prey field for this option.</p>
+</li>
+</ol>
+</div>
+<div class="paragraph">
+<p>There are two different limits to keep in mind:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>occurrences</code> controls how many instances of the whole option set can exist.
+Here it is omitted, so feeding behavior is optional and can occur at most once.</p>
+</li>
+<li>
+<p><code>selection</code> controls how many options can be selected within an instance.
+Here both limits are <code>1</code>, so an editor adding feeding behavior must choose exactly one option.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>The <code>herbivore</code> option has no extra fields.
+The <code>carnivore</code> option contains a repeatable <code>prey</code> field.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="task_query_the_selected_option"><a class="link" href="#task_query_the_selected_option">Task: Query the selected option</a></h3>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p><strong>Fetch Lion&#8217;s feeding behavior</strong> - Run this query for Lion:</p>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-graphql" data-lang="graphql">{
+  guillotine {
+    get(key: "/animals/lion") {
+      displayName
+      ... on com_example_tutorial_modeling_Animal {
+        data {
+          feedingBehavior {
+            _selected
+            carnivore {
+              prey
+            }
+          }
+        }
+      }
+    }
+  }
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The <code>data.guillotine.get</code> object contains:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-json" data-lang="json">{
+  "displayName": "Lion",
+  "data": {
+    "feedingBehavior": {
+      "_selected": "carnivore",
+      "carnivore": {
+        "prey": ["Zebra", "Giraffe"]
+      }
+    }
+  }
+}</code></pre>
+</div>
+</div>
+</li>
+<li>
+<p><strong>Compare the herbivore option</strong> - Change the key to <code>/animals/reindeer</code> and run the query again.
+The selected option is now <code>"herbivore"</code>, and <code>carnivore</code> is <code>null</code>.
+Use <code>_selected</code> to identify the choice even when it has no extra fields, as with Herbivore.</p>
+</li>
+</ol>
+</div>
+<div class="paragraph">
+<p>The <code>_selected</code> field tells you which option was chosen, using its schema name rather than its label.
+For this single selection, it is a string.
+The <code>carnivore</code> object contains that option&#8217;s fields.</p>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="form-fragments"><a class="link" href="#form-fragments">Reuse fields across options</a></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Next, you&#8217;ll record where an animal lives.
+An animal may live on several continents, so this option set will allow multiple selections.
+Each selected continent needs its own Notes field.</p>
+</div>
+<div class="paragraph">
+<p>A <em>form fragment</em> defines form items once so you can include them in several places.
+You&#8217;ll use one here to give all seven continent options the same field definition.</p>
+</div>
+<div class="sect2">
+<h3 id="task_create_the_distribution_form_fragment"><a class="link" href="#task_create_the_distribution_form_fragment">Task: Create the distribution form fragment</a></h3>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p><strong>Define the shared Notes field</strong> - Create this file in your app:</p>
+<div class="listingblock">
+<div class="title">src/main/resources/cms/form-fragments/distributionData/distributionData.yaml</div>
+<div class="content">
+<pre class="highlight"><code class="language-yaml" data-lang="yaml">kind: "FormFragment"
+title: "Distribution data"
+form:
+  - type: "TextArea"
+    name: "notes"
+    label: "Notes"</code></pre>
+</div>
+</div>
+</li>
+</ol>
+</div>
+<div class="paragraph">
+<p>As with content types, the folder and filename match the schema name: <code>distributionData</code>.
+Its <code>form</code> contains the fields to insert wherever the fragment is included.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="task_add_distribution_to_animal"><a class="link" href="#task_add_distribution_to_animal">Task: Add distribution to Animal</a></h3>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p><strong>Include the fragment for each continent</strong> - Append this option set to the Animal form, after <code>feedingBehavior</code>:</p>
+<div class="listingblock">
+<div class="title">src/main/resources/cms/content-types/animal/animal.yaml</div>
+<div class="content">
+<pre class="highlight"><code class="language-yaml" data-lang="yaml">  - type: "OptionSet"
+    name: "distribution"
+    label: "Distribution across continents"
+    helpText: "Continents where the animal can be found in the wild"
+    selection:
+      min: 0
+      max: 7
+    options:
+      - name: "africa"
+        label: "Africa"
+        items:
+          - include: "distributionData"
+      - name: "antarctica"
+        label: "Antarctica"
+        items:
+          - include: "distributionData"
+      - name: "asia"
+        label: "Asia"
+        items:
+          - include: "distributionData"
+      - name: "australia"
+        label: "Australia"
+        items:
+          - include: "distributionData"
+      - name: "europe"
+        label: "Europe"
+        items:
+          - include: "distributionData"
+      - name: "northAmerica"
+        label: "North America"
+        items:
+          - include: "distributionData"
+      - name: "southAmerica"
+        label: "South America"
+        items:
+          - include: "distributionData"</code></pre>
+</div>
+</div>
+</li>
+<li>
+<p><strong>Enter Lion&#8217;s distribution</strong> - Save both files, let the watcher update the app, and reopen Lion.
+In Distribution across continents, click <b class="button">Add</b>, select Africa and Asia, and enter these notes:</p>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 25%;">
+<col style="width: 75%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Continent</th>
+<th class="tableblock halign-left valign-top">Notes</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Africa</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Found in parts of sub-Saharan Africa.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Asia</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Found in Gujarat, India.</p></td>
+</tr>
+</tbody>
+</table>
+</li>
+<li>
+<p><strong>Save the distribution</strong> - Save the animal.</p>
+<div class="imageblock">
+<div class="content">
+<img src="images/sets-distribution.png" alt="Distribution option set with Africa and Asia selected, each showing its own Notes field" width="527">
+</div>
+<div class="title">Figure 3. Lion&#8217;s distribution with separate notes for each selected continent</div>
+</div>
+</li>
+</ol>
+</div>
+<div class="paragraph">
+<p><code>selection.min: 0</code> and <code>selection.max: 7</code> allow any number of the seven continents to be selected.
+Each <code>include: "distributionData"</code> inserts the fragment&#8217;s Notes field into that option.</p>
+</div>
+<div class="paragraph">
+<p>The fragment shares the field definition, not its values: Africa and Asia each have their own notes.
+Changing the fragment updates the form wherever it is included, and it adds no extra level to the stored data or GraphQL response.
+A CMS form fragment is also separate from a GraphQL fragment, which groups fields in a query.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="task_query_the_distribution"><a class="link" href="#task_query_the_distribution">Task: Query the distribution</a></h3>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p><strong>Fetch the distribution notes</strong> - Run this query to fetch both selected continents and their notes:</p>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-graphql" data-lang="graphql">{
+  guillotine {
+    get(key: "/animals/lion") {
+      displayName
+      ... on com_example_tutorial_modeling_Animal {
+        data {
+          distribution {
+            _selected
+            africa {
+              notes
+            }
+            asia {
+              notes
+            }
+          }
+        }
+      }
+    }
+  }
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The <code>data.guillotine.get</code> object contains:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-json" data-lang="json">{
+  "displayName": "Lion",
+  "data": {
+    "distribution": {
+      "_selected": ["africa", "asia"],
+      "africa": {
+        "notes": "Found in parts of sub-Saharan Africa."
+      },
+      "asia": {
+        "notes": "Found in Gujarat, India."
+      }
+    }
+  }
+}</code></pre>
+</div>
+</div>
+</li>
+</ol>
+</div>
+<div class="paragraph">
+<p>This time, <code>_selected</code> is a list because the option set allows multiple selections.
+The whole <code>distribution</code> value is still one object: the number of selected options is independent of the number of occurrences of the set.
+The fragment&#8217;s <code>notes</code> field appears directly inside each continent, with no <code>distributionData</code> wrapper.</p>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="visual_grouping_and_further_reading"><a class="link" href="#visual_grouping_and_further_reading">Visual grouping and further reading</a></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>If you only want to organize a form visually, a <em>field set</em> puts a heading around a group of form items without changing their data structure.
+It has a label and nested <code>items</code>, but no property name of its own.
+For example, grouping Artist&#8217;s existing fields in a field set would leave their GraphQL paths unchanged.</p>
+</div>
+<div class="paragraph">
+<p>The CMS reference covers the additional settings and nesting possibilities for <a href="https://developer.enonic.com/docs/cms/stable/schemas/form-items/field-set">field sets</a>, <a href="https://developer.enonic.com/docs/cms/stable/schemas/form-items/item-set">item sets</a>, <a href="https://developer.enonic.com/docs/cms/stable/schemas/form-items/option-set">option sets</a> and <a href="https://developer.enonic.com/docs/cms/stable/schemas/form-fragments">form fragments</a>.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="summary"><a class="link" href="#summary">Summary</a></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>You&#8217;ve repeated structured filmography entries, selected options with their own fields, reused a form fragment, and queried each addition through Guillotine.
+Next, you&#8217;ll <a href="rich-text.ahtml">add rich text with links, images and macros</a>.</p>
+</div>
+</div>
+</div>
+</div>
+<div id="footer">
+<div id="footer-text">
+Last updated 2026-11-20 12:51:51 UTC
+</div>
+</div>
+</body>
+</html>
