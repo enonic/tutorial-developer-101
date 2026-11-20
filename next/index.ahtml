@@ -565,7 +565,7 @@ Throughout this tutorial, "XP" refers to "Enonic XP", the platform behind Enonic
 </ul>
 </div>
 <div class="paragraph">
-<p>You do not need to install Java or Gradle — the local sandbox bundles a Java runtime. You will install the Enonic CLI in the first chapter.</p>
+<p>You will install the Enonic CLI in the first chapter.</p>
 </div>
 </div>
 </div>
@@ -619,7 +619,7 @@ Throughout this tutorial, "XP" refers to "Enonic XP", the platform behind Enonic
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2026-11-20 14:02:36 UTC
+Last updated 2026-11-20 14:22:10 UTC
 </div>
 </div>
 </body>

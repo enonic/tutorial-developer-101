@@ -541,7 +541,7 @@ enonic project deploy -f</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>The CLI builds <code>modeling.jar</code> using the sandbox&#8217;s bundled Java runtime and deploys it to <code>demo_modeling</code>.
+<p>The CLI builds the app and deploys it to <code>demo_modeling</code>.
 On first startup, the app creates the <code>My First Project</code> (<code>my-first-project</code>) content project, imports the sample artists, animals and images, and publishes them.</p>
 </div>
 </li>
@@ -668,7 +668,7 @@ On first startup, the app creates the <code>My First Project</code> (<code>my-fi
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2026-11-20 14:02:36 UTC
+Last updated 2026-11-20 14:22:10 UTC
 </div>
 </div>
 </body>
