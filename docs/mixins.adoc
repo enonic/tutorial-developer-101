@@ -6,7 +6,7 @@ In this chapter, you'll add an Editorial mixin to Artist and Animal, enter separ
 
 A _mixin_ adds a group of fields to content types without editing each content type's schema.
 Use one for fields such as editorial notes that apply across different kinds of content, or to extend built-in types such as folders and media.
-Unlike a <<sets#_reuse_fields_across_options, form fragment>>, which inserts fields into a schema's form, a mixin keeps its values separately under `x`.
+Unlike a <<sets#form-fragments, form fragment>>, which inserts fields into a schema's form, a mixin keeps its values separately under `x`.
 
 == Add editorial notes to artists and animals
 
@@ -46,7 +46,7 @@ include::../{app-root}/cms/cms.yaml[]
 If you chose a different app name, update the app key in the expression to match.
 Leaving out `allowContentTypes` makes the mixin available on all content types in the content project where the app is assigned.
 
-For other registration options, including mixins that editors enable per content item, see the https://developer.enonic.com/docs/cms/stable/schemas/cms-descriptor#mixin-registration[CMS descriptor reference].
+For other registration options, including mixins that editors enable per content item, see the {cms-docs}/{docs-version}/schemas/cms-descriptor#mixin-registration[CMS descriptor reference].
 
 === Task: Add notes to two content types
 
@@ -120,7 +120,7 @@ The response contains:
 . *Compare Cardi B's note* - Change `key` to `/artists/cardi-b` and run the same query.
 The typed `notes` field returns a list, even when the content item has only one note.
 
-The three levels inside `x` are the app (`+{app-name-query}+`), the mixin (`editorial`), and its field (`notes`).
+The three levels inside `x` are the app (`{app-name-query}`), the mixin (`editorial`), and its field (`notes`).
 Dots in the app key become underscores in the GraphQL field name.
 Unlike the content type's `data`, `x` is available on the shared `Content` interface, so this query needs no Animal inline fragment.
 
@@ -144,7 +144,7 @@ The `xAsJson` value contains:
 [source,json,{subs}]
 ----
 {
-  "com-example-{app-name}": {
+  "com-example-tutorial-{app-name}": {
     "editorial": {
       "notes": [
         "Review the habitat description.",
@@ -155,10 +155,10 @@ The `xAsJson` value contains:
 }
 ----
 
-Notice the app key: the JSON representation uses hyphens (`com-example-{app-name}`), while the typed GraphQL field uses underscores (`+{app-name-query}+`).
+Notice the app key: the JSON representation uses hyphens (`com-example-tutorial-{app-name}`), while the typed GraphQL field uses underscores (`{app-name-query}`).
 The values are the same, but JSON does not apply the GraphQL field types: a single note appears as a string in `xAsJson`, while the typed field remains a list.
 Use the typed fields when your client needs a predictable shape and only selected values.
-The https://developer.enonic.com/docs/cms/stable/content/mixins[CMS mixins reference] covers the underlying storage in more detail.
+The {cms-docs}/{docs-version}/content/mixins[CMS mixins reference] covers the underlying storage in more detail.
 
 == Mixins from other apps
 
@@ -211,10 +211,10 @@ Use this recap when deciding how to represent new content:
 
 An OptionSet can support multiple selections with separate fields for each selected option, as you did with continents and their notes in the <<sets#, sets chapter>>.
 A repeatable OptionSet with one selected option per occurrence lets editors build a sequence of blocks, such as text, images and quotes, for your front-end to render.
-See the https://developer.enonic.com/docs/cms/stable/schemas/form-items/option-set[OptionSet reference] for configuration examples.
-For visual editing or more advanced page composition, explore XP's https://developer.enonic.com/docs/cms/stable/pages[page model] in the https://developer.enonic.com/docs/intro[Introduction to Enonic] or the https://developer.enonic.com/docs/next.xp[Next.js tutorial].
+See the {cms-docs}/{docs-version}/schemas/form-items/option-set[OptionSet reference] for configuration examples.
+For visual editing or more advanced page composition, explore XP's {cms-docs}/{docs-version}/pages[page model] in the {intro-docs}[Introduction to Enonic] or the {nextjs-docs}[Next.js tutorial].
 
-== Coming up
+== Summary
 
 You've added and queried a mixin across two content types, completing the tutorial's content model.
-In the next chapter, you'll publish your content and explore <<permissions#, read and editorial permissions>>.
+Next, you'll <<permissions#, publish your content and explore read and editorial permissions>>.

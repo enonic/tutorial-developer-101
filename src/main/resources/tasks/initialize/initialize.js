@@ -15,7 +15,7 @@ exports.run = () => context.run(administrator, () => {
         project.create({
             id: projectId,
             displayName: 'My First Project',
-            description: 'The completed Developer 101 tutorial',
+            description: 'The completed Content Modeling and GraphQL tutorial',
             language: 'en',
             publicRead: true,
             siteConfig: [{applicationKey: app.name}]
@@ -50,7 +50,7 @@ exports.run = () => context.run(administrator, () => {
         });
     } catch (error) {
         // Keep any imported data for inspection; never silently re-import over an existing project.
-        log.error(`Developer 101 initialization failed for "${projectId}": ${error.message}`);
+        log.error(`Content Modeling initialization failed for "${projectId}": ${error.message}`);
         throw error;
     }
 });

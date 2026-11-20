@@ -83,7 +83,7 @@
     <data>
         <boolean name="valid">true</boolean>
         <string name="displayName">Lynx</string>
-        <string name="type">com.example.dev101:animal</string>
+        <string name="type">com.example.tutorial.modeling:animal</string>
         <string name="owner">user:system:su</string>
         <string name="language">en</string>
         <dateTime name="modifiedTime">2026-10-28T00:18:52.776Z</dateTime>
@@ -110,7 +110,7 @@
             <string isNull="true" name="otherNames"/>
         </property-set>
         <property-set name="x">
-            <property-set name="com-example-dev101">
+            <property-set name="com-example-tutorial-modeling">
                 <property-set name="editorial">
                     <string name="notes">Review the habitat description.</string>
                     <string name="notes">Add a source for the diet information.</string>

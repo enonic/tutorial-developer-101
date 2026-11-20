@@ -62,14 +62,14 @@ enonic sandbox create {sandbox-name} -v {tested-xp-version} -t essentials -f
 . *Open the sandbox welcome page* - Wait for the terminal to report that Enonic XP has started, then open http://localhost:8080[http://localhost:8080] in your browser.
 You should see the Enonic SDK welcome page, listing the sandbox's installed applications:
 +
-image::setup-sdk.png["The Enonic SDK welcome page for XP 8.1.0, with the Admin, APIs and VHosts cards, the installed applications Content Studio, Data Toolbox and Guillotine, and the sandbox's configuration files", width=1001]
+image::setup-sdk.png["Enonic SDK welcome page with Admin, APIs and VHosts cards, installed applications, and sandbox configuration files", width=1001]
 
 . *Sign in to the admin interface* - Click btn:[Log In as Guest].
 This signs you in as the sandbox's built-in super user (`su`), with full administrator access.
-We'll call this your administrator session throughout the tutorial.
+Later chapters refer to this as your administrator session.
 You should see something like this:
 +
-image::setup-home.jpg["The XP menu for the 101tutorial sandbox, with useful links on the left and tiles for Dashboard, Applications, Content Studio, Data toolbox and Users", width=1440]
+image::setup-home.jpg["The XP menu with useful links on the left and tiles for Dashboard, Applications, Content Studio, Data toolbox and Users", width=1440]
 
 . *Check the installed app versions* - Open `XP menu` -> `Applications` and select Content Studio and Guillotine in turn to see their versions.
 The exercises use Content Studio 6.1 and Guillotine 9; earlier versions may differ from the examples.
@@ -87,18 +87,22 @@ TIP: To stop the sandbox, press kbd:[ctrl-c] in its terminal. To start it again,
 
 Almost everything in Enonic is an application: Content Studio is an app, Guillotine is an app, and the content types you are about to define live in an app of your own.
 
-Creating an app from scratch can be daunting for any system you're not familiar with. To make things easier, Enonic provides https://market.enonic.com/starters[starters]. We'll use the "Vanilla" starter, which contains the bare minimum.
+Creating an app from scratch can be daunting for any system you're not familiar with.
+To make things easier, Enonic provides https://market.enonic.com/starters[starters].
+You'll use the "Vanilla" starter, which contains the bare minimum.
 
 === Task: Create your app
 
-. *Create the app from a starter* - Open a new terminal window, leaving the sandbox running in the first one, and run this command:
+Use a dedicated workspace folder for Enonic tutorials, such as `enonic-tutorials/`, so each tutorial's source folder stays separate.
+
+. *Create the app from a starter* - Open a new terminal window in your tutorials workspace folder, leaving the sandbox running in the first one, and run:
 +
 [source,shell,{subs}]
 ----
-enonic create {app-name-full} -r starter-vanilla -s {sandbox-name}
+enonic project create {app-name-full} -r starter-vanilla -s {sandbox-name} -d {app-dir}
 ----
 
-This uses `starter-vanilla` as a template, gives the app the name `{app-name-full}`, places the code in the folder `{app-name}`, and links the app to the `{sandbox-name}` sandbox.
+This uses `starter-vanilla` as a template, gives the app the name `{app-name-full}`, places its files in `{app-dir}`, and links the app to the `{sandbox-name}` sandbox.
 
 TIP: You don't need to open the starter docs, so type `N` and press kbd:[Enter] if asked.
 
@@ -107,13 +111,13 @@ NOTE: App names matter. XP does not run two apps with the same name in a single 
 The app folder contains a minimal Enonic application. The parts you will touch in this tutorial are:
 
 .Essential app structure
-[source,files]
+[source,text]
 ----
 src/
   main/
     resources/
-      enonic.yaml // <1>
-      cms/ // <2>
+      enonic.yaml # <1>
+      cms/        # <2>
 ----
 
 <1> The application descriptor, holding the app's title, description and vendor information.
@@ -129,12 +133,13 @@ NOTE: The other files in the folder, such as `build.gradle` and `gradle.properti
 +
 [source,shell,{subs}]
 ----
-cd {app-name}
+cd {app-dir}
 enonic dev
 ----
 +
-This builds the app, deploys it to the `{sandbox-name}` sandbox, and then keeps watching the folder. Every time you save a file, the app is rebuilt and redeployed. Keep this command running in its own terminal while you follow the tutorial.
-// TODO(xp8-verify): recapture from a vanilla starter build on XP 8.1
+This builds the app, deploys it to the `{sandbox-name}` sandbox, and then keeps watching the folder.
+Every time you save a file, the app is rebuilt and redeployed.
+Keep this command running in its own terminal while you follow the tutorial; press kbd:[ctrl-c] to stop watching and run `enonic dev` from `{app-dir}` to resume later.
 +
 The first build downloads a few things, so give it a moment. Look for lines like these to confirm it has completed:
 +
@@ -148,7 +153,7 @@ Waiting for changes to input files...
 . *Verify the deployed app* - Open `XP menu` -> `Applications` in the XP admin.
 Your app is listed as "Vanilla Example":
 +
-image::setup-app.png["The Applications tool listing Content Studio, Data Toolbox, Guillotine and Vanilla Example, with Vanilla Example selected and its key com.example.dev101 shown", width=1440]
+image::setup-app.png["Applications tool listing Content Studio, Data Toolbox, Guillotine and the selected Vanilla Example app", width=1440]
 
 === Task: Change the app's title
 
@@ -176,9 +181,9 @@ If the build works but nothing shows up, make sure the app is linked to the sand
 enonic project sandbox
 ----
 
-For anything else, the https://developer.enonic.com/docs/enonic-cli[CLI documentation] covers every command and option, and the https://developer.enonic.com/docs/platform[platform documentation] covers the sandbox's configuration and ports.
+For anything else, the {cli-docs}[CLI documentation] covers every command and option, and the {platform-docs}[platform documentation] covers the sandbox's configuration and ports.
 
-== Coming up
+== Summary
 
 You now have the CLI, a running sandbox with Content Studio and Guillotine, and your own app deployed to it.
-In the next chapter, you'll <<content-studio#, get familiar with Content Studio and create your first content type>>.
+Next, you'll <<content-studio#, get familiar with Content Studio and create your first content type>>.

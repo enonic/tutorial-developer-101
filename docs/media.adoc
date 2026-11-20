@@ -1,6 +1,5 @@
 = Media - files are content too
 include::.variables.adoc[]
-// TODO(go-live): Add a developer portal rewrite from this tutorial edition's /files route to /media when the XP 8 edition goes live; leave the XP 7 edition's /files route unchanged.
 :description: Upload an image, inspect its content data and attachment, retrieve the original file, and request cropped and filtered versions with Guillotine.
 
 In this chapter, you'll upload an image, inspect how it is stored as content with an attachment, and use Guillotine to get URLs for its original file and for cropped and filtered versions.
@@ -31,7 +30,7 @@ It is saved in Draft and has not been published.
 == Inspect the uploaded content
 
 Your uploaded image is now a content item, just like the artists you created earlier.
-Let's inspect its data and find the file attached to it.
+Next, you'll inspect its data and find the file attached to it.
 
 === Task: Find the image and its attachment
 
@@ -111,10 +110,10 @@ This upload-and-retrieve pattern is the same for any kind of file, including a P
 Each upload creates a media content item with the original file attached and labeled `source`.
 XP maps the file to the appropriate media content type: an image becomes `media:image`, while other files become types such as Audio, Video or Document.
 The type and its metadata fields vary, but the attachment structure and the `mediaUrl` field used to retrieve the original file work the same way.
-The https://developer.enonic.com/docs/cms/stable/media[CMS media reference] explains media structure, type mapping and file handling in more detail.
+The {cms-docs}/{docs-version}/media[CMS media reference] explains media structure, type mapping and file handling in more detail.
 
 XP automatically extracts readable text from known file formats, such as PDF, and indexes it for search.
-See https://developer.enonic.com/docs/cms/stable/media/media-indexing[Media indexing] for what becomes searchable and how to query it.
+See {cms-docs}/{docs-version}/media/media-indexing[Media indexing] for what becomes searchable and how to query it.
 
 == Retrieve the attached file
 
@@ -265,7 +264,7 @@ The new crop prioritizes the selected subject:
 image::image-cropped-focused.jpg["Portrait crop after setting the focal point, with the lion's face in view", width=400]
 
 Image edits are stored on the content item; they do not rewrite the original attachment.
-The https://developer.enonic.com/docs/content-studio/stable/content-types/image[Content Studio image documentation] covers cropping, rotation, resetting edits and image metadata.
+The {cs-docs}/{docs-version}/content-types/image[Content Studio image documentation] covers cropping, rotation, resetting edits and image metadata.
 
 === Task: Add a filter
 
@@ -299,7 +298,7 @@ The semicolon separates two filters: grayscale and a black border.
 .The cropped image with filters
 image::image-processed.jpg["Portrait crop of the lion in grayscale with a black border", width=400]
 
-The https://developer.enonic.com/docs/cms/stable/apis/image[Image API reference] describes the available scaling methods and filters.
+The {cms-docs}/{docs-version}/apis/image[Image API reference] describes the available scaling methods and filters.
 
 TIP: For presentation effects such as grayscale or borders, consider CSS or similar client-side styling.
 Use server-side filters when the effect needs to be part of the delivered image file, for example in a download or an email.
@@ -316,9 +315,9 @@ Actual caching follows the response's `Cache-Control` header, with different set
 
 Returning URL components also lets your front-end use a separate base URL for media, for example when serving published images and downloads through a content delivery network (CDN).
 GraphQL requests can still go directly to the Enonic server.
-The platform's https://developer.enonic.com/docs/platform/stable/config/vhosts[virtual host configuration reference] explains how to give the media APIs their own address.
+The platform's {platform-docs}/{docs-version}/config/vhosts[virtual host configuration reference] explains how to give the media APIs their own address.
 
-== Coming up
+== Summary
 
 You've uploaded an image, inspected its content data and attachment, downloaded the original file, and requested cropped and filtered versions that use a focal point.
-In the next chapter, you'll take a closer look at <<form-items#, form items>>, the building blocks of content forms.
+Next, you'll take a closer look at <<form-items#, form items>>, the building blocks of content forms.

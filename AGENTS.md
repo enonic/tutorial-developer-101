@@ -1,98 +1,47 @@
-# Agent Instructions for the Developer 101 tutorial
+# Agent instructions for the Content Modeling and GraphQL tutorial
 
-This repository contains "Developer 101 - Content Modeling and the GraphQL API", the hands-on Enonic tutorial for developers who are new to Enonic XP.
+This repository contains **Content Modeling and GraphQL**, the hands-on Enonic tutorial written in AsciiDoc under `docs/` and published to https://developer.enonic.com/learn/content-modeling, together with a deployable copy of the completed tutorial app.
 
-## Scope and Audience
+Shared conventions for Enonic documentation and tutorials (language and tone, workspace isolation, tasks and steps, summaries, publishing, and AsciiDoc) are in the `enonic-docs` skill from the `enonic-contrib` plugin of https://github.com/enonic/agent-toolkit. Follow it for every change under `docs/`. The rules below cover what is specific to this tutorial, plus the core rules that must hold even without the skill.
 
-The tutorial is for developers who define content types and build front-ends against Enonic's GraphQL API. It walks a newcomer from installing the Enonic CLI to modeling, querying and controlling access to content: a sandbox and an app from a starter, Content Studio, content types, the Guillotine GraphQL API, media, form items, sets and form fragments, rich text, mixins, permissions and publishing, anonymous API requests, and exporting and importing content. It should remain approachable for people who are not primarily back-end developers.
+## Scope and audience
 
-The scope is content modeling, schema management and the Guillotine API. Two boundaries are stated on the front page and must hold throughout: there is no coding, meaning no application code, build steps or debugging beyond YAML schemas, GraphQL queries and ready-to-run cURL requests; and the page domain is left out entirely, meaning sites, pages, layouts, parts and page templates, whether rendered by Enonic or by an external front-end. Point readers to Guillotine usage for API clients, the React SPA tutorial for building a front-end, and the Introduction to Enonic and the Next.js tutorial for pages.
+The tutorial is for developers who define content types and build front-ends against Enonic's GraphQL API, including readers who are not primarily back-end developers. It walks a newcomer incrementally from installing the Enonic CLI to modeling, querying, and controlling access to content.
 
-This is a tutorial, not reference documentation. The CMS reference documentation covers every topic here in depth; this tutorial's value is the hands-on, incremental path through them. Explain enough to complete each task, then link to the reference documentation on developer.enonic.com for the full picture. Do not restate reference material such as the complete list of form items or the Guillotine schema.
+Two boundaries stated on the front page must hold throughout:
 
-## Content Guidelines
+- **No coding:** No application code, build configuration, or debugging beyond YAML schemas, GraphQL queries, and ready-to-run cURL requests. Point readers to Guillotine usage for API clients and the React SPA tutorial for building a front-end.
+- **No pages:** Leave out sites, pages, layouts, parts, and page templates entirely. Point readers to Introduction to Enonic and the Next.js tutorial for pages.
 
-This repository contains the documentation and a deployable copy of the completed tutorial app:
+Explain enough locally to complete each task, then link to the authoritative reference documentation rather than restating reference tables.
 
-* `docs/` contains the AsciiDoc tutorial published on Enonic's developer portal.
-* `drafts/` holds pages parked outside the build: the deployment chapter, which waits for the self-service cloud for XP 8, an unfinished IAM chapter that belongs in the 201 tutorial, and the former Data Toolbox chapter on low-level storage. Generally ignore `drafts/`: it only keeps a copy of files we may need later, so leave it out of searches, reviews and consistency changes unless a task is explicitly about a draft. Do not mention Enonic Cloud or deployment flows in `docs/` until the deployment chapter is back; the tutorial says only that a live server differs from the sandbox by its URL.
-* The reader builds their own app from the `starter-vanilla` starter. Every path such as `{app-root}/cms/content-types/` in prose refers to the reader's app; this repository holds a finished copy of it under `src/main/resources/` for the chapters to include. The resource root is the `app-root` attribute in `docs/.variables.adoc`, currently `src/main/resources`, so the planned XP 8.2 lightweight app layout with `cms/` at the app root is a one-line change. Never write the root out literally in prose or block titles.
-* Say "app" for the folder the reader edits and for the application running in XP. Do not call the folder a project; the only projects in this tutorial are content projects.
-* The `master` branch targets Enonic XP 8.1, Guillotine 9 and Content Studio 6.1, and is published as the `stable` version (8.x). The `7.x` branch holds the XP 7 edition and is published as `7.x`. All schemas are YAML, Guillotine URL fields return `path` and `queryString` components, and the API endpoint is `/api/com.enonic.app.guillotine:graphql`.
-* Statements that still need checking against a running sandbox are marked with an AsciiDoc comment starting with `// TODO(xp8-verify):` directly above the affected block. Comments are not rendered. Remove the comment once the content has been verified or the screenshot recaptured. Inside a list item, put the comment before the `+` continuation, never between the `+` and the block: a comment there detaches the block from the list and drops its title and source style.
-* `src/main/resources/` holds the finished tutorial app: the `enonic.yaml` application descriptor, and under `cms/` the complete schemas: the Artist and Animal content types, the `distributionData` form fragment, the `editorial` mixin, `cms.yaml` and `style.yaml`. Chapters show them with `include::../{app-root}/cms/...[]` instead of inline YAML, and title each block with the file's path, such as `.{app-root}/cms/content-types/artist/artist.yaml`, so the prose does not need to repeat it. Where a schema grows across chapters, each chapter's addition is wrapped in `# tag::<name>[]` and `# end::<name>[]` comments named after the field, and the chapter includes the tags for its step. In files included by several chapters, explain lines in prose or a bullet list naming the field, since `# <n>` callout markers in the file would clash between chapters; a file shown in a single block, such as `enonic.yaml`, may carry them. Illustrative snippets that are not part of the app, such as the form item and HtmlArea examples, stay inline. When the lightweight app layout ships, move `cms/` to the repository root and update `app-root`.
+## Versioning
 
-The finished app uses plain modern JavaScript on GraalJS without transpilation. Its startup task creates `my-first-project`, assigns the app, imports the bundled content and publishes it only when the project does not already exist. Preserve existing projects and user edits on subsequent starts. Keep this maintainer implementation out of the reader's no-coding tutorial tasks.
+- `master` targets Enonic XP 8.1, Guillotine 9, and Content Studio 6.1, and is published as `stable` (`8.x`). All schemas are YAML, Guillotine URL fields return `path` and `queryString` components, and the API endpoint is `/api/com.enonic.app.guillotine:graphql`.
+- `7.x` holds the XP 7 edition (`x-data.adoc`, XML schemas) and is published as `7.x`. Do not mention XP 7 schema names in the XP 8 tutorial.
 
-The tutorial is a sequential story. Navigation is defined by `docs/menu.json`, and `docs/index.adoc` groups the same chapters into themed sections. Keep both in the same order.
+## Content guidelines and companion app
 
-**Keep the chapters consistent with each other.** Later chapters build on the content types, content items, and app created earlier. Names, paths, app keys, and sandbox names are shared through attributes in `docs/.variables.adoc`; change the attribute rather than editing the value in individual chapters. Use attributes only for values that depend on the reader's setup or are expected to change, such as paths, URLs and the sandbox and app names; write ordinary words out. Call each page a "chapter", as Enonic's other tutorials do, and keep "step" for numbered instructions within a page. Do not put anything schema-related in `docs/.variables.adoc`: content type, field, form fragment and mixin names are written out literally in prose, YAML and GraphQL.
+- **Ignore `drafts/`:** `drafts/` parks unpublished pages (deployment, IAM, and the former Data Toolbox chapter). Leave it out of searches, reviews, and consistency changes unless explicitly asked. Do not mention Enonic Cloud or deployment flows in `docs/` until the deployment chapter returns.
+- **Tutorial slug (`modeling`):** `docs/.variables.adoc` defines `:sandbox-name: tutorial_modeling`, `:app-dir: tutorial-modeling-enonic`, and `:app-name-full: com.example.tutorial.modeling`. Do not put schema names (content types, fields, form fragments, or mixins) in `.variables.adoc`; write them literally in prose, YAML, and GraphQL.
+- **Included schemas and `{app-root}`:** `src/main/resources/` holds `enonic.yaml` and the complete schemas under `cms/` (`artist`, `animal`, `distributionData`, `editorial`, `cms.yaml`, `style.yaml`). Chapters include them via `include::../{app-root}/cms/...[]` using `# tag::<field>[]` / `# end::<field>[]` regions, titled `.{app-root}/cms/...`. Never write `src/main/resources` out literally in prose or block titles. Avoid `# <n>` callout markers in files included by multiple chapters; single-include files such as `enonic.yaml` may use them.
+- **Companion app build and startup:** Run `./gradlew build` with JDK 25 to run the GraalJS initialization tests and build `build/libs/modeling.jar`. On startup, the app creates `my-first-project`, imports the bundled content, and publishes it only if `my-first-project` does not already exist. Keep this maintainer code out of reader tasks.
 
-### LLM readability
+### Vocabulary
 
-This documentation should be useful to both people and LLMs learning Enonic development.
+- Say **app** (or **Enonic application**) for the source folder the reader edits and the application running in XP — never "XP app", and never "project" (reserved for **content projects**).
+- Say **XP menu** for the admin start page reached via the top-right XP icon — never "home page" ("XP home" is the server data directory).
+- Say **form item** as the umbrella term (simple ones may be called inputs, never "input types"). Schema field names use `camelCase`.
 
-* **No empty stubs.** Every page in `docs/menu.json` must contain substantive, accurate content. If a page is not ready, keep it out of `docs/` rather than publishing placeholder text: park it under `drafts/` with its images, as the deployment and IAM chapters are.
-* **Self-contained pages.** Briefly explain a concept locally before linking to deeper reference material. Avoid links that substitute for the explanation the reader needs to continue the tutorial.
-* **American English.** Write all documentation in American English: modeling, behavior, color, favorite, labeled, analyze, utilize.
-* **Consistent terminology.** Use Enonic terms such as sandbox, app, starter, project, content type, content project, site, form item, field set, item set, option set, form fragment, mixin, Guillotine, Content Studio, and XP menu consistently. The XP menu is the admin start page that lists the tools, reached through the XP icon in the top right corner; do not call it the home page, as "XP home" is the server's data folder. "Form item" is the umbrella for everything that goes in a form; the simple ones such as TextLine may be called inputs, but never "input types" as a category. Field names in schemas are `camelCase`, matching the GraphQL convention and the built-in fields, as the CMS form items docs say; never two names on one level differing only by case. Apps running on Enonic XP are "Enonic applications" or simply "apps", never "XP apps". For your own orientation, not the reader's: what XP 7 called a mixin is a form fragment in XP 8, and what XP 7 called x-data is a mixin. The tutorial is for new users and does not mention the XP 7 names, so do not add notes about the rename; the XP 7 edition lives on the `7.x` branch with the chapter as `x-data.adoc`.
-* **Runnable examples.** Commands and snippets should be complete enough to follow. Use placeholders only when the reader is explicitly expected to replace them, and explain what the replacement represents.
-* **Tutorial continuity.** Do not assume functionality from a later chapter. Each step must build on what the reader has created up to that point.
+## Key conventions specific to this repository
 
-### External references
+- **Assets and images:** Assets live in the established `docs/images/` directory (`:imagesdir: images`). Capture Retina screenshots at 2× and set `width` to half the pixel width; save photo-heavy captures as JPEG (quality 80) and flat UI captures as PNG.
+- **Verification markers:** Mark unverified sandbox output or screenshots with `// TODO(xp8-verify):` directly above the block (before any `+` list continuation, never between `+` and the block), and remove the comment once verified.
 
-When referring to separately documented products, give enough local context to explain why they matter, then link to the authoritative documentation.
+## Must-know rules even without the skill
 
-* **Enonic XP:** Link to the CMS documentation for content types, form items and schemas, and to the platform documentation for lower-level concerns.
-* **Content Studio:** Link to the Content Studio documentation for the editorial interface beyond what a task needs.
-* **Guillotine:** Enonic's headless GraphQL API for CMS content. Link to its documentation for schema details and query features; this tutorial teaches only the basics of querying content.
-* **Enonic CLI:** Link to its documentation for sandbox, project, build, and deployment commands.
-* **Enonic Market:** Link to Market for starters and apps such as Data Toolbox.
-
-Do not force links to open in a new tab. Avoid the AsciiDoc `^` suffix on link labels.
-
-## Build, Test, and Lint
-
-The documentation uses GitHub Actions for publishing. The completed app has a Gradle build based on `starter-vanilla`.
-
-* **App build and tests:** Run `./gradlew build` with JDK 25. The output is `build/libs/dev101.jar`; initialization tests run on GraalJS. Verify imports in a fresh XP 8.1.2 sandbox, since an existing `my-first-project` is intentionally preserved.
-* **CI Build:** The documentation is generated and published via `.github/workflows/enonic-docgen.yml` using `enonic/release-tools/generate-docs`. It runs on pushes to `master` that touch `docs/`.
-* **Local Preview:** There is no local preview setup in the repo. Use an AsciiDoc-aware IDE preview or the AsciiDoctor browser extension.
-* **Validation:** Validation happens during the CI build. Before finishing a change, validate JSON files and inspect includes, cross-references, attribute names, and image paths by hand.
-
-## Documentation Architecture
-
-* **Entry point:** `docs/index.adoc`
-* **Navigation:** `docs/menu.json`
-* **Published versions:** `docs/versions.json`
-* **Shared attributes:** `docs/.variables.adoc`
-* **Page format:** AsciiDoc (`.adoc`)
-* **Media:** `docs/images/`
-
-The documentation build maps source documents to routes based on their paths and menu entries. Add every new reader-facing page to `docs/menu.json` and to the overview in `docs/index.adoc`, and keep `docs/versions.json` valid. Files with a leading `.` are not picked up by the build.
-
-Sequential steps are numbered in `docs/menu.json` using the `"<n> - <Title>"` title format, as in Enonic's other tutorials. The numbers live only in the menu titles; a page's own `=` heading stays unnumbered. When inserting, removing, or reordering a step, renumber the remaining entries so the sequence stays unbroken, and check that no prose refers to a step by its old number. Menu titles may be shorter than the chapter heading because the sidebar is narrow.
-
-Every chapter starts with its title, then `include::.variables.adoc[]`, then its own attribute overrides such as `:description:`. The first sentence of a chapter says what the reader will do, in the form "In this chapter, you'll …", as in Enonic's other tutorials. Every chapter ends with a `== Coming up` section: a one-sentence recap, then "In the next chapter, you'll …" with a link to it. The last chapter ends with `== Where to go next` instead. Write the title and description directly in the chapter; `docs/.variables.adoc` holds only values shared across chapters, not single-use text such as page titles or sample content.
-
-## AsciiDoc Conventions
-
-* Use `image::filename.ext["alt text", width=<n>]` for block images stored in `docs/images/`. Screenshots are captured at 2x on a Retina display, so set `width` to half the image's pixel width, for example `width=1440` for a 2880-pixel-wide file. Images not yet recaptured have no width yet; add the halved `width` when each one is replaced. Save photo-heavy screenshots as JPEG at quality 80, and flat UI screenshots as PNG.
-* Use relative cross-document links such as `<<setup#, the setup chapter>>` so links remain version-aware on the developer portal.
-* Use source blocks with the correct language (`xml`, `graphql`, `json`, `shell` or `bash`, `html`) and callouts when individual lines need explanation. Add `[{subs}]` when a block uses attributes.
-* Use `kbd:[]` for keystrokes and `menu:` or the existing backtick `XP menu` -> `Applications` style for navigation paths. Follow the surrounding chapter.
-* Mark hands-on sections with a `=== Task:` heading so readers can tell instructions from explanation.
-* Start each numbered task step with a short, bold description of its purpose, followed by a spaced hyphen and the instructions: `. *Restore public access* - Reopen Lynx's permissions ...`. Describe the intended result before the clicks or commands. Keep steps focused on actions and expected results; place broader explanations after the task. Use `+` continuation markers to attach supporting paragraphs, code blocks and screenshots to their step.
-* Do not use the `^` suffix in link labels. Readers should choose whether links open in a new tab.
-* Be careful with underscores in inline AsciiDoc. Outside source blocks, wrap identifiers, paths, or query names containing `_` in single-plus passthrough, for example `+com_example_myapp+`. Combine passthrough with monospace when needed: `` `+com_example_myapp+` ``.
-* Prefer one sentence per line in prose where practical. It makes reviews and future edits easier without affecting rendered output.
-
-## Change Checklist
-
-Before finishing a change, check the relevant items:
-
-1. The prose, commands, and screenshots are accurate for the XP version the tutorial targets and for the current CLI, starter, Content Studio, and Guillotine releases.
-2. Tutorial steps still work in menu order and do not rely on a later chapter.
-3. Content type and other schema names are written out literally and match across chapters; app names, sandbox names, project names, and URLs come from `docs/.variables.adoc` and match across chapters.
-4. New or renamed pages and media are reflected in `docs/menu.json`, `docs/index.adoc`, cross-references, and image paths.
-5. JSON files are valid and every attribute used in a page is defined.
+- Every page in `docs/menu.json` has substantive content; reflect page additions or reorders in both `docs/menu.json` and `docs/index.adoc`.
+- Numbered chapters open with "In this chapter, you'll …" and end with `== Summary` (plus a completion celebration in the final chapter).
+- Suppress italic parsing on identifiers with `_` outside source blocks (`+foo_bar+`, or `` `pass:c,a[{attr}_Foo]` `` when an attribute is combined with `_`).
+- Use relative `<<doc#anchor,Label>>` internal links with explicit `[#anchor]` targets, and never append `^` to link labels.
+- Only `.adoc` and `.json` files under `docs/` stay out of the media import; keep drafts and notes outside `docs/`.

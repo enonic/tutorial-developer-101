@@ -25,7 +25,7 @@ In Content Studio, create an Animal named "Lynx" in the Animals folder, with the
 
 `exclude: "*"` removes the default toolbar tools, and `include` adds the tools used in this chapter.
 The field is optional and accepts one value, since `occurrences` is omitted.
-Keep the toolbar focused on the formatting your front-end supports; the https://developer.enonic.com/docs/cms/stable/schemas/form-items/htmlarea[HtmlArea reference] covers the other settings.
+Keep the toolbar focused on the formatting your front-end supports; the {cms-docs}/{docs-version}/schemas/form-items/htmlarea[HtmlArea reference] covers the other settings.
 
 == Link to another animal
 
@@ -132,7 +132,7 @@ Match `data-link-ref` in the HTML with `ref` in the link data from the same resp
 Your content IDs and reference values will differ from this example.
 The default `href` is the target's content path; it is not a guarantee that your front-end serves content at that URL.
 Use the target and URL components to construct your own route, supplying your front-end's base when `baseUrl` is `null`, and append any `queryString` and `fragment`.
-The https://developer.enonic.com/docs/guillotine/stable/usage/rich-text#links[Guillotine rich-text examples] show how to apply the resulting URL.
+The {guillotine-docs}/{docs-version}/usage/rich-text#links[Guillotine rich-text examples] show how to apply the resulting URL.
 
 == Insert an image
 
@@ -165,7 +165,7 @@ The description references that image by ID, and the uploaded file is an attachm
 
 
 Use the Decorative image option only when an image adds no information beyond its surrounding content.
-For more editing controls, see the https://developer.enonic.com/docs/content-studio/stable/editor/rich-text-editor[Content Studio rich-text editor documentation].
+For more editing controls, see the {cs-docs}/{docs-version}/editor/rich-text-editor[Content Studio rich-text editor documentation].
 
 === Task: Inspect the image URL
 
@@ -273,7 +273,7 @@ Styles are available from apps assigned to the content project, including your a
 For effects that only concern presentation, consider client-side CSS instead of server-side filters, as discussed in the media chapter.
 
 The style is not a stylesheet for your whole front-end: captions, text and layout still use your front-end's own styling.
-See the https://developer.enonic.com/docs/cms/stable/richtext/styles[CMS styles reference] for more options.
+See the {cms-docs}/{docs-version}/richtext/styles[CMS styles reference] for more options.
 
 == Insert a macro
 
@@ -356,8 +356,8 @@ In this example, `config.embed.body` contains HTML entities such as `&lt;` and `
 These remain after parsing the JSON; a client rendering this iframe must decode them as part of handling the embed macro.
 Returning `processedHtml` does not execute the macro or automatically turn its placeholder into a working video.
 
-The https://developer.enonic.com/docs/guillotine/stable/api#richtext[Guillotine RichText reference] also describes `macrosAsJson` for inspecting all macro data as JSON.
-The https://developer.enonic.com/docs/cms/stable/richtext/macros[CMS macros reference] covers macro definitions and other built-in macros.
+The {guillotine-docs}/{docs-version}/api#richtext[Guillotine RichText reference] also describes `macrosAsJson` for inspecting all macro data as JSON.
+The {cms-docs}/{docs-version}/richtext/macros[CMS macros reference] covers macro definitions and other built-in macros.
 
 == Optional: Request responsive images
 
@@ -402,10 +402,10 @@ The `images` entry now has an 800-pixel-wide `src` image, replacing the default 
 The Square grayscale style still applies, so the main image is 800 × 800 pixels and retains the grayscale filter.
 Build its URL from `{api-base-url}` + `src.path` + `src.queryString`.
 For each candidate, combine `{api-base-url}` with its `imageUrl.path` and `imageUrl.queryString`.
-The https://developer.enonic.com/docs/guillotine/stable/usage/rich-text#images[Guillotine image examples] show how to populate `src` and `srcset` from these components.
+The {guillotine-docs}/{docs-version}/usage/rich-text#images[Guillotine image examples] show how to populate `src` and `srcset` from these components.
 Request sizes through Guillotine; do not construct them by editing the returned URL paths.
 
-== Coming up
+== Summary
 
 You've added rich text with a link, an image style and a macro, and inspected the HTML and structured data your front-end uses to render them.
-In the next chapter, you'll add fields across content types with <<mixins#, mixins>>.
+Next, you'll <<mixins#, add shared fields across content types with mixins>>.

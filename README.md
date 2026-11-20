@@ -1,6 +1,6 @@
-# Developer 101 - Content Modeling and the GraphQL API
+# Content Modeling and GraphQL
 
-This repository contains the Developer 101 tutorial and its completed Enonic application.
+This repository contains the Content Modeling and GraphQL tutorial and its completed Enonic application.
 The app uses the tutorial's identifiers, schemas, and sample content so its GraphQL examples work directly against the installed result.
 Readers still build their own app from `starter-vanilla`; this app provides the finished result for exploration and verification.
 
@@ -13,9 +13,9 @@ The Gradle wrapper and build configuration are based on `starter-vanilla`.
 ./gradlew build
 ```
 
-The build runs the initialization tests and produces `build/libs/dev101.jar`.
+The build runs the initialization tests and produces `build/libs/modeling.jar`.
 Install this file through the Applications admin tool in a fresh sandbox, alongside Content Studio 6.1 and Guillotine 9.
-The app uses the same key as the reader's app, `com.example.dev101`, so installing it replaces any app already installed with that key.
+The app uses the same key as the reader's app, `com.example.tutorial.modeling`, so installing it replaces any app already installed with that key.
 
 Application code is plain modern JavaScript running on GraalJS, selected in `build.gradle`.
 There is no transpilation or npm build step.
@@ -27,7 +27,7 @@ On the cluster leader, `main.js` schedules the named `initialize` task.
 The task runs as the system administrator and:
 
 1. Creates the public content project `my-first-project` (My First Project) and its repository.
-2. Assigns `com.example.dev101` to the project.
+2. Assigns `com.example.tutorial.modeling` to the project.
 3. Imports the bundled Artists, Animals, and Images folders into the draft branch, including image attachments and relationships.
 4. Publishes all 11 content items so anonymous Guillotine requests can read them from the master branch.
 
@@ -57,8 +57,8 @@ Verify the result in a fresh sandbox: an existing project deliberately skips ini
 
 ### Working on the documentation
 
-Each chapter starts with its title and `include::.variables.adoc[]`.
-Keep chapter titles and descriptions in the chapter itself; shared setup values belong in `docs/.variables.adoc`.
+Each chapter starts with its title and `include::.variables.adoc[]`, and closes with `== Summary`.
+Keep chapter titles and descriptions in the chapter itself; shared setup values and documentation URLs belong in `docs/.variables.adoc`.
 Add or reorder chapters in both `docs/menu.json` and `docs/index.adoc`, keeping their order consistent.
 
 Store screenshots in `docs/images/`, capture them at 2x resolution, and set their AsciiDoc `width` to half their pixel width.

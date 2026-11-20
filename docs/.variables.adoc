@@ -4,12 +4,22 @@
 :xp-url: http://localhost:8080
 :api-base-url: {xp-url}/api
 :graphql-url: {api-base-url}/com.enonic.app.guillotine:graphql
-:sandbox-name: 101tutorial
+:sandbox-name: tutorial_modeling
 :app-root: src/main/resources
-:app-name: dev101
-:app-name-full: com.example.{app-name}
-:app-name-query: com_example_{app-name}
+:app-name: modeling
+:app-dir: tutorial-{app-name}-enonic
+:app-name-full: com.example.tutorial.{app-name}
+:app-name-query: com_example_tutorial_{app-name}
 :cms-project-displayname: My First Project
 :cms-project-id: my-first-project
-:example-app-url: https://github.com/enonic/tutorial-developer-101/tree/master
+:example-app-url: https://github.com/enonic/tutorial-content-modeling/tree/master
+:docs-version: stable
+:cms-docs: https://developer.enonic.com/docs/cms
+:cs-docs: https://developer.enonic.com/docs/content-studio
+:guillotine-docs: https://developer.enonic.com/docs/guillotine
+:platform-docs: https://developer.enonic.com/docs/platform
+:code-docs: https://developer.enonic.com/docs/code
+:cli-docs: https://developer.enonic.com/docs/enonic-cli
+:intro-docs: https://developer.enonic.com/docs/intro
+:nextjs-docs: https://developer.enonic.com/docs/next.xp
 :subs: subs="attributes+"

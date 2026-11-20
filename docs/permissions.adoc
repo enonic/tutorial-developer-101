@@ -24,7 +24,7 @@ This opens the Publishing Wizard with *Include child items* selected automatical
 
 . *Publish the content* - Once the content is valid and ready, click btn:[Publish now] and verify that the content is Online with no pending changes.
 
-The https://developer.enonic.com/docs/content-studio/stable/actions/publish[Content Studio publishing documentation] explains the wizard's other options.
+The {cs-docs}/{docs-version}/actions/publish[Content Studio publishing documentation] explains the wizard's other options.
 
 == Public and restricted access
 
@@ -72,7 +72,7 @@ Lynx is returned:
 }
 ----
 
-The https://developer.enonic.com/docs/guillotine/stable/usage#request-format[Guillotine usage documentation] explains the HTTP request format in more detail.
+The {guillotine-docs}/{docs-version}/usage#request-format[Guillotine usage documentation] explains the HTTP request format in more detail.
 
 === Task: Restrict Lynx
 
@@ -144,7 +144,7 @@ The image stayed public because it has its own permissions, copied from its pare
 Changing the parent's permissions later only affects existing children if you explicitly include them.
 
 Read permissions cover the entire content item, including mixin values: naming a mixin "Editorial" does not make its Notes field private.
-See the https://developer.enonic.com/docs/content-studio/stable/workbench/permissions[Content Studio permissions documentation] for more on access levels and available operations.
+See the {cs-docs}/{docs-version}/workbench/permissions[Content Studio permissions documentation] for more on access levels and available operations.
 
 XP can grant read access to individual users, groups, or roles on each content item.
 Restricted content can therefore be available to selected customers, partners, or employees.
@@ -152,7 +152,7 @@ Guillotine applies those permissions to the authenticated caller, so different u
 
 Users can sign in through an organization's existing identity provider, such as Microsoft Entra ID, using an appropriate XP ID provider integration.
 Authentication establishes who the user is; content permissions determine what they can read or manage.
-The https://developer.enonic.com/docs/platform/stable/security/idproviders[ID provider documentation] explains how XP connects to external identity systems.
+The {platform-docs}/{docs-version}/security/idproviders[ID provider documentation] explains how XP connects to external identity systems.
 
 == Who can edit and publish?
 
@@ -171,9 +171,9 @@ Two common project roles separate editing from publishing:
 
 An Author can save changes in Draft and mark the content ready, but publishing requires an Editor or another account with publishing permission.
 Marking an item ready changes its workflow status; it does not grant permission or update the published version.
-Authors can https://developer.enonic.com/docs/content-studio/stable/workflow/issues#publish_requests[request publishing] from an authorized editor.
+Authors can {cs-docs}/{docs-version}/workflow/issues#publish_requests[request publishing] from an authorized editor.
 
-The https://developer.enonic.com/docs/content-studio/stable/projects#project-roles[project roles reference] explains how to assign users and groups, along with the other available roles.
+The {cs-docs}/{docs-version}/projects#project-roles[project roles reference] explains how to assign users and groups, along with the other available roles.
 
 === Give teams access to specific content
 
@@ -197,9 +197,9 @@ The same approach supports other responsibilities:
 
 These examples build on the same Contributor baseline, with additional permissions granted where each team needs them.
 Managing group membership lets you change who belongs to a team without editing every content item's permissions.
-See the https://developer.enonic.com/docs/content-studio/stable/workbench/permissions#edit_permissions[content permissions reference] for the permission levels and options for applying changes to children.
+See the {cs-docs}/{docs-version}/workbench/permissions#edit_permissions[content permissions reference] for the permission levels and options for applying changes to children.
 
-== Coming up
+== Summary
 
 You've published your content, compared public and restricted access, and learned how editorial roles separate editing from publishing.
-In the next chapter, you'll <<export-import#, export your content and import it into another project>>.
+Next, you'll <<export-import#, export your content and import it into another project>>.

@@ -83,7 +83,7 @@
     <data>
         <boolean name="valid">true</boolean>
         <string name="displayName">Cardi B</string>
-        <string name="type">com.example.dev101:artist</string>
+        <string name="type">com.example.tutorial.modeling:artist</string>
         <string name="owner">user:system:su</string>
         <string name="language">en</string>
         <dateTime name="modifiedTime">2026-10-27T23:16:34.589Z</dateTime>
@@ -113,7 +113,7 @@
             </property-set>
         </property-set>
         <property-set name="x">
-            <property-set name="com-example-dev101">
+            <property-set name="com-example-tutorial-modeling">
                 <property-set name="editorial">
                     <string name="notes">Check the filmography for new releases.</string>
                 </property-set>

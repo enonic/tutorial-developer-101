@@ -33,7 +33,7 @@ Use `queryDsl` to find content by its type.
 
 . *Find artists by content type* - Run this query to retrieve up to ten artists, sorted by display name:
 +
-[source,GraphQL,{subs}]
+[source,graphql,{subs}]
 ----
 {
   guillotine {
@@ -100,9 +100,9 @@ The Artists folder keeps your content organized, but this query finds artists an
 
 === Getting around
 
-Before trying to come up with complex queries, let's familiarize ourselves with Query Playground. It consists of a few panels:
+Before writing more complex queries, get familiar with Query Playground's panels:
 
-Docs:: Opens on the left, and lets you browse every type and field in the API. We'll use it in a moment.
+Docs:: Opens on the left, and lets you browse every type and field in the API. You'll use it in the next task.
 Query:: The editor in the middle, where you write your query. Press the play button, or kbd:[ctrl+enter], to run it.
 Response:: The panel on the right, showing the result of the query, or any errors.
 Variables:: Expands below the query editor, and lets you supply query variables as a JSON object.
@@ -118,19 +118,19 @@ These types are part of the _GraphQL schema_: the API's description of the types
 The https://graphql.org/learn/schema/[GraphQL documentation] explains schemas and types in more detail.
 
 . *Find the Artist GraphQL type* - Open the Docs panel to explore those types.
-Search for `artist` and locate the `+{app-name-query}_Artist+` object type:
+Search for `artist` and locate the `pass:c,a[{app-name-query}_Artist]` object type:
 +
 .The Artist GraphQL type
 image::api-doc.png["Query Playground Docs panel showing the Artist GraphQL object type, its Content interface, and common fields", width=477]
 
-. *Find the form fields* - Follow the Artist object type's `data` field to `+{app-name-query}_Artist_Data+` in the Docs panel and find `legalName` and `about`.
+. *Find the form fields* - Follow the Artist object type's `data` field to `pass:c,a[{app-name-query}_Artist_Data]` in the Docs panel and find `legalName` and `about`.
 These are the fields you defined in your YAML form.
 
 Notice that the Artist object type _implements_ the `Content` interface.
 An interface defines fields shared by the object types that implement it.
 Here, `Content` defines common content fields such as `displayName`, `+_path+` and `+_id+`, so you can request them for any content item.
 
-NOTE: Your CMS content type is named `{app-name-full}:artist`, and its generated GraphQL object type is `+{app-name-query}_Artist+`.
+NOTE: Your CMS content type is named `{app-name-full}:artist`, and its generated GraphQL object type is `pass:c,a[{app-name-query}_Artist]`.
 The app namespace carries over to the API, keeping the types from different apps apart.
 
 === Task: Select the Artist fields
@@ -138,14 +138,14 @@ The app namespace carries over to the API, keeping the types from different apps
 You've inspected the Artist GraphQL type in the Docs panel.
 Now you'll query the fields from your content type's form.
 
-. *Prepare the result selection* - Close the Docs panel, head back to the editor and remove `displayName`, `+_path+` and `+_id+` from the query we introduced earlier.
+. *Prepare the result selection* - Close the Docs panel, head back to the editor and remove `displayName`, `+_path+` and `+_id+` from the earlier query.
 
 . *Explore the available fields* - Put your cursor inside the result selection braces immediately after `queryDsl(...)`, and press kbd:[ctrl+space] to see which fields you can request.
 Look for the common fields `displayName`, `+_path+` and `+_id+` in the suggestions.
 
 . *Query the Artist fields* - Run this query with an inline fragment to access the Artist's `data` fields:
 +
-[source,GraphQL,{subs}]
+[source,graphql,{subs}]
 ----
 {
   guillotine {
@@ -173,7 +173,7 @@ The autocomplete suggestions omit `legalName` and `about` because those fields b
 `queryDsl` returns the general `Content` interface, even when its filter selects only artists.
 The filter controls which items match; it does not change the query field's declared GraphQL return type.
 To select the Artist type's own fields, use an https://graphql.org/learn/queries/#inline-fragments[inline fragment].
-The syntax `+... on {app-name-query}_Artist { ... }+` means "for results whose GraphQL type is Artist, select the fields inside this block."
+The syntax `pass:c,a[... on {app-name-query}_Artist { ... }]` means "for results whose GraphQL type is Artist, select the fields inside this block."
 
 The filter selects artists, and the inline fragment lets you request their `legalName` and `about` fields under `data`, along with the general content field `+_id+`.
 Below is one example item from the `data.guillotine.queryDsl` array.
@@ -197,7 +197,7 @@ When you know an item's path or ID, use `get` to retrieve it directly.
 
 . *Fetch an artist by path* - Copy Cardi B's `+_path+` from the first response and use it as the `key` below:
 +
-[source,GraphQL,{subs}]
+[source,graphql,{subs}]
 ----
 {
   guillotine {
@@ -229,7 +229,7 @@ For a quick look at all stored form data, use `dataAsJson`.
 
 . *Fetch the stored form data* - Update the single-artist query to:
 +
-[source,GraphQL]
+[source,graphql]
 ----
 {
   guillotine {
@@ -269,7 +269,7 @@ The "Dsl" stands for "Domain Specific Language": the structured query you pass t
 
 . *Search the artist descriptions* - Keep the Artist type filter and add a text search on `data.about`:
 +
-[source,GraphQL,{subs}]
+[source,graphql,{subs}]
 ----
 {
   guillotine {
@@ -310,7 +310,7 @@ With the example descriptions, you should get Cardi B and Missy Elliott.
 The query returns each description so you can see why it matched.
 
 If your descriptions use different words, change `rap` to part of a word you entered, or edit a description in Content Studio, save it and run the query again.
-The https://developer.enonic.com/docs/code/stable/storage/querying[Query DSL reference] covers more search expressions and combinations.
+The {code-docs}/{docs-version}/storage/querying[Query DSL reference] covers more search expressions and combinations.
 
 == Extend the content model
 
@@ -338,11 +338,11 @@ Save the file while `enonic dev` is running, as in the previous chapter, and wai
 
 . *Reload the GraphQL schema* - Close and reopen Query Playground to reload the GraphQL schema.
 Keep the *Draft* branch selected: these edits have not been published.
-Find `+{app-name-query}_Artist_Data+` in the Docs panel and notice its new `birthday` field.
+Find `pass:c,a[{app-name-query}_Artist_Data]` in the Docs panel and notice its new `birthday` field.
 
 . *Query the birthdays* - Run the artist query with `birthday` selected:
 +
-[source,GraphQL,{subs}]
+[source,graphql,{subs}]
 ----
 {
   guillotine {
@@ -402,7 +402,7 @@ An external client must specify the content project and branch, and authenticate
 
 For example, the single-artist query with explicit project and branch arguments looks like this:
 
-[source,GraphQL,{subs}]
+[source,graphql,{subs}]
 ----
 {
   guillotine(project: "{cms-project-id}", branch: "draft") {
@@ -422,17 +422,17 @@ Its API name, `com.enonic.app.guillotine:graphql`, follows the API base URL, `{a
 The media APIs you'll use in the <<media#, next chapter>> follow the same pattern.
 
 For browser requests from another origin, the server must allow that origin through CORS.
-The Guillotine documentation covers https://developer.enonic.com/docs/guillotine/stable/usage#curl[cURL requests], https://developer.enonic.com/docs/guillotine/stable/usage#third-party-clients[third-party GraphQL clients] and https://developer.enonic.com/docs/guillotine/stable/configuration#config_file[CORS configuration for browsers].
-For a complete JavaScript request, see the https://developer.enonic.com/docs/guillotine/stable/usage#javascript[Guillotine usage examples].
+The Guillotine documentation covers {guillotine-docs}/{docs-version}/usage#curl[cURL requests], {guillotine-docs}/{docs-version}/usage#third-party-clients[third-party GraphQL clients] and {guillotine-docs}/{docs-version}/configuration#config_file[CORS configuration for browsers].
+For a complete JavaScript request, see the {guillotine-docs}/{docs-version}/usage#javascript[Guillotine usage examples].
 
 == Dive deeper
 
-- For more query examples and information about how to get up and running with Guillotine, check out the https://developer.enonic.com/docs/guillotine[Guillotine docs]
-- For pagination and aggregations, see the https://developer.enonic.com/docs/guillotine/stable/api#querydslcontentconnection[queryDslConnection reference].
+- For more query examples and information about how to get up and running with Guillotine, check out the {guillotine-docs}[Guillotine docs]
+- For pagination and aggregations, see the {guillotine-docs}/{docs-version}/api#querydslcontentconnection[queryDslConnection reference].
 - If you want to learn more about GraphQL in general, the https://graphql.org/learn/[_Introduction to GraphQL_ documentation] is a good place to start
 
 
-== Coming up
+== Summary
 
 You've found artists by type, selected their fields, retrieved a single item, searched descriptions and queried a new field from your content model.
-In the next chapter, you'll see <<media#, how XP deals with files and images>>.
+Next, you'll <<media#, upload files and serve processed images>>.

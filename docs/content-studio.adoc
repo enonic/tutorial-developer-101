@@ -8,9 +8,10 @@ In this chapter, you'll create a content project in Content Studio, define your 
 
 Content Studio is Enonic's editorial interface, where editors create and curate content without technical skills. It is already installed in your sandbox: open it from `XP menu` -> `Content Studio`.
 
-Content Studio has three parts: a project bar across the top, a menu bar on the left, and a main panel that fills the rest. The menu bar holds the content navigator, items contributed by installed apps, and *Settings* at the very bottom. For more than this chapter covers, see the https://developer.enonic.com/docs/content-studio[Content Studio documentation].
+Content Studio has three parts: a project bar across the top, a menu bar on the left, and a main panel that fills the rest. The menu bar holds the content navigator, items contributed by installed apps, and *Settings* at the very bottom. For more than this chapter covers, see the {cs-docs}[Content Studio documentation].
 
-=== Task: your first project
+[#first-project]
+=== Task: Create your first project
 
 When you open Content Studio for the first time, it offers to create a project:
 
@@ -32,7 +33,7 @@ NOTE: The project identifier is important, and cannot be changed later. Later ch
 
 . *Keep the default roles* - Continue without changing the roles; your administrator session already has access.
 
-. *Assign your app* - In the "Applications" step, select the `Developer 101` app you deployed earlier.
+. *Assign your app* - In the "Applications" step, select the `Content Modeling` app you deployed earlier.
 +
 .Project summary showing the values you have set in the wizard
 image::cs-project-summary.png["Content Studio project creation summary", width=910]
@@ -48,7 +49,7 @@ Content types are defined in apps, while content projects hold the content. Assi
 
 XP also ships with built-in content types, such as Folder, that are available in every project.
 
-=== Task: create a folder
+=== Task: Create a folder
 
 Your app does not define any content types yet, so start with a built-in one: create a folder called "Artists" to hold the artists you'll add later in this chapter.
 
@@ -69,7 +70,7 @@ image::cs-folder-form.png["The Folder form, with the display name Artists", widt
 
 . *Save the folder* - Save and close the tab.
 
-=== Task: your first content type
+=== Task: Define your first content type
 
 You'll create a custom content type Artist for artists, with two fields. Later, when editors create an Artist content item, Content Studio will show this form:
 
@@ -105,7 +106,7 @@ NOTE: XP validates the schema when it deploys, and reports mistakes such as `hel
 
 Every content type has a built-in display name, so don't add a `title` or `name` field that stores the same thing. Here the display name is the artist's stage name and `legalName` is the name on their official documents, which is why both earn their place. Add a field only when it carries different information from the item's display name. Also notice how the `displayNamePlaceholder` sets a different placeholder text for the display name field.
 
-TIP: Content types have more optional settings, described in https://developer.enonic.com/docs/cms/stable/content/content-types[the reference documentation].
+TIP: Content types have more optional settings, described in {cms-docs}/{docs-version}/content/content-types[the reference documentation].
 
 === Names and namespaces
 
@@ -115,9 +116,9 @@ XP's built-in content types have namespaces of their own, such as `base:folder` 
 Your Artist content type already refers to one: `superType: "base:structured"`.
 In the next chapter, you'll use these full names, namespace included, to filter content by type.
 
-NOTE: Read more about https://developer.enonic.com/docs/cms/stable/schemas/namespaces[namespaces] in the CMS reference docs.
+NOTE: Read more about {cms-docs}/{docs-version}/schemas/namespaces[namespaces] in the CMS reference docs.
 
-=== Task: create artists
+=== Task: Create artists
 
 Using the Artist content type, create these three artists, starting with Cardi B.
 Use the sample values below so your results match the queries in later chapters:
@@ -192,6 +193,7 @@ After completing the publication, publishing state should have changed from Offl
 TIP: You can also publish a piece of content by using the keyboard shortcut: Windows: kbd:[Ctrl+Alt+P] | Mac: kbd:[control+option+P].
 
 
-== Coming up
+== Summary
 
-You've created a content project, your first content type and some content. In the next chapter, you'll read that content back through the <<headless-api#, Headless API>>.
+You've created a content project, defined your first content type, and created and published some content.
+Next, you'll <<headless-api#, read that content back through the Headless API>>.

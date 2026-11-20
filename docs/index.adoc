@@ -1,4 +1,4 @@
-= Developer 101 — Content Modeling and the GraphQL API
+= Content Modeling and GraphQL
 include::.variables.adoc[]
 
 Hands-on introduction to modeling content in Enonic and reading it through the Guillotine GraphQL API.
@@ -20,15 +20,15 @@ Along the way you will:
 Two things to know before you start:
 
 * *No coding.* You will not write application code. You will edit YAML schemas, run GraphQL queries, and use ready-to-run cURL requests to test the API. There is nothing to compile or debug.
-* *No pages.* Sites, pages, layouts and parts - the whole page domain of Enonic - are left out entirely. To learn more about pages, check out the https://developer.enonic.com/docs/next.xp[Next.js tutorial], the https://developer.enonic.com/learn/react4xp-tutorial/stable[React4XP tutorial], or the https://developer.enonic.com/learn/building-enonic-sites/stable[My First Site] tutorials.
+* *No pages.* Sites, pages, layouts and parts - the whole page domain of Enonic - are left out entirely. To learn more about pages, check out the {intro-docs}[Introduction to Enonic] or the {nextjs-docs}[Next.js tutorial].
 
-The https://developer.enonic.com/docs/cms[CMS reference documentation] covers every topic in this tutorial in depth, and is the place to go once you know what you are looking for.
+The {cms-docs}[CMS reference documentation] covers every topic in this tutorial in depth, and is the place to go once you know what you are looking for.
 
 The {example-app-url}[completed example app on GitHub] contains the finished schemas and sample content for comparison as you work through the tutorial.
 To explore the finished result, follow its README to build and install it in a separate sandbox.
 It uses the same app key (`{app-name-full}`) and content project identifier (`{cms-project-id}`) as the exercises; installing it in your exercise sandbox would replace your app.
 
-NOTE: When we mention "XP", we are referring to "Enonic XP", the platform behind Enonic.
+NOTE: Throughout this tutorial, "XP" refers to "Enonic XP", the platform behind Enonic.
 
 If you have any questions, or just want to get in touch, visit the https://discuss.enonic.com[Forum] or join the https://slack.enonic.com/[Community Slack channel].
 

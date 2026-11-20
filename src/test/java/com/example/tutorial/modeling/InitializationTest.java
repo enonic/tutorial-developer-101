@@ -1,4 +1,4 @@
-package com.example.dev101;
+package com.example.tutorial.modeling;
 
 import com.enonic.xp.testing.ScriptRunnerSupport;
 

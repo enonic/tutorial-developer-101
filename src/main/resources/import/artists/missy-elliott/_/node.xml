@@ -83,7 +83,7 @@
     <data>
         <boolean name="valid">true</boolean>
         <string name="displayName">Missy Elliott</string>
-        <string name="type">com.example.dev101:artist</string>
+        <string name="type">com.example.tutorial.modeling:artist</string>
         <string name="owner">user:system:su</string>
         <string name="language">en</string>
         <dateTime name="modifiedTime">2026-10-27T15:59:36.046Z</dateTime>

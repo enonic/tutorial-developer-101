@@ -83,7 +83,7 @@
     <data>
         <boolean name="valid">true</boolean>
         <string name="displayName">Lion</string>
-        <string name="type">com.example.dev101:animal</string>
+        <string name="type">com.example.tutorial.modeling:animal</string>
         <string name="owner">user:system:su</string>
         <string name="language">en</string>
         <dateTime name="modifiedTime">2026-10-27T16:21:06.811Z</dateTime>

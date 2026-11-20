@@ -14,8 +14,8 @@ if (cluster.isLeader()) {
 
         const taskId = task.submitTask({
             descriptor: 'initialize',
-            name: 'Initialize Developer 101'
+            name: 'Initialize Content Modeling'
         });
-        log.info(`Scheduled Developer 101 initialization: ${taskId}`);
+        log.info(`Scheduled Content Modeling initialization: ${taskId}`);
     });
 }

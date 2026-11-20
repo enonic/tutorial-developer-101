@@ -176,6 +176,7 @@ The `+_selected+` field tells you which option was chosen, using its schema name
 For this single selection, it is a string.
 The `carnivore` object contains that option's fields.
 
+[#form-fragments]
 == Reuse fields across options
 
 Next, you'll record where an animal lives.
@@ -288,9 +289,9 @@ If you only want to organize a form visually, a _field set_ puts a heading aroun
 It has a label and nested `items`, but no property name of its own.
 For example, grouping Artist's existing fields in a field set would leave their GraphQL paths unchanged.
 
-The CMS reference covers the additional settings and nesting possibilities for https://developer.enonic.com/docs/cms/stable/schemas/form-items/field-set[field sets], https://developer.enonic.com/docs/cms/stable/schemas/form-items/item-set[item sets], https://developer.enonic.com/docs/cms/stable/schemas/form-items/option-set[option sets] and https://developer.enonic.com/docs/cms/stable/schemas/form-fragments[form fragments].
+The CMS reference covers the additional settings and nesting possibilities for {cms-docs}/{docs-version}/schemas/form-items/field-set[field sets], {cms-docs}/{docs-version}/schemas/form-items/item-set[item sets], {cms-docs}/{docs-version}/schemas/form-items/option-set[option sets] and {cms-docs}/{docs-version}/schemas/form-fragments[form fragments].
 
-== Coming up
+== Summary
 
 You've repeated structured filmography entries, selected options with their own fields, reused a form fragment, and queried each addition through Guillotine.
-In the next chapter, you'll add <<rich-text#, rich text>>, including links, images and macros.
+Next, you'll <<rich-text#, add rich text with links, images and macros>>.

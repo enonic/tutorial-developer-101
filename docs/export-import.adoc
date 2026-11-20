@@ -3,8 +3,6 @@ include::.variables.adoc[]
 :description: Export your tutorial content with Content Studio, import it into another project, and verify the result through Guillotine.
 :import-project-displayname: Tutorial Copy
 :import-project-id: tutorial-copy
-:management-url: http://localhost:4848
-:project-dump-name: {cms-project-id}-backup
 
 In this chapter, you'll export the Animals folder and import it into a second content project using Content Studio.
 You'll inspect the imported content and query the copy.
@@ -36,7 +34,7 @@ It will be available in the panel when you switch projects on this sandbox.
 
 NOTE: To download an export for transfer to another installation, open the https://market.enonic.com/vendors/glenn-ricaud/data-toolbox[Data Toolbox] admin tool, select it under *Node exports*, and choose *Archive and download selected node exports*.
 Data Toolbox also lets you upload exports on the destination server.
-For command-line export and import operations, see the https://developer.enonic.com/docs/enonic-cli/stable/xp#export[Enonic CLI documentation]; these commands use exports stored on the server and do not download them to your computer.
+For command-line export and import operations, see the {cli-docs}/{docs-version}/xp#export[Enonic CLI documentation]; these commands use exports stored on the server and do not download them to your computer.
 
 == Import the folder
 
@@ -49,8 +47,8 @@ It does not delete other content.
 
 === Task: Import the Animals folder
 
-. *Create another project* - Open *Settings* and click btn:[New], then follow the <<content-studio#_task_your_first_project, earlier project-creation example>>.
-Use the same settings, including the *Developer 101* app, but name the project "{import-project-displayname}" with identifier `{import-project-id}`.
+. *Create another project* - Open *Settings* and click btn:[New], then follow the <<content-studio#first-project, earlier project-creation example>>.
+Use the same settings, including the *Content Modeling* app, but name the project "{import-project-displayname}" with identifier `{import-project-id}`.
 
 . *Open the destination* - Return to *Content* and use the project selector in the top bar to switch to "{import-project-displayname}".
 Show the Context Panel and choose *Content Exports*.
@@ -96,72 +94,23 @@ The copy remains in Draft; publishing is a separate action, as in the <<permissi
 The two projects now hold separate copies of the content.
 Editing one does not update the other; importing is a one-time transfer, not ongoing synchronization.
 
-For the panel's other options and transferring exports between installations, see the https://developer.enonic.com/docs/content-studio/stable/contextpanel/export[Content Studio export documentation].
+For the panel's other options and transferring exports between installations, see the {cs-docs}/{docs-version}/contextpanel/export[Content Studio export documentation].
 
-////
-== Dump and load an entire project
+== Summary
 
-XP also supports dumping and loading a single content project's repository.
-A project dump contains all its content and attachments, all branches, project settings, issues and publish requests, and can include version history.
-This preserves the draft and published versions separately, including changes that have not yet been published.
-The app that supplies the schemas must still be installed separately.
+You did it! 🎉 You've modeled content with references, sets, rich text and mixins, queried it through Guillotine, controlled read and editorial access, and copied content into another project.
 
-The following optional examples use cURL with XP's management API on port `4848`.
-They require an administrator account with a password; `--user su` prompts for the super user's configured password.
-The sandbox's *Log In as Guest* session alone does not supply credentials for these requests.
-See https://developer.enonic.com/docs/platform/stable/endpoints/management[Management API authentication] for authentication options.
-
-To dump only "{cms-project-displayname}", select its repository and include version history:
-
-[source,shell,{subs}]
-----
-curl --fail-with-body --user su '{management-url}/system/dump' \
-  -H 'Content-Type: application/json' \
-  --data-binary '{
-    "name": "{project-dump-name}",
-    "repositories": ["com.enonic.cms.{cms-project-id}"],
-    "includeVersions": true
-  }'
-----
-
-The dump is written to `data/dump/{project-dump-name}.zip` inside the server's XP home folder.
-The request returns a `taskId` before the dump finishes.
-Replace `+TASK_ID+` below with that value and check that the task's `state` is `FINISHED` before using the dump:
-
-[source,shell,{subs}]
-----
-curl --fail-with-body --user su '{management-url}/task/TASK_ID'
-----
-
-To restore that dump, use the same repository selection:
-
-[source,shell,{subs}]
-----
-curl --fail-with-body --user su '{management-url}/system/load' \
-  -H 'Content-Type: application/json' \
-  --data-binary '{
-    "name": "{project-dump-name}",
-    "repositories": ["com.enonic.cms.{cms-project-id}"]
-  }'
-----
-
-Loading replaces the selected repository's existing data with the dumped state, including all branches and the included version history.
-Keep `repositories` in both requests to scope the operation to this project.
-The load request also returns a `taskId`; check its status in the same way.
-////
-
-== Where to go next
-
-You've modeled content, queried it through Guillotine, controlled access, and copied it into another project.
 Compare your schemas and sample content with the {example-app-url}[completed example app on GitHub].
 Its README explains how to build and install the finished result in a separate sandbox.
 
-Continue with these guides to use your content in an application or explore more of Enonic:
+=== Where to go next
 
-https://developer.enonic.com/docs/guillotine/stable/usage[Guillotine usage]:: Sending requests from cURL, JavaScript and other clients, authentication, CORS configuration, and further query examples.
+Continue with these optional guides to use your content in an application or explore more of Enonic:
 
-https://developer.enonic.com/learn/react-spa/stable[React SPA tutorial]:: Building a React application with content lists, detail views, routing, rich text, images and macros.
+{guillotine-docs}/{docs-version}/usage[Guillotine usage]:: Sending requests from cURL, JavaScript and other clients, authentication, CORS configuration, and further query examples.
 
-https://developer.enonic.com/docs/next.xp[Building sites with Enonic and Next.js]:: Building Next.js sites with Enonic as your CMS, including visual editing.
+https://developer.enonic.com/learn/react-spa[React SPA tutorial]:: Building a React application with content lists, detail views, routing, rich text, images and macros.
+
+{nextjs-docs}[Building sites with Enonic and Next.js]:: Building Next.js sites with Enonic as your CMS, including visual editing.
 
 https://developer.enonic.com/docs/graphql-tutorial[Building a custom GraphQL API]:: Building your own GraphQL API on Enonic XP, with mutations and subscriptions.
