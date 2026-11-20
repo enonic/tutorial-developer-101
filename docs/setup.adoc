@@ -1,27 +1,9 @@
 = Setup
 include::.variables.adoc[]
 :description: Install the Enonic CLI, start a local XP sandbox and create the app that will hold your content types.
-:tested-xp-version: 8.1.2
 
 In this chapter, you'll install the Enonic CLI, start a local XP sandbox, and create the app that will hold your content types.
 It takes a few minutes, and everything you install here is used in every later chapter.
-
-== Tested versions
-
-This tutorial was produced and tested with the following stack:
-
-[%header,cols="1,2"]
-|===
-|Component |Version
-|Enonic CLI |4.1.4
-|Enonic XP |{tested-xp-version}
-|Content Studio |6.1.0
-|Guillotine |9.0.0
-|===
-
-Some screenshots were captured on XP 8.1.0.
-The sandbox command below selects XP {tested-xp-version} to match the tested runtime.
-The Essentials template installs apps separately, so their versions may differ from those listed here.
 
 == Install the CLI
 
@@ -48,6 +30,7 @@ NOTE: You do not need to install Java or Gradle. The sandbox you create next bun
 A _sandbox_ is a local developer instance of Enonic XP, with its own data and configuration. You can have several, each on its own XP version.
 
 The `essentials` template installs a set of applications from Enonic Market, including Content Studio and Guillotine, which you will meet in the coming chapters.
+Because Market apps are installed separately, their exact patch versions may be newer than those listed on the <<index#,Introduction>> page.
 The `-v` flag selects the XP version; `-f` accepts the defaults for the remaining prompts.
 
 === Task: Start a sandbox
@@ -56,7 +39,7 @@ The `-v` flag selects the XP version; `-f` accepts the defaults for the remainin
 +
 [source,shell,{subs}]
 ----
-enonic sandbox create {sandbox-name} -v {tested-xp-version} -t essentials -f
+enonic sandbox create {sandbox-name} -v {xp-version} -t essentials -f
 ----
 
 . *Open the sandbox welcome page* - Wait for the terminal to report that Enonic XP has started, then open http://localhost:8080[http://localhost:8080] in your browser.

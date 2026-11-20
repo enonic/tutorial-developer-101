@@ -1,0 +1,139 @@
+= Running the demo
+include::.variables.adoc[]
+:description: Run the finished Content Modeling and GraphQL application locally, explore its content in Content Studio, and query it through Guillotine.
+:demo-sandbox-name: demo_{app-name}
+
+On this page, you'll run the finished application from this tutorial without going through the chapters.
+It takes a few minutes and gives you a local Enonic XP instance populated with the completed schemas, sample content and media, ready to inspect in Content Studio and query through {guillotine-docs}[Guillotine].
+
+TIP: Want to learn how each part works? Start with the <<setup#,first chapter>> of the tutorial instead.
+
+To run the demo you will need the https://developer.enonic.com/start[Enonic CLI] and https://git-scm.com/[Git], in addition to the <<index#prerequisites,prerequisites of the tutorial>>.
+
+== Task: Start Enonic
+
+The demo runs in its own sandbox, a local instance of Enonic XP.
+
+. *Create the demo sandbox* - Run this command in your terminal. It works from any folder:
++
+[source,shell,{subs}]
+----
+enonic sandbox create {demo-sandbox-name} -v {xp-version} -t essentials -f
+----
++
+The `essentials` template installs Content Studio and the Guillotine GraphQL API. The `-v` flag selects the tested XP version, and `-f` accepts the defaults for the remaining prompts and starts the sandbox.
++
+NOTE: The demo uses its own sandbox (`{demo-sandbox-name}`), separate from the `{sandbox-name}` sandbox used in the chapters. All sandboxes share port `8080` by default, so stop any other running sandbox before starting this one.
+
+. *Verify that the sandbox is running* - Wait for the terminal to report that Enonic XP has started, then open {xp-url}[{xp-url}]. The Enonic SDK welcome page appears.
+
+Leave the sandbox running in this terminal window. To stop it, press kbd:[ctrl-c]. To start it again later, run `enonic sandbox start {demo-sandbox-name}` from any folder.
+
+== Task: Deploy the completed app
+
+. *Get the code* - Open a new terminal window in the folder where you keep your tutorial projects, and clone the repository:
++
+[source,shell]
+----
+git clone --branch master https://github.com/enonic/tutorial-content-modeling.git
+----
++
+This creates a `tutorial-content-modeling/` folder containing the finished `{app-name-full}` application and its sample content.
+
+. *Link and deploy the app* - Enter the folder, link it to the demo sandbox, and deploy:
++
+[source,shell,{subs}]
+----
+cd tutorial-content-modeling
+enonic project sandbox {demo-sandbox-name} -f
+enonic project deploy -f
+----
++
+The CLI builds `{app-name}.jar` using the sandbox's bundled Java runtime and deploys it to `{demo-sandbox-name}`.
+On first startup, the app creates the `{cms-project-displayname}` (`{cms-project-id}`) content project, imports the sample artists, animals and images, and publishes them.
+
+== Task: Explore the content and GraphQL API
+
+. *Inspect the content in Content Studio* - On the welcome page at {xp-url}[{xp-url}], click btn:[Log In as Guest], then open `XP menu` -> `Content Studio`.
++
+Select `{cms-project-displayname}` in the top bar if it is not already open. You'll see the `Animals`, `Artists` and `Images` folders with 11 published content items — open *Cardi B*, *Lion* or *Lynx* to inspect their fields, references, rich text and *Editorial* mixin tab.
+
+. *Query the model in Query Playground* - Click the GraphQL icon in Content Studio's left menu bar, keep `{cms-project-displayname}` selected, and run this query:
++
+[source,graphql,{subs}]
+----
+{
+  guillotine {
+    queryDsl(
+      query: {
+        term: {
+          field: "type"
+          value: { string: "{app-name-full}:artist" }
+        }
+      }
+      sort: [{ field: "displayName", direction: ASC }]
+    ) {
+      displayName
+      ... on {app-name-query}_Artist {
+        data {
+          legalName
+          birthday
+          filmography {
+            title
+            year
+          }
+          favoriteAnimal {
+            displayName
+            ... on {app-name-query}_Animal {
+              data {
+                otherNames
+                feedingBehavior {
+                  _selected
+                }
+                images {
+                  ... on media_Image {
+                    imageUrl(scale: "block(400,600)") {
+                      path
+                      queryString
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+      x {
+        {app-name-query} {
+          editorial {
+            notes
+          }
+        }
+      }
+    }
+  }
+}
+----
++
+The response returns Cardi B, Missy Elliott and P!nk along with their filmography item sets, linked favorite animals, feeding behavior option sets, cropped image URL components and editorial mixin notes.
+
+. *Test the public HTTP endpoint* - Because the startup task published the content to `master` in a public project, you can also query `{graphql-url}` directly from a terminal without authentication:
++
+[source,shell,{subs}]
+----
+curl '{graphql-url}' \
+  -H 'Content-Type: application/json' \
+  --data-binary '{"query":"{ guillotine(project: \"{cms-project-id}\", branch: \"master\") { get(key: \"/animals/lynx\") { displayName ... on {app-name-query}_Animal { data { description { processedHtml } } } } } }"}'
+----
+
+== How it works
+
+The repository packages both the tutorial's YAML schemas and a startup task that initializes sample data on first run. Everything lives under `{app-root}/`:
+
+`cms/`:: The YAML schemas built across the tutorial: the `artist` and `animal` content types, the `distributionData` form fragment, the `editorial` mixin, `cms.yaml` and `style.yaml`
+`import/`:: Exported content items and image binaries for the `Artists`, `Animals` and `Images` folders
+`main.js` and `tasks/initialize/`:: Schedules a one-time initialization task on startup that creates `{cms-project-id}`, assigns `{app-name-full}`, imports the bundled content, and publishes it to `master` (if `{cms-project-id}` already exists, your edits are left untouched)
+
+If you want to experiment with changing the schemas in `tutorial-content-modeling/` and see updates redeployed automatically, run `enonic dev` from that folder.
+
+Each schema and query pattern is explained step by step in the tutorial, starting with <<setup#,setting up your environment>>.

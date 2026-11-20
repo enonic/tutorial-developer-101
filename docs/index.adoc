@@ -1,35 +1,67 @@
-= Content Modeling and GraphQL
+= Modeling and Querying Content in Enonic
 include::.variables.adoc[]
 
-Hands-on introduction to modeling content in Enonic and reading it through the Guillotine GraphQL API.
+This step-by-step tutorial introduces content modeling in Enonic XP and querying structured content and media through {guillotine-docs}[Guillotine], Enonic's GraphQL API.
 
-== Introduction
+TIP: *Just want to see the result?* <<demo#,Run the demo>> to deploy the finished schemas and sample content locally without going through the chapters.
 
-This tutorial is for developers who define content types and build front-ends against Enonic's GraphQL API. It covers content modeling, schema management and the Guillotine API, using the Enonic CLI, Content Studio and a local sandbox. Every chapter builds on the previous one, so you gain understanding incrementally while building a small content model of your own.
+== Intro
 
-Along the way you will:
+This tutorial is for developers who define content types and build front-ends against Enonic's GraphQL API.
+Every chapter builds on the previous one, using the Enonic CLI, Content Studio and a local sandbox to assemble and query a content model of your own.
 
-* <<setup#, set up>> the CLI, a local sandbox and your own app
-* create content types and content in <<content-studio#, Content Studio>>
-* query your content through the <<headless-api#, Headless API>>
-* upload <<media#, images and other media>>, and serve them scaled and cropped
-* model richer content with <<form-items#, form items>>, <<sets#, sets and form fragments>>, <<rich-text#, rich text>> and <<mixins#, mixins>>
-* publish your content and explore <<permissions#, read and editorial permissions>>
-* <<export-import#, export and import>> your content into another project
+When your schemas and content are in place, editors manage structured items and media in Content Studio while you query them through GraphQL:
 
-Two things to know before you start:
+.Querying modeled content through Query Playground in Content Studio
+image::api-playground.png["Query Playground in Content Studio showing a GraphQL query on the left and structured JSON results on the right", width=1440]
+
+You will complete the following steps:
+
+* <<setup#,Set up>> the CLI, a local sandbox and your own app
+* Create content types and content in <<content-studio#,Content Studio>>
+* Query your content through the <<headless-api#,Headless API>>
+* Upload <<media#,images and other media>>, and serve them scaled and cropped
+* Model richer content with <<form-items#,form items>>, <<sets#,sets and form fragments>>, <<rich-text#,rich text>> and <<mixins#,mixins>>
+* Publish your content and explore <<permissions#,read and editorial permissions>>
+* <<export-import#,Export and import>> your content into another project
+
+Two things to know about scope:
 
 * *No coding.* You will not write application code. You will edit YAML schemas, run GraphQL queries, and use ready-to-run cURL requests to test the API. There is nothing to compile or debug.
-* *No pages.* Sites, pages, layouts and parts - the whole page domain of Enonic - are left out entirely. To learn more about pages, check out the {intro-docs}[Introduction to Enonic] or the {nextjs-docs}[Next.js tutorial].
+* *No pages.* Sites, pages, layouts and parts - the whole page domain of Enonic - are left out entirely. To learn more about pages, check out the {intro-tutorial}[Introduction to Enonic] or the {nextjs-tutorial}[Next.js tutorial].
 
 The {cms-docs}[CMS reference documentation] covers every topic in this tutorial in depth, and is the place to go once you know what you are looking for.
 
-The {example-app-url}[completed example app on GitHub] contains the finished schemas and sample content for comparison as you work through the tutorial.
-To explore the finished result, follow its README to build and install it in a separate sandbox.
-It uses the same app key (`{app-name-full}`) and content project identifier (`{cms-project-id}`) as the exercises; installing it in your exercise sandbox would replace your app.
-
 NOTE: Throughout this tutorial, "XP" refers to "Enonic XP", the platform behind Enonic.
 
-If you have any questions, or just want to get in touch, visit the https://discuss.enonic.com[Forum] or join the https://slack.enonic.com/[Community Slack channel].
+[#prerequisites]
+== Prerequisites
 
-The first step is to <<setup#, get your tools in place>>. Good luck! 🙌
+No prior Enonic experience is required. Basic familiarity with YAML and JSON is helpful, and GraphQL concepts are introduced as you go.
+
+To follow this tutorial you will need:
+
+* A terminal, with `curl` available for testing anonymous HTTP requests in <<permissions#,chapter 9>>
+* Your favorite text or code editor
+* https://nodejs.org/[Node.js] with `npm` if you want to install the Enonic CLI via `npm` (other installers are also available)
+
+You do not need to install Java or Gradle — the local sandbox bundles a Java runtime. You will install the Enonic CLI in the first chapter.
+
+== Tested versions
+
+This version of the tutorial was produced and tested with the following stack:
+
+[%header,cols="2,1"]
+|===
+|Component |Version
+|Enonic CLI |{cli-version}
+|Enonic XP |{xp-version}
+|Content Studio |{cs-version}
+|Guillotine |{guillotine-version}
+|===
+
+Using Enonic XP 7? Select `7.x` from the version menu on this page.
+
+If you have any questions, or want to get in touch, visit the https://discuss.enonic.com[Forum] or join the https://slack.enonic.com/[Community Slack channel].
+
+Get started by <<setup#,setting up your local environment>>. 🙌

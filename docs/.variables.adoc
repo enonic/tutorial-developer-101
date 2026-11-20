@@ -1,6 +1,10 @@
 :toc: right
 :imagesdir: images
 :experimental:
+:xp-version: 8.1.2
+:cli-version: 4.1.4
+:cs-version: 6.1.0
+:guillotine-version: 9.0.0
 :xp-url: http://localhost:8080
 :api-base-url: {xp-url}/api
 :graphql-url: {api-base-url}/com.enonic.app.guillotine:graphql
@@ -20,6 +24,7 @@
 :platform-docs: https://developer.enonic.com/docs/platform
 :code-docs: https://developer.enonic.com/docs/code
 :cli-docs: https://developer.enonic.com/docs/enonic-cli
-:intro-docs: https://developer.enonic.com/docs/intro
-:nextjs-docs: https://developer.enonic.com/docs/next.xp
+:intro-tutorial: https://developer.enonic.com/learn/intro
+:nextjs-tutorial: https://developer.enonic.com/learn/nextjs
+:reactspa-tutorial: https://developer.enonic.com/learn/react-spa
 :subs: subs="attributes+"

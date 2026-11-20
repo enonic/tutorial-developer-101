@@ -100,8 +100,7 @@ For the panel's other options and transferring exports between installations, se
 
 You did it! 🎉 You've modeled content with references, sets, rich text and mixins, queried it through Guillotine, controlled read and editorial access, and copied content into another project.
 
-Compare your schemas and sample content with the {example-app-url}[completed example app on GitHub].
-Its README explains how to build and install the finished result in a separate sandbox.
+Compare your schemas and sample content with the {example-app-url}[completed example app on GitHub], or <<demo#,run the demo>> in a separate sandbox to inspect the finished result.
 
 === Where to go next
 
@@ -109,8 +108,8 @@ Continue with these optional guides to use your content in an application or exp
 
 {guillotine-docs}/{docs-version}/usage[Guillotine usage]:: Sending requests from cURL, JavaScript and other clients, authentication, CORS configuration, and further query examples.
 
-https://developer.enonic.com/learn/react-spa[React SPA tutorial]:: Building a React application with content lists, detail views, routing, rich text, images and macros.
+{reactspa-tutorial}[React SPA tutorial]:: Building a React application with content lists, detail views, routing, rich text, images and macros.
 
-{nextjs-docs}[Building sites with Enonic and Next.js]:: Building Next.js sites with Enonic as your CMS, including visual editing.
+{nextjs-tutorial}[Building sites with Enonic and Next.js]:: Building Next.js sites with Enonic as your CMS, including visual editing.
 
 https://developer.enonic.com/docs/graphql-tutorial[Building a custom GraphQL API]:: Building your own GraphQL API on Enonic XP, with mutations and subscriptions.

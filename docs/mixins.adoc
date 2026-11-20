@@ -212,7 +212,7 @@ Use this recap when deciding how to represent new content:
 An OptionSet can support multiple selections with separate fields for each selected option, as you did with continents and their notes in the <<sets#, sets chapter>>.
 A repeatable OptionSet with one selected option per occurrence lets editors build a sequence of blocks, such as text, images and quotes, for your front-end to render.
 See the {cms-docs}/{docs-version}/schemas/form-items/option-set[OptionSet reference] for configuration examples.
-For visual editing or more advanced page composition, explore XP's {cms-docs}/{docs-version}/pages[page model] in the {intro-docs}[Introduction to Enonic] or the {nextjs-docs}[Next.js tutorial].
+For visual editing or more advanced page composition, explore XP's {cms-docs}/{docs-version}/pages[page model] in the {intro-tutorial}[Introduction to Enonic] or the {nextjs-tutorial}[Next.js tutorial].
 
 == Summary
 
