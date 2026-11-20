@@ -1,6 +1,10 @@
 {
   "versions": [
     {
+      "label": "next",
+      "checkout": "issue-108"
+    },
+    {
       "label": "stable",
       "displayName": "8.x",
       "checkout": "master",
